@@ -8,11 +8,14 @@
     "dev": "vinxi dev",
     "build": "vinxi build --preset vercel-edge",
     "start": "vinxi start",
-    "check": "tsc -b tsconfig.json",
-    "lint": "eslint \"**/{src,test}/**/*.{ts,mjs}\"",
-    "lint-fix": "pnpm lint --fix",
-    "test": "vitest",
-    "coverage": "vitest --coverage"
+    "lint:ts": "tsc -b tsconfig.json",
+    "lint:js": "eslint \"{client,server,test}/**/*.{ts,mjs}\"",
+    "lint:js:fix": "pnpm lint:js --fix",
+    "lint:fmt": "prettier --check \"{client,server,test}/**/*.{ts,mjs}\"",
+    "lint:fmt:fix": "pnpm lint:fmt --write",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "clean": "git clean -xdf"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.57.15",
