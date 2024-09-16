@@ -24,5 +24,3 @@ if (!rootElement.innerHTML) {
     </StrictMode>,
   );
 }
-
-export const foo = () => {};
