@@ -64,12 +64,6 @@ yarn-error.log*
 .wrangler
 .dev.vars
 
-# Ignore all folders except `src/` and `test/` in every published package
-packages/*/*/
-!packages/*/src/
-!packages/*/test/
-!packages/*/playground/
-
 dist
 
 .svelte-kit
