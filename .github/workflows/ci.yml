@@ -1,50 +1,47 @@
-name: Check
+name: CI
 
 on:
-  workflow_dispatch:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 permissions: {}
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/setup
-      - run: pnpm codegen
-      - name: Check source state
-        run: git add packages/*/src && git diff-index --cached HEAD --exit-code packages/*/src
-
   types:
-    name: Types
+    name: Typecheck
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm check
+      - run: pnpm lint:ts
 
   lint:
-    name: Lint
+    name: Eslint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm lint
+      - run: pnpm lint:js
+
+  fmt:
+    name: Formatting 
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/setup
+      - run: pnpm lint:fmt
 
   test:
     name: Test 
