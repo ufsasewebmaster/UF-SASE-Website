@@ -10,7 +10,7 @@ export default eventHandler(async (event) => {
 });
 
 // https://itty.dev/itty-router/
-const router = AutoRouter().get("/todos", async () => {
+const router = AutoRouter().get("/api/todos", async () => {
   const todos = await db.select().from(Schema.todos);
   return {
     todos,

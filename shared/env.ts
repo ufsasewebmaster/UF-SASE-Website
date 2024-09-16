@@ -12,5 +12,5 @@ export const SERVER_ENV = createEnv({
 export const CLIENT_ENV = createEnv({
   clientPrefix: "VITE_",
   client: {},
-  runtimeEnv: process.env,
+  runtimeEnv: import.meta.env,
 });

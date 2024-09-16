@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.10.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build --preset vercel-edge",
