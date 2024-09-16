@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "exactOptionalPropertyTypes": true,
+    // "exactOptionalPropertyTypes": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
     "esModuleInterop": false,
@@ -33,7 +33,7 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "paths": {
-      "@shared/*": ["shared/*"]
+      "@/*": ["./*"]
     }
   }
 }

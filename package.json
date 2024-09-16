@@ -18,11 +18,17 @@
     "clean": "git clean -xdf"
   },
   "dependencies": {
+    "@libsql/client": "^0.11.0",
+    "@t3-oss/env-core": "^0.11.1",
+    "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-router": "^1.57.15",
     "@vitejs/plugin-react": "^4.3.1",
+    "drizzle-orm": "^0.33.0",
+    "itty-router": "^5.0.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "vinxi": "^0.4.3"
+    "vinxi": "^0.4.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/compat": "1.1.1",
@@ -37,10 +43,12 @@
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
     "autoprefixer": "^10.4.20",
+    "drizzle-kit": "^0.24.2",
     "eslint": "^9.10.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-codegen": "^0.28.0",
     "eslint-plugin-deprecation": "^3.0.0",
+    "eslint-plugin-drizzle": "^0.2.3",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",

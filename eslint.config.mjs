@@ -6,6 +6,7 @@ import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import codegen from "eslint-plugin-codegen";
 import deprecation from "eslint-plugin-deprecation";
+import drizzle from "eslint-plugin-drizzle";
 import _import from "eslint-plugin-import";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
@@ -34,6 +35,7 @@ export default [
       "sort-destructure-keys": sortDestructureKeys,
       "simple-import-sort": simpleImportSort,
       codegen,
+      drizzle,
     },
 
     languageOptions: {
@@ -114,6 +116,18 @@ export default [
       "@typescript-eslint/no-array-constructor": "off",
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/no-namespace": "off",
+      "drizzle/enforce-delete-with-where": [
+        "error",
+        {
+          drizzleObjectName: "db",
+        },
+      ],
+      "drizzle/enforce-update-with-where": [
+        "error",
+        {
+          drizzleObjectName: "db",
+        },
+      ],
     },
   },
 ];

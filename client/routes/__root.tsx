@@ -1,4 +1,4 @@
-import { FOO } from "@shared/index";
+import { FOO } from "@/shared";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
