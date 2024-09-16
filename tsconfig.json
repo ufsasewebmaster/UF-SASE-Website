@@ -10,14 +10,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": [],
+    "types": ["vinxi/client"],
     "isolatedModules": true,
     "sourceMap": true,
     "declarationMap": true,
-    "noImplicitReturns": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
     "noEmitOnError": false,
     "noErrorTruncation": false,
     "allowJs": false,
@@ -28,10 +24,13 @@
     "noUncheckedIndexedAccess": false,
     "strictNullChecks": true,
     "baseUrl": ".",
+    "noEmit": true,
     "incremental": true,
     "removeComments": false,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "Bundler",
     "module": "ESNext",
-    "target": "ESNext"
+    "target": "ESNext",
+    "jsx": "react-jsx"
   }
 }
