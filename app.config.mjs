@@ -26,7 +26,7 @@ export default createApp({
     {
       name: "server",
       type: "http",
-      base: "/server",
+      base: "/api",
       handler: "./server/index.ts",
     },
   ],
