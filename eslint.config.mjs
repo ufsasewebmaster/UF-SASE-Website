@@ -20,7 +20,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ["**/dist", "**/build", "**/docs", "**/*.md"],
+    ignores: ["prettier.config.cjs"],
   },
   ...compat.extends(
     "eslint:recommended",
