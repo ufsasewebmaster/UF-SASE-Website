@@ -22,7 +22,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vinxi:
         specifier: ^0.4.3
-        version: 0.4.3(@types/node@22.5.5)(ioredis@5.4.1)(terser@5.32.0)
+        version: 0.4.3(@types/node@22.5.5)(ioredis@5.4.1)(magicast@0.3.5)(terser@5.32.0)
     devDependencies:
       '@eslint/compat':
         specifier: 1.1.1
@@ -2664,6 +2664,9 @@ packages:
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
 
+  magicast@0.3.5:
+    resolution: {integrity: sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ==}
+
   make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -5136,7 +5139,7 @@ snapshots:
 
   builtin-modules@3.3.0: {}
 
-  c12@1.11.2:
+  c12@1.11.2(magicast@0.3.5):
     dependencies:
       chokidar: 3.6.0
       confbox: 0.1.7
@@ -5150,6 +5153,8 @@ snapshots:
       perfect-debounce: 1.0.0
       pkg-types: 1.2.0
       rc9: 2.1.2
+    optionalDependencies:
+      magicast: 0.3.5
 
   cac@6.7.14: {}
 
@@ -6464,6 +6469,13 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  magicast@0.3.5:
+    dependencies:
+      '@babel/parser': 7.25.6
+      '@babel/types': 7.25.6
+      source-map-js: 1.2.1
+    optional: true
+
   make-dir@3.1.0:
     dependencies:
       semver: 6.3.1
@@ -6558,7 +6570,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nitropack@2.9.7:
+  nitropack@2.9.7(magicast@0.3.5):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@netlify/functions': 2.8.1
@@ -6573,7 +6585,7 @@ snapshots:
       '@types/http-proxy': 1.17.15
       '@vercel/nft': 0.26.5
       archiver: 7.0.1
-      c12: 1.11.2
+      c12: 1.11.2(magicast@0.3.5)
       chalk: 5.3.0
       chokidar: 3.6.0
       citty: 0.1.6
@@ -7590,7 +7602,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vinxi@0.4.3(@types/node@22.5.5)(ioredis@5.4.1)(terser@5.32.0):
+  vinxi@0.4.3(@types/node@22.5.5)(ioredis@5.4.1)(magicast@0.3.5)(terser@5.32.0):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/plugin-syntax-jsx': 7.24.7(@babel/core@7.25.2)
@@ -7612,7 +7624,7 @@ snapshots:
       hookable: 5.5.3
       http-proxy: 1.18.1
       micromatch: 4.0.8
-      nitropack: 2.9.7
+      nitropack: 2.9.7(magicast@0.3.5)
       node-fetch-native: 1.6.4
       path-to-regexp: 6.3.0
       pathe: 1.1.2

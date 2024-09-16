@@ -12,3 +12,4 @@ scratchpad/*
 .idea/
 .output/
 .vinxi/
+.vercel/
