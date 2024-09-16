@@ -21,7 +21,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ["prettier.config.cjs"],
+    ignores: ["prettier.config.cjs", "postcss.config.cjs"],
   },
   ...compat.extends(
     "eslint:recommended",

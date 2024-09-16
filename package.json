@@ -15,7 +15,8 @@
     "lint:fmt:fix": "pnpm lint:fmt --write",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "clean": "git clean -xdf"
+    "clean": "git clean -xdf",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@libsql/client": "^0.11.0",
