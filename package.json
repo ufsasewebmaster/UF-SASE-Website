@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build": "vinxi build --preset vercel-edge",
     "start": "vinxi start",
     "check": "tsc -b tsconfig.json",
     "lint": "eslint \"**/{src,test}/**/*.{ts,mjs}\"",
