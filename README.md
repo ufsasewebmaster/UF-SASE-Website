@@ -115,6 +115,10 @@ Tailwind is **the** way to write css. Atomic classes make it easy to write css t
 
 Every app needs a router, and [Tanstack Router](https://tanstack.com/router/latest) is the most modern and inovative router out there. It pushes typesafety to the max and is super easy to use. It also has first class support for file based routing, which is pretty nice. Read more about it [here](https://tanstack.com/router/latest/docs/framework/react/overview).
 
+### Tanstack Query
+
+[Tanstack Query](https://tanstack.com/query/latest) is the way to fetch data in react. Can you do it yourself in `useEffect`, sure... but there are so many edge cases and things to consider that it is just not worth it. Tanstack Query asks for one thing: a function that returns a promise. It handles the rest.
+
 ## Backend
 
 ### Hono
