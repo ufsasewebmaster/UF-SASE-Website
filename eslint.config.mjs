@@ -121,6 +121,7 @@ export default [
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-empty-object-type": [
+        "error",
         {
           allowInterfaces: "with-single-extends",
         },
