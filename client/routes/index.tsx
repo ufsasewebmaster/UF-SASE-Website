@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { zodFetch } from "@/shared";
 import { todoSchema } from "@/shared/schema";
 import type { InsertTodo, UpdateTodo } from "@/shared/schema";
+import { Button } from "@client/components/ui/button";
+import { Checkbox } from "@client/components/ui/checkbox";
+import { Input } from "@client/components/ui/input";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";

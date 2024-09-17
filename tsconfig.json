@@ -23,7 +23,6 @@
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": false,
     "strictNullChecks": true,
-    "baseUrl": ".",
     "noEmit": true,
     "incremental": true,
     "removeComments": false,
@@ -32,8 +31,12 @@
     "module": "ESNext",
     "target": "ESNext",
     "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@client/*": ["./client/*"],
+      "@server/*": ["./server/*"],
+      "@shared/*": ["./shared/*"]
     }
   }
 }
