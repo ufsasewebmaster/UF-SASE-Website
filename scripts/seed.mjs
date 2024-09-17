@@ -1,4 +1,5 @@
 import { createClient } from "@libsql/client";
+import "dotenv/config";
 
 const client = createClient({
   url: "file:local.db",

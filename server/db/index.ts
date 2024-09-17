@@ -1,4 +1,4 @@
-import { SERVER_ENV } from "@/shared/env";
+import { SERVER_ENV } from "@/shared/env/server";
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
