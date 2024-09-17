@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+// Here we define schemas that can be shared between both the client and server
+
 export const todoSchema = z.object({
   id: z.number(),
   title: z.string(),

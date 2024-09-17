@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+// This parses the enviorment variables according to a zod schema and provides them to the client and server
+
 export const SERVER_ENV = createEnv({
   server: {
     DATABASE_URL: z.string().url(),

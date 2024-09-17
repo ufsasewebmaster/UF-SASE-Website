@@ -7,11 +7,13 @@ import { db } from "./db";
 import * as Schema from "./db/schema";
 
 // https://h3.unjs.io/guide/event-handler
+// This is the (actual) entry point, which we just redirect to the Hono server
 export default eventHandler(async (event) => {
   return app.fetch(toWebRequest(event));
 });
 
-// https://hono.dev/
+// Hono! https://hono.dev/
+// This is the entry point for our server which lives on the /api path
 const app = new Hono()
   .use(logger())
   .get("/api/todos", async (c) => {
