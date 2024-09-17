@@ -21,7 +21,11 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ["prettier.config.cjs", "postcss.config.cjs"],
+    ignores: [
+      "prettier.config.cjs",
+      "postcss.config.cjs",
+      "tailwind.config.cjs",
+    ],
   },
   ...compat.extends(
     "eslint:recommended",
@@ -116,6 +120,11 @@ export default [
       "@typescript-eslint/no-array-constructor": "off",
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-empty-object-type": [
+        {
+          allowInterfaces: "with-single-extends",
+        },
+      ],
       "drizzle/enforce-delete-with-where": [
         "error",
         {

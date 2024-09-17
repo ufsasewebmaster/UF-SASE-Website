@@ -1,4 +1,3 @@
-import { FOO } from "@/shared";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
@@ -12,7 +11,6 @@ export const Route = createRootRoute({
         <Link to="/about" className="[&.active]:font-bold">
           About
         </Link>
-        <div>{FOO}</div>
       </div>
       <hr />
       <Outlet />

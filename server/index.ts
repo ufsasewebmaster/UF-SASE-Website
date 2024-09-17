@@ -19,7 +19,7 @@ const app = new Hono()
     return c.json({ todos });
   })
   .post("/api/todos", async (c) => {
-    const toInsert = todoInsertSchema.parse(c.req.json());
+    const toInsert = todoInsertSchema.parse(await c.req.json());
     const todo = await db.insert(Schema.todos).values(toInsert);
     return c.json({ todo });
   })
@@ -38,7 +38,7 @@ const app = new Hono()
   })
   .patch("/api/todos/:id", async (c) => {
     const id = Number(c.req.param("id"));
-    const toUpdate = updateTodoSchema.parse(c.req.json());
+    const toUpdate = updateTodoSchema.parse(await c.req.json());
     await db.update(Schema.todos).set(toUpdate).where(eq(Schema.todos.id, id));
     return c.json({ message: "Updated todo" });
   });

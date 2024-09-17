@@ -72,6 +72,9 @@ export const Route = createFileRoute("/")({
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      if (newTodo.length === 0) {
+        return;
+      }
       createTodo.mutate(
         { title: newTodo, completed: false },
         {
@@ -102,44 +105,50 @@ export const Route = createFileRoute("/")({
         </form>
         {todos.isLoading ? (
           <div className="flex h-32 items-center justify-center">
-            <div />
+            <p className="text-center">Loading...</p>
           </div>
         ) : todos.isError ? (
-          <div className="text-center text-red-500">Error fetching todos</div>
+          <p className="text-center text-red-500">Error fetching todos</p>
         ) : (
           <div className="space-y-2">
-            {todos.data?.todos?.map((todo) => (
-              <div
-                key={todo.id}
-                className="bg-card flex items-center justify-between rounded-md p-2"
-              >
-                <div className="flex items-center">
-                  <Checkbox
-                    checked={todo.completed}
-                    className="mr-2"
-                    onCheckedChange={() =>
-                      handleComplete({
-                        id: todo.id,
-                        completed: !todo.completed,
-                      })
-                    }
-                  />
-                  <span
-                    className={`text-card-foreground ${todo.completed ? "text-muted-foreground line-through" : ""}`}
+            {todos.data?.todos ? (
+              todos.data.todos.length === 0 ? (
+                <p className="text-muted-foreground text-center">No todos</p>
+              ) : (
+                todos.data.todos.map((todo) => (
+                  <div
+                    key={todo.id}
+                    className="bg-card flex items-center justify-between rounded-md p-2"
                   >
-                    {todo.title}
-                  </span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(todo.id)}
-                  className="text-muted-foreground hover:bg-muted/50"
-                >
-                  <Trash2Icon className="h-4 w-4" />
-                </Button>
-              </div>
-            ))}
+                    <div className="flex items-center">
+                      <Checkbox
+                        checked={todo.completed}
+                        className="mr-2"
+                        onCheckedChange={() =>
+                          handleComplete({
+                            id: todo.id,
+                            completed: !todo.completed,
+                          })
+                        }
+                      />
+                      <span
+                        className={`text-card-foreground ${todo.completed ? "text-muted-foreground line-through" : ""}`}
+                      >
+                        {todo.title}
+                      </span>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDelete(todo.id)}
+                      className="text-muted-foreground hover:bg-muted/50"
+                    >
+                      <Trash2Icon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))
+              )
+            ) : null}
           </div>
         )}
       </div>
