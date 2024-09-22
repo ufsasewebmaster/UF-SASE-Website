@@ -1,173 +1,97 @@
-# Ethan's SASE Stack Template
 
-This is a little template I put together that I think would make a great stack to use for the team.
+# UF SASE Website
 
-I will go into detail about each technical deicison below, but I think you should clone and deploy it yourself to see what its like!
+This repository hosts the official website for the UF chapter of the Society of Asian Scientists and Engineers (SASE), built by our wonderful Web Team! It uses the T3+ stack, which includes TypeScript, React, Tanstack Router/Query, Hono, Drizzle, and more.
+[Staging](https://uf-sase-website.vercel.app)
+[Production](https://ufsase.com)
 
-# Running and Deploying
+## Getting Started
+### Prerequisites
 
-1. Clone the repo
+- **IDE Recommendation:** We recommend using Visual Studio Code (VSCode) as it offers great extensions for TypeScript and Tailwind CSS, which are automatically suggested when the project is opened.
+- **Package Manager:** Ensure you have [pnpm](https://pnpm.io/) installed. If not, you can install it globally using:
 
-In the top right corner of your screen, there will be a big green button that says "Use this template".
-Click that button and create a new repository.
+  ```bash
+  npm install -g pnpm
+  ```
 
-Then clone the repository to your local machine.
+### Cloning the Repository
 
-_I reccomend using VSCode, as it has some nice extensions for typescript and tailwind. They should be automatically recommended when you open the project._
+To get started, clone the repository to your local machine:
 
-2. Install the dependencies
-
+```bash
+git clone https://github.com/ufsasewebmaster/UF-SASE-Website
+cd UF-SASE-Website
 ```
-# if you dont have pnpm
-npm i -g pnpm
 
+### Installing Dependencies
+
+After cloning the repository, install the required dependencies:
+
+```bash
 pnpm install
 ```
 
-3. Setup .env
+### Setting Up the Environment Variables
 
-Create a .env file in the root of the project and add the following (as shown in the .env.example file):
+Create a `.env` file in the root directory of the project. Use the `.env.example` file as a reference.
 
 ```
 DATABASE_URL="file:local.db"
 ```
 
-4. Init the local dev db
+### Initializing the Local Development Database
 
-```
+To set up the local SQLite database and apply the schema, run the following commands:
+
+```bash
 pnpm db:local:init
 pnpm db:push
 ```
+Start the development server:
 
-5. Start the server
-
-```
+```bash
 pnpm dev
 ```
-
-## Thats it!
-
-You should now have the app running on localhost:3000, go check it out!
-
-That was cool but now lets deploy it!
+The application should now be running at `http://localhost:3000`.
 
 ## Deploying to Vercel
 
-1. Setting up a 'real' database
+### Setting Up an External Database
 
-Right now our data is stored in a local sqlite database, this is super convenient for development but in production, because we are using serverless functions, we need to use a database that is hosted separately from our application.
+We use [Turso](https://turso.tech/), a hosted SQLite service with a generous free tier, for our production database.
 
-We will use [Turso](https://turso.tech/) to host our database. It is basically hosted sqlite, and has a very generous free tier.
-Switching to it is as easy as swapping our environment variables.
+1. **Create a Database:** Sign up for Turso, create a new database group, and then create a new database.
+2. **Generate an Auth Token:** Click on the three dots in the top right corner of the database, select "Create new token", and copy the credentials to your `.env` file as shown below:
 
-To get started, sign up, create a new database group, then a new database.
-You can call either whatever you want.
-When you are done, click the 3 dots in the top right, then "create new token". Now copy these to your .env file (again, as shown in the .env.example file).
+    ```
+    DATABASE_URL="libsql://your-url"
+    DATABASE_AUTH_TOKEN="your-auth-token"
+    ```
 
-```
-DATABASE_URL="libsql://your-url"
-DATABASE_AUTH_TOKEN="your-auth-token"
-```
+3. **Update the Database Schema:** Push the database schema to the new database:
 
-This will also mean that when you run `pnpm dev` it is now talking to your production database, so be careful!
-You can always change it back to the local db by changing the DATABASE_URL to "file:local.db".
+    ```bash
+    pnpm db:push
+    ```
 
-2. Push the database schema
+**Note:** Running `pnpm dev` now connects to your production database. Be cautious when making changes in this mode. To switch back to local development, set `DATABASE_URL="file:local.db"` in the `.env` file.
 
-```
-pnpm db:push
-```
+### Deploying to Vercel
 
-3. Deploy to Vercel
+1. Deploy the project to Vercel by pushing changes to the main branch. Vercel will automatically build and deploy the project.
 
-We will deploy to [Vercel](https://vercel.com/), a serverless hosting platform that is super easy to use.
+## Project Structure
 
-First, sign up with github. Next, create a new project and select the github repository you created earlier.
-The only setting you need to update is the environment variables, add the same ones you added to your .env file (pro tip: you can copy the .env file and paste it into the environment variables section).
+### Shared
 
-Now click deploy, and your app will be live!
+The `shared` directory contains code that is used by both the frontend and backend, including environment variable validation using Zod.
 
-# Technical Decisions
+### Server
 
-I will now go into detail about the technical decisions I made when creating this stack.
+The backend entry point is `./server/index.ts`. It initializes the Hono app and sets up the database client. The database schema is defined in `./server/db/schema.ts`.
 
-### Typescript
+### Frontend
 
-Typescript is a non-negotiable for me. If you are writing anything bigger than a 10 line script, you should be using typescript, period.
+The frontend entry point is `./client/index.tsx`, which serves as the main React entry point. Routes are defined in the `./client/routes` folder, following the structure recommended by Tanstack Router. All static assets are located in the `./public` folder.
 
-## Frontend
-
-### React
-
-React is the most popular frontend library for a reason. Composition, declarative syntax, and a huge ecosystem make it a no-brainer.
-
-### Vite
-
-Vite is the standard for frontend tooling.
-
-### Tailwind
-
-Tailwind is **the** way to write css. Atomic classes make it easy to write css that is performant and maintainable. It goes very well with React's component model as well.
-
-[Not convinced?](https://youtu.be/5MKw-wOpJR8?si=S0YwYCK7SPbmsBHe)
-
-### Tanstack Router
-
-Every app needs a router, and [Tanstack Router](https://tanstack.com/router/latest) is the most modern and inovative router out there. It pushes typesafety to the max and is super easy to use. It also has first class support for file based routing, which is pretty nice. Read more about it [here](https://tanstack.com/router/latest/docs/framework/react/overview).
-
-### Tanstack Query
-
-[Tanstack Query](https://tanstack.com/query/latest) is the way to fetch data in react. Can you do it yourself in `useEffect`, sure... but there are so many edge cases and things to consider that it is just not worth it. Tanstack Query asks for one thing: a function that returns a promise. It handles the rest.
-
-## Backend
-
-### Hono
-
-[Hono](https://hono.dev/) is the modern express and designed for serverless. It is fast, easy to use, and has a bunch of built in helpers.
-
-### Drizzle
-
-[Drizzle](https://drizzle.dev/) is a modern ORM for typescript. It has a fully type safe api which is a joy to use. It's schema management solution, `drizzle-kit`, means that schema changes happen in code then are simply 'pushed' to the database.
-
-### Sqlite/Libsql/Turso
-
-SQL/relational data modeling is really good and an important skill to have. The best part about using sqlite/libsql/[turso](https://turso.tech/) is that how easy it is to switch between a local database (that is literally just a file) and a hosted database.
-
-Turso also has a generous free tier, so you can host 500 databases for free!
-
-## Other
-
-### Vercel
-
-Hosting on Vercel is really a fantastic experience. Generous free tier, dead simple to setup, and after that just push to deploy. PRs create "preview" deployments, which get their own unqiue domain so you can test changes before merging. It also keeps a history of all deployments, so you can easily rollback with a single click.
-
-### Vinxi / Nitro
-
-Vinxi is what enables the project to have both a frontend project, and a backend server all in one application. This is a huge win as it means that deployments happen all at once. It also means sharing code between the frontend and backend is super easy.
-
-### Auth
-
-`todo!()` (there are a couple options here- honestly wouldnt be opposed to rolling it ourselves with [Lucia](https://lucia-auth.com/))
-
-# Project Structure
-
-## Shared
-
-This is where code that is shared between the frontend and backend lives. The most interesting thing here is the `env` part which uses a package to zod validate the environment variables.
-
-## Server
-
-The server entry point is `./server/index.ts`. From there the request is passed to the Hono app, which has all of the handlers.
-
-The database client is created in `./server/db/index.ts`, and the database schema is defined in `./server/db/schema.ts`.
-
-## Frontend
-
-The frontend entry is `./index.html`, which loads the `./client/index.tsx` file. This is the main react entry point.
-
-The router root is in `./client/routes/__root.tsx`, and the routes are defined in the `./client/routes` folder.
-For more info see the [Tanstack Router Docs](https://tanstack.com/router/latest/docs/framework/react/guide/file-based-routing)
-
-All public assets are in the `./public` folder. These are served statically by the server.
-
-In the `./client/components/ui` are the [shadcn](https://ui.shadcn.com/) ui components used in the demo app.
