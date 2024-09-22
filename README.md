@@ -2,7 +2,8 @@
 # UF SASE Website
 
 This repository hosts the official website for the UF chapter of the Society of Asian Scientists and Engineers (SASE), built by our wonderful Web Team! It uses the T3+ stack, which includes TypeScript, React, Tanstack Router/Query, Hono, Drizzle, and more.
-See the deployed version [here](https://ufsase.com/).
+[Staging](https://uf-sase-website.vercel.app)
+[Production](https://ufsase.com)
 
 ## Getting Started
 ### Prerequisites
