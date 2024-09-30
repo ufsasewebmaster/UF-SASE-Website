@@ -50,6 +50,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@tanstack/router-devtools": "^1.57.15",
     "@tanstack/router-plugin": "^1.57.15",
+    "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "^22.5.2",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",

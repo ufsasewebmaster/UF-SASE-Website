@@ -84,6 +84,9 @@ importers:
       '@tanstack/router-plugin':
         specifier: ^1.57.15
         version: 1.57.15(vite@5.4.5(@types/node@22.5.5)(terser@5.32.0))
+      '@total-typescript/ts-reset':
+        specifier: ^0.6.1
+        version: 0.6.1
       '@types/node':
         specifier: ^22.5.2
         version: 22.5.5
@@ -1601,6 +1604,9 @@ packages:
   '@tanstack/virtual-file-routes@1.56.0':
     resolution: {integrity: sha512-fBUj+lbSaw+VxoBN4J/WFE7dTx8x4XCTRAQvbiIyPJ8MY1KRVkdZV6cbLvg7MeDP6CxUcj6XNvWU6h0ic1Ipyg==}
     engines: {node: '>=12'}
+
+  '@total-typescript/ts-reset@0.6.1':
+    resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -5733,6 +5739,8 @@ snapshots:
   '@tanstack/store@0.5.5': {}
 
   '@tanstack/virtual-file-routes@1.56.0': {}
+
+  '@total-typescript/ts-reset@0.6.1': {}
 
   '@types/babel__core@7.20.5':
     dependencies:
