@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build --preset vercel-edge",
+    "build": "vinxi build",
     "start": "vinxi start",
     "lint:ts": "tsc -b tsconfig.json",
     "lint:js": "eslint \"{client,server,test}/**/*.{ts,mjs}\"",
