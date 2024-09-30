@@ -4,6 +4,9 @@ import { createApp } from "vinxi";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default createApp({
+  server: {
+    preset: "vercel-edge",
+  },
   routers: [
     {
       name: "public",
