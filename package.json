@@ -17,7 +17,7 @@
     "lint:fmt:fix": "pnpm lint:fmt --write",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "clean": "git clean -xdf",
+    "clean": "git clean -xdf -e .env",
     "db:push": "drizzle-kit push",
     "db:local:init": "node scripts/initDb.mjs",
     "db:local:seed": "node scripts/seed.mjs"
