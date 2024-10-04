@@ -51,3 +51,28 @@ export const saseInfo = sqliteTable("saseInfo", {
   mentees: text("mentees"),
   groups: text("groups"),
 });
+
+export const events = sqliteTable("events", {
+  eventID: text("eventID").notNull().primaryKey(),
+  name: text("name").notNull(),
+  description: text("description"),
+  location: text("location").notNull(),
+  startDate: text("startDate").notNull(),
+  endDate: text("endDate").notNull(),
+  involvedGroups: text("involvedGroups"),
+});
+
+export const blogs = sqliteTable("blogs", {
+  blogID: text("blogID").notNull().primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  authorID: text("authorID").references(() => users.userID),
+  publishDate: text("publishDate").notNull(),
+  lastUpdateDate: text("lastUpdateDate"),
+  tags: text("text"),
+});
+
+export const groups = sqliteTable("groups", {
+  groupID: text("groupID").notNull().primaryKey(),
+  name: text("name").notNull(),
+});
