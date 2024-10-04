@@ -94,3 +94,14 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   blogId: text("blog_id").references(() => blogs.id),
   tagId: text("tag_id").references(() => blogTags.id),
 });
+
+export const mentorMenteeRelationship = sqliteTable(
+  "mentor_mentee_relationship",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => generateIdFromEntropySize(10)),
+    mentorId: text("mentor_id").references(() => users.id),
+    menteeId: text("mentee_id").references(() => users.id),
+  },
+);
