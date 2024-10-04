@@ -19,6 +19,13 @@ export const table = sqliteTable("table", {
 });
 */
 
+// temporary
+export const todos = sqliteTable("todo", {
+  id: integer("id").notNull().primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  completed: integer("completed", { mode: "boolean" }).notNull(),
+});
+
 // For lucia: https://lucia-auth.com/database/drizzle
 // https://lucia-auth.com/tutorials/username-and-password/astro
 export const users = sqliteTable("user", {
