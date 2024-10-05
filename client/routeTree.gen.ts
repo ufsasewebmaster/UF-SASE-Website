@@ -10,83 +10,119 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as AboutImport } from "./routes/about";
-import { Route as IndexImport } from "./routes/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as AboutImport } from './routes/about'
+import { Route as UsersPageImport } from './routes/UsersPage'
+import { Route as TodoPageImport } from './routes/TodoPage'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
 const AboutRoute = AboutImport.update({
-  path: "/about",
+  path: '/about',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const UsersPageRoute = UsersPageImport.update({
+  path: '/UsersPage',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TodoPageRoute = TodoPageImport.update({
+  path: '/TodoPage',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
-  path: "/",
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/TodoPage': {
+      id: '/TodoPage'
+      path: '/TodoPage'
+      fullPath: '/TodoPage'
+      preLoaderRoute: typeof TodoPageImport
+      parentRoute: typeof rootRoute
+    }
+    '/UsersPage': {
+      id: '/UsersPage'
+      path: '/UsersPage'
+      fullPath: '/UsersPage'
+      preLoaderRoute: typeof UsersPageImport
+      parentRoute: typeof rootRoute
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  '/': typeof IndexRoute
+  '/TodoPage': typeof TodoPageRoute
+  '/UsersPage': typeof UsersPageRoute
+  '/about': typeof AboutRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  '/': typeof IndexRoute
+  '/TodoPage': typeof TodoPageRoute
+  '/UsersPage': typeof UsersPageRoute
+  '/about': typeof AboutRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/TodoPage': typeof TodoPageRoute
+  '/UsersPage': typeof UsersPageRoute
+  '/about': typeof AboutRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/about";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/about";
-  id: "__root__" | "/" | "/about";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/TodoPage' | '/UsersPage' | '/about'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/TodoPage' | '/UsersPage' | '/about'
+  id: '__root__' | '/' | '/TodoPage' | '/UsersPage' | '/about'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
+  IndexRoute: typeof IndexRoute
+  TodoPageRoute: typeof TodoPageRoute
+  UsersPageRoute: typeof UsersPageRoute
+  AboutRoute: typeof AboutRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TodoPageRoute: TodoPageRoute,
+  UsersPageRoute: UsersPageRoute,
   AboutRoute: AboutRoute,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
@@ -97,11 +133,19 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/TodoPage",
+        "/UsersPage",
         "/about"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/TodoPage": {
+      "filePath": "TodoPage.tsx"
+    },
+    "/UsersPage": {
+      "filePath": "UsersPage.tsx"
     },
     "/about": {
       "filePath": "about.tsx"
