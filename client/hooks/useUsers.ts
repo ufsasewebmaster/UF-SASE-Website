@@ -8,16 +8,15 @@ export const useUsers = () => {
 
   // Fetch users query
   const usersQuery = useQuery({
-    queryKey: ['users'], // Adjust query key to 'users'
+    queryKey: ['users'],
     queryFn: fetchUsers,
   });
 
   // Mutation for creating a new user
   const createUserMutation = useMutation({
     mutationFn: async (newUser: InsertUser) => {
-      // Validate using Zod schema
       userInsertSchema.parse(newUser);
-      return createUser(newUser); // Adjust to user API
+      return createUser(newUser);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
@@ -45,7 +44,7 @@ export const useUsers = () => {
   });
 
   return {
-    users: usersQuery, // Adjust to 'users'
+    users: usersQuery,
     createUser: createUserMutation,
     updateUser: updateUserMutation,
     deleteUser: deleteUserMutation,

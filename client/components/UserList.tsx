@@ -1,7 +1,7 @@
 // src/components/UserList.tsx
 import { useUsers } from "../hooks/useUsers";
 import { Button } from "@client/components/ui/button";
-import type { UpdateUser } from "@/shared/userSchema";
+import type { UpdateUser, User } from "@/shared/userSchema";
 
 export const UserList = () => {
   const { updateUser, users } = useUsers();
@@ -21,34 +21,39 @@ export const UserList = () => {
   }
 
   // Handle case when there are no users
-  if (!users.data?.length) {
+  if (!users.data) {
     return <p className="text-center text-muted-foreground">No users</p>;
   }
 
   return (
     <div className="space-y-2">
-      {users.data?.map((user) => (
-        <div key={user.id} className="flex items-center justify-between rounded-md bg-card p-2">
-          <div className="flex items-center">
-            <span className="text-card-foreground">
-              {user.username} - {user.roles}
-            </span>
+      {Array.isArray(users.data) ? (
+        (users.data as Array<User>).map((user: User) => (
+          <div key={user.id as string} className="flex items-center justify-between rounded-md bg-card p-2">
+            <div className="flex items-center">
+              <span className="text-card-foreground">
+                {user.username as string} - {user.roles as string}
+              </span>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                updateUser.mutate({
+                  id: user.id,
+                  roles: user.roles === "admin" ? "user" : "admin",
+                } as UpdateUser)
+              }
+              className="text-muted-foreground hover:bg-muted/50"
+            >
+              Toggle Role
+            </Button>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() =>
-              updateUser.mutate({
-                id: user.id,
-                roles: user.roles === "admin" ? "user" : "admin",
-              } as UpdateUser)
-            }
-            className="text-muted-foreground hover:bg-muted/50"
-          >
-            Toggle Role
-          </Button>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div>No users available</div>
+      )}
     </div>
   );
+  
 };

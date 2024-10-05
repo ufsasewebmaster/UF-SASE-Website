@@ -1,3 +1,4 @@
+import { generateIdFromEntropySize } from 'lucia';
 import { z } from 'zod';
 
 export const userInsertSchema = z.object({
@@ -24,3 +25,23 @@ export const deleteUserSchema = z.object({
 });
 
 export type DeleteUser = z.infer<typeof deleteUserSchema>;
+
+export const userSchema = z.object({
+    id: z.string().default(() => generateIdFromEntropySize(10)), // Required by lucia
+    username: z.string().min(1), // Required by lucia, ensure uniqueness in application logic or database
+    password_hash: z.string().min(1), // Required by lucia
+    time_added: z
+      .number()
+      .int()
+      .refine((val) => !isNaN(val), { message: "Invalid timestamp" })
+      .default(() => Date.now()),
+    time_updated: z
+      .number()
+      .int()
+      .refine((val) => !isNaN(val), { message: "Invalid timestamp" })
+      .default(() => Date.now()),
+    points: z.number().int().optional(),
+    roles: z.string().optional(),
+  });
+  
+  export type User = z.infer<typeof userSchema>;

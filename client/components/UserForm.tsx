@@ -1,6 +1,6 @@
 // src/components/UserForm.tsx
 import { useState } from "react";
-import { useUsers } from "@client/hooks/useUsers";
+import { useUsers } from "../hooks/useUsers";
 import { Button } from "@client/components/ui/button";
 import { Input } from "@client/components/ui/input";
 
