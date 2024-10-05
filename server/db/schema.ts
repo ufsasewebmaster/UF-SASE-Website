@@ -5,7 +5,7 @@ import { generateIdFromEntropySize } from "lucia";
 // https://orm.drizzle.team/docs/column-types/sqlite
 
 /*
-TEMPLATE FOR NEW TABLES (not always needed just sometimes)
+TEMPLATE FOR NEW TABLES
 export const table = sqliteTable("table", {
   id: text("id")
     .primaryKey()
@@ -26,14 +26,13 @@ export const todos = sqliteTable("todo", {
   completed: integer("completed", { mode: "boolean" }).notNull(),
 });
 
-// For lucia: https://lucia-auth.com/database/drizzle
-// https://lucia-auth.com/tutorials/username-and-password/astro
+// Users table
 export const users = sqliteTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => generateIdFromEntropySize(10)), // https://lucia-auth.com/basics/users
-  username: text("username").notNull().unique(), // required by lucia
-  password_hash: text("password_hash").notNull(), // required by lucia
+    .$defaultFn(() => generateIdFromEntropySize(10)), // Required by lucia
+  username: text("username").notNull().unique(), // Required by lucia
+  password_hash: text("password_hash").notNull(), // Required by lucia
   created_at: integer("created_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
@@ -41,18 +40,56 @@ export const users = sqliteTable("user", {
     .notNull()
     .$onUpdateFn(() => new Date()),
   email: text("email").notNull().unique(),
-  phone: blob("id", { mode: "bigint" }).unique(),
-  areaCode: integer("area_code"),
-  graduationSemester: text("graduation_semester"),
+  phone: blob("phone", { mode: "bigint" }).unique(),
+  area_code: integer("area_code"),
+  graduation_semester: text("graduation_semester"),
+
+  points: integer("points"),
+  roles: text("roles"),
+  dateAdded: integer("date_added").notNull(),
+  dateLastUpdate: integer("date_last_update"),
 });
 
-// For lucia
+// Session table
 export const sessions = sqliteTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
   expiresAt: integer("expires_at").notNull(),
+});
+
+export const personalInfo = sqliteTable("personal_info", {
+  userID: text("userID")
+    .primaryKey()
+    .references(() => users.id),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  emails: text("emails").notNull(),
+  phoneNumber: integer("phone_number"),
+  phoneCountryCode: integer("phone_country_code"),
+});
+
+export const professionalInfo = sqliteTable("professional_info", {
+  userID: text("userID")
+    .primaryKey()
+    .references(() => users.id),
+  resumePath: text("resume_path"),
+  linkedin: text("linkedin"),
+  portfolio: text("portfolio"),
+  majors: text("majors"),
+  minors: text("minors"),
+  graduationSemester: text("graduation_semester"),
+});
+
+export const saseInfo = sqliteTable("sase_info", {
+  userID: text("userID")
+    .primaryKey()
+    .references(() => users.id),
+  eventsAttended: text("events_attended"),
+  mentors: text("mentors"),
+  mentees: text("mentees"),
+  groups: text("groups"),
 });
 
 export const events = sqliteTable("event", {
@@ -67,24 +104,27 @@ export const events = sqliteTable("event", {
   updated_at: integer("updated_at", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
-  location: text("location"),
-  startTime: integer("start_time", { mode: "timestamp" }),
-  endTime: integer("end_time", { mode: "timestamp" }),
+  location: text("location").notNull(),
+  startTime: integer("start_time", { mode: "timestamp" }).notNull(),
+  endTime: integer("end_time", { mode: "timestamp" }).notNull(),
+  involvedGroups: text("involved_groups"),
 });
 
 export const blogs = sqliteTable("blog", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  publishedDate: integer("created_at", { mode: "timestamp" })
+  title: text("title").notNull().unique(),
+  content: text("content").notNull(), // Assuming markdown content
+  authorId: text("author_id").references(() => users.id),
+  publishedDate: integer("published_date", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
   updated_at: integer("updated_at", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
-  content: text("content").notNull(), // markdown
-  title: text("title").notNull().unique(),
-  authorId: text("author_id").references(() => users.id),
+  lastUpdateDate: text("last_update_date"),
+  tags: text("tags"),
 });
 
 export const blogTags = sqliteTable("blog_tag", {
@@ -94,6 +134,7 @@ export const blogTags = sqliteTable("blog_tag", {
   name: text("name").notNull().unique(),
 });
 
+// Blog tag relationship table
 export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   id: text("id")
     .primaryKey()
@@ -102,6 +143,7 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   tagId: text("tag_id").references(() => blogTags.id),
 });
 
+// Mentor/Mentee relationship table
 export const mentorMenteeRelationship = sqliteTable(
   "mentor_mentee_relationship",
   {
