@@ -19,6 +19,12 @@ export const table = sqliteTable("table", {
 });
 */
 
+// temporary
+export const todos = sqliteTable("todo", {
+  id: integer("id").notNull().primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  completed: integer("completed", { mode: "boolean" }).notNull(),
+});
 
 // Users table
 export const users = sqliteTable("user", {
@@ -138,11 +144,13 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
 });
 
 // Mentor/Mentee relationship table
-export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => generateIdFromEntropySize(10)),
-  mentorId: text("mentor_id").references(() => users.id),
-  menteeId: text("mentee_id").references(() => users.id),
-});
-
+export const mentorMenteeRelationship = sqliteTable(
+  "mentor_mentee_relationship",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => generateIdFromEntropySize(10)),
+    mentorId: text("mentor_id").references(() => users.id),
+    menteeId: text("mentee_id").references(() => users.id),
+  },
+);
