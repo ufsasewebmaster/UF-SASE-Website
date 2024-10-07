@@ -26,8 +26,8 @@ const Navbar = () => {
 
   return (
     <header className="bg-white font-[Poppins] font-medium">
-      <nav className="flex justify-between items-center w-full px-4 md:px-8 py-3 h-16">
-        <div>
+      <nav className="z-50 flex justify-between items-center w-full px-4 md:px-8 py-3 h-16">
+        <div className="z-40">
           <Link to="/">
             <img
               className="w-40 md:w-44 cursor-pointer transform hover:scale-105 transition duration-300"
@@ -39,7 +39,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation Buttons! */}
         <div className="hidden md:flex items-center w-full">
-          <ul className="flex md:flex-row items-center gap-[4vw] mr-auto px-10 pt-1">
+          <ul className="flex md:flex-row items-center gap-[3vw] mr-auto px-10 pt-1">
             <li>
               <Link
                 to="/"
