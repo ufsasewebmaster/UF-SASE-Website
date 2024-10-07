@@ -1,4 +1,4 @@
-import { userInsertSchema } from "@/shared/userSchema";
+import { insertUserSchema } from "@/shared/userSchema";
 import { Hono } from "hono";
 // import { eq } from "drizzle-orm";
 import { db } from "../db";
@@ -13,7 +13,7 @@ userRoutes.get("/users", async (c) => {
 
 // Need to await and validate (wow that rhymes) the user
 userRoutes.post("/users", async (c) => {
-  const userToInsert = userInsertSchema.parse(await c.req.json());
+  const userToInsert = insertUserSchema.parse(await c.req.json());
   const user = await db.insert(Schema.users).values(userToInsert);
   return c.json({ user });
 });

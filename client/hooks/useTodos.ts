@@ -1,38 +1,33 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchTodos, createTodo, updateTodo, deleteTodo } from '../api/todos';
-import type { InsertTodo, UpdateTodo } from '@/shared/todoSchema'; // Importing types
-import { todoInsertSchema, updateTodoSchema } from '@/shared/todoSchema'; // Importing Zod schemas for validation
+import type { InsertTodo, UpdateTodo } from "@/shared/todoSchema"; // Importing types
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createTodo, deleteTodo, fetchTodos, updateTodo } from "../api/todos";
 
 export const useTodos = () => {
   const queryClient = useQueryClient();
 
   // Fetch todos query
   const todosQuery = useQuery({
-    queryKey: ['todos'],
+    queryKey: ["todos"],
     queryFn: fetchTodos,
   });
 
   // Mutation for creating a new todo
   const createTodoMutation = useMutation({
-    mutationFn: async (newTodo: InsertTodo) => {
-      // Validate using Zod schema
-      todoInsertSchema.parse(newTodo);
+    mutationFn: (newTodo: InsertTodo) => {
       return createTodo(newTodo);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
   // Mutation for updating an existing todo
   const updateTodoMutation = useMutation({
-    mutationFn: async (updatedTodo: UpdateTodo) => {
-      // Validate using Zod schema
-      updateTodoSchema.parse(updatedTodo);
+    mutationFn: (updatedTodo: UpdateTodo) => {
       return updateTodo(updatedTodo);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
@@ -40,7 +35,7 @@ export const useTodos = () => {
   const deleteTodoMutation = useMutation({
     mutationFn: (id: number) => deleteTodo(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 

@@ -1,6 +1,24 @@
 import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
 
+// Here we define our database schema as code
+// https://orm.drizzle.team/docs/column-types/sqlite
+
+/*
+TEMPLATE FOR NEW TABLES
+export const table = sqliteTable("table", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  created_at: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updated_at: integer("updated_at", { mode: "timestamp" })
+    .notNull()
+    .$onUpdateFn(() => new Date()),
+});
+*/
+
 // Todos table
 export const todos = sqliteTable("todo", {
   id: integer("id").notNull().primaryKey({ autoIncrement: true }),
@@ -36,7 +54,7 @@ export const sessions = sqliteTable("session", {
 });
 
 // Personal Info table
-export const personal_info = sqliteTable("personal_info", {
+export const personalInfo = sqliteTable("personal_info", {
   user_id: text("user_id")
     .primaryKey()
     .references(() => users.id),
@@ -48,7 +66,7 @@ export const personal_info = sqliteTable("personal_info", {
 });
 
 // Professional Info table
-export const professional_info = sqliteTable("professional_info", {
+export const professionalInfo = sqliteTable("professional_info", {
   user_id: text("user_id")
     .primaryKey()
     .references(() => users.id),
@@ -61,7 +79,7 @@ export const professional_info = sqliteTable("professional_info", {
 });
 
 // SASE Info table
-export const sase_info = sqliteTable("sase_info", {
+export const saseInfo = sqliteTable("sase_info", {
   user_id: text("user_id")
     .primaryKey()
     .references(() => users.id),
@@ -109,7 +127,7 @@ export const blogs = sqliteTable("blog", {
 });
 
 // Blog Tags table
-export const blog_tags = sqliteTable("blog_tag", {
+export const blogTags = sqliteTable("blog_tag", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
@@ -117,16 +135,16 @@ export const blog_tags = sqliteTable("blog_tag", {
 });
 
 // Blog Tag Relationship table
-export const blog_tag_relationship = sqliteTable("blog_tag_relationship", {
+export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
   blog_id: text("blog_id").references(() => blogs.id),
-  tag_id: text("tag_id").references(() => blog_tags.id),
+  tag_id: text("tag_id").references(() => blogTags.id),
 });
 
 // Mentor/Mentee Relationship table
-export const mentor_mentee_relationship = sqliteTable("mentor_mentee_relationship", {
+export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),

@@ -22,6 +22,12 @@ export const Route = createRootRoute({
         <Link to="/about" className="[&.active]:font-bold">
           About
         </Link>
+        <Link to="/UserPage" className="[&.active]:font-bold">
+          User Page
+        </Link>
+        <Link to="/TodoPage" className="[&.active]:font-bold">
+          Todo Page
+        </Link>
       </div>
       <hr />
       <Outlet />
