@@ -86,7 +86,7 @@ export const Route = createFileRoute("/")({
     };
 
     return (
-      <div className="bg-background mx-auto max-w-md rounded-lg p-4 shadow-md">
+      <div className="mx-auto max-w-md rounded-lg bg-background p-4 shadow-md">
         <h1 className="mb-4 text-2xl font-bold">Todo List</h1>
         <form onSubmit={handleSubmit} className="mb-4 flex items-center">
           <Input
@@ -94,11 +94,11 @@ export const Route = createFileRoute("/")({
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
             placeholder="Add a new todo"
-            className="border-muted focus:ring-primary mr-2 flex-1 rounded-md border p-2 focus:outline-none focus:ring-2"
+            className="mr-2 flex-1 rounded-md border border-muted p-2 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <Button
             type="submit"
-            className="bg-primary text-primary-foreground rounded-md px-4 py-2"
+            className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
           >
             Add
           </Button>
@@ -113,12 +113,12 @@ export const Route = createFileRoute("/")({
           <div className="space-y-2">
             {todos.data?.todos ? (
               todos.data.todos.length === 0 ? (
-                <p className="text-muted-foreground text-center">No todos</p>
+                <p className="text-center text-muted-foreground">No todos</p>
               ) : (
                 todos.data.todos.map((todo) => (
                   <div
                     key={todo.id}
-                    className="bg-card flex items-center justify-between rounded-md p-2"
+                    className="flex items-center justify-between rounded-md bg-card p-2"
                   >
                     <div className="flex items-center">
                       <Checkbox
