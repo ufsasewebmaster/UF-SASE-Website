@@ -34,6 +34,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
+    "hamburger-react": "^2.5.1",
     "hono": "^4.6.1",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",
