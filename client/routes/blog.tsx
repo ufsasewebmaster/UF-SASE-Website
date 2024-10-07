@@ -9,7 +9,7 @@ import "../blog.css";
 export const Route = createFileRoute("/blog")({
   component: () => {
     const [editorContent, setEditorContent] = useState<string>(
-      "Greetings, everyone! This is the initial blog content. Click edit to modify.",
+      "This is the initial blog content. Click edit to change the text.",
     );
     const [isEditing, setIsEditing] = useState(false);
 
@@ -51,7 +51,7 @@ export const Route = createFileRoute("/blog")({
             </div>
 
             {!isEditing ? (
-              <Button variant="outline" onClick={handleEdit}>
+              <Button variant="default" onClick={handleEdit}>
                 Edit
               </Button>
             ) : (
