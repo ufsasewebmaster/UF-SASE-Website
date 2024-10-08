@@ -1,12 +1,7 @@
-import React from "react";
-import { Route as AboutRoute } from "../../routes/about";
-import { Button } from "./button";
+import { Link } from "@tanstack/react-router";
+import { Button } from "./ui/button";
 
-const Footer = () => {
-  const navigate = (path: string) => {
-    AboutRoute.buildLink({ to: path }).onClick(); // This triggers navigation
-  };
-
+export const Footer = () => {
   return (
     <footer
       style={{
@@ -37,13 +32,8 @@ const Footer = () => {
             <span>Home</span>
           </Button>
 
-          <Button
-            asChild
-            variant="link"
-            size="default"
-            onClick={() => navigate("/about")}
-          >
-            <span>About</span>
+          <Button asChild variant="link" size="default">
+            <Link to="/about">About</Link>
           </Button>
 
           <Button asChild variant="link" size="default">
@@ -83,5 +73,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;
