@@ -11,11 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
+import { Route as BlogImport } from "./routes/blog";
 import { Route as IndexImport } from "./routes/index";
 import { Route as TodoPageImport } from "./routes/TodoPage";
 import { Route as UserPageImport } from "./routes/UserPage";
 
 // Create/Update Routes
+
+const BlogRoute = BlogImport.update({
+  path: "/blog",
+  getParentRoute: () => rootRoute,
+} as any);
 
 const UserPageRoute = UserPageImport.update({
   path: "/UserPage",
@@ -57,6 +63,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof UserPageImport;
       parentRoute: typeof rootRoute;
     };
+    "/blog": {
+      id: "/blog";
+      path: "/blog";
+      fullPath: "/blog";
+      preLoaderRoute: typeof BlogImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -66,12 +79,14 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRoutesById {
@@ -79,14 +94,15 @@ export interface FileRoutesById {
   "/": typeof IndexRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/TodoPage" | "/UserPage";
+  fullPaths: "/" | "/TodoPage" | "/UserPage" | "/blog";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/TodoPage" | "/UserPage";
-  id: "__root__" | "/" | "/TodoPage" | "/UserPage";
+  to: "/" | "/TodoPage" | "/UserPage" | "/blog";
+  id: "__root__" | "/" | "/TodoPage" | "/UserPage" | "/blog";
   fileRoutesById: FileRoutesById;
 }
 
@@ -94,12 +110,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   TodoPageRoute: typeof TodoPageRoute;
   UserPageRoute: typeof UserPageRoute;
+  BlogRoute: typeof BlogRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
+  BlogRoute: BlogRoute,
 };
 
 export const routeTree = rootRoute
@@ -116,7 +134,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/TodoPage",
-        "/UserPage"
+        "/UserPage",
+        "/blog"
       ]
     },
     "/": {
@@ -127,6 +146,9 @@ export const routeTree = rootRoute
     },
     "/UserPage": {
       "filePath": "UserPage.tsx"
+    },
+    "/blog": {
+      "filePath": "blog.tsx"
     }
   }
 }

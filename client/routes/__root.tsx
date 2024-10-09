@@ -25,6 +25,9 @@ export const Route = createRootRoute({
         <Link to="/TodoPage" className="[&.active]:font-bold">
           Todo Page
         </Link>
+        <Link to="/blog" className="[&.active]:font-bold">
+          Blog
+        </Link>
       </div>
       <hr />
       <Outlet />

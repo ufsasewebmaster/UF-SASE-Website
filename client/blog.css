@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card-bg: var(--background);
+    --card-fg: var(--foreground);
+    --border-radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card-bg: var(--background);
+    --card-fg: var(--foreground);
+  }
+}
+
+@layer components {
+  .blog-post {
+    @apply w-full max-w-5xl rounded-lg bg-white p-8 shadow-md;
+    background-color: var(--card-bg);
+    color: var(--card-fg);
+  }
+
+  .dark .blog-post {
+    background-color: var(--card-bg);
+    color: var(--card-fg);
+  }
+}
