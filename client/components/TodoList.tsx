@@ -8,7 +8,7 @@ export const TodoList = () => {
 
   return (
     <ul>
-      {(todos.data as Array<{ id: number; title?: string | undefined; completed?: boolean | undefined; }>).map((todo) => (
+      {(todos.data as unknown as Array<{ id: number; title?: string | undefined; completed?: boolean | undefined; }>).map((todo) => (
         <li key={todo.id}>
           <input
             type="checkbox"

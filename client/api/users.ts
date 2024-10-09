@@ -1,7 +1,5 @@
 import { insertUserSchema, selectUserSchema } from "@/shared/userSchema";
-
 import type { InsertUser, SelectUser, UpdateUser } from "@/shared/userSchema";
-
 
 // Fetch ALL Users
 export const fetchUsers = async (): Promise<Array<SelectUser>> => {
@@ -30,7 +28,9 @@ export const createUser = async (newUser: InsertUser): Promise<SelectUser> => {
   return selectUserSchema.parse(createdUser);
 };
 
-export const updateUser = async (updatedUser: UpdateUser): Promise<SelectUser> => {
+export const updateUser = async (
+  updatedUser: UpdateUser,
+): Promise<SelectUser> => {
   insertUserSchema.parse(updatedUser);
   const response = await fetch(`/api/users/${updatedUser.id}`, {
     method: "PATCH",
@@ -48,7 +48,9 @@ export const updateUser = async (updatedUser: UpdateUser): Promise<SelectUser> =
   return selectUserSchema.parse(updatedUserData);
 };
 
-export const deleteUser = async (userId: number): Promise<{ success: boolean }> => {
+export const deleteUser = async (
+  userId: number,
+): Promise<{ success: boolean }> => {
   const response = await fetch(`/api/users/${userId}`, {
     method: "DELETE",
     headers: {

@@ -20,7 +20,8 @@ export default eventHandler(async (event) => {
 // Hono! https://hono.dev/
 // This is the entry point for our server which lives on the /api path
 const app = new Hono();
-app.use('*', logger);
-app.get('/', (c) => c.text('TEST'))
+app.use("*", logger);
+app
+  .get("/", (c) => c.text("TEST"))
   .route("/api", todoRoutes)
   .route("/api", userRoutes);

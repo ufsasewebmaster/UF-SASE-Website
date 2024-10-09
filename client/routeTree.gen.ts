@@ -10,101 +10,101 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as UserPageImport } from './routes/UserPage'
-import { Route as TodoPageImport } from './routes/TodoPage'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as IndexImport } from "./routes/index";
+import { Route as TodoPageImport } from "./routes/TodoPage";
+import { Route as UserPageImport } from "./routes/UserPage";
 
 // Create/Update Routes
 
 const UserPageRoute = UserPageImport.update({
-  path: '/UserPage',
+  path: "/UserPage",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const TodoPageRoute = TodoPageImport.update({
-  path: '/TodoPage',
+  path: "/TodoPage",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/TodoPage': {
-      id: '/TodoPage'
-      path: '/TodoPage'
-      fullPath: '/TodoPage'
-      preLoaderRoute: typeof TodoPageImport
-      parentRoute: typeof rootRoute
-    }
-    '/UserPage': {
-      id: '/UserPage'
-      path: '/UserPage'
-      fullPath: '/UserPage'
-      preLoaderRoute: typeof UserPageImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/TodoPage": {
+      id: "/TodoPage";
+      path: "/TodoPage";
+      fullPath: "/TodoPage";
+      preLoaderRoute: typeof TodoPageImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/UserPage": {
+      id: "/UserPage";
+      path: "/UserPage";
+      fullPath: "/UserPage";
+      preLoaderRoute: typeof UserPageImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/TodoPage': typeof TodoPageRoute
-  '/UserPage': typeof UserPageRoute
+  "/": typeof IndexRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/TodoPage': typeof TodoPageRoute
-  '/UserPage': typeof UserPageRoute
+  "/": typeof IndexRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/TodoPage': typeof TodoPageRoute
-  '/UserPage': typeof UserPageRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/TodoPage' | '/UserPage'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/TodoPage' | '/UserPage'
-  id: '__root__' | '/' | '/TodoPage' | '/UserPage'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/TodoPage" | "/UserPage";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/TodoPage" | "/UserPage";
+  id: "__root__" | "/" | "/TodoPage" | "/UserPage";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  TodoPageRoute: typeof TodoPageRoute
-  UserPageRoute: typeof UserPageRoute
+  IndexRoute: typeof IndexRoute;
+  TodoPageRoute: typeof TodoPageRoute;
+  UserPageRoute: typeof UserPageRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
