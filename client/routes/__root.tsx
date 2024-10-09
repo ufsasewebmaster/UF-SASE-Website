@@ -15,6 +15,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <Navbar />
+      {/* TODO: Use the navbar for this navigation instead. */}
       <div className="flex gap-2 p-2">
         <Link to="/" className="[&.active]:font-bold">
           Home
