@@ -44,6 +44,9 @@ importers:
       drizzle-orm:
         specifier: ^0.33.0
         version: 0.33.0(@libsql/client@0.12.0)(@types/react@18.3.5)(react@18.3.1)
+      drizzle-zod:
+        specifier: ^0.5.1
+        version: 0.5.1(drizzle-orm@0.33.0(@libsql/client@0.12.0)(@types/react@18.3.5)(react@18.3.1))(zod@3.23.8)
       hono:
         specifier: ^4.6.1
         version: 4.6.1
@@ -2710,6 +2713,12 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-zod@0.5.1:
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
 
   duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
@@ -7180,6 +7189,11 @@ snapshots:
       '@libsql/client': 0.12.0
       '@types/react': 18.3.5
       react: 18.3.1
+
+  drizzle-zod@0.5.1(drizzle-orm@0.33.0(@libsql/client@0.12.0)(@types/react@18.3.5)(react@18.3.1))(zod@3.23.8):
+    dependencies:
+      drizzle-orm: 0.33.0(@libsql/client@0.12.0)(@types/react@18.3.5)(react@18.3.1)
+      zod: 3.23.8
 
   duplexer@0.1.2: {}
 
