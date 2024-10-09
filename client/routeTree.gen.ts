@@ -11,13 +11,25 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as AboutImport } from "./routes/about";
+import { Route as BlogImport } from "./routes/blog";
 import { Route as IndexImport } from "./routes/index";
+import { Route as TodoPageImport } from "./routes/TodoPage";
+import { Route as UserPageImport } from "./routes/UserPage";
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  path: "/about",
+const BlogRoute = BlogImport.update({
+  path: "/blog",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const UserPageRoute = UserPageImport.update({
+  path: "/UserPage",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const TodoPageRoute = TodoPageImport.update({
+  path: "/TodoPage",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -37,11 +49,25 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutImport;
+    "/TodoPage": {
+      id: "/TodoPage";
+      path: "/TodoPage";
+      fullPath: "/TodoPage";
+      preLoaderRoute: typeof TodoPageImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/UserPage": {
+      id: "/UserPage";
+      path: "/UserPage";
+      fullPath: "/UserPage";
+      preLoaderRoute: typeof UserPageImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/blog": {
+      id: "/blog";
+      path: "/blog";
+      fullPath: "/blog";
+      preLoaderRoute: typeof BlogImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -51,37 +77,47 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
+  "/TodoPage": typeof TodoPageRoute;
+  "/UserPage": typeof UserPageRoute;
+  "/blog": typeof BlogRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/about";
+  fullPaths: "/" | "/TodoPage" | "/UserPage" | "/blog";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/about";
-  id: "__root__" | "/" | "/about";
+  to: "/" | "/TodoPage" | "/UserPage" | "/blog";
+  id: "__root__" | "/" | "/TodoPage" | "/UserPage" | "/blog";
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
+  TodoPageRoute: typeof TodoPageRoute;
+  UserPageRoute: typeof UserPageRoute;
+  BlogRoute: typeof BlogRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  TodoPageRoute: TodoPageRoute,
+  UserPageRoute: UserPageRoute,
+  BlogRoute: BlogRoute,
 };
 
 export const routeTree = rootRoute
@@ -97,14 +133,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/TodoPage",
+        "/UserPage",
+        "/blog"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/TodoPage": {
+      "filePath": "TodoPage.tsx"
+    },
+    "/UserPage": {
+      "filePath": "UserPage.tsx"
+    },
+    "/blog": {
+      "filePath": "blog.tsx"
     }
   }
 }

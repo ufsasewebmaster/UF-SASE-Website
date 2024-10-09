@@ -14,8 +14,21 @@ const TanStackRouterDevtools =
 export const Route = createRootRoute({
   component: () => (
     <>
-      {/* Navigation Bar */}
-      <Navbar /> {/* Use the Navbar component here */}
+      <Navbar />
+      <div className="flex gap-2 p-2">
+        <Link to="/" className="[&.active]:font-bold">
+          Home
+        </Link>{" "}
+        <Link to="/UserPage" className="[&.active]:font-bold">
+          User Page
+        </Link>
+        <Link to="/TodoPage" className="[&.active]:font-bold">
+          Todo Page
+        </Link>
+        <Link to="/blog" className="[&.active]:font-bold">
+          Blog
+        </Link>
+      </div>
       <hr />
 
       {/* Content Rendering */}
