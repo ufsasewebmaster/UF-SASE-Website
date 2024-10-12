@@ -21,7 +21,7 @@
 
 @layer components {
   .blog-post {
-    @apply w-full max-w-5xl rounded-lg bg-white p-8 shadow-md;
+    font-family: var(--font-family);
     background-color: var(--card-bg);
     color: var(--card-fg);
   }
@@ -29,5 +29,55 @@
   .dark .blog-post {
     background-color: var(--card-bg);
     color: var(--card-fg);
+  }
+
+  .prose h1 {
+    @apply mb-4 text-4xl font-bold;
+  }
+
+  .prose h2 {
+    @apply mb-3 text-3xl font-semibold;
+  }
+
+  .prose h3 {
+    @apply mb-2 text-2xl font-medium;
+  }
+
+  /* Formatting for ordered lists */
+  .prose ol {
+    @apply list-inside list-decimal pl-4;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Formatting for unordered lists */
+  .prose ul {
+    @apply list-inside list-disc pl-4;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Formatting for blockquotes */
+  .prose blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-600;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Formatting for bold text */
+  .prose strong {
+    @apply font-bold;
+  }
+
+  /* Formatting for links */
+  .prose a {
+    @apply text-blue-600 hover:underline;
+  }
+
+  /* Formatting for inline code blocks */
+  .prose code {
+    @apply rounded bg-gray-200 px-1 py-0.5 text-sm;
+  }
+
+  /* General paragraph styling */
+  .prose p {
+    @apply mb-4 leading-relaxed;
   }
 }

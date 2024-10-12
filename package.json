@@ -23,10 +23,14 @@
     "db:local:seed": "node scripts/seed.mjs"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@heroicons/react": "^2.1.5",
     "@libsql/client": "^0.12.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-core": "^0.11.1",
+    "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-router": "^1.57.15",
     "@vitejs/plugin-react": "^4.3.1",
@@ -36,6 +40,7 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "hono": "^4.6.1",
+    "html-react-parser": "^5.1.18",
     "lucia": "^3.2.0",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",
