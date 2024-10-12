@@ -1,6 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
-import Navbar from "../components/ui/navbar"; // Import the new Navbar component
+import Navbar from "@client/components/Navbar";
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -15,21 +15,8 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <Navbar />
-      <div className="flex gap-2 p-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{" "}
-        <Link to="/UserPage" className="[&.active]:font-bold">
-          User Page
-        </Link>
-        <Link to="/TodoPage" className="[&.active]:font-bold">
-          Todo Page
-        </Link>
-        <Link to="/blog" className="[&.active]:font-bold">
-          Blog
-        </Link>
-      </div>
-      <hr />
+      <hr className="p-2"/>
+      <div className="h-12"/> {/* spacer for navbar*/}
 
       {/* Content Rendering */}
       <Outlet />
