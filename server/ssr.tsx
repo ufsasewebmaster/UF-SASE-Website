@@ -7,6 +7,6 @@ import {
 } from "@tanstack/start/server";
 
 export default createStartHandler({
-  createRouter,
+  createRouter: createRouter as any, // todo: why does this error?
   getRouterManifest,
 })(defaultStreamHandler);

@@ -8,5 +8,6 @@ const router = createRouter();
 
 ReactDOM.hydrateRoot(
   document.getElementById("root")!,
-  <StartClient router={router} />,
+  // todo: why does this error?
+  <StartClient router={router as any} />,
 );

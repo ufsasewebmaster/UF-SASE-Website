@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "./ui/button";
 import React from "react";
+import { Button } from "./ui/button";
 
 export const Footer = () => {
   return (
@@ -34,7 +34,7 @@ export const Footer = () => {
           </Button>
 
           <Button asChild variant="link" size="default">
-            <Link to="/about">About</Link>
+            <Link to="/About">About</Link>
           </Button>
 
           <Button asChild variant="link" size="default">
