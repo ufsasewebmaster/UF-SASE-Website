@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as BlogImport } from './routes/blog'
-import { Route as AboutImport } from './routes/about'
+import { Route as AboutImport } from './routes/About'
 import { Route as UserPageImport } from './routes/UserPage'
 import { Route as TodoPageImport } from './routes/TodoPage'
 import { Route as ProfileImport } from './routes/Profile'
