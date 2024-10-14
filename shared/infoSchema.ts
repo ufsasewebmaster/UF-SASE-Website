@@ -21,5 +21,12 @@ export const insertProfessionalSchema = infoSchema.extend({
   graduation_semester: z.string().optional(),
 });
 
+export const updatePersonalInfoSchema = insertPersonalSchema.partial();
+export const updateProfessionalInfoSchema = insertProfessionalSchema.partial();
+
 export type insertPersonalInfo = z.infer<typeof insertPersonalSchema>;
 export type insertProfessionalInfo = z.infer<typeof insertProfessionalSchema>;
+export type updatePersonalInfo = z.infer<typeof updatePersonalInfoSchema>;
+export type updateProfessionalInfo = z.infer<
+  typeof updateProfessionalInfoSchema
+>;
