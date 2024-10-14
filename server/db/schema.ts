@@ -1,6 +1,7 @@
 import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
-import {db} from './index';
+import { db } from "./index";
+
 // Here we define our database schema as code
 // https://orm.drizzle.team/docs/column-types/sqlite
 
@@ -45,37 +46,35 @@ export const users = sqliteTable("user", {
 });
 
 //Insertion for User Table
-async function insertUser(
-  id: string,
-  username: string,
-  passwordHash: string,
-  points?: number,
-  roles?: string
-)
-{
-  try
-  {
-    await db.insert(users).values({
-      id: generateIdFromEntropySize(10), // Generate unique ID using lucia
-      username: username,
-      password_hash: passwordHash,
-      time_added: new Date(),
-      time_updated: new Date(),
-      points: points ?? 0, //Sets points to 0 by default
-      roles: roles ?? 'user', //Sets base role as user
+// async function insertUser(
+//   id: string,
+//   username: string,
+//   passwordHash: string,
+//   points?: number,
+//   roles?: string
+// )
+// {
+//   try
+//   {
+//     await db.insert(users).values({
+//       id: generateIdFromEntropySize(10), // Generate unique ID using lucia
+//       username: username,
+//       password_hash: passwordHash,
+//       time_added: new Date(),
+//       time_updated: new Date(),
+//       points: points ?? 0, //Sets points to 0 by default
+//       roles: roles ?? 'user', //Sets base role as user
 
-    });
+//     });
 
-    console.log('User inserted successfully');
-  } 
-  catch (error) 
-  {
-    console.error('Error inserting user:', error);
-  }
+//     console.log('User inserted successfully');
+//   }
+//   catch (error)
+//   {
+//     console.error('Error inserting user:', error);
+//   }
 
-  }
-
-
+//   }
 
 // Session table
 export const sessions = sqliteTable("session", {
@@ -187,5 +186,3 @@ export const mentorMenteeRelationship = sqliteTable(
     mentee_id: text("mentee_id").references(() => users.id),
   },
 );
-
-
