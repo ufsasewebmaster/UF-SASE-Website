@@ -1,5 +1,3 @@
-import React from 'react';
-
 const About = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center font-[Poppins]">
