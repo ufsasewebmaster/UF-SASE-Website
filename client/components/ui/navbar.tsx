@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
+import { Squash as Hamburger } from "hamburger-react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiUser } from "react-icons/fi";
-import { Squash as Hamburger } from 'hamburger-react';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,11 +26,11 @@ const Navbar = () => {
 
   return (
     <header className="bg-white font-[Poppins] font-medium">
-      <nav className="z-50 flex justify-between items-center w-full px-4 md:px-8 py-3 h-16">
+      <nav className="z-50 flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         <div className="z-40">
           <Link to="/">
             <img
-              className="w-40 md:w-44 cursor-pointer transform hover:scale-105 transition duration-300"
+              className="w-40 transform cursor-pointer transition duration-300 hover:scale-105 md:w-44"
               src="./client/assets/images/SASELogo.png"
               alt="Logo"
             />
@@ -38,12 +38,12 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation Buttons! */}
-        <div className="hidden md:flex items-center w-full">
-          <ul className="flex md:flex-row items-center gap-[3vw] mr-auto px-10 pt-1">
+        <div className="hidden w-full items-center md:flex">
+          <ul className="mr-auto flex items-center gap-[3vw] px-10 pt-1 md:flex-row">
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 Home
               </Link>
@@ -59,7 +59,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 Board
               </Link>
@@ -67,7 +67,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 Gallery
               </Link>
@@ -75,7 +75,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 Events
               </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 Blogs
               </Link>
@@ -94,11 +94,11 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="border border-gray-600 pl-10 pr-3 py-2 rounded-full focus:outline-none transition-all duration-300 ease-in-out w-32 focus:w-64 placeholder-gray-600"
+                className="w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute left-3 top-3 h-5 w-5 text-gray-600 "
+                className="absolute left-3 top-3 h-5 w-5 text-gray-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -113,13 +113,13 @@ const Navbar = () => {
             </div>
             {isLoggedIn ? (
               <Link to="/">
-                <button className="text-gray-600 px-1 py-2 rounded-full duration-300 hover:text-[#000000] transform hover:scale-105">
+                <button className="transform rounded-full px-1 py-2 text-gray-600 duration-300 hover:scale-105 hover:text-[#000000]">
                   <FiUser className="text-2xl" />
                 </button>
               </Link>
             ) : (
               <Link to="/">
-                <button className="bg-[#0f6cb6] text-white px-5 py-2 rounded-full hover:bg-[#8dc63f] hover:text-[#000000] duration-300 transform hover:scale-105 inline-block">
+                <button className="inline-block transform rounded-full bg-[#0f6cb6] px-5 py-2 text-white duration-300 hover:scale-105 hover:bg-[#8dc63f] hover:text-[#000000]">
                   Log In
                 </button>
               </Link>
@@ -130,7 +130,7 @@ const Navbar = () => {
         {/* Hamburger Menu */}
         <div
           ref={menuRef}
-          className={`nav-links md:hidden absolute bg-white transition-all ease-in-out duration-500 w-full ${
+          className={`nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden ${
             menuOpen ? "top-[65px]" : "top-[-100%]"
           }`}
         >
@@ -138,7 +138,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 Home
@@ -156,7 +156,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 Board
@@ -165,7 +165,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 Gallery
@@ -174,7 +174,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 Events
@@ -183,7 +183,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 Blogs
@@ -197,11 +197,11 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search"
-              className="border border-gray-600 pl-10 pr-3 py-2 rounded-full focus:outline-none transition-all duration-300 ease-in-out w-32 focus:w-64 placeholder-gray-600"
+              className="w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-3 top-3 h-5 w-5 text-gray-600 "
+              className="absolute left-3 top-3 h-5 w-5 text-gray-600"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -217,19 +217,24 @@ const Navbar = () => {
 
           {isLoggedIn ? (
             <Link to="/">
-              <button className="text-gray-600 px-1 py-2 rounded-full duration-300 hover:text-[#000000] transform hover:scale-105">
+              <button className="transform rounded-full px-1 py-2 text-gray-600 duration-300 hover:scale-105 hover:text-[#000000]">
                 <FiUser className="text-2xl" />
               </button>
             </Link>
           ) : (
             <Link to="/">
-              <button className="bg-[#0f6cb6] text-white px-5 py-2 rounded-full hover:bg-[#8dc63f] hover:text-[#000000] duration-300 transform hover:scale-105 inline-block">
+              <button className="inline-block transform rounded-full bg-[#0f6cb6] px-5 py-2 text-white duration-300 hover:scale-105 hover:bg-[#8dc63f] hover:text-[#000000]">
                 Log In
               </button>
             </Link>
           )}
           <button ref={hamburgerRef} className="focus:outline-none">
-            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color="#000" size={22} />
+            <Hamburger
+              toggled={menuOpen}
+              toggle={setMenuOpen}
+              color="#000"
+              size={22}
+            />
           </button>
         </div>
       </nav>
