@@ -50,7 +50,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/about"
                 className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
               >
                 About
