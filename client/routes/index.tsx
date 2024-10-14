@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import professionalDevelopment from "../assets/images/ProfesionalDevelopment_Home.png";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -105,7 +106,69 @@ export const Route = createFileRoute("/")({
         </div>
 
         <h1 className="mb-4 text-3xl font-bold">FAQs</h1>
+
         <h1 className="mb-4 text-3xl font-bold">Our Values</h1>
+        <div className="mb-12 grid grid-cols-2">
+          <img
+            className="w-100"
+            src={professionalDevelopment}
+            alt="Professional Development Image"
+          />
+          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
+            <p className="mb-4 text-2xl font-bold">Professional Development</p>
+            <p className="mb-4 text-lg">
+              Through our meetings, conferences, and events, we shape skills
+              that will help our members succeed in the professional world.
+            </p>
+          </div>
+          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
+            <p className="mb-4 text-2xl font-bold">Socials</p>
+            <p className="mb-4 text-lg">
+              We host multiple social events throughout the year, including a
+              semesterly banquet, that give our members a chance to bond.
+            </p>
+          </div>
+          <img
+            src={professionalDevelopment}
+            alt="Professional Development Image"
+          />
+          <img
+            src={professionalDevelopment}
+            alt="Professional Development Image"
+          />
+          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
+            <p className="mb-4 text-2xl font-bold">Service</p>
+            <p className="mb-4 text-lg">
+              We believe that it is important to make meaningful contributions
+              to the community, so we organize service events for our members to
+              join.
+            </p>
+          </div>
+          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
+            <p className="mb-4 text-2xl font-bold">Sports</p>
+            <p className="mb-4 text-lg">
+              We believe that it is important to make meaningful contributions
+              to the community, so we organize service events for our members to
+              join.
+            </p>
+          </div>
+          <img
+            src={professionalDevelopment}
+            alt="Professional Development Image"
+          />
+          <img
+            src={professionalDevelopment}
+            alt="Professional Development Image"
+          />
+          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
+            <p className="mb-4 text-2xl font-bold">Mentorship</p>
+            <p className="mb-4 text-lg">
+              To ensure each member has the personal and academic guidance they
+              need, we organize a semesterly mentorship program. Keep an eye on
+              our Instagram to apply!
+            </p>
+          </div>
+        </div>
         <h1 className="mb-4 text-3xl font-bold">Latest Blogs</h1>
       </div>
     );
