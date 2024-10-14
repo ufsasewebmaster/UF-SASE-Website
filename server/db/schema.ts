@@ -1,6 +1,5 @@
 import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
-import { db } from "./index";
 
 // Here we define our database schema as code
 // https://orm.drizzle.team/docs/column-types/sqlite
