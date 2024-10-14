@@ -1,14 +1,15 @@
 // src/components/Navbar/Navbar.tsx
-import React, { useState, useRef, useEffect } from "react";
+import { Logo } from "@client/components/navigation/Logo";
+import { DesktopMenu } from "client/components/navigation/DesktopMenu";
+import { MobileMenu } from "client/components/navigation/MobileMenu";
+import { SearchBar } from "client/components/navigation/SearchBar";
+import { UserButton } from "client/components/navigation/UserButton";
 import { Squash as Hamburger } from "hamburger-react";
-import {Logo} from "@client/components/navigation/Logo";
-import {DesktopMenu} from "client/components/navigation/DesktopMenu";
-import {MobileMenu} from "client/components/navigation/MobileMenu";
-import {SearchBar} from "client/components/navigation/SearchBar";
-import {UserButton} from "client/components/navigation/UserButton";
+import React, { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
   { name: "Blog", path: "/blog" },
   { name: "User Page", path: "/UserPage" },
   { name: "Todo Page", path: "/TodoPage" },
@@ -43,13 +44,13 @@ const Navbar: React.FC = () => {
   }, [menuOpen]);
 
   return (
-    <header className="bg-white font-[Poppins] font-medium shadow-md fixed top-0 left-0 w-full z-50">
-      <nav className="flex justify-between items-center w-full px-4 md:px-8 py-3 h-16 relative">
+    <header className="fixed left-0 top-0 z-50 w-full bg-white font-[Poppins] font-medium shadow-md">
+      <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center w-full">
+        <div className="hidden w-full items-center md:flex">
           <DesktopMenu navItems={navItems} />
           <div className="flex items-center gap-4">
             <SearchBar />
@@ -62,12 +63,21 @@ const Navbar: React.FC = () => {
           <SearchBar className="w-32 focus:w-64" />
           <UserButton isLoggedIn={isLoggedIn} />
           <button ref={hamburgerRef} className="focus:outline-none">
-            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color="#000" size={22} />
+            <Hamburger
+              toggled={menuOpen}
+              toggle={setMenuOpen}
+              color="#000"
+              size={22}
+            />
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu navItems={navItems} isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        <MobileMenu
+          navItems={navItems}
+          isOpen={menuOpen}
+          onClose={() => setMenuOpen(false)}
+        />
       </nav>
     </header>
   );

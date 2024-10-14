@@ -10,7 +10,6 @@
 
 // Import Routes
 
-
 import { Route as rootRoute } from "./routes/__root";
 import { Route as AboutImport } from "./routes/About";
 import { Route as BlogImport } from "./routes/blog";
@@ -23,34 +22,24 @@ import { Route as UserPageImport } from "./routes/UserPage";
 // Create/Update Routes
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
+  path: "/login",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const BlogRoute = BlogImport.update({
-  path: '/blog',
+  path: "/blog",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const UserPageRoute = UserPageImport.update({
-  path: '/UserPage',
+  path: "/UserPage",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const TodoPageRoute = TodoPageImport.update({
-  path: '/TodoPage',
+  path: "/TodoPage",
   getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileRoute = ProfileImport.update({
-  path: '/Profile',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutRoute = AboutImport.update({
-  path: '/About',
-  getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProfileRoute = ProfileImport.update({
   path: "/Profile",
@@ -63,13 +52,13 @@ const AboutRoute = AboutImport.update({
 } as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
       id: "/";
@@ -157,7 +146,7 @@ export interface FileRoutesById {
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | "/"
     | "/About"
@@ -209,7 +198,7 @@ const rootRouteChildren: RootRouteChildren = {
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
