@@ -14,6 +14,7 @@ const Assets = createAssets(
   getManifest("client").handler,
   getManifest("client"),
 );
+import Navbar from "@client/components/Navbar";
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -66,6 +67,13 @@ function RootComponent() {
       {/* Content Rendering */}
       <Outlet />
       <TanStackRouterDevtools />
+  component: () => (
+    <>
+      <Navbar />
+      <hr className="p-2" />
+      <div className="h-12" /> {/* spacer for navbar*/}
+      {/* Content Rendering */}
+      <Outlet />
       <Suspense>
         <ReactQueryDevtools />
       </Suspense>
