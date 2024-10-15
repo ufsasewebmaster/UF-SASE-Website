@@ -50,5 +50,6 @@ export function createRouter() {
         </QueryClientProvider>
       );
     },
+    defaultNotFoundComponent: () => <div>404</div>, // TODO: Make an actual 404 page
   });
 }

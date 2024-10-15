@@ -9,12 +9,12 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { createAssets } from "@vinxi/react";
 import React, { Suspense } from "react";
 import { getManifest } from "vinxi/manifest";
+import Navbar from "@client/components/Navbar";
 
 const Assets = createAssets(
   getManifest("client").handler,
   getManifest("client"),
 );
-import Navbar from "@client/components/Navbar";
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -51,7 +51,7 @@ function RootComponent() {
       <div className="flex gap-2 p-2">
         <Link to="/" className="[&.active]:font-bold">
           Home
-        </Link>{" "}
+        </Link>
         <Link to="/UserPage" className="[&.active]:font-bold">
           User Page
         </Link>
@@ -66,17 +66,17 @@ function RootComponent() {
 
       {/* Content Rendering */}
       <Outlet />
-      <TanStackRouterDevtools />
-  component: () => (
-    <>
+      
+      {/* Navigation Bar */}
       <Navbar />
       <hr className="p-2" />
-      <div className="h-12" /> {/* spacer for navbar*/}
-      {/* Content Rendering */}
-      <Outlet />
+      <div className="h-12" /> {/* Spacer for navbar */}
+
+      {/* Additional DevTools */}
       <Suspense>
         <ReactQueryDevtools />
       </Suspense>
+      <TanStackRouterDevtools />
     </RootDocument>
   );
 }
