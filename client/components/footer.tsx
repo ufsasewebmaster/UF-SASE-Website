@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "./ui/button";
 import React from "react";
+import { Button } from "./ui/button";
 
 export const Footer = () => {
   return (
