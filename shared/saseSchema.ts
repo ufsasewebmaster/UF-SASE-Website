@@ -12,7 +12,4 @@ export const insertSaseInfoSchema = saseInfoSchema.extend({
     groups: z.string().optional(),
 });
 
-export const updateSaseInfoSchema = insertSaseInfoSchema.partial();
-
 export type InsertSaseInfo = z.infer<typeof insertSaseInfoSchema>;
-export type UpdateSaseInfo = z.infer<typeof updateSaseInfoSchema>;

@@ -1,6 +1,5 @@
 import {
-    insertSaseInfoSchema,
-    updateSaseInfoSchema,
+    insertSaseInfoSchema
 } from "@/shared/saseSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
