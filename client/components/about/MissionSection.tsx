@@ -9,19 +9,19 @@ const MissionSection = () => (
     <div className="flex flex-nowrap justify-center gap-20">
       <MissionCard
         text="Are able to help each other develop professionally, foster leadership skills, and excel academically"
-        shadowColor="#0668B3"
+        shadowColor="blue"
       />
       <MissionCard
         text="Are inspired and encouraged to pursue their goals by creating their own opportunities"
-        shadowColor="#7DC242"
+        shadowColor="green"
       />
       <MissionCard
         text="Learn and understand how their own culture affects the workplace"
-        shadowColor="#0668B3"
+        shadowColor="blue"
       />
       <MissionCard
         text="Actively contribute to the local community"
-        shadowColor="#7DC242"
+        shadowColor="green"
       />
     </div>
   </section>
