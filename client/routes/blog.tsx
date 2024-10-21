@@ -1,10 +1,11 @@
 import "react-quill/dist/quill.snow.css";
 import { createFileRoute } from "@tanstack/react-router";
 import "../blog.css";
-import { BlogCard, BlogProps, LatestCard } from "../components/BlogCard";
+import { BlogCard, BlogCardProps, LatestCard } from "../components/BlogCard";
 import { SearchBar } from "../components/navigation/SearchBar";
 
-const sampleBlog: BlogProps = {
+// Use api call to set inital values in the future
+const sampleBlog: BlogCardProps = { // temp object
   id: 1,
   title: "October 2023 Recap",
   author: "Gurleen Dhillon",
@@ -13,7 +14,7 @@ const sampleBlog: BlogProps = {
   content: "Learn about blah blah etc.",
 };
 
-const latestInfo: BlogProps = {
+const latestInfo: BlogCardProps = { // temp object
   id: 2,
   title: "November/December Recap",
   author: "Gurleen Dhillon",
@@ -25,6 +26,13 @@ const latestInfo: BlogProps = {
 
 export const Route = createFileRoute("/blog")({
   component: () => {
+    
+    /* 
+      API call will fill list with blogs available which then will be used to make 
+      BlogCard Objects. useInfiniteQuery will then be used to load in blog cards in 
+      sets of 5
+    */
+   
     return (
       <>
         <div className="flex min-h-screen justify-center bg-gray-100 py-8">

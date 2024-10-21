@@ -4,7 +4,7 @@ import React, { useReducer, useState } from "react";
 import ReactQuill from "react-quill";
 import { Button } from "../components/ui/button";
 
-export interface BlogProps {
+export interface BlogCardProps {
   id: number;
   title: string;
   author: string;
@@ -13,7 +13,7 @@ export interface BlogProps {
   content: string;
 }
 
-export const BlogCard = ({ src }: { src: BlogProps }) => {
+export const BlogCard = ({ src }: { src: BlogCardProps }) => {
   return (
     <Link
       to={`/blog/${src.id}`}
@@ -37,9 +37,7 @@ export const BlogCard = ({ src }: { src: BlogProps }) => {
   );
 };
 
-export const LatestCard = ({ src }: { src: BlogProps }) => {
-  // Use api call to set inital values in the future
-
+export const LatestCard = ({ src }: { src: BlogCardProps }) => {
   type ACTIONS =
     | { type: "SET_TITLE"; payload: string }
     | { type: "SET_AUTHOR"; payload: string }
@@ -48,7 +46,7 @@ export const LatestCard = ({ src }: { src: BlogProps }) => {
     | { type: "SET_CONTENT"; payload: string }
     | { type: "RESET" };
 
-  const Reducer = (state: BlogProps, action: ACTIONS) => {
+  const Reducer = (state: BlogCardProps, action: ACTIONS) => {
     switch (action.type) {
       case "SET_TITLE":
         return { ...state, title: action.payload };
@@ -67,7 +65,10 @@ export const LatestCard = ({ src }: { src: BlogProps }) => {
 
   const [latestPost, dispatch] = useReducer(Reducer, src);
 
-  // May remove or revise functionality edit button if not needed
+  /*
+    Likely will revise editing feature to allow more freedom to blog editors 
+    (more functionality than just editing blog content excerpt)
+  */
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
