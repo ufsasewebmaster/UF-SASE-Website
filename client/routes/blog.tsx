@@ -1,141 +1,68 @@
-import React, { useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import Quill CSS
-
+import "react-quill/dist/quill.snow.css";
 import { createFileRoute } from "@tanstack/react-router";
-import parse from "html-react-parser";
-import { FiSave, FiUpload, FiX } from "react-icons/fi";
-import { Button } from "../components/ui/button";
 import "../blog.css";
+import type { BlogCardProps} from "../components/BlogCard";
+import { BlogCard, LatestCard } from "../components/BlogCard";
+import { SearchBar } from "../components/navigation/SearchBar";
+
+// Use api call to set initial values in the future
+const sampleBlog: BlogCardProps = {
+  id: 1,
+  title: "October 2023 Recap",
+  author: "Gurleen Dhillon",
+  date: "Nov. 13, 2023",
+  readTime: "15 min",
+  content: "Learn about blah blah etc.",
+};
+
+const latestInfo: BlogCardProps = {
+  id: 2,
+  title: "November/December Recap",
+  author: "Gurleen Dhillon",
+  date: "Oct 5, 2023",
+  readTime: "15 min",
+  content:
+    "Greetings, everyone! This is the initial blog content. Click edit to modify.",
+};
 
 export const Route = createFileRoute("/blog")({
   component: () => {
-    const [editorContent, setEditorContent] = useState<string>(
-      "This is the initial blog content. Click edit to change the text.",
-    );
-    const [isEditing, setIsEditing] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [imageUploaded, setImageUploaded] = useState(false);
-    const quillRef = useRef(null);
-
-    const handleEdit = () => {
-      setIsEditing(true);
-    };
-
-    const handleSave = () => {
-      setIsEditing(false);
-    };
-
-    const handleImageSave = () => {
-      setImageUploaded(false);
-    };
-
-    const handleChange = (content: string) => {
-      setEditorContent(content);
-    };
-
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const imageURL = URL.createObjectURL(file);
-        setImageUrl(imageURL);
-        setImageUploaded(true);
-      }
-    };
-
-    const handleImageRemove = () => {
-      setImageUrl(null);
-      setImageUploaded(false);
-    };
+    // API call for all blogs here
 
     return (
-      <div className="blog-container">
-        <div
-          className="relative flex h-80 w-full items-center justify-center bg-cover bg-center"
-          style={{
-            backgroundImage: imageUrl
-              ? `url(${imageUrl})`
-              : "url('default-image-url')",
-          }}
-        >
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="hidden"
-            id="upload-banner"
-          />
+      <>
+        <div className="flex min-h-screen justify-center bg-gray-100 py-8">
+          <div className="flex w-[50vw] flex-col gap-6">
+            <h1 className="ml-4 text-4xl font-bold">BLOGS</h1>
+            <h2 className="ml-4 border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+              The Latest
+            </h2>
+            <LatestCard src={latestInfo} />
+            <div className="mt-6 flex">
+              <div className="flex flex-col gap-8">
+                <h2 className="ml-4 border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+                  Our Posts
+                </h2>
 
-          {imageUrl && (
-            <button
-              className="absolute left-4 top-4 rounded border border-black bg-white px-2 py-1 text-black"
-              onClick={handleImageRemove}
-            >
-              <FiX className="text-black" />
-            </button>
-          )}
-
-          {!imageUploaded ? (
-            <label
-              htmlFor="upload-banner"
-              className="absolute right-4 top-4 cursor-pointer rounded border border-black bg-white px-2 py-1 text-black"
-            >
-              <FiUpload className="text-black" />
-            </label>
-          ) : (
-            <button
-              className="absolute right-4 top-4 rounded border border-black bg-white px-2 py-1 text-black"
-              onClick={handleImageSave}
-            >
-              <FiSave className="text-black" />
-            </button>
-          )}
-
-          <h1 className="absolute text-5xl font-bold text-white [text-shadow:_0px_0px_4px_rgb(0_0_0_/_80%)]">
-            September 2023 Recap
-          </h1>
-        </div>
-
-        <div className="blog-content-container mx-auto max-w-5xl bg-white p-8">
-          <div className="author-info text-black-600 mb-4 text-center">
-            <p className="font-semibold">Gurleen Dhillon</p>
-            <p className="text-sm">15 min read • Oct 5, 2023</p>
+                {/* Implement useInfiniteQuery after connecting with db */}
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+              </div>
+              <SearchBar className="ml-auto" />
+            </div>
           </div>
-          <hr className="my-4" />
-
-          <div className="ql-editor prose lg:prose-xl mb-8">
-            {!isEditing ? (
-              <div>{parse(editorContent)}</div>
-            ) : (
-              <ReactQuill
-                ref={quillRef}
-                value={editorContent}
-                onChange={handleChange}
-                className="font-sans"
-                modules={{
-                  toolbar: [
-                    [{ header: [1, 2, 3, false] }],
-                    [{ list: "ordered" }, { list: "bullet" }],
-                    ["bold", "italic", "underline"],
-                    [{ align: [] }],
-                    ["clean"],
-                  ],
-                }}
-              />
-            )}
-          </div>
-
-          {!isEditing ? (
-            <Button variant="default" onClick={handleEdit}>
-              Edit
-            </Button>
-          ) : (
-            <Button variant="default" onClick={handleSave} className="mt-4">
-              Save
-            </Button>
-          )}
         </div>
-      </div>
+      </>
     );
   },
 });
+
+// // TODO: Add route by id
+// export const BlogPostRoute = createFileRoute("/blog")({
+//   component: () => {
+//     return <h1 className="mb-4 text-2xl font-bold">Blog Post</h1>;
+//   },
+// });
