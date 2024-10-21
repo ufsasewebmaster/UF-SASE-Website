@@ -28,38 +28,59 @@ export const Route = createFileRoute("/blog")({
     };
 
     return (
-      <div className="min-h-screen bg-gray-100 py-8">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-lg bg-white shadow-lg">
-          <div className="p-8">
-            <h1 className="mb-4 text-center text-4xl font-bold">
-              September 2023 Recap
-            </h1>
-            <div className="mb-4 flex items-center justify-center text-gray-600">
-              <div>
-                <p className="font-semibold">Gurleen Dhillon</p>
-                <p className="text-sm">15 min read • Oct 5, 2023</p>
+      <div className="flex min-h-screen justify-center bg-gray-100 py-8">
+        <div className="flex w-[50vw] flex-col gap-6">
+          <h1 className="text-4xl font-bold">BLOGS</h1>
+          <h2 className="border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+            The Latest
+          </h2>
+          <div className="flex aspect-[7/3] max-w-5xl flex-row gap-4 content-between overflow-hidden rounded-3xl bg-white p-8 shadow-md">
+            <div className="flex flex-1 items-center px-4">
+              <div className="flex h-[80%] w-[90%] flex-col ">
+                <h1 className="mb-4 text-2xl text-blue-600">
+                  November/December Recap
+                </h1>
+                <hr className="border-gray-400" />
+                <div className="mb-4 flex gap-2">
+                  <p className="font-medium">Gurleen Dhillon</p>
+                  <p className="ml-auto text-base font-normal">
+                    15 min read • Oct 5, 2023
+                  </p>
+                </div>
+                <div className="prose lg:prose-xl">
+                  {!isEditing ? (
+                    <div dangerouslySetInnerHTML={{ __html: editorContent }} />
+                  ) : (
+                    <ReactQuill value={editorContent} onChange={handleChange} />
+                  )}
+                </div>
+
+                {!isEditing ? (
+                  <Button
+                    variant="outline"
+                    onClick={handleEdit}
+                    className="mt-auto w-16 shadow-sm"
+                  >
+                    Edit
+                  </Button>
+                ) : (
+                  <Button
+                    variant="default"
+                    onClick={handleSave}
+                    className="mt-auto w-16 shadow-sm"
+                  >
+                    Save
+                  </Button>
+                )}
               </div>
             </div>
-            <hr className="my-4" />
-
-            <div className="prose lg:prose-xl mb-8">
-              {!isEditing ? (
-                <div dangerouslySetInnerHTML={{ __html: editorContent }} />
-              ) : (
-                <ReactQuill value={editorContent} onChange={handleChange} />
-              )}
+            <div className="flex flex-1 items-center justify-center rounded-3xl bg-gray-200">
+              <p className="font-bold text-gray-500">PLACEHOLDER IMG</p>
             </div>
-
-            {!isEditing ? (
-              <Button variant="outline" onClick={handleEdit}>
-                Edit
-              </Button>
-            ) : (
-              <Button variant="default" onClick={handleSave} className="mt-4">
-                Save
-              </Button>
-            )}
           </div>
+          <h2 className="border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+            Our Posts
+          </h2>
         </div>
       </div>
     );
