@@ -38,30 +38,13 @@ export const BlogCard = ({ src }: { src: BlogCardProps }) => {
 };
 
 export const LatestCard = ({ src }: { src: BlogCardProps }) => {
-  type ACTIONS =
-    | { type: "SET_TITLE"; payload: string }
-    | { type: "SET_AUTHOR"; payload: string }
-    | { type: "SET_DATE"; payload: string }
-    | { type: "SET_READTIME"; payload: string }
-    | { type: "SET_CONTENT"; payload: string }
-    | { type: "RESET" };
 
-  const Reducer = (state: BlogCardProps, action: ACTIONS) => {
-    switch (action.type) {
-      case "SET_TITLE":
-        return { ...state, title: action.payload };
-      case "SET_AUTHOR":
-        return { ...state, author: action.payload };
-      case "SET_DATE":
-        return { ...state, date: action.payload };
-      case "SET_READTIME":
-        return { ...state, readTime: action.payload };
-      case "SET_CONTENT":
-        return { ...state, content: action.payload };
-      case "RESET":
-        return src;
-    }
-  };
+    const Reducer = (state: BlogCardProps, action: { type: keyof BlogCardProps; payload: string }) => {
+      return {
+        ...state,
+        [action.type]: action.payload,
+      };
+    };
 
   const [latestPost, dispatch] = useReducer(Reducer, src);
 
@@ -77,12 +60,12 @@ export const LatestCard = ({ src }: { src: BlogCardProps }) => {
 
   const handleSave = () => {
     const cleanContent = DOMPurify.sanitize(latestPost.content);
-    dispatch({ type: "SET_CONTENT", payload: cleanContent });
+    dispatch({ type: "content", payload: cleanContent });
     setIsEditing(false);
   };
 
   const handleChange = (content: string) => {
-    dispatch({ type: "SET_CONTENT", payload: content });
+    dispatch({ type: "content", payload: content });
   };
 
   return (

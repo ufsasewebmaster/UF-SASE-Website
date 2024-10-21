@@ -1,11 +1,12 @@
 import "react-quill/dist/quill.snow.css";
 import { createFileRoute } from "@tanstack/react-router";
 import "../blog.css";
-import { BlogCard, BlogCardProps, LatestCard } from "../components/BlogCard";
+import type { BlogCardProps} from "../components/BlogCard";
+import { BlogCard, LatestCard } from "../components/BlogCard";
 import { SearchBar } from "../components/navigation/SearchBar";
 
-// Use api call to set inital values in the future
-const sampleBlog: BlogCardProps = { // temp object
+// Use api call to set initial values in the future
+const sampleBlog: BlogCardProps = {
   id: 1,
   title: "October 2023 Recap",
   author: "Gurleen Dhillon",
@@ -14,7 +15,7 @@ const sampleBlog: BlogCardProps = { // temp object
   content: "Learn about blah blah etc.",
 };
 
-const latestInfo: BlogCardProps = { // temp object
+const latestInfo: BlogCardProps = {
   id: 2,
   title: "November/December Recap",
   author: "Gurleen Dhillon",
@@ -26,13 +27,8 @@ const latestInfo: BlogCardProps = { // temp object
 
 export const Route = createFileRoute("/blog")({
   component: () => {
-    
-    /* 
-      API call will fill list with blogs available which then will be used to make 
-      BlogCard Objects. useInfiniteQuery will then be used to load in blog cards in 
-      sets of 5
-    */
-   
+    // API call for all blogs here
+
     return (
       <>
         <div className="flex min-h-screen justify-center bg-gray-100 py-8">
@@ -64,9 +60,9 @@ export const Route = createFileRoute("/blog")({
   },
 });
 
-// Individual blog posts page
-export const RoutePosts = createFileRoute("/blog")({
-  component: () => {
-    return <h1 className="mb-4 text-2xl font-bold">Blog</h1>;
-  },
-});
+// // TODO: Add route by id
+// export const BlogPostRoute = createFileRoute("/blog")({
+//   component: () => {
+//     return <h1 className="mb-4 text-2xl font-bold">Blog Post</h1>;
+//   },
+// });
