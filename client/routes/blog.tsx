@@ -58,16 +58,6 @@ export const Route = createFileRoute("/blog")({
               <SearchBar className="ml-auto" />
             </div>
           </div>
-
-          {!isEditing ? (
-            <Button variant="default" onClick={handleEdit}>
-              Edit
-            </Button>
-          ) : (
-            <Button variant="default" onClick={handleSave} className="mt-4">
-              Save
-            </Button>
-          )}
         </div>
       </>
     );

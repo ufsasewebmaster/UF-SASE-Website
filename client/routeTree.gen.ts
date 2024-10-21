@@ -16,7 +16,6 @@ import { Route as BlogImport } from "./routes/blog";
 import { Route as IndexImport } from "./routes/index";
 import { Route as LoginImport } from "./routes/login";
 import { Route as ProfileImport } from "./routes/Profile";
-import { Route as SponsorsImport } from "./routes/Sponsors";
 import { Route as TodoPageImport } from "./routes/TodoPage";
 import { Route as UserPageImport } from "./routes/UserPage";
 
@@ -39,11 +38,6 @@ const UserPageRoute = UserPageImport.update({
 
 const TodoPageRoute = TodoPageImport.update({
   path: "/TodoPage",
-  getParentRoute: () => rootRoute,
-} as any);
-
-const SponsorsRoute = SponsorsImport.update({
-  path: "/Sponsors",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -87,13 +81,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ProfileImport;
       parentRoute: typeof rootRoute;
     };
-    "/Sponsors": {
-      id: "/Sponsors";
-      path: "/Sponsors";
-      fullPath: "/Sponsors";
-      preLoaderRoute: typeof SponsorsImport;
-      parentRoute: typeof rootRoute;
-    };
     "/TodoPage": {
       id: "/TodoPage";
       path: "/TodoPage";
@@ -131,7 +118,6 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/About": typeof AboutRoute;
   "/Profile": typeof ProfileRoute;
-  "/Sponsors": typeof SponsorsRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
   "/blog": typeof BlogRoute;
@@ -142,7 +128,6 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/About": typeof AboutRoute;
   "/Profile": typeof ProfileRoute;
-  "/Sponsors": typeof SponsorsRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
   "/blog": typeof BlogRoute;
@@ -154,7 +139,6 @@ export interface FileRoutesById {
   "/": typeof IndexRoute;
   "/About": typeof AboutRoute;
   "/Profile": typeof ProfileRoute;
-  "/Sponsors": typeof SponsorsRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
   "/blog": typeof BlogRoute;
@@ -167,7 +151,6 @@ export interface FileRouteTypes {
     | "/"
     | "/About"
     | "/Profile"
-    | "/Sponsors"
     | "/TodoPage"
     | "/UserPage"
     | "/blog"
@@ -177,7 +160,6 @@ export interface FileRouteTypes {
     | "/"
     | "/About"
     | "/Profile"
-    | "/Sponsors"
     | "/TodoPage"
     | "/UserPage"
     | "/blog"
@@ -187,7 +169,6 @@ export interface FileRouteTypes {
     | "/"
     | "/About"
     | "/Profile"
-    | "/Sponsors"
     | "/TodoPage"
     | "/UserPage"
     | "/blog"
@@ -199,7 +180,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AboutRoute: typeof AboutRoute;
   ProfileRoute: typeof ProfileRoute;
-  SponsorsRoute: typeof SponsorsRoute;
   TodoPageRoute: typeof TodoPageRoute;
   UserPageRoute: typeof UserPageRoute;
   BlogRoute: typeof BlogRoute;
@@ -210,7 +190,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ProfileRoute: ProfileRoute,
-  SponsorsRoute: SponsorsRoute,
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
   BlogRoute: BlogRoute,
@@ -232,7 +211,6 @@ export const routeTree = rootRoute
         "/",
         "/About",
         "/Profile",
-        "/Sponsors",
         "/TodoPage",
         "/UserPage",
         "/blog",
@@ -247,9 +225,6 @@ export const routeTree = rootRoute
     },
     "/Profile": {
       "filePath": "Profile.tsx"
-    },
-    "/Sponsors": {
-      "filePath": "Sponsors.tsx"
     },
     "/TodoPage": {
       "filePath": "TodoPage.tsx"
