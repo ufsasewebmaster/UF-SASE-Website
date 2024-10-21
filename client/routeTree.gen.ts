@@ -11,20 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as AboutImport } from "./routes/about";
+import { Route as AboutImport } from "./routes/About";
 import { Route as BlogImport } from "./routes/blog";
 import { Route as IndexImport } from "./routes/index";
 import { Route as LoginImport } from "./routes/login";
-import { Route as ProfileImport } from "./routes/profile";
+import { Route as ProfileImport } from "./routes/Profile";
 import { Route as TodoPageImport } from "./routes/TodoPage";
 import { Route as UserPageImport } from "./routes/UserPage";
 
 // Create/Update Routes
-
-const ProfileRoute = ProfileImport.update({
-  path: "/profile",
-  getParentRoute: () => rootRoute,
-} as any);
 
 const LoginRoute = LoginImport.update({
   path: "/login",
@@ -36,11 +31,6 @@ const BlogRoute = BlogImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const AboutRoute = AboutImport.update({
-  path: "/about",
-  getParentRoute: () => rootRoute,
-} as any);
-
 const UserPageRoute = UserPageImport.update({
   path: "/UserPage",
   getParentRoute: () => rootRoute,
@@ -48,6 +38,16 @@ const UserPageRoute = UserPageImport.update({
 
 const TodoPageRoute = TodoPageImport.update({
   path: "/TodoPage",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const ProfileRoute = ProfileImport.update({
+  path: "/Profile",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const AboutRoute = AboutImport.update({
+  path: "/About",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -67,6 +67,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
+    "/About": {
+      id: "/About";
+      path: "/About";
+      fullPath: "/About";
+      preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/Profile": {
+      id: "/Profile";
+      path: "/Profile";
+      fullPath: "/Profile";
+      preLoaderRoute: typeof ProfileImport;
+      parentRoute: typeof rootRoute;
+    };
     "/TodoPage": {
       id: "/TodoPage";
       path: "/TodoPage";
@@ -79,13 +93,6 @@ declare module "@tanstack/react-router" {
       path: "/UserPage";
       fullPath: "/UserPage";
       preLoaderRoute: typeof UserPageImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutImport;
       parentRoute: typeof rootRoute;
     };
     "/blog": {
@@ -102,13 +109,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LoginImport;
       parentRoute: typeof rootRoute;
     };
-    "/profile": {
-      id: "/profile";
-      path: "/profile";
-      fullPath: "/profile";
-      preLoaderRoute: typeof ProfileImport;
-      parentRoute: typeof rootRoute;
-    };
   }
 }
 
@@ -116,84 +116,84 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
+  "/About": typeof AboutRoute;
+  "/Profile": typeof ProfileRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
-  "/about": typeof AboutRoute;
   "/blog": typeof BlogRoute;
   "/login": typeof LoginRoute;
-  "/profile": typeof ProfileRoute;
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
+  "/About": typeof AboutRoute;
+  "/Profile": typeof ProfileRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
-  "/about": typeof AboutRoute;
   "/blog": typeof BlogRoute;
   "/login": typeof LoginRoute;
-  "/profile": typeof ProfileRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexRoute;
+  "/About": typeof AboutRoute;
+  "/Profile": typeof ProfileRoute;
   "/TodoPage": typeof TodoPageRoute;
   "/UserPage": typeof UserPageRoute;
-  "/about": typeof AboutRoute;
   "/blog": typeof BlogRoute;
   "/login": typeof LoginRoute;
-  "/profile": typeof ProfileRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | "/"
+    | "/About"
+    | "/Profile"
     | "/TodoPage"
     | "/UserPage"
-    | "/about"
     | "/blog"
-    | "/login"
-    | "/profile";
+    | "/login";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
+    | "/About"
+    | "/Profile"
     | "/TodoPage"
     | "/UserPage"
-    | "/about"
     | "/blog"
-    | "/login"
-    | "/profile";
+    | "/login";
   id:
     | "__root__"
     | "/"
+    | "/About"
+    | "/Profile"
     | "/TodoPage"
     | "/UserPage"
-    | "/about"
     | "/blog"
-    | "/login"
-    | "/profile";
+    | "/login";
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  AboutRoute: typeof AboutRoute;
+  ProfileRoute: typeof ProfileRoute;
   TodoPageRoute: typeof TodoPageRoute;
   UserPageRoute: typeof UserPageRoute;
-  AboutRoute: typeof AboutRoute;
   BlogRoute: typeof BlogRoute;
   LoginRoute: typeof LoginRoute;
-  ProfileRoute: typeof ProfileRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ProfileRoute: ProfileRoute,
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
-  AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
   LoginRoute: LoginRoute,
-  ProfileRoute: ProfileRoute,
 };
 
 export const routeTree = rootRoute
@@ -209,16 +209,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/About",
+        "/Profile",
         "/TodoPage",
         "/UserPage",
-        "/about",
         "/blog",
-        "/login",
-        "/profile"
+        "/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/About": {
+      "filePath": "About.tsx"
+    },
+    "/Profile": {
+      "filePath": "Profile.tsx"
     },
     "/TodoPage": {
       "filePath": "TodoPage.tsx"
@@ -226,17 +232,11 @@ export const routeTree = rootRoute
     "/UserPage": {
       "filePath": "UserPage.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
-    },
     "/blog": {
       "filePath": "blog.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
-    },
-    "/profile": {
-      "filePath": "profile.tsx"
     }
   }
 }

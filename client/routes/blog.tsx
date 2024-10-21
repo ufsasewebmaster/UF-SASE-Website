@@ -1,67 +1,72 @@
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createFileRoute } from "@tanstack/react-router";
-import DOMPurify from "dompurify";
-import { Button } from "../components/ui/button";
 import "../blog.css";
+import { BlogCard, BlogCardProps, LatestCard } from "../components/BlogCard";
+import { SearchBar } from "../components/navigation/SearchBar";
+
+// Use api call to set inital values in the future
+const sampleBlog: BlogCardProps = { // temp object
+  id: 1,
+  title: "October 2023 Recap",
+  author: "Gurleen Dhillon",
+  date: "Nov. 13, 2023",
+  readTime: "15 min",
+  content: "Learn about blah blah etc.",
+};
+
+const latestInfo: BlogCardProps = { // temp object
+  id: 2,
+  title: "November/December Recap",
+  author: "Gurleen Dhillon",
+  date: "Oct 5, 2023",
+  readTime: "15 min",
+  content:
+    "Greetings, everyone! This is the initial blog content. Click edit to modify.",
+};
 
 export const Route = createFileRoute("/blog")({
   component: () => {
-    const [editorContent, setEditorContent] = useState<string>(
-      "Greetings, everyone! This is the initial blog content. Click edit to modify.",
-    );
-    const [isEditing, setIsEditing] = useState(false);
-
-    const handleEdit = () => {
-      setIsEditing(true);
-    };
-
-    const handleSave = () => {
-      const cleanContent = DOMPurify.sanitize(editorContent);
-      setEditorContent(cleanContent);
-      setIsEditing(false);
-    };
-
-    const handleChange = (content: string) => {
-      setEditorContent(content);
-    };
-
+    
+    /* 
+      API call will fill list with blogs available which then will be used to make 
+      BlogCard Objects. useInfiniteQuery will then be used to load in blog cards in 
+      sets of 5
+    */
+   
     return (
-      <div className="min-h-screen bg-gray-100 py-8">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-lg bg-white shadow-lg">
-          <div className="p-8">
-            <h1 className="mb-4 text-center text-4xl font-bold">
-              September 2023 Recap
-            </h1>
-            <div className="mb-4 flex items-center justify-center text-gray-600">
-              <div>
-                <p className="font-semibold">Gurleen Dhillon</p>
-                <p className="text-sm">15 min read • Oct 5, 2023</p>
+      <>
+        <div className="flex min-h-screen justify-center bg-gray-100 py-8">
+          <div className="flex w-[50vw] flex-col gap-6">
+            <h1 className="ml-4 text-4xl font-bold">BLOGS</h1>
+            <h2 className="ml-4 border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+              The Latest
+            </h2>
+            <LatestCard src={latestInfo} />
+            <div className="mt-6 flex">
+              <div className="flex flex-col gap-8">
+                <h2 className="ml-4 border-l-[6px] border-[#7dc242] pl-4 text-3xl font-semibold text-gray-700">
+                  Our Posts
+                </h2>
+
+                {/* Implement useInfiniteQuery after connecting with db */}
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
+                <BlogCard src={sampleBlog} />
               </div>
+              <SearchBar className="ml-auto" />
             </div>
-            <hr className="my-4" />
-
-            <div className="prose lg:prose-xl mb-8">
-              {!isEditing ? (
-                <div dangerouslySetInnerHTML={{ __html: editorContent }} />
-              ) : (
-                <ReactQuill value={editorContent} onChange={handleChange} />
-              )}
-            </div>
-
-            {!isEditing ? (
-              <Button variant="outline" onClick={handleEdit}>
-                Edit
-              </Button>
-            ) : (
-              <Button variant="default" onClick={handleSave} className="mt-4">
-                Save
-              </Button>
-            )}
           </div>
         </div>
-      </div>
+      </>
     );
+  },
+});
+
+// Individual blog posts page
+export const RoutePosts = createFileRoute("/blog")({
+  component: () => {
+    return <h1 className="mb-4 text-2xl font-bold">Blog</h1>;
   },
 });

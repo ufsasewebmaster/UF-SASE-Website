@@ -9,11 +9,9 @@ import {UserButton} from "client/components/navigation/UserButton";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Board", path: "/board" },
-  { name: "Gallery", path: "/gallery" },
-  { name: "Events", path: "/events" },
-  { name: "Blogs", path: "/blogs" },
+  { name: "Blog", path: "/blog" },
+  { name: "User Page", path: "/UserPage" },
+  { name: "Todo Page", path: "/TodoPage" },
 ];
 
 const Navbar: React.FC = () => {
