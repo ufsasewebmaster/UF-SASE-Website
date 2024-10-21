@@ -20,7 +20,8 @@
     "clean": "git clean -xdf -e .env",
     "db:push": "drizzle-kit push",
     "db:local:init": "node scripts/initDb.mjs",
-    "db:local:seed": "node scripts/seed.mjs"
+    "db:local:seed": "node scripts/seed.mjs",
+    "db:studio": "drizzle-kit studio --port 3003 --verbose"
   },
   "dependencies": {
     "@libsql/client": "^0.12.0",
