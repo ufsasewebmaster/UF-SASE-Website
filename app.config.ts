@@ -3,7 +3,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   server: {
-    preset: "vercel-edge",
+    preset: "node-server",
     // prerender: {
     // crawlLinks: true,
     // routes: ["/"],
