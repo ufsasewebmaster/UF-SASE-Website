@@ -16,14 +16,14 @@ const Assets = createAssets(
   getManifest("client"),
 );
 
-const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : React.lazy(() =>
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      );
+// const TanStackRouterDevtools =
+//   process.env.NODE_ENV === "production"
+//     ? () => null
+//     : React.lazy(() =>
+//         import("@tanstack/router-devtools").then((res) => ({
+//           default: res.TanStackRouterDevtools,
+//         })),
+//       );
 
 export const Route = createRootRoute({
   meta: () => [
@@ -76,7 +76,7 @@ function RootComponent() {
       <Suspense>
         <ReactQueryDevtools />
       </Suspense>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </RootDocument>
   );
 }
