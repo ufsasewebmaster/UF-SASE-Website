@@ -1,0 +1,193 @@
+:root {
+  --white: #fff;
+  --black: #323135;
+  --crystal: #a8dadd;
+  --columbia-blue: #cee9e4;
+  --midnight-green: #01565b;
+  --yellow: #e5f33d;
+  --timeline-gradient: rgba(255, 255, 255, 1) 0%, rgba(206, 233, 228, 0.5) 0%,
+    rgba(255, 255, 255, 0) 100%;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font:
+    normal 16px/1.5 "Inter",
+    sans-serif;
+  background: var(--columbia-blue);
+  color: var(--black);
+  margin-bottom: 50px;
+}
+
+/* .section SECTION
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.section {
+  padding: 50px 0;
+}
+
+.section .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* TIMELINE
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline {
+  position: relative;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+
+.timeline::before,
+.timeline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 30px;
+  width: 100px;
+  z-index: 2;
+}
+/* Gradient Settings */
+
+/* .timeline::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--timeline-gradient));
+  }
+  .timeline::before {
+    left: 0px;
+    background: linear-gradient(90deg, var(--timeline-gradient));
+  } */
+
+.timeline ol {
+  font-size: 0;
+  padding: 250px 0;
+  transition: all 1s;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+  /* Custom scrollbar styles */
+  scrollbar-color: #ffffff #0668b3; /* Scrollbar thumb and track color */
+  scrollbar-width: thin; /* Make the scrollbar thinner */
+}
+
+.timeline ol::-webkit-scrollbar {
+  height: 12px; /* Adjust the height of the scrollbar */
+}
+
+.timeline ol::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Scrollbar thumb color */
+  border-radius: 6px; /* Rounded scrollbar */
+}
+
+.timeline ol::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Scrollbar track color */
+  border-radius: 6px; /* Rounded scrollbar track */
+}
+
+.timeline ol li {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  width: 160px;
+  height: 5px;
+  background: black;
+  scroll-snap-align: start;
+}
+
+.timeline ol li:last-child {
+  width: 340px;
+}
+
+.timeline ol li:not(:first-child) {
+  margin-left: 14px;
+}
+
+.timeline ol li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1px);
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #0668b3;
+  z-index: 1;
+}
+
+.timeline ol li div {
+  position: absolute;
+  left: calc(100% + 7px);
+  width: 280px;
+  padding: 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: var(--black);
+  background: var(--white);
+  border-radius: 0 30px 30px 30px;
+}
+
+/* Add alternating border colors for timeline events */
+.timeline ol li:nth-child(odd) div {
+  top: -16px;
+  transform: translateY(-100%);
+  border-radius: 30px 30px 30px 0;
+  border: 2px solid #0668b3; /* saseBlue for odd items */
+}
+
+.timeline ol li:nth-child(even) div {
+  top: calc(100% + 16px);
+  border: 2px solid #7dc242; /* saseGreen for even items */
+}
+
+.timeline ol li:nth-child(odd) div::before {
+  top: 100%;
+  border-width: 8px 8px 0 0;
+  border-color: var(--white) transparent transparent transparent;
+}
+
+.timeline ol li:nth-child(even) div::before {
+  top: -8px;
+  border-width: 8px 0 0 8px;
+  border-color: transparent transparent transparent var(--white);
+}
+
+.timeline time {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0668b3;
+}
