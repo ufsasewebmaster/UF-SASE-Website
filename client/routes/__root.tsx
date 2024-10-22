@@ -1,4 +1,4 @@
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRoute,
   Link,
@@ -74,7 +74,7 @@ function RootComponent() {
 
       {/* Additional DevTools */}
       <Suspense>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </Suspense>
       {/* <TanStackRouterDevtools /> */}
     </RootDocument>

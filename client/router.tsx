@@ -8,11 +8,18 @@ import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
 import { routeTree } from "./routeTree.gen";
 
+// declare module "@tanstack/react-router" {
+//   interface Register {
+//     router: ReturnType<typeof createRouter>;
+//   }
+// }
+
 declare module "@tanstack/react-router" {
   interface Register {
-    router: ReturnType<typeof createRouter>;
+    client: QueryClient;
   }
 }
+
 
 export function createRouter() {
   // Make sure you create your loader client or similar data
