@@ -1,3 +1,5 @@
+// This should not be this long! Organize things if there is any repetition
+
 const About = () => {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center font-[Poppins]">
