@@ -61,6 +61,9 @@ function RootComponent() {
         <Link to="/blog" className="[&.active]:font-bold">
           Blog
         </Link>
+        <Link to="/gallery" className="[&.active]:font-bold">
+          Gallery
+        </Link>
       </div>
       <hr />
 

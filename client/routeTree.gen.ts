@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
+import { Route as GalleryImport } from './routes/gallery'
 import { Route as BlogImport } from './routes/blog'
 import { Route as UserPageImport } from './routes/UserPage'
 import { Route as TodoPageImport } from './routes/TodoPage'
@@ -24,6 +25,11 @@ import { Route as IndexImport } from './routes/index'
 
 const LoginRoute = LoginImport.update({
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GalleryRoute = GalleryImport.update({
+  path: '/gallery',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -115,6 +121,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogImport
       parentRoute: typeof rootRoute
     }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryImport
+      parentRoute: typeof rootRoute
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -135,6 +148,7 @@ export interface FileRoutesByFullPath {
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
   '/blog': typeof BlogRoute
+  '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
 }
 
@@ -146,6 +160,7 @@ export interface FileRoutesByTo {
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
   '/blog': typeof BlogRoute
+  '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
 }
 
@@ -158,6 +173,7 @@ export interface FileRoutesById {
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
   '/blog': typeof BlogRoute
+  '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
 }
 
@@ -171,6 +187,7 @@ export interface FileRouteTypes {
     | '/TodoPage'
     | '/UserPage'
     | '/blog'
+    | '/gallery'
     | '/login'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -181,6 +198,7 @@ export interface FileRouteTypes {
     | '/TodoPage'
     | '/UserPage'
     | '/blog'
+    | '/gallery'
     | '/login'
   id:
     | '__root__'
@@ -191,6 +209,7 @@ export interface FileRouteTypes {
     | '/TodoPage'
     | '/UserPage'
     | '/blog'
+    | '/gallery'
     | '/login'
   fileRoutesById: FileRoutesById
 }
@@ -203,6 +222,7 @@ export interface RootRouteChildren {
   TodoPageRoute: typeof TodoPageRoute
   UserPageRoute: typeof UserPageRoute
   BlogRoute: typeof BlogRoute
+  GalleryRoute: typeof GalleryRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -214,6 +234,7 @@ const rootRouteChildren: RootRouteChildren = {
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
   BlogRoute: BlogRoute,
+  GalleryRoute: GalleryRoute,
   LoginRoute: LoginRoute,
 }
 
@@ -236,6 +257,7 @@ export const routeTree = rootRoute
         "/TodoPage",
         "/UserPage",
         "/blog",
+        "/gallery",
         "/login"
       ]
     },
@@ -259,6 +281,9 @@ export const routeTree = rootRoute
     },
     "/blog": {
       "filePath": "blog.tsx"
+    },
+    "/gallery": {
+      "filePath": "gallery.tsx"
     },
     "/login": {
       "filePath": "login.tsx"

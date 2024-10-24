@@ -20,7 +20,7 @@ const navItems = [
     name: "Events",
     path: "/events",
     children: [
-      { name: "Gallery", path: "/events/gallery" },
+      { name: "Gallery", path: "/gallery" },
       { name: "Blogs", path: "/events/blogs" },
     ],
   },
