@@ -1,11 +1,11 @@
+// import { Route as AboutRoute } from "@/client/routes/about";
 import React from "react";
-import { Route as AboutRoute } from "@client/routes/about";
 import { Button } from "./button";
 
 const Footer = () => {
-  const navigate = (path: string) => {
-    AboutRoute.buildLink({ to: path }).onClick(); // This triggers navigation
-  };
+  // const navigate = (path: string) => {
+  //   AboutRoute.buildLink({ to: path }).onClick(); // This triggers navigation
+  // };
 
   return (
     <footer
@@ -41,7 +41,7 @@ const Footer = () => {
             asChild
             variant="link"
             size="default"
-            onClick={() => navigate("/about")}
+            // onClick={() => navigate("/about")}
           >
             <span>About</span>
           </Button>
