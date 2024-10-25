@@ -12,26 +12,26 @@ const navItems = [
     name: "About",
     path: "/about",
     children: [
-      { name: "Board", path: "/about/board" },
-      { name: "Sponsors", path: "/about/sponsors" },
+      { name: "Board", path: "/board" },
+      { name: "Sponsors", path: "/sponsors" },
     ],
   },
   {
     name: "Events",
     path: "/events",
     children: [
-      { name: "Gallery", path: "/events/gallery" },
-      { name: "Blogs", path: "/events/blogs" },
+      { name: "Gallery", path: "/gallery" },
+      { name: "Blogs", path: "/blogs" },
     ],
   },
   {
     name: "Programs",
     path: "/programs",
     children: [
-      { name: "Interns", path: "/programs/interns" },
-      { name: "SET", path: "/programs/set" },
-      { name: "Web Dev", path: "/programs/web-dev" },
-      { name: "Sports", path: "/programs/sports" },
+      { name: "Interns", path: "/interns" },
+      { name: "SET", path: "/set" },
+      { name: "Web Dev", path: "/webdev" },
+      { name: "Sports", path: "/sports" },
     ],
   },
 ];
