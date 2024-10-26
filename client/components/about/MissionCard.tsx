@@ -1,21 +1,22 @@
 interface CardProps {
   text: string;
-  shadowColor: string; // Should be either 'blue' or 'green'
+  shadowColor: string;
+  logo: string;
 }
 
-const MissionCard = ({ shadowColor, text }: CardProps) => {
-  // Determine the shadow color class based on the prop
+const MissionCard = ({ logo, shadowColor, text }: CardProps) => {
   const hoverShadowClass =
     shadowColor === "blue"
-      ? "hover:shadow-[#0668B3]"
-      : "hover:shadow-[#7DC242]";
+      ? "hover:shadow-[12px_12px_0px_#0668B3]"
+      : "hover:shadow-[12px_12px_0px_#7DC242]";
 
   return (
     <div className="w-48 flex-none">
       <div
-        className={`flex h-48 w-48 transform items-center justify-center rounded-lg border border-black bg-gray-200 p-6 shadow-md transition duration-300 hover:scale-105 ${hoverShadowClass}`}
+        className={`flex min-h-48 w-48 transform flex-col items-center rounded-2xl border-2 border-black bg-gray-100 p-4 transition duration-300 hover:scale-105 ${hoverShadowClass}`}
       >
-        <p className="text-center text-black">{text}</p>
+        <img src={logo} alt="Logo" className="mb-2 h-10 w-10 object-contain" />
+        <p className="overflow-auto text-center text-black">{text}</p>
       </div>
     </div>
   );

@@ -1,26 +1,34 @@
+import lightbulb from "../../assets/images/about_page/lightbulb.png";
+import people from "../../assets/images/about_page/people.png";
+import suitcase from "../../assets/images/about_page/suitcase.png";
 import MissionCard from "./MissionCard";
 
 const MissionSection = () => (
   <section className="mb-12">
-    <h2 className="mb-4 text-2xl font-semibold text-gray-800">Our Mission</h2>
-    <p className="mb-8 text-black">
+    <div className="mb-4 flex items-center">
+      <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
+      <h2 className="text-3xl font-semibold text-gray-800">
+        Mission Statement
+      </h2>
+    </div>
+
+    <p className="mb-8 text-center text-xl text-black">
       To create a welcoming community where members:
     </p>
     <div className="flex flex-nowrap justify-center gap-20">
       <MissionCard
-        text="Are able to help each other develop professionally, foster leadership skills, and excel academically"
-        shadowColor="blue"
-      />
-      <MissionCard
-        text="Are inspired and encouraged to pursue their goals by creating their own opportunities"
+        logo={suitcase}
+        text="Are able to help each other develop professional, academic, and leadership skills"
         shadowColor="green"
       />
       <MissionCard
+        logo={people}
         text="Learn and understand how their own culture affects the workplace"
         shadowColor="blue"
       />
       <MissionCard
-        text="Actively contribute to the local community"
+        logo={lightbulb}
+        text="Actively engage in and contribute to the development of the local community"
         shadowColor="green"
       />
     </div>

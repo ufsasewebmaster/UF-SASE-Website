@@ -1,4 +1,5 @@
-import AboutTextSection from "./about/AboutTextSection";
+import AboutCard from "./about/AboutCard";
+import ContactForm from "./about/ContactForm";
 import HeaderSection from "./about/HeaderSection";
 import HistorySection from "./about/HistorySection";
 import MissionSection from "./about/MissionSection";
@@ -10,27 +11,44 @@ const About = () => {
     <div className="mt-5 flex min-h-screen flex-col items-center justify-center bg-white font-[Poppins]">
       <div className="w-full max-w-7xl px-4 py-8">
         <HeaderSection />
-
-        {/* General About Section */}
-        <section className="mb-8 flex flex-col items-center gap-12 md:flex-row md:items-start">
+        <div className="mb-20 flex justify-center">
+          <AboutCard />
+        </div>
+        <section className="mb-12 flex justify-center">
           <YoutubeSection />
-          <AboutTextSection />
+        </section>
+        <MissionSection />
+        <div className="mb-10 flex items-center">
+          <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>
+          <h2 className="text-3xl font-semibold text-gray-800">History</h2>
+        </div>
+        <section className="mb-6 flex justify-center">
+          <div className="w-full max-w-5xl">
+            <HistorySection />
+          </div>
         </section>
 
-        <MissionSection />
-        <HistorySection />
-
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-black">
-            Timeline of Achievements
-          </h2>
+          <div className="mb-0 flex items-center">
+            <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
+            <h2 className="text-3xl font-semibold text-gray-800">
+              Timeline of Achievements
+            </h2>
+          </div>
           <Timeline />
         </section>
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-black">Board</h2>
+          <div className="mb-4 flex items-center">
+            <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
+            <h2 className="text-3xl font-semibold text-gray-800">Board</h2>
+          </div>
         </section>
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-black">Contact Us</h2>
+          <div className="mb-4 flex items-center">
+            <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
+            <h2 className="text-3xl font-semibold text-gray-800">Contact Us</h2>
+          </div>
+          <ContactForm />
         </section>
       </div>
     </div>
