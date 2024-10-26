@@ -1,52 +1,52 @@
-import React, { useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import Quill CSS
+import React, { useRef, useState } from 'react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css' // Import Quill CSS
 
-import { createFileRoute } from "@tanstack/react-router";
-import parse from "html-react-parser";
-import { FiSave, FiUpload, FiX } from "react-icons/fi";
-import { Button } from "../components/ui/button";
-import "../blog.css";
+import { createFileRoute } from '@tanstack/react-router'
+import parse from 'html-react-parser'
+import { FiSave, FiUpload, FiX } from 'react-icons/fi'
+import { Button } from '../components/ui/button'
+import '../blog.css'
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute('/blogs')({
   component: () => {
     const [editorContent, setEditorContent] = useState<string>(
-      "This is the initial blog content. Click edit to change the text.",
-    );
-    const [isEditing, setIsEditing] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [imageUploaded, setImageUploaded] = useState(false);
-    const quillRef = useRef(null);
+      'This is the initial blog content. Click edit to change the text.',
+    )
+    const [isEditing, setIsEditing] = useState(false)
+    const [imageUrl, setImageUrl] = useState<string | null>(null)
+    const [imageUploaded, setImageUploaded] = useState(false)
+    const quillRef = useRef(null)
 
     const handleEdit = () => {
-      setIsEditing(true);
-    };
+      setIsEditing(true)
+    }
 
     const handleSave = () => {
-      setIsEditing(false);
-    };
+      setIsEditing(false)
+    }
 
     const handleImageSave = () => {
-      setImageUploaded(false);
-    };
+      setImageUploaded(false)
+    }
 
     const handleChange = (content: string) => {
-      setEditorContent(content);
-    };
+      setEditorContent(content)
+    }
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
+      const file = e.target.files?.[0]
       if (file) {
-        const imageURL = URL.createObjectURL(file);
-        setImageUrl(imageURL);
-        setImageUploaded(true);
+        const imageURL = URL.createObjectURL(file)
+        setImageUrl(imageURL)
+        setImageUploaded(true)
       }
-    };
+    }
 
     const handleImageRemove = () => {
-      setImageUrl(null);
-      setImageUploaded(false);
-    };
+      setImageUrl(null)
+      setImageUploaded(false)
+    }
 
     return (
       <div className="blog-container">
@@ -115,10 +115,10 @@ export const Route = createFileRoute("/blog")({
                 modules={{
                   toolbar: [
                     [{ header: [1, 2, 3, false] }],
-                    [{ list: "ordered" }, { list: "bullet" }],
-                    ["bold", "italic", "underline"],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['bold', 'italic', 'underline'],
                     [{ align: [] }],
-                    ["clean"],
+                    ['clean'],
                   ],
                 }}
               />
@@ -136,6 +136,6 @@ export const Route = createFileRoute("/blog")({
           )}
         </div>
       </div>
-    );
+    )
   },
-});
+})

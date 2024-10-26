@@ -8,7 +8,7 @@ interface UserButtonProps {
 
 export const UserButton: React.FC<UserButtonProps> = ({ isLoggedIn }) =>
   isLoggedIn ? (
-    <Link to="/Profile">
+    <Link to="/profile">
       <button className="text-gray-600 px-1 py-2 rounded-full duration-300 hover:text-[#000000] transform hover:scale-105">
         <FiUser className="text-2xl" />
       </button>

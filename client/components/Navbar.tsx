@@ -1,4 +1,3 @@
-// src/components/Navbar/Navbar.tsx
 import { Logo } from "@client/components/navigation/Logo";
 import { DesktopMenu } from "client/components/navigation/DesktopMenu";
 import { MobileMenu } from "client/components/navigation/MobileMenu";
@@ -9,11 +8,32 @@ import React, { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Blog", path: "/blog" },
-  { name: "Sponsors", path: "/Sponsors" },
-  { name: "User Page", path: "/UserPage" },
-  { name: "Todo Page", path: "/TodoPage" },
+  {
+    name: "About",
+    path: "/about",
+    children: [
+      { name: "Board", path: "/board" },
+      { name: "Sponsors", path: "/sponsors" },
+    ],
+  },
+  {
+    name: "Events",
+    path: "/events",
+    children: [
+      { name: "Gallery", path: "/gallery" },
+      { name: "Blogs", path: "/blogs" },
+    ],
+  },
+  {
+    name: "Programs",
+    path: "/programs",
+    children: [
+      { name: "Interns", path: "/interns" },
+      { name: "SET", path: "/set" },
+      { name: "Web Dev", path: "/webdev" },
+      { name: "Sports", path: "/sports" },
+    ],
+  },
 ];
 
 const Navbar: React.FC = () => {
@@ -51,9 +71,9 @@ const Navbar: React.FC = () => {
         <Logo />
 
         {/* Desktop Navigation */}
-        <div className="hidden w-full items-center md:flex">
-          <DesktopMenu navItems={navItems} />
-          <div className="flex items-center gap-4">
+        <div className="hidden w-full items-center justify-between md:flex">
+          <div className="ml-auto flex items-center gap-4">
+            <DesktopMenu navItems={navItems} />
             <SearchBar />
             <UserButton isLoggedIn={isLoggedIn} />
           </div>
