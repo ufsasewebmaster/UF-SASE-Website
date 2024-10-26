@@ -52,13 +52,13 @@ function RootComponent() {
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>
-        <Link to="/UserPage" className="[&.active]:font-bold">
+        <Link to="/userpage" className="[&.active]:font-bold">
           User Page
         </Link>
-        <Link to="/TodoPage" className="[&.active]:font-bold">
+        <Link to="/todopage" className="[&.active]:font-bold">
           Todo Page
         </Link>
-        <Link to="/blog" className="[&.active]:font-bold">
+        <Link to="/blogs" className="[&.active]:font-bold">
           Blog
         </Link>
         <Link to="/gallery" className="[&.active]:font-bold">

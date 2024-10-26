@@ -8,7 +8,7 @@ import { FiSave, FiUpload, FiX } from 'react-icons/fi'
 import { Button } from '../components/ui/button'
 import '../blog.css'
 
-export const Route = createFileRoute('/blog')({
+export const Route = createFileRoute('/blogs')({
   component: () => {
     const [editorContent, setEditorContent] = useState<string>(
       'This is the initial blog content. Click edit to change the text.',

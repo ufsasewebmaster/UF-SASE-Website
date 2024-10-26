@@ -33,7 +33,6 @@ const NavItemComponent: React.FC<{ item: NavItem }> = ({ item }) => {
           {/* Parent item (clickable and triggers dropdown on hover) */}
           <NavLink
             to={item.path!} 
-            className="flex items-center space-x-1 focus:outline-none"
             aria-haspopup="true"
             aria-expanded={dropdownOpen}
           >
