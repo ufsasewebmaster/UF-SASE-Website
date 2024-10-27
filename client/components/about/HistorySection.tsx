@@ -1,5 +1,3 @@
-import React from "react";
-
 const HistorySection = () => (
   <section className="mb-8">
     <div className="max-w-5xl">
@@ -45,7 +43,7 @@ const HistorySection = () => (
     </div>
     <div className="mt-2 text-center">
       <a
-        href="https://ufsase.com/wp-content/uploads/2024/03/2024-2025-SASE-Constitution.docx.pdf"
+        href="/public/2024-2025-SASE-Constitution.docx.pdf"
         className="mt-6 inline-block transform rounded-full bg-[#0f6cb6] px-6 py-2 text-white transition duration-300 hover:scale-105"
         target="_blank"
         rel="noopener noreferrer"
