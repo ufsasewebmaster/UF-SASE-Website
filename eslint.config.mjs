@@ -25,6 +25,10 @@ export default [
       "prettier.config.cjs",
       "postcss.config.cjs",
       "tailwind.config.cjs",
+      ".vinxi/**/*",
+      ".vercel/**/*",
+      ".github/**/*",
+      ".output/**/*",
     ],
   },
   ...compat.extends(

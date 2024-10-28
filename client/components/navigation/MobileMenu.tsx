@@ -16,8 +16,8 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({
-  navItems,
   isOpen,
+  navItems,
   onClose,
 }) => {
   if (!isOpen) return null;
