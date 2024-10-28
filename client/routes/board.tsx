@@ -1,12 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Board from "../components/Board";
 
-export const Route = createFileRoute('/board')({
-    component: () => {
-        return (
-          <>
-            <div>Ignore</div>
-            <div>This is where the content actually starts</div>
-          </>
-        )
-      }
-})
+export const Route = createFileRoute("/board")({
+  component: Board,
+});
