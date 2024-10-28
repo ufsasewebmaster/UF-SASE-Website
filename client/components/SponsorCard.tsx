@@ -1,7 +1,15 @@
+import { cn } from "@/shared/utils";
+
 const SponsorCard = (props: any) => {
   return (
     <div
-      className={`flex flex-col items-center rounded-lg border-4 border-black ${props.diamond == "Y" ? "bg-gradient from-saseBlue to-white" : "bg-white"}`}
+      className={cn(
+        {
+          "bg-gradient from-saseBlue to-white": props.diamond == "Y",
+          "bg-white": props.diamond == "N",
+        },
+        `flex flex-col items-center rounded-lg border-4 border-black`,
+      )}
     >
       <img
         src={props.image}
@@ -9,7 +17,13 @@ const SponsorCard = (props: any) => {
         className="h-3/4 w-full pl-1 pr-1 pt-1"
       />
       <p
-        className={`h-1/4 w-full p-4 text-center text-2xl font-medium ${props.diamond == "Y" ? "text-white" : "text-black"}`}
+        className={cn(
+          {
+            "text-white": props.diamond == "Y",
+            "text-black": props.diamond == "N",
+          },
+          `h-1/4 w-full p-4 text-center text-2xl font-medium`,
+        )}
       >
         {props.companyName}
       </p>
