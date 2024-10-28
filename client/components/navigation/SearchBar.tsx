@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import React from "react";
 
 interface SearchBarProps {
@@ -9,7 +10,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   className = "",
   placeholder = "Search",
 }) => (
-  <div className={`relative ${className}`}>
+  <div className={cn(`relative`, className)}>
     <input
       type="text"
       placeholder={placeholder}

@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
@@ -130,9 +131,13 @@ const Navbar = () => {
         {/* Hamburger Menu */}
         <div
           ref={menuRef}
-          className={`nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden ${
-            menuOpen ? "top-[65px]" : "top-[-100%]"
-          }`}
+          className={cn(
+            `nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden`,
+            {
+              "top-[65px]": menuOpen,
+              "top-[-100%]": !menuOpen,
+            },
+          )}
         >
           <ul className="flex flex-col items-end gap-8 py-4 pr-12">
             <li>

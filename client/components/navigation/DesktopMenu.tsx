@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import React, { useState } from "react";
 import { NavLink } from "./NavLink";
 
@@ -57,7 +58,13 @@ const NavItemComponent: React.FC<{ item: NavItem }> = ({ item }) => {
 
           {/* Dropdown Menu */}
           <ul
-            className={`absolute left-0 mt-2 w-40 rounded border bg-white shadow-lg group-hover:block ${dropdownOpen ? "block" : "hidden"}`}
+            className={cn(
+              `absolute left-0 mt-2 w-40 rounded border bg-white shadow-lg group-hover:block`,
+              {
+                hidden: !dropdownOpen,
+                block: dropdownOpen,
+              },
+            )}
             style={{ paddingTop: "10px", marginTop: "0px" }} // Ensure dropdown is positioned without affecting the title
           >
             {item.children!.map((child) => (
