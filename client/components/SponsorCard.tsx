@@ -1,7 +1,7 @@
 const SponsorCard = (props: any) => {
   return (
     <div
-      className={`flex flex-col items-center rounded-lg border-4 border-black ${props.diamond == "Y" ? "from-saseBlue bg-gradient-to-t to-white" : "bg-white"}`}
+      className={`flex flex-col items-center rounded-lg border-4 border-black ${props.diamond == "Y" ? "bg-gradient from-saseBlue to-white" : "bg-white"}`}
     >
       <img
         src={props.image}

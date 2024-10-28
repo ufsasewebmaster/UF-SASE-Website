@@ -63,19 +63,14 @@ function RootComponent() {
         </Link>
       </div>
       <hr />
-
       {/* Content Rendering */}
       <Outlet />
-      
       {/* Navigation Bar */}
       <Navbar />
       <hr className="p-2" />
       <div className="h-12" /> {/* Spacer for navbar */}
-
       {/* Additional DevTools */}
-      <Suspense>
-        {/* <ReactQueryDevtools /> */}
-      </Suspense>
+      <Suspense>{/* <ReactQueryDevtools /> */}</Suspense>
       {/* <TanStackRouterDevtools /> */}
     </RootDocument>
   );

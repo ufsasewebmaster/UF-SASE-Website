@@ -1,18 +1,21 @@
-import { useState } from 'react';
-import { useTodos } from '../hooks/useTodos';
+import { useState } from "react";
+import { useTodos } from "../hooks/useTodos";
 
 export const TodoForm = () => {
-  const [newTodo, setNewTodo] = useState('');
+  const [newTodo, setNewTodo] = useState("");
   const { createTodo } = useTodos();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newTodo) return;
-    createTodo.mutate({ title: newTodo, completed: false }, {
-      onSuccess: () => {
-        setNewTodo('');
+    createTodo.mutate(
+      { title: newTodo, completed: false },
+      {
+        onSuccess: () => {
+          setNewTodo("");
+        },
       },
-    });
+    );
   };
 
   return (

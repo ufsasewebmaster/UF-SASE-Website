@@ -5,12 +5,15 @@ interface SearchBarProps {
   className?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholder = "Search" }) => (
+export const SearchBar: React.FC<SearchBarProps> = ({
+  className = "",
+  placeholder = "Search",
+}) => (
   <div className={`relative ${className}`}>
     <input
       type="text"
       placeholder={placeholder}
-      className="border border-gray-600 pl-10 pr-3 py-2 rounded-full focus:outline-none transition-all duration-300 ease-in-out w-32 focus:w-64 placeholder-gray-600"
+      className="w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none"
     />
     <svg
       xmlns="http://www.w3.org/2000/svg"

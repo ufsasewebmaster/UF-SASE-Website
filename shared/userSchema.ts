@@ -13,9 +13,9 @@ const baseUserSchema = z.object({
 // Can define schema from table to validate requests
 export const insertUserSchema = baseUserSchema;
 export const selectUserSchema = baseUserSchema.extend({
-    id: z.string().uuid(),
-    time_added: z.number().int(),
-    time_updated: z.number().int(),
+  id: z.string().uuid(),
+  time_added: z.number().int(),
+  time_updated: z.number().int(),
 });
 export const updateUserSchema = selectUserSchema.partial(); // Allow for partial updates
 

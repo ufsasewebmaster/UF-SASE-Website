@@ -1,5 +1,5 @@
 // src/schema/todoSchema.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 export const todoSchema = z.object({
   id: z.number(),
@@ -29,4 +29,4 @@ export const deleteUserSchema = z.object({
   id: z.string().min(1), // Ensures 'id' is a valid non-empty string
 });
 
-export type DeleteUser = z.infer<typeof deleteUserSchema>;  
+export type DeleteUser = z.infer<typeof deleteUserSchema>;

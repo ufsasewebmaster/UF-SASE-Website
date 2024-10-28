@@ -51,7 +51,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/about"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 About
               </Link>
@@ -147,7 +147,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/about"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 About
