@@ -1,15 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import arthrex from "../assets/images/sponsors_page/Arthrex.png";
-import axogen from "../assets/images/sponsors_page/Axogen.png";
-import blueorigin from "../assets/images/sponsors_page/BlueOriginLogo.png";
-import fmglobal from "../assets/images/sponsors_page/FMGlobal.png";
-import google from "../assets/images/sponsors_page/Google.png";
-import headerImage from "../assets/images/sponsors_page/Header.png";
-import johnson from "../assets/images/sponsors_page/J&J.png";
-import sargentlundy from "../assets/images/sponsors_page/S&L.png";
-import SponsorCard from "../components/SponsorCard";
+import { createFileRoute } from '@tanstack/react-router'
+import arthrex from '../assets/images/sponsors_page/Arthrex.png'
+import axogen from '../assets/images/sponsors_page/Axogen.png'
+import blueorigin from '../assets/images/sponsors_page/BlueOriginLogo.png'
+import fmglobal from '../assets/images/sponsors_page/FMGlobal.png'
+import google from '../assets/images/sponsors_page/Google.png'
+import headerImage from '../assets/images/sponsors_page/Header.png'
+import johnson from '../assets/images/sponsors_page/J&J.png'
+import sargentlundy from '../assets/images/sponsors_page/S&L.png'
+import SponsorCard from '../components/SponsorCard'
 
-export const Route = createFileRoute("/sponsors")({
+export const Route = createFileRoute('/sponsors')({
   component: () => {
     return (
       <>
@@ -86,6 +86,6 @@ export const Route = createFileRoute("/sponsors")({
           </div>
         </div>
       </>
-    );
+    )
   },
-});
+})
