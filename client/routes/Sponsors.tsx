@@ -9,7 +9,7 @@ import johnson from '../assets/images/sponsors_page/J&J.png'
 import sargentlundy from '../assets/images/sponsors_page/S&L.png'
 import SponsorCard from '../components/SponsorCard'
 
-export const Route = createFileRoute('/sponsors')({
+export const Route = createFileRoute('/Sponsors')({
   component: () => {
     return (
       <>

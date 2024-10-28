@@ -3,7 +3,7 @@ import { TodoList } from '@client/components/TodoList'
 import { TodoForm } from '@client/components/TodoForm'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/todopage')({
+export const Route = createFileRoute('/TodoPage')({
   component: () => {
     return (
       <div>
