@@ -30,6 +30,8 @@ app
   .route("/api", todoRoutes)
   .route("/api", userRoutes)
   .route("/api", infoRoutes)
+  .route("/api", saseRoutes)
+  .route("/api", titleRoutes)
   .route("/api", tagRoutes)
   .route("/api", titleRoutes)
   .route("/api", saseRoutes);
