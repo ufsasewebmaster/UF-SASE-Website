@@ -11,24 +11,71 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as WebdevImport } from './routes/webdev'
+import { Route as SportsImport } from './routes/sports'
+import { Route as SetImport } from './routes/set'
 import { Route as LoginImport } from './routes/login'
-import { Route as BlogImport } from './routes/blog'
+import { Route as InternsImport } from './routes/interns'
+import { Route as GalleryImport } from './routes/gallery'
+import { Route as EventsImport } from './routes/events'
+import { Route as BoardImport } from './routes/board'
+import { Route as BlogsImport } from './routes/blogs'
+import { Route as AboutImport } from './routes/about'
 import { Route as UserPageImport } from './routes/UserPage'
 import { Route as TodoPageImport } from './routes/TodoPage'
 import { Route as SponsorsImport } from './routes/Sponsors'
 import { Route as ProfileImport } from './routes/Profile'
-import { Route as AboutImport } from './routes/About'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const WebdevRoute = WebdevImport.update({
+  path: '/webdev',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SportsRoute = SportsImport.update({
+  path: '/sports',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SetRoute = SetImport.update({
+  path: '/set',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LoginRoute = LoginImport.update({
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
-const BlogRoute = BlogImport.update({
-  path: '/blog',
+const InternsRoute = InternsImport.update({
+  path: '/interns',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GalleryRoute = GalleryImport.update({
+  path: '/gallery',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EventsRoute = EventsImport.update({
+  path: '/events',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BoardRoute = BoardImport.update({
+  path: '/board',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BlogsRoute = BlogsImport.update({
+  path: '/blogs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutRoute = AboutImport.update({
+  path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -52,11 +99,6 @@ const ProfileRoute = ProfileImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AboutRoute = AboutImport.update({
-  path: '/About',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -71,13 +113,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/About': {
-      id: '/About'
-      path: '/About'
-      fullPath: '/About'
-      preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
     '/Profile': {
@@ -108,11 +143,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserPageImport
       parentRoute: typeof rootRoute
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsImport
+      parentRoute: typeof rootRoute
+    }
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardImport
+      parentRoute: typeof rootRoute
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsImport
+      parentRoute: typeof rootRoute
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryImport
+      parentRoute: typeof rootRoute
+    }
+    '/interns': {
+      id: '/interns'
+      path: '/interns'
+      fullPath: '/interns'
+      preLoaderRoute: typeof InternsImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -122,6 +192,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/set': {
+      id: '/set'
+      path: '/set'
+      fullPath: '/set'
+      preLoaderRoute: typeof SetImport
+      parentRoute: typeof rootRoute
+    }
+    '/sports': {
+      id: '/sports'
+      path: '/sports'
+      fullPath: '/sports'
+      preLoaderRoute: typeof SportsImport
+      parentRoute: typeof rootRoute
+    }
+    '/webdev': {
+      id: '/webdev'
+      path: '/webdev'
+      fullPath: '/webdev'
+      preLoaderRoute: typeof WebdevImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -129,92 +220,148 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/About': typeof AboutRoute
   '/Profile': typeof ProfileRoute
   '/Sponsors': typeof SponsorsRoute
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
-  '/blog': typeof BlogRoute
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/board': typeof BoardRoute
+  '/events': typeof EventsRoute
+  '/gallery': typeof GalleryRoute
+  '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
+  '/set': typeof SetRoute
+  '/sports': typeof SportsRoute
+  '/webdev': typeof WebdevRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/About': typeof AboutRoute
   '/Profile': typeof ProfileRoute
   '/Sponsors': typeof SponsorsRoute
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
-  '/blog': typeof BlogRoute
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/board': typeof BoardRoute
+  '/events': typeof EventsRoute
+  '/gallery': typeof GalleryRoute
+  '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
+  '/set': typeof SetRoute
+  '/sports': typeof SportsRoute
+  '/webdev': typeof WebdevRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/About': typeof AboutRoute
   '/Profile': typeof ProfileRoute
   '/Sponsors': typeof SponsorsRoute
   '/TodoPage': typeof TodoPageRoute
   '/UserPage': typeof UserPageRoute
-  '/blog': typeof BlogRoute
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/board': typeof BoardRoute
+  '/events': typeof EventsRoute
+  '/gallery': typeof GalleryRoute
+  '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
+  '/set': typeof SetRoute
+  '/sports': typeof SportsRoute
+  '/webdev': typeof WebdevRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/About'
     | '/Profile'
     | '/Sponsors'
     | '/TodoPage'
     | '/UserPage'
-    | '/blog'
+    | '/about'
+    | '/blogs'
+    | '/board'
+    | '/events'
+    | '/gallery'
+    | '/interns'
     | '/login'
+    | '/set'
+    | '/sports'
+    | '/webdev'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/About'
     | '/Profile'
     | '/Sponsors'
     | '/TodoPage'
     | '/UserPage'
-    | '/blog'
+    | '/about'
+    | '/blogs'
+    | '/board'
+    | '/events'
+    | '/gallery'
+    | '/interns'
     | '/login'
+    | '/set'
+    | '/sports'
+    | '/webdev'
   id:
     | '__root__'
     | '/'
-    | '/About'
     | '/Profile'
     | '/Sponsors'
     | '/TodoPage'
     | '/UserPage'
-    | '/blog'
+    | '/about'
+    | '/blogs'
+    | '/board'
+    | '/events'
+    | '/gallery'
+    | '/interns'
     | '/login'
+    | '/set'
+    | '/sports'
+    | '/webdev'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   ProfileRoute: typeof ProfileRoute
   SponsorsRoute: typeof SponsorsRoute
   TodoPageRoute: typeof TodoPageRoute
   UserPageRoute: typeof UserPageRoute
-  BlogRoute: typeof BlogRoute
+  AboutRoute: typeof AboutRoute
+  BlogsRoute: typeof BlogsRoute
+  BoardRoute: typeof BoardRoute
+  EventsRoute: typeof EventsRoute
+  GalleryRoute: typeof GalleryRoute
+  InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
+  SetRoute: typeof SetRoute
+  SportsRoute: typeof SportsRoute
+  WebdevRoute: typeof WebdevRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   ProfileRoute: ProfileRoute,
   SponsorsRoute: SponsorsRoute,
   TodoPageRoute: TodoPageRoute,
   UserPageRoute: UserPageRoute,
-  BlogRoute: BlogRoute,
+  AboutRoute: AboutRoute,
+  BlogsRoute: BlogsRoute,
+  BoardRoute: BoardRoute,
+  EventsRoute: EventsRoute,
+  GalleryRoute: GalleryRoute,
+  InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
+  SetRoute: SetRoute,
+  SportsRoute: SportsRoute,
+  WebdevRoute: WebdevRoute,
 }
 
 export const routeTree = rootRoute
@@ -230,20 +377,24 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/About",
         "/Profile",
         "/Sponsors",
         "/TodoPage",
         "/UserPage",
-        "/blog",
-        "/login"
+        "/about",
+        "/blogs",
+        "/board",
+        "/events",
+        "/gallery",
+        "/interns",
+        "/login",
+        "/set",
+        "/sports",
+        "/webdev"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/About": {
-      "filePath": "About.tsx"
     },
     "/Profile": {
       "filePath": "Profile.tsx"
@@ -257,11 +408,35 @@ export const routeTree = rootRoute
     "/UserPage": {
       "filePath": "UserPage.tsx"
     },
-    "/blog": {
-      "filePath": "blog.tsx"
+    "/about": {
+      "filePath": "about.tsx"
+    },
+    "/blogs": {
+      "filePath": "blogs.tsx"
+    },
+    "/board": {
+      "filePath": "board.tsx"
+    },
+    "/events": {
+      "filePath": "events.tsx"
+    },
+    "/gallery": {
+      "filePath": "gallery.tsx"
+    },
+    "/interns": {
+      "filePath": "interns.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/set": {
+      "filePath": "set.tsx"
+    },
+    "/sports": {
+      "filePath": "sports.tsx"
+    },
+    "/webdev": {
+      "filePath": "webdev.tsx"
     }
   }
 }

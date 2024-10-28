@@ -1,4 +1,4 @@
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRoute,
   Link,
@@ -9,21 +9,21 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { createAssets } from "@vinxi/react";
 import React, { Suspense } from "react";
 import { getManifest } from "vinxi/manifest";
-import Navbar from "@client/components/Navbar";
+import Navbar from "../components/Navbar";
 
 const Assets = createAssets(
   getManifest("client").handler,
   getManifest("client"),
 );
 
-const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : React.lazy(() =>
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      );
+// const TanStackRouterDevtools =
+//   process.env.NODE_ENV === "production"
+//     ? () => null
+//     : React.lazy(() =>
+//         import("@tanstack/router-devtools").then((res) => ({
+//           default: res.TanStackRouterDevtools,
+//         })),
+//       );
 
 export const Route = createRootRoute({
   meta: () => [
@@ -52,13 +52,13 @@ function RootComponent() {
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>
-        <Link to="/UserPage" className="[&.active]:font-bold">
+        <Link to="/userpage" className="[&.active]:font-bold">
           User Page
         </Link>
-        <Link to="/TodoPage" className="[&.active]:font-bold">
+        <Link to="/todopage" className="[&.active]:font-bold">
           Todo Page
         </Link>
-        <Link to="/blog" className="[&.active]:font-bold">
+        <Link to="/blogs" className="[&.active]:font-bold">
           Blog
         </Link>
       </div>
@@ -74,9 +74,9 @@ function RootComponent() {
 
       {/* Additional DevTools */}
       <Suspense>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </Suspense>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </RootDocument>
   );
 }
