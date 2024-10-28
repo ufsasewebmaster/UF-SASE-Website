@@ -102,9 +102,9 @@ export default [
       ],
 
       "@typescript-eslint/member-delimiter-style": 0,
-      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-non-null-assertion": "error",
       "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/consistent-type-imports": "warn",
 
