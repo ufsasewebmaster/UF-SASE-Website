@@ -78,18 +78,19 @@ const MobileNavItem: React.FC<{ item: NavItem; onClose: () => void }> = ({
           </button>
           {submenuOpen && (
             <ul className="ml-4 mt-1 flex flex-col space-y-1">
-              {item.children!.map((child) => (
-                <li key={child.name}>
-                  <NavLink to={child.path!} onClick={onClose}>
-                    {child.name}
-                  </NavLink>
-                </li>
-              ))}
+              {Array.isArray(item.children) &&
+                item.children.map((child) => (
+                  <li key={child.name}>
+                    <NavLink to={child.path ?? "#"} onClick={onClose}>
+                      {child.name}
+                    </NavLink>
+                  </li>
+                ))}
             </ul>
           )}
         </>
       ) : (
-        <NavLink to={item.path!} onClick={onClose}>
+        <NavLink to={item.path ?? "#"} onClick={onClose}>
           {item.name}
         </NavLink>
       )}

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/sponsors")({
   component: () => {
     return (
       <div className="flex flex-col items-center">
-        <h1 className="font-oswald mb-10 mt-16 text-7xl font-medium">
+        <h1 className="mb-10 mt-16 font-oswald text-7xl font-medium">
           CURRENT SPONSORS
         </h1>
         <div className="w-2/3">
@@ -51,7 +51,7 @@ export const Route = createFileRoute("/sponsors")({
             className="flex h-auto w-full flex-col items-center"
           />
           <div className="absolute top-2/3 m-0 flex flex-col items-center bg-gradient-to-t from-black to-transparent p-20 pt-5">
-            <p className="font-redhat border-l-8 border-saseGreen pl-4 text-4xl font-medium text-white">
+            <p className="border-l-8 border-saseGreen pl-4 font-redhat text-4xl font-medium text-white">
               Become a partner of the{" "}
               <p className="inline-block text-saseGreen">
                 UF Society of Asian Scientists and Engineers (SASE)
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/sponsors")({
               Chapter
             </p>
             <br></br>
-            <p className="font-redhat border-l-8 border-black pl-4 text-2xl font-medium italic text-white">
+            <p className="border-l-8 border-black pl-4 font-redhat text-2xl font-medium italic text-white">
               To view our sponsorship packet, or for any related questions,
               please contact our External Vice President, Kayleen Diaz, at{" "}
               <p className="inline-block text-saseGreen underline">

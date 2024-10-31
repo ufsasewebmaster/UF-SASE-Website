@@ -35,7 +35,7 @@ const NavItemComponent: React.FC<{ item: NavItem }> = ({ item }) => {
         <>
           {/* Parent item (clickable and triggers dropdown on hover) */}
           <NavLink
-            to={item.path!}
+            to={item.path ?? "#"}
             aria-haspopup="true"
             aria-expanded={dropdownOpen}
           >
@@ -67,20 +67,22 @@ const NavItemComponent: React.FC<{ item: NavItem }> = ({ item }) => {
             )}
             style={{ paddingTop: "10px", marginTop: "0px" }} // Ensure dropdown is positioned without affecting the title
           >
-            {item.children!.map((child) => (
-              <li key={child.name} className="p-2 hover:bg-gray-200">
-                <NavLink
-                  to={child.path!}
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  {child.name}
-                </NavLink>
-              </li>
-            ))}
+            {item.children &&
+              Array.isArray(item.children) &&
+              item.children.map((child) => (
+                <li key={child.name} className="p-2 hover:bg-gray-200">
+                  <NavLink
+                    to={child.path ?? "#"}
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    {child.name}
+                  </NavLink>
+                </li>
+              ))}
           </ul>
         </>
       ) : (
-        <NavLink to={item.path!}>{item.name}</NavLink>
+        <NavLink to={item.path ?? "#"}>{item.name}</NavLink>
       )}
     </li>
   );
