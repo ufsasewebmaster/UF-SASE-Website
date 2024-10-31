@@ -17,7 +17,7 @@ const SponsorCard = ({
             "text-saseBlue": type == "Diamond",
             "text-saseGreen": type == "Gold",
           },
-          `font-redhat pb-2 text-center text-4xl font-semibold`,
+          `pb-2 text-center font-redhat text-4xl font-semibold`,
         )}
       >
         {type}
@@ -29,7 +29,7 @@ const SponsorCard = ({
           className="h-5/6 w-full rounded-2xl pl-1 pr-1 pt-1"
         />
         <div className="flex w-full items-center justify-center">
-          <p className="font-redhat p-4 text-center text-3xl font-semibold">
+          <p className="p-4 text-center font-redhat text-3xl font-semibold">
             {companyName}
           </p>
         </div>
