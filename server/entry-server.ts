@@ -10,6 +10,7 @@ import tagRoutes from "./routes/tags";
 import todoRoutes from "./routes/todos";
 import userRoutes from "./routes/user"; // How is @shared used?
 import infoRoutes from "./routes/userInfo";
+import contentRoutes from "./routes/blogContent";
 
 const logger: MiddlewareHandler = async (c, next) => {
   console.log(`${c.req.method} ${c.req.url}`);
@@ -34,4 +35,5 @@ app
   .route("/api", titleRoutes)
   .route("/api", tagRoutes)
   .route("/api", titleRoutes)
-  .route("/api", saseRoutes);
+  .route("/api", saseRoutes)
+  .route("/api", contentRoutes);
