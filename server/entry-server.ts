@@ -1,6 +1,7 @@
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";
+import contentRoutes from "./routes/blogContent";
 import titleRoutes from "./routes/blogTitle";
 import saseRoutes from "./routes/saseInfo";
 import tagRoutes from "./routes/tags";
@@ -10,7 +11,6 @@ import tagRoutes from "./routes/tags";
 import todoRoutes from "./routes/todos";
 import userRoutes from "./routes/user"; // How is @shared used?
 import infoRoutes from "./routes/userInfo";
-import contentRoutes from "./routes/blogContent";
 
 const logger: MiddlewareHandler = async (c, next) => {
   console.log(`${c.req.method} ${c.req.url}`);
