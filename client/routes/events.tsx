@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import EventsCalendar from "../components/events/EventsCalendar";
 
 export const Route = createFileRoute("/events")({
   component: () => {
@@ -8,6 +9,7 @@ export const Route = createFileRoute("/events")({
           <h1>Events</h1>
         </div>
         <div>Events</div>
+        <EventsCalendar />
       </>
     );
   },
