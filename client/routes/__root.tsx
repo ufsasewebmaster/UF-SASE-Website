@@ -80,6 +80,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <Html>
       <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Red+Hat+Text:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
         <Meta />
         <Suspense>
           <Assets />
