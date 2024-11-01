@@ -25,7 +25,7 @@ export function createRouter() {
 
   return createTanStackRouter({
     routeTree,
-    defaultPreload: "intent",
+    // defaultPreload: "intent",
     transformer: SuperJSON,
 
     // Optionally provide your loaderClient to the router context for
@@ -33,7 +33,7 @@ export function createRouter() {
     // context!)
     context: {
       queryClient,
-      auth: undefined,
+      // auth: undefined,
     },
     // On the server, dehydrate the loader client so the router
     // can serialize it and send it to the client for us
