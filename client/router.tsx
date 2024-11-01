@@ -33,6 +33,7 @@ export function createRouter() {
     // context!)
     context: {
       queryClient,
+      auth: undefined,
     },
     // On the server, dehydrate the loader client so the router
     // can serialize it and send it to the client for us
