@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 
-const BoardMemberCard = ({ member }) => {
+interface Member {
+  role: string;
+  image: string;
+  name: string;
+  major: string;
+  contact: string;
+  description: string;
+}
+
+const BoardMemberCard = ({ member }: { member: Member }) => {
   const [isExpanded, setExpanded] = useState(false);
 
   const handleToggleExpand = () => {
