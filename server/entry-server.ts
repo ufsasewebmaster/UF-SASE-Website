@@ -1,6 +1,7 @@
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";
+import contentRoutes from "./routes/blogContent";
 import titleRoutes from "./routes/blogTitle";
 import saseRoutes from "./routes/saseInfo";
 import tagRoutes from "./routes/tags";
@@ -34,4 +35,5 @@ app
   .route("/api", titleRoutes)
   .route("/api", tagRoutes)
   .route("/api", titleRoutes)
-  .route("/api", saseRoutes);
+  .route("/api", saseRoutes)
+  .route("/api", contentRoutes);
