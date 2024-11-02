@@ -8,9 +8,13 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, navItems, onClose }) => (
+export const MobileMenu: React.FC<MobileMenuProps> = ({
+  isOpen,
+  navItems,
+  onClose,
+}) => (
   <div
-    className={`nav-links md:hidden absolute bg-white transition-all ease-in-out duration-500 w-full ${
+    className={`nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden ${
       isOpen ? "top-16" : "-top-full"
     }`}
   >

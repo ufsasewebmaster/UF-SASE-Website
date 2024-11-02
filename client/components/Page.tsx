@@ -1,17 +1,20 @@
-'use client'
+"use client";
 
-import type { CSSProperties, FC, PropsWithChildren } from 'react'
+import type { CSSProperties, FC, PropsWithChildren } from "react";
 
-type PageProps = Pick<CSSProperties, 'gap' | 'padding' | 'alignItems' | 'justifyContent'> & {
-  style?: CSSProperties | undefined
-}
+type PageProps = Pick<
+  CSSProperties,
+  "gap" | "padding" | "alignItems" | "justifyContent"
+> & {
+  style?: CSSProperties | undefined;
+};
 
 export const Page: FC<PropsWithChildren<PageProps>> = ({
   alignItems,
   children,
-  gap = '1rem',
+  gap = "1rem",
   justifyContent,
-  padding = '1rem',
+  padding = "1rem",
   style,
 }) => {
   return (
@@ -19,8 +22,8 @@ export const Page: FC<PropsWithChildren<PageProps>> = ({
       className="Page"
       data-testid="Page"
       style={{
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         gap,
         padding,
         alignItems,
@@ -30,5 +33,5 @@ export const Page: FC<PropsWithChildren<PageProps>> = ({
     >
       {children}
     </div>
-  )
-}
+  );
+};

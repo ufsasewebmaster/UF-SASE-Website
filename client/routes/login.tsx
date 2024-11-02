@@ -1,72 +1,123 @@
-import { createFileRoute } from '@tanstack/react-router'
-
+import { useMutation } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
+import { Logo } from "../components/navigation/Logo";
+import { Page } from "../components/Page";
 import { Button } from "../components/ui/button";
-import { Input } from '../components/ui/input';
-import { useForm } from "../components/useForm";
-import { Page } from '../components/Page';
-import axios from 'axios'
+import { Input } from "../components/ui/input";
 
-export const Route = createFileRoute('/login')({
+interface FormData {
+  username: string;
+  password: string;
+}
+
+export const Route = createFileRoute("/login")({
   component: () => {
-    const { formData, formErrors, ...formMethods } = useForm();
+    const {
+      formState: { errors },
+      handleSubmit,
+      register,
+    } = useForm<FormData>();
 
-    const handleSubmit = async (event: { preventDefault: () => void; }) => {
-      event.preventDefault();
-      const isValid = formMethods.validateForm();
-  
-      if (isValid) {
-  
-        try {
-          await axios.post('https://sheetdb.io/api/v1/79fo2g87zoqgy', formData);
-        } catch (error) {
-          console.error(error);
+    const mutation = useMutation({
+      mutationFn: async (formData: FormData) => {
+        const response = await fetch(
+          "https://sheetdb.io/api/v1/79fo2g87zoqgy",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      } else {
-        console.log('Form has errors.');
-      }
+
+        return response.json();
+      },
+      onSuccess: () => {
+        console.log("Data submitted successfully!");
+      },
+      onError: (error) => {
+        console.error("Error submitting data:", error);
+      },
+    });
+
+    const onSubmit = (data: FormData) => {
+      mutation.mutate(data);
     };
-  
+
     return (
       <Page>
-      <div className="flex items-center justify-center min-h-screen">
-          <form 
-            onSubmit={handleSubmit} 
-            className="flex flex-col items-center justify-center w-full max-w-md p-6 border border-gray-300 rounded-lg shadow-lg bg-white"
-          >
-            <h3 className="heading mb-6">Login</h3>
+        <div className="relative flex min-h-screen items-center justify-center">
+          {/* Shadow Card 1 */}
+          <div className="absolute left-1/2 z-0 -ml-4 mt-6 h-[32rem] w-full max-w-md -translate-x-1/2 -translate-y-6 transform rounded-lg bg-saseGreen opacity-100 shadow-lg"></div>
 
-            <label className="mb-2">Username:</label>
+          {/* Shadow Card 2 (Right) */}
+          <div className="absolute right-1/2 z-0 -mr-4 mt-20 h-[31.5rem] w-full max-w-md -translate-y-6 translate-x-1/2 transform rounded-lg bg-saseBlue opacity-100 shadow-lg"></div>
+
+          {/* Login Form Container */}
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="border-gray relative z-10 flex h-[32rem] w-full max-w-md flex-col items-center justify-center rounded-lg border bg-gray-100 p-6 shadow-xl"
+          >
+            <div className="mb-6 p-2">
+              <Logo />
+            </div>
+            <h3 className="heading mb-3 pb-2 text-center font-redhat text-4xl font-semibold">
+              Login
+            </h3>
+            <p className="mb-4 text-center text-lg"> Sign in to your account</p>
+
             <Input
               type="text"
-              name="username"
-              placeholder="Enter your username"
-              maxLength={12}
-              value={formData.username}
-              onChange={formMethods.handleInputChange}
-              className="mb-4 p-2 border border-gray-300 rounded" 
+              {...register("username", {
+                required: "Username is required",
+                maxLength: {
+                  value: 12,
+                  message: "Username must be 12 characters or fewer!",
+                },
+              })}
+              placeholder="Username"
+              className={`mb-4 rounded-lg border border-gray-300 bg-saseGreen p-5 placeholder-black opacity-90 ${errors.username ? "border-red-600" : ""}`}
             />
-            {formErrors.username && <span className="errorMessage mb-4 text-red-600">{formErrors.username}</span>}
+            {errors.username && (
+              <span className="errorMessage mb-4 text-red-600">
+                {errors.username.message}
+              </span>
+            )}
 
-            <label className="mb-2">Password:</label>
             <Input
               type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={formMethods.handleInputChange}
-              className="mb-4 p-2 border border-gray-300 rounded" 
+              {...register("password", {
+                required: "Password is required",
+                pattern: {
+                  value: /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                  message:
+                    "Password must be longer than 8 characters, contain a number and a special character!",
+                },
+              })}
+              placeholder="Password"
+              className={`mb-4 rounded-lg border border-gray-300 bg-saseGreen p-5 placeholder-black opacity-90 ${errors.password ? "border-red-600" : ""}`}
             />
-            {formErrors.password && <span className="errorMessage mb-4 text-red-600">{formErrors.password}</span>}
+            {errors.password && (
+              <span className="errorMessage mb-4 text-red-600">
+                {errors.password.message}
+              </span>
+            )}
 
-            <Button type="submit" className="w-full p-2 border border-gray-300 rounded bg-blue-500 text-white" disabled={!formMethods.isFormFilled()}>
+            <Button
+              type="submit"
+              className="w-full rounded-lg border border-gray-300 bg-saseBlue p-5 text-white"
+            >
               Login
             </Button>
           </form>
         </div>
-    </Page>
-    );  
-
-}
-
-})
-
+      </Page>
+    );
+  },
+});

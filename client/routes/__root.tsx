@@ -1,3 +1,4 @@
+import Navbar from "@client/components/Navbar";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRoute,
@@ -9,7 +10,6 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { createAssets } from "@vinxi/react";
 import React, { Suspense } from "react";
 import { getManifest } from "vinxi/manifest";
-import Navbar from "@client/components/Navbar";
 
 const Assets = createAssets(
   getManifest("client").handler,
@@ -63,15 +63,12 @@ function RootComponent() {
         </Link>
       </div>
       <hr />
-
       {/* Content Rendering */}
       <Outlet />
-      
       {/* Navigation Bar */}
       <Navbar />
       <hr className="p-2" />
       <div className="h-12" /> {/* Spacer for navbar */}
-
       {/* Additional DevTools */}
       <Suspense>
         <ReactQueryDevtools />

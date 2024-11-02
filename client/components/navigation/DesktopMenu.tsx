@@ -7,7 +7,7 @@ interface DesktopMenuProps {
 }
 
 export const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems }) => (
-  <ul className="flex md:flex-row items-center gap-[3vw] mr-auto px-10 pt-1">
+  <ul className="mr-auto flex items-center gap-[3vw] px-10 pt-1 md:flex-row">
     {navItems.map((item) => (
       <li key={item.name}>
         <NavLink to={item.path}>{item.name}</NavLink>
