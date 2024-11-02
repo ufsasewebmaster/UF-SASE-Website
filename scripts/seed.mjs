@@ -7,8 +7,9 @@ const client = createClient({
 
 // Based command
 client.query("INSERT INTO todo (title, completed) VALUES ('Learn vim', 0)");
-client.query("INSERT INTO users (username, points, roles) VALUES ('test', 0, 'admin')"); // should populate users
-
+client.query(
+  "INSERT INTO users (username, points, roles) VALUES ('test', 0, 'admin')",
+); // should populate users
 
 // Suggested to use this different way of inserting data, but idk how it works.
 
@@ -25,7 +26,6 @@ client.query("INSERT INTO users (username, points, roles) VALUES ('test', 0, 'ad
 //     driver: sqlite3.Database,
 //   })
 // );
-
 
 // await db.insert(Schema.users).values({
 //   id: "1",

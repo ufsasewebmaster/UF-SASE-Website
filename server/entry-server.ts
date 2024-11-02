@@ -1,7 +1,9 @@
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";
+import titleRoutes from "./routes/blogTitle";
 import saseRoutes from "./routes/saseInfo";
+import tagRoutes from "./routes/tags";
 // import * as Schema from "./db/schema";
 // import { todoInsertSchema, updateTodoSchema } from "@/shared/schema";
 // import { eq } from "drizzle-orm";
@@ -28,4 +30,8 @@ app
   .route("/api", todoRoutes)
   .route("/api", userRoutes)
   .route("/api", infoRoutes)
+  .route("/api", saseRoutes)
+  .route("/api", titleRoutes)
+  .route("/api", tagRoutes)
+  .route("/api", titleRoutes)
   .route("/api", saseRoutes);
