@@ -34,7 +34,7 @@ export const Footer = () => {
           </Button>
 
           <Button asChild variant="link" size="default">
-            <Link to="/about">About</Link>
+            <Link to="/About">About</Link>
           </Button>
 
           <Button asChild variant="link" size="default">
