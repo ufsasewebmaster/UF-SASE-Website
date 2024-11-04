@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import professionalDevelopment from "@assets/ProfesionalDevelopment_Home.png";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: () => {

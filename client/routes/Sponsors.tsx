@@ -1,15 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router'
-import arthrex from '@assets/sponsors/Arthrex.png'
-import axogen from '@assets/sponsors/Axogen.png'
-import blueorigin from '@assets/sponsors/BlueOriginLogo.png'
-import fmglobal from '@assets/sponsors/FMGlobal.png'
-import google from '@assets/sponsors/Google.png'
-import headerImage from '@assets/sponsors/Header_Bg.png'
-import johnson from '@assets/sponsors/J&J.png'
-import sargentlundy from '@assets/sponsors/S&L.png'
-import SponsorCard from '../components/SponsorCard'
+import arthrex from "@assets/sponsors/Arthrex.png";
+import axogen from "@assets/sponsors/Axogen.png";
+import blueorigin from "@assets/sponsors/BlueOriginLogo.png";
+import fmglobal from "@assets/sponsors/FMGlobal.png";
+import google from "@assets/sponsors/Google.png";
+import headerImage from "@assets/sponsors/Header_Bg.png";
+import johnson from "@assets/sponsors/J&J.png";
+import sargentlundy from "@assets/sponsors/S&L.png";
+import { createFileRoute } from "@tanstack/react-router";
+import SponsorCard from "../components/SponsorCard";
 
-export const Route = createFileRoute('/Sponsors')({
+export const Route = createFileRoute("/sponsors")({
   component: () => {
     return (
       <div className="flex flex-col items-center">
@@ -52,16 +52,16 @@ export const Route = createFileRoute('/Sponsors')({
           />
           <div className="absolute top-2/3 m-0 flex flex-col items-center bg-gradient-to-t from-black to-transparent p-20 pt-5">
             <p className="border-l-8 border-saseGreen pl-4 font-redhat text-4xl font-medium text-white">
-              Become a partner of the{' '}
+              Become a partner of the{" "}
               <p className="inline-block text-saseGreen">
                 UF Society of Asian Scientists and Engineers (SASE)
-              </p>{' '}
+              </p>{" "}
               Chapter
             </p>
             <br></br>
             <p className="border-l-8 border-black pl-4 font-redhat text-2xl font-medium italic text-white">
               To view our sponsorship packet, or for any related questions,
-              please contact our External Vice President, Kayleen Diaz, at{' '}
+              please contact our External Vice President, Kayleen Diaz, at{" "}
               <p className="inline-block text-saseGreen underline">
                 ufsase.evp@gmail.com
               </p>
@@ -69,6 +69,6 @@ export const Route = createFileRoute('/Sponsors')({
           </div>
         </div>
       </div>
-    )
+    );
   },
-})
+});

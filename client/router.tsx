@@ -1,3 +1,4 @@
+import NotFound from "@navigation/NotFound";
 import {
   dehydrate,
   hydrate,
@@ -7,7 +8,6 @@ import {
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
 import { routeTree } from "./routeTree.gen";
-import NotFound from "@navigation/NotFound";
 
 declare module "@tanstack/react-router" {
   interface Register {

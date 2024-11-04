@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import AboutCard from '@about/AboutCard'
-import ContactForm from '@about/ContactForm'
-import HeaderSection from '@about/HeaderSection'
-import HistorySection from '@about/HistorySection'
-import MissionSection from '@about/MissionSection'
-import Timeline from '@about/Timeline'
-import YoutubeSection from '@about/YoutubeSection'
+import AboutCard from "@about/AboutCard";
+import ContactForm from "@about/ContactForm";
+import HeaderSection from "@about/HeaderSection";
+import HistorySection from "@about/HistorySection";
+import MissionSection from "@about/MissionSection";
+import Timeline from "@about/Timeline";
+import YoutubeSection from "@about/YoutubeSection";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/About')({
+export const Route = createFileRoute("/about")({
   component: () => {
     return (
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center bg-white font-[Poppins]">
@@ -32,7 +32,7 @@ export const Route = createFileRoute('/About')({
 
           <section className="mb-12">
             <div className="mb-0 flex items-center">
-              <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{' '}
+              <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
               <h2 className="text-3xl font-semibold text-gray-800">
                 Timeline of Achievements
               </h2>
@@ -41,7 +41,7 @@ export const Route = createFileRoute('/About')({
           </section>
           <section className="mb-12">
             <div className="mb-4 flex items-center">
-              <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{' '}
+              <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
               <h2 className="text-3xl font-semibold text-gray-800">
                 Contact Us
               </h2>
@@ -50,6 +50,6 @@ export const Route = createFileRoute('/About')({
           </section>
         </div>
       </div>
-    )
+    );
   },
-})
+});

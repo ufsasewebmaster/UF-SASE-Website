@@ -1,10 +1,10 @@
+import { Page } from "@components/Page";
+import { Logo } from "@navigation/Logo";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
-import { Logo } from "@navigation/Logo";
-import { Page } from "@components/Page";
 import { Button } from "@ui/button";
 import { Input } from "@ui/input";
+import { useForm } from "react-hook-form";
 
 interface FormData {
   username: string;

@@ -1,5 +1,5 @@
-import { Logo } from "@navigation/Logo";
 import { DesktopMenu } from "@navigation/DesktopMenu";
+import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
 import { SearchBar } from "@navigation/SearchBar";
 import { UserButton } from "@navigation/UserButton";
