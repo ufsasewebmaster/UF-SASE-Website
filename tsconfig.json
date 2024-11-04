@@ -35,6 +35,11 @@
     "paths": {
       "@/*": ["./*"],
       "@client/*": ["./client/*"],
+      "@components/*": ["./client/components/*"],
+      "@navigation/*": ["./client/components/navigation/*"],
+      "@about/*": ["./client/components/about/*"],
+      "@assets/*": ["client/assets/*"],
+      "@ui/*": ["./client/components/ui/*"],
       "@server/*": ["./server/*"],
       "@shared/*": ["./shared/*"]
     }

@@ -1,6 +1,6 @@
-import lightbulb from "../../assets/images/about_page/lightbulb.png";
-import people from "../../assets/images/about_page/people.png";
-import suitcase from "../../assets/images/about_page/suitcase.png";
+import lightbulb from "@assets/about/lightbulb.png";
+import people from "@assets/about/people.png";
+import suitcase from "@assets/about/suitcase.png";
 import MissionCard from "./MissionCard";
 
 const MissionSection = () => (

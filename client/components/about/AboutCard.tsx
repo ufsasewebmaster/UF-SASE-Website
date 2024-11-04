@@ -1,5 +1,5 @@
 import React from "react";
-import logoImage from "../../assets/images/about_page/sase_logo.png";
+import logoImage from "@assets/about/sase_logo.png";
 
 const AboutCard = () => {
   return (

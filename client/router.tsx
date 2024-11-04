@@ -7,6 +7,7 @@ import {
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
 import { routeTree } from "./routeTree.gen";
+import NotFound from "@navigation/NotFound";
 
 declare module "@tanstack/react-router" {
   interface Register {
@@ -50,6 +51,6 @@ export function createRouter() {
         </QueryClientProvider>
       );
     },
-    defaultNotFoundComponent: () => <div>404</div>, // TODO: Make an actual 404 page
+    defaultNotFoundComponent: () => NotFound, // TODO: Make an actual 404 page
   });
 }

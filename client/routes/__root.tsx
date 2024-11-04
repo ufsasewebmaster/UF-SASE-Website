@@ -1,7 +1,8 @@
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Footer from "@navigation/Footer";
+import Header from "@navigation/Header";
 import {
   createRootRoute,
-  Link,
   Outlet,
   ScrollRestoration,
 } from "@tanstack/react-router";
@@ -9,21 +10,20 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { createAssets } from "@vinxi/react";
 import React, { Suspense } from "react";
 import { getManifest } from "vinxi/manifest";
-import Navbar from "../components/Navbar";
 
 const Assets = createAssets(
   getManifest("client").handler,
   getManifest("client"),
 );
 
-// const TanStackRouterDevtools =
-//   process.env.NODE_ENV === "production"
-//     ? () => null
-//     : React.lazy(() =>
-//         import("@tanstack/router-devtools").then((res) => ({
-//           default: res.TanStackRouterDevtools,
-//         })),
-//       );
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? () => null
+    : React.lazy(() =>
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+        })),
+      );
 
 export const Route = createRootRoute({
   meta: () => [
@@ -48,30 +48,20 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <div className="flex gap-2 p-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>
-        <Link to="/userpage" className="[&.active]:font-bold">
-          User Page
-        </Link>
-        <Link to="/todopage" className="[&.active]:font-bold">
-          Todo Page
-        </Link>
-        <Link to="/blogs" className="[&.active]:font-bold">
-          Blog
-        </Link>
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        {/* Main Content Area */}
+        <main className="flex-grow p-4">
+          {/* Suspense wrapper with fallback for async components */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </main>
+
+        <Footer />
       </div>
-      <hr />
-      {/* Content Rendering */}
-      <Outlet />
-      {/* Navigation Bar */}
-      <Navbar />
-      <hr className="p-2" />
-      <div className="h-12" /> {/* Spacer for navbar */}
-      {/* Additional DevTools */}
-      <Suspense>{/* <ReactQueryDevtools /> */}</Suspense>
-      {/* <TanStackRouterDevtools /> */}
+      {/* TanStackRouterDevtools can stay here */}
+      <TanStackRouterDevtools />
     </RootDocument>
   );
 }

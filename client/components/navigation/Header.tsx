@@ -1,8 +1,8 @@
-import { Logo } from "@client/components/navigation/Logo";
-import { DesktopMenu } from "client/components/navigation/DesktopMenu";
-import { MobileMenu } from "client/components/navigation/MobileMenu";
-import { SearchBar } from "client/components/navigation/SearchBar";
-import { UserButton } from "client/components/navigation/UserButton";
+import { Logo } from "@navigation/Logo";
+import { DesktopMenu } from "@navigation/DesktopMenu";
+import { MobileMenu } from "@navigation/MobileMenu";
+import { SearchBar } from "@navigation/SearchBar";
+import { UserButton } from "@navigation/UserButton";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -36,7 +36,7 @@ const navItems = [
   },
 ];
 
-const Navbar: React.FC = () => {
+const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, _setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
   }, [menuOpen]);
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-white font-[Poppins] font-medium shadow-md">
+    <header className="left-0 top-0 z-50 w-full bg-white font-[Poppins] font-medium shadow-md">
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
@@ -104,4 +104,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default Header;

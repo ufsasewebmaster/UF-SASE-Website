@@ -1,15 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer
       style={{
         backgroundColor: "#acc9fa",
         paddingTop: "30px",
         paddingBottom: "30px",
-        position: "absolute",
         bottom: "0",
         left: "0",
         right: "0",
@@ -74,3 +72,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
