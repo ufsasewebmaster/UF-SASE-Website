@@ -1,13 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import EventsCalendar from "@client/components/EventsCalendar";
 
 export const Route = createFileRoute("/events")({
   component: () => {
     return (
       <>
-        <div>
-          <h1>Events</h1>
-        </div>
-        <div>Events</div>
+        <div>You shouldn't see this</div>
+        <EventsCalendar />
       </>
     );
   },
