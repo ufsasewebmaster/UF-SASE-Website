@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from "./routes/__root";
 import { Route as AboutImport } from "./routes/about";
+import { Route as AuthedImport } from "./routes/authed";
 import { Route as BlogsImport } from "./routes/blogs";
 import { Route as BoardImport } from "./routes/board";
 import { Route as EventsImport } from "./routes/events";
@@ -94,6 +95,11 @@ const BlogsRoute = BlogsImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
+const AuthedRoute = AuthedImport.update({
+  path: "/authed",
+  getParentRoute: () => rootRoute,
+} as any);
+
 const AboutRoute = AboutImport.update({
   path: "/about",
   getParentRoute: () => rootRoute,
@@ -120,6 +126,13 @@ declare module "@tanstack/react-router" {
       path: "/about";
       fullPath: "/about";
       preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/authed": {
+      id: "/authed";
+      path: "/authed";
+      fullPath: "/authed";
+      preLoaderRoute: typeof AuthedImport;
       parentRoute: typeof rootRoute;
     };
     "/blogs": {
@@ -221,6 +234,7 @@ declare module "@tanstack/react-router" {
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
   "/blogs": typeof BlogsRoute;
   "/board": typeof BoardRoute;
   "/events": typeof EventsRoute;
@@ -239,6 +253,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
   "/blogs": typeof BlogsRoute;
   "/board": typeof BoardRoute;
   "/events": typeof EventsRoute;
@@ -258,6 +273,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexRoute;
   "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
   "/blogs": typeof BlogsRoute;
   "/board": typeof BoardRoute;
   "/events": typeof EventsRoute;
@@ -278,6 +294,7 @@ export interface FileRouteTypes {
   fullPaths:
     | "/"
     | "/about"
+    | "/authed"
     | "/blogs"
     | "/board"
     | "/events"
@@ -295,6 +312,7 @@ export interface FileRouteTypes {
   to:
     | "/"
     | "/about"
+    | "/authed"
     | "/blogs"
     | "/board"
     | "/events"
@@ -312,6 +330,7 @@ export interface FileRouteTypes {
     | "__root__"
     | "/"
     | "/about"
+    | "/authed"
     | "/blogs"
     | "/board"
     | "/events"
@@ -331,6 +350,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AboutRoute: typeof AboutRoute;
+  AuthedRoute: typeof AuthedRoute;
   BlogsRoute: typeof BlogsRoute;
   BoardRoute: typeof BoardRoute;
   EventsRoute: typeof EventsRoute;
@@ -349,6 +369,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AuthedRoute: AuthedRoute,
   BlogsRoute: BlogsRoute,
   BoardRoute: BoardRoute,
   EventsRoute: EventsRoute,
@@ -378,6 +399,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/authed",
         "/blogs",
         "/board",
         "/events",
@@ -398,6 +420,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/authed": {
+      "filePath": "authed.tsx"
     },
     "/blogs": {
       "filePath": "blogs.tsx"
