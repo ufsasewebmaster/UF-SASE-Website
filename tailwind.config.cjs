@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         saseGreen: "#7DC242",
         saseBlue: "#0668B3",
+        saseGray: " #CBCBD4",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -56,7 +57,9 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        // saseHeader: ['Orienta', 'sans-serif'],
+        oswald: ["Oswald", "sans-serif"],
+        redhat: ['"Red Hat Text"', "sans-serif"],
+        // sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

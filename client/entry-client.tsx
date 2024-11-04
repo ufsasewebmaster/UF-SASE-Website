@@ -5,9 +5,10 @@ import { createRouter } from "./router";
 import "./index.css";
 
 const router = createRouter();
+const rootElement = document.getElementById("root");
 
-ReactDOM.hydrateRoot(
-  document.getElementById("root")!,
-  // todo: why does this error?
-  <StartClient router={router as any} />,
-);
+if (rootElement) {
+  ReactDOM.hydrateRoot(rootElement, <StartClient router={router} />);
+} else {
+  console.error("Root element not found");
+}

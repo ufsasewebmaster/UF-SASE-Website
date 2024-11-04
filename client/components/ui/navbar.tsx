@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
@@ -5,7 +6,7 @@ import { FiUser } from "react-icons/fi";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, _setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
@@ -51,7 +52,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/about"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
               >
                 About
               </Link>
@@ -130,9 +131,13 @@ const Navbar = () => {
         {/* Hamburger Menu */}
         <div
           ref={menuRef}
-          className={`nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden ${
-            menuOpen ? "top-[65px]" : "top-[-100%]"
-          }`}
+          className={cn(
+            `nav-links absolute w-full bg-white transition-all duration-500 ease-in-out md:hidden`,
+            {
+              "top-[65px]": menuOpen,
+              "top-[-100%]": !menuOpen,
+            },
+          )}
         >
           <ul className="flex flex-col items-end gap-8 py-4 pr-12">
             <li>
@@ -147,7 +152,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/about"
-                className="hover:text-[#0f6cb6] duration-300 transform hover:scale-105 inline-block"
+                className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]"
                 onClick={() => setMenuOpen(false)}
               >
                 About

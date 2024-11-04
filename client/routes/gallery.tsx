@@ -6,7 +6,7 @@ export const Route = createFileRoute('/gallery')({
       <div>
         <div className="py-5"></div> {/* spacer element */}
         <div className="flex justify-center">
-          <div className="flex-5 pb-5 text-7xl text-center font-mono">GALLERY</div>
+          <div className="flex-5 pb-5 text-7xl text-center font-oswald">GALLERY</div>
         </div>
         <div className="flex justify-center w-full">
           <hr className="h-5 border-t-4 border-saseBlue w-10/12" />
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/gallery')({
             <select
               name="photo_drives"
               id="photo_drives"
-              className="pl-1 pt-1 pb-1 text-lg font-semibold font-mono w-full border-2 border-black rounded-lg hover:cursor-pointer"
+              className="pl-1 pt-1 pb-1 text-lg font-semibold font-redhat w-full border-2 border-black rounded-lg hover:cursor-pointer"
             >
               <option value="default" selected>
                 Photo Google Drives
@@ -35,7 +35,7 @@ export const Route = createFileRoute('/gallery')({
           <hr className="h-5 border-t-4 border-saseGreen w-10/12" />
         </div>
         <div className="justify-center">
-          <div className="flex-5 pt-5 pb-5 text-3xl text-center font-mono">
+          <div className="flex-5 pt-5 pb-5 text-3xl text-center font-oswald">
             Spring 2024
           </div>
         </div>
@@ -56,7 +56,7 @@ export const Route = createFileRoute('/gallery')({
           </div>
           <div className="flex justify-between pt-5">
             <div className="pl-28"></div> {/* spacer element */}
-            <div className="flex flex-1 text-xs">
+            <div className="flex flex-1 text-xs font-redhat">
               <div className="pr-2">Home</div>
               <div className="pl-2 pr-2">About</div>
               <div className="pl-2 pr-2">Board</div>
@@ -67,7 +67,7 @@ export const Route = createFileRoute('/gallery')({
               <div className="pl-2 pr-2">Blogs</div>
               <div className="pl-2 pr-2">Contact Us</div>
             </div>
-            <div className="text-xs">
+            <div className="text-xs font-redhat">
               Copyright <i className="fas fa-copyright"></i> 2024 - Yuki Theme
               by WP Moose
             </div>

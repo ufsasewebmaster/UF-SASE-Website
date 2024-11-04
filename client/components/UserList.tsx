@@ -1,7 +1,7 @@
 // src/components/UserList.tsx
-import { useUsers } from "../hooks/useUsers";
+import type { SelectUser, UpdateUser } from "@/shared/userSchema";
 import { Button } from "@client/components/ui/button";
-import type { UpdateUser, SelectUser } from "@/shared/userSchema";
+import { useUsers } from "../hooks/useUsers";
 
 export const UserList = () => {
   const { updateUser, users } = useUsers();
@@ -29,7 +29,10 @@ export const UserList = () => {
     <div className="space-y-2">
       {Array.isArray(users.data) ? (
         (users.data as Array<SelectUser>).map((user: SelectUser) => (
-          <div key={user.id as string | null} className="flex items-center justify-between rounded-md bg-card p-2">
+          <div
+            key={user.id as string | null}
+            className="flex items-center justify-between rounded-md bg-card p-2"
+          >
             <div className="flex items-center">
               <span className="text-card-foreground">
                 {user.username as string} - {user.roles as string}
@@ -55,5 +58,4 @@ export const UserList = () => {
       )}
     </div>
   );
-  
 };

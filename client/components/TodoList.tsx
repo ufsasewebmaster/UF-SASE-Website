@@ -1,4 +1,4 @@
-import { useTodos } from '../hooks/useTodos';
+import { useTodos } from "../hooks/useTodos";
 
 export const TodoList = () => {
   const { deleteTodo, todos, updateTodo } = useTodos();
@@ -8,12 +8,20 @@ export const TodoList = () => {
 
   return (
     <ul>
-      {(todos.data as unknown as Array<{ id: number; title?: string | undefined; completed?: boolean | undefined; }>).map((todo) => (
+      {(
+        todos.data as unknown as Array<{
+          id: number;
+          title?: string | undefined;
+          completed?: boolean | undefined;
+        }>
+      ).map((todo) => (
         <li key={todo.id}>
           <input
             type="checkbox"
             checked={todo.completed}
-            onChange={() => updateTodo.mutate({ ...todo, completed: !todo.completed })}
+            onChange={() =>
+              updateTodo.mutate({ ...todo, completed: !todo.completed })
+            }
           />
           {todo.title}
           <button onClick={() => deleteTodo.mutate(todo.id)}>Delete</button>

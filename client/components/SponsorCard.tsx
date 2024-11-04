@@ -1,18 +1,41 @@
-const SponsorCard = (props: any) => {
+import { cn } from "@/shared/utils";
+
+const SponsorCard = ({
+  companyName,
+  image,
+  type,
+}: {
+  image: string;
+  companyName: string;
+  type: string;
+}) => {
   return (
-    <div
-      className={`flex flex-col items-center rounded-lg border-4 border-black ${props.diamond == "Y" ? "from-saseBlue bg-gradient-to-t to-white" : "bg-white"}`}
-    >
-      <img
-        src={props.image}
-        alt="Company Logo"
-        className="h-3/4 w-full pl-1 pr-1 pt-1"
-      />
+    <div className="flex h-full w-full flex-col">
       <p
-        className={`h-1/4 w-full p-4 text-center text-2xl font-medium ${props.diamond == "Y" ? "text-white" : "text-black"}`}
+        className={cn(
+          {
+            "text-saseBlue": type == "Diamond",
+            "text-saseGreen": type == "Gold",
+          },
+          `pb-2 text-center font-redhat text-4xl font-semibold`,
+        )}
       >
-        {props.companyName}
+        {type}
       </p>
+      <div className="relative flex h-auto w-full flex-col items-center rounded-2xl border-4 border-black bg-white">
+        <img
+          src={image}
+          alt="Company Logo"
+          className="h-5/6 w-full rounded-2xl pl-1 pr-1 pt-1"
+        />
+        <div className="flex w-full items-center justify-center">
+          <p className="p-4 text-center font-redhat text-3xl font-semibold">
+            {companyName}
+          </p>
+        </div>
+
+        <div className="absolute left-2 top-2 z-0 h-full w-full rounded-2xl border-b-8 border-r-8 border-saseGreen"></div>
+      </div>
     </div>
   );
 };
