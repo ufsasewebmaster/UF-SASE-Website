@@ -9,6 +9,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
+    "fix": "concurrently \"pnpm lint:ts\" \"pnpm lint:js:fix\" \"pnpm lint:fmt:fix\"",
     "lint": "concurrently \"pnpm lint:ts\" \"pnpm lint:js\" \"pnpm lint:fmt\"",
     "lint:ts": "tsc -b tsconfig.json",
     "lint:js": "eslint .",

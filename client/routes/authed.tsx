@@ -1,7 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useAuth } from '@client/AuthContext'
+import { useAuth } from "@client/AuthContext";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/authed')({
+export const Route = createFileRoute("/authed")({
   // Ethan plz look: How would this context work? Is it needed?
   // beforeLoad: async ({ context }) => {
   //   if (!context.auth) {
@@ -14,10 +14,10 @@ export const Route = createFileRoute('/authed')({
   //   }
   // },
   component: AuthedComponent,
-})
+});
 
 function AuthedComponent() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth();
   console.log(isAuthenticated);
   return (
     <div>
@@ -28,5 +28,5 @@ function AuthedComponent() {
         <div>Sorry, you are not authenticated</div>
       )}
     </div>
-  )
+  );
 }
