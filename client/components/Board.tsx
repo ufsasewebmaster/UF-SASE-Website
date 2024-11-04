@@ -1,6 +1,196 @@
 import React from "react";
 import officer from "../assets/images/board_page/boardimage.png";
 import boardGroup from "../assets/images/board_page/placeholder.png";
+import BoardMemberCard from "./BoardMemberCard";
+
+const teamData = [
+  {
+    section: "Executive Board",
+    members: [
+      {
+        name: "Vincent Lin",
+        role: "President",
+        image: officer,
+        major: "3rd Year Computer Engineering",
+        contact: "ufsase.p@gmail.com",
+        description: "description",
+      },
+      {
+        name: "Bryan Park",
+        role: "Internal Vice President (IVP)",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Kayleen Diaz",
+        role: "External Vice President (EVP)",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Gayatri Baskaran",
+        role: "Treasurer",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Rachel Young",
+        role: "Secretary",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Kimmy Chu",
+        role: "Public Relations",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+    ],
+  },
+  {
+    section: "Chair Board",
+    members: [
+      {
+        name: "Ricky Zhang",
+        role: "Webmaster",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Amanda Jiang",
+        role: "Advancement",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Chloe Bai",
+        role: "Fundraising",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Anna Lim",
+        role: "Member Involvement",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Justin Doan",
+        role: "Member Involvement",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Helen Zou",
+        role: "Historian",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Adriel Poon",
+        role: "Multimedia",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Reyna Simpson",
+        role: "Multimedia",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Tabitha Gottipati",
+        role: "Network",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Aahan Dwivedi",
+        role: "Science",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Leann Tang",
+        role: "Service",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Sophia Dong",
+        role: "Social",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Jessica Lu",
+        role: "Sports Coordinator",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Alexander Lou",
+        role: "Sports Coordinator",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Manav Sanghvi",
+        role: "Technical",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+      {
+        name: "Kevin Tang",
+        role: "Technical",
+        image: officer,
+        major: "major",
+        contact: "contact",
+        description: "description",
+      },
+    ],
+  },
+];
 
 const Board: React.FC = () => {
   return (
@@ -25,49 +215,18 @@ const Board: React.FC = () => {
       </div>
       <hr className="w-7/8 mx-auto my-2 mt-10 border-t-2 border-blue-500" />
 
-      {/* Executive Board Section */}
-      <div className="container mx-auto my-12">
-        <div className="text-center font-[Poppins]">
-          <h2 className="mt-6 text-3xl font-semibold">Executive Board</h2>
-          <div className="mt-5 flex justify-center gap-16">
-            <div className="flex flex-col items-center p-4 text-center">
-              <p className="my-2 text-2xl text-gray-500">President</p>
-              <img
-                src={officer} // placeholder
-                className="h-50 w-50 overflow-hidden rounded-2xl border-[2px] border-black shadow-[5px_5px_0px_0px_rgb(61,137,196)]"
-              />
-              <p className="mt-4 text-2xl">Emely Chhu</p>
-            </div>
-            <div className="flex flex-col items-center p-4 text-center">
-              <p className="my-2 text-2xl text-gray-500">
-                Internal Vice President (IVP)
-              </p>
-              <img
-                src={officer} // placeholder
-                className="h-50 w-50 overflow-hidden rounded-2xl border-[2px] border-black shadow-[5px_5px_0px_0px_rgb(61,137,196)]"
-              />
-              <p className="mt-4 text-2xl">Sharika Khondaker</p>
-            </div>
-            <div className="flex flex-col items-center p-4 text-center">
-              <p className="my-2 text-2xl text-gray-500">
-                External Vice President (EVP)
-              </p>
-              <img
-                src={officer} // placeholder
-                className="h-50 w-50 overflow-hidden rounded-2xl border-[2px] border-black shadow-[5px_5px_0px_0px_rgb(61,137,196)]"
-              />
-              <p className="mt-4 text-2xl">Max Huang</p>
-            </div>
+      {teamData.map((section, idx) => (
+        <div key={idx} className="mb-12">
+          <h2 className="mb-6 text-center text-3xl font-semibold">
+            {section.section}
+          </h2>
+          <div className="flex flex-wrap justify-center gap-10">
+            {section.members.map((member, idx) => (
+              <BoardMemberCard key={idx} member={member} />
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* chair board */}
-      <div className="mt-12 text-center font-[Poppins]">
-        <h2 className="text-3xl font-semibold">Chair Board</h2>
-        <hr className="w-7/8 mx-auto my-2 border-t-2 border-blue-500" />
-        <div className="mt-6 flex justify-center gap-8"></div>
-      </div>
+      ))}
     </div>
   );
 };
