@@ -32,86 +32,62 @@ import { Route as IndexImport } from './routes/index'
 
 const WebdevRoute = WebdevImport.update({
   path: '/webdev',
-  path: '/webdev',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const UserpageRoute = UserpageImport.update({
   path: '/userpage',
-  path: '/userpage',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const TodopageRoute = TodopageImport.update({
   path: '/todopage',
-  path: '/todopage',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const SportsRoute = SportsImport.update({
   path: '/sports',
-  path: '/sports',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const SponsorsRoute = SponsorsImport.update({
   path: '/sponsors',
-  path: '/sponsors',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const SetRoute = SetImport.update({
   path: '/set',
-  path: '/set',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const ProfileRoute = ProfileImport.update({
   path: '/profile',
-  path: '/profile',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const LoginRoute = LoginImport.update({
   path: '/login',
-  path: '/login',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const InternsRoute = InternsImport.update({
   path: '/interns',
-  path: '/interns',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const GalleryRoute = GalleryImport.update({
   path: '/gallery',
-  path: '/gallery',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const EventsRoute = EventsImport.update({
   path: '/events',
-  path: '/events',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const BoardRoute = BoardImport.update({
   path: '/board',
-  path: '/board',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const BlogsRoute = BlogsImport.update({
@@ -123,25 +99,19 @@ const AuthedRoute = AuthedImport.update({
   path: '/authed',
   getParentRoute: () => rootRoute,
 } as any)
-} as any)
 
 const AboutRoute = AboutImport.update({
   path: '/about',
-  path: '/about',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
-  path: '/',
   getParentRoute: () => rootRoute,
-} as any)
 } as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
@@ -321,7 +291,6 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
@@ -415,11 +384,9 @@ const rootRouteChildren: RootRouteChildren = {
   UserpageRoute: UserpageRoute,
   WebdevRoute: WebdevRoute,
 }
-}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
   ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
