@@ -50,6 +50,8 @@ blogRouter.get("/blog/all", async (c) => {
     })
     .from(blogs);
 
+  console.log(result);
+
   return c.json({ blogs: result });
 });
 

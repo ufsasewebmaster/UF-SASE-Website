@@ -7,10 +7,21 @@ export const Route = createFileRoute("/blogs")({
   component: () => {
     const blogs = useQuery({
       queryKey: ["blogs"],
-      queryFn: () => zodFetch(blogAllSchema, "/api/blog/all"),
+      // queryFn: () =>
+      // zodFetch(blogAllSchema, "https://localhost:3000/api/blog/all"),
+      queryFn: async () => {
+        console.log("SANITY");
+        const res = await fetch("/api/blog/all");
+        const json = await res.json();
+        return json;
+      },
     });
 
-    console.log(blogs.data);
-    return <div>{JSON.stringify(blogs.data, null, 2)}</div>;
+    return (
+      <div>
+        <p>hi</p>
+        {JSON.stringify(blogs, null, 2)}
+      </div>
+    );
   },
 });

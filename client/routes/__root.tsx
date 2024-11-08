@@ -1,6 +1,6 @@
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Footer from "@navigation/Footer";
 import Header from "@navigation/Header";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRoute,
   Outlet,
