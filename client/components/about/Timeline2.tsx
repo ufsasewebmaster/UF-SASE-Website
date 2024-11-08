@@ -107,10 +107,10 @@ const defaultItems: Array<TimelineItem> = [
 ];
 const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
   return (
-    <div className="h-[35rem] overflow-x-auto">
-      <div className="relative w-full px-4 py-48">
+    <div className="flex h-[35rem] items-center justify-center overflow-x-auto">
+      <div className="relative w-full px-4">
         {/* Main Timeline Line */}
-        <div className="absolute inset-x-0 top-1/2 h-1 w-full -translate-y-1/2 transform bg-saseBlue" />
+        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 transform bg-saseBlue" />
 
         {/* Timeline Items Container */}
         <div className="relative flex items-center gap-x-44">
