@@ -33,7 +33,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
       {/* role */}
       <p
         className={`my-2 flex h-[3.5vw] w-[12em] items-center justify-center break-words text-center ${
-          isExpanded ? "invisible" : "text-blue-500 font-medium italic"
+          isExpanded ? "invisible" : "font-medium italic text-blue-500"
         }`}
         style={{
           fontSize: "1.4vw",
@@ -63,7 +63,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         {/* learn more */}
         {!isExpanded && (
           <div className="absolute inset-0 flex items-start justify-center bg-white bg-opacity-60 p-[1vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="font-semibold text-black underline text-[1.2vw]">
+            <span className="text-[1.2vw] font-semibold text-black underline">
               Learn More
             </span>
           </div>
@@ -72,7 +72,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         {isExpanded && (
           <div className="absolute inset-0 flex flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out">
             <button
-              className="absolute right-[1vw] top-[1vw] text-[1.5vw] text-gray-500 hover:text-black cursor-pointer"
+              className="absolute right-[1vw] top-[1vw] cursor-pointer text-[1.5vw] text-gray-500 hover:text-black"
               onClick={(e) => {
                 e.stopPropagation();
                 setExpanded(false);
@@ -106,9 +106,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
 
       {/* role/name turns invisible on click of learn more */}
       <p
-        className={`mt-[1.5vw] ${
-          isExpanded ? "invisible" : "text-black"
-        }`}
+        className={`mt-[1.5vw] ${isExpanded ? "invisible" : "text-black"}`}
         style={{ fontSize: "1.6vw" }}
       >
         {member.name}

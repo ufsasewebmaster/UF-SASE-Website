@@ -7,8 +7,8 @@ import b_p from "@assets/board/bryan_park.jpeg";
 import c_b from "@assets/board/chloe_bai.jpeg";
 import g_b from "@assets/board/gaya_baskaran.jpeg";
 import h_z from "@assets/board/helen_zou.jpeg";
-import j_d from "@assets/board/justin_doan.jpeg";
 import j_l from "@assets/board/jessica_lu.jpeg";
+import j_d from "@assets/board/justin_doan.jpeg";
 import k_d from "@assets/board/kayleen_diaz.jpeg";
 import k_t from "@assets/board/kevin_tang.jpeg";
 import k_c from "@assets/board/kimmy_chiu.jpeg";
@@ -20,8 +20,6 @@ import r_z from "@assets/board/ricky_zhang.jpeg";
 import s_d from "@assets/board/sophia_dong.jpeg";
 import t_g from "@assets/board/tabitha_gottipati.jpeg";
 import v_l from "@assets/board/vincent_lin.jpeg";
-
-
 
 const boardInfo = [
   {
