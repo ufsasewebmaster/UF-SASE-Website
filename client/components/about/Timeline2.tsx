@@ -107,13 +107,13 @@ const defaultItems: Array<TimelineItem> = [
 ];
 const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
   return (
-    <div className="flex h-[35rem] items-center justify-center overflow-x-auto">
-      <div className="relative w-full px-4">
+    <div className="scrollbar-custom flex h-[35rem] items-center justify-center overflow-x-auto">
+      <div className="relative w-full px-32">
         {/* Main Timeline Line */}
-        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 transform bg-saseBlue" />
+        <div className="absolute top-1/2 h-1 w-[250%] -translate-y-1/2 transform bg-saseBlue" />
 
         {/* Timeline Items Container */}
-        <div className="relative flex items-center gap-x-44">
+        <div className="relative flex items-center space-x-44 pl-8">
           {items.map((item, index) => {
             const isTop = index % 2 === 0;
 
@@ -140,7 +140,7 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
 
                 {/* Connector Line */}
                 <div
-                  className={`absolute left-[82%] w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}
+                  className={`absolute w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}
                 >
                   {/* Connecting Dot */}
                   <div

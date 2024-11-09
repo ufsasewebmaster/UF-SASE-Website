@@ -89,3 +89,22 @@
     font-family: "Poppins", sans-serif;
   }
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* Gray-400 */
+  border-radius: 9999px; /* Rounded-full */
+  transition: background-color 300ms; /* Transition */
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* Darker Gray */
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background-color: #edf2f7; /* Gray-200 */
+  border-radius: 9999px;
+}
