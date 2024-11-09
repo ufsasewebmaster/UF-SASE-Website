@@ -14,7 +14,7 @@ const MissionCard = ({ logo, shadowColor, text }: CardProps) => {
           `flex h-56 w-56 transform flex-col items-center rounded-2xl border-2 border-black bg-gray-100 p-4 transition duration-300 hover:scale-105`,
           {
             "hover:shadow-[12px_12px_0px_#0668B3]": shadowColor === "blue",
-            "hover:shadow-[12px_12px_0px_#7DC242]": shadowColor !== "green",
+            "hover:shadow-[12px_12px_0px_#7DC242]": shadowColor === "green",
           },
         )}
       >

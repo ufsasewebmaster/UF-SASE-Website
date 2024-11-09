@@ -1,5 +1,3 @@
-"use client";
-
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 type PageProps = Pick<

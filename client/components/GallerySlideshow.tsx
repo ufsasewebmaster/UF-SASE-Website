@@ -1,5 +1,5 @@
 import React from 'react'
-import mainImage from '../assets/gallery/gallery_slideshow/DSC01367.jpg'
+import mainImage from '../assets/gallery/DSC01367.jpg'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6'
 
 const GallerySlideshow = () => {

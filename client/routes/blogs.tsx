@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import Quill CSS
-
+import "react-quill/dist/quill.snow.css";
 import { createFileRoute } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { FiSave, FiUpload, FiX } from "react-icons/fi";

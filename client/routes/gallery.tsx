@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import GallerySlideshow from "../components/GallerySlideshow";
+import GallerySlideshow from "../components/GallerySlideshow"
 import GalleryDropdown from "../components/GalleryDropdown";
 import dropdown from "../assets/gallery/dropdown_image.webp"
 
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/gallery")({
           </div>
           <div className="flex-1 pr-5"></div> {/* spacer element */}
         </div>
-          
+        <div className="pt-10"></div> {/* spacer element */}
       </div>
     );
   },
