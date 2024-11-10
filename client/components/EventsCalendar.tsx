@@ -1,8 +1,8 @@
 const EventsCalendar = () => (
   <div className="relative w-4/5">
     <div
-      className="absolute left-5 top-5 h-full w-full rounded-lg bg-saseGreen"
-      style={{ width: "800px", height: "600px", zIndex: 1 }}
+      className="absolute left-3 top-3 h-full w-full rounded-lg bg-blueShadow"
+      style={{ width: "60%", height: "550px", minWidth: "550px", zIndex: 1 }}
     ></div>
 
     <iframe
@@ -11,10 +11,11 @@ const EventsCalendar = () => (
         border: "2px solid black",
         borderRadius: "15px",
         zIndex: 2,
-        position: "absolute",
+        position: "relative",
+        width: "60%",
+        height: "550px",
+        minWidth: "550px",
       }}
-      width="800"
-      height="600"
       frameBorder="0"
       scrolling="no"
     ></iframe>
