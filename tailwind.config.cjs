@@ -15,7 +15,9 @@ module.exports = {
     extend: {
       colors: {
         saseGreen: "#7DC242",
+        saseGreenLight: "#A5D57C",
         saseBlue: "#0668B3",
+        saseBlueLight: "#1E77BA",
         saseGray: " #CBCBD4",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
