@@ -4,10 +4,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   server: {
     preset: "vercel-edge",
-    // prerender: {
-    // crawlLinks: true,
-    // routes: ["/"],
-    // },
+    prerender: {
+      // crawlLinks: true,
+      routes: ["/"],
+    },
   },
   routers: {
     client: {
@@ -23,7 +23,7 @@ export default defineConfig({
   tsr: {
     routesDirectory: "./client/routes",
     generatedRouteTree: "./client/routeTree.gen.ts",
-    appDirectory: ".",
+    appDirectory: "./client",
   },
   vite: {
     plugins: () => [tsconfigPaths()],

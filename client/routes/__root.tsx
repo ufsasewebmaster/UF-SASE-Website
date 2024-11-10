@@ -7,14 +7,7 @@ import {
   ScrollRestoration,
 } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
-import { createAssets } from "@vinxi/react";
 import React, { Suspense } from "react";
-import { getManifest } from "vinxi/manifest";
-
-const Assets = createAssets(
-  getManifest("client").handler,
-  getManifest("client"),
-);
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -75,9 +68,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           rel="stylesheet"
         />
         <Meta />
-        <Suspense>
-          <Assets />
-        </Suspense>
       </Head>
       <Body>
         {children}
