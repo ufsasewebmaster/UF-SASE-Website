@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { zodFetch } from "@/shared";
+import { blogAllSchema } from "@/shared/blogSchema";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { FiSave, FiUpload, FiX } from "react-icons/fi";
@@ -9,7 +9,19 @@ import "../blog.css";
 import { useAuth } from "@client/AuthContext";
 
 export const Route = createFileRoute("/blogs")({
-  component: BlogEditor,
+  component: () => {
+    const blogs = useQuery({
+      queryKey: ["blogs"],
+      // queryFn: () =>
+      // zodFetch(blogAllSchema, "https://localhost:3000/api/blog/all"),
+      queryFn: async () => {
+        console.log("SANITY");
+        const res = await fetch("/api/blog/all");
+        const json = await res.json();
+        return json;
+      },
+    });
+  // component: BlogEditor,
 });
 
 function BlogEditor() {
@@ -54,6 +66,8 @@ function BlogEditor() {
 
   return (
     <div className="blog-container">
+      <p>hi</p>
+      {JSON.stringify(blogs, null, 2)}
       <div
         className="relative flex h-80 w-full items-center justify-center bg-cover bg-center"
         style={{

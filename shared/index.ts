@@ -9,5 +9,7 @@ export async function zodFetch<T extends z.AnyZodObject>(
   if (!res.ok) {
     throw new Error(res.statusText);
   }
-  return schema.parse(await res.json());
+  const json = await res.json();
+  console.log(json);
+  return schema.parse(json);
 }

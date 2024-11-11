@@ -3,7 +3,7 @@ import ContactForm from "@about/ContactForm";
 import HeaderSection from "@about/HeaderSection";
 import HistorySection from "@about/HistorySection";
 import MissionSection from "@about/MissionSection";
-import Timeline from "@about/Timeline";
+import Timeline from "@about/Timeline2";
 import YoutubeSection from "@about/YoutubeSection";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/about")({
             </div>
           </section>
 
-          <section className="mb-12">
-            <div className="mb-0 flex items-center">
+          <section className="mb-24">
+            <div className="mb-20 flex items-center">
               <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
               <h2 className="text-3xl font-semibold text-gray-800">
                 Timeline of Achievements

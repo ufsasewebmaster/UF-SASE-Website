@@ -17,18 +17,21 @@ const MissionSection = () => (
     </p>
     <div className="flex flex-nowrap justify-center gap-20">
       <MissionCard
+        title="Professional Development"
         logo={suitcase}
-        text="Are able to help each other develop professional, academic, and leadership skills"
+        text="To prepare Asian heritage students for success in the global business world."
         shadowColor="green"
       />
       <MissionCard
+        title="Diversity"
         logo={people}
-        text="Learn and understand how their own culture affects the workplace"
+        text="To promote diversity and tolerance on campuses and in the workplace."
         shadowColor="blue"
       />
       <MissionCard
+        title="Community"
         logo={lightbulb}
-        text="Actively engage in and contribute to the development of the local community"
+        text="To provide opportunities for our members to contribute to their local communities."
         shadowColor="green"
       />
     </div>
