@@ -16,6 +16,7 @@ import { Route as UserpageImport } from './routes/userpage'
 import { Route as TodopageImport } from './routes/todopage'
 import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
+import { Route as SignupImport } from './routes/signup'
 import { Route as SetImport } from './routes/set'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as LoginImport } from './routes/login'
@@ -52,6 +53,11 @@ const SportsRoute = SportsImport.update({
 
 const SponsorsRoute = SponsorsImport.update({
   path: '/sponsors',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignupRoute = SignupImport.update({
+  path: '/signup',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -191,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetImport
       parentRoute: typeof rootRoute
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
+      parentRoute: typeof rootRoute
+    }
     '/sponsors': {
       id: '/sponsors'
       path: '/sponsors'
@@ -243,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/set': typeof SetRoute
+  '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/todopage': typeof TodopageRoute
@@ -262,6 +276,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/set': typeof SetRoute
+  '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/todopage': typeof TodopageRoute
@@ -282,6 +297,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/set': typeof SetRoute
+  '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/todopage': typeof TodopageRoute
@@ -303,6 +319,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/profile'
     | '/set'
+    | '/signup'
     | '/sponsors'
     | '/sports'
     | '/todopage'
@@ -321,6 +338,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/profile'
     | '/set'
+    | '/signup'
     | '/sponsors'
     | '/sports'
     | '/todopage'
@@ -339,6 +357,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/profile'
     | '/set'
+    | '/signup'
     | '/sponsors'
     | '/sports'
     | '/todopage'
@@ -359,6 +378,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ProfileRoute: typeof ProfileRoute
   SetRoute: typeof SetRoute
+  SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
   SportsRoute: typeof SportsRoute
   TodopageRoute: typeof TodopageRoute
@@ -378,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ProfileRoute: ProfileRoute,
   SetRoute: SetRoute,
+  SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
   SportsRoute: SportsRoute,
   TodopageRoute: TodopageRoute,
@@ -408,6 +429,7 @@ export const routeTree = rootRoute
         "/login",
         "/profile",
         "/set",
+        "/signup",
         "/sponsors",
         "/sports",
         "/todopage",
@@ -447,6 +469,9 @@ export const routeTree = rootRoute
     },
     "/set": {
       "filePath": "set.tsx"
+    },
+    "/signup": {
+      "filePath": "signup.tsx"
     },
     "/sponsors": {
       "filePath": "sponsors.tsx"
