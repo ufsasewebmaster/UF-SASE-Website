@@ -54,6 +54,8 @@
     "react-hook-form": "^7.53.1",
     "react-icons": "^5.3.0",
     "react-quill": "^2.0.0",
+    "slate": "^0.110.2",
+    "slate-react": "^0.111.0",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.5.2",
     "tailwind-scrollbar": "^3.1.0",
