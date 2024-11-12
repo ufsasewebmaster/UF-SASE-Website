@@ -5,16 +5,11 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import React from "react";
 import { SuperJSON } from "superjson";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider } from "./auth";
+import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
+import { NotFound } from "./components/NotFound";
 import { routeTree } from "./routeTree.gen";
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: ReturnType<typeof createRouter>;
-  }
-}
 
 export function createRouter() {
   // Make sure you create your loader client or similar data
@@ -23,11 +18,12 @@ export function createRouter() {
   // always present on both server and client.
   const queryClient = new QueryClient();
 
-  return createTanStackRouter({
+  const router = createTanStackRouter({
     routeTree,
-    // defaultPreload: "intent",
+    defaultPreload: "intent",
+    defaultErrorComponent: DefaultCatchBoundary,
+    defaultNotFoundComponent: () => <NotFound />,
     transformer: SuperJSON,
-
     // Optionally provide your loaderClient to the router context for
     // convenience (you can provide anything you want to the router
     // context!)
@@ -57,6 +53,13 @@ export function createRouter() {
         </QueryClientProvider>
       );
     },
-    defaultNotFoundComponent: () => <div>404</div>, // TODO: Make an actual 404 page
   });
+
+  return router;
+}
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: ReturnType<typeof createRouter>;
+  }
 }
