@@ -8,10 +8,6 @@ runs:
       uses: oven-sh/setup-bun@v2
       with:
         bun-version: latest
-    - name: Install node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: bun install
