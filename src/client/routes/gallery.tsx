@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import GalleryDropdown from "../components/GalleryDropdown";
 
 export const Route = createFileRoute("/gallery")({
   component: () => {
@@ -16,20 +17,7 @@ export const Route = createFileRoute("/gallery")({
         <div className="flex items-center justify-center pb-8 pt-3">
           <div className="w-1/12"></div> {/* spacer element */}
           <div className="flex-1 pr-10 text-center">
-            <select
-              name="photo_drives"
-              id="photo_drives"
-              className="w-full rounded-lg border-2 border-black pb-1 pl-1 pt-1 font-mono text-lg font-semibold hover:cursor-pointer"
-            >
-              <option value="default" selected>
-                Photo Google Drives
-              </option>
-              <option value="Fall 2024">Fall 2024</option>
-              <option value="Spring 2024">Spring 2024</option>
-              <option value="Fall 2023">Fall 2023</option>
-              <option value="Spring 2023">Spring 2023</option>
-              <option value="Fall 2022">Fall 2022</option>
-            </select>
+            <GalleryDropdown />
           </div>
           <div className="flex-1">{/* add image eventually */}</div>
         </div>
