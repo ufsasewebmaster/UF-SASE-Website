@@ -1,31 +1,34 @@
 import { defineConfig } from "@tanstack/start/config";
-import tsconfigPaths from "vite-tsconfig-paths";
+import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   server: {
     preset: "vercel-edge",
-    // prerender: {
-    // crawlLinks: true,
-    // routes: ["/"],
-    // },
-  },
-  routers: {
-    client: {
-      entry: "./client/entry-client.tsx",
-    },
-    ssr: {
-      entry: "./server/ssr.tsx",
-    },
-    api: {
-      entry: "./server/entry-server.ts",
+    prerender: {
+      routes: ["/"],
+      // crawlLinks: true,
     },
   },
   tsr: {
-    routesDirectory: "./client/routes",
-    generatedRouteTree: "./client/routeTree.gen.ts",
-    appDirectory: ".",
+    appDirectory: "src/client",
+    routesDirectory: "src/client/routes",
+  },
+  routers: {
+    client: {
+      entry: "./src/client/client.tsx",
+    },
+    ssr: {
+      entry: "./src/server/ssr.tsx",
+    },
+    api: {
+      entry: "./src/server/api.ts",
+    },
   },
   vite: {
-    plugins: () => [tsconfigPaths()],
+    plugins: [
+      tsConfigPaths({
+        projects: ["./tsconfig.json"],
+      }),
+    ],
   },
 });

@@ -2,7 +2,6 @@
   "name": "@template/basic",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@9.10.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -18,7 +17,7 @@
     "lint:fmt:fix": "prettier --write .",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "clean": "git clean -xdf -e .env",
+    "clean": "git clean -xdf -e .env -e local.db",
     "db:push": "drizzle-kit push",
     "db:local:init": "node scripts/initDb.mjs",
     "db:local:seed": "node scripts/seed.mjs",

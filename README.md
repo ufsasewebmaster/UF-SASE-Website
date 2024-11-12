@@ -9,11 +9,7 @@ This repository hosts the official website for the UF chapter of the Society of 
 ### Prerequisites
 
 - **IDE Recommendation:** We recommend using Visual Studio Code (VSCode) as it offers great extensions for TypeScript and Tailwind CSS, which are automatically suggested when the project is opened.
-- **Package Manager:** Ensure you have [pnpm](https://pnpm.io/) installed. If not, you can install it globally using:
-
-  ```bash
-  npm install -g pnpm
-  ```
+- **Package Manager:** Ensure you have [bun](https://bun.sh/) installed.
 
 ### Cloning the Repository
 
