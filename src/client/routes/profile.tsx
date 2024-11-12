@@ -12,7 +12,7 @@ export const Route = createFileRoute("/profile")({
         <p className="text-xl">You have clicked the button {count} times.</p>
         <button
           onClick={() => setCount(count + 1)}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="rounded-md bg-blue-500 px-4 py-2 text-white"
         >
           Click me
         </button>

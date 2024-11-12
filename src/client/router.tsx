@@ -1,15 +1,15 @@
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
-import { NotFound } from "./components/NotFound";
-import { AuthProvider } from "./auth";
 import {
   dehydrate,
   hydrate,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
+import { AuthProvider } from "./auth";
+import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
+import { NotFound } from "./components/NotFound";
+import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {
   // Make sure you create your loader client or similar data
