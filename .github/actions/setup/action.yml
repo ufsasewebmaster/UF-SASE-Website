@@ -4,8 +4,10 @@ description: Perform standard setup and install dependencies using pnpm.
 runs:
   using: composite
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v3
+    - name: Install bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
     - name: Install node
       uses: actions/setup-node@v4
       with:
