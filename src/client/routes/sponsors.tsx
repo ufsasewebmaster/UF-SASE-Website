@@ -13,12 +13,12 @@ export const Route = createFileRoute("/sponsors")({
   component: () => {
     return (
       <div className="flex flex-col items-center">
-        <h1 className="pb-10 pt-16 font-oswald text-7xl font-medium">
+        <h1 className="pb-10 pt-16 font-oswald text-6xl sm:text-7xl font-medium text-center">
           CURRENT SPONSORS
         </h1>
 
-        <div className="flex w-2/3 flex-col items-center justify-center">
-          <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 border-t-8 border-saseGreen bg-gradient-to-b from-gray-100 to-white p-24 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="flex w-full sm:w-2/3 flex-col items-center justify-center">
+          <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 border-t-8 border-saseGreen bg-gradient-to-b from-gray-100 to-white p-24 lg:grid-cols-2 xl:grid-cols-3">
             <SponsorCard
               image={blueorigin}
               companyName="Blue Origin"
