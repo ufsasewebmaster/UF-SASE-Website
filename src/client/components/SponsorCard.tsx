@@ -11,10 +11,7 @@ const SponsorCard = ({
   type: string;
 }) => {
   return (
-    <div
-      className="flex h-full w-full flex-col"
-      style={{ zIndex: 10 }}
-    >
+    <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
         className={cn(
           {
@@ -27,20 +24,20 @@ const SponsorCard = ({
         {type}
       </p>
 
-      <div className="relative h-full flex flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
+      <div className="relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
         <img
           src={image}
           alt="Company Logo"
           className="h-5/6 w-full rounded-2xl"
         />
-        <p className="pt-4 pb-4 text-center font-redhat text-3xl font-semibold">
+        <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">
           {companyName}
         </p>
 
         <div
           className="absolute left-[6%] top-[7%] h-full w-full rounded-2xl bg-saseGreen"
-          style={{ zIndex: -1 }}>
-        </div>
+          style={{ zIndex: -1 }}
+        ></div>
 
         {type === "Diamond" ? (
           <img
