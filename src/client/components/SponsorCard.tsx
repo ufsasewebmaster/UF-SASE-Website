@@ -12,7 +12,7 @@ const SponsorCard = ({
 }) => {
   return (
     <div
-      className="relative flex h-full w-full flex-col"
+      className="flex h-full w-full flex-col"
       style={{ zIndex: 10 }}
     >
       <p
@@ -26,28 +26,31 @@ const SponsorCard = ({
       >
         {type}
       </p>
-      <div
-        className="absolute left-4 top-16 h-5/6 w-full rounded-2xl bg-saseGreen"
-        style={{ zIndex: -1 }}
-      ></div>
-      {type === "Diamond" ? (
-        <img
-          src={diamond}
-          alt="Diamond Icon"
-          className="absolute -left-12 top-2 h-[30%]"
-        />
-      ) : (
-        ""
-      )}
-      <div className="flex h-5/6 flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
+
+      <div className="relative h-full flex flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
         <img
           src={image}
           alt="Company Logo"
           className="h-5/6 w-full rounded-2xl"
         />
-        <p className="m-4 text-center font-redhat text-3xl font-semibold">
+        <p className="pt-4 pb-4 text-center font-redhat text-3xl font-semibold">
           {companyName}
         </p>
+
+        <div
+          className="absolute left-[6%] top-[7%] h-full w-full rounded-2xl bg-saseGreen"
+          style={{ zIndex: -1 }}>
+        </div>
+
+        {type === "Diamond" ? (
+          <img
+            src={diamond}
+            alt="Diamond Icon"
+            className="absolute -left-[16%] -top-[10%] h-[30%]"
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
