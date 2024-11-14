@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
@@ -69,9 +70,13 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`sticky left-0 top-0 z-50 w-full font-[Poppins] font-medium shadow-md ${
-        isHomePage ? "bg-black text-white" : "bg-white text-black"
-      }`}
+      className={cn(
+        `left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`,
+        {
+          "bg-black text-white": isHomePage,
+          "bg-white text-black": !isHomePage,
+        },
+      )}
     >
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
@@ -80,6 +85,7 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
+            <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
             <UserButton isLoggedIn={isLoggedIn} />
