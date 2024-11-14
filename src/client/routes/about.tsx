@@ -6,7 +6,7 @@ import HistorySection from "@about/HistorySection";
 import MissionSection from "@about/MissionSection";
 import Timeline from "@about/Timeline2";
 import YoutubeSection from "@about/YoutubeSection";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/about")({
@@ -22,10 +22,27 @@ export const Route = createFileRoute("/about")({
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center bg-white font-[Poppins]">
         <div className="w-full max-w-7xl px-4 py-8">
           <HeaderSection />
-          <div className="mb-20 flex justify-center">
+          <div className="mb-14 flex justify-center">
             <AboutCard />
           </div>
-          <section className="mb-12 flex justify-center">
+          <div className="relative flex w-full max-w-7xl justify-center">
+            {/* Adjust this `left` value as needed to control horizontal alignment */}
+            <div className="absolute left-[50%] flex space-x-6">
+              <Link
+                to="/board"
+                className="rounded-full border border-black bg-saseBlue px-8 py-1 text-center text-sm text-white transition duration-300 hover:scale-105"
+              >
+                Meet Our Board!
+              </Link>
+              <Link
+                to="/sponsors"
+                className="rounded-full border border-black bg-saseBlue px-8 py-1 text-center text-sm text-white transition duration-300 hover:scale-105"
+              >
+                View Our Sponsors
+              </Link>
+            </div>
+          </div>
+          <section className="mb-12 mt-20 flex justify-center">
             <YoutubeSection />
           </section>
           <MissionSection />
