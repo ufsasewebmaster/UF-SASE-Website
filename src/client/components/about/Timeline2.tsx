@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface TimelineItem {
   date: string;
@@ -106,6 +106,56 @@ const defaultItems: Array<TimelineItem> = [
   },
 ];
 const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const scrollInterval = useRef<number | null>(null);
+
+  useEffect(() => {
+    const timelineElement = timelineRef.current;
+
+    let scrollAccumulator = 0;
+
+    const scrollTimeline = () => {
+      if (timelineElement) {
+        scrollAccumulator += 0.3;
+
+        if (scrollAccumulator >= 1) {
+          timelineElement.scrollLeft += Math.floor(scrollAccumulator);
+          scrollAccumulator = scrollAccumulator % 1;
+        }
+
+        scrollInterval.current = requestAnimationFrame(scrollTimeline);
+      }
+    };
+
+    const observerCallback = (entries: Array<IntersectionObserverEntry>) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        scrollInterval.current = requestAnimationFrame(scrollTimeline);
+      } else {
+        if (scrollInterval.current) {
+          cancelAnimationFrame(scrollInterval.current);
+          scrollInterval.current = null;
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      threshold: 0.5,
+    });
+
+    if (timelineElement) {
+      observer.observe(timelineElement);
+    }
+
+    return () => {
+      if (scrollInterval.current) {
+        cancelAnimationFrame(scrollInterval.current);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="relative h-[35rem]">
       {/* Gradient Overlay Container */}
@@ -118,7 +168,10 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
       </div>
 
       {/* Scrollable Timeline Container */}
-      <div className="scrollbar-custom flex h-full items-center justify-center overflow-x-auto">
+      <div
+        ref={timelineRef}
+        className="scrollbar-custom flex h-full items-center justify-center overflow-x-auto"
+      >
         <div className="absolute top-[49%] z-10 h-1 w-full -translate-y-1/2 bg-saseBlue" />
         <div className="relative w-full px-32">
           {/* Main Timeline Line */}
@@ -151,7 +204,9 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
 
                   {/* Connector Line */}
                   <div
-                    className={`absolute w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}
+                    className={`absolute w-1 bg-saseBlue ${
+                      isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"
+                    }`}
                   >
                     {/* Connecting Dot */}
                     <div
