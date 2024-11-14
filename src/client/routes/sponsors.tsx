@@ -53,7 +53,7 @@ export const Route = createFileRoute("/sponsors")({
               Chapter
             </p>
 
-            <img src={headerImage} alt="" className="w-full" />
+            <img src={headerImage} alt="2023-2024 Board" className="w-full" />
             {/* <div className="absolute flex w-full flex-col justify-center bg-gradient-to-b from-transparent to-black pb-4">
               +{" "} */}
             <p className="absolute bottom-[10%] pl-4 pr-4 text-center font-redhat text-base font-medium italic text-white md:text-xl lg:text-2xl xl:text-3xl">
