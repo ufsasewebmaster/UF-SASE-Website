@@ -3,6 +3,7 @@ import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
 import { SearchBar } from "@navigation/SearchBar";
 import { UserButton } from "@navigation/UserButton";
+import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -37,6 +38,8 @@ const navItems = [
 ];
 
 const Header: React.FC = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, _setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -65,7 +68,11 @@ const Header: React.FC = () => {
   }, [menuOpen]);
 
   return (
-    <header className="left-0 top-0 z-50 w-full bg-white font-poppins font-medium shadow-md">
+    <header
+      className={`left-0 top-0 z-50 w-full font-[Poppins] font-medium shadow-md ${
+        isHomePage ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
@@ -73,7 +80,7 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
-            <DesktopMenu navItems={navItems} />
+            <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
             <UserButton isLoggedIn={isLoggedIn} />
           </div>
@@ -87,7 +94,7 @@ const Header: React.FC = () => {
             <Hamburger
               toggled={menuOpen}
               toggle={setMenuOpen}
-              color="#000"
+              color={isHomePage ? "#fff" : "#000"}
               size={22}
             />
           </button>
@@ -98,6 +105,7 @@ const Header: React.FC = () => {
           navItems={navItems}
           isOpen={menuOpen}
           onClose={() => setMenuOpen(false)}
+          isHomePage={isHomePage}
         />
       </nav>
     </header>
