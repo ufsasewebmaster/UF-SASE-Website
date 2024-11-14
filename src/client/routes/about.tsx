@@ -4,7 +4,7 @@ import ContactForm from "@about/ContactForm";
 import HeaderSection from "@about/HeaderSection";
 import HistorySection from "@about/HistorySection";
 import MissionSection from "@about/MissionSection";
-import Timeline from "@about/Timeline2";
+import Timeline from "@about/Timeline";
 import YoutubeSection from "@about/YoutubeSection";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
@@ -26,7 +26,6 @@ export const Route = createFileRoute("/about")({
             <AboutCard />
           </div>
           <div className="relative flex w-full max-w-7xl justify-center">
-            {/* Adjust this `left` value as needed to control horizontal alignment */}
             <div className="absolute left-[50%] flex space-x-6">
               <Link
                 to="/board"
