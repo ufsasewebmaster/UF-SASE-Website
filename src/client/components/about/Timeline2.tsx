@@ -81,7 +81,7 @@ const defaultItems: Array<TimelineItem> = [
   {
     title: "UF Student Organization Awards 2023-24",
     description:
-      "Member of the Year: Sophia Dong (AASA Choreographer and SERC Programming Lead)",
+      "Member of the Year: Sophia Dong (AASA Choreographer, SERC Programming Lead)",
     date: "Apr 2024",
   },
   {
@@ -107,51 +107,63 @@ const defaultItems: Array<TimelineItem> = [
 ];
 const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
   return (
-    <div className="scrollbar-custom flex h-[35rem] items-center justify-center overflow-x-auto">
-      <div className="relative w-full px-32">
-        {/* Main Timeline Line */}
-        <div className="absolute top-1/2 h-1 w-[250%] -translate-y-1/2 transform bg-saseBlue" />
+    <div className="relative h-[35rem]">
+      {/* Gradient Overlay Container */}
+      <div className="pointer-events-none absolute inset-0 z-20 flex justify-between">
+        {/* Left Gradient Overlay */}
+        <div className="h-full w-16 bg-gradient-to-r from-white to-transparent" />
 
-        {/* Timeline Items Container */}
-        <div className="relative flex items-center space-x-44 pl-8">
-          {items.map((item, index) => {
-            const isTop = index % 2 === 0;
+        {/* Right Gradient Overlay */}
+        <div className="h-full w-16 bg-gradient-to-l from-white to-transparent" />
+      </div>
 
-            return (
-              <div
-                key={index}
-                className="relative flex flex-col items-center"
-                style={{ width: `${100 / items.length}%` }}
-              >
-                {/* Card */}
+      {/* Scrollable Timeline Container */}
+      <div className="scrollbar-custom flex h-full items-center justify-center overflow-x-auto">
+        <div className="absolute top-[49%] z-10 h-1 w-full -translate-y-1/2 bg-saseBlue" />
+        <div className="relative w-full px-32">
+          {/* Main Timeline Line */}
+
+          {/* Timeline Items Container */}
+          <div className="relative flex items-center space-x-44 pl-8">
+            {items.map((item, index) => {
+              const isTop = index % 2 === 0;
+
+              return (
                 <div
-                  className={`absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-black bg-gray-100 p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
-                    isTop ? "bottom-full mb-14" : "top-full mt-14"
-                  }`}
+                  key={index}
+                  className="relative flex flex-col items-center"
+                  style={{ width: `${100 / items.length}%` }}
                 >
-                  <div className="text-xs text-gray-600">{item.date}</div>
-                  <div className="mt-1 text-lg font-bold text-gray-800">
-                    {item.title}
-                  </div>
-                  <p className="mt-2 overflow-auto text-black">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Connector Line */}
-                <div
-                  className={`absolute w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}
-                >
-                  {/* Connecting Dot */}
+                  {/* Card */}
                   <div
-                    className={`${
-                      isTop ? "bottom-12" : "top-12"
-                    } absolute -left-1.5 h-4 w-4 rounded-full bg-saseBlue`}
-                  />
+                    className={`absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-black bg-gray-100 p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
+                      isTop ? "bottom-full mb-14" : "top-full mt-14"
+                    }`}
+                  >
+                    <div className="text-xs text-gray-600">{item.date}</div>
+                    <div className="mt-1 text-lg font-bold text-gray-800">
+                      {item.title}
+                    </div>
+                    <p className="mt-2 overflow-auto text-black">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Connector Line */}
+                  <div
+                    className={`absolute w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}
+                  >
+                    {/* Connecting Dot */}
+                    <div
+                      className={`${
+                        isTop ? "bottom-12" : "top-12"
+                      } absolute -left-1.5 h-4 w-4 rounded-full bg-saseBlue`}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
