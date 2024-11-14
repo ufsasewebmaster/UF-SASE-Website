@@ -53,26 +53,27 @@ export const Route = createFileRoute("/sponsors")({
             <SponsorCard image={google} companyName="Google" type="Bronze" />
           </div>
 
-          <div className="relative flex w-11/12 flex-col items-center justify-end border-t-8 border-saseGreen pt-10">
+          <div className="relative flex w-11/12 flex-col items-center border-t-8 border-saseGreen pb-8 pt-8">
+            <p className="mb-8 w-full self-center border-l-8 border-saseGreen pl-4 font-redhat text-xl font-medium text-black sm:text-4xl md:text-5xl">
+              Become a partner of the{" "}
+              <span className="text-saseGreen">
+                UF Society of Asian Scientists and Engineers (SASE)
+              </span>{" "}
+              Chapter
+            </p>
+
             <img src={headerImage} alt="" className="w-full" />
-            <div className="absolute flex w-full flex-col justify-center bg-gradient-to-b from-transparent to-black pb-4">
-              <p className="ml-12 mr-12 self-center border-l-8 border-saseGreen pl-4 font-redhat text-4xl font-medium text-white sm:text-lg md:text-xl lg:text-3xl xl:text-4xl">
-                Become a partner of the{" "}
-                <span className="text-saseGreen">
-                  UF Society of Asian Scientists and Engineers (SASE)
-                </span>{" "}
-                Chapter
-              </p>
-              <br />
-              <p className="ml-12 mr-12 self-center font-redhat text-2xl font-medium italic text-white sm:text-base md:text-lg lg:text-2xl xl:text-3xl">
-                To view our sponsorship packet, or for any related questions,
-                please contact our External Vice President, Kayleen Diaz, at{" "}
-                <span className="text-saseGreen underline">
-                  ufsase.evp@gmail.com
-                </span>
-                .
-              </p>
-            </div>
+            {/* <div className="absolute flex w-full flex-col justify-center bg-gradient-to-b from-transparent to-black pb-4">
+              +{" "} */}
+            <p className="absolute bottom-[10%] pl-4 pr-4 text-center font-redhat text-base font-medium italic text-white md:text-xl lg:text-2xl xl:text-3xl">
+              To view our sponsorship packet, or for any related questions,
+              please contact our External Vice President, Kayleen Diaz, at{" "}
+              <span className="text-saseGreen underline">
+                ufsase.evp@gmail.com
+              </span>
+              .
+            </p>
+            {/* </div> */}
           </div>
         </div>
       </div>
