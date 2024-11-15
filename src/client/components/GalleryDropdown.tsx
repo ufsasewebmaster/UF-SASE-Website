@@ -1,66 +1,111 @@
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { CgPlayButtonR } from "react-icons/cg";
+import { IoMdLink } from "react-icons/io";
+import dropdownImage from "../assets/gallery/dropdown_image.webp";
 
-const GalleryZipExtraction: React.FC = () => {
-  // List of image paths inside the 'public/assets' folder
-  const images = [
-    "/assets/fall2024_1.JPG",
-    "/assets/fall2024_4.JPG",
-    "/assets/fall2024_5.JPG",
-    "/assets/fall2024_6.JPG",
-    "/assets/fall2024_7.JPG",
-    "/assets/fall2024_9.JPG",
-    "/assets/fall2024_10.JPG",
-    "/assets/fall2024_2.jpg",
-    "/assets/fall2024_3.jpeg",
-    "/assets/fall2024_8.jpg",
-    "/assets/fall2024_12.jpg",
-    "/assets/fall2024_13.jpg",
-  ];
+const GalleryDropdown: React.FC = () => {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(true);
 
-  // State to track the current index of the image being displayed
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  // Function to go to the next image
-  const nextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length); // Wrap around to the first image
-  };
-
-  // Function to go to the previous image
-  const prevImage = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length, // Wrap around to the last image
-    );
+  const toggleVisibility = () => {
+    setIsDropdownVisible((prev) => !prev);
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-3/12 flex-1"></div> {/* spacer element */}
-      <div className="flex items-center justify-center">
-        <div className="cursor-pointer p-20" onClick={prevImage}>
-          {/* Left Arrow */}
-          <button className="text-4xl">
-            <FaChevronLeft />
-          </button>
+    <div className="flex w-full items-center justify-between pb-10">
+      <div className="w-full pl-32 pr-5">
+        <div
+          id="photo_drives"
+          className="w-full rounded-lg border-2 border-black pb-1 pl-2 pt-1 text-left font-redhat text-lg font-semibold shadow-[5px_5px_0px_0px_rgb(125,194,66)] hover:cursor-pointer"
+          onClick={toggleVisibility}
+        >
+          Photo Google Drives
         </div>
-        <div>
-          {/* Image */}
-          <img
-            src={images[currentIndex]}
-            alt={`Image ${currentIndex + 1}`}
-            className="h-96 w-full rounded-lg border-2 border-black object-cover"
-          />
-        </div>
-        <div className="cursor-pointer p-20" onClick={nextImage}>
-          {/* Right Arrow */}
-          <button className="text-4xl">
-            <FaChevronRight />
-          </button>
-        </div>
+        <div className="w-1/12 pt-5"></div> {/* spacer element */}
+        {isDropdownVisible && (
+          <div
+            id="photo_drives"
+            className="w-full rounded-lg border-2 border-black pb-1 pl-2 pt-1 text-left font-redhat text-lg font-normal shadow-[5px_5px_0px_0px_rgb(125,194,66)]"
+          >
+            <div>
+              <div className="flex items-center py-1">
+                <p>Fall 2024</p>
+                <div className="p-1"></div> {/* spacer element */}
+                <a
+                  href="https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0"
+                  target="__blank"
+                >
+                  <div className="flex h-6 w-6 items-center justify-center rounded-sm border-2 border-gray-700">
+                    {" "}
+                    <IoMdLink size={15} />{" "}
+                  </div>
+                </a>
+                <div className="p-1"></div> {/* spacer element */}
+                <div>
+                  <div className="flex items-center justify-center rounded-full border-2 border-gray-700 p-1">
+                    <div className="px-0.5">
+                      <CgPlayButtonR size={10} />{" "}
+                    </div>
+                    <p className="text-xs">Slideshow</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center py-1">
+                <p>Spring 2024</p>
+                <div className="p-1"></div> {/* spacer element */}
+                <a
+                  href="https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0"
+                  target="__blank"
+                >
+                  <div className="flex h-6 w-6 items-center justify-center rounded-sm border-2 border-gray-700">
+                    {" "}
+                    <IoMdLink size={15} />{" "}
+                  </div>
+                </a>
+                <div className="p-1"></div> {/* spacer element */}
+                <div>
+                  <div className="flex items-center justify-center rounded-full border-2 border-gray-700 p-1">
+                    <div className="px-0.5">
+                      <CgPlayButtonR size={10} />{" "}
+                    </div>
+                    <p className="text-xs">Slideshow</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center py-1">
+                <p>Fall 2023</p>
+                <div className="p-1"></div> {/* spacer element */}
+                <a
+                  href="https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0"
+                  target="__blank"
+                >
+                  <div className="flex h-6 w-6 items-center justify-center rounded-sm border-2 border-gray-700">
+                    {" "}
+                    <IoMdLink size={15} />{" "}
+                  </div>
+                </a>
+                <div className="p-1"></div> {/* spacer element */}
+                <div>
+                  <div className="flex items-center justify-center rounded-full border-2 border-gray-700 p-1">
+                    <div className="px-0.5">
+                      <CgPlayButtonR size={10} />{" "}
+                    </div>
+                    <p className="text-xs">Slideshow</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="w-3/12 flex-1"></div> {/* spacer element */}
+      <div className="flex justify-center pl-5 pr-32">
+        <img
+          src={dropdownImage}
+          alt=""
+          className="h-56 min-h-[150px] w-96 min-w-[300px] rounded-lg border-2 border-black object-cover"
+        />
+      </div>
     </div>
   );
 };
 
-export default GalleryZipExtraction;
+export default GalleryDropdown;
