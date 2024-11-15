@@ -11,7 +11,9 @@ export const Route = createFileRoute("/programs")({
         <div className="w-full max-w-7xl px-4 py-8">
           <header className="mb-14 flex items-center px-5">
             <div className="mr-3 h-14 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-5xl font-semibold text-gray-800">PROGRAMS</h2>
+            <h2 className="rounded-sm text-5xl font-semibold text-gray-800">
+              PROGRAMS
+            </h2>
           </header>
           <BoardPicture />
           <header className="mb-6 flex items-center px-5">

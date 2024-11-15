@@ -12,8 +12,8 @@ const BoardPicture = () => {
       />
 
       {/* Text Overlay */}
-      <div className="absolute inset-0 flex items-end justify-center p-6">
-        <div className="w-7/8 rounded-b-xl bg-gradient-to-t from-black to-transparent p-4">
+      <div className="absolute inset-0 flex items-end justify-center p-4">
+        <div className="w-5/6 rounded-b-xl bg-gradient-to-t from-black to-transparent p-4">
           <p className="text-lg text-white">
             Brief overview of what{" "}
             <span className="text-saseGreen">SASE programs</span> there are,
