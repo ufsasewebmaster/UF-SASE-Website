@@ -1,4 +1,5 @@
 import saseLogo from "@/client/assets/SASELogo.png";
+import FeaturedEvent from "@/client/components/FeaturedEvent";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/events")({
         </div>
         <div className="flex w-full justify-center">
           <EventsCalendar />
+          <FeaturedEvent />
         </div>
       </div>
     );
