@@ -22,7 +22,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
   return (
     <div
       className={`group relative transform transition-transform duration-500 ease-in-out ${
-        isExpanded ? "scale-105" : "scale-100"
+        isExpanded ? "scale-105 cursor-default" : "scale-100 cursor-pointer"
       } flex flex-col items-center p-4 text-center`}
       onClick={() => !isExpanded && handleToggleExpand()}
       style={{
@@ -72,24 +72,43 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         )}
 
         {isExpanded && (
-          <div className="absolute inset-0 flex flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out">
+          <div
+            className="absolute inset-0 flex cursor-pointer flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out"
+            onClick={() => setExpanded(false)}
+          >
             {/* expanded content */}
             <div
-              className="mt-[1.5vw] text-left"
+              className="mt-[1.5vw] cursor-pointer text-left"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-[1.2vw] font-bold">{member.role}</h3>
-              <h4 className="text-[1vw] font-semibold">{member.name}</h4>
-              <p className="text-[0.9vw] text-gray-600">{member.major}</p>
+              <h3
+                className="cursor-pointer text-[1.2vw] font-bold"
+                onClick={() => setExpanded(false)}
+              >
+                {member.role}
+              </h3>
+              <h4
+                className="cursor-pointer text-[1vw] font-semibold"
+                onClick={() => setExpanded(false)}
+              >
+                {member.name}
+              </h4>
+              <p
+                className="cursor-pointer text-[0.9vw] text-gray-600"
+                onClick={() => setExpanded(false)}
+              >
+                {member.major}
+              </p>
               <a
                 href={`mailto:${member.contact}`}
-                className="text-[0.9vw] text-blue-500 underline"
+                className="cursor-pointer text-[0.9vw] text-blue-500 underline"
                 onClick={(e) => e.stopPropagation()}
               >
                 {member.contact}
               </a>
               <p
-                className="mt-[1vw] text-[0.7vw] text-gray-800"
+                className="mt-[1vw] cursor-pointer text-[0.7vw] text-gray-800"
+                onClick={() => setExpanded(false)}
                 style={{ marginTop: "1vw" }}
               >
                 {member.description}
