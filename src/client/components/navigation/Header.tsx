@@ -65,7 +65,7 @@ const Header: React.FC = () => {
   }, [menuOpen]);
 
   return (
-    <header className="left-0 top-0 z-50 w-full bg-white font-[Poppins] font-medium shadow-md">
+    <header className="font-poppins left-0 top-0 z-50 w-full bg-white font-medium shadow-md">
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
