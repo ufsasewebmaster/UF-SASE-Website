@@ -10,397 +10,418 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as WebdevImport } from './routes/webdev'
-import { Route as UserpageImport } from './routes/userpage'
-import { Route as TodopageImport } from './routes/todopage'
-import { Route as SportsImport } from './routes/sports'
-import { Route as SponsorsImport } from './routes/sponsors'
-import { Route as SignupImport } from './routes/signup'
-import { Route as SetImport } from './routes/set'
-import { Route as ProfileImport } from './routes/profile'
-import { Route as LoginImport } from './routes/login'
-import { Route as InternsImport } from './routes/interns'
-import { Route as GalleryImport } from './routes/gallery'
-import { Route as EventsImport } from './routes/events'
-import { Route as BoardImport } from './routes/board'
-import { Route as BlogsImport } from './routes/blogs'
-import { Route as AuthedImport } from './routes/authed'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as AboutImport } from "./routes/about";
+import { Route as AuthedImport } from "./routes/authed";
+import { Route as BlogsImport } from "./routes/blogs";
+import { Route as BoardImport } from "./routes/board";
+import { Route as EventsImport } from "./routes/events";
+import { Route as GalleryImport } from "./routes/gallery";
+import { Route as IndexImport } from "./routes/index";
+import { Route as InternsImport } from "./routes/interns";
+import { Route as LoginImport } from "./routes/login";
+import { Route as ProfileImport } from "./routes/profile";
+import { Route as ProgramsImport } from "./routes/programs";
+import { Route as SetImport } from "./routes/set";
+import { Route as SignupImport } from "./routes/signup";
+import { Route as SponsorsImport } from "./routes/sponsors";
+import { Route as SportsImport } from "./routes/sports";
+import { Route as TodopageImport } from "./routes/todopage";
+import { Route as UserpageImport } from "./routes/userpage";
+import { Route as WebdevImport } from "./routes/webdev";
 
 // Create/Update Routes
 
 const WebdevRoute = WebdevImport.update({
-  id: '/webdev',
-  path: '/webdev',
+  id: "/webdev",
+  path: "/webdev",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const UserpageRoute = UserpageImport.update({
-  id: '/userpage',
-  path: '/userpage',
+  id: "/userpage",
+  path: "/userpage",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const TodopageRoute = TodopageImport.update({
-  id: '/todopage',
-  path: '/todopage',
+  id: "/todopage",
+  path: "/todopage",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SportsRoute = SportsImport.update({
-  id: '/sports',
-  path: '/sports',
+  id: "/sports",
+  path: "/sports",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SponsorsRoute = SponsorsImport.update({
-  id: '/sponsors',
-  path: '/sponsors',
+  id: "/sponsors",
+  path: "/sponsors",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SignupRoute = SignupImport.update({
-  id: '/signup',
-  path: '/signup',
+  id: "/signup",
+  path: "/signup",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SetRoute = SetImport.update({
-  id: '/set',
-  path: '/set',
+  id: "/set",
+  path: "/set",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
+
+const ProgramsRoute = ProgramsImport.update({
+  id: "/programs",
+  path: "/programs",
+  getParentRoute: () => rootRoute,
+} as any);
 
 const ProfileRoute = ProfileImport.update({
-  id: '/profile',
-  path: '/profile',
+  id: "/profile",
+  path: "/profile",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
+  id: "/login",
+  path: "/login",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const InternsRoute = InternsImport.update({
-  id: '/interns',
-  path: '/interns',
+  id: "/interns",
+  path: "/interns",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const GalleryRoute = GalleryImport.update({
-  id: '/gallery',
-  path: '/gallery',
+  id: "/gallery",
+  path: "/gallery",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const EventsRoute = EventsImport.update({
-  id: '/events',
-  path: '/events',
+  id: "/events",
+  path: "/events",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const BoardRoute = BoardImport.update({
-  id: '/board',
-  path: '/board',
+  id: "/board",
+  path: "/board",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const BlogsRoute = BlogsImport.update({
-  id: '/blogs',
-  path: '/blogs',
+  id: "/blogs",
+  path: "/blogs",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AuthedRoute = AuthedImport.update({
-  id: '/authed',
-  path: '/authed',
+  id: "/authed",
+  path: "/authed",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
+  id: "/about",
+  path: "/about",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/authed': {
-      id: '/authed'
-      path: '/authed'
-      fullPath: '/authed'
-      preLoaderRoute: typeof AuthedImport
-      parentRoute: typeof rootRoute
-    }
-    '/blogs': {
-      id: '/blogs'
-      path: '/blogs'
-      fullPath: '/blogs'
-      preLoaderRoute: typeof BlogsImport
-      parentRoute: typeof rootRoute
-    }
-    '/board': {
-      id: '/board'
-      path: '/board'
-      fullPath: '/board'
-      preLoaderRoute: typeof BoardImport
-      parentRoute: typeof rootRoute
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsImport
-      parentRoute: typeof rootRoute
-    }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryImport
-      parentRoute: typeof rootRoute
-    }
-    '/interns': {
-      id: '/interns'
-      path: '/interns'
-      fullPath: '/interns'
-      preLoaderRoute: typeof InternsImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileImport
-      parentRoute: typeof rootRoute
-    }
-    '/set': {
-      id: '/set'
-      path: '/set'
-      fullPath: '/set'
-      preLoaderRoute: typeof SetImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupImport
-      parentRoute: typeof rootRoute
-    }
-    '/sponsors': {
-      id: '/sponsors'
-      path: '/sponsors'
-      fullPath: '/sponsors'
-      preLoaderRoute: typeof SponsorsImport
-      parentRoute: typeof rootRoute
-    }
-    '/sports': {
-      id: '/sports'
-      path: '/sports'
-      fullPath: '/sports'
-      preLoaderRoute: typeof SportsImport
-      parentRoute: typeof rootRoute
-    }
-    '/todopage': {
-      id: '/todopage'
-      path: '/todopage'
-      fullPath: '/todopage'
-      preLoaderRoute: typeof TodopageImport
-      parentRoute: typeof rootRoute
-    }
-    '/userpage': {
-      id: '/userpage'
-      path: '/userpage'
-      fullPath: '/userpage'
-      preLoaderRoute: typeof UserpageImport
-      parentRoute: typeof rootRoute
-    }
-    '/webdev': {
-      id: '/webdev'
-      path: '/webdev'
-      fullPath: '/webdev'
-      preLoaderRoute: typeof WebdevImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/about": {
+      id: "/about";
+      path: "/about";
+      fullPath: "/about";
+      preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/authed": {
+      id: "/authed";
+      path: "/authed";
+      fullPath: "/authed";
+      preLoaderRoute: typeof AuthedImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/blogs": {
+      id: "/blogs";
+      path: "/blogs";
+      fullPath: "/blogs";
+      preLoaderRoute: typeof BlogsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/board": {
+      id: "/board";
+      path: "/board";
+      fullPath: "/board";
+      preLoaderRoute: typeof BoardImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/events": {
+      id: "/events";
+      path: "/events";
+      fullPath: "/events";
+      preLoaderRoute: typeof EventsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/gallery": {
+      id: "/gallery";
+      path: "/gallery";
+      fullPath: "/gallery";
+      preLoaderRoute: typeof GalleryImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/interns": {
+      id: "/interns";
+      path: "/interns";
+      fullPath: "/interns";
+      preLoaderRoute: typeof InternsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/profile": {
+      id: "/profile";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof ProfileImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/programs": {
+      id: "/programs";
+      path: "/programs";
+      fullPath: "/programs";
+      preLoaderRoute: typeof ProgramsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/set": {
+      id: "/set";
+      path: "/set";
+      fullPath: "/set";
+      preLoaderRoute: typeof SetImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/signup": {
+      id: "/signup";
+      path: "/signup";
+      fullPath: "/signup";
+      preLoaderRoute: typeof SignupImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/sponsors": {
+      id: "/sponsors";
+      path: "/sponsors";
+      fullPath: "/sponsors";
+      preLoaderRoute: typeof SponsorsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/sports": {
+      id: "/sports";
+      path: "/sports";
+      fullPath: "/sports";
+      preLoaderRoute: typeof SportsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/todopage": {
+      id: "/todopage";
+      path: "/todopage";
+      fullPath: "/todopage";
+      preLoaderRoute: typeof TodopageImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/userpage": {
+      id: "/userpage";
+      path: "/userpage";
+      fullPath: "/userpage";
+      preLoaderRoute: typeof UserpageImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/webdev": {
+      id: "/webdev";
+      path: "/webdev";
+      fullPath: "/webdev";
+      preLoaderRoute: typeof WebdevImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/authed': typeof AuthedRoute
-  '/blogs': typeof BlogsRoute
-  '/board': typeof BoardRoute
-  '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/interns': typeof InternsRoute
-  '/login': typeof LoginRoute
-  '/profile': typeof ProfileRoute
-  '/set': typeof SetRoute
-  '/signup': typeof SignupRoute
-  '/sponsors': typeof SponsorsRoute
-  '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
-  '/userpage': typeof UserpageRoute
-  '/webdev': typeof WebdevRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
+  "/blogs": typeof BlogsRoute;
+  "/board": typeof BoardRoute;
+  "/events": typeof EventsRoute;
+  "/gallery": typeof GalleryRoute;
+  "/interns": typeof InternsRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
+  "/programs": typeof ProgramsRoute;
+  "/set": typeof SetRoute;
+  "/signup": typeof SignupRoute;
+  "/sponsors": typeof SponsorsRoute;
+  "/sports": typeof SportsRoute;
+  "/todopage": typeof TodopageRoute;
+  "/userpage": typeof UserpageRoute;
+  "/webdev": typeof WebdevRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/authed': typeof AuthedRoute
-  '/blogs': typeof BlogsRoute
-  '/board': typeof BoardRoute
-  '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/interns': typeof InternsRoute
-  '/login': typeof LoginRoute
-  '/profile': typeof ProfileRoute
-  '/set': typeof SetRoute
-  '/signup': typeof SignupRoute
-  '/sponsors': typeof SponsorsRoute
-  '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
-  '/userpage': typeof UserpageRoute
-  '/webdev': typeof WebdevRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
+  "/blogs": typeof BlogsRoute;
+  "/board": typeof BoardRoute;
+  "/events": typeof EventsRoute;
+  "/gallery": typeof GalleryRoute;
+  "/interns": typeof InternsRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
+  "/programs": typeof ProgramsRoute;
+  "/set": typeof SetRoute;
+  "/signup": typeof SignupRoute;
+  "/sponsors": typeof SponsorsRoute;
+  "/sports": typeof SportsRoute;
+  "/todopage": typeof TodopageRoute;
+  "/userpage": typeof UserpageRoute;
+  "/webdev": typeof WebdevRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/authed': typeof AuthedRoute
-  '/blogs': typeof BlogsRoute
-  '/board': typeof BoardRoute
-  '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/interns': typeof InternsRoute
-  '/login': typeof LoginRoute
-  '/profile': typeof ProfileRoute
-  '/set': typeof SetRoute
-  '/signup': typeof SignupRoute
-  '/sponsors': typeof SponsorsRoute
-  '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
-  '/userpage': typeof UserpageRoute
-  '/webdev': typeof WebdevRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/authed": typeof AuthedRoute;
+  "/blogs": typeof BlogsRoute;
+  "/board": typeof BoardRoute;
+  "/events": typeof EventsRoute;
+  "/gallery": typeof GalleryRoute;
+  "/interns": typeof InternsRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
+  "/programs": typeof ProgramsRoute;
+  "/set": typeof SetRoute;
+  "/signup": typeof SignupRoute;
+  "/sponsors": typeof SponsorsRoute;
+  "/sports": typeof SportsRoute;
+  "/todopage": typeof TodopageRoute;
+  "/userpage": typeof UserpageRoute;
+  "/webdev": typeof WebdevRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/about'
-    | '/authed'
-    | '/blogs'
-    | '/board'
-    | '/events'
-    | '/gallery'
-    | '/interns'
-    | '/login'
-    | '/profile'
-    | '/set'
-    | '/signup'
-    | '/sponsors'
-    | '/sports'
-    | '/todopage'
-    | '/userpage'
-    | '/webdev'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/about"
+    | "/authed"
+    | "/blogs"
+    | "/board"
+    | "/events"
+    | "/gallery"
+    | "/interns"
+    | "/login"
+    | "/profile"
+    | "/programs"
+    | "/set"
+    | "/signup"
+    | "/sponsors"
+    | "/sports"
+    | "/todopage"
+    | "/userpage"
+    | "/webdev";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/about'
-    | '/authed'
-    | '/blogs'
-    | '/board'
-    | '/events'
-    | '/gallery'
-    | '/interns'
-    | '/login'
-    | '/profile'
-    | '/set'
-    | '/signup'
-    | '/sponsors'
-    | '/sports'
-    | '/todopage'
-    | '/userpage'
-    | '/webdev'
+    | "/"
+    | "/about"
+    | "/authed"
+    | "/blogs"
+    | "/board"
+    | "/events"
+    | "/gallery"
+    | "/interns"
+    | "/login"
+    | "/profile"
+    | "/programs"
+    | "/set"
+    | "/signup"
+    | "/sponsors"
+    | "/sports"
+    | "/todopage"
+    | "/userpage"
+    | "/webdev";
   id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/authed'
-    | '/blogs'
-    | '/board'
-    | '/events'
-    | '/gallery'
-    | '/interns'
-    | '/login'
-    | '/profile'
-    | '/set'
-    | '/signup'
-    | '/sponsors'
-    | '/sports'
-    | '/todopage'
-    | '/userpage'
-    | '/webdev'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/about"
+    | "/authed"
+    | "/blogs"
+    | "/board"
+    | "/events"
+    | "/gallery"
+    | "/interns"
+    | "/login"
+    | "/profile"
+    | "/programs"
+    | "/set"
+    | "/signup"
+    | "/sponsors"
+    | "/sports"
+    | "/todopage"
+    | "/userpage"
+    | "/webdev";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  AuthedRoute: typeof AuthedRoute
-  BlogsRoute: typeof BlogsRoute
-  BoardRoute: typeof BoardRoute
-  EventsRoute: typeof EventsRoute
-  GalleryRoute: typeof GalleryRoute
-  InternsRoute: typeof InternsRoute
-  LoginRoute: typeof LoginRoute
-  ProfileRoute: typeof ProfileRoute
-  SetRoute: typeof SetRoute
-  SignupRoute: typeof SignupRoute
-  SponsorsRoute: typeof SponsorsRoute
-  SportsRoute: typeof SportsRoute
-  TodopageRoute: typeof TodopageRoute
-  UserpageRoute: typeof UserpageRoute
-  WebdevRoute: typeof WebdevRoute
+  IndexRoute: typeof IndexRoute;
+  AboutRoute: typeof AboutRoute;
+  AuthedRoute: typeof AuthedRoute;
+  BlogsRoute: typeof BlogsRoute;
+  BoardRoute: typeof BoardRoute;
+  EventsRoute: typeof EventsRoute;
+  GalleryRoute: typeof GalleryRoute;
+  InternsRoute: typeof InternsRoute;
+  LoginRoute: typeof LoginRoute;
+  ProfileRoute: typeof ProfileRoute;
+  ProgramsRoute: typeof ProgramsRoute;
+  SetRoute: typeof SetRoute;
+  SignupRoute: typeof SignupRoute;
+  SponsorsRoute: typeof SponsorsRoute;
+  SportsRoute: typeof SportsRoute;
+  TodopageRoute: typeof TodopageRoute;
+  UserpageRoute: typeof UserpageRoute;
+  WebdevRoute: typeof WebdevRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -414,6 +435,7 @@ const rootRouteChildren: RootRouteChildren = {
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   ProfileRoute: ProfileRoute,
+  ProgramsRoute: ProgramsRoute,
   SetRoute: SetRoute,
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
@@ -421,11 +443,11 @@ const rootRouteChildren: RootRouteChildren = {
   TodopageRoute: TodopageRoute,
   UserpageRoute: UserpageRoute,
   WebdevRoute: WebdevRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -443,6 +465,7 @@ export const routeTree = rootRoute
         "/interns",
         "/login",
         "/profile",
+        "/programs",
         "/set",
         "/signup",
         "/sponsors",
@@ -481,6 +504,9 @@ export const routeTree = rootRoute
     },
     "/profile": {
       "filePath": "profile.tsx"
+    },
+    "/programs": {
+      "filePath": "programs.tsx"
     },
     "/set": {
       "filePath": "set.tsx"
