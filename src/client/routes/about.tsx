@@ -1,3 +1,4 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import AboutCard from "@about/AboutCard";
 import ContactForm from "@about/ContactForm";
 import HeaderSection from "@about/HeaderSection";
@@ -6,8 +7,16 @@ import MissionSection from "@about/MissionSection";
 import Timeline from "@about/Timeline2";
 import YoutubeSection from "@about/YoutubeSection";
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/about")({
+  meta: () => [
+    ...seo({
+      title: "About | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
   component: () => {
     return (
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center bg-white font-[Poppins]">
