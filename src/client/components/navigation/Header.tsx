@@ -71,7 +71,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={cn(
-        `left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`,
+        `font-poppins sticky left-0 top-0 z-50 w-full font-medium shadow-md`,
         {
           "bg-black text-white": isHomePage,
           "bg-white text-black": !isHomePage,
