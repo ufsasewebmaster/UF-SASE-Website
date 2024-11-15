@@ -22,12 +22,13 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
   return (
     <div
       className={`group relative transform transition-transform duration-500 ease-in-out ${
-        isExpanded ? "scale-105 cursor-default" : "scale-100 cursor-pointer"
+        isExpanded ? "scale-105" : "scale-100"
       } flex flex-col items-center p-4 text-center`}
       onClick={() => !isExpanded && handleToggleExpand()}
       style={{
         width: "22vw",
         maxWidth: "22vw",
+        cursor: "pointer",
       }}
     >
       {/* role */}
@@ -53,6 +54,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
           height: "20vw",
           width: "20vw",
         }}
+        onClick={handleToggleExpand}
       >
         <img
           src={member.image}
@@ -71,32 +73,25 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
 
         {isExpanded && (
           <div className="absolute inset-0 flex flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out">
-            <button
-              className="absolute right-[1vw] top-[1vw] cursor-pointer text-[1.5vw] text-gray-500 hover:text-black"
-              onClick={(e) => {
-                e.stopPropagation();
-                setExpanded(false);
-              }}
+            {/* expanded content */}
+            <div
+              className="mt-[1.5vw] text-left"
+              onClick={(e) => e.stopPropagation()}
             >
-              &times;
-            </button>
-
-            {/* info once expanded */}
-            <div className="mt-[1.5vw] text-left">
               <h3 className="text-[1.2vw] font-bold">{member.role}</h3>
               <h4 className="text-[1vw] font-semibold">{member.name}</h4>
               <p className="text-[0.9vw] text-gray-600">{member.major}</p>
               <a
                 href={`mailto:${member.contact}`}
                 className="text-[0.9vw] text-blue-500 underline"
+                onClick={(e) => e.stopPropagation()}
               >
                 {member.contact}
               </a>
-            </div>
-
-            {/* description */}
-            <div className="flex flex-grow items-end justify-center">
-              <p className="mt-[1.5vw] text-center text-[0.9vw] text-gray-800">
+              <p
+                className="mt-[1vw] text-[0.7vw] text-gray-800"
+                style={{ marginTop: "1vw" }}
+              >
                 {member.description}
               </p>
             </div>
@@ -104,7 +99,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         )}
       </div>
 
-      {/* role/name turns invisible on click of learn more */}
+      {/* name turns invisible on click of learn more */}
       <p
         className={`mt-[1.5vw] ${isExpanded ? "invisible" : "text-black"}`}
         style={{ fontSize: "1.6vw" }}
