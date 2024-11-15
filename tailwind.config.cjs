@@ -61,7 +61,7 @@ module.exports = {
       },
       fontFamily: {
         oswald: ["Oswald", "sans-serif"],
-        redhat: ['"Red Hat Text"', "sans-serif"],
+        redhat: ["Red Hat Text", "sans-serif"],
         // sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {

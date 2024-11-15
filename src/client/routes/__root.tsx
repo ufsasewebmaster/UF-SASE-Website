@@ -56,6 +56,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <Html>
       <Head>
         <Meta />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <Body>
         <div className="flex min-h-screen flex-col">
