@@ -1,72 +1,60 @@
+import logoImage from "@assets/logoSaseWhite.png";
 import { Link } from "@tanstack/react-router";
 import { Button } from "../ui/button";
+import SocialIcons from "../ui/socialIcons";
 
-const Footer = () => {
+const footerNavItems = [
+  { key: "about", label: "About", href: "/about" },
+  { key: "board", label: "Board", href: "/board" },
+  { key: "gallery", label: "Gallery", href: "/gallery" },
+  { key: "events", label: "Events & Slides", href: "/events" },
+  { key: "sports", label: "Sports", href: "/sports" },
+  { key: "blogs", label: "Blogs", href: "/blogs" },
+];
+
+const Footer: React.FC = () => {
   return (
-    <footer
-      style={{
-        backgroundColor: "#acc9fa",
-        paddingTop: "30px",
-        paddingBottom: "30px",
-        bottom: "0",
-        left: "0",
-        right: "0",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          padding: "10px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            gap: "0px",
-            marginLeft: "1.5em",
-          }}
-        >
-          <Button asChild variant="link" size="default">
-            <span>Home</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <Link to="/about">About</Link>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Board</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Gallery</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Events & Slides</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Sports</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Blogs</span>
-          </Button>
-
-          <Button asChild variant="link" size="default">
-            <span>Contact Us</span>
-          </Button>
+    <footer className="mt-auto bg-saseBlue py-7 text-white">
+      <div className="container mx-auto flex flex-col items-center justify-between md:flex-row">
+        {/* Left Section - Logo and Social Icons */}
+        <div className="mb-6 flex flex-col items-center md:mb-0 md:items-start">
+          <div className="mb-6">
+            <img
+              src={logoImage}
+              alt="Logo"
+              style={{ width: "235px", height: "75px" }}
+              className="ml-2 h-auto"
+            />
+          </div>
+          <SocialIcons />
         </div>
 
-        <div
-          style={{
-            marginLeft: "29em",
-            marginTop: "10px",
-          }}
-        >
-          <p>&copy; Copyright 2024 - Yuki Theme By WP Moose.</p>
+        {/* Right Section - Navigation */}
+        <div className="flex flex-col items-center md:items-end">
+          <div className="mb-4 flex flex-col items-center space-y-4 md:flex-row md:space-x-6 md:space-y-0">
+            {footerNavItems.map((item) => (
+              <Link
+                key={item.key}
+                to={item.href}
+                className="font-redhat text-lg text-white transition-all hover:text-saseGreen hover:underline"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Contact Us Button */}
+          <div className="flex flex-col items-center md:flex-row md:items-center">
+            <div className="-top-3 h-0.5 w-[350px] bg-saseGreen"></div>
+            <div className="relative mt-2 md:ml-4 md:mt-0">
+              <div className="absolute -bottom-2 -left-[3px] -right-[3px] -top-[3px] rounded-[55px] bg-black/80"></div>
+              <Button asChild variant="link" size="default">
+                <Link className="relative flex h-8 items-center rounded-[55px] bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5">
+                  Contact Us!
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
