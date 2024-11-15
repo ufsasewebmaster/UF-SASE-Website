@@ -16,9 +16,16 @@ export const Route = createFileRoute("/events")({
         <div className="flex w-full justify-center">
           <hr className="h-5 w-10/12 border-t-4 border-saseBlue" />
         </div>
-        <div className="flex w-full justify-center">
+        <div className="flex justify-center items-center">
           <EventsCalendar />
-          <ImageButton imageUrl={peopleImage} />
+        </div>
+        <div className="justify-center grid grid-cols-3 gap-4">
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
+          <ImageButton slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000" imageUrl={peopleImage} />
         </div>
       </div>
     );
