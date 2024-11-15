@@ -1,11 +1,294 @@
+import IG from "@assets/routes/interns/interngroup.png";
+import IS from "@assets/routes/interns/internspotlight.png";
+import star2 from "@assets/routes/interns/internstar.png";
+import titleUnderline from "@assets/routes/interns/titleunderline.png";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/interns")({
   component: () => {
     return (
-      <>
-        <div>This is where the content actually starts</div>
-      </>
+      <div className="flex w-full flex-col items-center bg-white">
+        {/* Header Section */}
+        <div className="mt-16 flex w-full max-w-6xl flex-col px-4 md:flex-row">
+          {/* Left Side: Heading */}
+          <div className="flex items-center md:w-1/3">
+            <div className="flex items-center">
+              {/* Green Line */}
+              <div
+                className="mr-4 bg-[#7dc242]"
+                style={{ width: "9px", height: "150px" }}
+              ></div>
+              <h1 className="font-oswald text-7xl text-black">
+                SASE
+                <br />
+                INTERNS
+              </h1>
+            </div>
+          </div>
+          {/* Right Side: Description with Shadow Background */}
+          <div className="relative mt-8 md:ml-8 md:mt-0 md:w-2/3">
+            {/* Shadow Background */}
+            <div className="absolute inset-0 translate-x-6 translate-y-6 transform rounded-2xl bg-[#7dc242]"></div>
+            <div className="relative rounded-2xl border border-black bg-neutral-100 p-6">
+              <p className="font-redhat text-2xl text-black">
+                <span className="font-bold">SASE Interns</span> collaborate with
+                other members to execute a project for the SASE community,
+                honing your communication, event planning, and leadership
+                skills. Throughout the process, interns will gain{" "}
+                <span className="font-bold">
+                  experience to add to your resume
+                </span>{" "}
+                and talk about during job interviews. Interns will also obtain{" "}
+                <span className="font-bold">behind-the-scenes insights</span>{" "}
+                through board presentations and shadowing opportunities—valuable
+                for future leadership roles in and out of SASE. Aside from
+                projects, interns will have the chance to network and connect
+                through <span className="font-bold">interns-only</span> socials
+                and Board x Interns events.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Add Vertical Spacing */}
+        <div className="mt-16"></div>
+
+        {/* Intern Group Image Section with Green Lines */}
+        <div className="relative w-full max-w-6xl px-4">
+          {/* Top Green Line */}
+          <img
+            src={titleUnderline}
+            alt="Green Line"
+            className="absolute -top-6 left-0 right-0 w-full"
+          />
+          {/* Add Spacing */}
+          <div className="mt-6"></div>
+          {/* Image */}
+          <img
+            src={IG}
+            alt="Intern Group"
+            className="w-full rounded-lg object-cover"
+          />
+          {/* Add Spacing */}
+          <div className="mb-6"></div>
+          {/* Bottom Green Line */}
+          <img
+            src={titleUnderline}
+            alt="Green Line"
+            className="absolute -bottom-6 left-0 right-0 w-full"
+          />
+        </div>
+
+        {/* Add Vertical Spacing */}
+        <div className="mt-16"></div>
+
+        {/* Testimonials Section */}
+        <div className="flex w-full max-w-6xl flex-col px-4">
+          {/* Heading with Green Line */}
+          <div className="mb-8 flex items-center">
+            <div
+              className="mr-4 bg-[#7dc242]"
+              style={{ width: "9px", height: "70px" }}
+            ></div>
+            <h2 className="font-raleway text-5xl font-medium text-[#363636]">
+              Testimonials
+            </h2>
+          </div>
+          {/* Content */}
+          <div className="flex flex-col md:flex-row">
+            {/* Image with Shadow */}
+            <div className="relative md:w-1/2">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-6 translate-y-6 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative">
+                <img
+                  src={IS}
+                  alt="Intern Spotlight"
+                  className="h-auto w-full rounded-2xl"
+                />
+                <img
+                  src={star2}
+                  alt="Star"
+                  className="absolute bottom-0 left-0 h-24 w-24 translate-x-[-40px] translate-y-[20px]"
+                />
+              </div>
+            </div>
+            {/* Text with Green Line */}
+            <div className="mt-8 flex items-center md:ml-8 md:mt-0 md:w-1/2">
+              <div className="flex items-start">
+                {/* Green Line */}
+                <div
+                  className="mr-4 bg-[#7dc242]"
+                  style={{ width: "9px", height: "100%" }}
+                ></div>
+                <div>
+                  <p className="font-redhat text-4xl text-black">
+                    “SASE Interns was an incredible experience. I learned a lot
+                    about organizational, leadership, and planning skills and
+                    gained a lot of insight from SASE Board members. This
+                    program has greatly helped my professional development.”
+                  </p>
+                  <p className="mt-4 font-redhat text-4xl font-medium text-[#7dc242]">
+                    First Last, 2024 Intern
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Add Vertical Spacing */}
+        <div className="mt-16"></div>
+
+        {/* Goals & Outcomes Section */}
+        <div className="flex w-full max-w-6xl flex-col px-4">
+          <div className="flex items-start">
+            {/* Green Line */}
+            <div
+              className="mr-4 bg-[#7dc242]"
+              style={{ width: "9px", height: "70px" }}
+            ></div>
+            <h2 className="font-raleway text-5xl font-medium text-black">
+              Goals &amp; Outcomes
+            </h2>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+            {/* Goal 1 */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-4 translate-y-4 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative rounded-2xl border border-black bg-neutral-100 p-6">
+                <p className="font-redhat text-2xl text-black">
+                  Get more involved in SASE, especially for first and second
+                  years.
+                </p>
+              </div>
+            </div>
+            {/* Goal 2 */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-4 translate-y-4 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative rounded-2xl border border-black bg-neutral-100 p-6">
+                <p className="font-redhat text-2xl text-black">
+                  Develop essential professional skills and experiences to add
+                  to your resume.
+                </p>
+              </div>
+            </div>
+            {/* Goal 3 */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-4 translate-y-4 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative rounded-2xl border border-black bg-neutral-100 p-6">
+                <p className="font-redhat text-2xl text-black">
+                  Connect with other SASErs and board members through
+                  intern-exclusive networking events.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Add Vertical Spacing */}
+        <div className="mt-16"></div>
+
+        {/* FAQs Section */}
+        <div className="mb-16 flex w-full max-w-6xl flex-col px-4">
+          <div className="flex items-start">
+            {/* Green Line */}
+            <div
+              className="mr-4 bg-[#7dc242]"
+              style={{ width: "9px", height: "70px" }}
+            ></div>
+            <h2 className="font-raleway text-5xl font-medium text-[#363636]">
+              FAQs
+            </h2>
+          </div>
+          <div className="mt-8 space-y-6">
+            {/* FAQ Item 1 */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative overflow-hidden rounded-2xl border border-black bg-neutral-100">
+                <div className="flex items-center justify-between p-4">
+                  <p className="font-redhat text-2xl font-medium text-black">
+                    How do I sign up?
+                  </p>
+                  <span className="text-3xl font-medium text-black">-</span>
+                </div>
+                <div className="p-4">
+                  <p className="font-redhat text-2xl text-black">
+                    Applications for{" "}
+                    <span className="font-bold">Fall 2024</span> are now closed,
+                    but <span className="font-bold">Spring 2025</span>{" "}
+                    applications will open next semester!
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* FAQ Item 4 (Moved up) */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative overflow-hidden rounded-2xl border border-black bg-neutral-100">
+                <div className="flex items-center justify-between p-4">
+                  <p className="font-redhat text-2xl font-medium text-black">
+                    What does the time commitment look like?
+                  </p>
+                  <span className="text-3xl font-medium text-black">+</span>
+                </div>
+                {/* Answer can be added here if available */}
+              </div>
+            </div>
+            {/* FAQ Item 3 */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative overflow-hidden rounded-2xl border border-black bg-neutral-100">
+                <div className="flex items-center justify-between p-4">
+                  <p className="font-redhat text-2xl font-medium text-black">
+                    What projects do interns work on?
+                  </p>
+                  <span className="text-3xl font-medium text-black">+</span>
+                </div>
+                {/* Answer can be added here if available */}
+              </div>
+            </div>
+            {/* FAQ Item 2 (Moved down) */}
+            <div className="relative">
+              {/* Shadow Background */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 transform rounded-2xl bg-[#7dc242]"></div>
+              <div className="relative overflow-hidden rounded-2xl border border-black bg-neutral-100">
+                <div className="flex items-center justify-between p-4">
+                  <p className="font-redhat text-2xl font-medium text-black">
+                    I have more questions!
+                  </p>
+                  <span className="text-3xl font-medium text-black">-</span>
+                </div>
+                <div className="p-4">
+                  <p className="font-redhat text-2xl text-black">
+                    Feel free to ask your questions in the{" "}
+                    <a
+                      href="#"
+                      className="font-medium text-[#7dc242] underline"
+                    >
+                      SASE Discord channel
+                    </a>{" "}
+                    or use the{" "}
+                    <a
+                      href="#"
+                      className="font-medium text-[#7dc242] underline"
+                    >
+                      Contact Form
+                    </a>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   },
 });
