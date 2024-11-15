@@ -7,7 +7,6 @@ interface ModalProps {
   title: string;
   description?: string;
   children: React.ReactNode;
-  slideLink?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -16,16 +15,18 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
-  slideLink,
 }) => {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onClose}>
       <Dialog.Portal>
         {/* Overlay */}
-        <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black bg-opacity-50" />
 
         {/* Content */}
-        <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-4x1 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-6 focus:outline-none z-50" style={{ width: "1010px", height: "700px" }}>
+        <Dialog.Content
+          className="max-w-4x1 fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-6 focus:outline-none"
+          style={{ width: "1010px", height: "700px" }}
+        >
           {/* Title */}
           <Dialog.Title className="text-lg font-semibold">{title}</Dialog.Title>
 
