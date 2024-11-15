@@ -1,7 +1,10 @@
 import StandInPicture from "@assets/home/board.png";
+import FAQ from "@components/programs/FAQCard";
+import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
+import { faqData } from "../components/programs/faqInterns";
 
 export const Route = createFileRoute("/interns")({
   component: () => {
@@ -56,6 +59,29 @@ export const Route = createFileRoute("/interns")({
             name="First Last"
             title="2024 Intern"
           />
+          <header className="mb-12 flex max-w-7xl items-center px-5">
+            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
+            <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
+          </header>
+          <div className="mb-24 flex flex-nowrap justify-center gap-36">
+            <GoalCard
+              text="Get more involved in SASE, especially for first and second years."
+              color="blue"
+            />
+            <GoalCard
+              text="Develop essential professional skills and experiences to add to your resume."
+              color="green"
+            />
+            <GoalCard
+              text="Connect with other SASErs and board members through intern-exclusive networking events."
+              color="blue"
+            />
+          </div>
+          <header className="flex max-w-7xl items-center px-5">
+            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
+            <h2 className="text-4xl text-gray-800">FAQs</h2>
+          </header>
+          <FAQ faqData={faqData} />
         </div>
       </div>
     );
