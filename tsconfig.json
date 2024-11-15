@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vinxi/types/client"],
+    "types": [],
     "isolatedModules": true,
     "sourceMap": true,
     "declarationMap": true,

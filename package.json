@@ -48,6 +48,7 @@
     "html-react-parser": "^5.1.18",
     "isomorphic-dompurify": "^2.16.0",
     "jsdom": "^25.0.1",
+    "jszip": "^3.10.1",
     "lucia": "^3.2.0",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",
