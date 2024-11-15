@@ -1,7 +1,7 @@
-import IG from "@assets/routes/interns/interngroup.png";
-import IS from "@assets/routes/interns/internspotlight.png";
-import star2 from "@assets/routes/interns/internstar.png";
-import titleUnderline from "@assets/routes/interns/titleunderline.png";
+import IG from "@assets/programs/interns/interngroup.png";
+import IS from "@assets/programs/interns/internspotlight.png";
+import star2 from "@assets/programs/interns/internstar.png";
+import titleUnderline from "@assets/programs/interns/titleunderline.png";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/interns")({

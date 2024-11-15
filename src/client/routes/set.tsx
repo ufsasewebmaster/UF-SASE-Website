@@ -1,7 +1,7 @@
-import star2 from "@assets/routes/interns/internstar.png";
-import titleUnderline from "@assets/routes/interns/titleunderline.png";
-import IG from "@assets/routes/set/SETGroup.png";
-import IS from "@assets/routes/set/SETRobot.png";
+import star2 from "@assets/programs/interns/internstar.png";
+import titleUnderline from "@assets/programs/interns/titleunderline.png";
+import IG from "@assets/programs/set/SETGroup.png";
+import IS from "@assets/programs/set/SETRobot.png";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/set")({
