@@ -5,9 +5,11 @@ interface ImageButtonProps {
   imageUrl: string;
   buttonLabel?: string;
   slideUrl: string;
+  title?: string;
+  description: string;
 }
 
-const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, buttonLabel = "Open Image", slideUrl }) => {
+const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, buttonLabel = "Open Image", slideUrl, title="", description }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -18,10 +20,11 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, buttonLabel = "Open
       <img 
         src={imageUrl}
         onClick={openModal}
-        className="cursor-pointer max-w-sm px-40 py-10 hover:opacity-90 focus:outline-none"
+        className="cursor-pointer border-2 border-black rounded-xl hover:opacity-90 focus:outline-none"
+        style={{width: '300px', height: '200px', marginLeft: '125px', marginTop: '50px', marginBottom: '50px'}}
       />
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={closeModal} title="Image Preview" description="This is a preview of the selected image.">
+        <Modal isOpen={isModalOpen} onClose={closeModal} title={title} description={description}>
           <iframe src={slideUrl} width="960" height="569"></iframe>
         </Modal>
       )}
