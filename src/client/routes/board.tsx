@@ -15,8 +15,11 @@ export const Route = createFileRoute("/board")({
   ],
   component: () => {
     return (
+      <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
         {/* title */}
         <div className="text-center">
+          <h1 className="font-oswald text-7xl font-medium">BOARD</h1>
+          <p className="mb-8 mt-8 text-2xl text-black">
             Meet our 2024-2025 SASE Board Members!
           </p>
           <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
