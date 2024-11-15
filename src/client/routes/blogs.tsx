@@ -1,3 +1,4 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import { useAuth } from "@client/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
@@ -7,8 +8,16 @@ import type { Descendant } from "slate";
 import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 import { Button } from "../components/ui/button";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/blogs")({
+  meta: () => [
+    ...seo({
+      title: "Blogs | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
   component: BlogEditor,
 });
 

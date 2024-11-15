@@ -1,3 +1,4 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import { DefaultCatchBoundary } from "@/client/components/DefaultCatchBoundary";
 import { NotFound } from "@/client/components/NotFound";
 import {
@@ -22,10 +23,10 @@ export const Route = createRootRoute({
       name: "viewport",
       content: "width=device-width, initial-scale=1",
     },
-    // todo: fix
     ...seo({
-      title: "TanStack Start Starter",
-      description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+      title: "UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
     }),
   ],
   links: () => [
