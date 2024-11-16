@@ -86,7 +86,6 @@ const Header: React.FC = () => {
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
-            <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
             <UserButton isLoggedIn={isLoggedIn} />
           </div>
