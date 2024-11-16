@@ -4,9 +4,9 @@ import ContactForm from "@about/ContactForm";
 import HeaderSection from "@about/HeaderSection";
 import HistorySection from "@about/HistorySection";
 import MissionSection from "@about/MissionSection";
-import Timeline from "@about/Timeline2";
+import Timeline from "@about/Timeline";
 import YoutubeSection from "@about/YoutubeSection";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/about")({
@@ -22,10 +22,26 @@ export const Route = createFileRoute("/about")({
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center bg-white font-[Poppins]">
         <div className="w-full max-w-7xl px-4 py-8">
           <HeaderSection />
-          <div className="mb-20 flex justify-center">
+          <div className="mb-14 flex justify-center">
             <AboutCard />
           </div>
-          <section className="mb-12 flex justify-center">
+          <div className="relative flex w-full max-w-7xl justify-center">
+            <div className="absolute left-[50%] flex space-x-6">
+              <Link
+                to="/board"
+                className="rounded-full border border-black bg-saseBlue px-8 py-1 text-center text-sm text-white transition duration-300 hover:scale-105"
+              >
+                Meet Our Board!
+              </Link>
+              <Link
+                to="/sponsors"
+                className="rounded-full border border-black bg-saseBlue px-8 py-1 text-center text-sm text-white transition duration-300 hover:scale-105"
+              >
+                View Our Sponsors
+              </Link>
+            </div>
+          </div>
+          <section className="mb-12 mt-20 flex justify-center">
             <YoutubeSection />
           </section>
           <MissionSection />
@@ -39,8 +55,8 @@ export const Route = createFileRoute("/about")({
             </div>
           </section>
 
-          <section className="mb-24">
-            <div className="mb-20 flex items-center">
+          <section className="mb-20">
+            <div className="mb-8 flex items-center">
               <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
               <h2 className="text-3xl font-semibold text-gray-800">
                 Timeline of Achievements
