@@ -1,3 +1,4 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import arthrex from "@assets/sponsors/Arthrex.png";
 import axogen from "@assets/sponsors/Axogen.png";
 import blueorigin from "@assets/sponsors/BlueOriginLogo.png";
@@ -8,8 +9,16 @@ import johnson from "@assets/sponsors/J&J.png";
 import sargentlundy from "@assets/sponsors/S&L.png";
 import { createFileRoute } from "@tanstack/react-router";
 import SponsorCard from "../components/SponsorCard";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/sponsors")({
+  meta: () => [
+    ...seo({
+      title: "Sponsors | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
   component: () => {
     return (
       <div className="flex flex-col items-center">

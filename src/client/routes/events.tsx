@@ -1,7 +1,16 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/events")({
+  meta: () => [
+    ...seo({
+      title: "Events | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
   component: () => {
     return (
       <div>

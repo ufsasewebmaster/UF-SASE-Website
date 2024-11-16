@@ -7,6 +7,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { faqData } from "../components/programs/faqInterns";
 
 export const Route = createFileRoute("/interns")({
+  meta: () => [
+    ...seo({
+      title: "Interns | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
+
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
