@@ -1,5 +1,6 @@
 coverage/
 *.tsbuildinfo
+*gen.ts
 node_modules/
 .DS_Store
 tmp/
@@ -13,7 +14,6 @@ scratchpad/*
 .output/
 .vinxi/
 .vercel/
-client/routeTree.gen.ts
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
