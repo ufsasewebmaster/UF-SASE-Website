@@ -14,7 +14,7 @@ export const Route = createFileRoute("/gallery")({
   ],
   component: () => {
     return (
-      <div>
+      <div onClick={() => console.log("Hello")}>
         <div className="py-5"></div> {/* spacer element */}
         <div className="flex justify-center">
           <div className="flex-5 pb-5 text-center font-mono text-7xl">
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/gallery")({
             </div>
             <div></div>
             <div className="flex items-center justify-center pb-20">
-              <GalleryZipExtraction />
+              <GalleryZipExtraction/>
             </div>
           </div>
         </div>

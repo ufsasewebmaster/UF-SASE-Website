@@ -23,11 +23,13 @@ const GalleryZipExtraction: React.FC = () => {
 
   // Function to go to the next image
   const nextImage = () => {
+    console.log("Next Image");
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length); // Wrap around to the first image
   };
 
   // Function to go to the previous image
   const prevImage = () => {
+    console.log("Next Image");
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + images.length) % images.length, // Wrap around to the last image
     );
@@ -37,7 +39,7 @@ const GalleryZipExtraction: React.FC = () => {
     <div className="flex w-full items-center justify-center">
       <div className="w-3/12 flex-1"></div> {/* spacer element */}
       <div className="flex items-center justify-center">
-        <div className="cursor-pointer p-20" onClick={prevImage}>
+        <div className="cursor-pointer" onClick={prevImage}>
           {/* Left Arrow */}
           <button className="text-4xl">
             <FaChevronLeft />
@@ -51,7 +53,7 @@ const GalleryZipExtraction: React.FC = () => {
             className="h-96 w-full rounded-lg border-2 border-black object-cover"
           />
         </div>
-        <div className="cursor-pointer p-20" onClick={nextImage}>
+        <div className="cursor-pointer" onClick={nextImage}>
           {/* Right Arrow */}
           <button className="text-4xl">
             <FaChevronRight />

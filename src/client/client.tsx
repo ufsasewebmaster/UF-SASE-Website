@@ -16,6 +16,4 @@ if (rootElement) {
       <StartClient router={router} />
     </React.StrictMode>,
   );
-} else {
-  console.error("Root element not found");
 }
