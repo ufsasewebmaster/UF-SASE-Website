@@ -26,6 +26,7 @@
   "dependencies": {
     "@iconify/json": "^2.2.272",
     "@libsql/client": "^0.12.0",
+    "@node-rs/argon2": "^2.0.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-core": "^0.11.1",
