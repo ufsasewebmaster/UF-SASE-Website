@@ -24,7 +24,7 @@ const SponsorCard = ({
         {type}
       </p>
 
-      <div className="relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
+      <div className="relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1 shadow-[12px_12px_0px_#7DC242] duration-300 hover:scale-105">
         <img
           src={image}
           alt="Company Logo"
@@ -34,16 +34,11 @@ const SponsorCard = ({
           {companyName}
         </p>
 
-        <div
-          className="absolute left-[6%] top-[7%] h-full w-full rounded-2xl bg-saseGreen"
-          style={{ zIndex: -1 }}
-        ></div>
-
         {type === "Diamond" ? (
           <img
             src={diamond}
             alt="Diamond Icon"
-            className="absolute -left-[16%] -top-[10%] h-[30%]"
+            className="absolute left-0 top-0 h-[30%] -translate-x-1/2 -translate-y-1/3"
           />
         ) : (
           ""

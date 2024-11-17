@@ -1,15 +1,17 @@
-import r_z from "@assets/board/ricky_zhang.jpeg";
 import board from "@assets/home/board.png";
 import briefcase from "@assets/home/briefcase.png";
+import b_p from "@assets/home/bryan.png";
 import dudes from "@assets/home/dudes.png";
+import k_d from "@assets/home/kayleen.png";
 import lightbulb from "@assets/home/lightbulb.png";
 import logo from "@assets/home/logo.png";
 import star_logo from "@assets/home/star_logo.png";
-import blueorigin from "@assets/sponsors/BlueOriginLogo.png";
-import fmglobal from "@assets/sponsors/FMGlobal.png";
+import v_l from "@assets/home/vincent.png";
 import MissionCard from "@components/MissionCard";
 import SponsorCard from "@components/SponsorCard";
+import SponsorInfo from "@components/SponsorInfo";
 import { createFileRoute } from "@tanstack/react-router";
+import MemberCard from "../components/MemberCard";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -21,7 +23,7 @@ export const Route = createFileRoute("/")({
             alt="2023-2024 SASE Board"
             className="relative h-auto w-full"
           />
-          <div className="absolute w-full items-center p-8 pt-[30%] font-redhat text-2xl italic text-white sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">
+          <div className="absolute w-full items-center p-8 pt-[30%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl 2xl:pl-32 2xl:pr-32 2xl:text-8xl">
             <h1 className="flex items-center">
               <span>S </span>
               <img
@@ -35,9 +37,9 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="flex flex-col items-center bg-black pb-12 pt-12">
-          <div className="relative w-9/12 rounded-2xl border-4 border-b-saseGreen border-l-saseGreen border-r-saseBlue border-t-saseBlue bg-black p-10 opacity-50">
-            <h1 className="pb-12 font-oswald text-5xl text-white">
+        <div className="flex flex-col items-center bg-black p-12">
+          <div className="relative w-9/12 rounded-2xl border-4 border-b-saseGreen border-l-saseGreen border-r-saseBlue border-t-saseBlue bg-gray-950 p-10">
+            <h1 className="pb-12 font-oswald text-3xl font-medium text-white sm:text-5xl">
               University of Florida Chapter
             </h1>
 
@@ -82,177 +84,158 @@ export const Route = createFileRoute("/")({
             <img
               src={star_logo}
               alt="SASE Logo"
-              className="absolute right-0 top-0 w-[25%] translate-x-[30%] translate-y-[-40%] transform lg:w-[20%]"
+              className="absolute right-0 top-0 w-[20%] -translate-y-1/2 translate-x-1/3"
             />
           </div>
         </div>
 
-        <div
-          className="flex w-full flex-col items-center bg-saseGray pb-10 pl-20 pr-20 pt-10"
-          style={{ zIndex: -1 }}
-        >
+        <div className="flex w-full flex-col items-center bg-saseGray p-12">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">
             Our Mission
           </h1>
-          <div className="grid gap-12 sm:grid-cols-1 md:grid-cols-3">
+          <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
             <MissionCard
               image={briefcase}
               mission="Professional Development"
               text="To prepare Asian heritage students for success in the
                 transnational, global business world."
+              shadow="green"
             />
             <MissionCard
               image={dudes}
               mission="Diversity"
               text="To promote diversity and tolerance on campuses and in the
                 workplace."
+              shadow="blue"
             />
             <MissionCard
               image={lightbulb}
               mission="Community"
               text="To provide opportunities for its members to make contributions
                 to their local communities."
+              shadow="green"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-20 bg-white p-12 md:grid-cols-3">
-          <div
-            className="flex aspect-[4/3] w-auto flex-col justify-center rounded-2xl bg-cover bg-center"
-            style={{ backgroundImage: `url(${r_z})` }}
-          >
-            <p className="pt-[125%]">First Last</p>
-            <p>Sase Member</p>
-            <p>Filler filler filler filler filler filler</p>
-          </div>
-          <div
-            className="flex w-auto flex-col justify-center rounded-2xl bg-cover bg-center"
-            style={{ backgroundImage: `url(${r_z})` }}
-          >
-            <p className="pt-[125%]">First Last</p>
-            <p>Sase Member</p>
-            <p>Filler filler filler filler filler filler</p>
-          </div>
-          <div
-            className="flex w-auto flex-col justify-center rounded-2xl bg-cover bg-center"
-            style={{ backgroundImage: `url(${r_z})` }}
-          >
-            <p className="pt-[125%]">First Last</p>
-            <p>Sase Member</p>
-            <p>Filler filler filler filler filler filler</p>
-          </div>
+        <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
+          <MemberCard
+            image={v_l}
+            name="Vincent Lin"
+            role="President"
+            textColor="blue"
+          />
+          <MemberCard
+            image={b_p}
+            name="Bryan Park"
+            role="Internal Vice President"
+            textColor="green"
+          />
+          <MemberCard
+            image={k_d}
+            name="Kayleen Diaz"
+            role="External Vice President"
+            textColor="blue"
+          />
         </div>
 
-        <div className="h-96 w-full bg-black p-12">
-          <h1 className="w-full text-center font-oswald text-6xl text-white">
+        <div className="w-full bg-black p-12">
+          <h1 className="w-full pb-12 text-center font-oswald text-6xl text-white">
             Our Values
           </h1>
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+            <MissionCard
+              image={dudes}
+              mission="Professional Development"
+              text="Through our meetings, conferences, and events, we shape skills that will help our members succeed in the professional world."
+              shadow="blue"
+            />
+            <MissionCard
+              image={dudes}
+              mission="Socials"
+              text="We host multiple social events throughout the year, including a semesterly banquet, that give our members a chance to bond."
+              shadow="blue"
+            />
+            <MissionCard
+              image={dudes}
+              mission="Service"
+              text="We believe that it is important to make meaningful contributions to the community, so we organize service events for our members to join."
+              shadow="blue"
+            />
+            <MissionCard
+              image={dudes}
+              mission="Sports"
+              text="To facilitate bonding and interaction, we have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!"
+              shadow="blue"
+            />
+            <MissionCard
+              image={dudes}
+              mission="Mentorship"
+              text="To ensure each member has the personal and academic guidance they need, we organize a semesterly mentorship program. Keep an eye on our Instagram to apply!"
+              shadow="blue"
+            />
+          </div>
         </div>
 
-        <div className="bg-saseGray p-16" style={{ zIndex: 10 }}>
-          <h1 className="w-full pb-10 text-center font-oswald text-6xl font-medium">
+        <div className="bg-saseGray p-12">
+          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">
             Sponsors
           </h1>
-          <div className="grid grid-cols-1 gap-20 xl:grid-cols-[1fr_1.5fr]">
-            <div className="relative rounded-2xl border-4 border-black bg-white p-10">
+          <div className="grid grid-cols-1 gap-12 pl-8 pr-8 xl:grid-cols-[1fr_1fr]">
+            <div className="flex flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="font-redhat text-2xl">
-                CHANGE!!!! Are you interested in becoming a partner with the UF
-                Society of Asian Scientists and Engineers (SASE) Chapter? Click
-                the button below to download our sponsorship packet!
-                <br /> <br />
-                If you have any questions, please contact our External Vice
-                President at
-                <br /> <br />
-                ufsase.evp@gmail.com
+                <span className="font-semibold">CHANGE!!!!! </span>
+                Are you interested in becoming a partner with the{" "}
+                <span className="font-semibold">
+                  {" "}
+                  UF Society of Asian Scientists and Engineers (SASE) Chapter
+                </span>
+                ?
+                <br />
+                <br />
+                To get access to our{" "}
+                <span className="font-semibold">sponsorship packet </span>
+                please contact our External Vice President, Kayleen Diaz, at{" "}
+                <span>
+                  <a
+                    href={`mailto:ufsase.evp@gmail.com`}
+                    className="text-saseGreen underline"
+                  >
+                    ufsase.evp@gmail.com
+                  </a>
+                </span>
               </p>
-              <div
-                className="absolute left-[3%] top-[4%] h-full w-full rounded-2xl bg-saseGreen"
-                style={{ zIndex: -1 }}
-              ></div>
+              {/* <div className="mt-20 text-center duration-300 hover:scale-105">
+                <a
+                  href="public/UF SASE Sponsorship Packet.pdf"
+                  className="p-4 rounded-full bg-saseBlue text-white font-redhat text-2xl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Sponsorship Packet
+                </a>
+              </div> */}
             </div>
 
-            <div className="flex h-3/4 flex-col gap-16 pl-[8%] pr-[8%]">
+            <div className="flex h-3/4 flex-col gap-16 pl-8 pr-8">
               <div className="grid grid-cols-1 gap-20 sm:grid-cols-2">
-                <SponsorCard
-                  image={blueorigin}
-                  companyName="Blue Origin"
-                  type="Diamond"
-                />
-                <SponsorCard
-                  image={fmglobal}
-                  companyName="FM Global"
-                  type="Diamond"
-                />
+                {SponsorInfo.map((sponsor) =>
+                  sponsor.tier === "Diamond" ? (
+                    <SponsorCard
+                      key={sponsor.company}
+                      image={sponsor.image}
+                      companyName={sponsor.company}
+                      type={sponsor.tier}
+                    />
+                  ) : null,
+                )}
               </div>
-              <p className="m-0 w-full text-center font-redhat text-xl italic">
+              <p className="m-0 w-full text-center font-redhat text-2xl italic text-black">
                 Current Featured Sponsors
               </p>
             </div>
           </div>
         </div>
-
-        {/* <h1 className="mb-4 text-3xl font-bold">Our Values</h1> */}
-        {/* <div className="mb-12 grid grid-cols-2">
-          <img
-            className="w-100"
-            src={professionalDevelopment}
-            alt="Professional Development Image"
-          />
-          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
-            <p className="mb-4 text-2xl font-bold">Professional Development</p>
-            <p className="mb-4 text-lg">
-              Through our meetings, conferences, and events, we shape skills
-              that will help our members succeed in the professional world.
-            </p>
-          </div>
-          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
-            <p className="mb-4 text-2xl font-bold">Socials</p>
-            <p className="mb-4 text-lg">
-              We host multiple social events throughout the year, including a
-              semesterly banquet, that give our members a chance to bond.
-            </p>
-          </div>
-          <img
-            src={professionalDevelopment}
-            alt="Professional Development Image"
-          />
-          <img
-            src={professionalDevelopment}
-            alt="Professional Development Image"
-          />
-          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
-            <p className="mb-4 text-2xl font-bold">Service</p>
-            <p className="mb-4 text-lg">
-              We believe that it is important to make meaningful contributions
-              to the community, so we organize service events for our members to
-              join.
-            </p>
-          </div>
-          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
-            <p className="mb-4 text-2xl font-bold">Sports</p>
-            <p className="mb-4 text-lg">
-              We believe that it is important to make meaningful contributions
-              to the community, so we organize service events for our members to
-              join.
-            </p>
-          </div>
-          <img
-            src={professionalDevelopment}
-            alt="Professional Development Image"
-          />
-          <img
-            src={professionalDevelopment}
-            alt="Professional Development Image"
-          />
-          <div className="ml-4 mr-4 flex flex-col items-center justify-center gap-12">
-            <p className="mb-4 text-2xl font-bold">Mentorship</p>
-            <p className="mb-4 text-lg">
-              To ensure each member has the personal and academic guidance they
-              need, we organize a semesterly mentorship program. Keep an eye on
-              our Instagram to apply!
-            </p>
-          </div>
-        </div> */}
       </div>
     );
   },
