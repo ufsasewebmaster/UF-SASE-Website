@@ -1,4 +1,3 @@
-/// <reference types="vinxi/types/client" />
 import { StartClient } from "@tanstack/start";
 import React from "react";
 import { createRoot } from "react-dom/client";

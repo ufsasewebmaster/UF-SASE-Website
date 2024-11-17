@@ -1,8 +1,8 @@
 import saseLogo from "@/client/assets/SASELogo.png";
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "../utils/seo";
 import GalleryDropdown from "../components/GalleryDropdown";
 import GalleryZipExtraction from "../components/GalleryZipExtraction";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/gallery")({
   meta: () => [
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/gallery")({
             </div>
             <div></div>
             <div className="flex items-center justify-center pb-20">
-              <GalleryZipExtraction/>
+              <GalleryZipExtraction />
             </div>
           </div>
         </div>
