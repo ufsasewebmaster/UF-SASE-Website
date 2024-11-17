@@ -9,9 +9,9 @@ import star_logo from "@assets/home/star_logo.png";
 import v_l from "@assets/home/vincent.png";
 import MissionCard from "@components/MissionCard";
 import SponsorCard from "@components/SponsorCard";
+import MemberCard from "../components/MemberCard";
 import SponsorInfo from "@components/SponsorInfo";
 import { createFileRoute } from "@tanstack/react-router";
-import MemberCard from "../components/MemberCard";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -116,6 +116,12 @@ export const Route = createFileRoute("/")({
               shadow="green"
             />
           </div>
+        </div>
+        
+        <div className="h-96 w-full bg-black p-12">
+          <h1 className="w-full text-center font-oswald text-6xl text-white">
+            Our Values
+          </h1>
         </div>
 
         <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
