@@ -1,9 +1,12 @@
-import { hash, verify } from "@node-rs/argon2";
+// import { hash, verify } from "@node-rs/argon2";
+import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "../db";
 import * as Schema from "../db/schema";
+
+const { compare, genSalt, hash } = bcrypt;
 
 const authRoutes = new Hono();
 
@@ -26,12 +29,8 @@ authRoutes.post("/auth/signup", async (c) => {
     });
   }
 
-  const formPasswordHash = await hash(formPassword, {
-    memoryCost: 19456,
-    timeCost: 2,
-    outputLen: 32,
-    parallelism: 1,
-  });
+  const passSalt = await genSalt(10);
+  const formPasswordHash = await hash(formPassword, passSalt);
 
   const userId = generateIdFromEntropySize(10); // 16 characters long
 
@@ -83,12 +82,7 @@ authRoutes.post("/auth/login", async (c) => {
     return new Response("Invalid username or password", { status: 400 });
 
   const passwordHash = user[0].password_hash;
-  const validPassword = await verify(passwordHash, formPassword, {
-    memoryCost: 19456,
-    timeCost: 2,
-    outputLen: 32,
-    parallelism: 1,
-  });
+  const validPassword = await compare(formPassword, passwordHash);
 
   if (!validPassword) {
     return new Response("Invalid email or password", {
