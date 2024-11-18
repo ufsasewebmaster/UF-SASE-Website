@@ -117,12 +117,6 @@ export const Route = createFileRoute("/")({
             />
           </div>
         </div>
-        
-        <div className="h-96 w-full bg-black p-12">
-          <h1 className="w-full text-center font-oswald text-6xl text-white">
-            Our Values
-          </h1>
-        </div>
 
         <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
           <MemberCard
