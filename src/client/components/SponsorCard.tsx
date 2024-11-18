@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import diamond from "../assets/sponsors/Diamond.png";
+import diamond from "@assets/sponsors/Diamond.png";
 
 const SponsorCard = ({
   companyName,
@@ -11,10 +11,7 @@ const SponsorCard = ({
   type: string;
 }) => {
   return (
-    <div
-      className="relative flex h-full w-full flex-col"
-      style={{ zIndex: 10 }}
-    >
+    <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
         className={cn(
           {
@@ -26,28 +23,26 @@ const SponsorCard = ({
       >
         {type}
       </p>
-      <div
-        className="absolute left-4 top-16 h-5/6 w-full rounded-2xl bg-saseGreen"
-        style={{ zIndex: -1 }}
-      ></div>
-      {type === "Diamond" ? (
-        <img
-          src={diamond}
-          alt="Diamond Icon"
-          className="absolute -left-12 top-2 h-[30%]"
-        />
-      ) : (
-        ""
-      )}
-      <div className="flex h-5/6 flex-col items-center rounded-2xl border-4 border-black bg-white p-1">
+
+      <div className="relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1 shadow-[12px_12px_0px_#7DC242] duration-300 hover:scale-105">
         <img
           src={image}
           alt="Company Logo"
           className="h-5/6 w-full rounded-2xl"
         />
-        <p className="m-4 text-center font-redhat text-3xl font-semibold">
+        <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">
           {companyName}
         </p>
+
+        {type === "Diamond" ? (
+          <img
+            src={diamond}
+            alt="Diamond Icon"
+            className="absolute left-0 top-0 h-[30%] -translate-x-1/2 -translate-y-1/3"
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
