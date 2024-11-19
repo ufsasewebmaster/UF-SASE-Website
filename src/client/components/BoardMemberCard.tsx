@@ -28,7 +28,6 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
       style={{
         width: "22vw",
         maxWidth: "22vw",
-        cursor: "pointer",
       }}
     >
       {/* role */}
@@ -54,7 +53,6 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
           height: "20vw",
           width: "20vw",
         }}
-        onClick={handleToggleExpand}
       >
         <img
           src={member.image}
@@ -72,45 +70,33 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         )}
 
         {isExpanded && (
-          <div
-            className="absolute inset-0 flex cursor-pointer flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out"
-            onClick={() => setExpanded(false)}
-          >
-            {/* expanded content */}
-            <div
-              className="mt-[1.5vw] cursor-pointer text-left"
-              onClick={(e) => e.stopPropagation()}
+          <div className="absolute inset-0 flex flex-col bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out">
+            <button
+              className="absolute right-[1vw] top-[1vw] cursor-pointer text-[1.5vw] text-gray-500 hover:text-black"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(false);
+              }}
             >
-              <h3
-                className="cursor-pointer text-[1.2vw] font-bold"
-                onClick={() => setExpanded(false)}
-              >
-                {member.role}
-              </h3>
-              <h4
-                className="cursor-pointer text-[1vw] font-semibold"
-                onClick={() => setExpanded(false)}
-              >
-                {member.name}
-              </h4>
-              <p
-                className="cursor-pointer text-[0.9vw] text-gray-600"
-                onClick={() => setExpanded(false)}
-              >
-                {member.major}
-              </p>
+              &times;
+            </button>
+
+            {/* info once expanded */}
+            <div className="mt-[1.5vw] text-left">
+              <h3 className="text-[1.2vw] font-bold">{member.role}</h3>
+              <h4 className="text-[1vw] font-semibold">{member.name}</h4>
+              <p className="text-[0.9vw] text-gray-600">{member.major}</p>
               <a
                 href={`mailto:${member.contact}`}
-                className="cursor-pointer text-[0.9vw] text-blue-500 underline"
-                onClick={(e) => e.stopPropagation()}
+                className="text-[0.9vw] text-blue-500 underline"
               >
                 {member.contact}
               </a>
-              <p
-                className="mt-[1vw] cursor-pointer text-[0.7vw] text-gray-800"
-                onClick={() => setExpanded(false)}
-                style={{ marginTop: "1vw" }}
-              >
+            </div>
+
+            {/* description */}
+            <div className="flex flex-grow items-end justify-center">
+              <p className="mt-[1.5vw] text-center text-[0.9vw] text-gray-800">
                 {member.description}
               </p>
             </div>
@@ -118,7 +104,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         )}
       </div>
 
-      {/* name turns invisible on click of learn more */}
+      {/* role/name turns invisible on click of learn more */}
       <p
         className={`mt-[1.5vw] ${isExpanded ? "invisible" : "text-black"}`}
         style={{ fontSize: "1.6vw" }}

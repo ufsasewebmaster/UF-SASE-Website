@@ -1,21 +1,11 @@
-import saseLogo from "@/client/assets/SASELogo.png";
 import type { FormData } from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import AuthForm from "../components/AuthForm";
 import ShadowCard from "../components/AuthShadowCard";
-import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/signup")({
-  meta: () => [
-    ...seo({
-      title: "Signup | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
-    }),
-  ],
-
   component: () => {
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {

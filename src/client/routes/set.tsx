@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import IG from "@assets/programs/set/SETGroup.png";
 import IS from "@assets/programs/set/SETRobot.png";
 import Star from "@assets/programs/star.png";
@@ -8,20 +7,9 @@ import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import PastProjectsSection from "@components/programs/PastProjectsSection";
 import TitleUnderline from "@components/programs/TitleUnderline";
-=======
-import saseLogo from "@/client/assets/SASELogo.png";
->>>>>>> 0788abd3fe8969bb68d9eb88460f6aa133a1126d
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/set")({
-  meta: () => [
-    ...seo({
-      title: "SET | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
-    }),
-  ],
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">

@@ -1,5 +1,4 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-const { addDynamicIconSelectors } = require("@iconify/tailwind");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -62,8 +61,7 @@ module.exports = {
       },
       fontFamily: {
         oswald: ["Oswald", "sans-serif"],
-        redhat: ["Red Hat Text", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
+        redhat: ['"Red Hat Text"', "sans-serif"],
         // sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
@@ -82,9 +80,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwind-scrollbar"),
-    addDynamicIconSelectors(),
-  ],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 };

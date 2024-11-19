@@ -8,23 +8,19 @@ interface NavItem {
   children?: Array<NavItem>;
 }
 
-export const DesktopMenu: React.FC<{
-  navItems: Array<NavItem>;
-  isHomePage: boolean;
-}> = ({ isHomePage, navItems }) => {
+export const DesktopMenu: React.FC<{ navItems: Array<NavItem> }> = ({
+  navItems,
+}) => {
   return (
     <ul className="flex space-x-6">
       {navItems.map((item) => (
-        <NavItemComponent key={item.name} item={item} isHomePage={isHomePage} />
+        <NavItemComponent key={item.name} item={item} />
       ))}
     </ul>
   );
 };
 
-const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({
-  isHomePage,
-  item,
-}) => {
+const NavItemComponent: React.FC<{ item: NavItem }> = ({ item }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const hasChildren = item.children && item.children.length > 0;
@@ -65,12 +61,10 @@ const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({
           {/* Dropdown Menu */}
           <ul
             className={cn(
-              `absolute left-0 mt-2 w-40 rounded border shadow-lg group-hover:block`,
+              `absolute left-0 mt-2 w-40 rounded border bg-white shadow-lg group-hover:block`,
               {
                 hidden: !dropdownOpen,
                 block: dropdownOpen,
-                "border-black bg-black text-white": isHomePage,
-                "border-white bg-white text-black": !isHomePage,
               },
             )}
             style={{ paddingTop: "10px", marginTop: "0px" }} // Ensure dropdown is positioned without affecting the title
@@ -78,10 +72,7 @@ const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({
             {item.children &&
               Array.isArray(item.children) &&
               item.children.map((child) => (
-                <li
-                  key={child.name}
-                  className={`p-2 ${isHomePage ? "hover:bg-gray-700" : "hover:bg-gray-200"}`}
-                >
+                <li key={child.name} className="p-2 hover:bg-gray-200">
                   <NavLink
                     to={child.path ?? "#"}
                     onClick={() => setDropdownOpen(false)}

@@ -1,18 +1,9 @@
-import saseLogo from "@/client/assets/SASELogo.png";
 import boardGroup from "@assets/board/boardpic.jpeg";
 import boardInfo from "@components/BoardInfo";
 import BoardMemberCard from "@components/BoardMemberCard";
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/board")({
-  meta: () => [
-    ...seo({
-      title: "Board | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
-    }),
-  ],
   component: () => {
     return (
       <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
@@ -20,7 +11,7 @@ export const Route = createFileRoute("/board")({
         <div className="text-center">
           <h1 className="font-oswald text-7xl font-medium">BOARD</h1>
           <p className="mb-8 mt-8 text-2xl text-black">
-            Meet our 2024-2025 SASE Board Members!
+            Meet our 2023-2024 SASE Board Members!
           </p>
           <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
         </div>

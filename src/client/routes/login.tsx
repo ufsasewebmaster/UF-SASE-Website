@@ -1,24 +1,14 @@
-import saseLogo from "@/client/assets/SASELogo.png";
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useAuth } from "../AuthContext";
 import ShadowCard from "../components/AuthShadowCard";
-import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/login")({
-  meta: () => [
-    ...seo({
-      title: "Login | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
-    }),
-  ],
   component: () => {
     const { login } = useAuth();
-    const navigate = useNavigate();
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
@@ -44,7 +34,6 @@ export const Route = createFileRoute("/login")({
       },
       onSuccess: () => {
         login();
-        navigate({ to: "/" });
       },
       onError: (error) => {
         console.error("Error during mutation:", error);

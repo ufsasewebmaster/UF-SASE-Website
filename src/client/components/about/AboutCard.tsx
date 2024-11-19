@@ -24,9 +24,9 @@ const AboutCard = () => {
           Through our{" "}
           <span className="font-semibold">general body meetings</span>,{" "}
           <span className="font-semibold">socials</span>,
-          <span className="font-semibold"> workshops</span>, and{" "}
+          <span className="font-semibold">workshops</span>, and{" "}
           <span className="font-semibold">internal mentorship program</span>, we
-          aim to build our members’ relationships, skills, and knowledge that
+          aim to build our members’ relationships, skills and knowledge that
           will enable them to succeed. We also offer an
           <span className="font-semibold">
             {" "}
@@ -40,20 +40,11 @@ const AboutCard = () => {
           .
         </p>
 
-        {/* Gradient Line */}
-        <div
-          className="absolute -bottom-12 right-6 h-2 w-[90%] rounded-full"
-          style={{
-            background: "linear-gradient(to right, #0668B3 70%, white)",
-          }}
-        ></div>
-
-        {/* Logo Image */}
         <img
           src={logoImage}
           alt="Logo"
-          style={{ width: "200px", height: "200px" }}
-          className="absolute -bottom-28 -right-20 object-contain"
+          style={{ width: "175px", height: "175px" }}
+          className="absolute -bottom-20 -right-20 object-contain"
         />
       </div>
     </div>
