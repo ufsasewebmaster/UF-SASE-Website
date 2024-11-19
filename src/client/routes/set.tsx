@@ -1,5 +1,5 @@
-import IG from "@assets/programs/set/SETGroup.png";
-import IS from "@assets/programs/set/SETRobot.png";
+import IG from "@assets/logoSaseWhite.png";
+import IS from "@assets/programs/star.png";
 import saseLogo from "@assets/SASELogo.png";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
