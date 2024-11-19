@@ -1,8 +1,8 @@
+import dropdownImage from "@assets/SASELogo.png";
 import type { SetStateAction } from "react";
 import React, { useCallback, useState } from "react";
 import { CgPlayButtonR } from "react-icons/cg";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import dropdownImage from "@assets/SASELogo.png";
 
 interface DropdownProps {
   slideshow: string;
