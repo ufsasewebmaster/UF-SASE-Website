@@ -1,7 +1,5 @@
-// src/components/navigation/MobileMenu.tsx
-
 import React, { useState } from "react";
-import { NavLink } from "./NavLink"; // Adjust the import path as needed
+import { NavLink } from "./NavLink";
 
 interface NavItem {
   name: string;
@@ -13,9 +11,11 @@ interface MobileMenuProps {
   navItems: Array<NavItem>;
   isOpen: boolean;
   onClose: () => void;
+  isHomePage: boolean;
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({
+  isHomePage,
   isOpen,
   navItems,
   onClose,
@@ -23,20 +23,30 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute left-0 top-16 z-40 w-full bg-white shadow-md">
+    <div
+      className={`absolute left-0 top-16 z-40 w-full shadow-md ${
+        isHomePage ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       <ul className="flex flex-col space-y-2 p-4">
         {navItems.map((item) => (
-          <MobileNavItem key={item.name} item={item} onClose={onClose} />
+          <MobileNavItem
+            key={item.name}
+            item={item}
+            onClose={onClose}
+            isHomePage={isHomePage}
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-const MobileNavItem: React.FC<{ item: NavItem; onClose: () => void }> = ({
-  item,
-  onClose,
-}) => {
+const MobileNavItem: React.FC<{
+  item: NavItem;
+  onClose: () => void;
+  isHomePage: boolean;
+}> = ({ isHomePage, item, onClose }) => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const hasChildren = item.children && item.children.length > 0;
 
@@ -45,7 +55,9 @@ const MobileNavItem: React.FC<{ item: NavItem; onClose: () => void }> = ({
       {hasChildren ? (
         <>
           <button
-            className="flex w-full items-center justify-between px-2 py-1 text-left focus:outline-none"
+            className={`flex w-full items-center justify-between px-2 py-1 text-left focus:outline-none ${
+              isHomePage ? "text-white" : "text-black"
+            }`}
             onClick={() => setSubmenuOpen(!submenuOpen)}
             aria-haspopup="true"
             aria-expanded={submenuOpen}

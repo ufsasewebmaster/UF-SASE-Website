@@ -1,15 +1,23 @@
+import saseLogo from "@/client/assets/SASELogo.png";
 import { useAuth } from "@client/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import React, { useMemo, useState } from "react";
-import { FiSave, FiUpload, FiX } from "react-icons/fi";
 import type { Descendant } from "slate";
 import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 import { Button } from "../components/ui/button";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/blogs")({
+  meta: () => [
+    ...seo({
+      title: "Blogs | UF SASE",
+      description: "UF Society of Asian Scientists & Engineers",
+      image: saseLogo,
+    }),
+  ],
   component: BlogEditor,
 });
 
@@ -109,7 +117,7 @@ function BlogEditor() {
             onClick={handleImageRemove}
             aria-label="Remove Image"
           >
-            <FiX />
+            <span>todo x icon</span>
           </button>
         )}
 
@@ -119,7 +127,7 @@ function BlogEditor() {
             className="absolute right-4 top-4 cursor-pointer rounded border border-black bg-white px-2 py-1 text-black"
             aria-label="Upload Image"
           >
-            <FiUpload />
+            <span>todo upload icon</span>
           </label>
         ) : (
           <button
@@ -127,7 +135,7 @@ function BlogEditor() {
             onClick={handleImageSave}
             aria-label="Save Image"
           >
-            <FiSave />
+            <span>todo save icon</span>
           </button>
         )}
 
