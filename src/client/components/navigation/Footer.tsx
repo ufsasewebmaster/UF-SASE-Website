@@ -1,4 +1,4 @@
-import logoImage from "@assets/logoSaseWhite.png";
+import { imageUrls } from "@/client/assets/imageUrls";
 import { Link } from "@tanstack/react-router";
 import { Button } from "../ui/button";
 import SocialIcons from "../ui/socialIcons";
@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
         <div className="mb-6 flex flex-col items-center md:mb-0 md:items-start">
           <div className="mb-6">
             <img
-              src={logoImage}
+              src={imageUrls["WhiteSASELogo.png"]}
               alt="Logo"
               style={{ width: "235px", height: "75px" }}
               className="ml-2 h-auto"

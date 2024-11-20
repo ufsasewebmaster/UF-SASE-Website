@@ -1,12 +1,12 @@
+import { imageUrls } from "@/client/assets/imageUrls";
 import React from "react";
-import board from "../../assets/home/board.png";
 
 const BoardPicture = () => {
   return (
     <div className="relative mx-auto mb-24 w-full max-w-7xl">
       {/* Background Image */}
       <img
-        src={board}
+        src={imageUrls["Board.png"]}
         alt="Board Picture"
         className="h-auto w-full rounded-xl object-cover"
       />

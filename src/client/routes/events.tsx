@@ -1,5 +1,4 @@
-import ExampleSlideShow from "@assets/events/ExampleSlideShow.png";
-import saseLogo from "@assets/SASELogo.png";
+import { imageUrls } from "@assets/imageUrls";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
 import ImageButton from "../components/events/ImageButton";
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/events")({
     ...seo({
       title: "Events | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   component: () => {
@@ -31,27 +30,27 @@ export const Route = createFileRoute("/events")({
         <div className="grid grid-cols-3 justify-center gap-4">
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={ExampleSlideShow}
+            imageUrl={imageUrls["ExampleSlideShow.png"]}
           />
         </div>
       </div>

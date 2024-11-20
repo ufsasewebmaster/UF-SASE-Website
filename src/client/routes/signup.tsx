@@ -1,4 +1,4 @@
-import saseLogo from "@/client/assets/SASELogo.png";
+import { imageUrls } from "@assets/imageUrls";
 import type { FormData } from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/signup")({
     ...seo({
       title: "Signup | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
 

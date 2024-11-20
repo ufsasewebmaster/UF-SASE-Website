@@ -1,5 +1,4 @@
-import saseLogo from "@/client/assets/SASELogo.png";
-import headerImage from "@assets/sponsors/Board.png";
+import { imageUrls } from "@assets/imageUrls";
 import SponsorCard from "@components/SponsorCard";
 import SponsorInfo from "@components/SponsorInfo";
 import { createFileRoute } from "@tanstack/react-router";
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/sponsors")({
     ...seo({
       title: "Sponsors | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   component: () => {
@@ -40,7 +39,11 @@ export const Route = createFileRoute("/sponsors")({
               </span>{" "}
               Chapter
             </p>
-            <img src={headerImage} alt="2023-2024 Board" className="w-full" />
+            <img
+              src={imageUrls["Board.png"]}
+              alt="2023-2024 Board"
+              className="w-full"
+            />
             <p className="absolute bottom-[10%] pl-4 pr-4 text-center font-redhat text-base font-medium italic text-white md:text-xl lg:text-2xl xl:text-3xl">
               To view our sponsorship packet, or for any related questions,
               please contact our External Vice President, Kayleen Diaz, at{" "}

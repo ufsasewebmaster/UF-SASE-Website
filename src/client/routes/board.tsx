@@ -1,5 +1,4 @@
-import saseLogo from "@/client/assets/SASELogo.png";
-import boardGroup from "@assets/board/boardpic.jpeg";
+import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/BoardInfo";
 import BoardMemberCard from "@components/BoardMemberCard";
 import { createFileRoute } from "@tanstack/react-router";
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/board")({
     ...seo({
       title: "Board | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   component: () => {
@@ -28,7 +27,7 @@ export const Route = createFileRoute("/board")({
         {/* group picture */}
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
           <div className="w-full max-w-3xl overflow-hidden rounded-2xl border-[3px] border-black shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
-            <img src={boardGroup} className="w-full" />
+            <img src={imageUrls["BoardPic.jpeg"]} className="w-full" />
           </div>
         </div>
         <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />

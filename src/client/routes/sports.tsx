@@ -1,4 +1,4 @@
-import saseLogo from "@/client/assets/SASELogo.png";
+import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/sports")({
     ...seo({
       title: "Sports | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
 

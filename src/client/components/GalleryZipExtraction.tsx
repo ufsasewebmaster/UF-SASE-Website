@@ -1,3 +1,4 @@
+import { imageUrls } from "@assets/imageUrls";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
@@ -8,24 +9,24 @@ interface ZipProps {
 const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
   // List of image paths inside the 'public/assets' folder
   const fall2024_images = [
-    "/assets/fall2024_1.JPG",
-    "/assets/fall2024_4.JPG",
-    "/assets/fall2024_5.JPG",
-    "/assets/fall2024_6.JPG",
+    imageUrls["fall2024_1.JPG"],
+    imageUrls["fall2024_4.JPG"],
+    imageUrls["fall2024_5.JPG"],
+    imageUrls["fall2024_6.JPG"],
   ];
 
   const spring2024_images = [
-    "/assets/fall2024_7.JPG",
-    "/assets/fall2024_9.JPG",
-    "/assets/fall2024_10.JPG",
-    "/assets/fall2024_2.jpg",
+    imageUrls["fall2024_7.JPG"],
+    imageUrls["fall2024_9.JPG"],
+    imageUrls["fall2024_10.JPG"],
+    imageUrls["fall2024_2.jpg"],
   ];
 
   const fall2023_images = [
-    "/assets/fall2024_3.jpeg",
-    "/assets/fall2024_8.jpg",
-    "/assets/fall2024_12.jpg",
-    "/assets/fall2024_13.jpg",
+    imageUrls["fall2024_3.jpeg"],
+    imageUrls["fall2024_8.jpg"],
+    imageUrls["fall2024_12.jpg"],
+    imageUrls["fall2024_13.jpg"],
   ];
 
   let images;

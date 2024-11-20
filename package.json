@@ -9,6 +9,7 @@
     "build": "vinxi build",
     "start": "vinxi start",
     "fix": "concurrently \"bun run lint:js:fix\" \"bun run lint:fmt:fix\"",
+    "generate": "bun run src/client/assets/generateImageMaps.ts",
     "lint": "concurrently \"bun run lint:ts\" \"bun run lint:js\" \"bun run lint:fmt\"",
     "lint:ts": "tsc -b tsconfig.json",
     "lint:js": "eslint .",

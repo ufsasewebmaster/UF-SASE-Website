@@ -1,6 +1,6 @@
-import saseLogo from "@/client/assets/SASELogo.png";
 import { DefaultCatchBoundary } from "@/client/components/DefaultCatchBoundary";
 import { NotFound } from "@/client/components/NotFound";
+import { imageUrls } from "@assets/imageUrls";
 import {
   createRootRoute,
   Outlet,
@@ -26,7 +26,7 @@ export const Route = createRootRoute({
     ...seo({
       title: "UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   links: () => [

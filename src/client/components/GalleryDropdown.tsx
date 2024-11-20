@@ -1,8 +1,8 @@
+import { imageUrls } from "@assets/imageUrls";
 import type { SetStateAction } from "react";
 import React, { useCallback, useState } from "react";
 import { CgPlayButtonR } from "react-icons/cg";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import dropdownImage from "../assets/gallery/dropdown_image.webp";
 
 interface DropdownProps {
   slideshow: string;
@@ -54,7 +54,7 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(
         </div>
         <div className="flex justify-center pl-5 pr-32">
           <img
-            src={dropdownImage}
+            src={imageUrls["DropDownImage.webp"]}
             alt=""
             loading="lazy"
             className="h-56 min-h-[150px] w-96 min-w-[300px] rounded-lg border-2 border-black object-cover"

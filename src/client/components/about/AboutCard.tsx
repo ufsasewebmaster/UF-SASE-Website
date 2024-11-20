@@ -1,4 +1,4 @@
-import logoImage from "@assets/about/sase_logo.png";
+import { imageUrls } from "@assets/imageUrls";
 import React from "react";
 
 const AboutCard = () => {
@@ -50,7 +50,7 @@ const AboutCard = () => {
 
         {/* Logo Image */}
         <img
-          src={logoImage}
+          src={imageUrls["SASELogoStar.png"]}
           alt="Logo"
           style={{ width: "200px", height: "200px" }}
           className="absolute -bottom-28 -right-20 object-contain"

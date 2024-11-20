@@ -1,4 +1,4 @@
-import saseLogo from "@/client/assets/SASELogo.png";
+import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { IoMdLink } from "react-icons/io";
@@ -11,7 +11,7 @@ export const Route = createFileRoute("/gallery")({
     ...seo({
       title: "Gallery | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   component: () => {

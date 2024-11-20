@@ -1,11 +1,9 @@
-import IG from "@assets/logoSaseWhite.png";
-import IS from "@assets/programs/star.png";
-import saseLogo from "@assets/SASELogo.png";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
+import { imageUrls } from "../assets/imageUrls";
 import { faqData } from "../components/programs/faqInterns";
 import { seo } from "../utils/seo";
 
@@ -14,7 +12,7 @@ export const Route = createFileRoute("/set")({
     ...seo({
       title: "SET | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
   component: () => {
@@ -52,7 +50,7 @@ export const Route = createFileRoute("/set")({
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="mx-auto mb-24 w-full max-w-7xl px-4">
             <img
-              src={IG}
+              src={imageUrls["WhiteSASELogo.png"]}
               alt="SET Image"
               className="w-full rounded-3xl border-4 border-saseGreen"
               style={{ height: "600px", objectFit: "cover" }}
@@ -63,7 +61,7 @@ export const Route = createFileRoute("/set")({
             <h2 className="text-4xl text-gray-800">Past Projects</h2>
           </header>
           <TestimonialCard
-            image={IS}
+            image={imageUrls["Star.png"]}
             text="Last year, SET successfully developed a campus cleaner robot designed to autonomously identify and pick up trash 🤖. This innovative project not only helped keep our campus clean but also provided valuable experience in robotics, programming, and teamwork."
             name="SET Member"
             title="2024 Project"
