@@ -1,5 +1,5 @@
+import { imageUrls } from "@/client/assets/imageUrls";
 import React from "react";
-import Star from "../../assets/programs/star.png";
 
 interface TestimonialCardProps {
   image: string;
@@ -25,7 +25,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         />
         {/* Decorative Icon */}
         <img
-          src={Star}
+          src={imageUrls["Star.png"]}
           alt="Decorative star"
           className="absolute -bottom-6 -left-9 h-20 w-20"
         />

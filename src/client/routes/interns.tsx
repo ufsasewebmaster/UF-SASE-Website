@@ -1,10 +1,9 @@
-import StandInPicture from "@assets/home/board.png";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
-import saseLogo from "../assets/SASELogo.png";
+import { imageUrls } from "../assets/imageUrls";
 import { faqData } from "../components/programs/faqInterns";
 import { seo } from "../utils/seo";
 
@@ -13,7 +12,7 @@ export const Route = createFileRoute("/interns")({
     ...seo({
       title: "Interns | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
-      image: saseLogo,
+      image: imageUrls["SASELogo.png"],
     }),
   ],
 
@@ -53,7 +52,7 @@ export const Route = createFileRoute("/interns")({
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="mx-auto mb-24 w-full max-w-7xl px-4">
             <img
-              src={StandInPicture}
+              src={imageUrls["Board.png"]}
               alt="Placeholder"
               className="w-full rounded-3xl border-4 border-saseGreen"
               style={{ height: "600px", objectFit: "cover" }}
@@ -64,7 +63,7 @@ export const Route = createFileRoute("/interns")({
             <h2 className="text-4xl text-gray-800">Testimonials</h2>
           </header>
           <TestimonialCard
-            image={StandInPicture}
+            image={imageUrls["Board.png"]}
             text="SASE Interns was an incredible experience. I learned a lot about organizational, leadership, and planning skills and gained a lot of insight from SASE Board members. This program has greatly helped my professional development."
             name="First Last"
             title="2024 Intern"

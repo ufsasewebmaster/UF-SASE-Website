@@ -1,8 +1,8 @@
-import StandInPicture from "@assets/home/board.png";
 import BoardPicture from "@components/programs/BoardPicture";
 import ProgramCard from "@components/programs/ProgramCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
+import { imageUrls } from "../assets/imageUrls";
 
 export const Route = createFileRoute("/programs")({
   component: () => {
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Interns</h2>
           </header>
           <ProgramCard
-            image={StandInPicture}
+            image={imageUrls["Board.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Engineering Team (SET)</h2>
           </header>
           <ProgramCard
-            image={StandInPicture}
+            image={imageUrls["Board.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Web Development Team</h2>
           </header>
           <ProgramCard
-            image={StandInPicture}
+            image={imageUrls["Board.png"]}
             text={
               <>
                 The <strong>SASE Web Development Team</strong> is a group of{" "}
@@ -76,7 +76,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Sports</h2>
           </header>
           <ProgramCard
-            image={StandInPicture}
+            image={imageUrls["Board.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board

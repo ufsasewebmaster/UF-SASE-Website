@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import diamond from "@assets/sponsors/Diamond.png";
+import { imageUrls } from "../assets/imageUrls";
 
 const SponsorCard = ({
   companyName,
@@ -36,7 +36,7 @@ const SponsorCard = ({
 
         {type === "Diamond" ? (
           <img
-            src={diamond}
+            src={imageUrls["Diamond.png"]}
             alt="Diamond Icon"
             className="absolute left-0 top-0 h-[30%] -translate-x-1/2 -translate-y-1/3"
           />

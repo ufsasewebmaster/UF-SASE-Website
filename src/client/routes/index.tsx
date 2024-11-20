@@ -1,12 +1,4 @@
-import board from "@assets/home/board.png";
-import briefcase from "@assets/home/briefcase.png";
-import b_p from "@assets/home/bryan.png";
-import dudes from "@assets/home/dudes.png";
-import k_d from "@assets/home/kayleen.png";
-import lightbulb from "@assets/home/lightbulb.png";
-import logo from "@assets/home/logo.png";
-import star_logo from "@assets/home/star_logo.png";
-import v_l from "@assets/home/vincent.png";
+import { imageUrls } from "@assets/imageUrls";
 import MemberCard from "@components/MemberCard";
 import MissionCard from "@components/MissionCard";
 import SponsorCard from "@components/SponsorCard";
@@ -19,7 +11,7 @@ export const Route = createFileRoute("/")({
       <div className="flex flex-col items-center">
         <div className="flex w-full flex-col items-center">
           <img
-            src={board}
+            src={imageUrls["Board.png"]}
             alt="2023-2024 SASE Board"
             className="relative h-auto w-full"
           />
@@ -27,7 +19,7 @@ export const Route = createFileRoute("/")({
             <h1 className="flex items-center">
               <span>S </span>
               <img
-                src={logo}
+                src={imageUrls["WhiteLogo.png"]}
                 alt="SASE Logo"
                 className="inline-block h-[1.5em] align-middle"
               />
@@ -82,7 +74,7 @@ export const Route = createFileRoute("/")({
               our members to contribute meaningfully to society.
             </p>
             <img
-              src={star_logo}
+              src={imageUrls["SASELogoStar.png"]}
               alt="SASE Logo"
               className="absolute right-0 top-0 w-[20%] -translate-y-1/2 translate-x-1/3"
             />
@@ -95,21 +87,21 @@ export const Route = createFileRoute("/")({
           </h1>
           <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
             <MissionCard
-              image={briefcase}
+              image={imageUrls["Briefcase.png"]}
               mission="Professional Development"
               text="To prepare Asian heritage students for success in the
                 transnational, global business world."
               shadow="green"
             />
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Diversity"
               text="To promote diversity and tolerance on campuses and in the
                 workplace."
               shadow="blue"
             />
             <MissionCard
-              image={lightbulb}
+              image={imageUrls["Lightbulb.png"]}
               mission="Community"
               text="To provide opportunities for its members to make contributions
                 to their local communities."
@@ -120,19 +112,19 @@ export const Route = createFileRoute("/")({
 
         <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
           <MemberCard
-            image={v_l}
+            image={imageUrls["President.png"]}
             name="Vincent Lin"
             role="President"
             textColor="blue"
           />
           <MemberCard
-            image={b_p}
+            image={imageUrls["InternalVicePresident.png"]}
             name="Bryan Park"
             role="Internal Vice President"
             textColor="green"
           />
           <MemberCard
-            image={k_d}
+            image={imageUrls["ExternalVicePresident.png"]}
             name="Kayleen Diaz"
             role="External Vice President"
             textColor="blue"
@@ -145,31 +137,31 @@ export const Route = createFileRoute("/")({
           </h1>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Professional Development"
               text="Through our meetings, conferences, and events, we shape skills that will help our members succeed in the professional world."
               shadow="blue"
             />
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Socials"
               text="We host multiple social events throughout the year, including a semesterly banquet, that give our members a chance to bond."
               shadow="blue"
             />
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Service"
               text="We believe that it is important to make meaningful contributions to the community, so we organize service events for our members to join."
               shadow="blue"
             />
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Sports"
               text="To facilitate bonding and interaction, we have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!"
               shadow="blue"
             />
             <MissionCard
-              image={dudes}
+              image={imageUrls["People.png"]}
               mission="Mentorship"
               text="To ensure each member has the personal and academic guidance they need, we organize a semesterly mentorship program. Keep an eye on our Instagram to apply!"
               shadow="blue"

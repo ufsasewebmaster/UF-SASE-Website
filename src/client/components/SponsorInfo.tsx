@@ -1,46 +1,40 @@
-import arthrex from "@assets/sponsors/Arthrex.png";
-import axogen from "@assets/sponsors/Axogen.png";
-import blueorigin from "@assets/sponsors/BlueOriginLogo.png";
-import fmglobal from "@assets/sponsors/FMGlobal.png";
-import google from "@assets/sponsors/Google.png";
-import johnson from "@assets/sponsors/J&J.png";
-import sargentlundy from "@assets/sponsors/S&L.png";
+import { imageUrls } from "@assets/imageUrls";
 
 const SponsorInfo = [
   {
     company: "Blue Origin",
     tier: "Diamond",
-    image: blueorigin,
+    image: imageUrls["BlueOriginLogo.png"],
   },
   {
     company: "Fm Global",
     tier: "Diamond",
-    image: fmglobal,
+    image: imageUrls["FMGlobal.png"],
   },
   {
     company: "Sargent & Lundy",
     tier: "Gold",
-    image: sargentlundy,
+    image: imageUrls["S&L.png"],
   },
   {
     company: "Axogen",
     tier: "Gold",
-    image: axogen,
+    image: imageUrls["Axogen.png"],
   },
   {
     company: "Johnson & Johnson",
     tier: "Silver",
-    image: johnson,
+    image: imageUrls["J&J.png"],
   },
   {
     company: "Arthrex",
     tier: "Bronze",
-    image: arthrex,
+    image: imageUrls["Arthrex.png"],
   },
   {
     company: "Google",
     tier: "Bronze",
-    image: google,
+    image: imageUrls["Google.png"],
   },
 ];
 
