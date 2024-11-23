@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import { imageUrls } from "../assets/imageUrls";
+import { imageUrls } from "@assets/imageUrls";
 
 const SponsorCard = ({
   companyName,

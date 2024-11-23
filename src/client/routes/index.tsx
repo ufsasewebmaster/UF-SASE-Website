@@ -1,9 +1,10 @@
+import MemberCard from "@/client/components/home/MemberCard";
+import MissionCard from "@/client/components/home/MissionCard";
+import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import { imageUrls } from "@assets/imageUrls";
-import MemberCard from "@components/MemberCard";
-import MissionCard from "@components/MissionCard";
-import SponsorCard from "@components/SponsorCard";
-import SponsorInfo from "@components/SponsorInfo";
+import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
+import EmblaCarousel from "../components/home/Carousel";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -54,7 +55,7 @@ export const Route = createFileRoute("/")({
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <p className="font-redhat text-2xl text-white">
+            <p className="font-redhat text-xl text-white sm:text-2xl">
               The Society of Asian Scientists & Engineers is a vibrant and
               dynamic organization at the University of Florida. We are
               committed to fostering meaningful connections across cultures and
@@ -62,7 +63,7 @@ export const Route = createFileRoute("/")({
               professionals in science and engineering.
             </p>
             <br />
-            <p className="font-redhat text-2xl text-white">
+            <p className="font-redhat text-xl text-white sm:text-2xl">
               Through engaging meetings and events, we provide a nurturing
               environment where you can acquire essential skills and knowledge
               to excel in the professional world. Our inclusive community
@@ -135,8 +136,9 @@ export const Route = createFileRoute("/")({
           <h1 className="w-full pb-12 text-center font-oswald text-6xl text-white">
             Our Values
           </h1>
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-            <MissionCard
+          <div className="">
+            <EmblaCarousel />
+            {/* <MissionCard
               image={imageUrls["People.png"]}
               mission="Professional Development"
               text="Through our meetings, conferences, and events, we shape skills that will help our members succeed in the professional world."
@@ -165,7 +167,7 @@ export const Route = createFileRoute("/")({
               mission="Mentorship"
               text="To ensure each member has the personal and academic guidance they need, we organize a semesterly mentorship program. Keep an eye on our Instagram to apply!"
               shadow="blue"
-            />
+            /> */}
           </div>
         </div>
 
