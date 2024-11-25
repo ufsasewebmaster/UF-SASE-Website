@@ -1,4 +1,3 @@
-// import { hash, verify } from "@node-rs/argon2";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -11,9 +10,9 @@ const { compare, genSalt, hash } = bcrypt;
 const authRoutes = new Hono();
 
 authRoutes.post("/auth/signup", async (c) => {
-  const formData = await c.req.formData();
-  const formUsername = formData.get("username");
-  const formPassword = formData.get("password");
+  const formData = await c.req.json();
+  const formUsername = formData["username"];
+  const formPassword = formData["password"];
 
   //TODO VALIDATE USERNAME
   if (!formUsername || typeof formUsername !== "string") {
