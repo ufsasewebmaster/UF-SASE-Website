@@ -1,11 +1,18 @@
-import image from "@assets/Values_ProfDev.png";
+import mentorship_icon from "@assets/MentorshipValueIcon.png";
+import mentorship from "@assets/MentorshipValues.jpeg";
+import prof from "@assets/ProfDevValue.jpg";
+import prof_icon from "@assets/ProfDevValueIcon.png";
+import service from "@assets/ServiceValue.jpg";
+import socials from "@assets/SocialsValue.jpg";
+import sport from "@assets/SportsValue.jpg";
+import sports_icon from "@assets/SportsValueIcon.png";
 import type {
   EmblaCarouselType,
   EmblaEventType,
   EmblaOptionsType,
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselArrows";
 
 const TWEEN_FACTOR_BASE = 0.52;
@@ -20,32 +27,38 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = () => {
   const values = [
     {
-      img: image,
+      img: prof,
+      icon: prof_icon,
       value: "Professional Development",
       text: "Through our meetings, conferences, and events, we shape skills that will help our members succeed in the professional world.",
     },
     {
-      img: image,
+      img: socials,
+      icon: prof_icon,
       value: "Socials",
       text: "We host multiple social events throughout the year, including a semesterly banquet, that give our members a chance to bond.",
     },
     {
-      img: image,
+      img: service,
+      icon: prof_icon,
       value: "Service",
       text: "We believe that it is important to make meaningful contributions to the community, so we organize service events for our members to join.",
     },
     {
-      img: image,
+      img: sport,
+      icon: sports_icon,
       value: "Sports",
       text: "To facilitate interaction, we have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!",
     },
     {
-      img: image,
+      img: mentorship,
+      icon: mentorship_icon,
       value: "Mentorship",
       text: "To ensure each member has the personal and academic guidance they need, we organize a semesterly mentorship program. Keep an eye on our Instagram to apply!",
     },
   ];
 
+  const [flipped, setFlipped] = useState([false, false, false, false, false]);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<Array<HTMLElement>>([]);
@@ -124,27 +137,47 @@ const EmblaCarousel: React.FC<PropType> = () => {
       .on("slideFocus", tweenScale);
   }, [emblaApi, tweenScale]);
 
+  const handleImageClick = (index: number) => {
+    const updatedFlippedStatus = [...flipped];
+    updatedFlippedStatus[index] = !flipped[index];
+    setFlipped(updatedFlippedStatus);
+  };
+
   return (
     <div className="m-auto max-w-full">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {values.map((value, index) => (
             <div
-              className="flex min-w-0 flex-[0_0_50%] items-center justify-center [transform:translate3d(0,0,0)]"
+              className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] sm:flex-[0_0_40%]"
               key={index}
             >
-              <p
-                className="absolute pt-[15%] font-redhat text-4xl font-semibold text-white"
-                style={{ zIndex: 1 }}
-              >
-                {value.value}
-              </p>
-              <img
-                className="embla__slide__image relative rounded-2xl border-4 border-saseGreen opacity-50 hover:cursor-pointer"
-                src={value.img}
-                alt={`Slide ${index + 1}`}
-                style={{ zIndex: -1 }}
-              />
+              <div className="embla__slide__image rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
+                <div
+                  className="embla__slide__image relative rounded-2xl hover:cursor-pointer"
+                  onClick={() => handleImageClick(index)}
+                >
+                  <img
+                    src={value.img}
+                    alt={`${value.value} + Image`}
+                    className="aspect-auto rounded-xl"
+                  />
+                  {!flipped[index] ? (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
+                      <img src={value.icon} alt={`${value.value} + Icon`} />
+                      <p className="text-center font-redhat text-4xl font-semibold text-black">
+                        {value.value}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
+                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black">
+                        {value.text}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
