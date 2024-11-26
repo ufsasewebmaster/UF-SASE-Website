@@ -38,10 +38,13 @@
       "@components/*": ["src/client/components/*"],
       "@navigation/*": ["src/client/components/navigation/*"],
       "@about/*": ["src/client/components/about/*"],
-      "@assets/*": ["./src/client/assets/*"],
       "@ui/*": ["src/client/components/ui/*"],
+      "@assets/*": ["./src/client/assets/*"],
       "@server/*": ["./src/server/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@api/*": ["./src/server/api/*"],
+      "@db/*": ["./src/server/db/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@schema/*": ["./src/shared/schema/*"]
     }
   }
 }

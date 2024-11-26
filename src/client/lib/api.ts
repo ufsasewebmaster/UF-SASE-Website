@@ -1,5 +1,5 @@
 import { db } from "@/server/db";
-import { blogs } from "@/server/db/schema";
+import { blogs } from "@/server/db/tables";
 import { eq } from "drizzle-orm";
 import type { Blog } from "./types";
 

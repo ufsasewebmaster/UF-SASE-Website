@@ -1,6 +1,6 @@
 import type { InsertUser, UpdateUser } from "@/shared/userSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createUser, deleteUser, fetchUsers, updateUser } from "../api/users";
+import { createUser, deleteUser, fetchUsers, updateUser } from "../libapi/users";
 
 export const useUsers = () => {
   const queryClient = useQueryClient();

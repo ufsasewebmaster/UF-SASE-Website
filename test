@@ -1,0 +1,122 @@
+.TH "P3: File Systems" "November 2024" "Version 1.0" "COP4600 Assignments"
+.SH NAME
+P3: WAD Filesystem Daemon and Library.
+
+.SH SYNOPSIS
+Implements a library for handling WAD file formats and a FUSE daemon to provide virtual filesystem support
+
+.SH Library Functions
+.B Library source code:
+- Wad.h, Wad.cpp, Utils.h, Makefile
+.PP
+.B Daemon source code:
+- fuse.cpp, Makefile
+
+.PP
+.B File Element Representation
+.PP
+For modularity, I used Nodes and Descriptors as helper structs to support my Wad object.
+.PP 
+A node represents a directory or a file. It necessarily contains a a list of Node* children, name, data, len, and type. 
+.PP
+A descriptor contains offset, size, and name.
+.PP
+The Wad object contains a Node* root of the N-ary tree that represents the file structure, which allows for efficient stack traversal.
+.PP
+It also stores the magic, wad path, number of descriptors, and offset.
+
+
+
+.PP
+.B Loadwad()
+.PP
+Loads a WAD file described by the wadPath into memory, populating the entire Node* tree and variables
+
+.PP
+.B isContent(), isDirectory()
+.PP
+Checks if a path has an existing file/directory node at the specified path.
+
+.PP
+.B getSize()
+.PP
+Returns the size at the given path if the file node exists.
+
+.PP
+.B getContents()
+.PP
+Copies as much of a file's content as possible from memory depending on the data size and offset provided into a buffer. If successful returns copied length.
+
+.PP
+.B Common schemas
+.PP
+.PP 
+Parsing a path - includes removing trailing slashes (for directories), spliting to
+parent/child paths based on the last slash, verifying name length (empty = root directory), and prescense of existing nodes. 
+.PP
+Read/write to WAD file - use POSIX read operations for buffer/descriptor/offset information,
+gets some information to shift the data (call some getIndex()), then calls shiftDataForward and writeDescriptors
+to update the header.
+
+.PP
+.B getDirectory()
+.PP
+Calls isDirectory and copies all children into a vector<string> buffer, returning the children size.
+
+.I createDirectory
+Always creates a namespace directory.
+Parses the file path as described above.
+Reads/writes to the WAD file, finding the insertion index through stack-based traveral of the parent path.
+Update the header with new information with shiftDataForward and writeDescriptors. Add 2 to numDesc and update the node tree.
+
+.I createFile
+Parses the file path, excludes any name in map, start descriptor, or end descriptor format.
+Does WAD file operations similarly to createDirectory()
+Handles descriptors shift and updates the header. Adds 1 to the number of descriptors.
+
+.I writeToFile
+Parses the file path for a file node.
+Reads from the WAD file similarly, then finds the descriptor index by tokenizing the full path and using a stack with marker checks.
+Sets lumpInsertPos based on current data end, handle descriptors shift and update header.
+Uses lseek to write lump data correctly and writes to a file.
+Deletes previous information and replaces with new information. 
+
+.SH Daemon
+.B wadfs main()
+Interprets initial parameters for file and mount point.
+Initializes FUSE with callback functions (ex. read_callback)
+Loads the Wad file and passes formatted variables into fuse_main
+
+.SH Callback functions
+.B getattr
+The "magic" of my daemon really comes from impelmenting the callack funcitons, which are an API that
+replaces exisitng Linux functionality with my custom Wad LIbrary functionality.
+.BB
+mknod_callback and mkdir_callback, for instance, are basically wrappers for wad->createFile and wad->createDirectory. Same for write_callback and read_callback
+
+getattr_callback evaluates the type through isDirectory and isContent, and then sets the relevant information (ex. wad-?getSize)
+readdir sets curre/parent directoris and then calls getDirectory.
+
+.SH LIBRARY TESTING
+- Official tests were ran through instuctions on linking and compiling `CommandLineTest.cpp`.
+- Used helper funcigons such as printing the tree structure throughout the test file.
+
+.SH DAEMON TESTING
+- Mounted the filesystem with sample1.wad, sample2.wad, and doom1.wad in my virtual machine
+- Tested ls, tree, cat, and echo
+- Verified memory safety using Valgrind.
+
+.SH LINK
+https://youtu.be/your-unlisted-video-link
+
+.SH BUGS
+None found after testing.
+
+.SH REFERENCES
+https://libfuse.github.io/
+https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/html/callbacks.html
+COP4600 P3 Discussions
+ChatGPT 4o
+
+.SH AUTHOR
+Ricky Zhang
