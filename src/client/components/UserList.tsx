@@ -1,5 +1,5 @@
 // src/components/UserList.tsx
-import type { SelectUser, UpdateUser } from "@/shared/userSchema";
+import type { SelectUser, UpdateUser } from "@schema/userSchema";
 import { Button } from "@client/components/ui/button";
 import { useUsers } from "../hooks/useUsers";
 

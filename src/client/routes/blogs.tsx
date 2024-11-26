@@ -1,16 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
-import { createBlog, getAllBlogs, updateBlog } from "../lib/api";
-import type { Blog } from "../lib/types";
-
-export const Route = createFileRoute("/blogs")({
-  component: BlogsPage,
-});
+import { useAuth } from "@client/AuthContext";
+import { Button } from "@components/ui/button";
+import { Input } from "@components/ui/input";
+import { Textarea } from "@components/ui/textarea";
+import { useBlogs } from "@hooks/useBlogs";
+import type { Blog } from "@shared/schema/blogSchema";
 
 function BlogsPage() {
   const [isCreating, setIsCreating] = useState(false);
@@ -20,51 +14,53 @@ function BlogsPage() {
   const [newBlogContent, setNewBlogContent] = useState("");
   const [newBlogTags, setNewBlogTags] = useState("");
   const { isAuthenticated } = useAuth();
-  const queryClient = useQueryClient();
+  const [error, setError] = useState<string | null>(null);
 
   const {
-    data: blogs,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: getAllBlogs,
-  });
-
-  const createBlogMutation = useMutation({
-    mutationFn: createBlog,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      setIsCreating(false);
-      resetForm();
-    },
-  });
-
-  const updateBlogMutation = useMutation({
-    mutationFn: updateBlog,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      setIsEditing(false);
-      setCurrentBlog(null);
-    },
-  });
+    blogs,
+    createBlog,
+    updateBlog,
+  } = useBlogs();
 
   const handleCreateBlog = () => {
-    createBlogMutation.mutate({
-      title: newBlogTitle,
-      content: newBlogContent,
-      tags: newBlogTags,
-    });
+    createBlog.mutate(
+      {
+        title: newBlogTitle,
+        content: newBlogContent,
+        tags: newBlogTags.split(",").map(tag => tag.trim()),
+        authorId: "SASE Historian" // TODO: This should be optional
+      },
+      {
+        onError: (error: Error) => {
+          setError(error.message);
+        },
+        onSuccess: () => {
+          setIsCreating(false);
+          resetForm();
+        }
+      }
+    );
   };
 
   const handleUpdateBlog = () => {
     if (currentBlog) {
-      updateBlogMutation.mutate({
-        id: currentBlog.id,
-        title: newBlogTitle,
-        content: newBlogContent,
-        tags: newBlogTags,
-      });
+      updateBlog.mutate(
+        {
+          title: newBlogTitle,
+          content: newBlogContent,
+          tags: newBlogTags.split(",").map(tag => tag.trim()),
+        },
+        {
+          onError: (error: Error) => {
+            setError(error.message);
+          },
+          onSuccess: () => {
+            setIsEditing(false);
+            setCurrentBlog(null);
+            resetForm();
+          }
+        }
+      );
     }
   };
 
@@ -72,22 +68,23 @@ function BlogsPage() {
     setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
-    setNewBlogTags(blog.tags || "");
+    setNewBlogTags(blog.tags?.join(", ") || "");
     setIsEditing(true);
+    setError(null);
   };
 
   const resetForm = () => {
     setNewBlogTitle("");
     setNewBlogContent("");
     setNewBlogTags("");
+    setError(null);
   };
 
-  if (isLoading) return <div>Loading blogs...</div>;
-  if (error)
+  if (blogs.isLoading) return <div>Loading blogs...</div>;
+  if (blogs.isError)
     return (
       <div>
-        Error loading blogs:{" "}
-        {error instanceof Error ? error.message : "Unknown error"}
+        Error loading blogs: {blogs.error.message}
       </div>
     );
 
@@ -144,9 +141,6 @@ function BlogsPage() {
           <div className="mt-4 space-x-2">
             <Button
               onClick={isCreating ? handleCreateBlog : handleUpdateBlog}
-              disabled={
-                createBlogMutation.isPending || updateBlogMutation.isPending
-              }
             >
               {isCreating ? "Create Post" : "Update Post"}
             </Button>
@@ -162,19 +156,20 @@ function BlogsPage() {
               Cancel
             </Button>
           </div>
+          {error && <div className="mt-2 text-red-500">{error}</div>}
         </div>
       )}
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {blogs && blogs.length > 0 ? (
-          blogs.map((blog) => (
+        {blogs.data && blogs.data.length > 0 ? (
+          blogs.data.map((blog: Blog) => (
             <div key={blog.id} className="rounded-lg bg-white p-6 shadow-md">
               <h2 className="mb-2 text-xl font-bold">{blog.title}</h2>
               <p className="mb-4 text-gray-600">
                 {blog.content.substring(0, 100)}...
               </p>
               {blog.tags && (
-                <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags}</p>
+                <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags.join(", ")}</p>
               )}
               {isAuthenticated && (
                 <Button onClick={() => handleEditBlog(blog)}>Edit</Button>
@@ -188,3 +183,5 @@ function BlogsPage() {
     </div>
   );
 }
+
+export default BlogsPage;

@@ -1,4 +1,4 @@
-import type { InsertUser, UpdateUser } from "@/shared/userSchema";
+import type { InsertUser, UpdateUser } from "@schema/userSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createUser, deleteUser, fetchUsers, updateUser } from "../libapi/users";
 

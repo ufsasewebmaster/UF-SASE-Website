@@ -7,3 +7,4 @@ export * from "./personalInfoSchema";
 export * from "./professionalInfoSchema";
 export * from "./saseInfoSchema";
 export * from "./userSchema";
+export * from "./responseSchema";

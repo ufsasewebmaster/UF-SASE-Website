@@ -40,6 +40,7 @@
       "@about/*": ["src/client/components/about/*"],
       "@ui/*": ["src/client/components/ui/*"],
       "@assets/*": ["./src/client/assets/*"],
+      "@hooks/*": ["src/client/hooks/*"],
       "@server/*": ["./src/server/*"],
       "@api/*": ["./src/server/api/*"],
       "@db/*": ["./src/server/db/*"],

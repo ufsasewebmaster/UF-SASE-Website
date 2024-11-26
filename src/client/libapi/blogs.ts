@@ -1,17 +1,11 @@
-import type { Blog, BlogSearchResponse } from "@shared/schema/blogSchema";
-import { blogTitleSchema } from "@shared/schema/blogSchema";
-import { z } from "zod";
+// libapi/blogs.ts
+import type { Blog, BlogSearchResponse, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
+import { blogsApiResponseSchema, singleBlogApiResponseSchema, blogSearchResponseSchema, blogTitleSchema } from "@shared/schema/blogSchema";
+import { apiFetch } from "@shared/utils";
 
 // Fetch ALL Blogs
 export const fetchBlogs = async (): Promise<Array<Blog>> => {
-  const response = await fetch("/api/blogs/all");
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch blogs");
-  }
-
-  const blogs = await response.json();
-  return z.array(blogTitleSchema).parse(blogs.result); // Validate response as an array of blogs
+  return apiFetch<Array<Blog>>("/api/blogs/all", { method: "GET" }, blogsApiResponseSchema);
 };
 
 // Fetch Blog by ID
@@ -19,42 +13,38 @@ export const fetchBlogById = async (blogId: string): Promise<Blog> => {
   if (!blogId) {
     throw new Error("Blog ID is required");
   }
-
-  const response = await fetch(`/api/blogs/${blogId}`, {
-    method: "POST",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch blog");
-  }
-
-  const blog = await response.json();
-  return blogTitleSchema.parse(blog.result); // Validate response as a blog
+  return apiFetch<Blog>(`/api/blogs/${blogId}`, { method: "GET" }, singleBlogApiResponseSchema);
 };
 
 // Search Blogs by Title
-export const searchBlogsByTitle = async (
-  title: string,
-): Promise<BlogSearchResponse> => {
+export const searchBlogsByTitle = async (title: string): Promise<BlogSearchResponse> => {
   if (!title) {
     throw new Error("Title is required");
   }
-
-  // Validate title using schema before making the request
   blogTitleSchema.parse({ title });
-
-  const response = await fetch("/api/blogs/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  return apiFetch<BlogSearchResponse>("/api/blogs/search", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to search blogs by title");
-  }
-
-  const result = await response.json();
-  return z.object({ blog_ids: z.array(z.string()) }).parse(result); // Validate response as an array of blog IDs
+  }, blogSearchResponseSchema);
 };
+
+export const createBlog = async (
+  newBlog: CreateBlog
+): Promise<Blog> => {
+  return apiFetch<Blog>("/api/blogs/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newBlog),
+  }, singleBlogApiResponseSchema);
+}
+
+export const updateBlog = async (
+  blog: UpdateBlog
+): Promise<Blog> => {
+  return apiFetch<Blog>("/api/blogs/update", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(blog),
+  }, singleBlogApiResponseSchema);
+}
