@@ -1,9 +1,4 @@
-import {
-  dehydrate,
-  hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { dehydrate, hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
 import { AuthProvider } from "./auth";
