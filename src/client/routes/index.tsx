@@ -2,9 +2,9 @@ import MemberCard from "@/client/components/home/MemberCard";
 import MissionCard from "@/client/components/home/MissionCard";
 import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import { imageUrls } from "@assets/imageUrls";
+import EmblaCarousel from "@components/home/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
-import EmblaCarousel from "../components/home/Carousel";
 
 export const Route = createFileRoute("/")({
   component: () => {
