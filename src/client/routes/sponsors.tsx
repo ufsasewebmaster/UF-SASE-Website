@@ -1,6 +1,6 @@
+import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import { imageUrls } from "@assets/imageUrls";
-import SponsorCard from "@components/SponsorCard";
-import SponsorInfo from "@components/SponsorInfo";
+import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
