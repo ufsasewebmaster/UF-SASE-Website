@@ -12,7 +12,7 @@ const socialLinks = [
     iconClass: "icon-[ph--linktree-logo-fill]",
   },
   {
-    href: "https://www.discord.com/ufsase",
+    href: "https://discord.com/invite/q3HBeC5",
     iconClass: "icon-[ic--baseline-discord]",
   },
 ];

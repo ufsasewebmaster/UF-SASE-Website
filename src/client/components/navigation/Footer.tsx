@@ -47,9 +47,8 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:flex-row md:items-center">
             <div className="-top-3 h-0.5 w-[350px] bg-saseGreen"></div>
             <div className="relative mt-2 md:ml-4 md:mt-0">
-              <div className="absolute -bottom-2 -left-[3px] -right-[3px] -top-[3px] rounded-[55px] bg-black/80"></div>
               <Button asChild variant="link" size="default">
-                <Link className="relative flex h-8 items-center rounded-[55px] bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5">
+                <Link className="relative flex h-9 items-center rounded-[55px] border-2 border-black bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5">
                   Contact Us!
                 </Link>
               </Button>
