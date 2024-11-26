@@ -2,7 +2,9 @@ import mentorship_icon from "@assets/MentorshipValueIcon.png";
 import mentorship from "@assets/MentorshipValues.jpeg";
 import prof from "@assets/ProfDevValue.jpg";
 import prof_icon from "@assets/ProfDevValueIcon.png";
+import service_icon from "@assets/ServiceIcon.png";
 import service from "@assets/ServiceValue.jpg";
+import socials_icon from "@assets/SocialsIcon.png";
 import socials from "@assets/SocialsValue.jpg";
 import sport from "@assets/SportsValue.jpg";
 import sports_icon from "@assets/SportsValueIcon.png";
@@ -34,13 +36,13 @@ const EmblaCarousel: React.FC<PropType> = () => {
     },
     {
       img: socials,
-      icon: prof_icon,
+      icon: socials_icon,
       value: "Socials",
       text: "We host multiple social events throughout the year, including a semesterly banquet, that give our members a chance to bond.",
     },
     {
       img: service,
-      icon: prof_icon,
+      icon: service_icon,
       value: "Service",
       text: "We believe that it is important to make meaningful contributions to the community, so we organize service events for our members to join.",
     },
@@ -144,7 +146,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
   };
 
   return (
-    <div className="m-auto max-w-full">
+    <div className="m-auto px-0 sm:px-12">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {values.map((value, index) => (
@@ -165,13 +167,13 @@ const EmblaCarousel: React.FC<PropType> = () => {
                   {!flipped[index] ? (
                     <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
                       <img src={value.icon} alt={`${value.value} + Icon`} />
-                      <p className="text-center font-redhat text-4xl font-semibold text-black">
+                      <p className="text-center font-redhat text-4xl font-semibold text-black sm:text-5xl">
                         {value.value}
                       </p>
                     </div>
                   ) : (
                     <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
-                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black">
+                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black sm:text-3xl">
                         {value.text}
                       </p>
                     </div>
