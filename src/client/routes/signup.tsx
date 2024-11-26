@@ -25,7 +25,7 @@ export const Route = createFileRoute("/signup")({
           body: JSON.stringify(formData),
         });
         if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
+        return response;
       },
       onSuccess: () => console.log("User signed up successfully!"),
     });
