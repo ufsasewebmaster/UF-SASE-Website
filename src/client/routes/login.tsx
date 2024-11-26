@@ -33,7 +33,7 @@ export const Route = createFileRoute("/login")({
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          return response.json();
+          return response.json;
         } catch (error) {
           console.error("Error submitting data:", error);
           throw error;

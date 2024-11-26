@@ -56,9 +56,9 @@ authRoutes.post("/auth/signup", async (c) => {
 });
 
 authRoutes.post("/auth/login", async (c) => {
-  const formData = await c.req.formData();
-  const formUsername = formData.get("username");
-  const formPassword = formData.get("password");
+  const formData = await c.req.json();
+  const formUsername = formData["username"];
+  const formPassword = formData["password"];
 
   if (!formUsername || typeof formUsername !== "string") {
     return new Response("Invalid username", {
