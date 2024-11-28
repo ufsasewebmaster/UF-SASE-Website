@@ -21,7 +21,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Interns</h2>
           </header>
           <ProgramCard
-            image={imageUrls["Board.png"]}
+            image={imageUrls["SaseInternsCard.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Engineering Team (SET)</h2>
           </header>
           <ProgramCard
-            image={imageUrls["Board.png"]}
+            image={imageUrls["SetCard.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board
@@ -76,7 +76,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Sports</h2>
           </header>
           <ProgramCard
-            image={imageUrls["Board.png"]}
+            image={imageUrls["SaseSportsCard.png"]}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board
