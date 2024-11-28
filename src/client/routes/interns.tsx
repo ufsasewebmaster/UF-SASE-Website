@@ -52,7 +52,7 @@ export const Route = createFileRoute("/interns")({
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="mx-auto mb-24 w-full max-w-7xl px-4">
             <img
-              src={imageUrls["Board.png"]}
+              src={imageUrls["SaseInterns.png"]}
               alt="Placeholder"
               className="w-full rounded-3xl border-4 border-saseGreen"
               style={{ height: "600px", objectFit: "cover" }}

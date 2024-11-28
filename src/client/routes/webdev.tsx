@@ -3,7 +3,7 @@ import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
-import MemberCard from "../components/MemberCard";
+import MemberCard from "../components/home/MemberCard";
 import { faqData } from "../components/programs/faqWebdev";
 import { seo } from "../utils/seo";
 
