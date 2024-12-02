@@ -2,9 +2,9 @@ import MemberCard from "@/client/components/home/MemberCard";
 import MissionCard from "@/client/components/home/MissionCard";
 import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import { imageUrls } from "@assets/imageUrls";
+import EmblaCarousel from "@components/home/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
-import EmblaCarousel from "../components/home/Carousel";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -16,8 +16,8 @@ export const Route = createFileRoute("/")({
             alt="2023-2024 SASE Board"
             className="relative h-auto w-full"
           />
-          <div className="absolute w-full items-center p-8 pt-[30%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl 2xl:px-32 2xl:text-8xl">
-            <h1 className="flex items-center">
+          <div className="absolute w-full items-center p-8 pt-[35%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl 2xl:px-32 2xl:text-8xl">
+            <h1 className="flex w-1/2 items-center justify-end">
               <span>S </span>
               <img
                 src={imageUrls["WhiteLogo.png"]}
@@ -26,7 +26,9 @@ export const Route = createFileRoute("/")({
               />
               <span>CIETY OF ASIAN</span>
             </h1>
-            <h1 className="text-right">SCIENTISTS & ENGINEERS</h1>
+            <h1 className="w-1/2 place-self-end text-left">
+              SCIENTISTS & ENGINEERS
+            </h1>
           </div>
         </div>
 
