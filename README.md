@@ -1,6 +1,6 @@
 # UF SASE Website
 
-This repository hosts the official website for the UF chapter of the Society of Asian Scientists and Engineers (SASE), built by our wonderful Web Team! It uses the T3+ stack, which includes TypeScript, React, Tanstack Router/Query, Hono, Drizzle, and more.
+This repository hosts the official website for the UF chapter of the Society of Asian Scientists and Engineers (SASE), built by our wonderful Web Team! It uses a modern stack including Bun, TypeScript, React, Tanstack Router, Hono, and Drizzle.
 [Staging](https://uf-sase-website.vercel.app)
 [Production](https://ufsase.com)
 
@@ -25,7 +25,7 @@ cd UF-SASE-Website
 After cloning the repository, install the required dependencies:
 
 ```bash
-pnpm install
+bun install
 ```
 
 ### Setting Up the Environment Variables
