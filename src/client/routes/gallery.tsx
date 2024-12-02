@@ -73,7 +73,9 @@ export const Route = createFileRoute("/gallery")({
           </div>
           <div className="pb-10"></div>
           <div className="flex justify-center pb-10 font-redhat">
-            <button className="pl-5 pr-5 ... delay-50 flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">2024-2025 SASE Yearbook</button>
+            <a href="https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n" target="_blank">
+              <button className="pl-5 pr-5 ... delay-50 flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">2024-2025 SASE Yearbook</button>
+            </a>  
           </div>
         </div>
       </div>
