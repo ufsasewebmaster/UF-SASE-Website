@@ -32,6 +32,7 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
           <div>Photo Google Drives</div>
           <div className="pr-3">{isDropdownVisible ? <FaChevronDown /> : <FaChevronUp />}</div>
         </div>
+        <div className="py-2"></div>
         {isDropdownVisible && (
           <div className="w-full rounded-lg border-2 border-black pb-1 pl-2 pt-1 text-left font-redhat text-lg font-normal shadow-[5px_5px_0px_0px_rgb(125,194,66)]">
             <DropdownItem label="Fall 2024" onClick={setFall2024} />
@@ -40,12 +41,12 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
           </div>
         )}
       </div>
-      <div className="flex justify-center pl-5 pr-32">
+      <div className="flex justify-center pl-5 pr-32 transition duration-300 ease-in-out hover:translate-x-1 hover:scale-105">
         <img
           src={imageUrls["DropDownImage.webp"]}
           alt=""
           loading="lazy"
-          className="h-56 min-h-[150px] w-96 min-w-[300px] rounded-lg border-2 border-black object-cover"
+          className="h-56 min-h-[150px] w-96 min-w-[300px] rounded-lg border-2 border-black object-cover shadow-[5px_5px_0px_0px_rgb(30,119,186)]"
         />
       </div>
     </div>
