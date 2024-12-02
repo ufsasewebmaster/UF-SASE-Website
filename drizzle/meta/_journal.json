@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1733114337816,
+      "tag": "0000_sour_sugar_man",
+      "breakpoints": true
+    }
+  ]
+}

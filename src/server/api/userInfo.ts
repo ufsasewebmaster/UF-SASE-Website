@@ -1,4 +1,5 @@
-import { insertPersonalSchema, insertProfessionalSchema, updatePersonalInfoSchema, updateProfessionalInfoSchema } from "@/shared/infoSchema";
+import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
+import { personalInfoInsertSchema, personalInfoUpdateSchema } from "@schema/personalInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
@@ -8,7 +9,7 @@ const infoRoutes = new Hono();
 
 //Insert personal info
 infoRoutes.post("/users/personal", async (c) => {
-  const personalInfoInsertion = insertPersonalSchema.parse(await c.req.json());
+  const personalInfoInsertion = personalInfoInsertSchema.parse(await c.req.json());
   const personal_info = await db.insert(Schema.personalInfo).values(personalInfoInsertion);
   return c.json({ personal_info });
 });
@@ -23,14 +24,14 @@ infoRoutes.get("/users/personal/:id", async (c) => {
 //Update personal info by user_id
 infoRoutes.patch("/users/personal/:id", async (c) => {
   const user_id = c.req.param("id");
-  const updateInfo = updatePersonalInfoSchema.parse(await c.req.json());
+  const updateInfo = personalInfoUpdateSchema.parse(await c.req.json());
   const personal_info = await db.update(Schema.personalInfo).set(updateInfo).where(eq(Schema.personalInfo.user_id, user_id));
   return c.json({ personal_info });
 });
 
 //Insert professional info
 infoRoutes.post("/users/professional", async (c) => {
-  const professionalInfoInsertion = insertProfessionalSchema.parse(await c.req.json());
+  const professionalInfoInsertion = professionalInfoInsertSchema.parse(await c.req.json());
   const professional_info = await db.insert(Schema.professionalInfo).values(professionalInfoInsertion);
   return c.json({ professional_info });
 });
@@ -45,7 +46,7 @@ infoRoutes.get("/users/professional/:id", async (c) => {
 //Update professional info by user_id
 infoRoutes.patch("/users/professional/:id", async (c) => {
   const user_id = c.req.param("id");
-  const updateInfo = updateProfessionalInfoSchema.parse(await c.req.json());
+  const updateInfo = professionalInfoUpdateSchema.parse(await c.req.json());
   const professional_info = await db.update(Schema.professionalInfo).set(updateInfo).where(eq(Schema.professionalInfo.user_id, user_id));
   return c.json({ professional_info });
 });

@@ -1,4 +1,4 @@
-import { insertSaseInfoSchema } from "@/shared/saseSchema";
+import { saseInfoSchema } from "@schema/saseInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
@@ -7,7 +7,7 @@ import * as Schema from "../db/tables";
 const saseRoutes = new Hono();
 
 saseRoutes.post("/users/sase", async (c) => {
-  const saseInfoInsertion = insertSaseInfoSchema.parse(await c.req.json());
+  const saseInfoInsertion = saseInfoSchema.parse(await c.req.json());
   const sase_info = await db.insert(Schema.saseInfo).values(saseInfoInsertion);
   return c.json({ sase_info });
 });
