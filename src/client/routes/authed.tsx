@@ -2,17 +2,6 @@ import { useAuth } from "@client/AuthContext";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/authed")({
-  // Ethan plz look: How would this context work? Is it needed?
-  // beforeLoad: async ({ context }) => {
-  //   if (!context.auth) {
-  //     throw new Error('Not authenticated')
-  //   }
-  // },
-  // beforeLoad: () => {
-  //   if (!isAuthenticated) {
-  //     throw new Error('Not authenticated')
-  //   }
-  // },
   component: AuthedComponent,
 });
 

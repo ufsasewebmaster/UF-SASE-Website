@@ -1,5 +1,5 @@
-import { insertUserSchema, selectUserSchema } from "@/shared/userSchema";
-import type { InsertUser, SelectUser, UpdateUser } from "@/shared/userSchema";
+import { insertUserSchema, selectUserSchema } from "@shared/schema/userSchema";
+import type { InsertUser, SelectUser, UpdateUser } from "@shared/schema/userSchema";
 
 // Fetch ALL Users
 export const fetchUsers = async (): Promise<Array<SelectUser>> => {

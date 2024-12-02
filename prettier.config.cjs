@@ -3,7 +3,7 @@
 /** @type { PrettierConfig | SortImportsConfig } */
 const config = {
   arrowParens: "always",
-  printWidth: 80,
+  printWidth: 150, // I like 150
   singleQuote: false,
   semi: true,
   trailingComma: "all",

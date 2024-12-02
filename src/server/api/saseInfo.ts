@@ -2,7 +2,7 @@ import { insertSaseInfoSchema } from "@/shared/saseSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
-import * as Schema from "../db/schema";
+import * as Schema from "../db/tables";
 
 const saseRoutes = new Hono();
 

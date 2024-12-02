@@ -13,7 +13,6 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as WebdevImport } from './routes/webdev'
 import { Route as UserpageImport } from './routes/userpage'
-import { Route as TodopageImport } from './routes/todopage'
 import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
@@ -41,12 +40,6 @@ const WebdevRoute = WebdevImport.update({
 const UserpageRoute = UserpageImport.update({
   id: '/userpage',
   path: '/userpage',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const TodopageRoute = TodopageImport.update({
-  id: '/todopage',
-  path: '/todopage',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -249,13 +242,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SportsImport
       parentRoute: typeof rootRoute
     }
-    '/todopage': {
-      id: '/todopage'
-      path: '/todopage'
-      fullPath: '/todopage'
-      preLoaderRoute: typeof TodopageImport
-      parentRoute: typeof rootRoute
-    }
     '/userpage': {
       id: '/userpage'
       path: '/userpage'
@@ -291,7 +277,6 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
 }
@@ -312,7 +297,6 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
 }
@@ -334,7 +318,6 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
-  '/todopage': typeof TodopageRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
 }
@@ -357,7 +340,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
-    | '/todopage'
     | '/userpage'
     | '/webdev'
   fileRoutesByTo: FileRoutesByTo
@@ -377,7 +359,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
-    | '/todopage'
     | '/userpage'
     | '/webdev'
   id:
@@ -397,7 +378,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
-    | '/todopage'
     | '/userpage'
     | '/webdev'
   fileRoutesById: FileRoutesById
@@ -419,7 +399,6 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
   SportsRoute: typeof SportsRoute
-  TodopageRoute: typeof TodopageRoute
   UserpageRoute: typeof UserpageRoute
   WebdevRoute: typeof WebdevRoute
 }
@@ -440,7 +419,6 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
   SportsRoute: SportsRoute,
-  TodopageRoute: TodopageRoute,
   UserpageRoute: UserpageRoute,
   WebdevRoute: WebdevRoute,
 }
@@ -470,7 +448,6 @@ export const routeTree = rootRoute
         "/signup",
         "/sponsors",
         "/sports",
-        "/todopage",
         "/userpage",
         "/webdev"
       ]
@@ -519,9 +496,6 @@ export const routeTree = rootRoute
     },
     "/sports": {
       "filePath": "sports.tsx"
-    },
-    "/todopage": {
-      "filePath": "todopage.tsx"
     },
     "/userpage": {
       "filePath": "userpage.tsx"
