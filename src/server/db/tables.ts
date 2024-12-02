@@ -145,3 +145,15 @@ export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship"
   mentor_id: text("mentor_id").references(() => users.id),
   mentee_id: text("mentee_id").references(() => users.id),
 });
+
+
+export const emailSubscribers = sqliteTable("email_subscriber", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  email: text("email").notNull().unique(),
+  name: text("name"),
+  subscribed_at: integer("subscribed_at", { mode: "timestamp" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+});

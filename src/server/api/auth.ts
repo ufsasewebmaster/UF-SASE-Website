@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { generateIdFromEntropySize } from "lucia";
-import { db } from "../db";
-import * as Schema from "../db/tables";
+import { db } from "@db/index";
+import * as Schema from "@db/tables";
 
 const { compare, genSalt, hash } = bcrypt;
 

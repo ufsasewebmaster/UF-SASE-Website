@@ -1,9 +1,9 @@
-import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
+import { db } from "@db/index";
+import * as Schema from "@db/tables";
 import { personalInfoInsertSchema, personalInfoUpdateSchema } from "@schema/personalInfoSchema";
+import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { db } from "../db";
-import * as Schema from "../db/tables";
 
 const infoRoutes = new Hono();
 

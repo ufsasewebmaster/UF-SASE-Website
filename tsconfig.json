@@ -43,6 +43,7 @@
       "@hooks/*": ["src/client/hooks/*"],
       "@server/*": ["./src/server/*"],
       "@api/*": ["./src/server/api/*"],
+      "@db/index": ["./src/server/db"],
       "@db/*": ["./src/server/db/*"],
       "@shared/*": ["./src/shared/*"],
       "@schema/*": ["./src/shared/schema/*"]

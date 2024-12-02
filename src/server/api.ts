@@ -6,6 +6,7 @@ import saseRoutes from "@api/saseInfo";
 import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
 import infoRoutes from "@api/userInfo";
+import emailRoutes from "@api/email"
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";
@@ -23,6 +24,10 @@ export default eventHandler(async (event) => {
 // Hono! https://hono.dev/
 // This is the entry point for our server which lives on the /api path
 const app = new Hono();
+app.routes.forEach((route) => {
+  console.log(`Method: ${route.method}, Path: ${route.path}`);
+});
+
 app.use("*", logger);
 app
   .get("/", (c) => c.text("TEST"))
@@ -31,4 +36,5 @@ app
   .route("/api", infoRoutes)
   .route("/api", tagRoutes)
   .route("/api", saseRoutes)
-  .route("/api", authRoutes);
+  .route("/api", authRoutes)
+  .route("/api", emailRoutes);
