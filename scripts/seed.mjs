@@ -5,9 +5,7 @@ const client = createClient({
   url: "file:local.db",
 });
 
-client.query(
-  "INSERT INTO users (username, points, roles) VALUES ('test', 0, 'admin')",
-); // should populate users
+client.query("INSERT INTO users (username, points, roles) VALUES ('test', 0, 'admin')"); // should populate users
 
 // Suggested to use this different way of inserting data, but idk how it works.
 

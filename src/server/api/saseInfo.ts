@@ -14,10 +14,7 @@ saseRoutes.post("/users/sase", async (c) => {
 
 saseRoutes.get("/users/sase/:id", async (c) => {
   const user_id = c.req.param("id");
-  const sase_info = await db
-    .select()
-    .from(Schema.saseInfo)
-    .where(eq(Schema.saseInfo.user_id, user_id));
+  const sase_info = await db.select().from(Schema.saseInfo).where(eq(Schema.saseInfo.user_id, user_id));
 
   return c.json({ sase_info });
 });

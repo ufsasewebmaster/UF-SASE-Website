@@ -4,16 +4,12 @@ const ContactForm = () => {
   return (
     <div className="mx-auto max-w-5xl p-4">
       <h2 className="mb-4 text-lg font-medium text-gray-800">
-        Have any questions or comments? Submit the form below and we will get in
-        contact with you shortly!
+        Have any questions or comments? Submit the form below and we will get in contact with you shortly!
       </h2>
       <form className="space-y-4">
         <div className="-mx-2 flex flex-wrap">
           <div className="mb-4 w-1/2 px-2">
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700">
               Name <span className="text-red-600">*</span>
             </label>
             <input
@@ -25,10 +21,7 @@ const ContactForm = () => {
             />
           </div>
           <div className="mb-4 w-1/2 px-2">
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700">
               &nbsp;
             </label>
             <input
@@ -42,10 +35,7 @@ const ContactForm = () => {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold text-gray-700"
-          >
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
             Email <span className="text-red-600">*</span>
           </label>
           <input
@@ -58,10 +48,7 @@ const ContactForm = () => {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="message"
-            className="block text-sm font-semibold text-gray-700"
-          >
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-700">
             Comment or Message
           </label>
           <textarea

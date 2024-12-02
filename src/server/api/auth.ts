@@ -73,13 +73,9 @@ authRoutes.post("/auth/login", async (c) => {
     });
   }
 
-  const user = await db
-    .select()
-    .from(Schema.users)
-    .where(eq(Schema.users.username, formUsername));
+  const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
 
-  if (user.length == 0)
-    return new Response("Invalid username or password", { status: 400 });
+  if (user.length == 0) return new Response("Invalid username or password", { status: 400 });
 
   const passwordHash = user[0].password_hash;
   const validPassword = await compare(formPassword, passwordHash);

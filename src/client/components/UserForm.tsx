@@ -15,11 +15,7 @@ export const UserForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      newUser.username.trim().length === 0 ||
-      newUser.password_hash.trim().length === 0
-    )
-      return;
+    if (newUser.username.trim().length === 0 || newUser.password_hash.trim().length === 0) return;
     createUser.mutate(newUser, {
       onSuccess: () => {
         setNewUser({
@@ -44,18 +40,14 @@ export const UserForm = () => {
       <Input
         type="password"
         value={newUser.password_hash}
-        onChange={(e) =>
-          setNewUser({ ...newUser, password_hash: e.target.value })
-        }
+        onChange={(e) => setNewUser({ ...newUser, password_hash: e.target.value })}
         placeholder="Password"
         className="mb-2 rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
       />
       <Input
         type="number"
         value={newUser.points}
-        onChange={(e) =>
-          setNewUser({ ...newUser, points: parseInt(e.target.value) })
-        }
+        onChange={(e) => setNewUser({ ...newUser, points: parseInt(e.target.value) })}
         placeholder="Points"
         className="mb-2 rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
       />
@@ -66,10 +58,7 @@ export const UserForm = () => {
         placeholder="Roles"
         className="mb-2 rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
       />
-      <Button
-        type="submit"
-        className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
-      >
+      <Button type="submit" className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
         Add User
       </Button>
     </form>

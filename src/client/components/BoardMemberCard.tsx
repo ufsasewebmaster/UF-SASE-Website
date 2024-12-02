@@ -56,18 +56,12 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         }}
         onClick={handleToggleExpand}
       >
-        <img
-          src={member.image}
-          alt={`${member.name}'s photo`}
-          className="h-full w-full object-cover"
-        />
+        <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full object-cover" />
 
         {/* learn more */}
         {!isExpanded && (
           <div className="absolute inset-0 flex items-start justify-center bg-white bg-opacity-60 p-[1vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="text-[1.2vw] font-semibold text-black underline">
-              Learn More
-            </span>
+            <span className="text-[1.2vw] font-semibold text-black underline">Learn More</span>
           </div>
         )}
 
@@ -77,26 +71,14 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
             onClick={() => setExpanded(false)}
           >
             {/* expanded content */}
-            <div
-              className="mt-[1.5vw] cursor-pointer text-left"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3
-                className="cursor-pointer text-[1.2vw] font-bold"
-                onClick={() => setExpanded(false)}
-              >
+            <div className="mt-[1.5vw] cursor-pointer text-left" onClick={(e) => e.stopPropagation()}>
+              <h3 className="cursor-pointer text-[1.2vw] font-bold" onClick={() => setExpanded(false)}>
                 {member.role}
               </h3>
-              <h4
-                className="cursor-pointer text-[1vw] font-semibold"
-                onClick={() => setExpanded(false)}
-              >
+              <h4 className="cursor-pointer text-[1vw] font-semibold" onClick={() => setExpanded(false)}>
                 {member.name}
               </h4>
-              <p
-                className="cursor-pointer text-[0.9vw] text-gray-600"
-                onClick={() => setExpanded(false)}
-              >
+              <p className="cursor-pointer text-[0.9vw] text-gray-600" onClick={() => setExpanded(false)}>
                 {member.major}
               </p>
               <a
@@ -106,11 +88,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
               >
                 {member.contact}
               </a>
-              <p
-                className="mt-[1vw] cursor-pointer text-[0.7vw] text-gray-800"
-                onClick={() => setExpanded(false)}
-                style={{ marginTop: "1vw" }}
-              >
+              <p className="mt-[1vw] cursor-pointer text-[0.7vw] text-gray-800" onClick={() => setExpanded(false)} style={{ marginTop: "1vw" }}>
                 {member.description}
               </p>
             </div>
@@ -119,10 +97,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
       </div>
 
       {/* name turns invisible on click of learn more */}
-      <p
-        className={`mt-[1.5vw] ${isExpanded ? "invisible" : "text-black"}`}
-        style={{ fontSize: "1.6vw" }}
-      >
+      <p className={`mt-[1.5vw] ${isExpanded ? "invisible" : "text-black"}`} style={{ fontSize: "1.6vw" }}>
         {member.name}
       </p>
     </div>

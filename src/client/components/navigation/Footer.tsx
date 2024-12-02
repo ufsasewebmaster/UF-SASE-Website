@@ -19,12 +19,7 @@ const Footer: React.FC = () => {
         {/* Left Section - Logo and Social Icons */}
         <div className="mb-6 flex flex-col items-center md:mb-0 md:items-start">
           <div className="mb-6">
-            <img
-              src={imageUrls["WhiteSASELogo.png"]}
-              alt="Logo"
-              style={{ width: "235px", height: "75px" }}
-              className="ml-2 h-auto"
-            />
+            <img src={imageUrls["WhiteSASELogo.png"]} alt="Logo" style={{ width: "235px", height: "75px" }} className="ml-2 h-auto" />
           </div>
           <SocialIcons />
         </div>
@@ -33,11 +28,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-center md:items-end">
           <div className="mb-4 flex flex-col items-center space-y-4 md:flex-row md:space-x-6 md:space-y-0">
             {footerNavItems.map((item) => (
-              <Link
-                key={item.key}
-                to={item.href}
-                className="font-redhat text-lg text-white transition-all hover:text-saseGreen hover:underline"
-              >
+              <Link key={item.key} to={item.href} className="font-redhat text-lg text-white transition-all hover:text-saseGreen hover:underline">
                 {item.label}
               </Link>
             ))}

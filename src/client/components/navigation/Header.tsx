@@ -70,13 +70,10 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={cn(
-        `sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`,
-        {
-          "bg-black text-white": isHomePage,
-          "bg-white text-black": !isHomePage,
-        },
-      )}
+      className={cn(`sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`, {
+        "bg-black text-white": isHomePage,
+        "bg-white text-black": !isHomePage,
+      })}
     >
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
@@ -96,22 +93,12 @@ const Header: React.FC = () => {
           <SearchBar className="w-32 focus:w-64" />
           <UserButton isLoggedIn={isLoggedIn} />
           <button ref={hamburgerRef} className="focus:outline-none">
-            <Hamburger
-              toggled={menuOpen}
-              toggle={setMenuOpen}
-              color={isHomePage ? "#fff" : "#000"}
-              size={22}
-            />
+            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu
-          navItems={navItems}
-          isOpen={menuOpen}
-          onClose={() => setMenuOpen(false)}
-          isHomePage={isHomePage}
-        />
+        <MobileMenu navItems={navItems} isOpen={menuOpen} onClose={() => setMenuOpen(false)} isHomePage={isHomePage} />
       </nav>
     </header>
   );

@@ -26,21 +26,9 @@ export interface FormData {
 }
 
 //only styling
-const StyledFormField = ({
-  children,
-  hasError,
-  icon,
-}: {
-  children: React.ReactNode;
-  icon?: string;
-  hasError?: boolean;
-}) => (
+const StyledFormField = ({ children, hasError, icon }: { children: React.ReactNode; icon?: string; hasError?: boolean }) => (
   <div className="relative mb-1 w-full">
-    {icon && (
-      <span
-        className={`pointer-events-none absolute left-3 top-[40%] z-10 h-5 w-5 -translate-y-1/2 text-gray-500 ${icon}`}
-      />
-    )}
+    {icon && <span className={`pointer-events-none absolute left-3 top-[40%] z-10 h-5 w-5 -translate-y-1/2 text-gray-500 ${icon}`} />}
     {React.cloneElement(children as React.ReactElement, {
       className: `mb-3 rounded-lg border border-gray-300 bg-saseGreenLight p-4 pl-10 placeholder-black opacity-90 ${
         hasError ? "border-red-600" : ""
@@ -49,15 +37,7 @@ const StyledFormField = ({
   </div>
 );
 
-const AuthForm = ({
-  additionalButton,
-  buttonLabel,
-  isSignUp = false,
-  linkRoute,
-  linkText,
-  onSubmit,
-  title,
-}: AuthFormProps) => {
+const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, linkText, onSubmit, title }: AuthFormProps) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -80,13 +60,8 @@ const AuthForm = ({
       <div className="mb-6 p-2">
         <Logo />
       </div>
-      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">
-        {title}
-      </h3>
-      <StyledFormField
-        icon="icon-[qlementine-icons--user-16]"
-        hasError={!!errors.username}
-      >
+      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3>
+      <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
         <Input
           id="username"
           type="text"
@@ -105,60 +80,39 @@ const AuthForm = ({
           className="h-12 p-4"
         />
       </StyledFormField>
-      {errors.username && (
-        <span className="mb-1 font-redhat text-sm text-red-600">
-          {errors.username.message}
-        </span>
-      )}
+      {errors.username && <span className="mb-1 font-redhat text-sm text-red-600">{errors.username.message}</span>}
 
-      <StyledFormField
-        icon="icon-[fluent--key-20-filled]"
-        hasError={!!errors.password}
-      >
+      <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.password}>
         <Input
           id="password"
           type="password"
           {...register("password", {
             required: "Password is required",
             pattern: {
-              value:
-                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-              message:
-                "Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character!",
+              value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+              message: "Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character!",
             },
           })}
           placeholder="Password"
           autoComplete="current-password"
         />
       </StyledFormField>
-      {errors.password && (
-        <span className="mb-1 font-redhat text-sm text-red-600">
-          {errors.password.message}
-        </span>
-      )}
+      {errors.password && <span className="mb-1 font-redhat text-sm text-red-600">{errors.password.message}</span>}
 
       {isSignUp && (
         <>
-          <StyledFormField
-            icon="icon-[fluent--key-20-filled]"
-            hasError={!!errors.retypePassword}
-          >
+          <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.retypePassword}>
             <Input
               id="retypePassword"
               type="password"
               {...register("retypePassword", {
                 required: "Please retype your password",
-                validate: (value) =>
-                  value === password || "Passwords do not match!",
+                validate: (value) => value === password || "Passwords do not match!",
               })}
               placeholder="Retype Password"
             />
           </StyledFormField>
-          {errors.retypePassword && (
-            <span className="mb-1 font-redhat text-sm text-red-600">
-              {errors.retypePassword.message}
-            </span>
-          )}
+          {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message}</span>}
         </>
       )}
 

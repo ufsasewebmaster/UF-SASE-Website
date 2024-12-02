@@ -32,15 +32,9 @@ export const Route = createFileRoute("/sports")({
           <InfoCard
             text={
               <>
-                <strong>SASE Intramurals</strong> include{" "}
-                <strong>
-                  6v6 Indoor Volleyball, Indoor Soccer, Ultimate Frisbee,
-                  Doubles Pickleball{" "}
-                </strong>{" "}
-                and more, available in Fall, Spring, and Summer semesters! SASE
-                Sports provides a fantastic opportunity to meet new people, and
-                the best part is, no prior experience is required to play. Make
-                sure to sign up for an amazing experience!
+                <strong>SASE Intramurals</strong> include <strong>6v6 Indoor Volleyball, Indoor Soccer, Ultimate Frisbee, Doubles Pickleball </strong>{" "}
+                and more, available in Fall, Spring, and Summer semesters! SASE Sports provides a fantastic opportunity to meet new people, and the
+                best part is, no prior experience is required to play. Make sure to sign up for an amazing experience!
               </>
             }
           />
@@ -70,18 +64,9 @@ export const Route = createFileRoute("/sports")({
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
           <div className="mb-24 flex flex-nowrap justify-center gap-36">
-            <GoalCard
-              text="Meet new people with common interests."
-              color="blue"
-            />
-            <GoalCard
-              text="Have fun and compete in a friendly yet competitive environment."
-              color="green"
-            />
-            <GoalCard
-              text="Develop your athletic ability in a variety of disciplines."
-              color="blue"
-            />
+            <GoalCard text="Meet new people with common interests." color="blue" />
+            <GoalCard text="Have fun and compete in a friendly yet competitive environment." color="green" />
+            <GoalCard text="Develop your athletic ability in a variety of disciplines." color="blue" />
           </div>
           <header className="flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>

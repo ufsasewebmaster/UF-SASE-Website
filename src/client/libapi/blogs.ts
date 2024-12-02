@@ -1,6 +1,6 @@
 // libapi/blogs.ts
 import type { Blog, BlogSearchResponse, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
-import { blogsApiResponseSchema, singleBlogApiResponseSchema, blogSearchResponseSchema, blogTitleSchema } from "@shared/schema/blogSchema";
+import { blogsApiResponseSchema, blogSearchResponseSchema, blogTitleSchema, singleBlogApiResponseSchema } from "@shared/schema/blogSchema";
 import { apiFetch } from "@shared/utils";
 
 // Fetch ALL Blogs
@@ -22,29 +22,37 @@ export const searchBlogsByTitle = async (title: string): Promise<BlogSearchRespo
     throw new Error("Title is required");
   }
   blogTitleSchema.parse({ title });
-  return apiFetch<BlogSearchResponse>("/api/blogs/search", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title }),
-  }, blogSearchResponseSchema);
+  return apiFetch<BlogSearchResponse>(
+    "/api/blogs/search",
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    },
+    blogSearchResponseSchema,
+  );
 };
 
-export const createBlog = async (
-  newBlog: CreateBlog
-): Promise<Blog> => {
-  return apiFetch<Blog>("/api/blogs/add", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newBlog),
-  }, singleBlogApiResponseSchema);
-}
+export const createBlog = async (newBlog: CreateBlog): Promise<Blog> => {
+  return apiFetch<Blog>(
+    "/api/blogs/add",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newBlog),
+    },
+    singleBlogApiResponseSchema,
+  );
+};
 
-export const updateBlog = async (
-  blog: UpdateBlog
-): Promise<Blog> => {
-  return apiFetch<Blog>("/api/blogs/update", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(blog),
-  }, singleBlogApiResponseSchema);
-}
+export const updateBlog = async (blog: UpdateBlog): Promise<Blog> => {
+  return apiFetch<Blog>(
+    "/api/blogs/update",
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blog),
+    },
+    singleBlogApiResponseSchema,
+  );
+};

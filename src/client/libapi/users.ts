@@ -28,9 +28,7 @@ export const createUser = async (newUser: InsertUser): Promise<SelectUser> => {
   return selectUserSchema.parse(createdUser);
 };
 
-export const updateUser = async (
-  updatedUser: UpdateUser,
-): Promise<SelectUser> => {
+export const updateUser = async (updatedUser: UpdateUser): Promise<SelectUser> => {
   insertUserSchema.parse(updatedUser);
   const response = await fetch(`/api/users/${updatedUser.id}`, {
     method: "PATCH",
@@ -48,9 +46,7 @@ export const updateUser = async (
   return selectUserSchema.parse(updatedUserData);
 };
 
-export const deleteUser = async (
-  userId: number,
-): Promise<{ success: boolean }> => {
+export const deleteUser = async (userId: number): Promise<{ success: boolean }> => {
   const response = await fetch(`/api/users/${userId}`, {
     method: "DELETE",
     headers: {

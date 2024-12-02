@@ -5,10 +5,7 @@ export const userSchema = z.object({
   username: z.string().min(1, "Username is required."),
   password_hash: z.string().min(1, "Password hash is required."),
   time_added: z.number().int().min(0, "Time added must be a valid timestamp."),
-  time_updated: z
-    .number()
-    .int()
-    .min(0, "Time updated must be a valid timestamp."),
+  time_updated: z.number().int().min(0, "Time updated must be a valid timestamp."),
   points: z.number().int().min(0).optional(),
   roles: z.string().optional(),
 });

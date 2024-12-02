@@ -8,26 +8,11 @@ interface ZipProps {
 
 const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
   // List of image paths inside the 'public/assets' folder
-  const fall2024_images = [
-    imageUrls["fall2024_1.JPG"],
-    imageUrls["fall2024_4.JPG"],
-    imageUrls["fall2024_5.JPG"],
-    imageUrls["fall2024_6.JPG"],
-  ];
+  const fall2024_images = [imageUrls["fall2024_1.JPG"], imageUrls["fall2024_4.JPG"], imageUrls["fall2024_5.JPG"], imageUrls["fall2024_6.JPG"]];
 
-  const spring2024_images = [
-    imageUrls["fall2024_7.JPG"],
-    imageUrls["fall2024_9.JPG"],
-    imageUrls["fall2024_10.JPG"],
-    imageUrls["fall2024_2.jpg"],
-  ];
+  const spring2024_images = [imageUrls["fall2024_7.JPG"], imageUrls["fall2024_9.JPG"], imageUrls["fall2024_10.JPG"], imageUrls["fall2024_2.jpg"]];
 
-  const fall2023_images = [
-    imageUrls["fall2024_3.jpeg"],
-    imageUrls["fall2024_8.jpg"],
-    imageUrls["fall2024_12.jpg"],
-    imageUrls["fall2024_13.jpg"],
-  ];
+  const fall2023_images = [imageUrls["fall2024_3.jpeg"], imageUrls["fall2024_8.jpg"], imageUrls["fall2024_12.jpg"], imageUrls["fall2024_13.jpg"]];
 
   let images;
 
@@ -58,10 +43,7 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
     <div className="flex w-full items-center justify-center">
       <div className="w-3/12 flex-1"></div> {/* spacer element */}
       <div className="flex items-center justify-center">
-        <div
-          className="cursor-pointer p-20 transition hover:opacity-45"
-          onClick={prevImage}
-        >
+        <div className="cursor-pointer p-20 transition hover:opacity-45" onClick={prevImage}>
           {/* Left Arrow */}
           <button className="text-4xl">
             <FaChevronLeft />
@@ -69,16 +51,9 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
         </div>
         <div className="rounded-lg shadow-[10px_10px_0px_0px_rgb(6,104,179)]">
           {/* Image */}
-          <img
-            src={images[currentIndex]}
-            alt={`Image ${currentIndex + 1}`}
-            className="h-96 w-full rounded-lg border-2 border-black object-cover"
-          />
+          <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} className="h-96 w-full rounded-lg border-2 border-black object-cover" />
         </div>
-        <div
-          className="cursor-pointer p-20 transition hover:opacity-45"
-          onClick={nextImage}
-        >
+        <div className="cursor-pointer p-20 transition hover:opacity-45" onClick={nextImage}>
           {/* Right Arrow */}
           <button className="text-4xl">
             <FaChevronRight />

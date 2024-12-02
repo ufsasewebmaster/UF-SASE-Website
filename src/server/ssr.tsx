@@ -1,9 +1,6 @@
 /// <reference types="vinxi/types/server" />
 import { getRouterManifest } from "@tanstack/start/router-manifest";
-import {
-  createStartHandler,
-  defaultStreamHandler,
-} from "@tanstack/start/server";
+import { createStartHandler, defaultStreamHandler } from "@tanstack/start/server";
 import { createRouter } from "../client/router";
 
 export default createStartHandler({

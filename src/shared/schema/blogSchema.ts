@@ -18,22 +18,22 @@ export const blogTitleSchema = z.object({
 });
 
 // Auto-handled by the backend
-export const createBlogSchema = blogSchema.omit({
-  id: true,
-  timeUpdated: true,
-  publishedDate: true,
-  lastUpdateDate: true,
-}).extend({
-  tags: z.array(z.string()).optional(),
-});
-
-export const updateBlogSchema = blogSchema
-  .partial()
+export const createBlogSchema = blogSchema
   .omit({
-    id: true,  // Immutable fields
-    authorId: true,
+    id: true,
+    timeUpdated: true,
     publishedDate: true,
+    lastUpdateDate: true,
+  })
+  .extend({
+    tags: z.array(z.string()).optional(),
   });
+
+export const updateBlogSchema = blogSchema.partial().omit({
+  id: true, // Immutable fields
+  authorId: true,
+  publishedDate: true,
+});
 
 // Export TypeScript types
 export type Blog = z.infer<typeof blogSchema>;

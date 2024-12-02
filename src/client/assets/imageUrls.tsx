@@ -1,132 +1,68 @@
 export const imageUrls = {
-  "Star.png":
-    "https://utfs.io/f/ehMyJVEoR9sINL5t6LIOhLMSWtjn5ErwKaF987lzcI6podYA",
-  "SETRobot.png":
-    "https://utfs.io/f/ehMyJVEoR9sI1bxJKdBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
-  "SETGroup.png":
-    "https://utfs.io/f/ehMyJVEoR9sIGbczUfVKYFmogsyB53wR7ISZkLn9jaNQTilf",
-  "Briefcase.png":
-    "https://utfs.io/f/ehMyJVEoR9sIJNrQErTybceI05vNVOwxQPMK3zgXrB1ns92C",
-  "InternalVicePresident.png":
-    "https://utfs.io/f/ehMyJVEoR9sIVQzekH8MSe4B8WlQFwX5z9an7tuiVIrgq063",
-  "StarLogo.png":
-    "https://utfs.io/f/ehMyJVEoR9sIWoLjKq4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
-  "Dudes.png":
-    "https://utfs.io/f/ehMyJVEoR9sIEV9sQyw9lOX8AQVhirwWqSZ46B3Eev0yF5Lk",
-  "WhiteLogo.png":
-    "https://utfs.io/f/ehMyJVEoR9sI1dIaWj4Bt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
-  "ExternalVicePresident.png":
-    "https://utfs.io/f/ehMyJVEoR9sIy5mdPZNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
-  "President.png":
-    "https://utfs.io/f/ehMyJVEoR9sICOMcrykAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7",
-  "Board.png":
-    "https://utfs.io/f/ehMyJVEoR9sI2mOaordiuk23wDEdSnxzOpMosLJj9hgUv1FX",
-  "fall2024_1.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sITNAkfvOWljhb0rYgqA5pmn3XNTKG81sF9BUL",
-  "fall2024_6.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sIF7PsjfAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
-  "fall2024_7.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sIayZwWYmqveU6V5wERNtKSZsQ28nxadk0CLG4",
-  "fall2024_13.jpg":
-    "https://utfs.io/f/ehMyJVEoR9sIGNIFUBVKYFmogsyB53wR7ISZkLn9jaNQTilf",
-  "fall2024_10.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sIJt8kEjTybceI05vNVOwxQPMK3zgXrB1ns92C",
-  "fall2024_9.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sI7RyTcWbKABVHz30CFZ54lXbUoIMWGd6wOjin",
-  "fall2024_4.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sISgqbAhaW1OtRjkWVG8Y2zlAZcPibJKh7T5ro",
-  "fall2024_12.jpg":
-    "https://utfs.io/f/ehMyJVEoR9sIibqCPWrLzR4LG5Nvi7wqTelrZ8myCpV6XgD1",
-  "fall2024_5.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sIMHDsoxilprYuJav8QOzy4wSd7WFmeTqGtbgh",
-  "fall2024_8.jpg":
-    "https://utfs.io/f/ehMyJVEoR9sI1Geiz8Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
-  "fall2024_3.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sI7jWETXbKABVHz30CFZ54lXbUoIMWGd6wOjin",
-  "SETGroupPic.jpg":
-    "https://utfs.io/f/ehMyJVEoR9sIboSbky920yuGkCWXYIKSpq4DfF1adgcivRwZ",
-  "fall2024_11.JPG":
-    "https://utfs.io/f/ehMyJVEoR9sIAWWq3HvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
-  "fall2024_2.jpg":
-    "https://utfs.io/f/ehMyJVEoR9sIFKQhGefAU3c5JO1RsA0miEYz4B7LpDWSZVIb",
-  "DropDownImage.webp":
-    "https://utfs.io/f/ehMyJVEoR9sImdRRu1ZiSurVxQZv5hpYT2DgkwAFc9zfsnl3",
-  "CoMultimediaChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIteI5UzJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
-  "CoTechnicalChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIBLXBsi2kDm2rxftGpUEesqCMHIJ7RnXNYh34",
-  "SocialChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sI2zcq5Ldiuk23wDEdSnxzOpMosLJj9hgUv1FX",
-  "President.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sInmM2z71QX9dVgjiwAazMhQorPFyvWpKtcOe5",
-  "AdvancementChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIBDNlXem2kDm2rxftGpUEesqCMHIJ7RnXNYh3",
-  "SportsCoordinatorChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIJ3OcXcTybceI05vNVOwxQPMK3zgXrB1ns92C",
-  "HistorianChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIykuYPrNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
-  "CoMemberInvolvementChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIQ3DnemapRZ8nt64O75KJPT0fHjGxCsgQVLSm",
-  "ServiceChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIlvGeccRB3S6VhU4nXYx1OC2woQFmgajt7Mzr",
-  "ExternalVicePresident.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sI4269d8g6GrX0VJTYsuv13NAKF7jfE89pI4HB",
-  "TechnicalChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIwM9xVgpoTmGXoVhHAS79wOnW10lbk6aYEFd4",
-  "MultimediaChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIvyzB9gKzdHY9jVSQqZP5fbnhULCXGlrFxw7a",
-  "PublicRelations.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIgmfBizjNf7EIjRmO19PWBAeSakyzhnML0Kq3",
-  "FundraisingChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sI1dmQSlrBt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
-  "WebmasterChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIYXHlhKFMAPnuZN5w0bOVQ8rvCGk64aqIL9Uf",
-  "InternalVicePresident.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIK2ZkjQp1vFCLMTeyStlfUQNij8whZRPs0m3H",
-  "CoSportsCoordinatorChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIaB1VCjmqveU6V5wERNtKSZsQ28nxadk0CLG4",
-  "NetworkChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIFKdky2BAU3c5JO1RsA0miEYz4B7LpDWSZVIb",
-  "Secretary.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sI2LkFkHdiuk23wDEdSnxzOpMosLJj9hgUv1FX",
-  "Treasurer.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIqySzON056V4zikMLPKmHb0OcuvdeC9sFXGq3",
-  "BoardPic.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIIrXjR4unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
-  "MemberInvolvementChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIGcB1bxEVKYFmogsyB53wR7ISZkLn9jaNQTil",
-  "ScienceChair.jpeg":
-    "https://utfs.io/f/ehMyJVEoR9sIuE7QsentlYGv7p06JzneEfyBiHVKWROgUFZr",
-  "SASELogoStar.png":
-    "https://utfs.io/f/ehMyJVEoR9sIviqJIYKzdHY9jVSQqZP5fbnhULCXGlrFxw7a",
-  "Lightbulb.png":
-    "https://utfs.io/f/ehMyJVEoR9sIt2pBpCJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
-  "People.png":
-    "https://utfs.io/f/ehMyJVEoR9sIfzmmhlyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
-  "Suitcase.png":
-    "https://utfs.io/f/ehMyJVEoR9sI0OdHYcrVgpFfGjqHr4LaTcBvIDxyMNl6Pew5",
-  "J&J.png":
-    "https://utfs.io/f/ehMyJVEoR9sIGcKkoobVKYFmogsyB53wR7ISZkLn9jaNQTil",
-  "Google.png":
-    "https://utfs.io/f/ehMyJVEoR9sIYLVNUHFMAPnuZN5w0bOVQ8rvCGk64aqIL9Uf",
-  "SASELogo.png":
-    "https://utfs.io/f/ehMyJVEoR9sIFN4FX8AU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
-  "S&L.png":
-    "https://utfs.io/f/ehMyJVEoR9sIFffk9tAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
-  "FMGlobal.png":
-    "https://utfs.io/f/ehMyJVEoR9sIjWwbrTqPXFgMeIkVs28LhKWNr1H9atGfnUQc",
-  "Axogen.png":
-    "https://utfs.io/f/ehMyJVEoR9sIA6ua0cvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
-  "BlueOriginLogo.png":
-    "https://utfs.io/f/ehMyJVEoR9sIO4lAfWfSMwtbgyo8XKnYdP0kDxvWGV1ZNFjQ",
-  "Diamond.png":
-    "https://utfs.io/f/ehMyJVEoR9sI2o7jOqdiuk23wDEdSnxzOpMosLJj9hgUv1FX",
-  "ExampleSlideShow.png":
-    "https://utfs.io/f/ehMyJVEoR9sIWIefNJ4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
-  "Arthrex.png":
-    "https://utfs.io/f/ehMyJVEoR9sItFbu8hJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
-  "WhiteSASELogo.png":
-    "https://utfs.io/f/ehMyJVEoR9sIChGAYLkAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7",
+  "Star.png": "https://utfs.io/f/ehMyJVEoR9sINL5t6LIOhLMSWtjn5ErwKaF987lzcI6podYA",
+  "SETRobot.png": "https://utfs.io/f/ehMyJVEoR9sI1bxJKdBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
+  "SETGroup.png": "https://utfs.io/f/ehMyJVEoR9sIGbczUfVKYFmogsyB53wR7ISZkLn9jaNQTilf",
+  "Briefcase.png": "https://utfs.io/f/ehMyJVEoR9sIJNrQErTybceI05vNVOwxQPMK3zgXrB1ns92C",
+  "InternalVicePresident.png": "https://utfs.io/f/ehMyJVEoR9sIVQzekH8MSe4B8WlQFwX5z9an7tuiVIrgq063",
+  "StarLogo.png": "https://utfs.io/f/ehMyJVEoR9sIWoLjKq4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
+  "Dudes.png": "https://utfs.io/f/ehMyJVEoR9sIEV9sQyw9lOX8AQVhirwWqSZ46B3Eev0yF5Lk",
+  "WhiteLogo.png": "https://utfs.io/f/ehMyJVEoR9sI1dIaWj4Bt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
+  "ExternalVicePresident.png": "https://utfs.io/f/ehMyJVEoR9sIy5mdPZNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
+  "President.png": "https://utfs.io/f/ehMyJVEoR9sICOMcrykAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7",
+  "Board.png": "https://utfs.io/f/ehMyJVEoR9sI2mOaordiuk23wDEdSnxzOpMosLJj9hgUv1FX",
+  "fall2024_1.JPG": "https://utfs.io/f/ehMyJVEoR9sITNAkfvOWljhb0rYgqA5pmn3XNTKG81sF9BUL",
+  "fall2024_6.JPG": "https://utfs.io/f/ehMyJVEoR9sIF7PsjfAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
+  "fall2024_7.JPG": "https://utfs.io/f/ehMyJVEoR9sIayZwWYmqveU6V5wERNtKSZsQ28nxadk0CLG4",
+  "fall2024_13.jpg": "https://utfs.io/f/ehMyJVEoR9sIGNIFUBVKYFmogsyB53wR7ISZkLn9jaNQTilf",
+  "fall2024_10.JPG": "https://utfs.io/f/ehMyJVEoR9sIJt8kEjTybceI05vNVOwxQPMK3zgXrB1ns92C",
+  "fall2024_9.JPG": "https://utfs.io/f/ehMyJVEoR9sI7RyTcWbKABVHz30CFZ54lXbUoIMWGd6wOjin",
+  "fall2024_4.JPG": "https://utfs.io/f/ehMyJVEoR9sISgqbAhaW1OtRjkWVG8Y2zlAZcPibJKh7T5ro",
+  "fall2024_12.jpg": "https://utfs.io/f/ehMyJVEoR9sIibqCPWrLzR4LG5Nvi7wqTelrZ8myCpV6XgD1",
+  "fall2024_5.JPG": "https://utfs.io/f/ehMyJVEoR9sIMHDsoxilprYuJav8QOzy4wSd7WFmeTqGtbgh",
+  "fall2024_8.jpg": "https://utfs.io/f/ehMyJVEoR9sI1Geiz8Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
+  "fall2024_3.jpeg": "https://utfs.io/f/ehMyJVEoR9sI7jWETXbKABVHz30CFZ54lXbUoIMWGd6wOjin",
+  "SETGroupPic.jpg": "https://utfs.io/f/ehMyJVEoR9sIboSbky920yuGkCWXYIKSpq4DfF1adgcivRwZ",
+  "fall2024_11.JPG": "https://utfs.io/f/ehMyJVEoR9sIAWWq3HvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
+  "fall2024_2.jpg": "https://utfs.io/f/ehMyJVEoR9sIFKQhGefAU3c5JO1RsA0miEYz4B7LpDWSZVIb",
+  "DropDownImage.webp": "https://utfs.io/f/ehMyJVEoR9sImdRRu1ZiSurVxQZv5hpYT2DgkwAFc9zfsnl3",
+  "CoMultimediaChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIteI5UzJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
+  "CoTechnicalChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIBLXBsi2kDm2rxftGpUEesqCMHIJ7RnXNYh34",
+  "SocialChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sI2zcq5Ldiuk23wDEdSnxzOpMosLJj9hgUv1FX",
+  "President.jpeg": "https://utfs.io/f/ehMyJVEoR9sInmM2z71QX9dVgjiwAazMhQorPFyvWpKtcOe5",
+  "AdvancementChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIBDNlXem2kDm2rxftGpUEesqCMHIJ7RnXNYh3",
+  "SportsCoordinatorChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIJ3OcXcTybceI05vNVOwxQPMK3zgXrB1ns92C",
+  "HistorianChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIykuYPrNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
+  "CoMemberInvolvementChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIQ3DnemapRZ8nt64O75KJPT0fHjGxCsgQVLSm",
+  "ServiceChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIlvGeccRB3S6VhU4nXYx1OC2woQFmgajt7Mzr",
+  "ExternalVicePresident.jpeg": "https://utfs.io/f/ehMyJVEoR9sI4269d8g6GrX0VJTYsuv13NAKF7jfE89pI4HB",
+  "TechnicalChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIwM9xVgpoTmGXoVhHAS79wOnW10lbk6aYEFd4",
+  "MultimediaChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIvyzB9gKzdHY9jVSQqZP5fbnhULCXGlrFxw7a",
+  "PublicRelations.jpeg": "https://utfs.io/f/ehMyJVEoR9sIgmfBizjNf7EIjRmO19PWBAeSakyzhnML0Kq3",
+  "FundraisingChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sI1dmQSlrBt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
+  "WebmasterChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIYXHlhKFMAPnuZN5w0bOVQ8rvCGk64aqIL9Uf",
+  "InternalVicePresident.jpeg": "https://utfs.io/f/ehMyJVEoR9sIK2ZkjQp1vFCLMTeyStlfUQNij8whZRPs0m3H",
+  "CoSportsCoordinatorChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIaB1VCjmqveU6V5wERNtKSZsQ28nxadk0CLG4",
+  "NetworkChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIFKdky2BAU3c5JO1RsA0miEYz4B7LpDWSZVIb",
+  "Secretary.jpeg": "https://utfs.io/f/ehMyJVEoR9sI2LkFkHdiuk23wDEdSnxzOpMosLJj9hgUv1FX",
+  "Treasurer.jpeg": "https://utfs.io/f/ehMyJVEoR9sIqySzON056V4zikMLPKmHb0OcuvdeC9sFXGq3",
+  "BoardPic.jpeg": "https://utfs.io/f/ehMyJVEoR9sIIrXjR4unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
+  "MemberInvolvementChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIGcB1bxEVKYFmogsyB53wR7ISZkLn9jaNQTil",
+  "ScienceChair.jpeg": "https://utfs.io/f/ehMyJVEoR9sIuE7QsentlYGv7p06JzneEfyBiHVKWROgUFZr",
+  "SASELogoStar.png": "https://utfs.io/f/ehMyJVEoR9sIviqJIYKzdHY9jVSQqZP5fbnhULCXGlrFxw7a",
+  "Lightbulb.png": "https://utfs.io/f/ehMyJVEoR9sIt2pBpCJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
+  "People.png": "https://utfs.io/f/ehMyJVEoR9sIfzmmhlyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
+  "Suitcase.png": "https://utfs.io/f/ehMyJVEoR9sI0OdHYcrVgpFfGjqHr4LaTcBvIDxyMNl6Pew5",
+  "J&J.png": "https://utfs.io/f/ehMyJVEoR9sIGcKkoobVKYFmogsyB53wR7ISZkLn9jaNQTil",
+  "Google.png": "https://utfs.io/f/ehMyJVEoR9sIYLVNUHFMAPnuZN5w0bOVQ8rvCGk64aqIL9Uf",
+  "SASELogo.png": "https://utfs.io/f/ehMyJVEoR9sIFN4FX8AU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
+  "S&L.png": "https://utfs.io/f/ehMyJVEoR9sIFffk9tAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
+  "FMGlobal.png": "https://utfs.io/f/ehMyJVEoR9sIjWwbrTqPXFgMeIkVs28LhKWNr1H9atGfnUQc",
+  "Axogen.png": "https://utfs.io/f/ehMyJVEoR9sIA6ua0cvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
+  "BlueOriginLogo.png": "https://utfs.io/f/ehMyJVEoR9sIO4lAfWfSMwtbgyo8XKnYdP0kDxvWGV1ZNFjQ",
+  "Diamond.png": "https://utfs.io/f/ehMyJVEoR9sI2o7jOqdiuk23wDEdSnxzOpMosLJj9hgUv1FX",
+  "ExampleSlideShow.png": "https://utfs.io/f/ehMyJVEoR9sIWIefNJ4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
+  "Arthrex.png": "https://utfs.io/f/ehMyJVEoR9sItFbu8hJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
+  "WhiteSASELogo.png": "https://utfs.io/f/ehMyJVEoR9sIChGAYLkAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

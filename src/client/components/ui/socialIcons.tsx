@@ -20,12 +20,7 @@ const socialLinks = [
 const SocialIcons = () => (
   <div className="mb-2 ml-12 flex h-6 w-6 gap-4">
     {socialLinks.map((link) => (
-      <a
-        key={link.href}
-        href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
         <span className={`${link.iconClass} text-3xl`} />
       </a>
     ))}

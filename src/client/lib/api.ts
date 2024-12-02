@@ -18,9 +18,7 @@ export async function getAllBlogs(): Promise<Array<Blog>> {
   }
 }
 
-export async function createBlog(
-  blog: Omit<Blog, "id" | "published_date" | "time_updated" | "author_id">,
-): Promise<Blog> {
+export async function createBlog(blog: Omit<Blog, "id" | "published_date" | "time_updated" | "author_id">): Promise<Blog> {
   try {
     const [newBlog] = await db
       .insert(blogs)
@@ -43,9 +41,7 @@ export async function createBlog(
   }
 }
 
-export async function updateBlog(
-  blog: Partial<Blog> & { id: string },
-): Promise<Blog> {
+export async function updateBlog(blog: Partial<Blog> & { id: string }): Promise<Blog> {
   try {
     const [updatedBlog] = await db
       .update(blogs)

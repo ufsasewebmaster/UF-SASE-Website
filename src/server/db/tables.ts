@@ -137,13 +137,10 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
 });
 
 // Mentor/Mentee Relationship table
-export const mentorMenteeRelationship = sqliteTable(
-  "mentor_mentee_relationship",
-  {
-    id: text("id")
-      .primaryKey()
-      .$defaultFn(() => generateIdFromEntropySize(10)),
-    mentor_id: text("mentor_id").references(() => users.id),
-    mentee_id: text("mentee_id").references(() => users.id),
-  },
-);
+export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  mentor_id: text("mentor_id").references(() => users.id),
+  mentee_id: text("mentee_id").references(() => users.id),
+});

@@ -1,14 +1,4 @@
-export const seo = ({
-  description,
-  image,
-  keywords,
-  title,
-}: {
-  title: string;
-  description?: string;
-  image?: string;
-  keywords?: string;
-}) => {
+export const seo = ({ description, image, keywords, title }: { title: string; description?: string; image?: string; keywords?: string }) => {
   const tags = [
     { title },
     { name: "description", content: description },

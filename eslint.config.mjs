@@ -21,21 +21,9 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: [
-      "prettier.config.cjs",
-      "postcss.config.cjs",
-      "tailwind.config.cjs",
-      ".vinxi/**/*",
-      ".vercel/**/*",
-      ".github/**/*",
-      ".output/**/*",
-    ],
+    ignores: ["prettier.config.cjs", "postcss.config.cjs", "tailwind.config.cjs", ".vinxi/**/*", ".vercel/**/*", ".github/**/*", ".output/**/*"],
   },
-  ...compat.extends(
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-  ),
+  ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"),
   {
     plugins: {
       deprecation,
@@ -75,8 +63,7 @@ export default [
       "no-restricted-syntax": [
         "error",
         {
-          selector:
-            "CallExpression[callee.property.name='push'] > SpreadElement.arguments",
+          selector: "CallExpression[callee.property.name='push'] > SpreadElement.arguments",
           message: "Do not use spread arguments in Array.push",
         },
       ],

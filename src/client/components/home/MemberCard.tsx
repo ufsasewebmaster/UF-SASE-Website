@@ -1,21 +1,8 @@
 import { cn } from "@/shared/utils";
 
-const MemberCard = ({
-  image,
-  name,
-  role,
-  textColor,
-}: {
-  image: string;
-  name: string;
-  role: string;
-  textColor: string;
-}) => {
+const MemberCard = ({ image, name, role, textColor }: { image: string; name: string; role: string; textColor: string }) => {
   return (
-    <div
-      className="flex aspect-auto w-auto flex-col justify-center rounded-2xl bg-cover bg-center pb-4"
-      style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="flex aspect-auto w-auto flex-col justify-center rounded-2xl bg-cover bg-center pb-4" style={{ backgroundImage: `url(${image})` }}>
       <div
         className={cn(
           {
@@ -30,9 +17,7 @@ const MemberCard = ({
         <p className="text-center font-semibold">{name}</p>
         <p className="text-center italic">{role}</p>
       </div>
-      <p className="p-2 text-center font-redhat text-xl text-white">
-        "SASE is Cool!"
-      </p>
+      <p className="p-2 text-center font-redhat text-xl text-white">"SASE is Cool!"</p>
     </div>
   );
 };

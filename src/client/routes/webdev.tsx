@@ -32,15 +32,11 @@ export const Route = createFileRoute("/webdev")({
           <InfoCard
             text={
               <>
-                The SASE Web Team consists of <strong>UI/UX, Frontend</strong>,
-                and <strong>Backend</strong> teams working together to create
-                the UF SASE website. Are you looking to expand your skill set
-                and gain experience with <strong>agile practices</strong>{" "}
-                commonly used in the industry? Do you want to apply your
-                technical experience for the good of all SASE? If so, this is a
-                great opportunity! We're seeking committed members to bring our
-                ideas to life and publish an improved, self-hosted version of
-                our website. We encourage people of all skill levels to apply!
+                The SASE Web Team consists of <strong>UI/UX, Frontend</strong>, and <strong>Backend</strong> teams working together to create the UF
+                SASE website. Are you looking to expand your skill set and gain experience with <strong>agile practices</strong> commonly used in the
+                industry? Do you want to apply your technical experience for the good of all SASE? If so, this is a great opportunity! We're seeking
+                committed members to bring our ideas to life and publish an improved, self-hosted version of our website. We encourage people of all
+                skill levels to apply!
               </>
             }
           />
@@ -60,48 +56,19 @@ export const Route = createFileRoute("/webdev")({
             <h2 className="text-4xl text-gray-800">Team Leads</h2>
           </header>
           <div className="grid grid-cols-1 gap-10 bg-white p-12 lg:grid-cols-4">
-            <MemberCard
-              image={imageUrls["FullStackLead.png"]}
-              name="Ethan Niser"
-              role="Full-Stack"
-              textColor="blue"
-            />
-            <MemberCard
-              image={imageUrls["FrontendLead.png"]}
-              name="Joseph Kim"
-              role="Frontend"
-              textColor="green"
-            />
-            <MemberCard
-              image={imageUrls["BackendLead.jpeg"]}
-              name="Sihala Senevirathne"
-              role="Backend"
-              textColor="blue"
-            />
-            <MemberCard
-              image={imageUrls["UIUXLead.jpg"]}
-              name="Catherine Wu"
-              role="UI/UX"
-              textColor="green"
-            />
+            <MemberCard image={imageUrls["FullStackLead.png"]} name="Ethan Niser" role="Full-Stack" textColor="blue" />
+            <MemberCard image={imageUrls["FrontendLead.png"]} name="Joseph Kim" role="Frontend" textColor="green" />
+            <MemberCard image={imageUrls["BackendLead.jpeg"]} name="Sihala Senevirathne" role="Backend" textColor="blue" />
+            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="green" />
           </div>
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
           <div className="mb-24 flex flex-nowrap justify-center gap-36">
-            <GoalCard
-              text="Work with agile practices commonly found in the industry."
-              color="blue"
-            />
-            <GoalCard
-              text="Develop technical skills related to UI/UX,  frontend, or backend development."
-              color="green"
-            />
-            <GoalCard
-              text="Gain hands-on experience with web development and contribute to SASE in a meaningful way."
-              color="blue"
-            />
+            <GoalCard text="Work with agile practices commonly found in the industry." color="blue" />
+            <GoalCard text="Develop technical skills related to UI/UX,  frontend, or backend development." color="green" />
+            <GoalCard text="Gain hands-on experience with web development and contribute to SASE in a meaningful way." color="blue" />
           </div>
           <header className="flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>

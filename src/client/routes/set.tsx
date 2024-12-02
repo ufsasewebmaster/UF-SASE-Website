@@ -33,15 +33,11 @@ export const Route = createFileRoute("/set")({
           <InfoCard
             text={
               <>
-                <strong>SASE Engineering Team (SET)</strong> collaborates with
-                other members to execute projects for the SASE community, honing
-                your technical, communication, and leadership skills. Throughout
-                the process, members will gain{" "}
-                <strong>experience to add to your resume</strong> and talk about
-                during job interviews. SET members will also obtain{" "}
-                <strong>behind-the-scenes insights</strong> through project
-                development and teamwork—valuable for future leadership roles in
-                and out of SASE.
+                <strong>SASE Engineering Team (SET)</strong> collaborates with other members to execute projects for the SASE community, honing your
+                technical, communication, and leadership skills. Throughout the process, members will gain{" "}
+                <strong>experience to add to your resume</strong> and talk about during job interviews. SET members will also obtain{" "}
+                <strong>behind-the-scenes insights</strong> through project development and teamwork—valuable for future leadership roles in and out
+                of SASE.
               </>
             }
           />
@@ -71,18 +67,9 @@ export const Route = createFileRoute("/set")({
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
           <div className="mb-24 flex flex-nowrap justify-center gap-36">
-            <GoalCard
-              text="Get more involved in SASE, especially for first and second years."
-              color="blue"
-            />
-            <GoalCard
-              text="Develop essential technical skills and experiences to add to your resume."
-              color="green"
-            />
-            <GoalCard
-              text="Connect with other SASErs and develop leadership skills through hands-on projects."
-              color="blue"
-            />
+            <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
+            <GoalCard text="Develop essential technical skills and experiences to add to your resume." color="green" />
+            <GoalCard text="Connect with other SASErs and develop leadership skills through hands-on projects." color="blue" />
           </div>
           <header className="flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>

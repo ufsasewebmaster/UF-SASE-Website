@@ -82,9 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwind-scrollbar"),
-    addDynamicIconSelectors(),
-  ],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar"), addDynamicIconSelectors()],
 };

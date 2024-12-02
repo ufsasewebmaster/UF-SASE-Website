@@ -24,13 +24,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
         className="flex w-full items-center justify-between bg-gray-100 px-6 py-5 text-left text-2xl font-semibold text-gray-800 focus:outline-none"
       >
         <span>{question}</span>
-        <span
-          className={`transform text-2xl transition-transform duration-200 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        >
-          {isOpen ? "−" : "+"}
-        </span>
+        <span className={`transform text-2xl transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}>{isOpen ? "−" : "+"}</span>
       </button>
 
       {/* Answer Section with Smooth Dropdown Animation */}

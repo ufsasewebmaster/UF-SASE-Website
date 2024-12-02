@@ -11,9 +11,7 @@ export const Route = createFileRoute("/programs")({
         <div className="w-full max-w-7xl px-4 py-8">
           <header className="mb-14 flex items-center px-5">
             <div className="mr-3 h-14 w-1.5 bg-saseGreen"></div>
-            <h2 className="rounded-sm text-5xl font-semibold text-gray-800">
-              PROGRAMS
-            </h2>
+            <h2 className="rounded-sm text-5xl font-semibold text-gray-800">PROGRAMS</h2>
           </header>
           <BoardPicture />
           <header className="mb-6 flex items-center px-5">
@@ -24,12 +22,9 @@ export const Route = createFileRoute("/programs")({
             image={imageUrls["SaseInternsCard.png"]}
             text={
               <>
-                <strong>SASE Interns</strong> collaborate directly with board
-                members in committees to plan events for the SASE community.
-                Interns gain a behind-the-scenes look at how SASE operates and,
-                in the process, are given the opportunity to develop their{" "}
-                <strong>professional</strong> and <strong>leadership</strong>{" "}
-                skills.
+                <strong>SASE Interns</strong> collaborate directly with board members in committees to plan events for the SASE community. Interns
+                gain a behind-the-scenes look at how SASE operates and, in the process, are given the opportunity to develop their{" "}
+                <strong>professional</strong> and <strong>leadership</strong> skills.
               </>
             }
             link="/interns"
@@ -42,12 +37,9 @@ export const Route = createFileRoute("/programs")({
             image={imageUrls["SetCard.png"]}
             text={
               <>
-                <strong>SASE Interns</strong> collaborate directly with board
-                members in committees to plan events for the SASE community.
-                Interns gain a behind-the-scenes look at how SASE operates and,
-                in the process, are given the opportunity to develop their{" "}
-                <strong>professional</strong> and <strong>leadership</strong>{" "}
-                skills.
+                <strong>SASE Interns</strong> collaborate directly with board members in committees to plan events for the SASE community. Interns
+                gain a behind-the-scenes look at how SASE operates and, in the process, are given the opportunity to develop their{" "}
+                <strong>professional</strong> and <strong>leadership</strong> skills.
               </>
             }
             link="/set"
@@ -60,12 +52,9 @@ export const Route = createFileRoute("/programs")({
             image={imageUrls["Board.png"]}
             text={
               <>
-                The <strong>SASE Web Development Team</strong> is a group of{" "}
-                <strong>UI/UX</strong>, <strong>Frontend</strong>, and{" "}
-                <strong>Backend</strong> developers working together to build
-                and enhance the UF SASE website. This team offers a chance to{" "}
-                <strong>expand technical skills</strong>, gain experience with{" "}
-                <strong>agile practices</strong>, and make a real impact.{" "}
+                The <strong>SASE Web Development Team</strong> is a group of <strong>UI/UX</strong>, <strong>Frontend</strong>, and{" "}
+                <strong>Backend</strong> developers working together to build and enhance the UF SASE website. This team offers a chance to{" "}
+                <strong>expand technical skills</strong>, gain experience with <strong>agile practices</strong>, and make a real impact.{" "}
                 <strong>All skill levels are welcome!</strong>
               </>
             }
@@ -79,12 +68,9 @@ export const Route = createFileRoute("/programs")({
             image={imageUrls["SaseSportsCard.png"]}
             text={
               <>
-                <strong>SASE Interns</strong> collaborate directly with board
-                members in committees to plan events for the SASE community.
-                Interns gain a behind-the-scenes look at how SASE operates and,
-                in the process, are given the opportunity to develop their{" "}
-                <strong>professional</strong> and <strong>leadership</strong>{" "}
-                skills.
+                <strong>SASE Interns</strong> collaborate directly with board members in committees to plan events for the SASE community. Interns
+                gain a behind-the-scenes look at how SASE operates and, in the process, are given the opportunity to develop their{" "}
+                <strong>professional</strong> and <strong>leadership</strong> skills.
               </>
             }
             link="/sports"

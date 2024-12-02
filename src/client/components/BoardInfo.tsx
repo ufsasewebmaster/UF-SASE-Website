@@ -168,8 +168,7 @@ const boardInfo = [
         image: imageUrls["CoSportsCoordinatorChair.jpeg"],
         major: "2nd Year Chemical Engineering",
         contact: "ufsase.sports@gmail.com",
-        description:
-          "Managing the SASE Sports Program, which includes overseeing intramurals, casual sports, and other sports events.",
+        description: "Managing the SASE Sports Program, which includes overseeing intramurals, casual sports, and other sports events.",
       },
       {
         name: "Alexander Lou",
@@ -177,8 +176,7 @@ const boardInfo = [
         image: imageUrls["SportsCoordinatorChair.jpeg"],
         major: "2nd Year Computer Science",
         contact: "ufsase.sports@gmail.com",
-        description:
-          "Managing the SASE Sports Program, which includes overseeing intramurals, casual sports, and other sports events.",
+        description: "Managing the SASE Sports Program, which includes overseeing intramurals, casual sports, and other sports events.",
       },
       {
         name: "Manav Sanghvi",

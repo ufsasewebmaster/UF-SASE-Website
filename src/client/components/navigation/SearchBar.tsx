@@ -6,10 +6,7 @@ interface SearchBarProps {
   className?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({
-  className = "",
-  placeholder = "Search",
-}) => (
+export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholder = "Search" }) => (
   <div className={cn(`relative`, className)}>
     <input
       type="text"
@@ -23,12 +20,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-4l4 4"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-4l4 4" />
     </svg>
   </div>
 );

@@ -13,11 +13,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, text }) => {
       <div className="relative flex transform flex-col items-center rounded-3xl border-2 border-black bg-gray-100 p-12 shadow-[16px_16px_0px_#7DC242] transition duration-300 hover:shadow-[24px_24px_0px_#0668B3] sm:flex-row">
         {/* Image */}
         <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-8">
-          <img
-            src={image}
-            alt="Program Image"
-            className="h-[323px] w-[440px] rounded-2xl object-cover"
-          />
+          <img src={image} alt="Program Image" className="h-[323px] w-[440px] rounded-2xl object-cover" />
         </div>
 
         {/* Text Content */}

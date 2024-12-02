@@ -1,20 +1,10 @@
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
-type PageProps = Pick<
-  CSSProperties,
-  "gap" | "padding" | "alignItems" | "justifyContent"
-> & {
+type PageProps = Pick<CSSProperties, "gap" | "padding" | "alignItems" | "justifyContent"> & {
   style?: CSSProperties | undefined;
 };
 
-export const Page: FC<PropsWithChildren<PageProps>> = ({
-  alignItems,
-  children,
-  gap = "1rem",
-  justifyContent,
-  padding = "1rem",
-  style,
-}) => {
+export const Page: FC<PropsWithChildren<PageProps>> = ({ alignItems, children, gap = "1rem", justifyContent, padding = "1rem", style }) => {
   return (
     <div
       className="Page"

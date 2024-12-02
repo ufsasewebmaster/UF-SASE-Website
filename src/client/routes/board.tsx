@@ -18,9 +18,7 @@ export const Route = createFileRoute("/board")({
         {/* title */}
         <div className="text-center">
           <h1 className="font-oswald text-7xl font-medium">BOARD</h1>
-          <p className="mb-8 mt-8 text-2xl text-black">
-            Meet our 2024-2025 SASE Board Members!
-          </p>
+          <p className="mb-8 mt-8 text-2xl text-black">Meet our 2024-2025 SASE Board Members!</p>
           <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
         </div>
 
@@ -34,12 +32,8 @@ export const Route = createFileRoute("/board")({
 
         {boardInfo.map((section, idx) => (
           <div key={idx} className="mb-12">
-            {section.section === "Chair Board" && (
-              <hr className="w-7/8 my-10 border-t-2 border-green-500" />
-            )}
-            <h2 className="mb-6 text-center font-oswald text-5xl">
-              {section.section}
-            </h2>
+            {section.section === "Chair Board" && <hr className="w-7/8 my-10 border-t-2 border-green-500" />}
+            <h2 className="mb-6 text-center font-oswald text-5xl">{section.section}</h2>
             <div className="flex flex-wrap justify-center gap-10">
               {section.members.map((member, idx) => (
                 <BoardMemberCard key={idx} member={member} />

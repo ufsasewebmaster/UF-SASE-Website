@@ -8,9 +8,7 @@ const newFilePath = `${__dirname}/imageUrls.tsx`;
 async function generateImageMaps() {
   console.log(filePath);
   try {
-    const data: Array<{ name: string; url: string }> = JSON.parse(
-      await readFile(filePath, "utf-8"),
-    ) as Array<{ name: string; url: string }>;
+    const data: Array<{ name: string; url: string }> = JSON.parse(await readFile(filePath, "utf-8")) as Array<{ name: string; url: string }>;
     const imageUrls: { [key: string]: string } = {};
     data.forEach((item) => {
       imageUrls[item.name] = item.url;

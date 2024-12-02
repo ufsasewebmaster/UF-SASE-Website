@@ -19,14 +19,11 @@ export const Route = createFileRoute("/signup")({
   component: () => {
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        const response = await fetch(
-          "https://sheetdb.io/api/v1/79fo2g87zoqgy",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          },
-        );
+        const response = await fetch("https://sheetdb.io/api/v1/79fo2g87zoqgy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
         if (!response.ok) throw new Error("Network response was not ok");
         return response.json();
       },

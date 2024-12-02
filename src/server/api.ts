@@ -1,14 +1,14 @@
-import type { MiddlewareHandler } from "hono";
-import { Hono } from "hono";
-import { eventHandler, toWebRequest } from "vinxi/http";
 // import * as Schema from "./db/schema";
 // import { eq } from "drizzle-orm";
 import authRoutes from "@api/auth";
-import blogRoutes from "@api/blogs"
+import blogRoutes from "@api/blogs";
 import saseRoutes from "@api/saseInfo";
 import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
 import infoRoutes from "@api/userInfo";
+import type { MiddlewareHandler } from "hono";
+import { Hono } from "hono";
+import { eventHandler, toWebRequest } from "vinxi/http";
 
 const logger: MiddlewareHandler = async (c, next) => {
   console.log(`${c.req.method} ${c.req.url}`);

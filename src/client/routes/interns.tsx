@@ -32,18 +32,11 @@ export const Route = createFileRoute("/interns")({
           <InfoCard
             text={
               <>
-                <strong>SASE Interns</strong> collaborate with other members to
-                execute a project for the SASE community, honing your
-                communication, event planning, and leadership skills. Throughout
-                the process, interns will gain{" "}
-                <strong>experience to add to your resume</strong> and talk about
-                during job interviews. Interns will also obtain{" "}
-                <strong>behind-the-scenes insights</strong> through board
-                presentations and shadowing opportunities—valuable for future
-                leadership roles in and out of SASE. Aside from projects,
-                interns will have the chance to network and connect through{" "}
-                <strong>interns-only</strong> socials and Board x Interns
-                events.
+                <strong>SASE Interns</strong> collaborate with other members to execute a project for the SASE community, honing your communication,
+                event planning, and leadership skills. Throughout the process, interns will gain <strong>experience to add to your resume</strong> and
+                talk about during job interviews. Interns will also obtain <strong>behind-the-scenes insights</strong> through board presentations and
+                shadowing opportunities—valuable for future leadership roles in and out of SASE. Aside from projects, interns will have the chance to
+                network and connect through <strong>interns-only</strong> socials and Board x Interns events.
               </>
             }
           />
@@ -73,18 +66,9 @@ export const Route = createFileRoute("/interns")({
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
           <div className="mb-24 flex flex-nowrap justify-center gap-36">
-            <GoalCard
-              text="Get more involved in SASE, especially for first and second years."
-              color="blue"
-            />
-            <GoalCard
-              text="Develop essential professional skills and experiences to add to your resume."
-              color="green"
-            />
-            <GoalCard
-              text="Connect with other SASErs and board members through intern-exclusive networking events."
-              color="blue"
-            />
+            <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
+            <GoalCard text="Develop essential professional skills and experiences to add to your resume." color="green" />
+            <GoalCard text="Connect with other SASErs and board members through intern-exclusive networking events." color="blue" />
           </div>
           <header className="flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>

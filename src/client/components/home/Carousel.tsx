@@ -8,19 +8,14 @@ import socials_icon from "@assets/SocialsIcon.png";
 import socials from "@assets/SocialsValue.jpg";
 import sport from "@assets/SportsValue.jpg";
 import sports_icon from "@assets/SportsValueIcon.png";
-import type {
-  EmblaCarouselType,
-  EmblaEventType,
-  EmblaOptionsType,
-} from "embla-carousel";
+import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselArrows";
 
 const TWEEN_FACTOR_BASE = 0.52;
 
-const numberWithinRange = (number: number, min: number, max: number): number =>
-  Math.min(Math.max(number, min), max);
+const numberWithinRange = (number: number, min: number, max: number): number => Math.min(Math.max(number, min), max);
 
 type PropType = {
   options?: EmblaOptionsType;
@@ -65,12 +60,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<Array<HTMLElement>>([]);
 
-  const {
-    nextBtnDisabled,
-    onNextButtonClick,
-    onPrevButtonClick,
-    prevBtnDisabled,
-  } = usePrevNextButtons(emblaApi);
+  const { nextBtnDisabled, onNextButtonClick, onPrevButtonClick, prevBtnDisabled } = usePrevNextButtons(emblaApi);
 
   const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
@@ -82,47 +72,43 @@ const EmblaCarousel: React.FC<PropType> = () => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
   }, []);
 
-  const tweenScale = useCallback(
-    (emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => {
-      const engine = emblaApi.internalEngine();
-      const scrollProgress = emblaApi.scrollProgress();
-      const slidesInView = emblaApi.slidesInView();
-      const isScrollEvent = eventName === "scroll";
+  const tweenScale = useCallback((emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => {
+    const engine = emblaApi.internalEngine();
+    const scrollProgress = emblaApi.scrollProgress();
+    const slidesInView = emblaApi.slidesInView();
+    const isScrollEvent = eventName === "scroll";
 
-      emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-        let diffToTarget = scrollSnap - scrollProgress;
-        const slidesInSnap = engine.slideRegistry[snapIndex];
+    emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+      let diffToTarget = scrollSnap - scrollProgress;
+      const slidesInSnap = engine.slideRegistry[snapIndex];
 
-        slidesInSnap.forEach((slideIndex) => {
-          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
+      slidesInSnap.forEach((slideIndex) => {
+        if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
 
-          if (engine.options.loop) {
-            engine.slideLooper.loopPoints.forEach((loopItem) => {
-              const target = loopItem.target();
+        if (engine.options.loop) {
+          engine.slideLooper.loopPoints.forEach((loopItem) => {
+            const target = loopItem.target();
 
-              if (slideIndex === loopItem.index && target !== 0) {
-                const sign = Math.sign(target);
+            if (slideIndex === loopItem.index && target !== 0) {
+              const sign = Math.sign(target);
 
-                if (sign === -1) {
-                  diffToTarget = scrollSnap - (1 + scrollProgress);
-                }
-                if (sign === 1) {
-                  diffToTarget = scrollSnap + (1 - scrollProgress);
-                }
+              if (sign === -1) {
+                diffToTarget = scrollSnap - (1 + scrollProgress);
               }
-            });
-          }
+              if (sign === 1) {
+                diffToTarget = scrollSnap + (1 - scrollProgress);
+              }
+            }
+          });
+        }
 
-          const tweenValue =
-            1.25 - Math.abs(diffToTarget * tweenFactor.current);
-          const scale = numberWithinRange(tweenValue, 0, 1).toString();
-          const tweenNode = tweenNodes.current[slideIndex];
-          tweenNode.style.transform = `scale(${scale})`;
-        });
+        const tweenValue = 1.25 - Math.abs(diffToTarget * tweenFactor.current);
+        const scale = numberWithinRange(tweenValue, 0, 1).toString();
+        const tweenNode = tweenNodes.current[slideIndex];
+        tweenNode.style.transform = `scale(${scale})`;
       });
-    },
-    [],
-  );
+    });
+  }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -131,12 +117,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
     setTweenFactor(emblaApi);
     tweenScale(emblaApi);
 
-    emblaApi
-      .on("reInit", setTweenNodes)
-      .on("reInit", setTweenFactor)
-      .on("reInit", tweenScale)
-      .on("scroll", tweenScale)
-      .on("slideFocus", tweenScale);
+    emblaApi.on("reInit", setTweenNodes).on("reInit", setTweenFactor).on("reInit", tweenScale).on("scroll", tweenScale).on("slideFocus", tweenScale);
   }, [emblaApi, tweenScale]);
 
   const handleImageClick = (index: number) => {
@@ -150,32 +131,18 @@ const EmblaCarousel: React.FC<PropType> = () => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {values.map((value, index) => (
-            <div
-              className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] sm:flex-[0_0_40%]"
-              key={index}
-            >
+            <div className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] sm:flex-[0_0_40%]" key={index}>
               <div className="embla__slide__image rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
-                <div
-                  className="embla__slide__image relative rounded-2xl hover:cursor-pointer"
-                  onClick={() => handleImageClick(index)}
-                >
-                  <img
-                    src={value.img}
-                    alt={`${value.value} + Image`}
-                    className="aspect-auto rounded-xl"
-                  />
+                <div className="embla__slide__image relative rounded-2xl hover:cursor-pointer" onClick={() => handleImageClick(index)}>
+                  <img src={value.img} alt={`${value.value} + Image`} className="aspect-auto rounded-xl" />
                   {!flipped[index] ? (
                     <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
                       <img src={value.icon} alt={`${value.value} + Icon`} />
-                      <p className="text-center font-redhat text-4xl font-semibold text-black sm:text-5xl">
-                        {value.value}
-                      </p>
+                      <p className="text-center font-redhat text-4xl font-semibold text-black sm:text-5xl">{value.value}</p>
                     </div>
                   ) : (
                     <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
-                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black sm:text-3xl">
-                        {value.text}
-                      </p>
+                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black sm:text-3xl">{value.text}</p>
                     </div>
                   )}
                 </div>

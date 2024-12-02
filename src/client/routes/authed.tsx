@@ -11,11 +11,7 @@ function AuthedComponent() {
   return (
     <div>
       <div>Helllllllo</div>
-      {isAuthenticated ? (
-        <div>Hellllllllo, you are indeed authenticated</div>
-      ) : (
-        <div>Sorry, you are not authenticated</div>
-      )}
+      {isAuthenticated ? <div>Hellllllllo, you are indeed authenticated</div> : <div>Sorry, you are not authenticated</div>}
     </div>
   );
 }

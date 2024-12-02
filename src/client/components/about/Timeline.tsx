@@ -23,26 +23,22 @@ const defaultItems: Array<TimelineItem> = [
   },
   {
     title: "SRC 2014 Host",
-    description:
-      "Hosted SASE Southeastern Regional Conference: Connecting the Dots",
+    description: "Hosted SASE Southeastern Regional Conference: Connecting the Dots",
     date: "Jan 2014",
   },
   {
     title: "SRC 2015 Host",
-    description:
-      "Hosted SASE Southeastern Regional Conference: Ignite, Innovate, Inspire",
+    description: "Hosted SASE Southeastern Regional Conference: Ignite, Innovate, Inspire",
     date: "Jan 2015",
   },
   {
     title: "Game Night Winner, NC 2015",
-    description:
-      "UF SASE team “Chompions” wins Game Night at National Conference 2015",
+    description: "UF SASE team “Chompions” wins Game Night at National Conference 2015",
     date: "Jan 2015",
   },
   {
     title: "SRC 2016 Host",
-    description:
-      "Host of SASE Southeastern Regional Conference: Beyond Expectations",
+    description: "Host of SASE Southeastern Regional Conference: Beyond Expectations",
     date: "Mar 2016",
   },
   {
@@ -52,8 +48,7 @@ const defaultItems: Array<TimelineItem> = [
   },
   {
     title: "Inspire Awards 2019-20",
-    description:
-      "SASE Inspire Awards: Most Influential Chapter Honorable Mention",
+    description: "SASE Inspire Awards: Most Influential Chapter Honorable Mention",
     date: "Jan 2020",
   },
   {
@@ -63,14 +58,12 @@ const defaultItems: Array<TimelineItem> = [
   },
   {
     title: "Inspire Awards 2021-22",
-    description:
-      "Collegiate Star Honorable Mention: Ian Lai (Social Chair ’21-’22, President ’22-’23)",
+    description: "Collegiate Star Honorable Mention: Ian Lai (Social Chair ’21-’22, President ’22-’23)",
     date: "Jan 2022",
   },
   {
     title: "Award of Excellence 2021-22",
-    description:
-      "Gator Engineering Student Society Recognition Award of Excellence",
+    description: "Gator Engineering Student Society Recognition Award of Excellence",
     date: "Jan 2022",
   },
   {
@@ -80,8 +73,7 @@ const defaultItems: Array<TimelineItem> = [
   },
   {
     title: "UF Student Organization Awards 2023-24",
-    description:
-      "Member of the Year: Sophia Dong (AASA Choreographer, SERC Programming Lead)",
+    description: "Member of the Year: Sophia Dong (AASA Choreographer, SERC Programming Lead)",
     date: "Apr 2024",
   },
   {
@@ -168,10 +160,7 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
       </div>
 
       {/* Scrollable Timeline Container */}
-      <div
-        ref={timelineRef}
-        className="scrollbar-custom flex h-full items-center justify-center overflow-x-auto"
-      >
+      <div ref={timelineRef} className="scrollbar-custom flex h-full items-center justify-center overflow-x-auto">
         <div className="absolute top-[49%] z-10 h-1 w-full -translate-y-1/2 bg-saseBlue" />
         <div className="relative w-full px-32">
           {/* Main Timeline Line */}
@@ -182,11 +171,7 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
               const isTop = index % 2 === 0;
 
               return (
-                <div
-                  key={index}
-                  className="relative flex flex-col items-center"
-                  style={{ width: `${100 / items.length}%` }}
-                >
+                <div key={index} className="relative flex flex-col items-center" style={{ width: `${100 / items.length}%` }}>
                   {/* Card */}
                   <div
                     className={`absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-black bg-gray-100 p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
@@ -194,26 +179,14 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
                     }`}
                   >
                     <div className="text-xs text-gray-600">{item.date}</div>
-                    <div className="mt-1 text-lg font-bold text-gray-800">
-                      {item.title}
-                    </div>
-                    <p className="mt-2 overflow-auto text-black">
-                      {item.description}
-                    </p>
+                    <div className="mt-1 text-lg font-bold text-gray-800">{item.title}</div>
+                    <p className="mt-2 overflow-auto text-black">{item.description}</p>
                   </div>
 
                   {/* Connector Line */}
-                  <div
-                    className={`absolute w-1 bg-saseBlue ${
-                      isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"
-                    }`}
-                  >
+                  <div className={`absolute w-1 bg-saseBlue ${isTop ? "bottom-1/2 h-14" : "top-1/2 h-14"}`}>
                     {/* Connecting Dot */}
-                    <div
-                      className={`${
-                        isTop ? "bottom-12" : "top-12"
-                      } absolute -left-1.5 h-4 w-4 rounded-full bg-saseBlue`}
-                    />
+                    <div className={`${isTop ? "bottom-12" : "top-12"} absolute -left-1.5 h-4 w-4 rounded-full bg-saseBlue`} />
                   </div>
                 </div>
               );
