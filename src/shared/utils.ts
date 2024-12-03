@@ -1,3 +1,4 @@
+import type { successResponseSchema } from "@schema/responseSchema";
 import { errorResponseSchema } from "@schema/responseSchema";
 import { clsx, type ClassValue } from "clsx";
 import type { Context } from "hono";
@@ -18,7 +19,12 @@ export async function zodFetch<T extends z.AnyZodObject>(schema: T, input: Reque
   return schema.parse(await res.json());
 }
 
-export const formatAndValidateResponse = <T>(result: T, message: string, schema: ZodTypeAny, meta: Record<string, never> = {}) => {
+export const formatAndValidateResponse = <Schema extends typeof successResponseSchema>(
+  result: z.infer<Schema>["data"],
+  message: string,
+  schema: Schema,
+  meta: Record<string, never> = {},
+) => {
   const responsePayload = {
     data: result,
     message,

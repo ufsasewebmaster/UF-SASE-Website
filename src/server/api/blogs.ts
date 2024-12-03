@@ -13,7 +13,8 @@ blogRoutes.get("/blogs/all", async (c) => {
     const result = await db.select().from(Schema.blogs);
     const validatedResponse = formatAndValidateResponse(result, "Fetched all blogs", blogsApiResponseSchema);
     return c.json(validatedResponse);
-  } catch {
+  } catch (error) {
+    console.log(error);
     return createErrorResponse(c, "MISSING_BLOG", "Cannot fetch blogs", 400);
   }
 });
