@@ -31,7 +31,7 @@ authRoutes.post("/auth/signup", async (c) => {
   const passSalt = await genSalt(10);
   const formPasswordHash = await hash(formPassword, passSalt);
 
-  const userId = generateIdFromEntropySize(10); // 16 characters long
+  const userId = generateIdFromEntropySize(16); // 16 characters long
 
   try {
     await db.insert(Schema.users).values({
@@ -72,13 +72,9 @@ authRoutes.post("/auth/login", async (c) => {
     });
   }
 
-  const user = await db
-    .select()
-    .from(Schema.users)
-    .where(eq(Schema.users.username, formUsername));
+  const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
 
-  if (user.length == 0)
-    return new Response("Invalid username or password", { status: 401 });
+  if (user.length == 0) return new Response("Invalid username or password", { status: 401 });
 
   const passwordHash = user[0].password_hash;
   const validPassword = await compare(formPassword, passwordHash);
@@ -88,10 +84,27 @@ authRoutes.post("/auth/login", async (c) => {
       status: 401,
     });
   } else {
+    //TODO: CREATE NEW SESSION IN THE DATABASE AND GENERATE ID
+    const session_id = generateIdFromEntropySize(16);
+    createSession(session_id, user[0].id);
     return new Response("Successfully logged in", {
       status: 200,
+      headers: {
+        "Set-Cookie": `sessionId=${session_id}; Path=/; HttpOnly; secure; Max-Age=3600; SameSite=Strict`,
+      },
     });
   }
 });
 
+async function createSession(sessionID: string, userID: string) {
+  try {
+    await db.insert(Schema.sessions).values({
+      id: sessionID,
+      user_id: userID, //Session expires in 1 hour from when it is created
+      expires_at: Date.now() + 3600 * 1000,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 export default authRoutes;
