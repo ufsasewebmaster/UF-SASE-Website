@@ -1,6 +1,6 @@
 import { cn } from "@/shared/utils";
 
-const MemberCard = ({ image, name, role, textColor }: { image: string; name: string; role: string; textColor: string }) => {
+const MemberCard = ({ image, name, quote, role, textColor }: { image: string; name: string; role: string; textColor: string; quote: string }) => {
   return (
     <div
       className="relative flex aspect-auto w-auto flex-col justify-center rounded-2xl bg-cover bg-center pb-4"
@@ -25,6 +25,9 @@ const MemberCard = ({ image, name, role, textColor }: { image: string; name: str
         <p className="text-center italic">{role}</p>
       </div>
       <p className="relative p-2 text-center font-redhat text-xl text-white">"SASE is Cool!"</p>
+      <div className="flex items-center justify-center">
+        <p className="w-full p-2 text-center font-redhat text-xl text-white">"{quote}"</p>
+      </div>
     </div>
   );
 };
