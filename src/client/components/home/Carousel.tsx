@@ -10,7 +10,7 @@ import sport from "@assets/SportsValue.jpg";
 import sports_icon from "@assets/SportsValueIcon.png";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselArrows";
 
 const TWEEN_FACTOR_BASE = 0.52;
@@ -55,7 +55,6 @@ const EmblaCarousel: React.FC<PropType> = () => {
     },
   ];
 
-  const [flipped, setFlipped] = useState([false, false, false, false, false]);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<Array<HTMLElement>>([]);
@@ -120,31 +119,24 @@ const EmblaCarousel: React.FC<PropType> = () => {
     emblaApi.on("reInit", setTweenNodes).on("reInit", setTweenFactor).on("reInit", tweenScale).on("scroll", tweenScale).on("slideFocus", tweenScale);
   }, [emblaApi, tweenScale]);
 
-  const handleImageClick = (index: number) => {
-    const updatedFlippedStatus = [...flipped];
-    updatedFlippedStatus[index] = !flipped[index];
-    setFlipped(updatedFlippedStatus);
-  };
-
   return (
-    <div className="m-auto px-0 sm:px-12">
+    <div className="m-auto px-0 sm:px-10">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {values.map((value, index) => (
             <div className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] sm:flex-[0_0_40%]" key={index}>
               <div className="embla__slide__image rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
-                <div className="embla__slide__image relative rounded-2xl hover:cursor-pointer" onClick={() => handleImageClick(index)}>
+                <div className="embla__slide__image group relative rounded-2xl hover:cursor-pointer">
                   <img src={value.img} alt={`${value.value} + Image`} className="aspect-auto rounded-xl" />
-                  {!flipped[index] ? (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
-                      <img src={value.icon} alt={`${value.value} + Icon`} />
-                      <p className="text-center font-redhat text-4xl font-semibold text-black sm:text-5xl">{value.value}</p>
-                    </div>
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
-                      <p className="px-4 text-center font-redhat text-2xl font-medium text-black sm:text-3xl">{value.text}</p>
-                    </div>
-                  )}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
+                    <img src={value.icon} alt={`${value.value} + Icon`} className="mb-2 transition-opacity duration-300 group-hover:opacity-0" />{" "}
+                    <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0">
+                      {value.value}
+                    </p>
+                    <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100 sm:text-xl">
+                      {value.text}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
