@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { IoMdLink } from "react-icons/io";
 import GalleryDropdown from "../components/GalleryDropdown";
+import GalleryYearbook from "../components/GalleryYearbook";
 import GalleryZipExtraction from "../components/GalleryZipExtraction";
 import { seo } from "../utils/seo";
-import GalleryYearbook from "../components/GalleryYearbook";
 
 export const Route = createFileRoute("/gallery")({
   meta: () => [
@@ -64,18 +64,20 @@ export const Route = createFileRoute("/gallery")({
               </div>
             </a>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             <div className="w-3/12"></div>
-            <div className="flex-1 shadow-[10px_10px_0px_0px_rgb(6,104,179)] rounded-lg bg-blue-300 pt-3 pb-3 transition duration-150 hover:scale-105">
-             <GalleryYearbook/>
+            <div className="flex-1 rounded-lg bg-blue-300 pb-3 pt-3 shadow-[10px_10px_0px_0px_rgb(6,104,179)] transition duration-150 hover:scale-105">
+              <GalleryYearbook />
             </div>
             <div className="w-3/12"></div>
           </div>
           <div className="pb-10"></div>
           <div className="flex justify-center pb-10 font-redhat">
             <a href="https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n" target="_blank">
-              <button className="pl-5 pr-5 ... delay-50 flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">2024-2025 SASE Yearbook</button>
-            </a>  
+              <button className="... delay-50 flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue pl-5 pr-5 text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
+                2024-2025 SASE Yearbook
+              </button>
+            </a>
           </div>
         </div>
       </div>

@@ -58,7 +58,6 @@ export const personalInfo = sqliteTable("personal_info", {
   area_code: integer("area_code"),
 });
 
-
 // Professional Info table
 export const professionalInfo = sqliteTable("professional_info", {
   user_id: text("user_id")

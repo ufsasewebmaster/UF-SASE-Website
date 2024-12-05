@@ -1,5 +1,5 @@
-import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
 import { personalInfoInsertSchema, personalInfoUpdateSchema } from "@schema/personalInfoSchema";
+import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db";
