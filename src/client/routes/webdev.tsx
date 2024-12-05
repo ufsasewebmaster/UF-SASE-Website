@@ -1,10 +1,10 @@
+import MemberCard from "@components/home/MemberCard";
 import FAQ from "@components/programs/FAQCard";
+import { faqData } from "@components/programs/faqWebdev";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
-import MemberCard from "../components/home/MemberCard";
-import { faqData } from "../components/programs/faqWebdev";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/webdev")({
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/webdev")({
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
-        <div className="flex w-full max-w-7xl items-start px-4 py-8">
+        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/webdev")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
-          <div className="mb-24 flex flex-nowrap justify-center gap-36">
+          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
             <GoalCard text="Work with agile practices commonly found in the industry." color="blue" />
             <GoalCard text="Develop technical skills related to UI/UX,  frontend, or backend development." color="green" />
             <GoalCard text="Gain hands-on experience with web development and contribute to SASE in a meaningful way." color="blue" />

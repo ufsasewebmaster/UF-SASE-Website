@@ -10,7 +10,7 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ image, name, text, title }) => {
   return (
-    <div className="mb-24 flex max-w-7xl items-center bg-white p-6">
+    <div className="mb-24 flex max-w-7xl flex-col items-center gap-12 bg-white p-6 md:flex-row">
       {/* Image Section */}
       <div className="relative flex-shrink-0 rounded-3xl border-2 border-black shadow-[18px_18px_0px_#7DC242]">
         <img src={image} alt={name} className="h-[500px] w-[400px] rounded-3xl object-cover" />
@@ -19,7 +19,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ image, name, text, ti
       </div>
 
       {/* Text Section */}
-      <div className="ml-24 border-l-4 border-saseGreen pl-6">
+      <div className="border-l-4 border-saseGreen pl-6">
         <p className="mb-4 text-3xl text-gray-800">“{text}”</p>
         <p className="font-semibold text-saseGreen">
           {name}, {title}

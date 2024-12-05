@@ -18,11 +18,11 @@ export const Route = createFileRoute("/set")({
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
-        <div className="flex w-full max-w-7xl items-start px-4 py-8">
+        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 lg:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-7xl font-semibold leading-tight text-gray-800">
+            <h2 className="text-5xl font-semibold leading-tight text-gray-800 sm:text-7xl">
               SASE
               <br />
               ENGINEERING
@@ -66,7 +66,7 @@ export const Route = createFileRoute("/set")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
-          <div className="mb-24 flex flex-nowrap justify-center gap-36">
+          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
             <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
             <GoalCard text="Develop essential technical skills and experiences to add to your resume." color="green" />
             <GoalCard text="Connect with other SASErs and develop leadership skills through hands-on projects." color="blue" />
