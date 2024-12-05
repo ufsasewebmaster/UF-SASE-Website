@@ -24,9 +24,7 @@ const MemberCard = ({ image, name, quote, role, textColor }: { image: string; na
         <p className="text-center font-semibold">{name}</p>
         <p className="text-center italic">{role}</p>
       </div>
-      <div className="flex items-center justify-center">
-        <p className="z-10 w-full p-2 text-center font-redhat text-xl text-white">"{quote}"</p>
-      </div>
+      <p className="p-2 text-center font-redhat text-xl text-white">"SASE is Cool!"</p>
     </div>
   );
 };
