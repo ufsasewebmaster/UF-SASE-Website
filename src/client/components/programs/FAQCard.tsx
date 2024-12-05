@@ -34,7 +34,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
         } overflow-hidden border-t border-gray-300 bg-white px-6`}
         style={{ transitionProperty: "max-height, opacity, padding" }}
       >
-        <p className="text-xl text-gray-800">{answer}</p>
+        <div className="text-xl text-gray-800" dangerouslySetInnerHTML={{ __html: answer }} />
       </div>
     </div>
   );

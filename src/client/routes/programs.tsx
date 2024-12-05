@@ -49,7 +49,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Web Development Team</h2>
           </header>
           <ProgramCard
-            image={imageUrls["Board.png"]}
+            image={imageUrls["WebDevCard.png"]}
             text={
               <>
                 The <strong>SASE Web Development Team</strong> is a group of <strong>UI/UX</strong>, <strong>Frontend</strong>, and{" "}
