@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
               <img src={imageUrls["WhiteLogo.png"]} alt="SASE Logo" className="inline-block h-[1.5em] align-middle" />
               <span>CIETY OF ASIAN</span>
             </h1>
-            <h1 className="w-1/2 place-self-end text-left">SCIENTISTS & ENGINEERS</h1>
+            <h1 className="w-3/5 place-self-end text-left">SCIENTISTS & ENGINEERS</h1>
           </div>
         </div>
 
