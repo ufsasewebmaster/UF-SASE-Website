@@ -35,12 +35,8 @@
           "name": "blog_tag_relationship_blog_id_blog_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog",
-          "columnsFrom": [
-            "blog_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["blog_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -48,12 +44,8 @@
           "name": "blog_tag_relationship_tag_id_blog_tag_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog_tag",
-          "columnsFrom": [
-            "tag_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tag_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -83,9 +75,7 @@
       "indexes": {
         "blog_tag_name_unique": {
           "name": "blog_tag_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         }
       },
@@ -157,9 +147,7 @@
       "indexes": {
         "blog_title_unique": {
           "name": "blog_title_unique",
-          "columns": [
-            "title"
-          ],
+          "columns": ["title"],
           "isUnique": true
         }
       },
@@ -168,12 +156,8 @@
           "name": "blog_author_id_user_id_fk",
           "tableFrom": "blog",
           "tableTo": "user",
-          "columnsFrom": [
-            "author_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["author_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -252,9 +236,7 @@
       "indexes": {
         "event_name_unique": {
           "name": "event_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         }
       },
@@ -294,12 +276,8 @@
           "name": "mentor_mentee_relationship_mentor_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": [
-            "mentor_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["mentor_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -307,12 +285,8 @@
           "name": "mentor_mentee_relationship_mentee_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": [
-            "mentee_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["mentee_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -370,16 +344,12 @@
       "indexes": {
         "personal_info_email_unique": {
           "name": "personal_info_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         },
         "personal_info_phone_unique": {
           "name": "personal_info_phone_unique",
-          "columns": [
-            "phone"
-          ],
+          "columns": ["phone"],
           "isUnique": true
         }
       },
@@ -388,12 +358,8 @@
           "name": "personal_info_user_id_user_id_fk",
           "tableFrom": "personal_info",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -461,12 +427,8 @@
           "name": "professional_info_user_id_user_id_fk",
           "tableFrom": "professional_info",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -520,12 +482,8 @@
           "name": "sase_info_user_id_user_id_fk",
           "tableFrom": "sase_info",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -565,12 +523,8 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -635,9 +589,7 @@
       "indexes": {
         "user_username_unique": {
           "name": "user_username_unique",
-          "columns": [
-            "username"
-          ],
+          "columns": ["username"],
           "isUnique": true
         }
       },
