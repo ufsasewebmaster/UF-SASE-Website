@@ -5,6 +5,6 @@ export interface Blog {
   author_id?: string;
   published_date: Date;
   time_updated: Date;
-  last_update_date?: string;
+  last_update_date?: Date;
   tags?: string;
 }

@@ -6,6 +6,6 @@ if (fs.existsSync("local.db")) {
   fs.rmSync("local.db");
 }
 
-const _client = createClient({
+const _client = createClient({  
   url: "file:local.db",
 });

@@ -19,7 +19,7 @@ export const Route = createFileRoute("/sports")({
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
-        <div className="flex w-full max-w-7xl items-start px-4 py-8">
+        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sports")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
-          <div className="mb-24 flex flex-nowrap justify-center gap-36">
+          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
             <GoalCard text="Meet new people with common interests." color="blue" />
             <GoalCard text="Have fun and compete in a friendly yet competitive environment." color="green" />
             <GoalCard text="Develop your athletic ability in a variety of disciplines." color="blue" />

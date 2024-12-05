@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "d125eabb-de50-41f6-9a98-e576103add00",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "13599e60-6f3a-4904-9750-25889b3c31ab",
+  "prevId": "d125eabb-de50-41f6-9a98-e576103add00",
   "tables": {
     "blog_tag_relationship": {
       "name": "blog_tag_relationship",
@@ -35,8 +35,12 @@
           "name": "blog_tag_relationship_blog_id_blog_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog",
-          "columnsFrom": ["blog_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "blog_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -44,14 +48,19 @@
           "name": "blog_tag_relationship_tag_id_blog_tag_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog_tag",
-          "columnsFrom": ["tag_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tag_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "blog_tag": {
       "name": "blog_tag",
@@ -74,13 +83,16 @@
       "indexes": {
         "blog_tag_name_unique": {
           "name": "blog_tag_name_unique",
-          "columns": ["name"],
+          "columns": [
+            "name"
+          ],
           "isUnique": true
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "blog": {
       "name": "blog",
@@ -127,13 +139,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "last_update_date": {
-          "name": "last_update_date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "tags": {
           "name": "tags",
           "type": "text",
@@ -145,7 +150,9 @@
       "indexes": {
         "blog_title_unique": {
           "name": "blog_title_unique",
-          "columns": ["title"],
+          "columns": [
+            "title"
+          ],
           "isUnique": true
         }
       },
@@ -154,14 +161,19 @@
           "name": "blog_author_id_user_id_fk",
           "tableFrom": "blog",
           "tableTo": "user",
-          "columnsFrom": ["author_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "author_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "email_subscriber": {
       "name": "email_subscriber",
@@ -206,7 +218,8 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "event": {
       "name": "event",
@@ -278,13 +291,16 @@
       "indexes": {
         "event_name_unique": {
           "name": "event_name_unique",
-          "columns": ["name"],
+          "columns": [
+            "name"
+          ],
           "isUnique": true
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "mentor_mentee_relationship": {
       "name": "mentor_mentee_relationship",
@@ -317,8 +333,12 @@
           "name": "mentor_mentee_relationship_mentor_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": ["mentor_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "mentor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -326,14 +346,19 @@
           "name": "mentor_mentee_relationship_mentee_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": ["mentee_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "mentee_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "personal_info": {
       "name": "personal_info",
@@ -384,12 +409,16 @@
       "indexes": {
         "personal_info_email_unique": {
           "name": "personal_info_email_unique",
-          "columns": ["email"],
+          "columns": [
+            "email"
+          ],
           "isUnique": true
         },
         "personal_info_phone_unique": {
           "name": "personal_info_phone_unique",
-          "columns": ["phone"],
+          "columns": [
+            "phone"
+          ],
           "isUnique": true
         }
       },
@@ -398,14 +427,19 @@
           "name": "personal_info_user_id_user_id_fk",
           "tableFrom": "personal_info",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "professional_info": {
       "name": "professional_info",
@@ -466,14 +500,19 @@
           "name": "professional_info_user_id_user_id_fk",
           "tableFrom": "professional_info",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "sase_info": {
       "name": "sase_info",
@@ -520,14 +559,19 @@
           "name": "sase_info_user_id_user_id_fk",
           "tableFrom": "sase_info",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "session": {
       "name": "session",
@@ -560,14 +604,19 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "user": {
       "name": "user",
@@ -625,15 +674,19 @@
       "indexes": {
         "user_username_unique": {
           "name": "user_username_unique",
-          "columns": ["username"],
+          "columns": [
+            "username"
+          ],
           "isUnique": true
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     }
   },
+  "views": {},
   "enums": {},
   "_meta": {
     "schemas": {},

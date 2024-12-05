@@ -11,7 +11,6 @@ CREATE TABLE `blog_tag` (
 	`name` text NOT NULL
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `blog_tag_name_unique` ON `blog_tag` (`name`);--> statement-breakpoint
 CREATE TABLE `blog` (
 	`id` text PRIMARY KEY NOT NULL,
 	`title` text NOT NULL,
@@ -19,12 +18,18 @@ CREATE TABLE `blog` (
 	`author_id` text,
 	`published_date` integer NOT NULL,
 	`time_updated` integer NOT NULL,
-	`last_update_date` text,
+	`last_update_date` integer NOT NULL,
 	`tags` text,
 	FOREIGN KEY (`author_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `blog_title_unique` ON `blog` (`title`);--> statement-breakpoint
+CREATE TABLE `email_subscriber` (
+	`id` text PRIMARY KEY NOT NULL,
+	`email` text NOT NULL,
+	`name` text,
+	`subscribed_at` integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `event` (
 	`id` text PRIMARY KEY NOT NULL,
 	`name` text NOT NULL,
@@ -37,7 +42,6 @@ CREATE TABLE `event` (
 	`involved_groups` text
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `event_name_unique` ON `event` (`name`);--> statement-breakpoint
 CREATE TABLE `mentor_mentee_relationship` (
 	`id` text PRIMARY KEY NOT NULL,
 	`mentor_id` text,
@@ -56,8 +60,6 @@ CREATE TABLE `personal_info` (
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `personal_info_email_unique` ON `personal_info` (`email`);--> statement-breakpoint
-CREATE UNIQUE INDEX `personal_info_phone_unique` ON `personal_info` (`phone`);--> statement-breakpoint
 CREATE TABLE `professional_info` (
 	`user_id` text PRIMARY KEY NOT NULL,
 	`resume_path` text,
@@ -95,4 +97,10 @@ CREATE TABLE `user` (
 	`roles` text
 );
 --> statement-breakpoint
+CREATE UNIQUE INDEX `blog_tag_name_unique` ON `blog_tag` (`name`);--> statement-breakpoint
+CREATE UNIQUE INDEX `blog_title_unique` ON `blog` (`title`);--> statement-breakpoint
+CREATE UNIQUE INDEX `email_subscriber_email_unique` ON `email_subscriber` (`email`);--> statement-breakpoint
+CREATE UNIQUE INDEX `event_name_unique` ON `event` (`name`);--> statement-breakpoint
+CREATE UNIQUE INDEX `personal_info_email_unique` ON `personal_info` (`email`);--> statement-breakpoint
+CREATE UNIQUE INDEX `personal_info_phone_unique` ON `personal_info` (`phone`);--> statement-breakpoint
 CREATE UNIQUE INDEX `user_username_unique` ON `user` (`username`);

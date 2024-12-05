@@ -87,7 +87,7 @@ blogRoutes.post("/blogs/update", async (c) => {
       .set({
         ...update,
         time_updated: new Date(),
-        last_update_date: new Date().toISOString(),
+        last_update_date: new Date(),
       })
       .where(eq(Schema.blogs.id, id))
       .returning();

@@ -115,7 +115,9 @@ export const blogs = sqliteTable("blog", {
   time_updated: integer("time_updated", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
-  last_update_date: text("last_update_date"),
+  last_update_date: integer("published_date", { mode: "timestamp" })
+  .notNull()
+  .$defaultFn(() => new Date()),
   tags: text("tags"),
 });
 
