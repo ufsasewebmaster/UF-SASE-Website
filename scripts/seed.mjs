@@ -34,11 +34,23 @@ client.execute(
         "TEST_ID", // Blog ID
         "My First Blog", // Title
         "This is the blog content.", // Content
-        "0000", // Author ID (matches user.id)
+        adminID, // Author ID (matches user.id)
         Date.now(), // Published date
         Date.now(), // Time updated
-        "1", // Tags
+        "0", // Tags
       ],
+    );
+
+    client.execute(
+      `INSERT INTO blog_tag (id, name) 
+        VALUES (?, ?)`,
+      ["0", "dummyTag"],
+    );
+
+    client.execute(
+      `INSERT INTO blog_tag_relationship (id, blog_id, tag_id) 
+        VALUES (?, ?, ?)`,
+      ["REL_TEST", "TEST_ID", "0"],
     );
   } catch (error) {
     console.error("Error during seeding:", error);
