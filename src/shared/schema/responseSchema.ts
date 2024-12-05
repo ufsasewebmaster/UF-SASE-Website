@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const successResponseSchema = z.object({
   data: z.any(),
-  message: z.string(),
+  message: z.string().optional(),
   meta: z.object({}).optional(), // Optional metadata, e.g., pagination details
 });
 

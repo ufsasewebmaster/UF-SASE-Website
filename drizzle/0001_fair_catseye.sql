@@ -1,0 +1,1 @@
+ALTER TABLE `blog` DROP COLUMN `last_update_date`;

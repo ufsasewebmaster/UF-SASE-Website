@@ -18,7 +18,11 @@ export const Route = createFileRoute("/blogs")({
     const { isAuthenticated } = useAuth();
     const [error, setError] = useState<string | null>(null);
 
+    const blogObject = useBlogs();
     const { blogs, createBlog, updateBlog } = useBlogs();
+    console.log("Blog Object", blogObject);
+    // console.log("Blogs", blogs);
+    console.log("Data", blogs.data);
 
     const handleCreateBlog = () => {
       createBlog.mutate(
@@ -66,7 +70,7 @@ export const Route = createFileRoute("/blogs")({
       setCurrentBlog(blog);
       setNewBlogTitle(blog.title);
       setNewBlogContent(blog.content);
-      setNewBlogTags(blog.tags?.join(", ") || "");
+      // setNewBlogTags(blog.tags?.join(", ") || "");
       setIsEditing(true);
       setError(null);
     };
@@ -78,8 +82,7 @@ export const Route = createFileRoute("/blogs")({
       setError(null);
     };
 
-    if (blogs.isLoading) return <div>Loading blogs...</div>;
-    if (blogs.isError) return <div>Error loading blogs: {blogs.error.message}</div>;
+    // if (blogs.isError) return <div>Error loading blogs: {blogs.error.message}</div>;
 
     return (
       <div className="container mx-auto p-4">
@@ -142,7 +145,7 @@ export const Route = createFileRoute("/blogs")({
               <div key={blog.id} className="rounded-lg bg-white p-6 shadow-md">
                 <h2 className="mb-2 text-xl font-bold">{blog.title}</h2>
                 <p className="mb-4 text-gray-600">{blog.content.substring(0, 100)}...</p>
-                {blog.tags && <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags.join(", ")}</p>}
+                {blog.tags && <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags}</p>}
                 {isAuthenticated && <Button onClick={() => handleEditBlog(blog)}>Edit</Button>}
               </div>
             ))

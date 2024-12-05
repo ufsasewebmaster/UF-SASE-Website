@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "d125eabb-de50-41f6-9a98-e576103add00",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "13599e60-6f3a-4904-9750-25889b3c31ab",
+  "prevId": "d125eabb-de50-41f6-9a98-e576103add00",
   "tables": {
     "blog_tag_relationship": {
       "name": "blog_tag_relationship",
@@ -59,7 +59,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "blog_tag": {
       "name": "blog_tag",
@@ -90,7 +91,8 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "blog": {
       "name": "blog",
@@ -137,13 +139,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "last_update_date": {
-          "name": "last_update_date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "tags": {
           "name": "tags",
           "type": "text",
@@ -177,7 +172,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "email_subscriber": {
       "name": "email_subscriber",
@@ -222,7 +218,8 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "event": {
       "name": "event",
@@ -302,7 +299,8 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "mentor_mentee_relationship": {
       "name": "mentor_mentee_relationship",
@@ -359,7 +357,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "personal_info": {
       "name": "personal_info",
@@ -439,7 +438,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "professional_info": {
       "name": "professional_info",
@@ -511,7 +511,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "sase_info": {
       "name": "sase_info",
@@ -569,7 +570,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "session": {
       "name": "session",
@@ -613,7 +615,8 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "user": {
       "name": "user",
@@ -679,9 +682,11 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     }
   },
+  "views": {},
   "enums": {},
   "_meta": {
     "schemas": {},

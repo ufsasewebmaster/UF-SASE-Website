@@ -48,7 +48,7 @@ export async function updateBlog(blog: Partial<Blog> & { id: string }): Promise<
       .set({
         ...blog,
         time_updated: new Date(),
-        last_update_date: new Date().toISOString(),
+        last_update_date: new Date(),
       })
       .where(eq(blogs.id, blog.id))
       .returning();
