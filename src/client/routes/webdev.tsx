@@ -57,22 +57,28 @@ export const Route = createFileRoute("/webdev")({
           </header>
           <div className="grid grid-cols-1 gap-1 bg-white p-12 xl:grid-cols-5">
             <MemberCard image={imageUrls["FullStackLead.png"]} name="Ethan Niser" role="Full-Stack" textColor="blue" quote="typesafety" />
-            <MemberCard image={imageUrls["FrontendLead.png"]} name="Joseph Kim" role="Frontend" textColor="green" quote="I <3 TypeScript" />
+            <MemberCard
+              image={imageUrls["FrontendLead.png"]}
+              name="Joseph Kim"
+              role="Frontend"
+              textColor="green"
+              quote="still don't how to center a div"
+            />
             <MemberCard
               image={imageUrls["WebmasterChair.jpeg"]}
               name="Ricky Zhang"
               role="Webmaster"
               textColor="blue"
-              quote="Building SASE's digital home."
+              quote="SASE deserves a better website"
             />
             <MemberCard
               image={imageUrls["BackendLead.jpeg"]}
               name="Sihala Senevirathne"
               role="Backend"
               textColor="green"
-              quote="Efficiency meets power."
+              quote="Ricky, please pay me"
             />
-            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="blue" quote="Design with impact." />
+            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="blue" quote="sigma Figma team" />
           </div>
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
@@ -80,7 +86,7 @@ export const Route = createFileRoute("/webdev")({
           </header>
           <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
             <GoalCard text="Work with agile practices commonly found in the industry." color="blue" />
-            <GoalCard text="Develop technical skills related to UI/UX,  frontend, or backend development." color="green" />
+            <GoalCard text="Develop technical skills related to UI/UX, frontend, or backend development." color="green" />
             <GoalCard text="Gain hands-on experience with web development and contribute to SASE in a meaningful way." color="blue" />
           </div>
           <header className="flex max-w-7xl items-center px-5">

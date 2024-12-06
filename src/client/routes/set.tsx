@@ -21,7 +21,7 @@ export const Route = createFileRoute("/set")({
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 lg:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
+            <div className="mr-5 h-52 w-1.5 bg-saseGreen"></div>
             <h2 className="text-5xl font-semibold leading-tight text-gray-800 sm:text-7xl">
               SASE
               <br />
@@ -33,11 +33,11 @@ export const Route = createFileRoute("/set")({
           <InfoCard
             text={
               <>
-                <strong>SASE Engineering Team (SET)</strong> collaborates with other members to execute projects for the SASE community, honing your
-                technical, communication, and leadership skills. Throughout the process, members will gain{" "}
-                <strong>experience to add to your resume</strong> and talk about during job interviews. SET members will also obtain{" "}
-                <strong>behind-the-scenes insights</strong> through project development and teamwork—valuable for future leadership roles in and out
-                of SASE.
+                The <strong>SASE Engineering Team (SET)</strong> collaborates to design and execute a yearlong project that showcases{" "}
+                <strong>technical creativity</strong> and <strong>problem-solving</strong>. By working on the project, members will enhance their
+                engineering, collaboration, and project management skills while gaining hands-on experience to highlight on their resumes and discuss
+                in interviews. Are you passionate about technology and eager to develop your skills in a collaborative, hands-on environment? The SASE
+                Engineering Team is your chance to make a real impact! Everyone of all skill levels are encouraged to apply!
               </>
             }
           />

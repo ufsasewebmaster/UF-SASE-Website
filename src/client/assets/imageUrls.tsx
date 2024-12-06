@@ -1,4 +1,6 @@
 export const imageUrls = {
+  "InternTestimonial.png": "https://utfs.io/f/2ipokchyMOTKMwe0GKpl7CgrRYfuEvBUbimQpeTP4DM6Ha3V",
+  "SponsorsWorkshop.png": "https://utfs.io/f/2ipokchyMOTKjseMsFzgL2ltXn5qJskZ8CrIuU3wcajib0EN",
   "FrontendLead.png": "https://utfs.io/f/2ipokchyMOTKB2YsSk3ULJG6YbFtkQIHNdvnrupfCaVTR0mi",
   "Briefcase.png": "https://utfs.io/f/2ipokchyMOTKGTdwdwM5yRk4tuHnbMN6AD2BQ8ZipxvdK7wa",
   "HistorianChair.jpeg": "https://utfs.io/f/2ipokchyMOTKLwUB2A9MrDVyAlf08kn7JZT9PI5tC2cYxsUS",
@@ -106,7 +108,7 @@ export const imageUrls = {
   "ServiceChair.jpeg": "https://utfs.io/f/2ipokchyMOTKcqEYUxPpMwbOnfqEJ7TVa05IgRhUszKWGF28",
   "Suitcase.png": "https://utfs.io/f/2ipokchyMOTKsVzvgSvNXQI7vJOBi4C8jpqwVZz0efGoksdW",
   "SETRobot.png": "https://utfs.io/f/2ipokchyMOTKIISNrb2IJDaG589To0SN4hLYtuCq1Env6XKb",
-  "SocialsIcon.png": "https://utfs.io/f/2ipokchyMOTKzW0Q4JX7mLWaP2lucpA0ZEkUGtsfdJoTvDjF",
+  "SocialsIcon.png": "https://utfs.io/f/2ipokchyMOTKzW0Q4JX7mLWaP2lucpA0ZEkUGtsfdJoTvDjF"
 } as const;
 
 export type imageName = keyof typeof imageUrls;

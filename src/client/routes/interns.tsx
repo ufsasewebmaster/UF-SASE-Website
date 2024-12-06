@@ -56,9 +56,9 @@ export const Route = createFileRoute("/interns")({
             <h2 className="text-4xl text-gray-800">Testimonials</h2>
           </header>
           <TestimonialCard
-            image={imageUrls["Board.png"]}
-            text="SASE Interns was an incredible experience. I learned a lot about organizational, leadership, and planning skills and gained a lot of insight from SASE Board members. This program has greatly helped my professional development."
-            name="First Last"
+            image={imageUrls["InternTestimonial.png"]}
+            text="I really enjoyed my time with SASE Interns as it was a great mixture of  fun and general skill building. I got to connect with other SASE members, get more involved with SASE, and improve a variety of skills. But there was also tons of times where I got to joke around making Interns never feel like a burden."
+            name="Bryant Cao"
             title="2024 Intern"
           />
           <header className="mb-12 flex max-w-7xl items-center px-5">
