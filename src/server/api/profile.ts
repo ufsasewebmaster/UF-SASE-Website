@@ -7,7 +7,7 @@ import { generateIdFromEntropySize } from "lucia";
 
 const profileRoutes = new Hono();
 
-profileRoutes.post("/profile/", async (c) => {
+profileRoutes.get("/profile/", async (c) => {
   const body = await c.req.header("Cookie");
   console.log(body);
   return new Response("Success");
