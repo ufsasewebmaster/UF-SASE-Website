@@ -3,11 +3,11 @@ import { cn } from "@/shared/utils";
 const MemberCard = ({ image, name, quote, role, textColor }: { image: string; name: string; role: string; textColor: string; quote: string }) => {
   return (
     <div
-      className="relative flex aspect-auto w-auto flex-col justify-center rounded-2xl bg-cover bg-center pb-4"
+      className="relative flex aspect-auto w-auto flex-col justify-center rounded-2xl bg-cover bg-center pb-2"
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-2/5 rounded-b-2xl bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-3/4 rounded-b-2xl bg-gradient-to-t from-black to-transparent" />
 
       {/* Content */}
       <div
@@ -23,10 +23,10 @@ const MemberCard = ({ image, name, quote, role, textColor }: { image: string; na
       >
         <p className="text-center font-semibold">{name}</p>
         <p className="text-center italic">{role}</p>
-        <p className="w-full p-2 text-center font-redhat text-xl text-white">"{quote}"</p>
       </div>
-      {/* <div className="flex items-center justify-center">
-      </div> */}
+      <div className="flex items-center justify-center">
+        <p className="z-10 w-full p-2 text-center font-redhat text-xl text-white">"{quote}"</p>
+      </div>
     </div>
   );
 };

@@ -53,13 +53,26 @@ export const Route = createFileRoute("/webdev")({
           </div>
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-gray-800">Team Leads</h2>
+            <h2 className="text-4xl text-gray-800">Leadership</h2>
           </header>
-          <div className="grid grid-cols-1 gap-10 bg-white p-12 lg:grid-cols-4">
-            <MemberCard image={imageUrls["FullStackLead.png"]} name="Ethan Niser" role="Full-Stack" textColor="blue" />
-            <MemberCard image={imageUrls["FrontendLead.png"]} name="Joseph Kim" role="Frontend" textColor="green" />
-            <MemberCard image={imageUrls["BackendLead.jpeg"]} name="Sihala Senevirathne" role="Backend" textColor="blue" />
-            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="green" />
+          <div className="grid grid-cols-1 gap-1 bg-white p-12 xl:grid-cols-5">
+            <MemberCard image={imageUrls["FullStackLead.png"]} name="Ethan Niser" role="Full-Stack" textColor="blue" quote="typesafety" />
+            <MemberCard image={imageUrls["FrontendLead.png"]} name="Joseph Kim" role="Frontend" textColor="green" quote="I <3 TypeScript" />
+            <MemberCard
+              image={imageUrls["WebmasterChair.jpeg"]}
+              name="Ricky Zhang"
+              role="Webmaster"
+              textColor="blue"
+              quote="Building SASE's digital home."
+            />
+            <MemberCard
+              image={imageUrls["BackendLead.jpeg"]}
+              name="Sihala Senevirathne"
+              role="Backend"
+              textColor="green"
+              quote="Efficiency meets power."
+            />
+            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="blue" quote="Design with impact." />
           </div>
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
