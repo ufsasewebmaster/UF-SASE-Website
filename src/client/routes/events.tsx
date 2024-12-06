@@ -25,7 +25,7 @@ export const Route = createFileRoute("/events")({
         <div className="flex items-center justify-center">
           <EventsCalendar />
         </div>
-        <div className="grid grid-cols-3 justify-center gap-4">
+        <div className="grid grid-cols-1 justify-items-center gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
           <ImageButton
             slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
             imageUrl={imageUrls["ExampleSlideShow.png"]}

@@ -15,7 +15,7 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, slideUrl }) => {
 
   return (
     <div>
-      <img src={imageUrl} onClick={openModal} className="max-w-sm cursor-pointer px-40 py-10 hover:opacity-90 focus:outline-none" />
+      <img src={imageUrl} onClick={openModal} className="h-[180px] w-[320px] cursor-pointer hover:opacity-90 focus:outline-none" />
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal} title="Image Preview" description="This is a preview of the selected image.">
           <iframe src={slideUrl} width="960" height="569"></iframe>
