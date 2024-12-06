@@ -2,11 +2,12 @@
 // import { eq } from "drizzle-orm";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
+import emailRoutes from "@api/email";
+import profileRoutes from "@api/profile";
 import saseRoutes from "@api/saseInfo";
 import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
 import infoRoutes from "@api/userInfo";
-import emailRoutes from "@api/email"
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";
@@ -37,4 +38,5 @@ app
   .route("/api", tagRoutes)
   .route("/api", saseRoutes)
   .route("/api", authRoutes)
-  .route("/api", emailRoutes);
+  .route("/api", emailRoutes)
+  .route("/api", profileRoutes);
