@@ -1,8 +1,8 @@
+// import { eq } from "drizzle-orm";
+import { db } from "@db/index";
+import * as Schema from "@db/tables";
 import { insertUserSchema } from "@shared/schema/userSchema";
 import { Hono } from "hono";
-// import { eq } from "drizzle-orm";
-import { db } from "../db";
-import * as Schema from "../db/tables";
 
 const userRoutes = new Hono();
 

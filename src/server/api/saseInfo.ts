@@ -1,8 +1,8 @@
+import { db } from "@db/index";
+import * as Schema from "@db/tables";
 import { saseInfoSchema } from "@schema/saseInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { db } from "../db";
-import * as Schema from "../db/tables";
 
 const saseRoutes = new Hono();
 

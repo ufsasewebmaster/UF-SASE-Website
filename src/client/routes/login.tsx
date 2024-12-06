@@ -22,7 +22,7 @@ export const Route = createFileRoute("/login")({
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
-          const response = await fetch("https://sheetdb.io/api/v1/79fo2g87zoqgy", {
+          const response = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/login")({
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          return response.json();
+          return response;
         } catch (error) {
           console.error("Error submitting data:", error);
           throw error;
