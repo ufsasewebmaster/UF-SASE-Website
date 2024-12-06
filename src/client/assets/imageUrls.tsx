@@ -108,7 +108,7 @@ export const imageUrls = {
   "ServiceChair.jpeg": "https://utfs.io/f/2ipokchyMOTKcqEYUxPpMwbOnfqEJ7TVa05IgRhUszKWGF28",
   "Suitcase.png": "https://utfs.io/f/2ipokchyMOTKsVzvgSvNXQI7vJOBi4C8jpqwVZz0efGoksdW",
   "SETRobot.png": "https://utfs.io/f/2ipokchyMOTKIISNrb2IJDaG589To0SN4hLYtuCq1Env6XKb",
-  "SocialsIcon.png": "https://utfs.io/f/2ipokchyMOTKzW0Q4JX7mLWaP2lucpA0ZEkUGtsfdJoTvDjF"
+  "SocialsIcon.png": "https://utfs.io/f/2ipokchyMOTKzW0Q4JX7mLWaP2lucpA0ZEkUGtsfdJoTvDjF",
 } as const;
 
 export type imageName = keyof typeof imageUrls;
