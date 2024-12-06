@@ -44,17 +44,26 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
     register,
     watch,
   } = useForm<FormData>({
-    mode: "onChange",
-    reValidateMode: "onSubmit",
+    mode: "all",
+    defaultValues: {
+      username: "",
+      password: "",
+      retypePassword: "",
+    },
   });
 
   const password = watch("password");
   const handleFormSubmit: SubmitHandler<FormData> = (data) => {
-    onSubmit(data);
+    // remove retypePassword before submitting
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { retypePassword, ...submitData } = data;
+    onSubmit(submitData as FormData);
   };
+
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
+      noValidate
       className="relative z-10 flex h-[32rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
     >
       <div className="mb-6 p-2">

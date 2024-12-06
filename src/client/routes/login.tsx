@@ -16,24 +16,20 @@ export const Route = createFileRoute("/login")({
       image: imageUrls["SASELogo.png"],
     }),
   ],
+
   component: () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
-          const response = await fetch("/api/auth/login", {
+          await fetch("/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
           });
-
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response;
         } catch (error) {
           console.error("Error submitting data:", error);
           throw error;

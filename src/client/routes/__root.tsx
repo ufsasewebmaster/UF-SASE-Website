@@ -6,6 +6,7 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import { seo } from "src/client/utils/seo";
+import { AuthProvider } from "../AuthContext";
 import Footer from "../components/navigation/Footer";
 import Header from "../components/navigation/Header";
 import css from "../index.css?url";
@@ -42,9 +43,11 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <AuthProvider>
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </AuthProvider>
   );
 }
 

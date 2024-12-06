@@ -9,7 +9,7 @@ export const UserButton: React.FC<UserButtonProps> = ({ isLoggedIn }) =>
   isLoggedIn ? (
     <Link to="/profile">
       <button className="transform rounded-full text-gray-600 duration-300 hover:scale-105 hover:text-[#000000]">
-        <span className="icon-[lucide--user] h-8 w-8"></span>
+        <span className="icon-[qlementine-icons--user-16] h-8 w-8"></span>
       </button>
     </Link>
   ) : (

@@ -1,3 +1,4 @@
+import { useAuth } from "@/client/AuthContext";
 import { cn } from "@/shared/utils";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, _setIsLoggedIn] = useState(false);
+  const { isAuthenticated } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
@@ -84,14 +85,14 @@ const Header: React.FC = () => {
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
-            <UserButton isLoggedIn={isLoggedIn} />
+            <UserButton isLoggedIn={isAuthenticated} />
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className="flex items-center gap-4 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
-          <UserButton isLoggedIn={isLoggedIn} />
+          <UserButton isLoggedIn={isAuthenticated} />
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
