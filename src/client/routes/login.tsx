@@ -16,13 +16,14 @@ export const Route = createFileRoute("/login")({
       image: imageUrls["SASELogo.png"],
     }),
   ],
+
   component: () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
-          const response = await fetch("/api/auth/login", {
+            await fetch("/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -30,19 +31,15 @@ export const Route = createFileRoute("/login")({
             body: JSON.stringify(formData),
           });
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response;
-        } catch (error) {
+         } catch (error) {
           console.error("Error submitting data:", error);
           throw error;
         }
       },
       onSuccess: () => {
-        login();
-        navigate({ to: "/" });
-      },
+          login();
+          navigate({ to: "/" });
+        },
       onError: (error) => {
         console.error("Error during mutation:", error);
       },
@@ -53,22 +50,22 @@ export const Route = createFileRoute("/login")({
     };
 
     return (
-      <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
-          <AuthForm
-            title="Login"
-            buttonLabel="Login"
-            linkText="Forgot password?"
-            linkRoute="/"
-            onSubmit={handleLogin}
-            additionalButton={{
-              text: "Register new account",
-              route: "/signup",
-            }}
-          />
-        </div>
-      </Page>
+        <Page>
+          <div className="relative flex min-h-screen items-center justify-center">
+            <ShadowCard />
+            <AuthForm
+              title="Login"
+              buttonLabel="Login"
+              linkText="Forgot password?"
+              linkRoute="/"
+              onSubmit={handleLogin}
+              additionalButton={{
+                text: "Register new account",
+                route: "/signup",
+              }}
+            />
+          </div>
+        </Page>
     );
   },
 });

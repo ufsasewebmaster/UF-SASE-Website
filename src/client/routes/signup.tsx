@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { imageUrls } from "@assets/imageUrls";
 import type { FormData } from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import AuthForm from "../components/AuthForm";
+import { useAuth } from "../AuthContext";
 import ShadowCard from "../components/AuthShadowCard";
+import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/signup")({
@@ -17,20 +20,42 @@ export const Route = createFileRoute("/signup")({
   ],
 
   component: () => {
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        const response = await fetch("/api/auth/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response;
+        try {
+            await fetch("/api/auth/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+         } catch (error) {
+          console.error("Error submitting data:", error);
+          throw error;
+        }
       },
-      onSuccess: () => console.log("User signed up successfully!"),
+      onSuccess: () => {
+          login();
+          setShowSuccessModal(true)
+        },
+      onError: (error) => {
+        console.error("Signup error:", error);
+      },
     });
 
     const handleSignup = (data: FormData) => mutation.mutate(data);
+
+    const handleModalClose = () => {
+      setShowSuccessModal(false);
+      login(); 
+      navigate({ to: "/" });
+    };
 
     return (
       <Page>
@@ -43,6 +68,12 @@ export const Route = createFileRoute("/signup")({
             linkRoute="/login"
             isSignUp={true}
             onSubmit={handleSignup}
+          />
+
+            <SuccessModal 
+            isOpen={showSuccessModal}
+            onClose={handleModalClose}
+            message="You have successfully created your account!"
           />
         </div>
       </Page>

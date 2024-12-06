@@ -42,19 +42,27 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
     formState: { errors },
     handleSubmit,
     register,
-    watch,
-  } = useForm<FormData>({
-    mode: "onChange",
-    reValidateMode: "onSubmit",
+    watch  } = useForm<FormData>({
+    mode: "all",
+    defaultValues: {
+      username: "",
+      password: "",
+      retypePassword: ""
+    }
   });
 
   const password = watch("password");
   const handleFormSubmit: SubmitHandler<FormData> = (data) => {
-    onSubmit(data);
+    // remove retypePassword before submitting
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { retypePassword, ...submitData } = data;
+    onSubmit(submitData as FormData);
   };
+
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
+      noValidate
       className="relative z-10 flex h-[32rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
     >
       <div className="mb-6 p-2">
@@ -107,12 +115,12 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
               type="password"
               {...register("retypePassword", {
                 required: "Please retype your password",
-                validate: (value) => value === password || "Passwords do not match!",
+                validate: (value) => value === password || "Passwords do not match!"
               })}
               placeholder="Retype Password"
             />
           </StyledFormField>
-          {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message}</span>}
+          {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message }</span>}
         </>
       )}
 

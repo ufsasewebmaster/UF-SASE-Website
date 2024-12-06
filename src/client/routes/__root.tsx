@@ -4,6 +4,7 @@ import { imageUrls } from "@assets/imageUrls";
 import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
+import { AuthProvider } from "../AuthContext";
 import * as React from "react";
 import { seo } from "src/client/utils/seo";
 import Footer from "../components/navigation/Footer";
@@ -42,9 +43,11 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <AuthProvider>
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </AuthProvider>
   );
 }
 
