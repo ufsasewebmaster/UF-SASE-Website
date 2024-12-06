@@ -101,6 +101,7 @@ export const Route = createFileRoute("/")({
 
         <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
           <MemberCard
             image={imageUrls["InternalVicePresident.jpeg"]}
@@ -109,6 +110,11 @@ export const Route = createFileRoute("/")({
           <MemberCard
             image={imageUrls["InternalVicePresident.png"]}
 >>>>>>> b606b54 (made home page nicer and added mobile friendliness to the program pages)
+=======
+          <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
+          <MemberCard
+            image={imageUrls["InternalVicePresident.jpeg"]}
+>>>>>>> 0ea4a9a (Webdev page and membercard)
             name="Bryan Park"
             role="Internal Vice President"
             textColor="green"
@@ -116,10 +122,14 @@ export const Route = createFileRoute("/")({
           />
           <MemberCard
 <<<<<<< HEAD
+<<<<<<< HEAD
             image={imageUrls["ExternalVicePresident.jpeg"]}
 =======
             image={imageUrls["ExternalVicePresident.png"]}
 >>>>>>> b606b54 (made home page nicer and added mobile friendliness to the program pages)
+=======
+            image={imageUrls["ExternalVicePresident.jpeg"]}
+>>>>>>> 0ea4a9a (Webdev page and membercard)
             name="Kayleen Diaz"
             role="External Vice President"
             textColor="blue"
