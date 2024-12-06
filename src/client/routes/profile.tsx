@@ -6,20 +6,19 @@ const fetchUserProfile = async (): Promise<{ username: string | null }> => {
   try {
     const response = await fetch("/api/profile", {
       method: "GET",
-      credentials: "include",  
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(response)
+    console.log(response);
     const data = await response.json();
-    return { username: data.username || null };  
+    return { username: data.username || null };
   } catch (error) {
     console.error("Error fetching user profile:", error);
-    return { username: null };  
+    return { username: null };
   }
 };
-
 
 export const Route = createFileRoute("/profile")({
   component: () => {
@@ -28,28 +27,25 @@ export const Route = createFileRoute("/profile")({
     useEffect(() => {
       const fetchData = async () => {
         const fetchedProfile = await fetchUserProfile();
-        setProfile(fetchedProfile);  // Set the profile state with the fetched data
+        setProfile(fetchedProfile); // Set the profile state with the fetched data
       };
 
       fetchData();
     }, []);
 
-
     if (profile.username === null) {
-      return <div>Loading...</div>; 
+      return <div>Loading...</div>;
     }
 
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-        <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
-          <div className="flex justify-between items-center mb-4">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
+        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+          <div className="mb-4 flex items-center justify-between">
             <h1 className="text-2xl font-bold">Profile</h1>
           </div>
           <div className="text-center">
-            <div className="w-24 h-24 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-4xl font-bold">
-                {profile.username?.charAt(0).toUpperCase()}
-              </span>
+            <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-blue-500 text-white">
+              <span className="text-4xl font-bold">{profile.username?.charAt(0).toUpperCase()}</span>
             </div>
             <h2 className="text-xl font-semibold">Welcome, {profile.username}!</h2>
           </div>
@@ -58,4 +54,3 @@ export const Route = createFileRoute("/profile")({
     );
   },
 });
-

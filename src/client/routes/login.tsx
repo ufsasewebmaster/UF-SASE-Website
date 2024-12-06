@@ -23,23 +23,22 @@ export const Route = createFileRoute("/login")({
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
-            await fetch("/api/auth/login", {
+          await fetch("/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
           });
-
-         } catch (error) {
+        } catch (error) {
           console.error("Error submitting data:", error);
           throw error;
         }
       },
       onSuccess: () => {
-          login();
-          navigate({ to: "/" });
-        },
+        login();
+        navigate({ to: "/" });
+      },
       onError: (error) => {
         console.error("Error during mutation:", error);
       },
@@ -50,22 +49,22 @@ export const Route = createFileRoute("/login")({
     };
 
     return (
-        <Page>
-          <div className="relative flex min-h-screen items-center justify-center">
-            <ShadowCard />
-            <AuthForm
-              title="Login"
-              buttonLabel="Login"
-              linkText="Forgot password?"
-              linkRoute="/"
-              onSubmit={handleLogin}
-              additionalButton={{
-                text: "Register new account",
-                route: "/signup",
-              }}
-            />
-          </div>
-        </Page>
+      <Page>
+        <div className="relative flex min-h-screen items-center justify-center">
+          <ShadowCard />
+          <AuthForm
+            title="Login"
+            buttonLabel="Login"
+            linkText="Forgot password?"
+            linkRoute="/"
+            onSubmit={handleLogin}
+            additionalButton={{
+              text: "Register new account",
+              route: "/signup",
+            }}
+          />
+        </div>
+      </Page>
     );
   },
 });

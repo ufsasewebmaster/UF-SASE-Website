@@ -42,13 +42,14 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
     formState: { errors },
     handleSubmit,
     register,
-    watch  } = useForm<FormData>({
+    watch,
+  } = useForm<FormData>({
     mode: "all",
     defaultValues: {
       username: "",
       password: "",
-      retypePassword: ""
-    }
+      retypePassword: "",
+    },
   });
 
   const password = watch("password");
@@ -115,12 +116,12 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
               type="password"
               {...register("retypePassword", {
                 required: "Please retype your password",
-                validate: (value) => value === password || "Passwords do not match!"
+                validate: (value) => value === password || "Passwords do not match!",
               })}
               placeholder="Retype Password"
             />
           </StyledFormField>
-          {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message }</span>}
+          {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message}</span>}
         </>
       )}
 

@@ -14,14 +14,6 @@ client.execute(
   await client.execute(
     `INSERT INTO blog (id, title, content, author_id, published_date, time_updated, tags) 
       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [
-      "TEST_ID",
-      "My First Blog",
-      "This is the blog content.",
-      "0000",
-      Date.now(),
-      Date.now(),
-      "1",
-    ],
+    ["TEST_ID", "My First Blog", "This is the blog content.", "0000", Date.now(), Date.now(), "1"],
   );
 })();

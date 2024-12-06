@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { imageUrls } from "@assets/imageUrls";
 import type { FormData } from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import AuthForm from "../components/AuthForm";
+import { useState } from "react";
 import { useAuth } from "../AuthContext";
+import AuthForm from "../components/AuthForm";
 import ShadowCard from "../components/AuthShadowCard";
 import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
@@ -27,23 +27,22 @@ export const Route = createFileRoute("/signup")({
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         try {
-            await fetch("/api/auth/signup", {
+          await fetch("/api/auth/signup", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
           });
-
-         } catch (error) {
+        } catch (error) {
           console.error("Error submitting data:", error);
           throw error;
         }
       },
       onSuccess: () => {
-          login();
-          setShowSuccessModal(true)
-        },
+        login();
+        setShowSuccessModal(true);
+      },
       onError: (error) => {
         console.error("Signup error:", error);
       },
@@ -53,7 +52,7 @@ export const Route = createFileRoute("/signup")({
 
     const handleModalClose = () => {
       setShowSuccessModal(false);
-      login(); 
+      login();
       navigate({ to: "/" });
     };
 
@@ -70,11 +69,7 @@ export const Route = createFileRoute("/signup")({
             onSubmit={handleSignup}
           />
 
-            <SuccessModal 
-            isOpen={showSuccessModal}
-            onClose={handleModalClose}
-            message="You have successfully created your account!"
-          />
+          <SuccessModal isOpen={showSuccessModal} onClose={handleModalClose} message="You have successfully created your account!" />
         </div>
       </Page>
     );

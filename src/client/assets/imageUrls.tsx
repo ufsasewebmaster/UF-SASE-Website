@@ -62,7 +62,7 @@ export const imageUrls = {
   "Diamond.png": "https://utfs.io/f/ehMyJVEoR9sI2o7jOqdiuk23wDEdSnxzOpMosLJj9hgUv1FX",
   "ExampleSlideShow.png": "https://utfs.io/f/ehMyJVEoR9sIWIefNJ4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
   "Arthrex.png": "https://utfs.io/f/ehMyJVEoR9sItFbu8hJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
-  "WhiteSASELogo.png": "https://utfs.io/f/ehMyJVEoR9sIChGAYLkAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7"
+  "WhiteSASELogo.png": "https://utfs.io/f/ehMyJVEoR9sIChGAYLkAfPUBLp8ZQDmtxNWFrEGCnkTeyuO7",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

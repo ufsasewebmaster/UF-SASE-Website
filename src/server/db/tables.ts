@@ -58,7 +58,6 @@ export const personalInfo = sqliteTable("personal_info", {
   area_code: integer("area_code"),
 });
 
-
 // Professional Info table
 export const professionalInfo = sqliteTable("professional_info", {
   user_id: text("user_id")
@@ -145,7 +144,6 @@ export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship"
   mentor_id: text("mentor_id").references(() => users.id),
   mentee_id: text("mentee_id").references(() => users.id),
 });
-
 
 export const emailSubscribers = sqliteTable("email_subscriber", {
   id: text("id")
