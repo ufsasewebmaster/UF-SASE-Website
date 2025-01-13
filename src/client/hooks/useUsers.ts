@@ -1,9 +1,14 @@
 import type { InsertUser, UpdateUser } from "@schema/userSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createUser, deleteUser, fetchUsers, updateUser } from "../libapi/users";
+import { createUser, deleteUser, fetchUser, fetchUsers, updateUser } from "../api/users";
 
 export const useUsers = () => {
   const queryClient = useQueryClient();
+
+  const userQuery = useQuery({
+    queryKey: ["user"],
+    queryFn: fetchUser,
+  });
 
   // Fetch users query
   const usersQuery = useQuery({
@@ -40,6 +45,7 @@ export const useUsers = () => {
   });
 
   return {
+    user: userQuery,
     users: usersQuery,
     createUser: createUserMutation,
     updateUser: updateUserMutation,

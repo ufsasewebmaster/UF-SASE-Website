@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+// As specified in conventions.md
+export type ApiResponse<T> = {
+  data?: T;
+  error?: {
+    message: string;
+    code?: number;
+  };
+};
+
 export const successResponseSchema = z.object({
   data: z.any(),
   message: z.string(),
@@ -14,6 +23,6 @@ export const errorResponseSchema = z.object({
 });
 
 export type SuccessResponse<T> = z.infer<typeof successResponseSchema> & {
-  data: T; // Replace `any` with specific type. Huh?
+  data: T;
 };
 export type ErrorResponse = z.infer<typeof errorResponseSchema>;

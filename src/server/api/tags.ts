@@ -1,4 +1,4 @@
-import { db } from "@db/index";
+import { db } from "@/server/db/db";
 import * as Schema from "@db/tables";
 import { blogTagsSchema } from "@schema/blogTagSchema";
 import { eq, inArray } from "drizzle-orm";

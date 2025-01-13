@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build": "db:push && vinxi build",
     "start": "vinxi start",
     "fix": "concurrently \"bun run lint:js:fix\" \"bun run lint:fmt:fix\"",
     "generate": "bun run src/client/assets/generateImageMaps.ts",

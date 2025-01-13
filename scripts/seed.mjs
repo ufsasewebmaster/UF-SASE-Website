@@ -6,7 +6,7 @@ const client = createClient({
 });
 
 client.execute(
-  "INSERT INTO user (id, username, password_hash, time_added, time_updated, points, roles) VALUES ('0', 'test_username', 'test_hash', 0, 0, 0, 'admin')",
+  "INSERT INTO user (id, username, password, time_added, time_updated, points, roles) VALUES ('0', 'test_username', 'test_hash', 0, 0, 0, 'admin')",
 ); // should populate users
 // client.execute("INSERT INTO users (username, points, roles) VALUES ('test', 0, 'admin')"); // should populate users
 

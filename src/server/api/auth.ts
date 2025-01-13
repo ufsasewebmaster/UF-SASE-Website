@@ -1,4 +1,4 @@
-import { db } from "@db/index";
+import { db } from "@/server/db/db";
 import * as Schema from "@db/tables";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
@@ -37,7 +37,7 @@ authRoutes.post("/auth/signup", async (c) => {
     await db.insert(Schema.users).values({
       id: userId,
       username: formUsername,
-      password_hash: formPasswordHash,
+      password: formPasswordHash,
     });
 
     return new Response("User successfully created", {
@@ -76,8 +76,7 @@ authRoutes.post("/auth/login", async (c) => {
 
   if (user.length == 0) return new Response("Invalid username or password", { status: 401 });
 
-  const passwordHash = user[0].password_hash;
-  const validPassword = await compare(formPassword, passwordHash);
+  const validPassword = await compare(formPassword, user[0].password);
 
   if (!validPassword) {
     return new Response("Invalid email or password", {

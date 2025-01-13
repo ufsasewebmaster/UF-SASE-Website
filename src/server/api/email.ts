@@ -1,4 +1,4 @@
-import { db } from "@db/index";
+import { db } from "@/server/db/db";
 import { emailSubscribers } from "@db/tables";
 import { createErrorResponse } from "@shared/utils";
 import { Hono } from "hono";

@@ -88,7 +88,7 @@ CREATE TABLE `session` (
 CREATE TABLE `user` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
-	`password_hash` text NOT NULL,
+	`password` text NOT NULL,
 	`time_added` integer NOT NULL,
 	`time_updated` integer NOT NULL,
 	`points` integer,

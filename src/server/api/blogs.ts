@@ -1,5 +1,5 @@
+import { db } from "@/server/db/db";
 import * as Schema from "@/server/db/tables";
-import { db } from "@db/index";
 import { blogsApiResponseSchema, blogTitleSchema, singleBlogApiResponseSchema } from "@shared/schema/blogSchema";
 import { createErrorResponse, formatAndValidateResponse } from "@shared/utils";
 import { eq, like } from "drizzle-orm";

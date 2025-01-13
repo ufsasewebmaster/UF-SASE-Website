@@ -1,4 +1,3 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";
 
 interface ModalProps {

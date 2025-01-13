@@ -2,7 +2,7 @@ import { personalInfoInsertSchema, personalInfoUpdateSchema } from "@schema/pers
 import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { db } from "../db";
+import { db } from "../db/db";
 import * as Schema from "../db/tables";
 
 const infoRoutes = new Hono();

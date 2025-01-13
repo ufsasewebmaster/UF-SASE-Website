@@ -4,28 +4,16 @@ import { generateIdFromEntropySize } from "lucia";
 // Here we define our database schema as code
 // https://orm.drizzle.team/docs/column-types/sqlite
 
-/*
-TEMPLATE FOR NEW TABLES
-export const table = sqliteTable("table", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => generateIdFromEntropySize(10)),
-  created_at: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .$defaultFn(() => new Date()),
-  updated_at: integer("updated_at", { mode: "timestamp" })
-    .notNull()
-    .$onUpdateFn(() => new Date()),
-});
-*/
-
 // Users table
 export const users = sqliteTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => generateIdFromEntropySize(10)), // Required by lucia
-  username: text("username").notNull().unique(), // Required by lucia
-  password_hash: text("password_hash").notNull(), // Required by lucia
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+
+  // TODO: password_hash
+  // password_hash: text("password_hash").notNull(),
 
   time_added: integer("time_added", { mode: "timestamp" })
     .notNull()

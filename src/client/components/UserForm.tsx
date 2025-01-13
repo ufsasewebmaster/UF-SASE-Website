@@ -7,7 +7,7 @@ import { useUsers } from "../hooks/useUsers";
 export const UserForm = () => {
   const [newUser, setNewUser] = useState({
     username: "",
-    password_hash: "",
+    password: "",
     points: 0,
     roles: "user",
   });
@@ -15,12 +15,12 @@ export const UserForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (newUser.username.trim().length === 0 || newUser.password_hash.trim().length === 0) return;
+    if (newUser.username.trim().length === 0 || newUser.password.trim().length === 0) return;
     createUser.mutate(newUser, {
       onSuccess: () => {
         setNewUser({
           username: "",
-          password_hash: "",
+          password: "",
           points: 0,
           roles: "user",
         });
@@ -39,8 +39,8 @@ export const UserForm = () => {
       />
       <Input
         type="password"
-        value={newUser.password_hash}
-        onChange={(e) => setNewUser({ ...newUser, password_hash: e.target.value })}
+        value={newUser.password}
+        onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
         placeholder="Password"
         className="mb-2 rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
       />
