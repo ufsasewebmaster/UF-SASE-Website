@@ -8,7 +8,7 @@ const AboutCard = () => {
       <div className="absolute left-5 top-5 h-full w-full rounded-lg bg-saseGreen"></div>
 
       {/* Main Text Card */}
-      <div className="relative rounded-lg border-2 border-black bg-gray-100 p-6 text-base shadow-xl">
+      <div className="relative rounded-lg border-2 border-black bg-gray-100 p-6 text-lg shadow-xl">
         <p className="mb-4 text-black">
           The <span className="font-semibold">Society of Asian Scientists and Engineers (SASE) </span>
           was established in 2010 as a student organization dedicated to the advancement of Asian heritage scientists and engineers. Above all, SASE
