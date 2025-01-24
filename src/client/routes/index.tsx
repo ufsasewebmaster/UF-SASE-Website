@@ -135,11 +135,17 @@ export const Route = createFileRoute("/")({
                 <br />
                 To get access to our <span className="font-semibold">sponsorship packet </span>
                 please contact our External Vice President, Kayleen Diaz, at{" "}
-                <span>
+                <div className="flex w-full items-center">
                   <a href={`mailto:ufsase.evp@gmail.com`} className="text-saseGreen underline">
                     ufsase.evp@gmail.com
                   </a>
-                </span>
+                  <a
+                    href="/sponsors"
+                    className="ml-auto rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]"
+                  >
+                    Sponsers
+                  </a>
+                </div>
               </p>
             </div>
 
