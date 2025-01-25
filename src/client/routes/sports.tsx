@@ -56,7 +56,7 @@ export const Route = createFileRoute("/sports")({
           </header>
           <TestimonialCard
             image={SportsTestimony}
-            text="Sase sports is a fun way to connect with people while being active! I’m really glad I got to join and make friends while getting to play soccer again, and everyone is really nice to play with! We get to joke around and break a swear together, and I’ll cherish the memories and friends I made far beyond college."
+            text="SASE sports is a fun way to connect with people while being active! I’m really glad I got to join and make friends while getting to play soccer again, and everyone is really nice to play with! We get to joke around and break a swear together, and I’ll cherish the memories and friends I made far beyond college."
             name="Cameron McMullen"
             title="2024 SASE Sports Member"
           />
