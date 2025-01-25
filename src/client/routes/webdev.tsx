@@ -8,7 +8,6 @@ import fullstackTeamLead from "../assets/fullstackTeamLead.jpeg";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
 
-
 export const Route = createFileRoute("/webdev")({
   meta: () => [
     ...seo({
