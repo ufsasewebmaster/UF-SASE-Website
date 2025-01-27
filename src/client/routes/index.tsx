@@ -143,7 +143,7 @@ export const Route = createFileRoute("/")({
                     href="/sponsors"
                     className="ml-auto rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]"
                   >
-                    Sponsers
+                    Sponsors
                   </a>
                 </div>
               </p>
