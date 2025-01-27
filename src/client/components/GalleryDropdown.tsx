@@ -1,4 +1,5 @@
 import { imageUrls } from "@assets/imageUrls";
+import { cn } from "@shared/utils";
 import type { SetStateAction } from "react";
 import React, { useCallback, useState } from "react";
 import { CgPlayButtonR } from "react-icons/cg";
@@ -22,8 +23,8 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
   const setFall2023 = useCallback(() => setSlideshow("Fall 2023"), [setSlideshow]);
 
   return (
-    <div className="items-top flex w-full justify-between pb-10">
-      <div className="w-full pl-32 pr-5 pt-5">
+    <div className="align-items flex w-full flex-col justify-center gap-5 md:flex-row">
+      <div className="w-full">
         <div
           id="photo_drives"
           className="flex w-full items-center justify-between rounded-lg border-2 border-black pb-1 pl-2 pt-1 text-left font-redhat text-lg font-semibold shadow-[5px_5px_0px_0px_rgb(125,194,66)] hover:cursor-pointer hover:opacity-70"
@@ -41,12 +42,18 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
           </div>
         )}
       </div>
-      <div className="flex justify-center pl-5 pr-32 transition duration-300 ease-in-out hover:translate-x-1 hover:scale-105">
+
+      <div
+        className={cn({
+          "invisible h-0": !isDropdownVisible,
+          "flex justify-center transition duration-300 ease-in-out hover:translate-x-1 hover:scale-105": isDropdownVisible,
+        })}
+      >
         <img
           src={imageUrls["DropDownImage.webp"]}
           alt=""
           loading="lazy"
-          className="h-56 min-h-[150px] w-96 min-w-[300px] rounded-lg border-2 border-black object-cover shadow-[5px_5px_0px_0px_rgb(30,119,186)]"
+          className="max-h-96 rounded-lg border-2 border-black object-cover shadow-[5px_5px_0px_0px_rgb(30,119,186)]"
         />
       </div>
     </div>
