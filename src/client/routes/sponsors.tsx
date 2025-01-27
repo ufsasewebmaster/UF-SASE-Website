@@ -20,7 +20,13 @@ export const Route = createFileRoute("/sponsors")({
         <div className="flex w-full flex-col items-center justify-center sm:w-2/3">
           <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 border-t-8 border-saseGreen bg-gradient-to-b from-gray-100 to-white p-24 lg:grid-cols-2 xl:grid-cols-3">
             {SponsorInfo.map((sponsor) => (
-              <SponsorCard key={sponsor.company} image={sponsor.image} companyName={sponsor.company} type={sponsor.tier} />
+              <SponsorCard
+                key={sponsor.company}
+                image={sponsor.image}
+                companyName={sponsor.company}
+                type={sponsor.tier}
+                shadowcolor={sponsor.shadow_color}
+              />
             ))}
           </div>
 
