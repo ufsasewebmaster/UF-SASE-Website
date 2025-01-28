@@ -5,10 +5,4 @@ export default defineConfig({
   vite: {
     plugins: [react()],
   },
-  server: {
-    hmr: {
-      watch: ["src/**/*"],
-      overlay: true,
-    },
-  },
 });

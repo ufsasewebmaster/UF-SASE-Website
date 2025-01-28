@@ -38,3 +38,8 @@ export const updateUserSchema = userSchema
   })
   .partial(); // Make all fields optional
 export type UpdateUser = z.infer<typeof updateUserSchema>;
+
+export const deleteUserSchema = z.object({
+  id: z.string().min(1, "User ID is required."),
+});
+export type DeleteUser = z.infer<typeof deleteUserSchema>;
