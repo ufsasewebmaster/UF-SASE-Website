@@ -101,6 +101,9 @@
 .flex-center {
   @apply flex items-center justify-center;
 }
+.flex-between {
+  @apply flex items-center justify-between;
+}
 
 .btn-hover {
   @apply flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black;

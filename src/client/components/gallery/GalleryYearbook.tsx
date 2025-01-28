@@ -1,8 +1,8 @@
 import React from "react";
-import { imageUrls } from "../../assets/imageUrls";
+import { imageUrls } from "@assets/imageUrls";
 
 const GalleryYearbook = () => {
-  return (
+  return ( 
     <div>
       <div className="flex justify-center pb-16 pt-6">
         <div className="font-redhat text-6xl font-bold text-white">UF SASE 2024-2025</div>

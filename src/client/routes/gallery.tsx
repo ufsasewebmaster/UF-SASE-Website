@@ -40,7 +40,7 @@ export const Route = createFileRoute("/gallery")({
         </div>
         <div className="flex-1 justify-center text-center">
           <p className="flex-1 pb-5 pt-5 text-center font-oswald text-4xl">{slideshow}</p>
-          <div className=".flex-center pb-20">
+          <div className="flex-center pb-20">
             <GalleryZipExtraction slideshow={slideshow} />
           </div>
           <div className="flex-center pb-10">
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/gallery")({
               </div>
             </a>
           </div>
-          <div className=".flex-center">
+          <div className="flex-center">
             <div className="mb-20 w-10/12 rounded-lg bg-blue-300 px-3 pb-10 pt-5 shadow-[10px_10px_0px_0px_rgb(6,104,179)] transition duration-150 hover:scale-105">
               <GalleryYearbook />
             </div>
