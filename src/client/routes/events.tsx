@@ -22,7 +22,7 @@ export const Route = createFileRoute("/events")({
         <div className="flex w-full justify-center">
           <hr className="h-5 w-10/12 border-t-4 border-saseBlue" />
         </div>
-        <div className="flex items-center justify-center">
+        <div className=".flex-center">
           <EventsCalendar />
         </div>
         <div className="grid grid-cols-1 justify-items-center gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">

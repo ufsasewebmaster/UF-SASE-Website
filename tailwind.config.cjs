@@ -4,7 +4,10 @@ const { addDynamicIconSelectors } = require("@iconify/tailwind");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/client/**/*.{ts,tsx}"],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './index.css',
+  ],
   theme: {
     container: {
       center: true,

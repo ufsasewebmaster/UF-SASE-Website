@@ -41,7 +41,7 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
 
   return (
     <div className="flex w-full items-center justify-center">
-      <div className="flex items-center justify-center">
+      <div className=".flex-center">
         <div className="cursor-pointer px-[8%] transition hover:scale-125 hover:opacity-45" onClick={prevImage}>
           {/* Left Arrow */}
           <button className="text-4xl">
