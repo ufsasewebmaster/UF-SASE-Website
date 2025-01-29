@@ -17,6 +17,7 @@
     "lint:fmt": "prettier --check .",
     "lint:fmt:fix": "prettier --write .",
     "test": "vitest --run",
+    "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
