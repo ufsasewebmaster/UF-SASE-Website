@@ -31,7 +31,7 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
             "max-h-0 -translate-y-4 opacity-0": !isDropdownVisible,
           })}
         >
-          <div className="dropdown-container pb-2 pl-3 pt-2 font-normal">
+          <div className="dropdown-container mt-2 pb-2 pl-3 pt-2 font-normal">
             {["Fall 2024", "Spring 2024", "Fall 2023"].map((label) => (
               <DropdownItem key={label} label={label} onClick={setSlideshowOption(label)} />
             ))}
