@@ -1,13 +1,22 @@
 name: Setup
-description: Perform standard setup and install dependencies using pnpm.
+description: Perform standard setup and install dependencies using Bun.
 
 runs:
   using: composite
   steps:
-    - name: Install bun
+    - name: Install Bun
       uses: oven-sh/setup-bun@v2
       with:
         bun-version: latest
-    - name: Install dependencies
+
+    - name: Install dependencies (use lockfile)
       shell: bash
-      run: bun install
+      run: bun install --frozen-lockfile
+
+    - name: Verify dependencies
+      shell: bash
+      run: bun list
+
+    - name: Run db push
+      shell: bash
+      run: bunx drizzle-kit push
