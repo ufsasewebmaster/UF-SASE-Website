@@ -39,8 +39,8 @@ export const Route = createFileRoute("/gallery")({
           <GalleryDropdown slideshow={slideshow} setSlideshow={setSlideshow} />
         </div>
         <div className="flex-1 justify-center text-center">
-          <p className="flex-1 pb-5 pt-5 text-center font-oswald text-4xl">{slideshow}</p>
-          <div className="flex-center pb-20">
+          <p className="pb-5 pt-5 text-center font-oswald text-4xl">{slideshow}</p>
+          <div className="pb-20">
             <GalleryZipExtraction slideshow={slideshow} />
           </div>
           <div className="flex-center pb-10">

@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const GallerySlideshow = () => {
   return (
-    <div className="flex items-center justify-between gap-5 pt-10">
+    <div className="flex flex-row items-center justify-between gap-5 pt-10">
       <FaChevronLeft size={40} className="icon-btn" />
       <div className="gallery-border w-full overflow-hidden">
         <img src={imageUrls["fall2024_12.jpg"]} alt="" className="h-full w-full object-cover" />
