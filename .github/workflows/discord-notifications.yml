@@ -1,0 +1,26 @@
+name: Discord Notifications
+
+on:
+  push:
+    branches:
+      - main # Only triggers on pushes to the 'main' branch
+  pull_request:
+    types: [opened, closed, merged] # Trigger for PR events
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Use a pre-built Discord notification action
+      - name: Send Discord Notification
+        uses: Ilshidur/action-discord@master
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          args: |
+            🚀 **New GitHub Event!**
+            - **Event Type:** ${{ github.event_name }}
+            - **Repository:** ${{ github.repository }}
+            - **Branch:** ${{ github.ref }}
+            - **Commit Message:** ${{ github.event.head_commit.message || 'No commit message' }}
+            - **Author:** ${{ github.event.head_commit.author.name }}
