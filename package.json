@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "concurrently \"bun run db:push\" \"bunx dotenv -- vinxi build\"",
+    "build": "concurrently \"bun run db:push\" \"bunx dotenv-cli -- vinxi build\"",
     "start": "vinxi start",
     "fix": "concurrently \"bun run lint:js:fix\" \"bun run lint:fmt:fix\"",
     "generate": "bun run src/client/assets/generateImageMaps.ts",
@@ -44,6 +44,7 @@
     "clsx": "^2.1.1",
     "dompurify": "^3.1.7",
     "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
     "drizzle-orm": "^0.36.4",
     "drizzle-zod": "^0.5.1",
     "embla-carousel-react": "^8.5.1",
