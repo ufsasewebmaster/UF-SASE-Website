@@ -11,7 +11,9 @@ export const UserForm = () => {
     points: 0,
     roles: "user",
   });
-  const { createUser } = useUsers();
+
+  // TODO: Get id from user context
+  const { createUser } = useUsers("default");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

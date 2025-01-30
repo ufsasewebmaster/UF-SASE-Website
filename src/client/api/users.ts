@@ -1,6 +1,6 @@
 import type { ApiResponse } from "@shared/schema/responseSchema";
 import type { DeleteUser, InsertUser, SelectUser, UpdateUser } from "@shared/schema/userSchema";
-import { insertUserSchema, selectUserSchema } from "@shared/schema/userSchema";
+import { deleteUserSchema, insertUserSchema, selectUserSchema } from "@shared/schema/userSchema";
 
 // Fetch ALL Users
 export const fetchUsers = async (): Promise<Array<SelectUser>> => {
@@ -80,5 +80,5 @@ export const deleteUser = async (userId: number): Promise<DeleteUser> => {
   if (!response.ok) {
     throw new Error(json.error?.message || "Unknown error occured");
   }
-  return { success: true };
+  return deleteUserSchema.parse(json);
 };

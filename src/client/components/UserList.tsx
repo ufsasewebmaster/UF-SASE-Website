@@ -4,7 +4,8 @@ import type { SelectUser, UpdateUser } from "@schema/userSchema";
 import { useUsers } from "../hooks/useUsers";
 
 export const UserList = () => {
-  const { updateUser, users } = useUsers();
+  // TODO
+  const { updateUser, users } = useUsers("default");
 
   // Handle loading state
   if (users.isLoading) {
