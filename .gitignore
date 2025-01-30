@@ -78,3 +78,5 @@ dist
 
 # direnv
 .direnv/
+
+bun.lockb
