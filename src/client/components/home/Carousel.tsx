@@ -1,17 +1,19 @@
-import mentorship_icon from "@assets/MentorshipValueIcon.png";
-import mentorship from "@assets/MentorshipValues.jpeg";
-import prof from "@assets/ProfDevValue.jpg";
-import prof_icon from "@assets/ProfDevValueIcon.png";
-import service_icon from "@assets/ServiceIcon.png";
-import service from "@assets/ServiceValue.jpg";
-import socials_icon from "@assets/SocialsIcon.png";
-import socials from "@assets/SocialsValue.jpg";
-import sport from "@assets/SportsValue.jpg";
-import sports_icon from "@assets/SportsValueIcon.png";
+import { imageUrls } from "@assets/imageUrls";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useRef } from "react";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselArrows";
+
+const mentorship_icon = imageUrls["MentorshipIcon.png"];
+const mentorship = imageUrls["MentorshipValues.jpeg"];
+const prof = imageUrls["ProfDevValue.jpg"];
+const prof_icon = imageUrls["ProfDevValueIcon.png"];
+const service_icon = imageUrls["ServiceIcon.png"];
+const service = imageUrls["ServiceValue.jpg"];
+const socials_icon = imageUrls["SocialsIcon.png"];
+const socials = imageUrls["SocialsValue.jpg"];
+const sport = imageUrls["SportsValue.jpg"];
+const sports_icon = imageUrls["SportsValueIcon.png"];
 
 const TWEEN_FACTOR_BASE = 0.52;
 

@@ -1,10 +1,15 @@
+import BackendLead from "@assets/webdev/BackendLead.jpeg";
+import FrontEndLead from "@assets/webdev/FrontendLead.png";
+import FullStackLead from "@assets/webdev/FullstackLead2.jpeg";
+import UIUXLead from "@assets/webdev/UIUXLead.jpg";
+import TeamPhoto from "@assets/webdev/WebDevTeam.jpg";
+import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";
 import MemberCard from "@components/home/MemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
-import fullstackTeamLead from "../assets/fullstackTeamLead.jpeg";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
 
@@ -46,7 +51,7 @@ export const Route = createFileRoute("/webdev")({
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="mx-auto mb-24 w-full max-w-7xl px-4">
             <img
-              src={imageUrls["WebDevTeam.jpg"]}
+              src={TeamPhoto}
               alt="Placeholder"
               className="w-full rounded-3xl border-4 border-saseGreen"
               style={{ height: "600px", objectFit: "cover" }}
@@ -57,29 +62,11 @@ export const Route = createFileRoute("/webdev")({
             <h2 className="text-4xl text-gray-800">Leadership</h2>
           </header>
           <div className="grid grid-cols-1 gap-1 bg-white p-12 xl:grid-cols-5">
-            <MemberCard image={fullstackTeamLead} name="Arman Kumaraswamy" role="Full-Stack" textColor="blue" quote="[object Object]" />
-            <MemberCard
-              image={imageUrls["FrontendLead.png"]}
-              name="Joseph Kim"
-              role="Frontend"
-              textColor="green"
-              quote="still don't how to center a div"
-            />
-            <MemberCard
-              image={imageUrls["WebmasterChair.jpeg"]}
-              name="Ricky Zhang"
-              role="Webmaster"
-              textColor="blue"
-              quote="SASE deserves a better website"
-            />
-            <MemberCard
-              image={imageUrls["BackendLead.jpeg"]}
-              name="Sihala Senevirathne"
-              role="Backend"
-              textColor="green"
-              quote="Ricky, please pay me"
-            />
-            <MemberCard image={imageUrls["UIUXLead.jpg"]} name="Catherine Wu" role="UI/UX" textColor="blue" quote="sigma Figma team" />
+            <MemberCard image={FullStackLead} name="Arman Kumaraswamy" role="Full-Stack" textColor="blue" quote="[object Object]" />
+            <MemberCard image={FrontEndLead} name="Joseph Kim" role="Frontend" textColor="green" quote="still don't how to center a div" />
+            <MemberCard image={WebmasterChair} name="Ricky Zhang" role="Webmaster" textColor="blue" quote="SASE deserves a better website" />
+            <MemberCard image={BackendLead} name="Sihala Senevirathne" role="Backend" textColor="green" quote="Ricky, please pay me" />
+            <MemberCard image={UIUXLead} name="Catherine Wu" role="UI/UX" textColor="blue" quote="sigma Figma team" />
           </div>
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>

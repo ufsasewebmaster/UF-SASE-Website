@@ -1,6 +1,7 @@
 import MemberCard from "@/client/components/home/MemberCard";
 import MissionCard from "@/client/components/home/MissionCard";
 import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
+import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import EmblaCarousel from "@components/home/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/")({
     return (
       <div className="flex flex-col items-center">
         <div className="flex w-full flex-col items-center">
-          <img src={imageUrls["Board.png"]} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
+          <img src={BoardPic} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
           <div className="absolute w-full items-center p-8 pt-[35%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl">
             <h1 className="flex w-full items-center pl-[5%] sm:pl-[10%]">
               <span>S </span>

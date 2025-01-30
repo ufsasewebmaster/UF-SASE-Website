@@ -1,8 +1,11 @@
+import InternsCard from "@assets/programs/SaseInternsCard.png";
+import SaseSportsCard from "@assets/programs/SaseSportsCard.png";
+import SetCard from "@assets/programs/SetCard.png";
+import WebDevCard from "@assets/programs/WebDevCard.png";
 import BoardPicture from "@components/programs/BoardPicture";
 import ProgramCard from "@components/programs/ProgramCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
-import { imageUrls } from "../assets/imageUrls";
 
 export const Route = createFileRoute("/programs")({
   component: () => {
@@ -19,7 +22,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Interns</h2>
           </header>
           <ProgramCard
-            image={imageUrls["SaseInternsCard.png"]}
+            image={InternsCard}
             text={
               <>
                 <strong>SASE Interns</strong> collaborate directly with board members in committees to plan events for the SASE community. Interns
@@ -34,7 +37,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Engineering Team (SET)</h2>
           </header>
           <ProgramCard
-            image={imageUrls["SetCard.png"]}
+            image={SetCard}
             text={
               <>
                 The <strong>SASE Engineering Team</strong> works together on a yearlong project to explore technical creativity and problem-solving.
@@ -49,7 +52,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">Web Development Team</h2>
           </header>
           <ProgramCard
-            image={imageUrls["WebDevCard.png"]}
+            image={WebDevCard}
             text={
               <>
                 The <strong>SASE Web Development Team</strong> brings together UI/UX, Frontend, and Backend members to develop and enhance the UF SASE
@@ -64,7 +67,7 @@ export const Route = createFileRoute("/programs")({
             <h2 className="text-4xl text-gray-800">SASE Sports</h2>
           </header>
           <ProgramCard
-            image={imageUrls["SaseSportsCard.png"]}
+            image={SaseSportsCard}
             text={
               <>
                 <strong>SASE Intramurals</strong> offer sports like Volleyball, Soccer, Ultimate Frisbee, and Pickleball year-round. It’s a fun way to
