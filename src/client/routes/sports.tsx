@@ -1,10 +1,11 @@
+import SportsPic from "@assets/sports/SaseSports.png";
+import SportsTestimony from "@assets/sports/SportsTestimonial.jpeg";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
-import SportsTestimony from "../assets/SportsTestimony.jpeg";
 import { faqData } from "../components/programs/faqSports";
 import { seo } from "../utils/seo";
 
@@ -44,7 +45,7 @@ export const Route = createFileRoute("/sports")({
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="mx-auto mb-24 w-full max-w-7xl px-4">
             <img
-              src={imageUrls["SaseSports.png"]}
+              src={SportsPic}
               alt="SaseSports"
               className="w-full rounded-3xl border-4 border-saseGreen"
               style={{ height: "600px", objectFit: "cover" }}

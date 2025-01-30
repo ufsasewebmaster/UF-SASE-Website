@@ -1,3 +1,4 @@
+import BoardPic from "@assets/board/BoardPic.jpeg";
 import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/BoardInfo";
 import BoardMemberCard from "@components/BoardMemberCard";
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/board")({
         {/* group picture */}
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
           <div className="w-full max-w-3xl overflow-hidden rounded-2xl border-[3px] border-black shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
-            <img src={imageUrls["BoardPic.jpeg"]} className="w-full" />
+            <img src={BoardPic} className="w-full" />
           </div>
         </div>
         <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />
