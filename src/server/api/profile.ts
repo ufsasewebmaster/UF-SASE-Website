@@ -6,23 +6,27 @@ import { Hono } from "hono";
 const profileRoutes = new Hono();
 
 profileRoutes.get("/profile", async (c) => {
-  const cookie = c.req.header("Cookie");
-  console.log(cookie);
-  let sessionID = "";
-  if (cookie && cookie.startsWith("sessionId=")) {
-    sessionID = cookie.substring("sessionId=".length); // Extract the value after "sessionId="
-  }
-  const result = await db
-    .select({ username: Schema.users.username })
-    .from(Schema.users)
-    .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.user_id))
-    .where(eq(Schema.sessions.id, sessionID));
-  console.log(result);
-  if (result.length == 1) {
-    return c.json(result[0]);
-  } else {
-    console.error("More than one user for a session");
-    return c.error;
+  try {
+    const cookie = c.req.header("Cookie") || "";
+    const sessionID = cookie.startsWith("sessionId=") ? cookie.slice("sessionId=".length) : null;
+
+    if (!sessionID) return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400);
+
+    const result = await db
+      .select({ username: Schema.users.username })
+      .from(Schema.users)
+      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.user_id))
+      .where(eq(Schema.sessions.id, sessionID));
+
+    return result.length === 1
+      ? c.json({ data: result[0], message: "Profile retrieved successfully" }, 200)
+      : c.json(
+          { error: { code: result.length === 0 ? 404 : 500, message: result.length === 0 ? "No user found" : "Multiple users found" } },
+          result.length === 0 ? 404 : 500,
+        );
+  } catch (err) {
+    console.error("Error:", err);
+    return c.json({ error: { code: 500, message: "Internal server error" } }, 500);
   }
 });
 
