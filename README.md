@@ -41,14 +41,14 @@ DATABASE_URL="file:local.db"
 To set up the local SQLite database and apply the schema, run the following commands:
 
 ```bash
-pnpm db:local:init
-pnpm db:push
+bun db:local:init
+bun db:push
 ```
 
 Start the development server:
 
 ```bash
-pnpm dev
+bun dev
 ```
 
 The application should now be running at `http://localhost:3000`.
@@ -70,10 +70,10 @@ We use [Turso](https://turso.tech/), a hosted SQLite service with a generous fre
 3. **Update the Database Schema:** Push the database schema to the new database:
 
    ```bash
-   pnpm db:push
+   bun db:push
    ```
 
-**Note:** Running `pnpm dev` now connects to your production database. Be cautious when making changes in this mode. To switch back to local development, set `DATABASE_URL="file:local.db"` in the `.env` file.
+**Note:** Running `bun dev` now connects to your production database. Be cautious when making changes in this mode. To switch back to local development, set `DATABASE_URL="file:local.db"` in the `.env` file.
 
 ### Deploying to Vercel
 

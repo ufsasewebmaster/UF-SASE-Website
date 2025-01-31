@@ -1,0 +1,20 @@
+name: Discord Notifications
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, closed, merged]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Discord Notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: "📂 **Repository:** `${{ github.repository }}`\n🔀 **Branch:** `${{ github.ref }}`\n📝 **Commit Message:** `${{ github.event.head_commit.message }}`"
