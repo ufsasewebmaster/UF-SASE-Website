@@ -4,6 +4,7 @@ import InfoCard from "@components/programs/InfoCard";
 import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
+import SportsTestimony from "../assets/SportsTestimony.jpeg";
 import { faqData } from "../components/programs/faqSports";
 import { seo } from "../utils/seo";
 
@@ -54,9 +55,9 @@ export const Route = createFileRoute("/sports")({
             <h2 className="text-4xl text-gray-800">Testimonials</h2>
           </header>
           <TestimonialCard
-            image={imageUrls["Board.png"]}
-            text="SASE Sports was an incredible experience. I learned a lot about organizational, leadership, and planning skills and gained a lot of insight from SASE Board members. This program has greatly helped my professional development."
-            name="First Last"
+            image={SportsTestimony}
+            text="SASE sports is a fun way to connect with people while being active! I’m really glad I got to join and make friends while getting to play soccer again, and everyone is really nice to play with! We get to joke around and break a swear together, and I’ll cherish the memories and friends I made far beyond college."
+            name="Cameron McMullen"
             title="2024 SASE Sports Member"
           />
           <header className="mb-12 flex max-w-7xl items-center px-5">
