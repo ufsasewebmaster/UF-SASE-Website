@@ -41,26 +41,22 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
 
   return (
     <div className="flex w-full items-center justify-center">
-      <div className="w-3/12 flex-1"></div> {/* spacer element */}
-      <div className="flex items-center justify-center">
-        <div className="w-7/12 cursor-pointer p-20 transition hover:scale-125 hover:opacity-45" onClick={prevImage}>
-          {/* Left Arrow */}
-          <button className="text-4xl">
-            <FaChevronLeft />
-          </button>
-        </div>
-        <div className="rounded-lg shadow-[10px_10px_0px_0px_rgb(6,104,179)]">
-          {/* Image */}
-          <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} className="w-full rounded-lg border-2 border-black object-cover" />
-        </div>
-        <div className="w-7/12 cursor-pointer p-20 transition hover:scale-125 hover:opacity-45" onClick={nextImage}>
-          {/* Right Arrow */}
-          <button className="text-4xl">
-            <FaChevronRight />
-          </button>
-        </div>
+      <div className="cursor-pointer px-[8%] transition hover:scale-125 hover:opacity-45" onClick={prevImage}>
+        {/* Left Arrow */}
+        <button className="text-4xl">
+          <FaChevronLeft />
+        </button>
       </div>
-      <div className="w-3/12 flex-1"></div> {/* spacer element */}
+      <div className="rounded-lg shadow-[10px_10px_0px_0px_rgb(6,104,179)]">
+        {/* Image */}
+        <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} className="w-full rounded-lg border-2 border-black object-cover" />
+      </div>
+      <div className="cursor-pointer px-[8%] transition hover:scale-125 hover:opacity-45" onClick={nextImage}>
+        {/* Right Arrow */}
+        <button className="text-4xl">
+          <FaChevronRight />
+        </button>
+      </div>
     </div>
   );
 };

@@ -3,8 +3,7 @@ import { StartClient } from "@tanstack/start";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { createRouter } from "./router";
-
-// import "./index.css";
+import "./index.css";
 
 const router = createRouter();
 
