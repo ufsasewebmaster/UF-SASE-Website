@@ -153,7 +153,13 @@ export const Route = createFileRoute("/")({
               <div className="grid w-7/12 grid-cols-1 gap-20 sm:grid-cols-2">
                 {SponsorInfo.map((sponsor) =>
                   sponsor.tier === "Diamond" ? (
-                    <SponsorCard key={sponsor.company} image={sponsor.image} companyName={sponsor.company} type={sponsor.tier} />
+                    <SponsorCard
+                      key={sponsor.company}
+                      image={sponsor.image}
+                      companyName={sponsor.company}
+                      type={sponsor.tier}
+                      shadowcolor={sponsor.shadow_color}
+                    />
                   ) : null,
                 )}
               </div>
