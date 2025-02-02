@@ -36,18 +36,27 @@ const MobileNavItem: React.FC<{
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const hasChildren = item.children && item.children.length > 0;
 
+  const handleClick = () => {
+    if (submenuOpen && ["About", "Events", "Programs"].includes(item.name)) {
+      window.location.href = item.path ?? "#";
+    } else {
+      setSubmenuOpen(!submenuOpen);
+    }
+  };
+
   return (
     <li>
       {hasChildren ? (
         <>
           <button
-            className={`flex w-full items-center justify-between px-2 py-1 text-left focus:outline-none ${isHomePage ? "text-white" : "text-black"}`}
-            onClick={() => setSubmenuOpen(!submenuOpen)}
+            className={`flex w-full items-center justify-between px-2 py-1 text-left transition-colors duration-300 focus:outline-none ${
+              isHomePage ? "text-white hover:text-[#0f6cb6]" : "text-black hover:text-[#0f6cb6]"
+            }`}
+            onClick={handleClick}
             aria-haspopup="true"
             aria-expanded={submenuOpen}
           >
             <span>{item.name}</span>
-            {/* Down/Up Arrow Icon */}
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               {submenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
@@ -61,7 +70,7 @@ const MobileNavItem: React.FC<{
               {Array.isArray(item.children) &&
                 item.children.map((child) => (
                   <li key={child.name}>
-                    <NavLink to={child.path ?? "#"} onClick={onClose}>
+                    <NavLink to={child.path ?? "#"} onClick={onClose} className="block px-2 py-2 transition-colors duration-300 hover:text-[#0f6cb6]">
                       {child.name}
                     </NavLink>
                   </li>
@@ -70,7 +79,7 @@ const MobileNavItem: React.FC<{
           )}
         </>
       ) : (
-        <NavLink to={item.path ?? "#"} onClick={onClose}>
+        <NavLink to={item.path ?? "#"} onClick={onClose} className="block px-2 py-2 transition-colors duration-300 hover:text-[#0f6cb6]">
           {item.name}
         </NavLink>
       )}

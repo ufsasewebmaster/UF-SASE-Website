@@ -5,10 +5,11 @@ interface NavLinkProps {
   to: string;
   children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
-export const NavLink: React.FC<NavLinkProps> = ({ children, onClick, to }) => (
-  <Link to={to} className="inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6]" onClick={onClick}>
+export const NavLink: React.FC<NavLinkProps> = ({ children, className, onClick, to }) => (
+  <Link to={to} onClick={onClick} className={`inline-block transform duration-300 hover:scale-105 hover:text-[#0f6cb6] ${className ?? ""}`}>
     {children}
   </Link>
 );
