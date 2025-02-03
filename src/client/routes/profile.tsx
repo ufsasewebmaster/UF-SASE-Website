@@ -10,7 +10,7 @@ export const Route = createFileRoute("/profile")({
     useEffect(() => {
       const fetchProfile = async () => {
         try {
-          const response = await fetch("/api/profile", { credentials: "include", });
+          const response = await fetch("/api/profile", { credentials: "include" });
 
           if (!response.ok) {
             throw new Error("Failed to fetch profile");
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/profile")({
 
           const result = (await response.json()) as { data: { username: string } };
           console.log("Profile API Response:", result);
-          setProfile(result.data)
+          setProfile(result.data);
         } catch (err) {
           setError(err instanceof Error ? err.message : "Unknown error");
         } finally {
