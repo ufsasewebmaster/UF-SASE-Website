@@ -148,3 +148,23 @@
 .image-transition {
   @apply max-h-96 rounded-lg border-2 border-black object-cover shadow-[5px_5px_0px_0px_rgb(30,119,186)];
 }
+
+.search-bar {
+  @apply w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 text-black placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none;
+}
+
+.search-dropdown {
+  @apply absolute left-0 z-50 mt-2 w-64 overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg;
+}
+
+.search-result {
+  @apply block cursor-pointer px-4 py-2 text-black duration-300 hover:scale-105 hover:bg-gray-200 hover:text-[#0f6cb6];
+}
+
+.search-result.selected {
+  @apply scale-105 bg-gray-200 text-[#0f6cb6] duration-300;
+}
+
+.no-results {
+  @apply px-4 py-2 text-gray-600;
+}
