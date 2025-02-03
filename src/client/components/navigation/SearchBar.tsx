@@ -11,7 +11,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
     <input
       type="text"
       placeholder={placeholder}
-      className="w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none"
+      className="w-32 rounded-full border border-gray-600 py-2 pl-10 pr-3 text-black placeholder-gray-600 transition-all duration-300 ease-in-out focus:w-64 focus:outline-none"
     />
     <svg
       xmlns="http://www.w3.org/2000/svg"
