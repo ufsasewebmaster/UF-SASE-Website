@@ -23,8 +23,8 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="flex flex-col items-center bg-black px-2 py-6 md:px-8 lg:px-12">
-          <div className="relative mt-8 w-9/12 rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px] lg:mt-0">
+        <div className="flex flex-col items-center bg-black px-0 py-14 md:px-8 lg:px-12">
+          <div className="relative w-9/12 rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
             <div className="flex h-full flex-col rounded-2xl bg-gray-950 p-4 text-center lg:p-10 lg:text-start">
               <h1 className="pb-12 font-oswald text-3xl font-medium text-white sm:text-5xl">University of Florida Chapter</h1>
               <div>
