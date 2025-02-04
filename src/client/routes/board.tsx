@@ -18,14 +18,14 @@ export const Route = createFileRoute("/board")({
       <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
         {/* title */}
         <div className="text-center">
-          <h1 className="font-oswald text-7xl font-medium">BOARD</h1>
-          <p className="mb-8 mt-8 text-2xl text-black">Meet our 2024-2025 SASE Board Members!</p>
+          <h1 className="font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">BOARD</h1>
+          <p className="mb-8 mt-8 text-lg text-black sm:text-xl md:text-2xl">Meet our 2024-2025 SASE Board Members!</p>
           <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
         </div>
 
         {/* group picture */}
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
-          <div className="w-full max-w-3xl overflow-hidden rounded-2xl border-[3px] border-black shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
+          <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-black shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
             <img src={BoardPic} className="w-full" />
           </div>
         </div>
@@ -34,11 +34,21 @@ export const Route = createFileRoute("/board")({
         {boardInfo.map((section, idx) => (
           <div key={idx} className="mb-12">
             {section.section === "Chair Board" && <hr className="w-7/8 my-10 border-t-2 border-green-500" />}
-            <h2 className="mb-6 text-center font-oswald text-5xl">{section.section}</h2>
-            <div className="flex flex-wrap justify-center gap-10">
-              {section.members.map((member, idx) => (
-                <BoardMemberCard key={idx} member={member} />
-              ))}
+            <h2 className="mb-6 text-center font-oswald text-3xl sm:text-4xl md:text-5xl">{section.section}</h2>
+
+            {/* Centering the grid properly */}
+            <div className="flex justify-center">
+              <div className="grid max-w-screen-lg grid-cols-2 place-items-center gap-10 sm:grid-cols-2 md:grid-cols-3">
+                {section.members.map((member, idx) => {
+                  const isLastItem = idx === section.members.length - 1;
+                  const isUnevenRow = section.members.length % 3 !== 0;
+                  return (
+                    <div key={idx} className={isLastItem && isUnevenRow ? "flex justify-center md:col-span-3" : ""}>
+                      <BoardMemberCard member={member} />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         ))}

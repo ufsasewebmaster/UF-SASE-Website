@@ -98,6 +98,26 @@
   border-radius: 9999px;
 }
 
+.scrollbar-thinner::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thinner::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* Gray-400 */
+  border-radius: 9999px; /* Fully rounded */
+  transition: background-color 300ms; /* Smooth transition */
+}
+
+.scrollbar-thinner::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* Darker Gray */
+}
+
+.scrollbar-thinner::-webkit-scrollbar-track {
+  background-color: #edf2f7; /* Gray-200 */
+  border-radius: 9999px;
+}
+
 .flex-center {
   @apply flex items-center justify-center;
 }
