@@ -102,7 +102,6 @@ export const blogs = sqliteTable("blog", {
     .notNull()
     .$onUpdateFn(() => new Date()),
   last_update_date: text("last_update_date"),
-  tags: text("tags"),
 });
 
 // Blog Tags table
