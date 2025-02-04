@@ -69,6 +69,18 @@ const Header: React.FC = () => {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <header
       className={cn(`sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`, {
