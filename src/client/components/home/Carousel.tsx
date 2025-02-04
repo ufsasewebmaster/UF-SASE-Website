@@ -47,7 +47,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
       img: sport,
       icon: sports_icon,
       value: "Sports",
-      text: "To facilitate interaction, we have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!",
+      text: "We have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!",
     },
     {
       img: mentorship,
@@ -126,16 +126,16 @@ const EmblaCarousel: React.FC<PropType> = () => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {values.map((value, index) => (
-            <div className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] sm:flex-[0_0_40%]" key={index}>
+            <div className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] md:flex-[0_0_40%]" key={index}>
               <div className="embla__slide__image rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
                 <div className="embla__slide__image group relative rounded-2xl hover:cursor-pointer">
                   <img src={value.img} alt={`${value.value} + Image`} className="aspect-auto rounded-xl" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60 hover:bg-saseGray/85">
                     <img src={value.icon} alt={`${value.value} + Icon`} className="mb-2 transition-opacity duration-300 group-hover:opacity-0" />{" "}
-                    <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0">
+                    <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0 md:text-2xl lg:text-3xl">
                       {value.value}
                     </p>
-                    <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100 sm:text-xl">
+                    <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100 md:text-base lg:text-lg">
                       {value.text}
                     </p>
                   </div>
