@@ -65,8 +65,6 @@ export const saseInfo = sqliteTable("sase_info", {
     .primaryKey()
     .references(() => users.id),
   events_attended: text("events_attended"),
-  mentors: text("mentors"),
-  mentees: text("mentees"),
   groups: text("groups"),
 });
 
