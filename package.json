@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "db:push && vinxi build",
+    "build": "concurrently \"bun run db:push\" \"bunx dotenv-cli -- vinxi build\"",
     "start": "vinxi start",
     "fix": "concurrently \"bun run lint:js:fix\" \"bun run lint:fmt:fix\"",
     "generate": "bun run src/client/assets/generateImageMaps.ts",
@@ -19,7 +19,7 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
-    "db:push": "drizzle-kit push",
+    "db:push": "npx drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:local:init": "node scripts/initDb.mjs",
     "db:local:seed": "node scripts/seed.mjs",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@iconify/json": "^2.2.272",
-    "@libsql/client": "^0.12.0",
+    "@libsql/client": "0.14.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-core": "^0.11.1",
@@ -43,7 +43,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dompurify": "^3.1.7",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
     "drizzle-orm": "^0.36.4",
     "drizzle-zod": "^0.5.1",
     "embla-carousel-react": "^8.5.1",
@@ -68,7 +69,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "vinxi": "^0.4.3",
+    "vinxi": "^0.5.1",
     "vite-plugin-image-optimizer": "^1.1.8",
     "zod": "^3.23.8"
   },
@@ -106,5 +107,8 @@
     "typescript": "^5.6.2",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
+  },
+  "overrides": {
+    "@libsql/hrana-client": "^0.8.0"
   }
 }

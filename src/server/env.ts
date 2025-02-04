@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
+import dotenv from "dotenv";
 import { z } from "zod";
-import "dotenv/config";
+
+dotenv.config();
 
 // This parses the enviorment variables according to a zod schema and provides them to the server
 export const SERVER_ENV = createEnv({
