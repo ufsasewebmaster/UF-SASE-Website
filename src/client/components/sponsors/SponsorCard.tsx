@@ -25,7 +25,26 @@ const SponsorCard = ({ companyName, image, shadowcolor, type }: { image: string;
         <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
 
         {type === "Diamond" ? (
-          <img src={imageUrls["Diamond.png"]} alt="Diamond Icon" className="absolute left-0 top-0 h-[30%] -translate-x-1/2 -translate-y-1/3" />
+          <img
+            src={imageUrls["Diamond.png"]}
+            alt="Diamond Icon"
+            className="absolute left-0 top-0 h-[23%] -translate-x-1/2 -translate-y-1/4 rotate-[-15deg]"
+          />
+        ) : (
+          ""
+        )}
+        {type === "Gold" ? (
+          <img src={imageUrls["Gold.png"]} alt="Diamond Icon" className="absolute left-0 top-0 h-[24%] -translate-x-1/2 -translate-y-1/3" />
+        ) : (
+          ""
+        )}
+        {type === "Silver" ? (
+          <img src={imageUrls["Silver.png"]} alt="Diamond Icon" className="absolute left-0 top-0 h-[23%] -translate-x-1/2 -translate-y-1/3" />
+        ) : (
+          ""
+        )}
+        {type === "Bronze" ? (
+          <img src={imageUrls["Bronze.png"]} alt="Diamond Icon" className="absolute left-0 top-0 h-[21%] -translate-x-1/2 -translate-y-1/3" />
         ) : (
           ""
         )}
