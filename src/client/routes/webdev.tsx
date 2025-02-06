@@ -61,7 +61,8 @@ export const Route = createFileRoute("/webdev")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Leadership</h2>
           </header>
-          <div className="grid grid-cols-1 gap-1 bg-white p-12 xl:grid-cols-5">
+          {/* CSS grid is not cooperating with the md breapoint, auto aligns left =(*/}
+          <div className="grid grid-cols-1 gap-1 bg-white p-12 md:grid-cols-2 lg:grid-cols-5">
             <MemberCard image={FullStackLead} name="Arman Kumaraswamy" role="Full-Stack" textColor="blue" quote="[object Object]" />
             <MemberCard image={FrontEndLead} name="Joseph Kim" role="Frontend" textColor="green" quote="still don't how to center a div" />
             <MemberCard image={WebmasterChair} name="Ricky Zhang" role="Webmaster" textColor="blue" quote="SASE deserves a better website" />
