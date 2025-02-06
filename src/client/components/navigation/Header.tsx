@@ -9,6 +9,8 @@ import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
 
+const SCREEN_BREAKPOINT = 1024;
+
 const navItems = [
   { name: "Home", path: "/" },
   {
@@ -68,6 +70,18 @@ const Header: React.FC = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= SCREEN_BREAKPOINT) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <header
