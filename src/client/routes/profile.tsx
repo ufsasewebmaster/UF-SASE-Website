@@ -1,28 +1,38 @@
-import { useUsers } from "@hooks/useUsers"; // Use the top-level abstraction
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
-// Profile route component
 export const Route = createFileRoute("/profile")({
   component: () => {
-    const userId = "current_user"; // Replace with actual logic to fetch current user ID
+    const [profile, setProfile] = useState<{ username: string } | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
-    // Call the useUsers hook here
-    const { user: userQuery } = useUsers(userId);
+    useEffect(() => {
+      const fetchProfile = async () => {
+        try {
+          const response = await fetch("/api/profile", { credentials: "include" });
 
-    // Call the overall query. While this is tied to all of the users functions, it will NOT incur additional overhead,
-    // as it caches and only does calls that are used int his code
-    const { data: profile, error, isError, isLoading } = userQuery;
+          if (!response.ok) {
+            throw new Error("Failed to fetch profile");
+          }
 
-    // Handle loading state
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
+          const result = (await response.json()) as { data: { username: string } };
+          console.log("Profile API Response:", result);
+          setProfile(result.data);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Unknown error");
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
-    // Handle error state
-    if (isError) {
-      return <div>Error fetching profile: {error instanceof Error ? error.message : "Unknown error"}</div>;
-    }
+      fetchProfile();
+    }, []);
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    //just temporary UI for now
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">

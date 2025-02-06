@@ -4,7 +4,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   server: {
-    preset: "vercel-edge",
+    preset: "vercel", // Switched from vercel-edge
     prerender: {
       routes: ["/"],
       // crawlLinks: true,
@@ -22,7 +22,7 @@ export default defineConfig({
       entry: "./src/server/ssr.tsx",
     },
     api: {
-      entry: "./src/server/api.ts",
+      entry: "./src/server/index.ts",
     },
   },
   vite: {

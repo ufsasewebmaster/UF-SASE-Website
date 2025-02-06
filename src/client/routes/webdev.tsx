@@ -1,6 +1,6 @@
 import BackendLead from "@assets/webdev/BackendLead.jpeg";
 import FrontEndLead from "@assets/webdev/FrontendLead.png";
-import FullStackLead from "@assets/webdev/FullstackLead2.jpeg";
+import FullStackLead from "@assets/webdev/FullStackLead2.jpg";
 import UIUXLead from "@assets/webdev/UIUXLead.jpg";
 import TeamPhoto from "@assets/webdev/WebDevTeam.jpg";
 import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";

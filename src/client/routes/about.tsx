@@ -62,7 +62,7 @@ export const Route = createFileRoute("/about")({
             </div>
             <Timeline />
           </section>
-          <section className="mb-12">
+          <section id="contact" className="mb-12">
             <div className="mb-4 flex items-center">
               <div className="mr-3 h-12 w-1.5 rounded-sm bg-saseGreen"></div>{" "}
               <h2 className="font-oswald text-3xl font-semibold text-gray-800">Contact Us</h2>
