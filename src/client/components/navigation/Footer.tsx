@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
     <footer className="mt-auto bg-saseBlue py-7 text-white">
       <div className="container mx-auto flex flex-col items-center justify-between md:flex-row">
         {/* Left Section - Logo and Social Icons */}
-        <div className="mb-6 flex flex-col items-center md:mb-0 md:items-start">
+        <div className="mb-6 flex flex-col items-center md:mb-0">
           <div className="mb-6">
             <img src={imageUrls["WhiteSASELogo.png"]} alt="Logo" style={{ width: "235px", height: "75px" }} className="ml-2 h-auto" />
           </div>
