@@ -14,6 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const searchIconLabel = query ? `Searching for: ${query}` : "Search icon";
 
   const filteredResults = useMemo(() => {
     if (!query?.trim()) return [];
@@ -79,11 +80,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-3 top-3 h-5 w-5 text-gray-600"
+        className={cn("absolute left-3 top-3 h-5 w-5 text-gray-600")}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-label={searchIconLabel}
       >
+        <title>{searchIconLabel}</title>
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-4l4 4" />
       </svg>
 
