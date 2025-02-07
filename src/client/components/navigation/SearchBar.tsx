@@ -1,7 +1,7 @@
 import { cn } from "@/shared/utils";
 import { pages } from "@navigation/pagesData";
-import { Link } from "@tanstack/react-router";
-import React, { useEffect, useRef, useState } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -9,40 +9,34 @@ interface SearchBarProps {
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholder = "Search" }) => {
-  const [query, setQuery] = useState("");
-  const [filteredResults, setFilteredResults] = useState<Array<{ name: string; path: string }>>([]);
+  const [query, setQuery] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
-  // Handle search filtering
-  useEffect(() => {
-    if (!query.trim()) {
-      setFilteredResults([]);
-      setIsDropdownOpen(false);
-      return;
-    }
-
-    const results = pages
+  const filteredResults = useMemo(() => {
+    if (!query?.trim()) return [];
+    return pages
       .filter((page) => [page.name, ...page.aliases].some((term) => term.toLowerCase().startsWith(query.toLowerCase())))
-      .map((page) => ({ name: page.name, path: page.path })); // Include path
-
-    setFilteredResults(results);
-    setIsDropdownOpen(true);
-    setSelectedIndex(-1);
+      .map((page) => ({ name: page.name, path: page.path }));
   }, [query]);
 
-  // Handle clicking outside of the search box
   useEffect(() => {
+    setIsDropdownOpen(filteredResults.length > 0);
+    setSelectedIndex(-1);
+  }, [filteredResults]);
+
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (!searchRef.current || !searchRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
 
-    const handleBlur = () => {
-      setIsDropdownOpen(false);
-    };
+    const handleBlur = () => setIsDropdownOpen(false);
 
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("blur", handleBlur);
@@ -51,7 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("blur", handleBlur);
     };
-  }, []);
+  }, [isDropdownOpen]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "ArrowDown") {
@@ -61,24 +55,23 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
     } else if (event.key === "Enter" && selectedIndex >= 0) {
       const selectedResult = filteredResults[selectedIndex];
       if (selectedResult) {
-        window.location.href = selectedResult.path;
-        setQuery("");
-        setFilteredResults([]);
+        router.navigate({ to: selectedResult.path });
+        setQuery(null);
         setIsDropdownOpen(false);
       }
     }
   };
 
   return (
-    <div className={cn(`relative`, className)} ref={searchRef}>
+    <div className={cn("relative", className)} ref={searchRef}>
       <input
         type="text"
         placeholder={placeholder}
         className="search-bar"
-        value={query}
+        value={query || ""}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => {
-          if (query.trim()) {
+          if (query?.trim()) {
             setIsDropdownOpen(true);
           }
         }}
@@ -94,7 +87,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-4l4 4" />
       </svg>
 
-      {/* Search Results Dropdown */}
       {isDropdownOpen && (
         <div className="search-dropdown">
           {filteredResults.length > 0 ? (
@@ -102,10 +94,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
               <Link
                 key={result.name}
                 to={result.path}
-                className={`search-result ${index === selectedIndex ? "selected" : ""}`}
+                className={cn("search-result", { selected: index === selectedIndex })}
                 onClick={() => {
-                  setQuery("");
-                  setFilteredResults([]);
+                  setQuery(null);
                   setIsDropdownOpen(false);
                 }}
               >
@@ -113,7 +104,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
               </Link>
             ))
           ) : (
-            <div className="no-results">{"No results found :("}</div>
+            <div className="no-results">No results found</div>
           )}
         </div>
       )}
