@@ -10,7 +10,6 @@ export const blogSchema = z.object({
   publishedDate: z.number().int().min(0, "Published date must be a valid timestamp."),
   timeUpdated: z.number().int().min(0, "Update time must be a valid timestamp."),
   lastUpdateDate: z.string().min(1, "Last update date must be a valid date.").optional(),
-  tags: z.array(z.string()).optional(),
 });
 
 export const blogTitleSchema = z.object({
