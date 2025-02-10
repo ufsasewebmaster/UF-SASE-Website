@@ -123,26 +123,25 @@ export const Route = createFileRoute("/")({
           <EmblaCarousel />
         </div>
 
-        <div className="flex w-full flex-col items-center bg-saseGray p-12">
-          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
-          <div className="flex w-9/12 flex-col items-center gap-12">
-            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
-              <p className="p-4 font-redhat text-xl sm:text-2xl">
+        <div className="flex w-full flex-col items-center bg-saseGray p-4 sm:p-8 md:p-12">
+          <h1 className="w-full pb-6 text-center font-oswald text-4xl font-medium sm:pb-8 sm:text-5xl md:pb-12 md:text-6xl">Sponsors</h1>
+          <div className="flex w-full flex-col items-center gap-8 sm:w-11/12 sm:gap-12 md:w-10/12 lg:w-9/12">
+            <div className="flex w-full flex-col items-center rounded-xl border-2 border-black bg-white p-4 shadow-[6px_6px_0px_#7DC242] sm:rounded-2xl sm:border-4 sm:p-6 sm:shadow-[8px_8px_0px_#7DC242] md:p-8 md:shadow-[12px_12px_0px_#7DC242] lg:p-10">
+              <p className="p-2 font-redhat text-base sm:p-4 sm:text-lg md:text-xl lg:text-2xl">
                 <span className="text-2xl font-semibold sm:text-3xl">CHANGE!!!!! </span>
                 Are you interested in becoming a partner with the{" "}
-                <span className="font-semibold"> UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
-                ?
+                <span className="font-semibold"> UF Society of Asian Scientists and Engineers (SASE) Chapter</span>?
                 <br />
                 <br />
-                To get access to our <span className="font-semibold">sponsorship packet </span>
-                please contact our External Vice President, Kayleen Diaz, at{" "}
-                <div className="flex w-full items-center">
-                  <a href={`mailto:ufsase.evp@gmail.com`} className="text-saseGreen underline">
+                To get access to our <span className="font-semibold">sponsorship packet</span> please contact our External Vice President, Kayleen
+                Diaz, at
+                <div className="mt-4 flex w-full flex-col items-center gap-4 sm:flex-row">
+                  <a href="mailto:ufsase.evp@gmail.com" className="break-all text-saseGreen underline">
                     ufsase.evp@gmail.com
                   </a>
                   <a
                     href="/sponsors"
-                    className="ml-auto rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]"
+                    className="w-full rounded-lg bg-saseGreen px-4 py-2 text-center font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:ml-auto sm:w-auto"
                   >
                     Sponsors
                   </a>
