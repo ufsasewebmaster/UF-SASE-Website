@@ -1,6 +1,15 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 
+const typeStyles = {
+  Diamond: { src: imageUrls["Diamond.png"], size: "h-[23%]", translateY: "-translate-y-1/4", rotate: "rotate-[-15deg]" },
+  Gold: { src: imageUrls["Gold.png"], size: "h-[24%]", translateY: "-translate-y-1/3" },
+  Silver: { src: imageUrls["Silver.png"], size: "h-[23%]", translateY: "-translate-y-1/3" },
+  Bronze: { src: imageUrls["Bronze.png"], size: "h-[21%]", translateY: "-translate-y-1/3" },
+};
+
+const styleBase = "absolute left-0 top-0 -translate-x-1/2";
+
 const SponsorCard = ({ companyName, image, shadowcolor, type }: { image: string; companyName: string; type: string; shadowcolor: string }) => {
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
@@ -24,10 +33,12 @@ const SponsorCard = ({ companyName, image, shadowcolor, type }: { image: string;
         <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />
         <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
 
-        {type === "Diamond" ? (
-          <img src={imageUrls["Diamond.png"]} alt="Diamond Icon" className="absolute left-0 top-0 h-[30%] -translate-x-1/2 -translate-y-1/3" />
-        ) : (
-          ""
+        {type in typeStyles && (
+          <img
+            src={typeStyles[type].src}
+            alt={`${type} Icon`}
+            className={cn(styleBase, typeStyles[type].size, typeStyles[type].translateY, typeStyles[type].rotate)}
+          />
         )}
       </div>
     </div>
