@@ -16,27 +16,29 @@ const SponsorCard = ({
   companyName,
   image,
   shadowcolor,
-  type,
+  type: sponsorTier,
 }: {
   image: string;
   companyName: string;
-  type: SponsorType; // Strictly typed
+  type: string;
   shadowcolor: string;
 }) => {
+  const sponsorType = sponsorTier in typeStyles ? (sponsorTier as SponsorType) : "Bronze";
+
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
         className={cn(
           {
-            "text-saseBlue": type === "Diamond",
-            "text-amber-300": type === "Gold",
-            "text-slate-400": type === "Silver",
-            "text-amber-700": type === "Bronze",
+            "text-saseBlue": sponsorType === "Diamond",
+            "text-amber-300": sponsorType === "Gold",
+            "text-slate-400": sponsorType === "Silver",
+            "text-amber-700": sponsorType === "Bronze",
           },
           `pb-2 text-center font-redhat text-4xl font-semibold`,
         )}
       >
-        {type}
+        {sponsorType}
       </p>
 
       <div
@@ -45,11 +47,11 @@ const SponsorCard = ({
         <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />
         <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
 
-        {type in typeStyles && (
+        {sponsorType in typeStyles && (
           <img
-            src={typeStyles[type].src}
-            alt={`${type} Icon`}
-            className={cn(styleBase, typeStyles[type].size, typeStyles[type].translateY, typeStyles[type].rotate || "")}
+            src={typeStyles[sponsorType].src}
+            alt={`${sponsorType} Icon`}
+            className={cn(styleBase, typeStyles[sponsorType].size, typeStyles[sponsorType].translateY, typeStyles[sponsorType].rotate || "")}
           />
         )}
       </div>
