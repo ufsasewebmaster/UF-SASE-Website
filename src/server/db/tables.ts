@@ -65,8 +65,6 @@ export const saseInfo = sqliteTable("sase_info", {
     .primaryKey()
     .references(() => users.id),
   events_attended: text("events_attended"),
-  mentors: text("mentors"),
-  mentees: text("mentees"),
   groups: text("groups"),
 });
 
@@ -87,6 +85,7 @@ export const events = sqliteTable("event", {
   start_time: integer("start_time", { mode: "timestamp" }).notNull(),
   end_time: integer("end_time", { mode: "timestamp" }).notNull(),
   involved_groups: text("involved_groups"),
+  slides_url: text("slides_url"),
 });
 
 // Blogs table
