@@ -11,6 +11,7 @@ export const eventSchema = z.object({
   start_time: z.number().int().min(0, "Start time must be a valid timestamp."),
   end_time: z.number().int().min(0, "End time must be a valid timestamp."),
   involved_groups: z.string().optional(),
+  slides_url: z.string().url("Slides URL must be a valid URL.").optional(),
 });
 
 export type Event = z.infer<typeof eventSchema>;
