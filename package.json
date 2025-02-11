@@ -19,7 +19,7 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
-    "db:push": "npx drizzle-kit push",
+    "db:push": "bun x drizzle-kit push --yes",
     "db:generate": "drizzle-kit generate",
     "db:local:init": "node scripts/initDb.mjs",
     "db:local:seed": "node scripts/seed.mjs",
