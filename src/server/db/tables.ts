@@ -42,7 +42,7 @@ export const personalInfo = sqliteTable("personal_info", {
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
   email: text("email").notNull().unique(),
-  phone: blob("phone", { mode: "bigint" }).unique(), // NOTE: Phone is bigint
+  phone: text("phone").unique(), // NOTE: Phone is bigint
   area_code: integer("area_code"),
 });
 

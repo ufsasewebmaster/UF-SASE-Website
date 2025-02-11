@@ -10,8 +10,8 @@ const client = createClient({
   await client.batch([
     "INSERT OR IGNORE INTO user (id, username, password, time_added, time_updated, points, roles) VALUES ('hwurhw64luqmednj5xqh5suwzm', 'testUser', '$2a$10$F3TH05I6LGRLq3Ws6.NPlOwbXsbjtXCcBedjMuewuUVcmjLEMU1LW', 1738639335, 1738639335, 0, 'admin')",
     "INSERT OR IGNORE INTO user (id, username, password, time_added, time_updated, points, roles) VALUES ('n4cpqnzaf4cdmxzuwwlxmberpq', 'testUser2', '$2a$10$zi2/N.Ry3euMsMviLp9IvurB/jjf8nkuTUePmPFCNWTl4OZYkohla', 1738639335, 1738639335, 0, 'admin')",
-    "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, email, phone, area_code) VALUES ('hwurhw64luqmednj5xqh5suwzm', 'Test', 'User', 'testuser@gmail.com', 1234567890, 123)",
-    "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, email, phone, area_code) VALUES ('n4cpqnzaf4cdmxzuwwlxmberpq', 'Test', 'User2', 'testuser2@gmail.com', 1112223333, 111)",
+    "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, email, phone, area_code) VALUES ('hwurhw64luqmednj5xqh5suwzm', 'Test', 'User', 'testuser@gmail.com', '1234567890', 123)",
+    "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, email, phone, area_code) VALUES ('n4cpqnzaf4cdmxzuwwlxmberpq', 'Test', 'User2', 'testuser2@gmail.com', '1112223333', 111)",
     "INSERT OR IGNORE INTO professional_info (user_id, resume_path, linkedin, portfolio, majors, minors, graduation_semester) VALUES ('hwurhw64luqmednj5xqh5suwzm', 'ufsase.com', 'linkedin.com', 'github.com', 'Computer Science', 'Mathematics', 'Spring 2025')",
     "INSERT OR IGNORE INTO professional_info (user_id, resume_path, linkedin, portfolio, majors, minors, graduation_semester) VALUES ('n4cpqnzaf4cdmxzuwwlxmberpq', 'ufsase.com', 'linkedin.com', 'github.com', 'Computer Science', 'Statistics', 'Spring 2027')",
     "INSERT OR IGNORE INTO sase_info (user_id, events_attended, groups) VALUES ('hwurhw64luqmednj5xqh5suwzm', 'eventID', 'SASE')",
