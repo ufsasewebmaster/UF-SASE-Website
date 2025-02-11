@@ -21,6 +21,7 @@ interface AuthFormProps {
 
 export interface FormData {
   username: string;
+  email: string;
   password: string;
   retypePassword?: string;
 }
@@ -47,6 +48,7 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
     mode: "all",
     defaultValues: {
       username: "",
+      email: "",
       password: "",
       retypePassword: "",
     },
@@ -64,7 +66,7 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
       noValidate
-      className="relative z-10 flex h-[32rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
+      className="relative z-10 flex h-[38rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
     >
       <div className="mb-6 p-2">
         <Logo />
@@ -90,6 +92,23 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
         />
       </StyledFormField>
       {errors.username && <span className="mb-1 font-redhat text-sm text-red-600">{errors.username.message}</span>}
+
+      <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.email}>
+        <Input
+          id="email"
+          type="text"
+          {...register("email", {
+            required: { value: true, message: "Email is required" },
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Invalid email format!",
+            },
+          })}
+          placeholder="Email"
+          className="h-12 p-4"
+        />
+      </StyledFormField>
+      {errors.email && <span className="mb-1 font-redhat text-sm text-red-600">{errors.email.message}</span>}
 
       <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.password}>
         <Input
