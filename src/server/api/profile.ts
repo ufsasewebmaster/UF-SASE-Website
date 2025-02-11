@@ -5,6 +5,22 @@ import { Hono } from "hono";
 
 const profileRoutes = new Hono();
 
+const profileSchema = {
+  username: Schema.users.username,
+  first_name: Schema.personalInfo.first_name,
+  last_name: Schema.personalInfo.last_name,
+  email: Schema.personalInfo.email,
+  phone: Schema.personalInfo.phone,
+  resume: Schema.professionalInfo.resume_path,
+  linkedin: Schema.professionalInfo.linkedin,
+  portfolio: Schema.professionalInfo.portfolio,
+  majors: Schema.professionalInfo.majors,
+  minors: Schema.professionalInfo.minors,
+  graduation_semester: Schema.professionalInfo.graduation_semester,
+};
+
+// Fetch profile, return JSON object of {data: <profileSchema>, message: <string>}
+//This route expects a session ID in the cookie, make sure a user is signed in when calling this endpoint
 profileRoutes.get("/profile", async (c) => {
   try {
     const cookie = c.req.header("Cookie") || "";
@@ -13,9 +29,11 @@ profileRoutes.get("/profile", async (c) => {
     if (!sessionID) return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400);
 
     const result = await db
-      .select({ username: Schema.users.username })
+      .select(profileSchema)
       .from(Schema.users)
       .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.user_id))
+      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.user_id))
+      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.user_id))
       .where(eq(Schema.sessions.id, sessionID));
 
     return result.length === 1

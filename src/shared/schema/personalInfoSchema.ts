@@ -6,7 +6,7 @@ export const personalInfoSchema = z.object({
   first_name: z.string().min(1, "First name is required."),
   last_name: z.string().min(1, "Last name is required."),
   email: z.string().email("Invalid email address."),
-  phone: z.bigint().optional(),
+  phone: z.string().optional(),
   area_code: z.number().int().min(0).optional(),
 });
 
