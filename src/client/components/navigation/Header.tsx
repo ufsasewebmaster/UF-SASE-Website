@@ -19,6 +19,7 @@ const navItems = [
     children: [
       { name: "Board", path: "/board" },
       { name: "Sponsors", path: "/sponsors" },
+      { name: "Resources", path: "/resources" },
     ],
   },
   {
