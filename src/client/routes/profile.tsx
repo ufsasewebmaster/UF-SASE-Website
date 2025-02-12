@@ -1,13 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Button } from "../components/ui/button";
+import { useAuth } from "../AuthContext";
 
 export const Route = createFileRoute("/profile")({
   component: () => {
     const [profile, setProfile] = useState<{ username: string } | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
+    console.log('Profile component rendered');
     useEffect(() => {
+      if (!isLoading) return;
       const fetchProfile = async () => {
         try {
           const response = await fetch("/api/profile", { credentials: "include" });
@@ -15,7 +21,6 @@ export const Route = createFileRoute("/profile")({
           if (!response.ok) {
             throw new Error("Failed to fetch profile");
           }
-
           const result = (await response.json()) as { data: { username: string } };
           console.log("Profile API Response:", result);
           setProfile(result.data);
@@ -28,6 +33,20 @@ export const Route = createFileRoute("/profile")({
 
       fetchProfile();
     }, []);
+
+    const handleLogout = async () => {
+      try {
+        const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+        if (response.ok) {
+          logout();
+          navigate({ to: "/" }); 
+        } else {
+          throw new Error("Logout failed");
+        }
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    };
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -44,6 +63,9 @@ export const Route = createFileRoute("/profile")({
               <span className="text-4xl font-bold">{profile?.username?.charAt(0).toUpperCase()}</span>
             </div>
             <h2 className="text-xl font-semibold">Welcome, {profile?.username}!</h2>
+            <Button variant="destructive" className="mt-4" onClick={handleLogout}>
+              Log Out
+              </Button>
           </div>
         </div>
       </div>
