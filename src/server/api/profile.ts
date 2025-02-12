@@ -10,7 +10,9 @@ profileRoutes.get("/profile", async (c) => {
     const cookie = c.req.header("Cookie") || "";
     console.log(cookie);
     const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
-    if(!sessionIDMatch) { return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400); }
+    if (!sessionIDMatch) {
+      return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400);
+    }
     const sessionID = sessionIDMatch[1];
     console.log(cookie, sessionID);
 

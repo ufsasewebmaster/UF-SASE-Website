@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Button } from "../components/ui/button";
 import { useAuth } from "../AuthContext";
+import { Button } from "../components/ui/button";
 
 export const Route = createFileRoute("/profile")({
   component: () => {
@@ -11,7 +11,7 @@ export const Route = createFileRoute("/profile")({
     const { logout } = useAuth();
     const navigate = useNavigate();
 
-    console.log('Profile component rendered');
+    console.log("Profile component rendered");
     useEffect(() => {
       if (!isLoading) return;
       const fetchProfile = async () => {
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/profile")({
         const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
         if (response.ok) {
           logout();
-          navigate({ to: "/" }); 
+          navigate({ to: "/" });
         } else {
           throw new Error("Logout failed");
         }
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/profile")({
             <h2 className="text-xl font-semibold">Welcome, {profile?.username}!</h2>
             <Button variant="destructive" className="mt-4" onClick={handleLogout}>
               Log Out
-              </Button>
+            </Button>
           </div>
         </div>
       </div>
