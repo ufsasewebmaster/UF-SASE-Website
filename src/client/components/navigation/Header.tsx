@@ -90,7 +90,7 @@ const Header: React.FC = () => {
         "bg-white text-black": !isHomePage,
       })}
     >
-      <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
+      <nav className="relative flex h-16 w-full items-center justify-between gap-2 px-2 py-3 md:px-8">
         {/* Logo */}
         <Logo />
 
@@ -104,7 +104,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
           <UserButton isLoggedIn={isAuthenticated} />
           <button ref={hamburgerRef} className="focus:outline-none">
