@@ -1,3 +1,4 @@
+import ProfileNav from "@components/profile/ProfileNav";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
@@ -46,6 +47,7 @@ export const Route = createFileRoute("/profile")({
             <h2 className="text-xl font-semibold">Welcome, {profile?.username}!</h2>
           </div>
         </div>
+        <ProfileNav />
       </div>
     );
   },
