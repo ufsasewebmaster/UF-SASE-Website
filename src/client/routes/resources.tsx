@@ -1,9 +1,67 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoMdLink } from "react-icons/io";
 import { seo } from "../utils/seo";
+
+interface ResourceCard {
+  title: string;
+  description: string;
+  linkText: string;
+  link: string;
+}
+
+const studyMaterials: Array<ResourceCard> = [
+  {
+    title: "Study Guide 1",
+    description: "Comprehensive guide for subject ABC.",
+    linkText: "View Guide",
+    link: "#",
+  },
+  {
+    title: "Study Guide 2",
+    description: "Practice problems for XYZ.",
+    linkText: "Access Problems",
+    link: "#",
+  },
+];
+
+const workshops: Array<ResourceCard> = [
+  {
+    title: "Workshop Slides",
+    description: "Slides from our recent leadership workshop.",
+    linkText: "Open Slides",
+    link: "#",
+  },
+  {
+    title: "Workshop Recording",
+    description: "Watch the session from last semester’s event.",
+    linkText: "Watch",
+    link: "#",
+  },
+];
+
+const careerResources: Array<ResourceCard> = [
+  {
+    title: "Resume Tips",
+    description: "A quick guide to building a strong resume.",
+    linkText: "View Tips",
+    link: "#",
+  },
+  {
+    title: "Interview Prep",
+    description: "Resources to help you ace your interviews.",
+    linkText: "Start Preparing",
+    link: "#",
+  },
+];
+
+const resourceTabs: Record<string, Array<ResourceCard>> = {
+  "Study Materials": studyMaterials,
+  Workshops: workshops,
+  "Career Resources": careerResources,
+};
 
 export const Route = createFileRoute("/resources")({
   meta: () => [
@@ -14,112 +72,91 @@ export const Route = createFileRoute("/resources")({
     }),
   ],
   component: () => {
-    const [resourceCategory, setResourceCategory] = useState<string>("Study Materials");
-    const [resourceLink, setResourceLink] = useState<string>("");
-
-    const resourceLinks = new Map<string, string>([
-      ["Study Materials", "https://docs.google.com/document/d/1StudyMaterialsLink"],
-      ["Workshops", "https://docs.google.com/document/d/1WorkshopsLink"],
-      ["Career Resources", "https://docs.google.com/document/d/1CareerResourcesLink"],
-    ]);
-
-    const resourceCards = [
-      {
-        title: "Default Title 1",
-        description: "Default description for resource 1.",
-        linkText: "Access Resource 1",
-        link: "#",
-      },
-      {
-        title: "Default Title 2",
-        description: "Default description for resource 2.",
-        linkText: "Access Resource 2",
-        link: "#",
-      },
-      {
-        title: "Default Title 3",
-        description: "Default description for resource 3.",
-        linkText: "Access Resource 3",
-        link: "#",
-      },
-      {
-        title: "Default Title 4",
-        description: "Default description for resource 4.",
-        linkText: "Access Resource 4",
-        link: "#",
-      },
-      {
-        title: "Default Title 5",
-        description: "Default description for resource 5.",
-        linkText: "Access Resource 5",
-        link: "#",
-      },
-      {
-        title: "Default Title 6",
-        description: "Default description for resource 6.",
-        linkText: "Access Resource 6",
-        link: "#",
-      },
-      {
-        title: "Default Title 7",
-        description: "Default description for resource 7.",
-        linkText: "Access Resource 7",
-        link: "#",
-      },
-    ];
+    const [activeTab, setActiveTab] = useState<keyof typeof resourceTabs>("Study Materials");
+    const categories = Object.keys(resourceTabs);
+    const tabRefs = useRef<Array<HTMLButtonElement>>([]);
+    const [sliderStyle, setSliderStyle] = useState({
+      left: "0px",
+      width: "0px",
+    });
 
     useEffect(() => {
-      setResourceLink(resourceLinks.get(resourceCategory) || "");
-    }, [resourceCategory]);
+      const currentIndex = categories.indexOf(activeTab);
+      if (currentIndex < 0) return;
+      const currentTab = tabRefs.current[currentIndex];
+      if (!currentTab) return;
+      setSliderStyle({
+        left: currentTab.offsetLeft + "px",
+        width: currentTab.offsetWidth + "px",
+      });
+    }, [activeTab, categories]);
 
     return (
-      <div>
-        <p className={cn("flex justify-center pb-5 text-center font-oswald text-7xl")}>RESOURCES</p>
-        <div className={cn("mx-[5%] border-b-4 border-t-4 border-b-saseGreen border-t-saseBlue px-10 py-10 lg:px-20")}>
-          <div className={cn("flex justify-center")}>
-            <select
-              aria-label="Select Resource Category"
-              value={resourceCategory}
-              onChange={(e) => setResourceCategory(e.target.value)}
-              className={cn("rounded-lg border bg-white p-2 shadow-sm")}
-            >
-              {[...resourceLinks.keys()].map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="w-full">
+        {/* Title */}
+        <div className="text-center">
+          <h1 className="mt-4 pb-8 font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">RESOURCES</h1>
         </div>
 
-        <div className={cn("grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-3")}>
-          {resourceCards.map((card, index) => (
-            <div key={index} className={cn("rounded-lg border p-4 shadow-md transition hover:shadow-lg")}>
-              <h2 className={cn("mb-2 text-xl font-semibold")}>{card.title}</h2>
-              <p className={cn("mb-4 text-gray-600")}>{card.description}</p>
-              <a href={card.link} target="_blank" rel="noopener noreferrer" className={cn("font-medium text-blue-600 hover:text-blue-800")}>
+        {/* Blue line under title */}
+        <div className="mx-[5%] border-b-4 border-saseBlue" />
+
+        {/* Tab Bar / Sliding Underline */}
+        <div className="mt-6 flex justify-center border-b">
+          <ul className="relative flex space-x-4 px-4">
+            <div className="absolute bottom-0 h-1 bg-saseBlue transition-all duration-300" style={sliderStyle} />
+            {categories.map((category, idx) => {
+              const isActive = category === activeTab;
+              return (
+                <li key={category}>
+                  <button
+                    ref={(el) => {
+                      if (el) tabRefs.current[idx] = el;
+                    }}
+                    onClick={() => setActiveTab(category as keyof typeof resourceTabs)}
+                    className={cn(
+                      "relative whitespace-nowrap px-4 py-2 text-base font-semibold transition-colors",
+                      isActive ? "text-saseBlue" : "text-gray-600 hover:text-black",
+                    )}
+                  >
+                    {category}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Resource Cards */}
+        <div className="grid grid-cols-1 justify-items-center gap-6 px-4 py-8 sm:grid-cols-2 lg:grid-cols-3">
+          {resourceTabs[activeTab].map((card, index) => (
+            <div key={index} className="w-full max-w-md rounded-lg border p-4 shadow-md hover:shadow-lg">
+              <h2 className="mb-2 text-xl font-semibold">{card.title}</h2>
+              <p className="mb-4 text-gray-600">{card.description}</p>
+              <a href={card.link} target="_blank" rel="noopener noreferrer" className="font-medium text-blue-600 hover:text-blue-800">
                 {card.linkText}
               </a>
             </div>
           ))}
         </div>
 
-        <div className={cn("flex-1 justify-center text-center")}>
-          <p className={cn("pb-5 pt-5 text-center font-oswald text-4xl")}>{resourceCategory}</p>
-          <div className={cn("flex-center pb-10")}>
-            <a href={resourceLink} target="_blank" rel="noopener noreferrer">
-              <div
-                className={cn(
-                  "delay-50 flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black",
-                )}
-              >
-                <div className={cn("pl-5 font-redhat")}>Linktree Default</div>
-                <div className={cn("pl-2 pr-5")}>
-                  <IoMdLink size={15} />
-                </div>
-              </div>
-            </a>
-          </div>
+        {/* Green line */}
+        <div className="mx-[5%] border-b-4 border-saseGreen" />
+
+        {/* Linktree Button */}
+        <div className="flex justify-center py-8">
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <div
+              className={cn(
+                "mx-auto flex h-10 w-fit items-center justify-center rounded-full border-2",
+                "border-gray-700 bg-saseBlue px-4 text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)]",
+                "transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black",
+              )}
+            >
+              <div className="pr-2 font-redhat">Linktree Default</div>
+              <IoMdLink size={15} />
+            </div>
+          </a>
         </div>
       </div>
     );
