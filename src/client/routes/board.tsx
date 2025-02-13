@@ -38,16 +38,10 @@ export const Route = createFileRoute("/board")({
 
             {/* Centering the grid properly */}
             <div className="flex justify-center">
-              <div className="grid max-w-screen-lg grid-cols-2 place-items-center gap-10 sm:grid-cols-2 md:grid-cols-3">
-                {section.members.map((member, idx) => {
-                  const isLastItem = idx === section.members.length - 1;
-                  const isUnevenRow = section.members.length % 3 !== 0;
-                  return (
-                    <div key={idx} className={isLastItem && isUnevenRow ? "flex justify-center md:col-span-3" : ""}>
-                      <BoardMemberCard member={member} />
-                    </div>
-                  );
-                })}
+              <div className="grid max-w-screen-lg grid-cols-2 justify-items-center gap-x-10 gap-y-12 sm:grid-cols-2 md:grid-cols-3">
+                {section.members.map((member, idx) => (
+                  <BoardMemberCard key={idx} member={member} />
+                ))}
               </div>
             </div>
           </div>
