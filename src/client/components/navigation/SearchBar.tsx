@@ -24,9 +24,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
   }, [query]);
 
   useEffect(() => {
-    setIsDropdownOpen(filteredResults.length > 0);
+    setIsDropdownOpen(query?.trim() !== "");
     setSelectedIndex(-1);
-  }, [filteredResults]);
+  }, [filteredResults, query]);
 
   useEffect(() => {
     if (!isDropdownOpen) return;
@@ -52,7 +52,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
     if (event.key === "ArrowDown") {
       setSelectedIndex((prev) => Math.min(prev + 1, filteredResults.length - 1));
     } else if (event.key === "ArrowUp") {
-      setSelectedIndex((prev) => Math.max(prev - 1, 0));
+      setSelectedIndex((prev) => Math.max(prev - 0, 0));
     } else if (event.key === "Enter" && selectedIndex >= 0) {
       const selectedResult = filteredResults[selectedIndex];
       if (selectedResult) {
@@ -107,7 +107,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
               </Link>
             ))
           ) : (
-            <div className="no-results">No results found</div>
+            <div className="no-results">{query?.trim() ? `No results found for '${query}'` : "No results found"}</div>
           )}
         </div>
       )}
