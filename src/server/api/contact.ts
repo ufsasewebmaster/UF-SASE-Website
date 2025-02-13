@@ -65,7 +65,7 @@ contactRoutes.post("/contact/submit", async (c) => {
       },
       body: JSON.stringify({
         from: "UF SASE <info@ufsase.com>",
-        to: ["delivered@resend.dev"],
+        to: [saseEmail],
         subject: "Contact Form Submission",
         html: formHTML,
       }),
