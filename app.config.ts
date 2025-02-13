@@ -1,13 +1,12 @@
-import { defineConfig } from "@tanstack/start/config";
+import { defineConfig, type TanStackStartOutputConfig } from "@tanstack/start/config";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import tsConfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig({
+const config = {
   server: {
-    preset: "vercel", // Switched from vercel-edge
+    preset: "vercel",
     prerender: {
       routes: ["/"],
-      // crawlLinks: true,
     },
   },
   tsr: {
@@ -26,11 +25,11 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [
-      tsConfigPaths({
-        projects: ["./tsconfig.json"],
-      }),
-      ViteImageOptimizer(),
-    ],
+    plugins: [tsConfigPaths({ projects: ["./tsconfig.json"] }), ViteImageOptimizer()],
   },
-});
+};
+
+// Cast the final output to a portable type. WTF???? Such weird workaround
+const finalConfig = defineConfig(config) as TanStackStartOutputConfig;
+
+export default finalConfig;

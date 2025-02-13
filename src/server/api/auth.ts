@@ -14,14 +14,13 @@ authRoutes.post("/auth/signup", async (c) => {
   const formUsername = formData["username"];
   const formPassword = formData["password"];
 
-  //TODO VALIDATE USERNAME
+  //validate username
   if (!formUsername || typeof formUsername !== "string") {
     return new Response("Invalid username", {
       status: 400,
     });
   }
 
-  //TODO VALIDATE PASSWORD
   if (!formPassword || typeof formPassword !== "string") {
     return new Response("Invalid password", {
       status: 400,
@@ -49,7 +48,7 @@ authRoutes.post("/auth/signup", async (c) => {
   } catch (error) {
     console.log(error);
     // db error, email taken, etc
-    return new Response("Username already used", {
+    return new Response("Username already taken", {
       status: 400,
     });
   }
@@ -92,6 +91,29 @@ authRoutes.post("/auth/login", async (c) => {
         "Set-Cookie": `sessionId=${session_id}; Path=/; HttpOnly; secure; Max-Age=3600; SameSite=Strict`,
       },
     });
+  }
+});
+
+authRoutes.post("/auth/logout", async (c) => {
+  const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+
+  if (!sessionId) {
+    return new Response("No active session found", { status: 401 });
+  }
+
+  try {
+    // delete the session id row from the table
+    await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+
+    return new Response("Successfully logged out", {
+      status: 200,
+      headers: {
+        "Set-Cookie": "sessionId=; Path=/; HttpOnly; Secure; Max-Age=0; SameSite=Strict",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Error logging out", { status: 500 });
   }
 });
 
