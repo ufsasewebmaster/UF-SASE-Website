@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 
-
 //sleep function that behaves synchronously in an async function
 const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay));
 const contactRoutes = new Hono();
@@ -46,13 +45,13 @@ contactRoutes.post("/contact/submit", async (c) => {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
     },
     body: JSON.stringify({
-      "from": "UF SASE <contactform@email.ufsase.com>",
-      "to": [saseEmail],
-      "subject": "Contact Form Submission",
-      "html": formHTML,
+      from: "UF SASE <contactform@email.ufsase.com>",
+      to: [saseEmail],
+      subject: "Contact Form Submission",
+      html: formHTML,
     }),
   });
-  console.log(resp.status)
+  console.log(resp.status);
   console.log(resp.headers);
   const respBody = await resp.json();
   console.log(respBody);
