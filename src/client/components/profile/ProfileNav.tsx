@@ -1,38 +1,56 @@
+import { cn } from "@/shared/utils";
 import { Icon } from "@iconify/react";
+import { Link } from "@tanstack/react-router";
 
-const ProfileNav = () => {
+const SASE_COLORS = ["saseBlue", "saseGreen"];
+
+interface ProfileNavProps {
+  profileName?: string;
+}
+
+const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User" }) => {
   return (
-    <div className="flex w-64 flex-col rounded-lg bg-white p-4 shadow-md">
+    <div className={cn("flex w-60 flex-col rounded-3xl bg-white p-6 font-redhat shadow-lg")}>
       {/* Profile Info */}
       <div className="mb-6 flex flex-col items-center text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-200">
-          <Icon icon="mdi:account" className="text-4xl text-gray-500" />
+        <div className={cn("flex h-36 w-36 items-center justify-center rounded-full bg-saseBlueLight text-white")}>
+          <span className="text-4xl font-bold">{profileName?.charAt(0).toUpperCase()}</span>
         </div>
-        <h2 className="mt-2 text-lg font-semibold">[NAME]</h2>
-        <p className="text-sm text-gray-500">UFID: [UFID]</p>
-        <p className="text-sm italic text-gray-500">ex: SASE President</p>
-        <p className="text-sm italic text-gray-500">Bio: [Short sentence]</p>
+        <h2 className="mt-3 text-2xl font-semibold">{profileName}</h2>
+        <p className="text-med italic text-gray-500">ex: SASE President</p>
+        <p className="text-med italic text-gray-500">Bio: [Short sentence]</p>
       </div>
 
-      {/* Navigation Links */}
-      <nav className="flex flex-col space-y-1">
-        <NavItem icon="mdi:account-circle-outline" text="Account" />
-        <NavItem icon="mdi:information-outline" text="User Info" />
-        <NavItem icon="mdi:lock-outline" text="Security" />
-        <NavItem icon="mdi:clipboard-check-outline" text="Attendance" />
-        <NavItem icon="mdi:file-document-outline" text="Forms" />
-        <NavItem icon="mdi:book-open-page-variant-outline" text="Resources" />
-        <NavItem icon="mdi:cog-outline" text="Settings" />
+      <nav className="flex flex-col space-y-2">
+        {[
+          { icon: "mdi:account-circle-outline", text: "Account", to: "/" },
+          { icon: "mdi:information-outline", text: "User Info", to: "/" },
+          { icon: "mdi:lock-outline", text: "Security", to: "/" },
+          { icon: "mdi:clipboard-check-outline", text: "Attendance", to: "/" },
+          { icon: "mdi:file-document-outline", text: "Forms", to: "/" },
+          { icon: "mdi:book-open-page-variant-outline", text: "Resources", to: "/" },
+          { icon: "mdi:cog-outline", text: "Settings", to: "/" },
+        ].map((item, idx) => (
+          <NavItem key={idx} icon={item.icon} text={item.text} to={item.to} color={SASE_COLORS[idx % 2]} />
+        ))}
       </nav>
     </div>
   );
 };
 
-const NavItem = ({ icon, text }: { icon: string; text: string }) => (
-  <button className="flex items-center space-x-3 rounded-md p-3 text-left transition hover:bg-gray-100">
-    <Icon icon={icon} className="text-xl text-gray-600" />
-    <span className="font-medium text-gray-700">{text}</span>
-  </button>
+const NavItem = ({ color, icon, text, to }: { icon: string; text: string; to: string; color: string }) => (
+  <Link
+    to={to}
+    className={cn(
+      "group relative flex items-center space-x-3 rounded-md p-3 text-left font-redhat transition-transform duration-300 hover:scale-105",
+    )}
+  >
+    <Icon icon={icon} className={cn("text-3xl text-black transition-colors duration-300", `group-hover:text-${color}`)} />
+    <div className="relative">
+      <span className={cn("font-medium text-black transition-all duration-300 group-hover:font-bold", `group-hover:text-${color}`)}>{text}</span>
+      <span className={cn("absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full", `group-hover:bg-${color}`)}></span>
+    </div>
+  </Link>
 );
 
 export default ProfileNav;

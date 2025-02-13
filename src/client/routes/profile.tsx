@@ -1,3 +1,4 @@
+import ProfileNav from "@components/profile/ProfileNav";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
@@ -51,21 +52,25 @@ export const Route = createFileRoute("/profile")({
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
-    //just temporary UI for now
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
-        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
-          <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Profile</h1>
-          </div>
-          <div className="text-center">
-            <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-blue-500 text-white">
-              <span className="text-4xl font-bold">{profile?.username?.charAt(0).toUpperCase()}</span>
+      <div className="flex min-h-screen bg-gray-100 p-10">
+        <div className="flex items-start">
+          <ProfileNav profileName={profile?.username} />
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+            <div className="mb-4 flex items-center justify-between">
+              <h1 className="text-2xl font-bold">Profile</h1>
             </div>
-            <h2 className="text-xl font-semibold">Welcome, {profile?.username}!</h2>
-            <Button variant="destructive" className="mt-4" onClick={handleLogout}>
-              Log Out
-            </Button>
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-blue-500 text-white">
+                <span className="text-4xl font-bold">{profile?.username?.charAt(0).toUpperCase()}</span>
+              </div>
+              <h2 className="text-xl font-semibold">Welcome, {profile?.username}!</h2>
+              <Button variant="destructive" className="mt-4" onClick={handleLogout}>
+                Log Out
+              </Button>
+            </div>
           </div>
         </div>
       </div>
