@@ -45,10 +45,28 @@ const NavItem = ({ color, icon, text, to }: { icon: string; text: string; to: st
       "group relative flex items-center space-x-3 rounded-md p-3 text-left font-redhat transition-transform duration-300 hover:scale-105",
     )}
   >
-    <Icon icon={icon} className={cn("text-3xl text-black transition-colors duration-300", `group-hover:text-${color}`)} />
+    <Icon
+      icon={icon}
+      className={cn(
+        "text-3xl text-black transition-colors duration-300",
+        color === "saseBlue" ? "group-hover:text-saseBlue" : "group-hover:text-saseGreen",
+      )}
+    />
     <div className="relative">
-      <span className={cn("font-medium text-black transition-all duration-300 group-hover:font-bold", `group-hover:text-${color}`)}>{text}</span>
-      <span className={cn("absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full", `group-hover:bg-${color}`)}></span>
+      <span
+        className={cn(
+          "font-medium text-black transition-all duration-300 group-hover:font-bold",
+          color === "saseBlue" ? "group-hover:text-saseBlue" : "group-hover:text-saseGreen",
+        )}
+      >
+        {text}
+      </span>
+      <span
+        className={cn(
+          "absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full",
+          color === "saseBlue" ? "group-hover:bg-saseBlue" : "group-hover:bg-saseGreen",
+        )}
+      ></span>
     </div>
   </Link>
 );
