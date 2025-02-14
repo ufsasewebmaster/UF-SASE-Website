@@ -15,11 +15,14 @@ export const Route = createFileRoute("/profile")({
     useEffect(() => {
       if (!isLoading) return;
       const fetchProfile = async () => {
+        //immediately redirect if session ID doesn't exist
+        if (!document.cookie.split(";").some((item) => item.trim().startsWith("sessionId="))) {
+          navigate({ to: "/" });
+        }
         try {
           const response = await fetch("/api/profile", { credentials: "include" });
-
           if (!response.ok) {
-            throw new Error("Failed to fetch profile");
+            navigate({ to: "/" });
           }
           const result = (await response.json()) as { data: { username: string } };
           console.log("Profile API Response:", result);
