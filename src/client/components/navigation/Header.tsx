@@ -39,6 +39,10 @@ const navItems = [
       { name: "Sports", path: "/sports" },
     ],
   },
+  {
+    name: "Resources",
+    path: "/resources",
+  },
 ];
 
 const Header: React.FC = () => {
