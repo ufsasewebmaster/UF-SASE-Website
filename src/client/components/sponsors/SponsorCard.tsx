@@ -1,9 +1,8 @@
 import { cn } from "@/shared/utils";
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { imageUrls } from "@assets/imageUrls";
 
 const SponsorCard = ({ companyName, image, link, shadowcolor, type}: { image: string; companyName: string; type: string; shadowcolor: string, link: string }) => {
-  const router = useRouter();
 
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
