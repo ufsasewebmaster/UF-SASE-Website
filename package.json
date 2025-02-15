@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@iconify/json": "^2.2.272",
+    "@iconify/react": "^5.2.0",
     "@libsql/client": "0.14.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
