@@ -26,6 +26,7 @@ export const Route = createFileRoute("/sponsors")({
                 companyName={sponsor.company}
                 type={sponsor.tier}
                 shadowcolor={sponsor.shadow_color}
+                link={sponsor.link}
               />
             ))}
           </div>
