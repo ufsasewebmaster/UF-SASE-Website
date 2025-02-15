@@ -51,10 +51,7 @@ contactRoutes.post("/contact/submit", async (c) => {
       html: formHTML,
     }),
   });
-  console.log(resp.status);
-  console.log(resp.headers);
-  const respBody = await resp.json();
-  console.log(respBody);
+
   if (resp.status == 429) {
     await sleep(1000);
     resp = await fetch("https://api.resend.com/emails", {

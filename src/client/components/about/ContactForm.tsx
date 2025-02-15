@@ -40,7 +40,7 @@ const ContactForm = () => {
         throw new Error(`Response status: ${resp.status}"`);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
