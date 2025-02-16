@@ -12,7 +12,6 @@ export const Route = createFileRoute("/profile")({
     const { logout } = useAuth();
     const navigate = useNavigate();
 
-    console.log("Profile component rendered");
     useEffect(() => {
       if (!isLoading) return;
       const fetchProfile = async () => {
