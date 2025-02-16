@@ -37,7 +37,7 @@ const StyledFormField = ({ children, hasError, icon }: { children: React.ReactNo
   </div>
 );
 
-const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, linkText, onSubmit, title }: AuthFormProps) => {
+const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, onSubmit, title }: AuthFormProps) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -134,10 +134,20 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
       </Button>
 
       <p className="text-md mt-4 text-center font-redhat">
-        {linkText}{" "}
-        <Link to={linkRoute} className="cursor-pointer text-saseBlue underline">
-          {isSignUp ? "Login here." : "Click here to reset."}
-        </Link>
+        {isSignUp ? (
+          <>
+            Already have an account?{" "}
+            <Link to="/login" className="cursor-pointer text-saseBlue underline">
+              Login here.
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/password" className="cursor-pointer text-saseBlue underline">
+              Forgot your password?
+            </Link>
+          </>
+        )}
       </p>
 
       {additionalButton && (
