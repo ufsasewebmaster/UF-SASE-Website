@@ -7,17 +7,6 @@ import { Hono } from "hono";
 
 const userRoutes = new Hono();
 
-// Fetch all users
-userRoutes.get("/users", async (c) => {
-  try {
-    const users = await db.select().from(Schema.users);
-    return c.json({ data: users, message: "Users retrieved successfully" });
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return c.json({ error: { code: 500, message: "An error occurred while fetching users" } }, 500);
-  }
-});
-
 // Fetch a single user by ID
 userRoutes.get("/users/:id", async (c) => {
   try {
