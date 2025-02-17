@@ -16,13 +16,13 @@ authRoutes.post("/auth/signup", async (c) => {
 
   //validate username
   if (!formUsername || typeof formUsername !== "string") {
-    return new Response("Invalid username", {
+    return new Response("Invalid username!", {
       status: 400,
     });
   }
 
   if (!formPassword || typeof formPassword !== "string") {
-    return new Response("Invalid password", {
+    return new Response("Invalid password!", {
       status: 400,
     });
   }
@@ -48,7 +48,7 @@ authRoutes.post("/auth/signup", async (c) => {
   } catch (error) {
     console.log(error);
     // db error, email taken, etc
-    return new Response("Username already taken", {
+    return new Response("Username already taken!", {
       status: 400,
     });
   }
@@ -60,29 +60,28 @@ authRoutes.post("/auth/login", async (c) => {
   const formPassword = formData["password"];
 
   if (!formUsername || typeof formUsername !== "string") {
-    return new Response("Invalid username", {
+    return new Response("Invalid username!", {
       status: 401,
     });
   }
 
   if (!formPassword || typeof formPassword !== "string") {
-    return new Response("Invalid password", {
+    return new Response("Invalid password!", {
       status: 401,
     });
   }
 
   const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
 
-  if (user.length == 0) return new Response("Invalid username or password", { status: 401 });
+  if (user.length == 0) return new Response("Invalid username!", { status: 401 });
 
   const validPassword = await compare(formPassword, user[0].password);
 
   if (!validPassword) {
-    return new Response("Invalid email or password", {
+    return new Response("Invalid password!", {
       status: 401,
     });
   } else {
-    //TODO: CREATE NEW SESSION IN THE DATABASE AND GENERATE ID
     const session_id = generateIdFromEntropySize(16);
     createSession(session_id, user[0].id);
     return new Response("Successfully logged in", {

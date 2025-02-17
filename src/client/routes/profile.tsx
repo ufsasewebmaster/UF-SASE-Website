@@ -15,10 +15,6 @@ export const Route = createFileRoute("/profile")({
     useEffect(() => {
       if (!isLoading) return;
       const fetchProfile = async () => {
-        //immediately redirect if session ID doesn't exist
-        if (!document.cookie.split(";").some((item) => item.trim().startsWith("sessionId="))) {
-          navigate({ to: "/" });
-        }
         try {
           const response = await fetch("/api/profile", { credentials: "include" });
           if (!response.ok) {

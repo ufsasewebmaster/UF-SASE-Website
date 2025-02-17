@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
 import { Page } from "@components/Page";
@@ -20,20 +21,20 @@ export const Route = createFileRoute("/login")({
   component: () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        try {
-          await fetch("/api/auth/login", {
+        const response = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
           });
-        } catch (error) {
-          console.error("Error submitting data:", error);
-          throw error;
-        }
+          if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
+          }
       },
       onSuccess: () => {
         login();
@@ -41,6 +42,7 @@ export const Route = createFileRoute("/login")({
       },
       onError: (error) => {
         console.error("Error during mutation:", error);
+        setErrorMessage(error.message);
       },
     });
 
@@ -58,6 +60,7 @@ export const Route = createFileRoute("/login")({
             linkText="Forgot password?"
             linkRoute="/"
             onSubmit={handleLogin}
+            errorMessage={errorMessage || undefined}
             additionalButton={{
               text: "Register new account",
               route: "/signup",
