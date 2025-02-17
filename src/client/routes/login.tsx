@@ -1,9 +1,9 @@
-import { useState } from "react";
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { useAuth } from "../AuthContext";
 import ShadowCard from "../components/AuthShadowCard";
@@ -25,16 +25,16 @@ export const Route = createFileRoute("/login")({
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
         const response = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-          if (!response.ok) {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        if (!response.ok) {
           const errorMessage = await response.text();
           throw new Error(errorMessage);
-          }
+        }
       },
       onSuccess: () => {
         login();

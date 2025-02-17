@@ -71,12 +71,8 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
         <Logo />
       </div>
       <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3>
-      {errorMessage && (
-        <div className="w-full mb-3 text-red-600 text-sm text-center">
-          {errorMessage}
-        </div>
-      )}
-      
+      {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
+
       <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
         <Input
           id="username"
