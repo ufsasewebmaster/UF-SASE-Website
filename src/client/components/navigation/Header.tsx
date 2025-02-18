@@ -104,7 +104,7 @@ const Header: React.FC = () => {
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
             <div className="hidden md:block">
-              <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />
+              <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />
             </div>
           </div>
         </div>

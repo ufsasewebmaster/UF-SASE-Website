@@ -39,7 +39,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
         {navItems.map((item) => (
           <MobileNavItem key={item.name} item={item} onClose={onClose} isHomePage={isHomePage} closeAll={allSubmenusClosed} />
         ))}
-        <UserButton isLoggedIn={isLoggedIn} onLogout={onLogout} />
+        <UserButton isLoggedIn={isLoggedIn} onLogout={onLogout} isHomePage={isHomePage} />
       </ul>
     </div>
   );
