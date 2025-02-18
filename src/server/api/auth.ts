@@ -39,7 +39,7 @@ authRoutes.post("/auth/signup", async (c) => {
       password: formPasswordHash,
     });
 
-    return new Response("User successfully created", {
+    return new Response("User successfully created!", {
       status: 201,
       headers: {
         Location: "/",
@@ -48,7 +48,7 @@ authRoutes.post("/auth/signup", async (c) => {
   } catch (error) {
     console.log(error);
     // db error, email taken, etc
-    return new Response("Username already taken!", {
+    return new Response("Username invalid!", {
       status: 400,
     });
   }
@@ -73,7 +73,7 @@ authRoutes.post("/auth/login", async (c) => {
 
   const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
 
-  if (user.length == 0) return new Response("Invalid username!", { status: 401 });
+  if (user.length == 0) return new Response("Invalid username or password!", { status: 401 });
 
   const validPassword = await compare(formPassword, user[0].password);
 
