@@ -30,7 +30,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
   return (
     <div
       className={cn(
-        "fixed right-0 top-16 h-auto w-auto rounded-bl-2xl pb-10 font-redhat shadow-md transition-all duration-300 ease-in-out",
+        "fixed right-0 top-16 h-auto w-auto rounded-bl-2xl pb-20 font-redhat text-xl shadow-md transition-all duration-300 ease-in-out",
         isOpen ? "pointer-events-auto translate-x-0 opacity-100" : "pointer-events-none translate-x-20 opacity-0",
         isHomePage ? "bg-black text-white" : "bg-white text-black",
       )}
@@ -78,7 +78,7 @@ const MobileNavItem: React.FC<{ item: NavItem; onClose: () => void; isHomePage: 
     <li className="w-full text-right">
       <button
         className={cn(
-          "flex w-full items-center justify-end px-2 py-1 pl-16 text-right transition-colors duration-300 focus:outline-none",
+          "flex w-full items-center justify-end px-2 py-1 pl-20 text-right transition-colors duration-300 focus:outline-none",
           isHomePage ? "text-white hover:text-[#0f6cb6]" : "text-black hover:text-[#0f6cb6]",
         )}
         onClick={handleClick}
