@@ -21,32 +21,57 @@ export const Route = createFileRoute("/signup")({
 
   component: () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        try {
-          await fetch("/api/auth/signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-        } catch (error) {
-          console.error("Error submitting data:", error);
-          throw error;
+        const signupResponse = await signupUser(formData);
+        if (!signupResponse.ok) {
+          const errorMessage = await signupResponse.text();
+          throw new Error(errorMessage);
         }
+
+        const loginResponse = await loginUser(formData);
+        if (!loginResponse.ok) {
+          const errorMessage = await loginResponse.text();
+          throw new Error(errorMessage);
+        }
+
+        return loginResponse;
       },
       onSuccess: () => {
-        login();
         setShowSuccessModal(true);
       },
       onError: (error) => {
-        console.error("Signup error:", error);
+        console.error("Error during signup:", error);
+        setErrorMessage(error.message);
       },
     });
+
+    const signupUser = async (formData: FormData) => {
+      return fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+    };
+
+    const loginUser = async (formData: FormData) => {
+      return fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
+      });
+    };
 
     const handleSignup = (data: FormData) => mutation.mutate(data);
 
@@ -67,6 +92,7 @@ export const Route = createFileRoute("/signup")({
             linkRoute="/login"
             isSignUp={true}
             onSubmit={handleSignup}
+            errorMessage={errorMessage || undefined}
           />
 
           <SuccessModal isOpen={showSuccessModal} onClose={handleModalClose} message="You have successfully created your account!" />
