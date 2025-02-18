@@ -89,7 +89,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={cn(`sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`, {
+      className={cn(`sticky left-0 top-0 z-50 w-full font-redhat font-medium shadow-md`, {
         "bg-black text-white": isHomePage,
         "bg-white text-black": !isHomePage,
       })}
@@ -103,21 +103,29 @@ const Header: React.FC = () => {
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
-            <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />
+            <div className="hidden md:block">
+              <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />
+            </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className="flex items-center gap-4 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
-          <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu navItems={navItems} isOpen={menuOpen} onClose={() => setMenuOpen(false)} isHomePage={isHomePage} />
+        <MobileMenu
+          navItems={navItems}
+          isOpen={menuOpen}
+          onClose={() => setMenuOpen(false)}
+          isHomePage={isHomePage}
+          isLoggedIn={isAuthenticated}
+          onLogout={logout}
+        />
       </nav>
     </header>
   );
