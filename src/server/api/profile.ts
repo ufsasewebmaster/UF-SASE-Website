@@ -24,9 +24,13 @@ const profileSchema = {
 profileRoutes.get("/profile", async (c) => {
   try {
     const cookie = c.req.header("Cookie") || "";
-    const sessionID = cookie.startsWith("sessionId=") ? cookie.slice("sessionId=".length) : null;
-
-    if (!sessionID) return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400);
+    console.log(cookie);
+    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
+    if (!sessionIDMatch) {
+      return c.json({ error: { code: 400, message: "Missing or invalid session ID" } }, 400);
+    }
+    const sessionID = sessionIDMatch[1];
+    console.log(cookie, sessionID);
 
     const result = await db
       .select(profileSchema)

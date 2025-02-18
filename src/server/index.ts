@@ -2,6 +2,7 @@
 // import { eq } from "drizzle-orm";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
+import contactRoutes from "@api/contact";
 import emailRoutes from "@api/email";
 import profileRoutes from "@api/profile";
 import saseRoutes from "@api/saseInfo";
@@ -39,4 +40,5 @@ app
   .route("/api", saseRoutes)
   .route("/api", authRoutes)
   .route("/api", emailRoutes)
-  .route("/api", profileRoutes);
+  .route("/api", profileRoutes)
+  .route("/api", contactRoutes);

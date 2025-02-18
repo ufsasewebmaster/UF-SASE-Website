@@ -160,6 +160,7 @@ export const Route = createFileRoute("/")({
                       companyName={sponsor.company}
                       type={sponsor.tier}
                       shadowcolor={sponsor.shadow_color}
+                      link={sponsor.link}
                     />
                   ) : null,
                 )}
