@@ -94,13 +94,13 @@ const MobileNavItem: React.FC<{ item: NavItem; onClose: () => void; isHomePage: 
       {item.children && item.children.length > 0 && (
         <div
           className={cn(
-            "mr-6 mt-1 w-full bg-gradient-to-r from-saseGreen via-saseBlue to-[#000000] transition-all duration-500 ease-in-out",
+            `mr-6 mt-1 w-full bg-gradient-to-r ${isHomePage ? "from-saseGreen via-saseBlue to-black" : "from-saseGreen via-saseBlue to-white"} transition-all duration-500 ease-in-out`,
             submenuOpen
               ? "pointer-events-auto max-h-screen translate-y-0 transform opacity-100"
               : "pointer-events-none max-h-0 -translate-y-2 transform opacity-0",
           )}
         >
-          <ul className="flex w-full flex-col items-end space-y-1 text-white">
+          <ul className={`flex w-full flex-col items-end space-y-1 ${isHomePage ? "text-white" : "text-black"}`}>
             {item.children.map(
               (child) =>
                 child.path && (
