@@ -12,6 +12,7 @@ interface AuthFormProps {
   buttonLabel: string;
   linkText: string;
   linkRoute: string;
+  errorMessage?: string;
   isSignUp?: boolean;
   additionalButton?: {
     text: string;
@@ -37,7 +38,7 @@ const StyledFormField = ({ children, hasError, icon }: { children: React.ReactNo
   </div>
 );
 
-const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, linkText, onSubmit, title }: AuthFormProps) => {
+const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = false, linkRoute, linkText, onSubmit, title }: AuthFormProps) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -70,6 +71,8 @@ const AuthForm = ({ additionalButton, buttonLabel, isSignUp = false, linkRoute, 
         <Logo />
       </div>
       <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3>
+      {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
+
       <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
         <Input
           id="username"
