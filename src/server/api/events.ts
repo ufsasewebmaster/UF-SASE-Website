@@ -11,16 +11,15 @@ eventRoutes.get("/events/all", async (c) => {
   try {
     const result = await db.select().from(Schema.events);
     return c.json(result);
-  } catch (error) {
-    console.log(error);
+  } catch {
     return createErrorResponse(c, "MISSING_EVENT", "Cannot fetch events", 400);
   }
 });
 
-// Fetch events between a start and end date
+// Fetch events between a start and end date (inclusive of partial overlaps)
 eventRoutes.get("/events", async (c) => {
   try {
-    // Collect startDate and endDate
+    // Collect startDate and endDate in UTC format
     const startDateStr = c.req.query("start_date");
     const endDateStr = c.req.query("end_date");
     if (!startDateStr || !endDateStr) {
@@ -33,7 +32,7 @@ eventRoutes.get("/events", async (c) => {
 
     // Validate the Date format
     if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      return createErrorResponse(c, "", "Invalid date format", 400);
+      return createErrorResponse(c, "DATE_FORMAT_INVALID", "Invalid date format", 400);
     }
 
     const eventsData = await db
@@ -63,11 +62,10 @@ eventRoutes.get("/events/:eventID", async (c) => {
   }
 });
 
-// Fetch event by name
+// Fetch event ID by name
 eventRoutes.get("/events/search/:name", async (c) => {
   try {
     const searchName = c.req.param("name");
-    console.log(searchName);
     const result = await db
       .select({ resEventIDs: Schema.events.id })
       .from(Schema.events)
