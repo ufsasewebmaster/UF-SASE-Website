@@ -27,7 +27,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
   }, [isOpen]);
 
   const menuClasses = cn(
-    "fixed right-0 top-16 h-auto w-auto rounded-bl-2xl pb-20 font-redhat text-xl shadow-md transition-all duration-300 ease-in-out",
+    "fixed right-0 top-16 h-auto w-auto rounded-bl-2xl pb-20 font-redhat text-lg shadow-md transition-all duration-300 ease-in-out",
     isOpen ? "pointer-events-auto translate-x-0 opacity-100" : "pointer-events-none translate-x-20 opacity-0",
     isHomePage ? "bg-black text-white" : "bg-white text-black",
   );
