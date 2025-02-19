@@ -53,27 +53,21 @@ const Header: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target as Node) &&
-      hamburgerRef.current &&
-      !hamburgerRef.current.contains(event.target as Node)
-    ) {
-      setMenuOpen(false);
-    }
-  };
-
   useEffect(() => {
-    if (menuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target as Node) &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
     };
-  }, [menuOpen]);
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -118,14 +112,16 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu
-          navItems={navItems}
-          isOpen={menuOpen}
-          onClose={() => setMenuOpen(false)}
-          isHomePage={isHomePage}
-          isLoggedIn={isAuthenticated}
-          onLogout={logout}
-        />
+        <div ref={menuRef}>
+          <MobileMenu
+            navItems={navItems}
+            isOpen={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            isHomePage={isHomePage}
+            isLoggedIn={isAuthenticated}
+            onLogout={logout}
+          />
+        </div>
       </nav>
     </header>
   );
