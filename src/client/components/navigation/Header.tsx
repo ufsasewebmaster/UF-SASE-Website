@@ -92,7 +92,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
@@ -103,7 +103,7 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
           <button ref={hamburgerRef} className="focus:outline-none">
