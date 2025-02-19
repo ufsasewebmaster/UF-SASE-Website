@@ -88,7 +88,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
               message: "Username must be 12 characters or fewer!",
             },
           })}
-          placeholder="Username"
+          placeholder="Username or email"
           className="h-12 p-4"
         />
       </StyledFormField>
