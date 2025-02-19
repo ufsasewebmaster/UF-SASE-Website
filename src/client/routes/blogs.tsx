@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blogs")({
           title: newBlogTitle,
           content: newBlogContent,
           tags: newBlogTags.split(",").map((tag) => tag.trim()),
-          authorId: "SASE Historian", // TODO: This should be optional
+          author_id: "SASE Historian", // TODO: This should be optional
         },
         {
           onError: (error: Error) => {

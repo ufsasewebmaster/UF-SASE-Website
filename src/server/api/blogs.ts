@@ -10,7 +10,7 @@ const blogRoutes = new Hono();
 blogRoutes.get("/blogs/all", async (c) => {
   try {
     const result = await db.select().from(Schema.blogs);
-    return c.json(result);
+    return c.json({ data: result });
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "MISSING_BLOG", "Cannot fetch blogs", 400);
