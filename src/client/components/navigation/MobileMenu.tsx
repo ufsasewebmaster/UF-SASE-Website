@@ -94,7 +94,7 @@ const MobileNavItem: React.FC<{
 
   const childUlClasses = cn("flex w-full flex-col items-end space-y-1", isHomePage ? "text-white" : "text-black");
 
-  const childButtonClasses = cn("block w-full px-2 py-2 text-right transition-transform duration-300 hover:scale-110");
+  const childButtonClasses = cn("block w-full px-2 py-2 text-right transition-transform duration-300 hover:scale-105");
 
   return (
     <li className={liClasses}>
