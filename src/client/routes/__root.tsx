@@ -42,18 +42,19 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const [dark, toggleDark] = React.useState(true);
   return (
     <AuthProvider>
-      <RootDocument>
+      <RootDocument dark={dark} toggleDark={toggleDark}>
         <Outlet />
       </RootDocument>
     </AuthProvider>
   );
 }
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children, dark, toggleDark }: { children: React.ReactNode; dark: boolean; toggleDark: () => void }) {
   return (
-    <Html>
+    <Html className={dark ? "dark" : ""}>
       <Head>
         <Meta />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,10 +70,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
       </Head>
       <Body>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col bg-white dark:bg-black">
           <Header />
           {/* Main Content Area */}
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow bg-white dark:bg-black">{children}</main>
           <Footer />
         </div>
         <ScrollRestoration />

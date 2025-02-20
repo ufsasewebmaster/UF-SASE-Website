@@ -20,7 +20,8 @@ export const Route = createFileRoute("/sports")({
 
   component: () => {
     return (
-      <div className="dark">
+      //<div className="dark">
+      <div>
         <div className="mt-12 flex min-h-screen flex-col items-center bg-background font-[Poppins]">
           <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
             <header className="mr-8 mt-10 flex items-center px-5">
