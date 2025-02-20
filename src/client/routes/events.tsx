@@ -1,7 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
-import ImageButton from "../components/events/ImageButton";
+import EventsSlides from "../components/events/EventsSlidesDisplay";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/events")({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/events")({
   component: () => {
     return (
       <div>
-        <div className="py-5"></div> {/* spacer element */}
+        <div className="py-5"></div>
         <div className="flex justify-center">
           <div className="flex-5 pb-5 text-center font-mono text-7xl">EVENTS & SLIDES</div>
         </div>
@@ -25,31 +25,8 @@ export const Route = createFileRoute("/events")({
         <div className="flex-center">
           <EventsCalendar />
         </div>
-        <div className="grid grid-cols-1 justify-items-center gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
-          <ImageButton
-            slideUrl="https://docs.google.com/presentation/d/e/2PACX-1vRZwx9OSENEgIJfkpJ4M_1ttXGPrBcP6UTxpgGGGi7J4CYEGaDZY2kKaUdJLRhwq7o9hSHf9vU9LX5s/embed?start=false&loop=false&delayms=3000"
-            imageUrl={imageUrls["ExampleSlideShow.png"]}
-          />
+        <div className="flex-center">
+          <EventsSlides />
         </div>
       </div>
     );
