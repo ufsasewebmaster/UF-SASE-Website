@@ -6,7 +6,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import AuthForm from "../components/AuthForm";
-import ShadowCard from "../components/AuthShadowCard";
+import ShadowCard from "../components/SignUpShadowCard";
 import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
 

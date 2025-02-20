@@ -14,10 +14,7 @@ interface AuthFormProps {
   linkRoute: string;
   errorMessage?: string;
   isSignUp?: boolean;
-  additionalButton?: {
-    text: string;
-    route: string;
-  };
+  additionalButton?: { text: string; route: string };
 }
 
 export interface FormData {
@@ -45,15 +42,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
     handleSubmit,
     register,
     watch,
-  } = useForm<FormData>({
-    mode: "all",
-    defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-      retypePassword: "",
-    },
-  });
+  } = useForm<FormData>({ mode: "all", defaultValues: { username: "", email: "", password: "", retypePassword: "" } });
 
   const password = watch("password");
   const handleFormSubmit: SubmitHandler<FormData> = (data) => {
@@ -67,7 +56,9 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
       noValidate
-      className="relative z-10 flex min-h-[38rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
+      className={`relative z-10 flex w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl ${
+        isSignUp ? "min-h-[38em]" : "min-h-[32rem]"
+      }`}
     >
       <div className="mb-6 p-2">
         <Logo />
@@ -81,14 +72,8 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
           type="text"
           {...register("username", {
             required: { value: true, message: "Username is required" },
-            minLength: {
-              value: 4,
-              message: "Username must be at least 4 characters!",
-            },
-            maxLength: {
-              value: 12,
-              message: "Username must be 12 characters or fewer!",
-            },
+            minLength: { value: 4, message: "Username must be at least 4 characters!" },
+            maxLength: { value: 12, message: "Username must be 12 characters or fewer!" },
           })}
           placeholder="Username or email"
           className="h-12 p-4"
@@ -104,10 +89,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
               type="email"
               {...register("email", {
                 required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Enter a valid email address",
-                },
+                pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email address" },
               })}
               placeholder="Email"
             />
