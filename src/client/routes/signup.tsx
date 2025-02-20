@@ -11,13 +11,7 @@ import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/signup")({
-  meta: () => [
-    ...seo({
-      title: "Signup | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
-      image: imageUrls["SASELogo.png"],
-    }),
-  ],
+  meta: () => [...seo({ title: "Signup | UF SASE", description: "UF Society of Asian Scientists & Engineers", image: imageUrls["SASELogo.png"] })],
 
   component: () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -51,25 +45,14 @@ export const Route = createFileRoute("/signup")({
     });
 
     const signupUser = async (formData: FormData) => {
-      return fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      return fetch("/api/auth/signup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) });
     };
 
     const loginUser = async (formData: FormData) => {
       return fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: formData.username, password: formData.password }),
       });
     };
 
