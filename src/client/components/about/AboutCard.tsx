@@ -25,18 +25,18 @@ const AboutCard = () => {
 
         {/* Gradient Line */}
         <div
-          className="absolute -bottom-12 right-6 h-2 w-[90%] rounded-full"
+          className="absolute -bottom-12 right-6 hidden h-2 w-[90%] rounded-full md:block"
           style={{
             background: "linear-gradient(to right, #0668B3 70%, white)",
           }}
         ></div>
 
-        {/* Logo Image */}
+        {/* Logo Image (Reduced Size) */}
         <img
           src={imageUrls["SASELogoStar.png"]}
           alt="Logo"
-          style={{ width: "200px", height: "200px" }}
-          className="absolute -bottom-28 -right-20 object-contain"
+          style={{ width: "150px", height: "150px" }} // Reduced size
+          className="absolute -bottom-24 -right-16 object-contain"
         />
       </div>
     </div>
