@@ -1,18 +1,20 @@
 import { cn } from "@/shared/utils";
+import useIsMobile from "@hooks/useIsMobile";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 const HistorySection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <section className={cn("mb-8")}>
-      <div className={cn("max-w-5xl")}>
-        <p className={cn("mb-4 text-lg text-gray-800")}>
+      <div className={cn(isMobile ? "max-w-full px-4" : "max-w-5xl")}>
+        <p className={cn(isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800")}>
           <span className={cn("font-semibold")}>Since being founded during the summer of 2010,</span> the University of Florida chapter has had an
           abundant effort put forth for the development of our members.
         </p>
-        <p className={cn("mb-4 text-lg text-gray-800")}>
+        <p className={cn(isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800")}>
           This development is centered on <span className={cn("font-semibold")}>five core values</span> of our mission statement:{" "}
           <span className={cn("font-semibold")}>leadership, professionalism, service, academics,</span> and{" "}
           <span className={cn("font-semibold")}>diversity.</span> Our meetings and events are catered to ensure that not only our mission is being
@@ -24,7 +26,7 @@ const HistorySection = () => {
         {!isExpanded && (
           <div className={cn("flex w-fit cursor-pointer items-center text-blue-600 hover:underline")} onClick={() => setIsExpanded(true)}>
             <span>Read more</span>
-            <FaChevronDown className={cn("ml-1 h-4 w-4")} />
+            {!isMobile && <FaChevronDown className={cn("ml-1 h-4 w-4")} />}
           </div>
         )}
 
@@ -35,13 +37,13 @@ const HistorySection = () => {
             "max-h-0 overflow-hidden opacity-0": !isExpanded,
           })}
         >
-          <p className={cn("mb-4 text-lg text-gray-800")}>
+          <p className={cn(isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800")}>
             Through <span className={cn("font-semibold")}>events</span> we have hosted in the past, such as our annual Quick Race or the Southeast
             Regional Conferences of 2014-2016, many of our members have been able to get involved in committees and take on leadership roles. Many of
             our other events allow students to <span className={cn("font-semibold")}>develop professional skills</span> that are essential for
             positions in industry.
           </p>
-          <p className={cn("mb-4 text-lg text-gray-800")}>
+          <p className={cn(isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800")}>
             Our SASE chapter is not only active on campus, but also within the <span className={cn("font-semibold")}>Gainesville community</span>,
             such as when we participated in a 5K raising money for a local robotics team. We are also heavily involved in the{" "}
             <span className={cn("font-semibold")}>Asian American Student Union</span> at the University of Florida, taking part in their annual
@@ -51,7 +53,7 @@ const HistorySection = () => {
           {/* Read Less Link (Appears at Bottom After Expansion) */}
           <div className={cn("flex w-fit cursor-pointer items-center text-blue-600 hover:underline")} onClick={() => setIsExpanded(false)}>
             <span>Read less</span>
-            <FaChevronUp className={cn("ml-1 h-4 w-4")} />
+            {!isMobile && <FaChevronUp className={cn("ml-1 h-4 w-4")} />}
           </div>
         </div>
       </div>
