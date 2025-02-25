@@ -53,27 +53,21 @@ const Header: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target as Node) &&
-      hamburgerRef.current &&
-      !hamburgerRef.current.contains(event.target as Node)
-    ) {
-      setMenuOpen(false);
-    }
-  };
-
   useEffect(() => {
-    if (menuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target as Node) &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
     };
-  }, [menuOpen]);
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,7 +83,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={cn(`sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`, {
+      className={cn(`sticky left-0 top-0 z-50 w-full font-redhat font-medium shadow-md`, {
         "bg-black text-white": isHomePage,
         "bg-white text-black": !isHomePage,
       })}
@@ -98,16 +92,18 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
-            {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />}
+            <div className="hidden md:block">
+              {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
+            </div>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
           {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} />}
@@ -117,7 +113,16 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu navItems={navItems} isOpen={menuOpen} onClose={() => setMenuOpen(false)} isHomePage={isHomePage} />
+        <div ref={menuRef}>
+          <MobileMenu
+            navItems={navItems}
+            isOpen={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            isHomePage={isHomePage}
+            isLoggedIn={isAuthenticated}
+            onLogout={logout}
+          />
+        </div>
       </nav>
     </header>
   );
