@@ -116,6 +116,43 @@ authRoutes.post("/auth/logout", async (c) => {
   }
 });
 
+// used for validating sessions
+authRoutes.get("/auth/session", async (c) => {
+  const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+
+  if (!sessionId) {
+    return new Response("No active session", { status: 401 });
+  }
+
+  try {
+    const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+
+    if (session.length === 0) {
+      return new Response("Session not found", { status: 401 });
+    }
+
+    if (session[0].expires_at < Date.now()) {
+      await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+      // maybe renew session?
+      return new Response("Session expired", { status: 401 });
+    }
+
+    const user = await db.select({ username: Schema.users.username }).from(Schema.users).where(eq(Schema.users.id, session[0].user_id));
+
+    if (user.length === 0) {
+      return new Response("User not found", { status: 401 });
+    }
+
+    return new Response(JSON.stringify({ username: user[0].username }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Error checking session", { status: 500 });
+  }
+});
+
 async function createSession(sessionID: string, userID: string) {
   try {
     await db.insert(Schema.sessions).values({
