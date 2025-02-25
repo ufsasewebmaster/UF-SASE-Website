@@ -7,9 +7,10 @@ interface ImageButtonProps {
   slideUrl: string;
   imgWidth?: string;
   imgHeight?: string;
+  title: string;
 }
 
-const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px", slideUrl }) => {
+const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px", slideUrl, title }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -26,17 +27,8 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px",
       </div>
 
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} title="" description="" onClose={closeModal}>
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-5">
-            <div className="relative flex h-[80vh] max-h-[700px] w-[80vw] max-w-[1200px] items-center justify-center rounded-lg bg-white shadow-lg">
-              <button onClick={closeModal} className="absolute left-5 top-5 z-10 rounded-full bg-black p-2 text-white">
-                X
-              </button>
-              <div className="relative aspect-[16/9] h-full w-full">
-                <iframe src={slideUrl} className="absolute left-0 top-0 h-full w-full rounded-lg" allowFullScreen></iframe>
-              </div>
-            </div>
-          </div>
+        <Modal isOpen={isModalOpen} onClose={closeModal} title={title} description="">
+          <iframe src={slideUrl} className="h-[60vh] w-full" allowFullScreen />
         </Modal>
       )}
     </div>

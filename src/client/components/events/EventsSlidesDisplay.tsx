@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageButton from "./ImageButton";
 
 const imageData = {
@@ -71,6 +71,18 @@ const EventsSlides: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<keyof typeof imageData>("Fall 2023");
   const [view, setView] = useState<"slides" | "recordings">("slides");
 
+  // Preloading all images on mount
+  useEffect(() => {
+    Object.values(imageData).forEach((slides) =>
+      slides.forEach((item) => {
+        if (item.imageUrl) {
+          const img = new Image();
+          img.src = item.imageUrl;
+        }
+      }),
+    );
+  }, []);
+
   return (
     <div className="relative flex w-screen flex-col items-center gap-5 p-5">
       <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300">
@@ -98,7 +110,7 @@ const EventsSlides: React.FC = () => {
         <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {imageData[selectedYear].map((item, index) => (
             <div key={index} className="flex w-full flex-col items-center">
-              {item.imageUrl && <ImageButton imageUrl={item.imageUrl} slideUrl={item.slideUrl} />}
+              {item.imageUrl && <ImageButton imageUrl={item.imageUrl} slideUrl={item.slideUrl} title={item.caption} />}
               {item.caption && <p className="mt-2 text-center text-sm">{item.caption}</p>}
             </div>
           ))}
