@@ -20,8 +20,8 @@ export const Route = createFileRoute("/about")({
   ],
   component: () => {
     return (
-      <div className={cn("mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-white font-redhat")}>
-        <div className={cn("w-full max-w-7xl px-4 py-8")}>
+      <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-white font-redhat">
+        <div className="w-full max-w-7xl px-4 py-8">
           <HeaderSection />
 
           <div className="mb-14 flex justify-center">
