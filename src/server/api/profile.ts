@@ -9,7 +9,6 @@ const profileSchema = {
   username: Schema.users.username,
   first_name: Schema.personalInfo.first_name,
   last_name: Schema.personalInfo.last_name,
-  email: Schema.personalInfo.email,
   phone: Schema.personalInfo.phone,
   resume: Schema.professionalInfo.resume_path,
   linkedin: Schema.professionalInfo.linkedin,
