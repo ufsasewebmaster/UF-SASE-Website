@@ -34,7 +34,7 @@ const Password = () => {
 
   const onSubmit: SubmitHandler<ForgotPasswordFormData> = async (data) => {
     console.log("Reset request submitted for:", data.email);
-    // add your reset password logic here
+    // add reset password logic here!! //
   };
 
   return (
