@@ -104,9 +104,8 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Nav */}
-        <div className="flex items-center gap-4 md:hidden">
-          <SearchBar className="w-32 focus:w-64" />
-          {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
+        <div className="ml-auto flex items-center gap-2 md:hidden">
+          <SearchBar />
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
