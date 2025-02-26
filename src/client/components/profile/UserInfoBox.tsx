@@ -1,5 +1,3 @@
-import AvatarEdit from "@assets/AvatarEdit.png";
-import EditIcon from "@assets/EditIcon.png";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 
