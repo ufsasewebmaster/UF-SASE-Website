@@ -24,7 +24,7 @@
     "db:local:init": "node scripts/initDb.mjs",
     "db:local:seed": "node scripts/seed.mjs",
     "db:studio": "drizzle-kit studio --port 3003 --verbose",
-    "db:all": "bun db:push && bun db:local:init && bun db:local:seed && bun db:generate && bun db:studio"
+    "db:all": "bun db:local:init && bun db:push && bun db:local:seed && bun db:generate && bun db:studio"
   },
   "dependencies": {
     "@iconify/json": "^2.2.272",
