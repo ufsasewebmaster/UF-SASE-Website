@@ -40,7 +40,7 @@ interface SponsorCardProps {
   image: string;
   link: string;
   shadowcolor: string;
-  type: string;
+  type: SponsorType;
 }
 
 const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCardProps) => {
