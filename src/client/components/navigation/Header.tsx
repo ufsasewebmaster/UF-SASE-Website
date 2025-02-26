@@ -1,4 +1,5 @@
 import { useAuth } from "@/client/AuthContext";
+import { DarkModeContext } from "../DarkModeProvider";
 import { cn } from "@/shared/utils";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
@@ -7,7 +8,7 @@ import { SearchBar } from "@navigation/SearchBar";
 import { UserButton } from "@navigation/UserButton";
 import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 const SCREEN_BREAKPOINT = 1024;
 
@@ -52,6 +53,7 @@ const Header: React.FC = () => {
   const { isAuthenticated, isLoading, logout } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -91,6 +93,10 @@ const Header: React.FC = () => {
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
+
+        {/* TODO: For testing purposes */}
+        <h1>{darkMode ? "Dark Mode is enabled" : "Light Mode is enabled"}</h1>
+        <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
 
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">

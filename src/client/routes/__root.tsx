@@ -1,4 +1,5 @@
 import { DefaultCatchBoundary } from "@/client/components/DefaultCatchBoundary";
+import { DarkModeProvider } from "@components/DarkModeProvider";
 import { NotFound } from "@/client/components/NotFound";
 import { imageUrls } from "@assets/imageUrls";
 import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
@@ -45,9 +46,11 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <AuthProvider>
-      <RootDocument>
-        <Outlet />
-      </RootDocument>
+      <DarkModeProvider>
+        <RootDocument>
+          <Outlet />
+        </RootDocument>
+      </DarkModeProvider>
     </AuthProvider>
   );
 }
