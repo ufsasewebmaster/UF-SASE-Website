@@ -40,7 +40,7 @@ interface SponsorCardProps {
   image: string;
   link: string;
   shadowcolor: string;
-  type: SponsorType;
+  type: string;
 }
 
 const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCardProps) => {
@@ -63,7 +63,6 @@ const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCar
       <div
         className={`relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1 ${shadowcolor} shadow-2xl duration-300 hover:scale-105`}
       >
-        {/* Link overlay so the whole card is clickable */}
         <Link to={link} className="absolute inset-0 z-10" />
         <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />
         <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
