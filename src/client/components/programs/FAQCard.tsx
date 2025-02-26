@@ -34,7 +34,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
         } overflow-hidden border-t border-gray-300 bg-white px-6`}
         style={{ transitionProperty: "max-height, opacity, padding" }}
       >
-        <div className="text-xl text-gray-800" dangerouslySetInnerHTML={{ __html: answer }} />
+        <div className="text-xl text-gray-800">{answer}</div>
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
 
 const FAQ: React.FC<FAQProps> = ({ faqData }) => {
   return (
-    <div className="w-full p-8">
+    <div className="w-full p-8 font-redhat">
       {faqData.map((item, index) => (
         <FAQItem key={index} question={item.question} answer={item.answer} />
       ))}

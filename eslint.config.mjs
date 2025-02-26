@@ -8,6 +8,7 @@ import codegen from "eslint-plugin-codegen";
 import deprecation from "eslint-plugin-deprecation";
 import drizzle from "eslint-plugin-drizzle";
 import _import from "eslint-plugin-import";
+import react from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 
@@ -26,6 +27,7 @@ export default [
   ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"),
   {
     plugins: {
+      react,
       deprecation,
       import: fixupPluginRules(_import),
       "sort-destructure-keys": sortDestructureKeys,
@@ -58,6 +60,7 @@ export default [
       "no-irregular-whitespace": "off",
       "object-shorthand": "error",
       "prefer-destructuring": "off",
+      "react/no-danger": "warn",
       "sort-imports": "off",
 
       "no-restricted-syntax": [

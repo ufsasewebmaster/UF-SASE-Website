@@ -1,11 +1,9 @@
-import SportsPic from "@assets/sports/SaseSports.png";
-import SportsTestimony from "@assets/sports/SportsTestimonial.jpeg";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
-import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
+import Carousel from "../components/carousel/Carousel";
 import { faqData } from "../components/programs/faqSports";
 import { seo } from "../utils/seo";
 
@@ -41,26 +39,13 @@ export const Route = createFileRoute("/sports")({
             }
           />
         </div>
-        {/* Placeholder Image */}
         <div className="w-full max-w-7xl px-4 py-8">
-          <div className="mx-auto mb-24 w-full max-w-7xl px-4">
-            <img
-              src={SportsPic}
-              alt="SaseSports"
-              className="w-full rounded-3xl border-4 border-saseGreen"
-              style={{ height: "600px", objectFit: "cover" }}
-            />
-          </div>
+          <Carousel purpose="Images" prog="Sports" />
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Testimonials</h2>
           </header>
-          <TestimonialCard
-            image={SportsTestimony}
-            text="SASE sports is a fun way to connect with people while being active! I’m really glad I got to join and make friends while getting to play soccer again, and everyone is really nice to play with! We get to joke around and break a swear together, and I’ll cherish the memories and friends I made far beyond college."
-            name="Cameron McMullen"
-            title="2024 SASE Sports Member"
-          />
+          <Carousel purpose="Testimonials" prog="Sports" />
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>

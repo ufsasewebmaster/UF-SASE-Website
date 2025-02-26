@@ -13,6 +13,8 @@ authRoutes.post("/auth/signup", async (c) => {
   const formData = await c.req.json();
   const formUsername = formData["username"];
   const formPassword = formData["password"];
+  const formEmail = formData["email"];
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   //validate username
   if (!formUsername || typeof formUsername !== "string") {
@@ -20,9 +22,16 @@ authRoutes.post("/auth/signup", async (c) => {
       status: 400,
     });
   }
-
+  //validate password
   if (!formPassword || typeof formPassword !== "string") {
     return new Response("Invalid password!", {
+      status: 400,
+    });
+  }
+  //validate email
+  // add 3rd validation for email using regular expressions
+  if (!formEmail || typeof formEmail !== "string" || !emailRegex.test(formEmail)) {
+    return new Response("Invalid email!", {
       status: 400,
     });
   }
@@ -37,6 +46,7 @@ authRoutes.post("/auth/signup", async (c) => {
       id: userId,
       username: formUsername,
       password: formPasswordHash,
+      email: formEmail,
     });
 
     return new Response("User successfully created!", {
@@ -113,6 +123,43 @@ authRoutes.post("/auth/logout", async (c) => {
   } catch (error) {
     console.log(error);
     return new Response("Error logging out", { status: 500 });
+  }
+});
+
+// used for validating sessions
+authRoutes.get("/auth/session", async (c) => {
+  const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+
+  if (!sessionId) {
+    return new Response("No active session", { status: 401 });
+  }
+
+  try {
+    const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+
+    if (session.length === 0) {
+      return new Response("Session not found", { status: 401 });
+    }
+
+    if (session[0].expires_at < Date.now()) {
+      await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+      // maybe renew session?
+      return new Response("Session expired", { status: 401 });
+    }
+
+    const user = await db.select({ username: Schema.users.username }).from(Schema.users).where(eq(Schema.users.id, session[0].user_id));
+
+    if (user.length === 0) {
+      return new Response("User not found", { status: 401 });
+    }
+
+    return new Response(JSON.stringify({ username: user[0].username }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Error checking session", { status: 500 });
   }
 });
 
