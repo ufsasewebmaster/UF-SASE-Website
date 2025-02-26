@@ -52,7 +52,7 @@ const Password = () => {
             <Logo />
           </div>
           <h3 className={cn("heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold")}>Forgot Password</h3>
-          <p className={cn("mb-4 text-center text-gray-600")}>Please type the email associated with the account</p>
+          <p className={cn("mb-10 text-center text-gray-600")}>Please type the email associated with the account</p>
           <StyledFormField icon="icon-[mdi--email-outline]" hasError={!!errors.email}>
             <Input
               id="email"
@@ -70,12 +70,12 @@ const Password = () => {
           {errors.email && <span className={cn("mb-4 font-redhat text-sm text-red-600")}>{errors.email.message}</span>}
           <Button
             type="submit"
-            className={cn("w-full rounded-lg border bg-saseBlueLight p-5 font-semibold text-white")}
+            className={cn("mt-5 w-full rounded-lg border bg-saseBlueLight p-5 font-semibold text-white")}
             disabled={isSubmitting || !!errors.email}
           >
             Send Email Verification
           </Button>
-          <p className={cn("text-md mt-4 text-center font-redhat")}>
+          <p className={cn("text-md mt-6 text-center font-redhat")}>
             <Link to="/login" className={cn("cursor-pointer text-saseBlue underline")}>
               Back to Login
             </Link>
