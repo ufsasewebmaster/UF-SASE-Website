@@ -13,6 +13,8 @@ authRoutes.post("/auth/signup", async (c) => {
   const formData = await c.req.json();
   const formUsername = formData["username"];
   const formPassword = formData["password"];
+  const formEmail = formData["email"];
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   //validate username
   if (!formUsername || typeof formUsername !== "string") {
@@ -20,9 +22,16 @@ authRoutes.post("/auth/signup", async (c) => {
       status: 400,
     });
   }
-
+  //validate password
   if (!formPassword || typeof formPassword !== "string") {
     return new Response("Invalid password!", {
+      status: 400,
+    });
+  }
+  //validate email
+  // add 3rd validation for email using regular expressions
+  if (!formEmail || typeof formEmail !== "string" || !emailRegex.test(formEmail)) {
+    return new Response("Invalid email!", {
       status: 400,
     });
   }
@@ -37,6 +46,7 @@ authRoutes.post("/auth/signup", async (c) => {
       id: userId,
       username: formUsername,
       password: formPasswordHash,
+      email: formEmail,
     });
 
     return new Response("User successfully created!", {
