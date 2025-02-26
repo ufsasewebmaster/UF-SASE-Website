@@ -142,7 +142,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
 
       <p className="text-md mt-4 text-center font-redhat">
         {linkText}{" "}
-        <Link to={linkRoute} className="cursor-pointer text-saseBlue underline">
+        <Link to={isSignUp ? linkRoute : "/password"} className="cursor-pointer text-saseBlue underline">
           {isSignUp ? "Login here." : "Click here to reset."}
         </Link>
       </p>
