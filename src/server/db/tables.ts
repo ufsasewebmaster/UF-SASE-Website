@@ -1,4 +1,4 @@
-import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
 
 // Here we define our database schema as code
