@@ -1,10 +1,10 @@
+import Carousel from "@/client/components/carousel/Carousel";
 import BackendLead from "@assets/webdev/BackendLead.jpeg";
 import FrontEndLead from "@assets/webdev/FrontendLead.png";
 import FullStackLead from "@assets/webdev/FullStackLead2.jpg";
 import UIUXLead from "@assets/webdev/UIUXLead.jpg";
 import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";
 import MemberCard from "@components/home/MemberCard";
-import Carousel from "@components/programs/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import GoalCard from "@components/programs/GoalCard";

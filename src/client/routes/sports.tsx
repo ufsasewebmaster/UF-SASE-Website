@@ -3,7 +3,7 @@ import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
-import Carousel from "../components/programs/Carousel";
+import Carousel from "../components/carousel/Carousel";
 import { faqData } from "../components/programs/faqSports";
 import { seo } from "../utils/seo";
 

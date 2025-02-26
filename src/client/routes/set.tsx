@@ -1,4 +1,4 @@
-import Carousel from "@/client/components/programs/Carousel";
+import Carousel from "@/client/components/carousel/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
