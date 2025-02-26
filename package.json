@@ -49,6 +49,7 @@
     "drizzle-orm": "^0.36.4",
     "drizzle-zod": "^0.5.1",
     "embla-carousel-react": "^8.5.1",
+    "eslint-plugin-react": "^7.37.4",
     "hamburger-react": "^2.5.1",
     "hono": "^4.6.1",
     "html-react-parser": "^5.1.18",

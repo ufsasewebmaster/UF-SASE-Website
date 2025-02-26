@@ -131,29 +131,29 @@ export const Route = createFileRoute("/")({
             <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="p-4 font-redhat text-xl sm:text-2xl">
                 Are you interested in becoming a partner with the{" "}
-                <span className="font-semibold"> UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
+                <span className="font-semibold">UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
                 ?
                 <br />
                 <br />
                 To get access to our <span className="font-semibold">sponsorship packet </span>
-                please contact our External Vice President, Kayleen Diaz, at{" "}
-                <div className="flex w-full items-center">
-                  <a href={`mailto:ufsase.evp@gmail.com`} className="text-saseGreen underline">
-                    ufsase.evp@gmail.com
-                  </a>
-                  <a
-                    href="/sponsors"
-                    className="ml-auto hidden rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:block"
-                  >
-                    Sponsors
-                  </a>
-                </div>
-                <div className="mt-4 sm:hidden">
-                  <a href="/sponsors" className="rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]">
-                    Sponsors
-                  </a>
-                </div>
+                please contact our External Vice President, Kayleen Diaz, at
               </p>
+              <div className="flex w-full items-center">
+                <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
+                  ufsase.evp@gmail.com
+                </a>
+                <a
+                  href="/sponsors"
+                  className="ml-auto hidden rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:block"
+                >
+                  Sponsors
+                </a>
+              </div>
+              <div className="mt-4 sm:hidden">
+                <a href="/sponsors" className="rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]">
+                  Sponsors
+                </a>
+              </div>
             </div>
 
             <div className="flex w-full flex-col items-center gap-16">
