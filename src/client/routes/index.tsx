@@ -3,7 +3,8 @@ import MissionCard from "@/client/components/home/MissionCard";
 import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
-import EmblaCarousel from "@components/home/Carousel";
+import Carousel from "@components/carousel/Carousel";
+// import Carousel from "@components/home/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -120,7 +121,8 @@ export const Route = createFileRoute("/")({
 
         <div className="w-full bg-black p-10">
           <h1 className="w-full pb-12 text-center font-oswald text-6xl text-white">Our Values</h1>
-          <EmblaCarousel />
+          <Carousel prog="N/A" purpose="Values" />
+          {/* <Carousel /> */}
         </div>
 
         <div className="flex w-full flex-col items-center bg-saseGray p-12">
