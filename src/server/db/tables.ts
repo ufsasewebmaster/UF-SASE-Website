@@ -1,4 +1,4 @@
-import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
 
 // Here we define our database schema as code
@@ -42,7 +42,7 @@ export const personalInfo = sqliteTable("personal_info", {
     .references(() => users.id),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
-  phone: blob("phone", { mode: "bigint" }).unique(), // NOTE: Phone is bigint
+  phone: text("phone").unique(), // NOTE: Phone is bigint
   area_code: integer("area_code"),
 });
 
