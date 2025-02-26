@@ -1,25 +1,58 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 
-const typeStyles = {
-  Diamond: { src: imageUrls["Diamond.png"], size: "h-[23%]", translateY: "-translate-y-1/4", rotate: "rotate-[-15deg]" },
-  Gold: { src: imageUrls["Gold.png"], size: "h-[24%]", translateY: "-translate-y-1/3" },
-  Silver: { src: imageUrls["Silver.png"], size: "h-[23%]", translateY: "-translate-y-1/3" },
-  Bronze: { src: imageUrls["Bronze.png"], size: "h-[21%]", translateY: "-translate-y-1/3" },
+interface SponsorStyle {
+  src: string;
+  size: string;
+  translateY: string;
+  rotate?: string;
+}
+
+type SponsorType = "Diamond" | "Gold" | "Silver" | "Bronze";
+
+const typeStyles: Record<SponsorType, SponsorStyle> = {
+  Diamond: {
+    src: imageUrls["Diamond.png"],
+    size: "h-[23%]",
+    translateY: "-translate-y-1/4",
+    rotate: "rotate-[-15deg]",
+  },
+  Gold: {
+    src: imageUrls["Gold.png"],
+    size: "h-[24%]",
+    translateY: "-translate-y-1/3",
+  },
+  Silver: {
+    src: imageUrls["Silver.png"],
+    size: "h-[23%]",
+    translateY: "-translate-y-1/3",
+  },
+  Bronze: {
+    src: imageUrls["Bronze.png"],
+    size: "h-[21%]",
+    translateY: "-translate-y-1/3",
+  },
 };
 
 const styleBase = "absolute left-0 top-0 -translate-x-1/2";
 
-const SponsorCard = ({ companyName, image, shadowcolor, type }: { image: string; companyName: string; type: string; shadowcolor: string }) => {
+interface SponsorCardProps {
+  companyName: string;
+  image: string;
+  shadowcolor: string;
+  type: SponsorType;
+}
+
+const SponsorCard = ({ companyName, image, shadowcolor, type }: SponsorCardProps) => {
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
         className={cn(
           {
-            "text-saseBlue": type == "Diamond",
-            "text-amber-300": type == "Gold",
-            "text-slate-400": type == "Silver",
-            "text-amber-700": type == "Bronze",
+            "text-saseBlue": type === "Diamond",
+            "text-amber-300": type === "Gold",
+            "text-slate-400": type === "Silver",
+            "text-amber-700": type === "Bronze",
           },
           `pb-2 text-center font-redhat text-4xl font-semibold`,
         )}
@@ -37,7 +70,7 @@ const SponsorCard = ({ companyName, image, shadowcolor, type }: { image: string;
           <img
             src={typeStyles[type].src}
             alt={`${type} Icon`}
-            className={cn(styleBase, typeStyles[type].size, typeStyles[type].translateY, typeStyles[type].rotate)}
+            className={cn(styleBase, typeStyles[type].size, typeStyles[type].translateY, typeStyles[type].rotate ?? "")}
           />
         )}
       </div>
