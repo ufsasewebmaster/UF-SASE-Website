@@ -5,6 +5,7 @@ import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-rout
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
+import { Toaster } from "react-hot-toast";
 import { seo } from "src/client/utils/seo";
 import { AuthProvider } from "../AuthContext";
 import Footer from "../components/navigation/Footer";
@@ -69,6 +70,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
       </Head>
       <Body>
+        <Toaster />
         <div className="flex min-h-screen flex-col">
           <Header />
           {/* Main Content Area */}

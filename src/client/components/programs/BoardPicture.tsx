@@ -10,9 +10,9 @@ const BoardPicture = () => {
       {/* Text Overlay */}
       <div className="absolute inset-0 flex items-end justify-center p-4">
         <div className="w-5/6 rounded-b-xl bg-gradient-to-t from-black to-transparent p-4">
-          <p className="text-lg text-white">
-            Brief overview of what <span className="text-saseGreen">SASE programs</span> there are, what they do, why they were created, what
-            participants get out of the programs, etc. Just general overview kinda thing.
+          <p className="font-redhat text-lg text-white">
+            We offer a variety of programs that provide members of all experience levels with opportunities to network, socialize, and develop
+            technical and leadership skills. Read on to learn more about our Intern Program, Engineering Team, Web Team, and Intramural sports league.
           </p>
         </div>
       </div>

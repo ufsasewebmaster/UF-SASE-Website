@@ -17,6 +17,7 @@ import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SetImport } from './routes/set'
+import { Route as ResourcesImport } from './routes/resources'
 import { Route as ProgramsImport } from './routes/programs'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as PasswordImport } from './routes/password'
@@ -65,6 +66,12 @@ const SignupRoute = SignupImport.update({
 const SetRoute = SetImport.update({
   id: '/set',
   path: '/set',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ResourcesRoute = ResourcesImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -229,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsImport
       parentRoute: typeof rootRoute
     }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesImport
+      parentRoute: typeof rootRoute
+    }
     '/set': {
       id: '/set'
       path: '/set'
@@ -289,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -310,6 +325,7 @@ export interface FileRoutesByTo {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -332,6 +348,7 @@ export interface FileRoutesById {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -355,6 +372,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/resources'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -375,6 +393,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/resources'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -395,6 +414,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/resources'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -417,6 +437,7 @@ export interface RootRouteChildren {
   PasswordRoute: typeof PasswordRoute
   ProfileRoute: typeof ProfileRoute
   ProgramsRoute: typeof ProgramsRoute
+  ResourcesRoute: typeof ResourcesRoute
   SetRoute: typeof SetRoute
   SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -438,6 +459,7 @@ const rootRouteChildren: RootRouteChildren = {
   PasswordRoute: PasswordRoute,
   ProfileRoute: ProfileRoute,
   ProgramsRoute: ProgramsRoute,
+  ResourcesRoute: ResourcesRoute,
   SetRoute: SetRoute,
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
@@ -468,6 +490,7 @@ export const routeTree = rootRoute
         "/password",
         "/profile",
         "/programs",
+        "/resources",
         "/set",
         "/signup",
         "/sponsors",
@@ -511,6 +534,9 @@ export const routeTree = rootRoute
     },
     "/programs": {
       "filePath": "programs.tsx"
+    },
+    "/resources": {
+      "filePath": "resources.tsx"
     },
     "/set": {
       "filePath": "set.tsx"

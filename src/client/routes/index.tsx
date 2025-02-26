@@ -128,7 +128,6 @@ export const Route = createFileRoute("/")({
           <div className="flex w-9/12 flex-col items-center gap-12">
             <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="p-4 font-redhat text-xl sm:text-2xl">
-                <span className="text-2xl font-semibold sm:text-3xl">CHANGE!!!!! </span>
                 Are you interested in becoming a partner with the{" "}
                 <span className="font-semibold"> UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
                 ?
@@ -142,8 +141,13 @@ export const Route = createFileRoute("/")({
                   </a>
                   <a
                     href="/sponsors"
-                    className="ml-auto rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]"
+                    className="ml-auto hidden rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:block"
                   >
+                    Sponsors
+                  </a>
+                </div>
+                <div className="mt-4 sm:hidden">
+                  <a href="/sponsors" className="rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]">
                     Sponsors
                   </a>
                 </div>
@@ -160,6 +164,7 @@ export const Route = createFileRoute("/")({
                       companyName={sponsor.company}
                       type={sponsor.tier}
                       shadowcolor={sponsor.shadow_color}
+                      link={sponsor.link}
                     />
                   ) : null,
                 )}

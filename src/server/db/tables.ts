@@ -11,6 +11,7 @@ export const users = sqliteTable("user", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
+  email: text("email").notNull().unique(),
 
   // TODO: password_hash
   // password_hash: text("password_hash").notNull(),
@@ -41,7 +42,6 @@ export const personalInfo = sqliteTable("personal_info", {
     .references(() => users.id),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
-  email: text("email").notNull().unique(),
   phone: blob("phone", { mode: "bigint" }).unique(), // NOTE: Phone is bigint
   area_code: integer("area_code"),
 });
@@ -102,7 +102,6 @@ export const blogs = sqliteTable("blog", {
   time_updated: integer("time_updated", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
-  last_update_date: text("last_update_date"),
 });
 
 // Blog Tags table

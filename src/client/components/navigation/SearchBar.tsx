@@ -24,9 +24,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
   }, [query]);
 
   useEffect(() => {
-    setIsDropdownOpen(filteredResults.length > 0);
+    setIsDropdownOpen(query?.trim() !== "");
     setSelectedIndex(-1);
-  }, [filteredResults]);
+  }, [filteredResults, query]);
 
   useEffect(() => {
     if (!isDropdownOpen) return;
@@ -90,7 +90,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-4l4 4" />
       </svg>
 
-      {isDropdownOpen && (
+      {isDropdownOpen && query?.trim() && (
         <div className="search-dropdown">
           {filteredResults.length > 0 ? (
             filteredResults.map((result, index) => (
@@ -107,7 +107,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className = "", placeholde
               </Link>
             ))
           ) : (
-            <div className="no-results">No results found</div>
+            <div className="no-results">No results found for '{query}'</div>
           )}
         </div>
       )}

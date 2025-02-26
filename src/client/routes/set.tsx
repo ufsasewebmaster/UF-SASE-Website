@@ -1,9 +1,7 @@
-import SETPic from "@assets/set/SaseSet.png";
-import SETProj from "@assets/set/SetProject.png";
+import Carousel from "@/client/components/programs/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
-import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
 import { faqData } from "../components/programs/faqSet";
@@ -44,26 +42,13 @@ export const Route = createFileRoute("/set")({
             }
           />
         </div>
-        {/* Image Section */}
         <div className="w-full max-w-7xl px-4 py-8">
-          <div className="mx-auto mb-24 w-full max-w-7xl px-4">
-            <img
-              src={SETPic}
-              alt="SET Image"
-              className="w-full rounded-3xl border-4 border-saseGreen"
-              style={{ height: "600px", objectFit: "cover" }}
-            />
-          </div>
+          <Carousel purpose="Images" prog="SET" />
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Past Projects</h2>
           </header>
-          <TestimonialCard
-            image={SETProj}
-            text="Last year, SET successfully developed a campus cleaner robot designed to autonomously identify and pick up trash 🤖. This innovative project not only helped keep our campus clean but also provided valuable experience in robotics, programming, and teamwork."
-            name="SET Member"
-            title="2024 Project"
-          />
+          <Carousel purpose="Testimonials" prog="SET" />
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
