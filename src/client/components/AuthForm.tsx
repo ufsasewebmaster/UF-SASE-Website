@@ -75,7 +75,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
             minLength: { value: 4, message: "Username must be at least 4 characters!" },
             maxLength: { value: 12, message: "Username must be 12 characters or fewer!" },
           })}
-          placeholder="Username or email"
+          placeholder={isSignUp ? "Username" : "Username or email"}
           className="h-12 p-4"
         />
       </StyledFormField>
