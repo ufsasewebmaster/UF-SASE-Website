@@ -99,7 +99,7 @@ emailRoutes.post("/email/password-reset", async (c) => {
     });
 
     return c.json({ message: "Password reset email sent successfully", result }, 200);
-  } catch (error) {
+  } catch {
     return createErrorResponse(c, "PASSWORD_RESET_FAILURE", "Failed to send password reset email", 500);
   }
 });
