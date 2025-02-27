@@ -68,4 +68,40 @@ emailRoutes.post("/email/send", async (c) => {
   }
 });
 
+emailRoutes.post("/email/password-reset", async (c) => {
+  try {
+    const { email, name } = await c.req.json();
+    if (!email) {
+      return createErrorResponse(c, "INVALID_INPUT", "Email is required", 400);
+    }
+
+    const resetPage = "http://ufsase.com/reset-password";
+    const htmlTemplate = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1>Password Reset Notification</h1>
+        <p>Hey ${name || "User"}.</p>
+        <p>Your UF SASE password can be reset by clicking the button below. If you did not request a new password, please ignore this email.</p>
+        <p>
+          <a href="${resetPage}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+            Reset Password
+          </a>
+        </p>
+        <p>This link will expire in 24 hours for security reasons.</p>
+        <p>Best regards,<br>The UF SASE WebDev Team</p>
+      </div>
+    `;
+
+    const result = await resend.emails.send({
+      from: "UF SASE <password@email.ufsase.com>",
+      to: [email],
+      subject: "Password Reset Request for UF SASE",
+      html: htmlTemplate,
+    });
+
+    return c.json({ message: "Password reset email sent successfully", result }, 200);
+  } catch (error) {
+    return createErrorResponse(c, "PASSWORD_RESET_FAILURE", "Failed to send password reset email", 500);
+  }
+});
+
 export default emailRoutes;
