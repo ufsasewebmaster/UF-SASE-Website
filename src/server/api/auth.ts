@@ -76,7 +76,7 @@ authRoutes.post("/auth/signup", async (c) => {
   } catch (error) {
     console.log(error);
     // db error, email taken, etc
-    return new Response("Username invalid!", {
+    return new Response("Error creating user", {
       status: 400,
     });
   }
