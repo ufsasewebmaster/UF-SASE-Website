@@ -2,11 +2,11 @@ import { cn } from "@/shared/utils";
 
 const MobileMemberCard = ({
   image,
+  imageSide,
   name,
   quote,
   role,
   textColor,
-  imageSide,
 }: {
   image: string;
   name: string;
