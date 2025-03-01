@@ -18,11 +18,11 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, text }) => {
 
         {/* Text Content */}
         <div className="flex flex-col justify-between">
-          <p className="mb-4 text-xl text-black">{text}</p>
+          <p className="mb-4 font-redhat text-xl text-black">{text}</p>
 
           {/* Learn More Button */}
           <a href={link} target="_blank" rel="noopener noreferrer">
-            <button className="mt-4 w-40 rounded-full bg-saseBlueLight py-2 text-center text-lg italic text-white transition duration-300 hover:scale-105 hover:bg-saseBlue focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button className="mt-4 w-40 rounded-full bg-saseBlueLight py-2 text-center font-redhat text-lg italic text-white transition duration-300 hover:scale-105 hover:bg-saseBlue focus:outline-none focus:ring-2 focus:ring-blue-500">
               LEARN MORE
             </button>
           </a>

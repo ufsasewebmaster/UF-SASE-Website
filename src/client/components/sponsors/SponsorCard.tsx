@@ -1,57 +1,82 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import { Link } from "@tanstack/react-router";
 
-const typeStyles = {
-  Diamond: { src: imageUrls["Diamond.png"], size: "h-[23%]", translateY: "-translate-y-1/4", rotate: "rotate-[-15deg]" },
-  Gold: { src: imageUrls["Gold.png"], size: "h-[24%]", translateY: "-translate-y-1/3", rotate: "" },
-  Silver: { src: imageUrls["Silver.png"], size: "h-[23%]", translateY: "-translate-y-1/3", rotate: "" },
-  Bronze: { src: imageUrls["Bronze.png"], size: "h-[21%]", translateY: "-translate-y-1/3", rotate: "" },
-} as const;
+interface SponsorStyle {
+  src: string;
+  size: string;
+  translateY: string;
+  rotate?: string;
+}
 
-const styleBase = "absolute left-0 top-0 -translate-x-1/2";
+type SponsorType = "Diamond" | "Gold" | "Silver" | "Bronze";
 
-type SponsorType = keyof typeof typeStyles;
+const typeStyles: Record<SponsorType, SponsorStyle> = {
+  Diamond: {
+    src: imageUrls["Diamond.png"],
+    size: "h-[30%]",
+    translateY: "-translate-y-1/3",
+    rotate: "rotate-[-15deg]",
+  },
+  Gold: {
+    src: imageUrls["Gold.png"],
+    size: "h-[30%]",
+    translateY: "-translate-y-1/3",
+  },
+  Silver: {
+    src: imageUrls["Silver.png"],
+    size: "h-[30%]",
+    translateY: "-translate-y-1/3",
+  },
+  Bronze: {
+    src: imageUrls["Bronze.png"],
+    size: "h-[30%]",
+    translateY: "-translate-y-1/3",
+  },
+};
 
-const SponsorCard = ({
-  companyName,
-  image,
-  shadowcolor,
-  type: sponsorTier,
-}: {
-  image: string;
+interface SponsorCardProps {
   companyName: string;
-  type: string;
+  image: string;
+  link: string;
   shadowcolor: string;
-}) => {
-  const sponsorType = sponsorTier in typeStyles ? (sponsorTier as SponsorType) : "Bronze";
+  type: SponsorType;
+}
 
+const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCardProps) => {
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
         className={cn(
           {
-            "text-saseBlue": sponsorType === "Diamond",
-            "text-amber-300": sponsorType === "Gold",
-            "text-slate-400": sponsorType === "Silver",
-            "text-amber-700": sponsorType === "Bronze",
+            "text-saseBlue": type === "Diamond",
+            "text-amber-300": type === "Gold",
+            "text-slate-400": type === "Silver",
+            "text-amber-700": type === "Bronze",
           },
-          `pb-2 text-center font-redhat text-4xl font-semibold`,
+          "pb-2 text-center font-redhat text-4xl font-semibold",
         )}
       >
-        {sponsorType}
+        {type}
       </p>
 
       <div
         className={`relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1 ${shadowcolor} shadow-2xl duration-300 hover:scale-105`}
       >
+        <Link to={link} className="absolute inset-0 z-10" />
         <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />
         <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
 
-        {sponsorType in typeStyles && (
+        {type in typeStyles && (
           <img
-            src={typeStyles[sponsorType].src}
-            alt={`${sponsorType} Icon`}
-            className={cn(styleBase, typeStyles[sponsorType].size, typeStyles[sponsorType].translateY, typeStyles[sponsorType].rotate || "")}
+            src={typeStyles[type].src}
+            alt={`${type} Icon`}
+            className={cn(
+              "absolute left-0 top-0 -translate-x-1/2",
+              typeStyles[type].size,
+              typeStyles[type].translateY,
+              typeStyles[type].rotate ?? "",
+            )}
           />
         )}
       </div>

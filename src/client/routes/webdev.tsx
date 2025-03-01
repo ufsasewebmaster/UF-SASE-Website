@@ -1,8 +1,8 @@
+import Carousel from "@/client/components/carousel/Carousel";
 import BackendLead from "@assets/webdev/BackendLead.jpeg";
 import FrontEndLead from "@assets/webdev/FrontendLead.png";
 import FullStackLead from "@assets/webdev/FullStackLead2.jpg";
 import UIUXLead from "@assets/webdev/UIUXLead.jpg";
-import TeamPhoto from "@assets/webdev/WebDevTeam.jpg";
 import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";
 import MemberCard from "@components/home/MemberCard";
 import FAQ from "@components/programs/FAQCard";
@@ -47,16 +47,8 @@ export const Route = createFileRoute("/webdev")({
             }
           />
         </div>
-        {/* Placeholder Image */}
         <div className="w-full max-w-7xl px-4 py-8">
-          <div className="mx-auto mb-24 w-full max-w-7xl px-4">
-            <img
-              src={TeamPhoto}
-              alt="Placeholder"
-              className="w-full rounded-3xl border-4 border-saseGreen"
-              style={{ height: "600px", objectFit: "cover" }}
-            />
-          </div>
+          <Carousel purpose="Images" prog="Web Dev" />
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Leadership</h2>

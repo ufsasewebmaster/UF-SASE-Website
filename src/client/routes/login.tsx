@@ -3,6 +3,7 @@ import AuthForm from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { useAuth } from "../AuthContext";
 import ShadowCard from "../components/AuthShadowCard";
@@ -20,19 +21,19 @@ export const Route = createFileRoute("/login")({
   component: () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        try {
-          await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-        } catch (error) {
-          console.error("Error submitting data:", error);
-          throw error;
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
         }
       },
       onSuccess: () => {
@@ -41,6 +42,7 @@ export const Route = createFileRoute("/login")({
       },
       onError: (error) => {
         console.error("Error during mutation:", error);
+        setErrorMessage(error.message);
       },
     });
 
@@ -58,6 +60,7 @@ export const Route = createFileRoute("/login")({
             linkText="Forgot password?"
             linkRoute="/"
             onSubmit={handleLogin}
+            errorMessage={errorMessage || undefined}
             additionalButton={{
               text: "Register new account",
               route: "/signup",

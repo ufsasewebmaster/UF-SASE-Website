@@ -1,12 +1,10 @@
-import InternTestimonial from "@assets/interns/InternTestimonial.png";
-import InternsPic from "@assets/interns/SaseInterns.png";
+import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
 import FAQ from "@components/programs/FAQCard";
+import { faqData } from "@components/programs/faqInterns";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
-import TestimonialCard from "@components/programs/TestimonialCard";
 import { createFileRoute } from "@tanstack/react-router";
-import { imageUrls } from "../assets/imageUrls";
-import { faqData } from "../components/programs/faqInterns";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/interns")({
@@ -20,12 +18,12 @@ export const Route = createFileRoute("/interns")({
 
   component: () => {
     return (
-      <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
+      <div className="mt-12 flex min-h-screen flex-col items-center bg-white">
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-7xl font-semibold leading-tight text-gray-800">
+            <h2 className="font-oswald text-7xl font-semibold leading-tight text-gray-800">
               SASE
               <br />
               INTERNS
@@ -43,27 +41,14 @@ export const Route = createFileRoute("/interns")({
             }
           />
         </div>
-        {/* Placeholder Image */}
         <div className="w-full max-w-7xl px-4 py-8">
-          <div className="mx-auto mb-24 w-full max-w-7xl px-4">
-            <img
-              src={InternsPic}
-              alt="Placeholder"
-              className="w-full rounded-3xl border-4 border-saseGreen"
-              style={{ height: "600px", objectFit: "cover" }}
-            />
-          </div>
-          <header className="mb-6 flex max-w-7xl items-center px-5">
+          <Carousel purpose="Images" prog="Interns" />
+          <header className="mb-6 flex max-w-7xl items-center px-5 font-oswald">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Testimonials</h2>
           </header>
-          <TestimonialCard
-            image={InternTestimonial}
-            text="I really enjoyed my time with SASE Interns as it was a great mixture of  fun and general skill building. I got to connect with other SASE members, get more involved with SASE, and improve a variety of skills. But there was also tons of times where I got to joke around making Interns never feel like a burden."
-            name="Bryant Cao"
-            title="2024 Intern"
-          />
-          <header className="mb-12 flex max-w-7xl items-center px-5">
+          <Carousel purpose="Testimonials" prog="Interns" />
+          <header className="mb-12 flex max-w-7xl items-center px-5 font-oswald">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
           </header>
@@ -72,7 +57,7 @@ export const Route = createFileRoute("/interns")({
             <GoalCard text="Develop essential professional skills and experiences to add to your resume." color="green" />
             <GoalCard text="Connect with other SASErs and board members through intern-exclusive networking events." color="blue" />
           </div>
-          <header className="flex max-w-7xl items-center px-5">
+          <header className="flex max-w-7xl items-center px-5 font-oswald">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">FAQs</h2>
           </header>
