@@ -49,6 +49,24 @@ authRoutes.post("/auth/signup", async (c) => {
       email: formEmail,
     });
 
+    await db.insert(Schema.personalInfo).values({
+      user_id: userId,
+      first_name: "",
+      last_name: "",
+      phone: "",
+      area_code: 0,
+    });
+
+    await db.insert(Schema.professionalInfo).values({
+      user_id: userId,
+      resume_path: "",
+      linkedin: "",
+      portfolio: "",
+      majors: "",
+      minors: "",
+      graduation_semester: "",
+    });
+
     return new Response("User successfully created!", {
       status: 201,
       headers: {
