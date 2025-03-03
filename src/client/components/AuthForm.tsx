@@ -14,14 +14,12 @@ interface AuthFormProps {
   linkRoute: string;
   errorMessage?: string;
   isSignUp?: boolean;
-  additionalButton?: {
-    text: string;
-    route: string;
-  };
+  additionalButton?: { text: string; route: string };
 }
 
 export interface FormData {
   username: string;
+  email?: string;
   password: string;
   retypePassword?: string;
 }
@@ -44,14 +42,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
     handleSubmit,
     register,
     watch,
-  } = useForm<FormData>({
-    mode: "all",
-    defaultValues: {
-      username: "",
-      password: "",
-      retypePassword: "",
-    },
-  });
+  } = useForm<FormData>({ mode: "all", defaultValues: { username: "", email: "", password: "", retypePassword: "" } });
 
   const password = watch("password");
   const handleFormSubmit: SubmitHandler<FormData> = (data) => {
@@ -65,7 +56,9 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
       noValidate
-      className="relative z-10 flex h-[32rem] w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl"
+      className={`relative z-10 flex w-full max-w-md flex-col items-center justify-start overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl ${
+        isSignUp ? "min-h-[38em]" : "min-h-[32rem]"
+      }`}
     >
       <div className="mb-6 p-2">
         <Logo />
@@ -79,20 +72,31 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
           type="text"
           {...register("username", {
             required: { value: true, message: "Username is required" },
-            minLength: {
-              value: 4,
-              message: "Username must be at least 4 characters!",
-            },
-            maxLength: {
-              value: 12,
-              message: "Username must be 12 characters or fewer!",
-            },
+            minLength: { value: 4, message: "Username must be at least 4 characters!" },
+            maxLength: { value: 12, message: "Username must be 12 characters or fewer!" },
           })}
-          placeholder="Username or email"
+          placeholder={isSignUp ? "Username" : "Username or email"}
           className="h-12 p-4"
         />
       </StyledFormField>
       {errors.username && <span className="mb-1 font-redhat text-sm text-red-600">{errors.username.message}</span>}
+
+      {isSignUp && (
+        <>
+          <StyledFormField icon="icon-[material-symbols--mail-outline]" hasError={!!errors.email}>
+            <Input
+              id="email"
+              type="email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email address" },
+              })}
+              placeholder="Email"
+            />
+          </StyledFormField>
+          {errors.email && <span className="mb-1 font-redhat text-sm text-red-600">{errors.email.message}</span>}
+        </>
+      )}
 
       <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.password}>
         <Input
@@ -138,7 +142,7 @@ const AuthForm = ({ additionalButton, buttonLabel, errorMessage, isSignUp = fals
 
       <p className="text-md mt-4 text-center font-redhat">
         {linkText}{" "}
-        <Link to={linkRoute} className="cursor-pointer text-saseBlue underline">
+        <Link to={isSignUp ? linkRoute : "/password"} className="cursor-pointer text-saseBlue underline">
           {isSignUp ? "Login here." : "Click here to reset."}
         </Link>
       </p>

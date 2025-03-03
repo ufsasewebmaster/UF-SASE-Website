@@ -1,14 +1,14 @@
 import { cn } from "@/shared/utils";
 import { Icon } from "@iconify/react";
-import { Link } from "@tanstack/react-router";
 
 const SASE_COLORS = ["saseBlue", "saseGreen"];
 
 interface ProfileNavProps {
   profileName?: string;
+  update: (section: string) => void;
 }
 
-const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User" }) => {
+const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User", update }) => {
   return (
     <div className={cn("flex w-60 flex-col rounded-3xl bg-white p-6 font-redhat shadow-lg")}>
       {/* Profile Info */}
@@ -23,52 +23,57 @@ const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User" }) => {
 
       <nav className="flex flex-col space-y-2">
         {[
-          { icon: "mdi:account-circle-outline", text: "Account", to: "/" },
-          { icon: "mdi:information-outline", text: "User Info", to: "/" },
-          { icon: "mdi:lock-outline", text: "Security", to: "/" },
-          { icon: "mdi:clipboard-check-outline", text: "Attendance", to: "/" },
-          { icon: "mdi:file-document-outline", text: "Forms", to: "/" },
-          { icon: "mdi:book-open-page-variant-outline", text: "Resources", to: "/" },
-          { icon: "mdi:cog-outline", text: "Settings", to: "/" },
+          { icon: "mdi:account-circle-outline", text: "Account" },
+          { icon: "mdi:information-outline", text: "User Info" },
+          { icon: "mdi:lock-outline", text: "Security" },
+          { icon: "mdi:clipboard-check-outline", text: "Attendance" },
+          { icon: "mdi:file-document-outline", text: "Forms" },
+          { icon: "mdi:book-open-page-variant-outline", text: "Resources" },
+          { icon: "mdi:cog-outline", text: "Settings" },
         ].map((item, idx) => (
-          <NavItem key={idx} icon={item.icon} text={item.text} to={item.to} color={SASE_COLORS[idx % 2]} />
+          <NavItem key={idx} icon={item.icon} text={item.text} color={SASE_COLORS[idx % 2]} update={update} />
         ))}
       </nav>
     </div>
   );
 };
 
-const NavItem = ({ color, icon, text, to }: { icon: string; text: string; to: string; color: string }) => (
-  <Link
-    to={to}
-    className={cn(
-      "group relative flex items-center space-x-3 rounded-md p-3 text-left font-redhat transition-transform duration-300 hover:scale-105",
-    )}
-  >
-    <Icon
-      icon={icon}
-      className={cn(
-        "text-3xl text-black transition-colors duration-300",
-        color === "saseBlue" ? "group-hover:text-saseBlue" : "group-hover:text-saseGreen",
-      )}
-    />
-    <div className="relative">
-      <span
+const NavItem = ({ color, icon, text, update }: { icon: string; text: string; color: string; update: (section: string) => void }) => {
+  const setActiveSection = () => {
+    const section = text.toLowerCase().replace(/\s+/g, "");
+    update(section);
+  };
+
+  return (
+    <button
+      className="group relative flex items-center space-x-3 rounded-md p-3 text-left font-redhat transition-transform duration-300 hover:scale-105"
+      onClick={setActiveSection}
+    >
+      <Icon
+        icon={icon}
         className={cn(
-          "font-medium text-black transition-all duration-300 group-hover:font-bold",
+          "text-3xl text-black transition-colors duration-300",
           color === "saseBlue" ? "group-hover:text-saseBlue" : "group-hover:text-saseGreen",
         )}
-      >
-        {text}
-      </span>
-      <span
-        className={cn(
-          "absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full",
-          color === "saseBlue" ? "group-hover:bg-saseBlue" : "group-hover:bg-saseGreen",
-        )}
-      ></span>
-    </div>
-  </Link>
-);
+      />
+      <div className="relative">
+        <span
+          className={cn(
+            "font-medium text-black transition-all duration-300 group-hover:font-bold",
+            color === "saseBlue" ? "group-hover:text-saseBlue" : "group-hover:text-saseGreen",
+          )}
+        >
+          {text}
+        </span>
+        <span
+          className={cn(
+            "absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full",
+            color === "saseBlue" ? "group-hover:bg-saseBlue" : "group-hover:bg-saseGreen",
+          )}
+        ></span>
+      </div>
+    </button>
+  );
+};
 
 export default ProfileNav;

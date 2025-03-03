@@ -1,4 +1,4 @@
-import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
 
 // Here we define our database schema as code
@@ -11,6 +11,7 @@ export const users = sqliteTable("user", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
+  email: text("email").notNull().unique(),
 
   // TODO: password_hash
   // password_hash: text("password_hash").notNull(),
@@ -41,8 +42,7 @@ export const personalInfo = sqliteTable("personal_info", {
     .references(() => users.id),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
-  email: text("email").notNull().unique(),
-  phone: blob("phone", { mode: "bigint" }).unique(), // NOTE: Phone is bigint
+  phone: text("phone"), // NOTE: Phone is bigint
   area_code: integer("area_code"),
 });
 

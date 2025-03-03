@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+import { Button } from "@ui/button";
 import React from "react";
 
 interface ModalProps {
@@ -12,15 +14,16 @@ const Modal: React.FC<ModalProps> = ({ children, description, isOpen, onClose, t
   if (!isOpen) return null;
 
   return (
-    // This wrapper ensures the modal is fixed and covers the entire viewport.
-    <div className="fixed left-0 top-0 z-[9999] flex h-full w-full items-center justify-center bg-black/50">
-      <div className="relative max-w-lg rounded-md bg-white p-6">
-        {title && <h2 className="mb-2 text-xl font-semibold">{title}</h2>}
-        {description && <p className="mb-4">{description}</p>}
-        {children}
-        <button className="absolute right-2 top-2 text-gray-500 hover:text-gray-700" onClick={onClose}>
-          X
-        </button>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
+      <div className="relative max-h-[80vh] w-[80vw] max-w-[1200px] overflow-auto rounded-lg bg-white shadow-lg">
+        <div className="flex items-center justify-between border-b px-6 py-3">
+          {title && <h2 className="text-xl font-semibold">{title}</h2>}
+          <Button variant="ghost" size="icon" onClick={onClose}>
+            <Icon icon="mdi:close" className="h-6 w-6" />
+          </Button>
+        </div>
+        {description && <p className="px-6 py-2">{description}</p>}
+        <div className="overflow-auto p-6">{children}</div>
       </div>
     </div>
   );

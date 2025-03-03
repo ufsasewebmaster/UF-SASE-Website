@@ -1,5 +1,5 @@
-import Carousel from "@/client/components/programs/Carousel";
 import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqInterns";
 import GoalCard from "@components/programs/GoalCard";

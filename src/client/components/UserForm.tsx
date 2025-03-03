@@ -10,6 +10,7 @@ export const UserForm = () => {
     password: "",
     points: 0,
     roles: "user",
+    email: "",
   });
 
   // TODO: Get id from user context
@@ -25,6 +26,7 @@ export const UserForm = () => {
           password: "",
           points: 0,
           roles: "user",
+          email: "",
         });
       },
     });
