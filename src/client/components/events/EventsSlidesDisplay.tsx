@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import React, { useEffect, useRef, useState } from "react";
 import ImageButton from "./ImageButton";
 
@@ -70,7 +71,6 @@ const imageData = {
 const EventsSlides: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<keyof typeof imageData>("Fall 2023");
   const [view, setView] = useState<"slides" | "recordings">("slides");
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -86,13 +86,15 @@ const EventsSlides: React.FC = () => {
 
   return (
     <div className="relative flex w-screen flex-col items-center gap-5 p-5">
+      {/* Year Selector */}
       <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300 font-redhat">
         {Object.keys(imageData).map((year) => (
           <button
             key={year}
-            className={`border-b-2 p-3 px-6 text-lg transition-all duration-300 ease-in-out ${
-              selectedYear === year ? "border-saseGreen text-black" : "border-transparent text-black hover:border-gray-400"
-            }`}
+            className={cn("border-b-2 p-3 px-6 text-lg transition-all duration-300 ease-in-out", {
+              "border-saseGreen text-black": selectedYear === year,
+              "border-transparent text-black hover:border-gray-400": selectedYear !== year,
+            })}
             onClick={() => setSelectedYear(year as keyof typeof imageData)}
           >
             {year}
@@ -107,7 +109,7 @@ const EventsSlides: React.FC = () => {
         >
           <span>{view === "slides" ? "Slides" : "Recordings"}</span>
           <svg
-            className={`h-4 transition-transform duration-200`}
+            className="h-4 transition-transform duration-200"
             style={{ transform: isDropdownOpen ? "rotate(270deg)" : "rotate(90deg)" }}
             fill="none"
             stroke="currentColor"
@@ -119,9 +121,10 @@ const EventsSlides: React.FC = () => {
         </button>
 
         <div
-          className={`absolute left-0 w-40 transform overflow-hidden rounded-xl border border-black bg-white transition-all duration-200 ${
-            isDropdownOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
-          }`}
+          className={cn("absolute left-0 w-40 transform overflow-hidden rounded-xl border border-black bg-white transition-all duration-200", {
+            "translate-y-0 opacity-100": isDropdownOpen,
+            "-translate-y-2 opacity-0": !isDropdownOpen,
+          })}
         >
           {view === "slides" ? (
             <div
@@ -147,6 +150,7 @@ const EventsSlides: React.FC = () => {
         </div>
       </div>
 
+      {/* Slides Content */}
       {view === "slides" ? (
         <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {imageData[selectedYear].map((item, index) => (
