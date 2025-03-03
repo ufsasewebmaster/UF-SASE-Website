@@ -1,7 +1,7 @@
 const EventsCalendar = () => (
   <div className="relative w-4/5">
     <div
-      className="absolute left-3 top-3 h-full w-full rounded-lg bg-blueShadow"
+      className="absolute left-3 top-3 h-full w-full rounded-xl bg-gradient-to-b from-saseGreen to-saseBlue transition-all duration-300 ease-in-out group-hover:bg-gradient-to-b group-hover:from-saseGreen group-hover:to-saseBlue"
       style={{ width: "60%", height: "550px", minWidth: "550px", zIndex: 1 }}
     ></div>
 
