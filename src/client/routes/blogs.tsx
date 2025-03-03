@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blogs")({
           title: newBlogTitle,
           content: newBlogContent,
           tags: newBlogTags.split(",").map((tag) => tag.trim()),
-          authorId: "SASE Historian", // TODO: This should be optional
+          author_id: "SASE Historian", // TODO: This should be optional
         },
         {
           onError: (error: Error) => {
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/blogs")({
           {
             title: newBlogTitle,
             content: newBlogContent,
-            tags: newBlogTags.split(",").map((tag) => tag.trim()),
+            // tags: newBlogTags.split(",").map((tag) => tag.trim()),
           },
           {
             onError: (error: Error) => {
@@ -66,7 +66,7 @@ export const Route = createFileRoute("/blogs")({
       setCurrentBlog(blog);
       setNewBlogTitle(blog.title);
       setNewBlogContent(blog.content);
-      setNewBlogTags(blog.tags?.join(", ") || "");
+      // setNewBlogTags(blog.tags?.join(", ") || "");
       setIsEditing(true);
       setError(null);
     };
@@ -142,7 +142,7 @@ export const Route = createFileRoute("/blogs")({
               <div key={blog.id} className="rounded-lg bg-white p-6 shadow-md">
                 <h2 className="mb-2 text-xl font-bold">{blog.title}</h2>
                 <p className="mb-4 text-gray-600">{blog.content.substring(0, 100)}...</p>
-                {blog.tags && <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags.join(", ")}</p>}
+                {/* {blog.tags && <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags.join(", ")}</p>} */}
                 {isAuthenticated && <Button onClick={() => handleEditBlog(blog)}>Edit</Button>}
               </div>
             ))

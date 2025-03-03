@@ -17,7 +17,7 @@ const GoalCard = ({ color, text }: GoalCardProps) => {
           },
         )}
       >
-        <p className="text-2xl text-muted-foreground">{text}</p>
+        <p className="font-redhat text-2xl text-foreground">{text}</p>
       </div>
     </div>
   );

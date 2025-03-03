@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
     <footer className="mt-auto bg-saseBlue py-7 text-white">
       <div className="container mx-auto flex flex-col items-center justify-between md:flex-row">
         {/* Left Section - Logo and Social Icons */}
-        <div className="mb-6 flex flex-col items-center md:mb-0 md:items-start">
+        <div className="mb-6 flex flex-col items-center md:mb-0">
           <div className="mb-6">
             <img src={imageUrls["WhiteSASELogo.png"]} alt="Logo" style={{ width: "235px", height: "75px" }} className="ml-2 h-auto" />
           </div>
@@ -39,7 +39,15 @@ const Footer: React.FC = () => {
             <div className="-top-3 h-0.5 w-[350px] bg-saseGreen"></div>
             <div className="relative mt-2 md:ml-4 md:mt-0">
               <Button asChild variant="link" size="default">
-                <Link className="relative flex h-9 items-center rounded-[55px] border-2 border-black bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5">
+                <Link
+                  to="/about"
+                  onClick={() => {
+                    setTimeout(() => {
+                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    }, 100);
+                  }}
+                  className="relative flex h-9 items-center rounded-[55px] border-2 border-black bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5"
+                >
                   Contact Us!
                 </Link>
               </Button>

@@ -23,9 +23,9 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="flex flex-col items-center bg-black p-12">
+        <div className="flex flex-col items-center bg-black px-0 py-14 md:px-8 lg:px-12">
           <div className="relative w-9/12 rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
-            <div className="flex h-full flex-col rounded-2xl bg-gray-950 p-10">
+            <div className="flex h-full flex-col rounded-2xl bg-gray-950 p-4 text-center lg:p-10 lg:text-start">
               <h1 className="pb-12 font-oswald text-3xl font-medium text-white sm:text-5xl">University of Florida Chapter</h1>
               <div>
                 {/* Video for sm-xl screens */}
@@ -47,14 +47,14 @@ export const Route = createFileRoute("/")({
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <p className="font-redhat text-xl text-white">
+                <p className="font-redhat text-lg text-white md:text-xl">
                   The <span className="font-semibold">Society of Asian Scientists & Engineers </span> is a vibrant and dynamic organization at the
                   University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
                   <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
                   professionals in <span className="font-semibold">science and engineering</span>.
                 </p>
                 <br />
-                <p className="font-redhat text-xl text-white">
+                <p className="font-redhat text-lg text-white md:text-xl">
                   Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
                   acquire <span className="font-semibold">essential skills and knowledge </span>
                   to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
@@ -128,7 +128,6 @@ export const Route = createFileRoute("/")({
           <div className="flex w-9/12 flex-col items-center gap-12">
             <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="p-4 font-redhat text-xl sm:text-2xl">
-                <span className="text-2xl font-semibold sm:text-3xl">CHANGE!!!!! </span>
                 Are you interested in becoming a partner with the{" "}
                 <span className="font-semibold"> UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
                 ?
@@ -142,8 +141,13 @@ export const Route = createFileRoute("/")({
                   </a>
                   <a
                     href="/sponsors"
-                    className="ml-auto rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]"
+                    className="ml-auto hidden rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:block"
                   >
+                    Sponsors
+                  </a>
+                </div>
+                <div className="mt-4 sm:hidden">
+                  <a href="/sponsors" className="rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]">
                     Sponsors
                   </a>
                 </div>
@@ -160,6 +164,7 @@ export const Route = createFileRoute("/")({
                       companyName={sponsor.company}
                       type={sponsor.tier}
                       shadowcolor={sponsor.shadow_color}
+                      link={sponsor.link}
                     />
                   ) : null,
                 )}

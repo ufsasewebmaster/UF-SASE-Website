@@ -9,6 +9,8 @@ import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useRef, useState } from "react";
 
+const SCREEN_BREAKPOINT = 1024;
+
 const navItems = [
   { name: "Home", path: "/" },
   {
@@ -37,41 +39,51 @@ const navItems = [
       { name: "Sports", path: "/sports" },
     ],
   },
+  {
+    name: "Resources",
+    path: "/resources",
+  },
 ];
 
 const Header: React.FC = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target as Node) &&
-      hamburgerRef.current &&
-      !hamburgerRef.current.contains(event.target as Node)
-    ) {
-      setMenuOpen(false);
-    }
-  };
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target as Node) &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+    const handleResize = () => {
+      if (window.innerWidth >= SCREEN_BREAKPOINT) {
+        setMenuOpen(false);
+      }
     };
-  }, [menuOpen]);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <header
-      className={cn(`sticky left-0 top-0 z-50 w-full font-poppins font-medium shadow-md`, {
+      className={cn(`sticky left-0 top-0 z-50 w-full font-redhat font-medium shadow-md`, {
         "bg-black text-white": isHomePage,
         "bg-white text-black": !isHomePage,
       })}
@@ -80,26 +92,36 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
             <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
             <SearchBar />
-            <UserButton isLoggedIn={isAuthenticated} />
+            <div className="hidden md:block">
+              <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />
+            </div>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
           <SearchBar className="w-32 focus:w-64" />
-          <UserButton isLoggedIn={isAuthenticated} />
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu navItems={navItems} isOpen={menuOpen} onClose={() => setMenuOpen(false)} isHomePage={isHomePage} />
+        <div ref={menuRef}>
+          <MobileMenu
+            navItems={navItems}
+            isOpen={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            isHomePage={isHomePage}
+            isLoggedIn={isAuthenticated}
+            onLogout={logout}
+          />
+        </div>
       </nav>
     </header>
   );

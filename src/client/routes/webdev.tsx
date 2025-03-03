@@ -2,9 +2,9 @@ import BackendLead from "@assets/webdev/BackendLead.jpeg";
 import FrontEndLead from "@assets/webdev/FrontendLead.png";
 import FullStackLead from "@assets/webdev/FullStackLead2.jpg";
 import UIUXLead from "@assets/webdev/UIUXLead.jpg";
-import TeamPhoto from "@assets/webdev/WebDevTeam.jpg";
 import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";
 import MemberCard from "@components/home/MemberCard";
+import Carousel from "@components/programs/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import GoalCard from "@components/programs/GoalCard";
@@ -47,21 +47,14 @@ export const Route = createFileRoute("/webdev")({
             }
           />
         </div>
-        {/* Placeholder Image */}
         <div className="w-full max-w-7xl px-4 py-8">
-          <div className="mx-auto mb-24 w-full max-w-7xl px-4">
-            <img
-              src={TeamPhoto}
-              alt="Placeholder"
-              className="w-full rounded-3xl border-4 border-saseGreen"
-              style={{ height: "600px", objectFit: "cover" }}
-            />
-          </div>
+          <Carousel purpose="Images" prog="Web Dev" />
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-gray-800">Leadership</h2>
           </header>
-          <div className="grid grid-cols-1 gap-1 bg-white p-12 xl:grid-cols-5">
+          {/* CSS grid is not cooperating with the md breapoint, auto aligns left =(*/}
+          <div className="grid grid-cols-1 gap-1 bg-white p-12 md:grid-cols-2 lg:grid-cols-5">
             <MemberCard image={FullStackLead} name="Arman Kumaraswamy" role="Full-Stack" textColor="blue" quote="[object Object]" />
             <MemberCard image={FrontEndLead} name="Joseph Kim" role="Frontend" textColor="green" quote="still don't how to center a div" />
             <MemberCard image={WebmasterChair} name="Ricky Zhang" role="Webmaster" textColor="blue" quote="SASE deserves a better website" />

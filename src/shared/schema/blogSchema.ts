@@ -6,11 +6,9 @@ export const blogSchema = z.object({
   id: z.string().min(1, "Blog ID is required."),
   title: z.string().min(1, "Title is required."),
   content: z.string().min(1, "Content cannot be empty."),
-  authorId: z.string().min(1, "Author ID is required."),
-  publishedDate: z.number().int().min(0, "Published date must be a valid timestamp."),
-  timeUpdated: z.number().int().min(0, "Update time must be a valid timestamp."),
-  lastUpdateDate: z.string().min(1, "Last update date must be a valid date.").optional(),
-  tags: z.array(z.string()).optional(),
+  author_id: z.string().min(1, "Author ID is required."),
+  published_date: z.string().min(0, "Published date must be a valid timestamp."),
+  time_updated: z.string().min(0, "Update time must be a valid timestamp."),
 });
 
 export const blogTitleSchema = z.object({
@@ -21,9 +19,8 @@ export const blogTitleSchema = z.object({
 export const createBlogSchema = blogSchema
   .omit({
     id: true,
-    timeUpdated: true,
-    publishedDate: true,
-    lastUpdateDate: true,
+    time_updated: true,
+    published_date: true,
   })
   .extend({
     tags: z.array(z.string()).optional(),
@@ -31,8 +28,8 @@ export const createBlogSchema = blogSchema
 
 export const updateBlogSchema = blogSchema.partial().omit({
   id: true, // Immutable fields
-  authorId: true,
-  publishedDate: true,
+  author_id: true,
+  published_date: true,
 });
 
 // Export TypeScript types
