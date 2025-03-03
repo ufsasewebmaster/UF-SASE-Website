@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({ children, description, isOpen, onClose, t
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
       <div className="relative max-h-[80vh] w-[80vw] max-w-[1200px] overflow-auto rounded-lg bg-white shadow-lg">
         <div className="flex items-center justify-between border-b px-6 py-3">
-          {title && <h2 className="text-xl font-semibold">{title}</h2>}
+          {title && <h2 className="font-redhat text-xl font-semibold">{title}</h2>}
           <Button variant="ghost" size="icon" onClick={onClose}>
             <Icon icon="mdi:close" className="h-6 w-6" />
           </Button>
