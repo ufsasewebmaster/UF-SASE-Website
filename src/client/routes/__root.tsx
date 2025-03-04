@@ -73,6 +73,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
       </Head>
       <Body>
+        <Toaster />
         <div className="flex min-h-screen flex-col">
           <Header />
           {/* Main Content Area */}
