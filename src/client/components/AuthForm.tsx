@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@ui/button";
 import { Input } from "@ui/input";
@@ -5,7 +6,6 @@ import React from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { Logo } from "./navigation/Logo";
-import { cn } from "@/shared/utils";
 
 interface AuthFormProps {
   onSubmit: (data: FormData) => void;
@@ -29,12 +29,14 @@ export interface FormData {
 
 // only styling
 const StyledFormField = ({ children, hasError, icon }: { children: React.ReactNode; icon?: string; hasError?: boolean }) => (
-  <div className="relative mb-2 w-full"> {/* Adjusted bottom margin */}
+  <div className="relative mb-2 w-full">
+    {" "}
+    {/* Adjusted bottom margin */}
     {icon && <span className={`absolute left-3 top-[40%] z-10 h-5 w-5 -translate-y-1/2 text-gray-500 ${icon}`} />}
     {React.cloneElement(children as React.ReactElement, {
       className: cn(
         "mb-3 rounded-lg border border-gray-300 bg-saseGreenLight p-4 pl-10 placeholder-black opacity-90 w-full",
-        hasError && "border-red-600"
+        hasError && "border-red-600",
       ),
     })}
   </div>
@@ -71,7 +73,7 @@ const AuthForm = ({
       noValidate
       className={cn(
         "relative z-10 flex w-full max-w-md flex-col items-center justify-center overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl",
-        isSignUp ? "min-h-[38em]" : "min-h-[32rem]"
+        isSignUp ? "min-h-[38em]" : "min-h-[32rem]",
       )}
     >
       <div className="mb-6 p-2">
@@ -79,7 +81,6 @@ const AuthForm = ({
       </div>
       <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3> {/* Kept original title size */}
       {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
-
       {!isResetPassword && (
         <>
           <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
@@ -113,7 +114,7 @@ const AuthForm = ({
               {errors.email && <span className="mb-1 font-redhat text-sm text-red-600">{errors.email.message}</span>}
             </>
           )}
-          
+
           <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.password}>
             <Input
               id="password"
@@ -133,7 +134,6 @@ const AuthForm = ({
           {errors.password && <span className="mb-1 font-redhat text-sm text-red-600">{errors.password.message}</span>}
         </>
       )}
-
       {isSignUp && (
         <>
           <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.retypePassword}>
@@ -151,7 +151,6 @@ const AuthForm = ({
           {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message}</span>}
         </>
       )}
-
       {isResetPassword && (
         <>
           <StyledFormField icon="icon-[fluent--key-20-filled]" hasError={!!errors.newPassword}>
@@ -186,7 +185,6 @@ const AuthForm = ({
           {errors.retypePassword && <span className="mb-1 font-redhat text-sm text-red-600">{errors.retypePassword.message}</span>}
         </>
       )}
-
       <Button
         type="submit"
         className="w-full rounded-lg border bg-saseBlueLight p-5 font-semibold text-white"
@@ -194,7 +192,6 @@ const AuthForm = ({
       >
         {buttonLabel}
       </Button>
-
       {!isResetPassword && (
         <p className="text-md mt-4 text-center font-redhat">
           {linkText}{" "}
@@ -203,7 +200,6 @@ const AuthForm = ({
           </Link>
         </p>
       )}
-
       {additionalButton && (
         <Link
           to={additionalButton.route}
