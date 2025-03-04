@@ -31,7 +31,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
       <div
         className={`transition-all duration-200 ease-in-out ${
           isOpen ? "max-h-[800px] py-5 opacity-100" : "max-h-0 py-0 opacity-0"
-        } overflow-hidden border-t border-gray-300 bg-white px-6`}
+        } bg-muted-background overflow-hidden border-t border-gray-300 px-6`}
         style={{ transitionProperty: "max-height, opacity, padding" }}
       >
         <div className="text-xl text-muted-foreground">{answer}</div>

@@ -17,12 +17,12 @@ export const Route = createFileRoute("/set")({
   ],
   component: () => {
     return (
-      <div className="mt-12 flex min-h-screen flex-col items-center bg-white font-[Poppins]">
+      <div className="mt-12 flex min-h-screen flex-col items-center bg-background font-[Poppins]">
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 lg:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-52 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-5xl font-semibold leading-tight text-gray-800 sm:text-7xl">
+            <h2 className="text-5xl font-semibold leading-tight text-foreground sm:text-7xl">
               SASE
               <br />
               ENGINEERING
@@ -46,12 +46,12 @@ export const Route = createFileRoute("/set")({
           <Carousel purpose="Images" prog="SET" />
           <header className="mb-6 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-gray-800">Past Projects</h2>
+            <h2 className="text-4xl text-foreground">Past Projects</h2>
           </header>
           <Carousel purpose="Testimonials" prog="SET" />
           <header className="mb-12 flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-gray-800">Goals & Outcomes</h2>
+            <h2 className="text-4xl text-foreground">Goals & Outcomes</h2>
           </header>
           <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
             <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/set")({
           </div>
           <header className="flex max-w-7xl items-center px-5">
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-gray-800">FAQs</h2>
+            <h2 className="text-4xl text-foreground">FAQs</h2>
           </header>
           <FAQ faqData={faqData} />
         </div>
