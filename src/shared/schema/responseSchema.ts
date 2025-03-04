@@ -22,7 +22,5 @@ export const errorResponseSchema = z.object({
   }),
 });
 
-export type SuccessResponse<T> = z.infer<typeof successResponseSchema> & {
-  data: T;
-};
+export type SuccessResponse = z.infer<typeof successResponseSchema>;
 export type ErrorResponse = z.infer<typeof errorResponseSchema>;

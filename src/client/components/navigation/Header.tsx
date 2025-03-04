@@ -1,4 +1,4 @@
-import { useAuth } from "@/client/AuthContext";
+import { useAuth } from "@/client/hooks/AuthContext";
 import { cn } from "@/shared/utils";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";

@@ -1,4 +1,4 @@
-import { useAuth } from "@client/AuthContext";
+import { useAuth } from "@/client/hooks/AuthContext";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/blogs")({
     const [newBlogTitle, setNewBlogTitle] = useState("");
     const [newBlogContent, setNewBlogContent] = useState("");
     const [newBlogTags, setNewBlogTags] = useState("");
-    const { isAuthenticated } = useAuth();
+    const { id, isAuthenticated } = useAuth();
     const [error, setError] = useState<string | null>(null);
 
     const { blogs, createBlog, updateBlog } = useBlogs();
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blogs")({
           title: newBlogTitle,
           content: newBlogContent,
           tags: newBlogTags.split(",").map((tag) => tag.trim()),
-          author_id: "SASE Historian", // TODO: This should be optional
+          author_id: id,
         },
         {
           onError: (error: Error) => {
