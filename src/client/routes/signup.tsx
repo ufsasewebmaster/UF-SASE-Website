@@ -4,10 +4,10 @@ import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
 import AuthForm from "../components/AuthForm";
 import ShadowCard from "../components/SignUpShadowCard";
 import { SuccessModal } from "../components/SuccessModal";
+import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/signup")({

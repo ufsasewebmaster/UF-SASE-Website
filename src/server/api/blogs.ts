@@ -1,6 +1,6 @@
 import { db } from "@/server/db/db";
-import * as Schema from "@/server/db/tables";
-import { createErrorResponse } from "@shared/utils";
+import * as Schema from "@db/tables";
+import { createErrorResponse, createSuccessResponse } from "@shared/utils";
 import { eq, like } from "drizzle-orm";
 import { Hono } from "hono";
 
@@ -10,7 +10,7 @@ const blogRoutes = new Hono();
 blogRoutes.get("/blogs/all", async (c) => {
   try {
     const result = await db.select().from(Schema.blogs);
-    return c.json({ data: result });
+    return createSuccessResponse(c, result, "Blogs retrieved successfully");
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "MISSING_BLOG", "Cannot fetch blogs", 400);
@@ -28,8 +28,9 @@ blogRoutes.get("/blogs/:blogID", async (c) => {
     if (result.length === 0) {
       return createErrorResponse(c, "BLOG_NOT_FOUND", "No Blogs Found", 404);
     }
-    return c.json(result[0]);
-  } catch {
+    return createSuccessResponse(c, result[0], "Blog retrieved successfully");
+  } catch (error) {
+    console.log(error);
     return createErrorResponse(c, "FETCH_BLOG_ERROR", "Failed to fetch blog", 500);
   }
 });
@@ -44,27 +45,30 @@ blogRoutes.get("/blogs/search/:title", async (c) => {
       .from(Schema.blogs)
       .where(like(Schema.blogs.title, `%${search_title}%`)); // Approximate search
     const blog_ids = result.map((row) => row.res_blog_ids);
-    return c.json(blog_ids);
-  } catch {
+    return createSuccessResponse(c, blog_ids, "Blog IDs retrieved successfully");
+  } catch (error) {
+    console.log(error);
     return createErrorResponse(c, "SEARCH_BLOGS_ERROR", "Failed to search blogs", 500);
   }
 });
 
+// Add blog
 blogRoutes.post("/blogs/add", async (c) => {
   try {
     const body = await c.req.json();
-    const newBlog = await db
+    const newBlogArray = await db
       .insert(Schema.blogs)
-      .values({
-        ...body,
-      })
+      .values({ ...body })
       .returning();
-    return c.json(`Inserted blog with ID: ${newBlog[0].id}`);
+    const newBlog = newBlogArray[0];
+    return createSuccessResponse(c, newBlog, "Blog added successfully");
   } catch (error) {
-    if (error) return createErrorResponse(c, "ADD_BLOG_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "ADD_BLOG_ERROR", "Failed to add blog", 500);
   }
 });
 
+// Update blog
 blogRoutes.post("/blogs/update", async (c) => {
   try {
     const body = await c.req.json();
@@ -74,15 +78,13 @@ blogRoutes.post("/blogs/update", async (c) => {
     }
     const updatedBlog = await db
       .update(Schema.blogs)
-      .set({
-        ...update,
-        time_updated: new Date(),
-      })
+      .set({ ...update, time_updated: new Date() })
       .where(eq(Schema.blogs.id, id))
       .returning();
-    return c.json(`Updated blog with ID: ${updatedBlog[0].id}`);
+    return createSuccessResponse(c, `Updated blog with ID: ${updatedBlog[0].id}`, "Blog updated successfully");
   } catch (error) {
-    if (error) return createErrorResponse(c, "UPDATE_BLOG_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "UPDATE_BLOG_ERROR", "Failed to update blog", 500);
   }
 });
 

@@ -1,4 +1,4 @@
-import type { Blog, BlogSearchResponse, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
+import type { Blog, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createBlog, fetchBlogById, fetchBlogs, searchBlogsByTitle, updateBlog } from "../api/blogs";
 
@@ -37,7 +37,7 @@ export const useBlogs = () => {
 
   // Search blogs by title
   const searchBlogsQuery = (title: string) =>
-    useQuery<BlogSearchResponse, Error>({
+    useQuery<Blog, Error>({
       queryKey: ["blogs", "search", title],
       queryFn: () => searchBlogsByTitle(title),
       enabled: !!title,
