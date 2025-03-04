@@ -8,3 +8,4 @@ export * from "./professionalInfoSchema";
 export * from "./saseInfoSchema";
 export * from "./userSchema";
 export * from "./responseSchema";
+export * from "./profileSchema";

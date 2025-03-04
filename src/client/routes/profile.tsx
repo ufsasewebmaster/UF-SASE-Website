@@ -1,15 +1,14 @@
 import ProfileNav from "@components/profile/ProfileNav";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useState } from "react";
 import UserInfoBox from "../components/profile/UserInfoBox";
 import { Button } from "../components/ui/button";
+import { useAuth } from "../hooks/AuthContext";
+import { useProfile } from "../hooks/useProfile";
 
 export const Route = createFileRoute("/profile")({
   component: () => {
-    const [profile, setProfile] = useState<{ username: string } | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const { data: profile, error, isLoading } = useProfile();
     const [activeSection, setActiveSection] = useState({
       account: true,
       userinfo: false,
@@ -19,32 +18,15 @@ export const Route = createFileRoute("/profile")({
       resources: false,
       settings: false,
     });
-    const { logout } = useAuth();
+    const { errorMessage, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-      if (!isLoading) return;
-      const fetchProfile = async () => {
-        try {
-          const response = await fetch("/api/profile", { credentials: "include" });
-          if (!response.ok) {
-            navigate({ to: "/" });
-          }
-          const result = (await response.json()) as { data: { username: string } };
-          console.log("Profile API Response:", result);
-          setProfile(result.data);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "Unknown error");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      fetchProfile();
-    }, []);
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
     const handleLogout = async () => {
       try {
+        // Use a hook-based logout if possible; otherwise, fall back to fetch
         const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
         if (response.ok) {
           logout();
@@ -67,15 +49,12 @@ export const Route = createFileRoute("/profile")({
         resources: false,
         settings: false,
       });
-
       setActiveSection((prev) => ({ ...prev, [section]: true }));
     };
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-
     return (
       <div className="flex min-h-screen bg-gray-100 p-10">
+        {errorMessage && <div className="mb-4 rounded bg-red-100 p-2 text-red-700">{errorMessage}</div>}
         <div className="flex items-start">
           <ProfileNav profileName={profile?.username} update={updateComponent} />
         </div>

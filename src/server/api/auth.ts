@@ -4,11 +4,13 @@ import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { generateIdFromEntropySize } from "lucia";
+import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 
 const { compare, genSalt, hash } = bcrypt;
 
 const authRoutes = new Hono();
 
+// Signup route
 authRoutes.post("/auth/signup", async (c) => {
   const formData = await c.req.json();
   const formUsername = formData["username"];
@@ -18,22 +20,16 @@ authRoutes.post("/auth/signup", async (c) => {
 
   //validate username
   if (!formUsername || typeof formUsername !== "string") {
-    return new Response("Invalid username!", {
-      status: 400,
-    });
+    return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 400);
   }
   //validate password
   if (!formPassword || typeof formPassword !== "string") {
-    return new Response("Invalid password!", {
-      status: 400,
-    });
+    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 400);
   }
   //validate email
   // add 3rd validation for email using regular expressions
   if (!formEmail || typeof formEmail !== "string" || !emailRegex.test(formEmail)) {
-    return new Response("Invalid email!", {
-      status: 400,
-    });
+    return createErrorResponse(c, "INVALID_EMAIL", "Invalid email!", 400);
   }
 
   const passSalt = await genSalt(10);
@@ -67,80 +63,71 @@ authRoutes.post("/auth/signup", async (c) => {
       graduation_semester: "",
     });
 
-    return new Response("User successfully created!", {
-      status: 201,
-      headers: {
-        Location: "/",
-      },
-    });
+    return createSuccessResponse(c, { userId }, "User successfully created");
   } catch (error) {
     console.log(error);
-    // db error, email taken, etc
-    return new Response("Error creating user", {
-      status: 400,
-    });
+    return createErrorResponse(c, "CREATE_USER_ERROR", "Error creating user", 400);
   }
 });
 
+// Login route
 authRoutes.post("/auth/login", async (c) => {
   const formData = await c.req.json();
   const formUsername = formData["username"];
   const formPassword = formData["password"];
 
   if (!formUsername || typeof formUsername !== "string") {
-    return new Response("Invalid username!", {
-      status: 401,
-    });
+    return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 401);
   }
 
   if (!formPassword || typeof formPassword !== "string") {
-    return new Response("Invalid password!", {
-      status: 401,
-    });
+    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 401);
   }
 
   const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
 
-  if (user.length == 0) return new Response("Invalid username or password!", { status: 401 });
+  if (user.length === 0) {
+    return createErrorResponse(c, "INVALID_CREDENTIALS", "Invalid username or password!", 401);
+  }
 
   const validPassword = await compare(formPassword, user[0].password);
 
   if (!validPassword) {
-    return new Response("Invalid password!", {
-      status: 401,
-    });
+    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 401);
   } else {
     const session_id = generateIdFromEntropySize(16);
     createSession(session_id, user[0].id);
-    return new Response("Successfully logged in", {
-      status: 200,
-      headers: {
-        "Set-Cookie": `sessionId=${session_id}; Path=/; HttpOnly; secure; Max-Age=3600; SameSite=Strict`,
-      },
-    });
+    // Set cookie here
+    c.header("Set-Cookie", `sessionId=${session_id}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Strict`);
+    return createSuccessResponse(
+      c,
+      { sessionId: session_id },
+      "Successfully logged in"
+    );
   }
 });
 
+
+// Logout route
 authRoutes.post("/auth/logout", async (c) => {
   const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
 
   if (!sessionId) {
-    return new Response("No active session found", { status: 401 });
+    return createErrorResponse(c, "NO_SESSION", "No active session found", 401);
   }
 
   try {
     // delete the session id row from the table
     await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
 
-    return new Response("Successfully logged out", {
-      status: 200,
-      headers: {
-        "Set-Cookie": "sessionId=; Path=/; HttpOnly; Secure; Max-Age=0; SameSite=Strict",
-      },
-    });
+    return createSuccessResponse(
+      c,
+      { success: true },
+      "Successfully logged out"
+    );
   } catch (error) {
     console.log(error);
-    return new Response("Error logging out", { status: 500 });
+    return createErrorResponse(c, "LOGOUT_ERROR", "Error logging out", 500);
   }
 });
 
@@ -149,35 +136,35 @@ authRoutes.get("/auth/session", async (c) => {
   const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
 
   if (!sessionId) {
-    return new Response("No active session", { status: 401 });
+    return createErrorResponse(c, "NO_SESSION", "No active session", 401);
   }
 
   try {
     const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
 
     if (session.length === 0) {
-      return new Response("Session not found", { status: 401 });
+      return createErrorResponse(c, "SESSION_NOT_FOUND", "Session not found", 401);
     }
 
     if (session[0].expires_at < Date.now()) {
       await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
       // maybe renew session?
-      return new Response("Session expired", { status: 401 });
+      return createErrorResponse(c, "SESSION_EXPIRED", "Session expired", 401);
     }
 
-    const user = await db.select({ username: Schema.users.username }).from(Schema.users).where(eq(Schema.users.id, session[0].user_id));
+    const user = await db
+      .select({ id: Schema.users.id, username: Schema.users.username })
+      .from(Schema.users)
+      .where(eq(Schema.users.id, session[0].user_id));
 
     if (user.length === 0) {
-      return new Response("User not found", { status: 401 });
+      return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 401);
     }
 
-    return new Response(JSON.stringify({ username: user[0].username }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return createSuccessResponse(c, { id: user[0].id, username: user[0].username }, "Session valid");
   } catch (error) {
     console.log(error);
-    return new Response("Error checking session", { status: 500 });
+    return createErrorResponse(c, "SESSION_CHECK_ERROR", "Error checking session", 500);
   }
 });
 
@@ -192,4 +179,5 @@ async function createSession(sessionID: string, userID: string) {
     console.log(error);
   }
 }
+
 export default authRoutes;
