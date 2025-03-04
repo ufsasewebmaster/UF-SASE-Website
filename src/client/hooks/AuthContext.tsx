@@ -1,6 +1,6 @@
+import { apiFetch } from "@/shared/utils";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { apiFetch } from "@/shared/utils";
 import { z } from "zod";
 
 export interface AuthContextType {
@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         z.object({
           id: z.string(),
           username: z.string(),
-        })
+        }),
       );
       console.log("ID set to ", user.data.id);
       setId(user.data.id);
@@ -81,11 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  return (
-    <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, login, logout, isLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, login, logout, isLoading }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {

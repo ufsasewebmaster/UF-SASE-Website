@@ -1,6 +1,6 @@
 // libapi/blogs.ts
 import type { Blog, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
-import { blogSchema, createBlogSchema, updateBlogSchema, blogSearchResponseSchema, blogTitleSchema } from "@shared/schema/blogSchema";
+import { blogSchema, blogSearchResponseSchema, blogTitleSchema, updateBlogSchema } from "@shared/schema/blogSchema";
 import { apiFetch } from "@shared/utils";
 import { z } from "zod";
 

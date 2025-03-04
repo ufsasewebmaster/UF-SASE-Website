@@ -4,11 +4,7 @@ import { apiFetch } from "@shared/utils";
 
 // Fetch ALL Users
 export const fetchUsers = async (): Promise<Array<SelectUser>> => {
-  const response = await apiFetch(
-    "/api/users",
-    { method: "GET" },
-    selectUserSchema.array()
-  );
+  const response = await apiFetch("/api/users", { method: "GET" }, selectUserSchema.array());
   return response.data;
 };
 
@@ -20,7 +16,7 @@ export const fetchUser = async (id: string): Promise<SelectUser> => {
       credentials: "include",
       headers: { "Content-Type": "application/json" },
     },
-    selectUserSchema
+    selectUserSchema,
   );
   return response.data;
 };
@@ -34,7 +30,7 @@ export const createUser = async (newUser: InsertUser): Promise<SelectUser> => {
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },
     },
-    selectUserSchema
+    selectUserSchema,
   );
   return response.data;
 };
@@ -48,7 +44,7 @@ export const updateUser = async (updatedUser: UpdateUser): Promise<SelectUser> =
       body: JSON.stringify(updatedUser),
       headers: { "Content-Type": "application/json" },
     },
-    selectUserSchema
+    selectUserSchema,
   );
   return response.data;
 };
@@ -60,7 +56,7 @@ export const deleteUser = async (userId: number): Promise<DeleteUser> => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     },
-    deleteUserSchema
+    deleteUserSchema,
   );
   return response.data;
 };

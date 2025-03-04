@@ -1,6 +1,6 @@
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import { personalInfoInsertSchema, personalInfoUpdateSchema } from "@schema/personalInfoSchema";
 import { professionalInfoInsertSchema, professionalInfoUpdateSchema } from "@schema/professionalInfoSchema";
-import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { db } from "../db/db";
@@ -23,10 +23,7 @@ infoRoutes.post("/users/personal", async (c) => {
 infoRoutes.get("/users/personal/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const personal_info = await db
-      .select()
-      .from(Schema.personalInfo)
-      .where(eq(Schema.personalInfo.user_id, user_id));
+    const personal_info = await db.select().from(Schema.personalInfo).where(eq(Schema.personalInfo.user_id, user_id));
     return createSuccessResponse(c, personal_info, "Personal info retrieved successfully");
   } catch (error) {
     console.log(error);
@@ -39,10 +36,7 @@ infoRoutes.patch("/users/personal/:id", async (c) => {
     const user_id = c.req.param("id");
     const payload = await c.req.json();
     const updateInfo = personalInfoUpdateSchema.parse(payload);
-    const personal_info = await db
-      .update(Schema.personalInfo)
-      .set(updateInfo)
-      .where(eq(Schema.personalInfo.user_id, user_id));
+    const personal_info = await db.update(Schema.personalInfo).set(updateInfo).where(eq(Schema.personalInfo.user_id, user_id));
     return createSuccessResponse(c, personal_info, "Personal info updated successfully");
   } catch (error) {
     console.log(error);
@@ -65,10 +59,7 @@ infoRoutes.post("/users/professional", async (c) => {
 infoRoutes.get("/users/professional/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const professional_info = await db
-      .select()
-      .from(Schema.professionalInfo)
-      .where(eq(Schema.professionalInfo.user_id, user_id));
+    const professional_info = await db.select().from(Schema.professionalInfo).where(eq(Schema.professionalInfo.user_id, user_id));
     return createSuccessResponse(c, professional_info, "Professional info retrieved successfully");
   } catch (error) {
     console.log(error);
@@ -81,10 +72,7 @@ infoRoutes.patch("/users/professional/:id", async (c) => {
     const user_id = c.req.param("id");
     const payload = await c.req.json();
     const updateInfo = professionalInfoUpdateSchema.parse(payload);
-    const professional_info = await db
-      .update(Schema.professionalInfo)
-      .set(updateInfo)
-      .where(eq(Schema.professionalInfo.user_id, user_id));
+    const professional_info = await db.update(Schema.professionalInfo).set(updateInfo).where(eq(Schema.professionalInfo.user_id, user_id));
     return createSuccessResponse(c, professional_info, "Professional info updated successfully");
   } catch (error) {
     console.log(error);

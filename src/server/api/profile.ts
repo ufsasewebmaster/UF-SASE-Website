@@ -1,8 +1,8 @@
 import { db } from "@/server/db/db";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
-import { getTableColumns, eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import { Hono } from "hono";
-import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 
 const profileRoutes = new Hono();
 
@@ -53,7 +53,6 @@ profileRoutes.get("/profile", async (c) => {
     return createErrorResponse(c, "FETCH_PROFILE_ERROR", "Internal server error", 500);
   }
 });
-
 
 // Fetch profile, return JSON object of {data: <profileSchema>, message: <string>}
 // This route expects a session ID in the cookie, make sure a user is signed in when calling this endpoint
@@ -142,11 +141,7 @@ profileRoutes.patch("/profile", async (c) => {
 export default profileRoutes;
 
 function generateColumns() {
-  const personalInfoColumns = new Set(
-    Object.values(getTableColumns(Schema.personalInfo)).map((col) => col.name)
-  );
-  const professionalInfoColumns = new Set(
-    Object.values(getTableColumns(Schema.professionalInfo)).map((col) => col.name)
-  );
+  const personalInfoColumns = new Set(Object.values(getTableColumns(Schema.personalInfo)).map((col) => col.name));
+  const professionalInfoColumns = new Set(Object.values(getTableColumns(Schema.professionalInfo)).map((col) => col.name));
   return [personalInfoColumns, professionalInfoColumns];
 }

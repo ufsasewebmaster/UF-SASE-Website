@@ -61,7 +61,7 @@ eventRoutes.post("/events", async (c) => {
         end_time: endTime,
       })
       .returning();
-      
+
     return createSuccessResponse(c, result[0], `Inserted event with ID: ${result[0].id}`);
   } catch (error) {
     console.log(error);
@@ -138,4 +138,3 @@ eventRoutes.get("/events/search/:name", async (c) => {
 });
 
 export default eventRoutes;
-

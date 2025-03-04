@@ -18,7 +18,7 @@ export const Route = createFileRoute("/profile")({
       resources: false,
       settings: false,
     });
-    const { errorMessage, isAuthenticated, logout } = useAuth();
+    const { errorMessage, logout } = useAuth();
     const navigate = useNavigate();
 
     if (isLoading) return <div>Loading...</div>;

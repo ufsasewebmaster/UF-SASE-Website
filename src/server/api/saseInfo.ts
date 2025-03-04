@@ -1,9 +1,9 @@
 import { db } from "@/server/db/db";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { saseInfoSchema } from "@schema/saseInfoSchema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 
 const saseRoutes = new Hono();
 
@@ -21,10 +21,7 @@ saseRoutes.post("/users/sase", async (c) => {
 saseRoutes.get("/users/sase/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const sase_info = await db
-      .select()
-      .from(Schema.saseInfo)
-      .where(eq(Schema.saseInfo.user_id, user_id));
+    const sase_info = await db.select().from(Schema.saseInfo).where(eq(Schema.saseInfo.user_id, user_id));
     return createSuccessResponse(c, sase_info, "SASE info retrieved successfully");
   } catch (error) {
     console.error("Error retrieving SASE info:", error);

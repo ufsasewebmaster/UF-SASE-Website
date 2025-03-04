@@ -6,15 +6,15 @@ export const profileSchema = z.object({
   email: z.string().email("Invalid email address."),
   time_added: z.preprocess(
     (val) => (typeof val === "string" ? Date.parse(val) : val),
-    z.number().int().min(0, "Time added must be a valid timestamp.")
+    z.number().int().min(0, "Time added must be a valid timestamp."),
   ),
   time_updated: z.preprocess(
     (val) => (typeof val === "string" ? Date.parse(val) : val),
-    z.number().int().min(0, "Time updated must be a valid timestamp.")
+    z.number().int().min(0, "Time updated must be a valid timestamp."),
   ),
 
   first_name: z.string(), // allow empty string if needed
-  last_name: z.string(),  // allow empty string if needed
+  last_name: z.string(), // allow empty string if needed
   phone: z.string().optional(),
 
   resume: z.string().optional(),

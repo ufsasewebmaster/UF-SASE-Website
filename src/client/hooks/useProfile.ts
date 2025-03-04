@@ -1,6 +1,6 @@
-import { apiFetch } from "@/shared/utils";
 import { profileSchema } from "@/shared/schema/profileSchema";
 import type { Profile } from "@/shared/schema/profileSchema";
+import { apiFetch } from "@/shared/utils";
 import { useQuery } from "@tanstack/react-query";
 
 export const useProfile = () => {

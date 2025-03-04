@@ -1,9 +1,9 @@
 import { db } from "@/server/db/db";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { blogTagsSchema } from "@schema/blogTagSchema";
 import { eq, inArray } from "drizzle-orm";
 import { Hono } from "hono";
-import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 
 const tagRoutes = new Hono();
 

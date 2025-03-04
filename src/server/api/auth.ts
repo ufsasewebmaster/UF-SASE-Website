@@ -1,10 +1,10 @@
 import { db } from "@/server/db/db";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { generateIdFromEntropySize } from "lucia";
-import { createSuccessResponse, createErrorResponse } from "@/shared/utils";
 
 const { compare, genSalt, hash } = bcrypt;
 
@@ -99,14 +99,9 @@ authRoutes.post("/auth/login", async (c) => {
     createSession(session_id, user[0].id);
     // Set cookie here
     c.header("Set-Cookie", `sessionId=${session_id}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Strict`);
-    return createSuccessResponse(
-      c,
-      { sessionId: session_id },
-      "Successfully logged in"
-    );
+    return createSuccessResponse(c, { sessionId: session_id }, "Successfully logged in");
   }
 });
-
 
 // Logout route
 authRoutes.post("/auth/logout", async (c) => {
@@ -120,11 +115,7 @@ authRoutes.post("/auth/logout", async (c) => {
     // delete the session id row from the table
     await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
 
-    return createSuccessResponse(
-      c,
-      { success: true },
-      "Successfully logged out"
-    );
+    return createSuccessResponse(c, { success: true }, "Successfully logged out");
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "LOGOUT_ERROR", "Error logging out", 500);
