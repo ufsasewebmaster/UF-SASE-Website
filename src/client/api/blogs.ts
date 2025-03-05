@@ -1,11 +1,13 @@
 // libapi/blogs.ts
-import type { Blog, BlogSearchResponse, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
-import { blogsApiResponseSchema, blogSearchResponseSchema, blogTitleSchema, singleBlogApiResponseSchema } from "@shared/schema/blogSchema";
+import type { Blog, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
+import { blogSchema, blogSearchResponseSchema, blogTitleSchema, updateBlogSchema } from "@shared/schema/blogSchema";
 import { apiFetch } from "@shared/utils";
+import { z } from "zod";
 
 // Fetch ALL Blogs
 export const fetchBlogs = async (): Promise<Array<Blog>> => {
-  return apiFetch<Array<Blog>>("/api/blogs/all", { method: "GET" }, blogsApiResponseSchema);
+  const response = await apiFetch("/api/blogs/all", { method: "GET" }, z.array(blogSchema));
+  return response.data;
 };
 
 // Fetch Blog by ID
@@ -13,16 +15,17 @@ export const fetchBlogById = async (blogId: string): Promise<Blog> => {
   if (!blogId) {
     throw new Error("Blog ID is required");
   }
-  return apiFetch<Blog>(`/api/blogs/${blogId}`, { method: "GET" }, singleBlogApiResponseSchema);
+  const response = await apiFetch(`/api/blogs/${blogId}`, { method: "GET" }, blogSchema);
+  return response.data;
 };
 
 // Search Blogs by Title
-export const searchBlogsByTitle = async (title: string): Promise<BlogSearchResponse> => {
+export const searchBlogsByTitle = async (title: string): Promise<Blog> => {
   if (!title) {
     throw new Error("Title is required");
   }
   blogTitleSchema.parse({ title });
-  return apiFetch<BlogSearchResponse>(
+  const response = await apiFetch(
     "/api/blogs/search",
     {
       method: "GET",
@@ -31,28 +34,31 @@ export const searchBlogsByTitle = async (title: string): Promise<BlogSearchRespo
     },
     blogSearchResponseSchema,
   );
+  return response.data;
 };
 
 export const createBlog = async (newBlog: CreateBlog): Promise<Blog> => {
-  return apiFetch<Blog>(
+  const response = await apiFetch(
     "/api/blogs/add",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newBlog),
     },
-    singleBlogApiResponseSchema,
+    blogSchema,
   );
+  return response.data;
 };
 
 export const updateBlog = async (blog: UpdateBlog): Promise<Blog> => {
-  return apiFetch<Blog>(
+  const response = await apiFetch(
     "/api/blogs/update",
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
     },
-    singleBlogApiResponseSchema,
+    updateBlogSchema,
   );
+  return response.data;
 };

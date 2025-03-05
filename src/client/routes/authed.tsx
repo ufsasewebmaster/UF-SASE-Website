@@ -1,4 +1,4 @@
-import { useAuth } from "@client/AuthContext";
+import { useAuth } from "@/client/hooks/AuthContext";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/authed")({
