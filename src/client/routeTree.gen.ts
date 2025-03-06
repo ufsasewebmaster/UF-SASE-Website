@@ -18,6 +18,7 @@ import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SetImport } from './routes/set'
 import { Route as ResourcesImport } from './routes/resources'
+import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as PasswordImport } from './routes/password'
@@ -75,6 +76,12 @@ const ResourcesRoute = ResourcesImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ResetPasswordRoute = ResetPasswordImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ProgramsRoute = ProgramsImport.update({
   id: '/programs',
   path: '/programs',
@@ -86,7 +93,6 @@ const ProfileRoute = ProfileImport.update({
   path: '/profile',
   getParentRoute: () => rootRoute,
 } as any)
-
 
 const PasswordRoute = PasswordImport.update({
   id: '/password',
@@ -236,6 +242,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsImport
       parentRoute: typeof rootRoute
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordImport
+      parentRoute: typeof rootRoute
+    }
     '/resources': {
       id: '/resources'
       path: '/resources'
@@ -303,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
@@ -325,6 +339,7 @@ export interface FileRoutesByTo {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
@@ -348,6 +363,7 @@ export interface FileRoutesById {
   '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
@@ -372,6 +388,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/reset-password'
     | '/resources'
     | '/set'
     | '/signup'
@@ -393,6 +410,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/reset-password'
     | '/resources'
     | '/set'
     | '/signup'
@@ -414,6 +432,7 @@ export interface FileRouteTypes {
     | '/password'
     | '/profile'
     | '/programs'
+    | '/reset-password'
     | '/resources'
     | '/set'
     | '/signup'
@@ -437,6 +456,7 @@ export interface RootRouteChildren {
   PasswordRoute: typeof PasswordRoute
   ProfileRoute: typeof ProfileRoute
   ProgramsRoute: typeof ProgramsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
   SetRoute: typeof SetRoute
   SignupRoute: typeof SignupRoute
@@ -459,6 +479,7 @@ const rootRouteChildren: RootRouteChildren = {
   PasswordRoute: PasswordRoute,
   ProfileRoute: ProfileRoute,
   ProgramsRoute: ProgramsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
   SetRoute: SetRoute,
   SignupRoute: SignupRoute,
@@ -490,6 +511,7 @@ export const routeTree = rootRoute
         "/password",
         "/profile",
         "/programs",
+        "/reset-password",
         "/resources",
         "/set",
         "/signup",
@@ -534,6 +556,9 @@ export const routeTree = rootRoute
     },
     "/programs": {
       "filePath": "programs.tsx"
+    },
+    "/reset-password": {
+      "filePath": "reset-password.tsx"
     },
     "/resources": {
       "filePath": "resources.tsx"
