@@ -18,12 +18,15 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px",
 
   return (
     <div>
-      <div
-        className="relative aspect-[16/9] cursor-pointer overflow-hidden rounded-lg hover:opacity-90 focus:outline-none"
-        style={{ width: imgWidth }}
-        onClick={openModal}
-      >
-        <img src={imageUrl} alt="Slide thumbnail" className="absolute left-0 top-0 h-full w-full object-cover" />
+      <div className="group relative inline-block">
+        <div className="absolute left-0 top-0 z-0 h-full w-full translate-x-4 translate-y-4 rounded-lg bg-gradient-to-b from-saseGreen to-saseBlue opacity-0 transition-all duration-300 group-hover:opacity-100"></div>
+        <div
+          className="relative z-10 aspect-[16/9] cursor-pointer overflow-hidden rounded-lg border-2 border-black transition-transform duration-300 ease-in-out group-hover:scale-105 focus:outline-none"
+          style={{ width: imgWidth }}
+          onClick={openModal}
+        >
+          <img src={imageUrl} alt="Slide thumbnail" className="absolute left-0 top-0 h-full w-full object-cover" />
+        </div>
       </div>
 
       {isModalOpen && (
