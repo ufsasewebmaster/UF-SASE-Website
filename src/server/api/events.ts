@@ -1,6 +1,6 @@
 import { db } from "@/server/db/db";
-import * as Schema from "@/server/db/tables";
-import { createErrorResponse } from "@shared/utils";
+import * as Schema from "@db/tables";
+import { createErrorResponse, createSuccessResponse } from "@shared/utils";
 import { and, eq, gte, like, lte } from "drizzle-orm";
 import { Hono } from "hono";
 
@@ -14,7 +14,7 @@ eventRoutes.get("/events", async (c) => {
 
     if (!startDateStr || !endDateStr) {
       const result = await db.select().from(Schema.events);
-      return c.json(result);
+      return createSuccessResponse(c, result, "Events retrieved successfully");
     }
 
     const startDate = new Date(startDateStr);
@@ -28,9 +28,10 @@ eventRoutes.get("/events", async (c) => {
       .select()
       .from(Schema.events)
       .where(and(lte(Schema.events.start_time, endDate), gte(Schema.events.end_time, startDate)));
-    return c.json(eventsData);
+    return createSuccessResponse(c, eventsData, "Events retrieved successfully");
   } catch (error) {
-    if (error) return createErrorResponse(c, "MISSING_EVENT", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "MISSING_EVENT", "Failed to fetch events", 500);
   }
 });
 
@@ -61,12 +62,10 @@ eventRoutes.post("/events", async (c) => {
       })
       .returning();
 
-    return c.json({
-      message: `Inserted event with ID: ${result[0].id}`,
-      data: result[0],
-    });
+    return createSuccessResponse(c, result[0], `Inserted event with ID: ${result[0].id}`);
   } catch (error) {
-    if (error) return createErrorResponse(c, "ADD_BLOG_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "ADD_EVENT_ERROR", "Failed to add event", 500);
   }
 });
 
@@ -97,12 +96,10 @@ eventRoutes.patch("/events", async (c) => {
       })
       .where(eq(Schema.events.id, id))
       .returning();
-    return c.json({
-      message: `Updated event with ID: ${updatedEvent[0].id}`,
-      data: updatedEvent[0],
-    });
+    return createSuccessResponse(c, updatedEvent[0], `Updated event with ID: ${updatedEvent[0].id}`);
   } catch (error) {
-    if (error) return createErrorResponse(c, "UPDATE_EVENT_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "UPDATE_EVENT_ERROR", "Failed to update event", 500);
   }
 });
 
@@ -111,15 +108,16 @@ eventRoutes.get("/events/:eventID", async (c) => {
   try {
     const eventID = c.req.param("eventID");
     if (!eventID) {
-      return createErrorResponse(c, "MISSING_EVENT_ID", "Event Id required", 400);
+      return createErrorResponse(c, "MISSING_EVENT_ID", "Event ID required", 400);
     }
     const result = await db.select().from(Schema.events).where(eq(Schema.events.id, eventID)).limit(1);
     if (result.length === 0) {
       return createErrorResponse(c, "EVENT_NOT_FOUND", "Event not found", 404);
     }
-    return c.json(result[0]);
+    return createSuccessResponse(c, result[0], "Event retrieved successfully");
   } catch (error) {
-    if (error) return createErrorResponse(c, "FETCH_EVENT_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "FETCH_EVENT_ERROR", "Failed to fetch event", 500);
   }
 });
 
@@ -132,9 +130,10 @@ eventRoutes.get("/events/search/:name", async (c) => {
       .from(Schema.events)
       .where(like(Schema.events.name, `%${searchName}%`)); // Approximate search
     const eventIDs = result.map((row) => row.resEventIDs);
-    return c.json(eventIDs);
+    return createSuccessResponse(c, eventIDs, "Event IDs retrieved successfully");
   } catch (error) {
-    if (error) return createErrorResponse(c, "SEARCH_EVENTS_ERROR", error.toString(), 500);
+    console.log(error);
+    return createErrorResponse(c, "SEARCH_EVENTS_ERROR", "Failed to search events", 500);
   }
 });
 

@@ -1,9 +1,9 @@
 import { dehydrate, hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { SuperJSON } from "superjson";
-import { AuthProvider } from "./AuthContext";
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
 import { NotFound } from "./components/NotFound";
+import { AuthProvider } from "./hooks/AuthContext";
 import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {

@@ -9,10 +9,10 @@ import ShadowCard from "../components/AuthShadowCard";
 import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/reset-password")({
   meta: () => [
     ...seo({
-      title: "Login | UF SASE",
+      title: "Reset Password | UF SASE",
       description: "UF Society of Asian Scientists & Engineers",
       image: imageUrls["SASELogo.png"],
     }),
@@ -20,15 +20,14 @@ export const Route = createFileRoute("/login")({
 
   component: () => {
     const { login } = useAuth();
-    const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const navigate = useNavigate();
+
     const mutation = useMutation({
       mutationFn: async (formData: FormData) => {
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch("api/user/users/:id/password", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
         if (!response.ok) {
@@ -38,15 +37,14 @@ export const Route = createFileRoute("/login")({
       },
       onSuccess: () => {
         login();
-        navigate({ to: "/" });
+        navigate({ to: "/login" });
       },
       onError: (error) => {
-        console.error("Error during mutation:", error);
         setErrorMessage(error.message);
       },
     });
 
-    const handleLogin = (data: FormData) => {
+    const handleResetPassword = (data: FormData) => {
       mutation.mutate(data);
     };
 
@@ -55,16 +53,13 @@ export const Route = createFileRoute("/login")({
         <div className="relative flex min-h-screen items-center justify-center">
           <ShadowCard />
           <AuthForm
-            title="Login"
-            buttonLabel="Login"
-            linkText="Forgot password?"
-            linkRoute="/"
-            onSubmit={handleLogin}
+            title="Reset Password"
+            buttonLabel="Reset Password"
+            linkText=""
+            linkRoute=""
+            isResetPassword={true}
+            onSubmit={handleResetPassword}
             errorMessage={errorMessage || undefined}
-            additionalButton={{
-              text: "Register new account",
-              route: "/signup",
-            }}
           />
         </div>
       </Page>

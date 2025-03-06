@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { successResponseSchema } from "./responseSchema";
 
 // Blog schema for full blog details
 export const blogSchema = z.object({
@@ -32,24 +31,11 @@ export const updateBlogSchema = blogSchema.partial().omit({
   published_date: true,
 });
 
-// Export TypeScript types
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogTitle = z.infer<typeof blogTitleSchema>;
 export type CreateBlog = z.infer<typeof createBlogSchema>;
 export type UpdateBlog = z.infer<typeof updateBlogSchema>;
-export type BlogSearchResponse = z.infer<typeof blogSearchResponseSchema>;
 
-// Specific success schemas
-export const blogsApiResponseSchema = successResponseSchema.extend({
-  data: z.array(blogSchema),
-});
-
-export const singleBlogApiResponseSchema = successResponseSchema.extend({
-  data: blogSchema,
-});
-
-export const blogSearchResponseSchema = successResponseSchema.extend({
-  data: z.object({
-    blog_ids: z.array(z.string().min(1, "Blog ID must be valid.")),
-  }),
+export const blogSearchResponseSchema = z.object({
+  blog_ids: z.array(z.string().min(1, "Blog ID must be valid.")),
 });

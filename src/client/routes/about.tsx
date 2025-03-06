@@ -62,14 +62,14 @@ export const Route = createFileRoute("/about")({
           <section className={cn("mb-20")}>
             <div className={cn("mb-8 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-gray-800")}>Timeline of Achievements</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Timeline of Achievements</h2>
             </div>
             <Timeline />
           </section>
           <section id="contact" className={cn("mb-12")}>
             <div className={cn("mb-4 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-gray-800")}>Contact Us</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Contact Us</h2>
             </div>
             <ContactForm />
           </section>

@@ -25,7 +25,7 @@ export const Route = createFileRoute("/board")({
 
         {/* group picture */}
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
-          <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-black shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
+          <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-border shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
             <img src={BoardPic} className="w-full" />
           </div>
         </div>
