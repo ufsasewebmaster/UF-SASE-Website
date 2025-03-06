@@ -153,10 +153,10 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
       {/* Gradient Overlay Container */}
       <div className="pointer-events-none absolute inset-0 z-20 flex justify-between">
         {/* Left Gradient Overlay */}
-        <div className="h-full w-16 bg-gradient-to-r from-white to-transparent" />
+        <div className="h-full w-16 bg-gradient-to-r from-white to-transparent dark:from-black" />
 
         {/* Right Gradient Overlay */}
-        <div className="h-full w-16 bg-gradient-to-l from-white to-transparent" />
+        <div className="h-full w-16 bg-gradient-to-l from-white to-transparent dark:from-black" />
       </div>
 
       {/* Scrollable Timeline Container */}
@@ -174,13 +174,13 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
                 <div key={index} className="relative flex flex-col items-center" style={{ width: `${100 / items.length}%` }}>
                   {/* Card */}
                   <div
-                    className={`absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-black bg-gray-100 p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
+                    className={`bg-muted-background absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-border p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
                       isTop ? "bottom-full mb-14" : "top-full mt-14"
                     }`}
                   >
-                    <div className="text-xs text-gray-600">{item.date}</div>
-                    <div className="mt-1 text-lg font-bold text-gray-800">{item.title}</div>
-                    <p className="mt-2 overflow-auto text-black">{item.description}</p>
+                    <div className="text-xs text-muted-foreground">{item.date}</div>
+                    <div className="mt-1 text-lg font-bold text-foreground">{item.title}</div>
+                    <p className="mt-2 overflow-auto text-foreground">{item.description}</p>
                   </div>
 
                   {/* Connector Line */}

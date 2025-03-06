@@ -7,6 +7,7 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import { Toaster } from "react-hot-toast";
 import { seo } from "src/client/utils/seo";
+import { DarkModeProvider } from "../components/DarkModeProvider";
 import Footer from "../components/navigation/Footer";
 import Header from "../components/navigation/Header";
 import { AuthProvider } from "../hooks/AuthContext";
@@ -45,9 +46,11 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <AuthProvider>
-      <RootDocument>
-        <Outlet />
-      </RootDocument>
+      <DarkModeProvider>
+        <RootDocument>
+          <Outlet />
+        </RootDocument>
+      </DarkModeProvider>
     </AuthProvider>
   );
 }
@@ -74,7 +77,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <div className="flex min-h-screen flex-col">
           <Header />
           {/* Main Content Area */}
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow bg-white dark:bg-black">{children}</main>
           <Footer />
         </div>
         <ScrollRestoration />

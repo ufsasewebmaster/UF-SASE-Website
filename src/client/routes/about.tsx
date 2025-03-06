@@ -20,7 +20,7 @@ export const Route = createFileRoute("/about")({
   ],
   component: () => {
     return (
-      <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-white font-redhat">
+      <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background font-redhat">
         <div className="w-full max-w-7xl px-4 py-8">
           <HeaderSection />
 
@@ -32,13 +32,13 @@ export const Route = createFileRoute("/about")({
             <div className="flex space-x-4 sm:space-x-6">
               <Link
                 to="/board"
-                className="flex h-9 w-28 items-center justify-center whitespace-nowrap rounded-full border border-black bg-saseBlue px-6 py-2 text-xs italic tracking-wide text-white transition duration-300 hover:scale-105 sm:h-10 sm:w-32 sm:px-7 sm:text-sm"
+                className="border-text flex h-9 w-28 items-center justify-center whitespace-nowrap rounded-full border bg-saseBlue px-6 py-2 text-xs italic tracking-wide text-white transition duration-300 hover:scale-105 sm:h-10 sm:w-32 sm:px-7 sm:text-sm"
               >
                 Meet Our Board!
               </Link>
               <Link
                 to="/sponsors"
-                className="flex h-9 w-28 items-center justify-center whitespace-nowrap rounded-full border border-black bg-saseBlue px-6 py-2 text-[11px] italic tracking-wide text-white transition duration-300 hover:scale-105 sm:h-10 sm:w-32 sm:px-7 sm:text-[13px]"
+                className="border-text flex h-9 w-28 items-center justify-center whitespace-nowrap rounded-full border bg-saseBlue px-6 py-2 text-[11px] italic tracking-wide text-white transition duration-300 hover:scale-105 sm:h-10 sm:w-32 sm:px-7 sm:text-[13px]"
               >
                 View Our Sponsors
               </Link>
@@ -51,7 +51,7 @@ export const Route = createFileRoute("/about")({
           <MissionSection />
           <div className={cn("mb-10 flex items-center")}>
             <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
-            <h2 className={cn("font-oswald text-3xl font-semibold text-gray-800")}>History</h2>
+            <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>History</h2>
           </div>
           <section className={cn("mb-6 flex justify-center")}>
             <div className={cn("w-full max-w-5xl")}>
@@ -62,14 +62,14 @@ export const Route = createFileRoute("/about")({
           <section className={cn("mb-20")}>
             <div className={cn("mb-8 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-gray-800")}>Timeline of Achievements</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Timeline of Achievements</h2>
             </div>
             <Timeline />
           </section>
           <section id="contact" className={cn("mb-12")}>
             <div className={cn("mb-4 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-gray-800")}>Contact Us</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Contact Us</h2>
             </div>
             <ContactForm />
           </section>

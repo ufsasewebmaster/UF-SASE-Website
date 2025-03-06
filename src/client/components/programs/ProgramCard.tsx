@@ -14,7 +14,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, text }) => {
         <div className="absolute left-5 top-5 z-0 h-full w-full rounded-3xl bg-gradient-to-b from-saseBlue to-saseGreen opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"></div>
 
         {/* Main Card */}
-        <div className="relative z-10 flex transform flex-col items-center rounded-3xl border-2 border-black bg-gray-100 p-12 transition sm:flex-row">
+        <div className="relative z-10 flex transform flex-col items-center rounded-3xl border-2 border-border bg-muted p-12 transition sm:flex-row">
           {/* Image */}
           <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-8">
             <img src={image} alt="Program Image" className="h-[323px] w-[440px] rounded-2xl object-cover" />
@@ -22,7 +22,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, text }) => {
 
           {/* Text Content */}
           <div className="flex flex-col justify-between">
-            <p className="mb-4 font-redhat text-xl text-black">{text}</p>
+            <p className="mb-4 font-redhat text-xl text-foreground">{text}</p>
 
             {/* Learn More Button */}
             <a href={link} target="_blank" rel="noopener noreferrer">

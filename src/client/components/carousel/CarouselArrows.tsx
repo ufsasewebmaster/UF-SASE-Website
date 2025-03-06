@@ -59,7 +59,10 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className={cn({ "text-white": props.purpose == "Values", "text-black": props.purpose != "Values" }, `embla__button embla__button--prev`)}
+      className={cn(
+        { "text-white": props.purpose == "Values", "text-text-foreground": props.purpose != "Values" },
+        `embla__button embla__button--prev`,
+      )}
       type="button"
       {...restProps}
     >
@@ -79,7 +82,10 @@ export const NextButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className={cn({ "text-white": props.purpose == "Values", "text-black": props.purpose != "Values" }, `embla__button embla__button--next`)}
+      className={cn(
+        { "text-white": props.purpose == "Values", "text-text-foreground": props.purpose != "Values" },
+        `embla__button embla__button--next`,
+      )}
       type="button"
       {...restProps}
     >

@@ -9,11 +9,11 @@ const HistorySection = () => {
   return (
     <section className="mb-8">
       <div className={isMobile ? "max-w-full px-4" : "max-w-5xl"}>
-        <p className={isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800"}>
+        <p className={isMobile ? "mb-3 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           <strong>Since being founded during the summer of 2010,</strong> the University of Florida chapter has had an abundant effort put forth for
           the development of our members.
         </p>
-        <p className={isMobile ? "mb-3 text-sm text-gray-800" : "mb-4 text-lg text-gray-800"}>
+        <p className={isMobile ? "mb-3 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           This development is centered on <strong>five core values</strong> of our mission statement:{" "}
           <strong>leadership, professionalism, service, academics,</strong> and <strong>diversity.</strong> Our meetings and events are catered to
           ensure that not only our mission is being fulfilled, but also that a community of support among Asian heritage students is being built. We
@@ -23,12 +23,12 @@ const HistorySection = () => {
         {/* Full description always shown on desktop */}
         {!isMobile && (
           <>
-            <p className="mb-4 text-lg text-gray-800">
+            <p className="mb-4 text-lg text-foreground">
               Through <strong>events</strong> we have hosted in the past, such as our annual Quick Race or the Southeast Regional Conferences of
               2014-2016, many of our members have been able to get involved in committees and take on leadership roles. Many of our other events allow
               students to <strong>develop professional skills</strong> that are essential for positions in industry.
             </p>
-            <p className="mb-4 text-lg text-gray-800">
+            <p className="mb-4 text-lg text-foreground">
               Our SASE chapter is not only active on campus, but also within the <strong>Gainesville community</strong>, such as when we participated
               in a 5K raising money for a local robotics team. We are also heavily involved in the <strong>Asian American Student Union</strong> at
               the University of Florida, taking part in their annual welcome assembly and hosting events with cultural and professional
@@ -48,12 +48,12 @@ const HistorySection = () => {
         {/* Expandable Content (Only on Mobile) */}
         {isMobile && (
           <div className={`transition-all duration-300 ${isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 overflow-hidden opacity-0"}`}>
-            <p className="mb-3 text-sm text-gray-800">
+            <p className="mb-3 text-sm text-foreground">
               Through <strong>events</strong> we have hosted in the past, such as our annual Quick Race or the Southeast Regional Conferences of
               2014-2016, many of our members have been able to get involved in committees and take on leadership roles. Many of our other events allow
               students to <strong>develop professional skills</strong> that are essential for positions in industry.
             </p>
-            <p className="mb-3 text-sm text-gray-800">
+            <p className="mb-3 text-sm text-foreground">
               Our SASE chapter is not only active on campus, but also within the <strong>Gainesville community</strong>, such as when we participated
               in a 5K raising money for a local robotics team. We are also heavily involved in the <strong>Asian American Student Union</strong> at
               the University of Florida, taking part in their annual welcome assembly and hosting events with cultural and professional
