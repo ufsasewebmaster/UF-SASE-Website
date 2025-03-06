@@ -5,8 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import { useAuth } from "../AuthContext";
 import ShadowCard from "../components/AuthShadowCard";
+import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/login")({

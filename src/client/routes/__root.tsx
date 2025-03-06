@@ -7,9 +7,9 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import { Toaster } from "react-hot-toast";
 import { seo } from "src/client/utils/seo";
-import { AuthProvider } from "../AuthContext";
 import Footer from "../components/navigation/Footer";
 import Header from "../components/navigation/Header";
+import { AuthProvider } from "../hooks/AuthContext";
 import css from "../index.css?url";
 
 export const Route = createRootRoute({
