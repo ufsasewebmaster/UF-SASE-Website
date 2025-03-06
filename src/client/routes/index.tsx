@@ -4,12 +4,15 @@ import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
-// import Carousel from "@components/home/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
+import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import MobileMemberCard from "../components/home/MobileMemberCard";
 
 export const Route = createFileRoute("/")({
   component: () => {
+    const isMobile = useIsMobile();
+
     return (
       <div className="flex flex-col items-center">
         <div className="flex w-full flex-col items-center">
@@ -101,28 +104,68 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-20 bg-white p-12 lg:grid-cols-3">
-          <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
-          <MemberCard
-            image={imageUrls["InternalVicePresident.jpeg"]}
-            name="Bryan Park"
-            role="Internal Vice President"
-            textColor="green"
-            quote="I love SASE <3"
-          />
-          <MemberCard
-            image={imageUrls["ExternalVicePresident.jpeg"]}
-            name="Kayleen Diaz"
-            role="External Vice President"
-            textColor="blue"
-            quote="Grow professionally with SASE! :D"
-          />
-        </div>
+        {isMobile ? (
+          <>
+            <div className="relative grid h-2 w-full grid-cols-2">
+              <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
+              <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
+            </div>
+            <div className="my-2 flex w-full flex-col items-center bg-white px-12">
+              <MobileMemberCard
+                image={imageUrls["President.jpeg"]}
+                name="Vincent Lin"
+                role="President"
+                textColor="blue"
+                quote="Love the SASE Community :)"
+                imageSide="left"
+              />
+              <div className="h-1 w-5/6 bg-gradient-to-r from-saseGreen to-saseBlue" />
+              <MobileMemberCard
+                image={imageUrls["InternalVicePresident.jpeg"]}
+                name="Bryan Park"
+                role="Internal Vice President"
+                textColor="green"
+                quote="I love SASE <3"
+                imageSide="right"
+              />
+              <div className="h-1 w-5/6 bg-gradient-to-l from-saseGreen to-saseBlue" />
+              <MobileMemberCard
+                image={imageUrls["ExternalVicePresident.jpeg"]}
+                name="Kayleen Diaz"
+                role="External Vice President"
+                textColor="blue"
+                quote="Grow professionally with SASE! :D"
+                imageSide="left"
+              />
+            </div>
+            <div className="relative mx-12 grid h-2 w-full grid-cols-2">
+              <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
+              <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
+            </div>
+          </>
+        ) : (
+          <div className="grid grid-cols-3 gap-12 bg-white p-12">
+            <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
+            <MemberCard
+              image={imageUrls["InternalVicePresident.jpeg"]}
+              name="Bryan Park"
+              role="Internal Vice President"
+              textColor="green"
+              quote="I love SASE <3"
+            />
+            <MemberCard
+              image={imageUrls["ExternalVicePresident.jpeg"]}
+              name="Kayleen Diaz"
+              role="External Vice President"
+              textColor="blue"
+              quote="Grow professionally with SASE! :D"
+            />
+          </div>
+        )}
 
         <div className="w-full bg-black p-10">
           <h1 className="w-full pb-12 text-center font-oswald text-6xl text-white">Our Values</h1>
           <Carousel prog="N/A" purpose="Values" />
-          {/* <Carousel /> */}
         </div>
 
         <div className="flex w-full flex-col items-center bg-saseGray p-12">
