@@ -168,39 +168,24 @@ export const Route = createFileRoute("/")({
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-        <div className="flex w-full flex-col items-center bg-saseGray p-12">
-          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
-          <div className="flex w-9/12 flex-col items-center gap-12">
-            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
-              <p className="p-4 font-redhat text-xl sm:text-2xl">
-                Are you interested in becoming a partner with the{" "}
-                <span className="font-semibold">UF Society of Asian Scientists and Engineers (SASE) Chapter</span>
-                ?
+        <div className="mr-2 flex w-full flex-col items-center bg-saseGray p-2">
+          <h1 className="w-full pb-10 text-center font-oswald text-6xl font-medium">Sponsors</h1>
+          <div className="justify-left mb-20 flex w-9/12 flex-wrap items-start gap-14">
+            <div className="ml-1 flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242] sm:w-[45%]">
+              <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
+                Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                 <br />
                 <br />
-                To get access to our <span className="font-semibold">sponsorship packet </span>
-                please contact our External Vice President, Kayleen Diaz, at
-              </p>
-              <div className="flex w-full items-center">
+                To get access to our sponsorship packet, please contact our External Vice President at
                 <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
+                  {" "}
                   ufsase.evp@gmail.com
                 </a>
-                <a
-                  href="/sponsors"
-                  className="ml-auto hidden rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b] sm:block"
-                >
-                  Sponsors
-                </a>
-              </div>
-              <div className="mt-4 sm:hidden">
-                <a href="/sponsors" className="rounded-lg bg-saseGreen px-4 py-2 font-bold text-white transition duration-300 hover:bg-[#486f2b]">
-                  Sponsors
-                </a>
-              </div>
+                .
+              </p>
             </div>
-
-            <div className="flex w-full flex-col items-center gap-16">
-              <div className="grid w-7/12 grid-cols-1 gap-20 sm:grid-cols-2">
+            <div className="flex w-full flex-col items-center gap-12 sm:w-[45%]">
+              <div className="grid w-full grid-cols-1 gap-14 sm:grid-cols-2">
                 {SponsorInfo.map((sponsor) =>
                   sponsor.tier === "Diamond" ? (
                     <SponsorCard
@@ -214,7 +199,7 @@ export const Route = createFileRoute("/")({
                   ) : null,
                 )}
               </div>
-              <p className="m-0 w-full text-center font-redhat text-2xl italic text-black xl:text-3xl">Current Featured Sponsors</p>
+              <p className="m-0 mt-[-30px] w-full text-center font-redhat text-2xl italic text-black xl:text-3xl">Current Featured Sponsors</p>
             </div>
           </div>
         </div>
