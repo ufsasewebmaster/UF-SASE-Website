@@ -105,8 +105,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div className="flex items-center gap-2 md:hidden">
-          <SearchBar className="w-32 focus:w-64" />
-          <UserButton isLoggedIn={isAuthenticated} />
+          <SearchBar className="" />
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>
