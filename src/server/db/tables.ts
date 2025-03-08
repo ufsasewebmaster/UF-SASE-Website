@@ -163,7 +163,6 @@ export const meetingSlides = sqliteTable("meeting_slides", {
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
   thumbnail_url: text("thumbnail_url").notNull().unique(),
-  gdrive_url: text("gdrive_url").notNull().unique(),
-  event_date: integer("event_date", { mode: "timestamp" }),
-  upload_date: integer("upload_date", { mode: "timestamp" }).notNull(),
+  embed_url: text("embed_url").notNull().unique(),
+  last_modified: integer("last_modified", { mode: "timestamp" }).notNull(),
 });
