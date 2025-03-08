@@ -6,20 +6,17 @@ const imageData = {
   "Fall 2023": [
     {
       imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKBrvuah3ULJG6YbFtkQIHNdvnrupfCaVTR0mi",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vRjesIK8GtogrTIETwI2GGKuWsokmx4dFqY_tNVi9R1Ri3Cu3ljHG4AaoTPzochbz8lWk0Ga0cIqQgU/embed?start=false&loop=false&delayms=3000",
+      slideUrl: "https://docs.google.com/presentation/d/1A_syyc0EV7v2Nbasv8jquM20W0aM8aNa/embed?start=false&loop=false&delayms=3000",
       caption: "GBM 1: Into the SASE-Verse",
     },
     {
       imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKhe5NTFG9SJMmEuRlABk3FjeDTi6ZgaqCo1G8",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vQUO65-H0ABBtwngsTFhCaQfT3-Hyqf2I3CUXM8E7ctM5YhdMuBNy3E2nV1cqnvldqhpzT6w0d2hxCu/embed?start=false&loop=false&delayms=3000",
+      slideUrl: "https://docs.google.com/presentation/d/1A_syyc0EV7v2Nbasv8jquM20W0aM8aNa/embed?start=false&loop=false&delayms=3000",
       caption: "GBM 2: Sailing the Seven SASE",
     },
     {
       imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKidrjzFZSynwPNl9jBc1Ktr2gWOdfUJku0ZGD",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vSw2sO-s1BSEBMPcpRjiUXGmfUQ79_MmQrIbdfhsbDmSdsSaw6kcdmwJyGZLSUC9uE3JWRQiv7w2cFe/embed?start=false&loop=false&delayms=3000",
+      slideUrl: "https://docs.google.com/presentation/d/1A_syyc0EV7v2Nbasv8jquM20W0aM8aNa/embed?start=false&loop=false&delayms=3000",
       caption: "GBM 3: SASEatouille",
     },
     {

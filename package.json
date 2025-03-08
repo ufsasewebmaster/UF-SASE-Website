@@ -27,6 +27,7 @@
     "db:all": "bun db:local:init && bun db:push && bun db:local:seed && bun db:generate && bun db:studio"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "@iconify/json": "^2.2.272",
     "@iconify/react": "^5.2.0",
     "@libsql/client": "0.14.0",
@@ -50,6 +51,9 @@
     "drizzle-zod": "^0.5.1",
     "embla-carousel-react": "^8.5.1",
     "eslint-plugin-react": "^7.37.4",
+    "fs": "^0.0.1-security",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^146.0.0",
     "hamburger-react": "^2.5.1",
     "hono": "^4.6.1",
     "html-react-parser": "^5.1.18",
