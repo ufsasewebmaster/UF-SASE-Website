@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
-import ShadowCard from "../components/SignUpShadowCard";
+import AuthLayout from "../components/AuthLayout";
 import { SuccessModal } from "../components/SuccessModal";
 import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
@@ -66,8 +66,7 @@ export const Route = createFileRoute("/signup")({
 
     return (
       <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
+        <AuthLayout isSignUp={true}>
           <AuthForm
             title="Sign Up"
             buttonLabel="Sign Up"
@@ -79,7 +78,7 @@ export const Route = createFileRoute("/signup")({
           />
 
           <SuccessModal isOpen={showSuccessModal} onClose={handleModalClose} message="You have successfully created your account!" />
-        </div>
+        </AuthLayout>
       </Page>
     );
   },
