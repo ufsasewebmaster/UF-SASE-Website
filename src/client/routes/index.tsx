@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import MemberCard from "@/client/components/home/MemberCard";
 import MissionCard from "@/client/components/home/MissionCard";
 import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
@@ -7,6 +6,7 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -61,28 +61,33 @@ export const Route = createFileRoute("/")({
                   allowFullScreen
                 ></iframe>
                 <p className="font-redhat text-lg text-white md:text-xl">
-                  The <span className="font-semibold">Society of Asian Scientists & Engineers</span> is a vibrant and dynamic organization at the University of Florida. We are committed to fostering meaningful connections across cultures and empowering <span className="font-semibold">Asian Pacific Islander Desi American (APIDA)</span> professionals in <span className="font-semibold">science and engineering</span>.
+                  The <span className="font-semibold">Society of Asian Scientists & Engineers</span> is a vibrant and dynamic organization at the
+                  University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
+                  <span className="font-semibold">Asian Pacific Islander Desi American (APIDA)</span> professionals in{" "}
+                  <span className="font-semibold">science and engineering</span>.
                 </p>
                 {isMobile && !readMore ? (
                   <>
-                    <p className="font-redhat text-lg text-white md:text-xl">Through engaging meetings and events, we provide a nurturing environment where you can acquire essential skills...</p>
-                    <button
-                      onClick={() => setReadMore(true)}
-                      className="mt-2 text-saseGreen underline"
-                    >
+                    <p className="font-redhat text-lg text-white md:text-xl">
+                      Through engaging meetings and events, we provide a nurturing environment where you can acquire essential skills...
+                    </p>
+                    <button onClick={() => setReadMore(true)} className="mt-2 text-saseGreen underline">
                       Read More
                     </button>
                   </>
                 ) : (
                   <>
                     <p className="font-redhat text-lg text-white md:text-xl">
-                      Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can acquire <span className="font-semibold">essential skills and knowledge</span> to excel in the professional world. Our <span className="font-semibold">inclusive community</span> welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create <span className="font-semibold">opportunities</span> for our members to contribute meaningfully to society.
+                      Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
+                      acquire <span className="font-semibold">essential skills and knowledge</span> to excel in the professional world. Our{" "}
+                      <span className="font-semibold">inclusive community</span> welcomes individuals from all majors, offering a friendly atmosphere
+                      to help you secure internships, jobs, and network with like-minded peers. Beyond{" "}
+                      <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in our{" "}
+                      <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
+                      <span className="font-semibold">opportunities</span> for our members to contribute meaningfully to society.
                     </p>
                     {isMobile && (
-                      <button
-                        onClick={() => setReadMore(false)}
-                        className="mt-2 text-saseGreen underline"
-                      >
+                      <button onClick={() => setReadMore(false)} className="mt-2 text-saseGreen underline">
                         Read Less
                       </button>
                     )}
