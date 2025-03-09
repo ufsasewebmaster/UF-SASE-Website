@@ -1,11 +1,11 @@
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
-import AuthLayout from "../components/AuthLayout";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
+import AuthLayout from "../components/AuthLayout";
 import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
@@ -53,19 +53,19 @@ export const Route = createFileRoute("/login")({
     return (
       <Page>
         <AuthLayout isSignUp={false}>
-        <AuthForm
-          title="Login"
-          buttonLabel="Login"
-          linkText="Forgot password?"
-          linkRoute="/"
-          onSubmit={handleLogin}
-          errorMessage={errorMessage || undefined}
-          additionalButton={{
-            text: "Register new account",
-            route: "/signup",
-          }}
-        />
-      </AuthLayout>
+          <AuthForm
+            title="Login"
+            buttonLabel="Login"
+            linkText="Forgot password?"
+            linkRoute="/"
+            onSubmit={handleLogin}
+            errorMessage={errorMessage || undefined}
+            additionalButton={{
+              text: "Register new account",
+              route: "/signup",
+            }}
+          />
+        </AuthLayout>
       </Page>
     );
   },
