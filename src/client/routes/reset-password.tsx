@@ -1,11 +1,11 @@
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
+import AuthLayout from "../components/AuthLayout";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import ShadowCard from "../components/AuthShadowCard";
 import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
@@ -50,8 +50,7 @@ export const Route = createFileRoute("/reset-password")({
 
     return (
       <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
+          <AuthLayout isSignUp={false}>
           <AuthForm
             title="Reset Password"
             buttonLabel="Reset Password"
@@ -61,7 +60,7 @@ export const Route = createFileRoute("/reset-password")({
             onSubmit={handleResetPassword}
             errorMessage={errorMessage || undefined}
           />
-        </div>
+        </AuthLayout>
       </Page>
     );
   },

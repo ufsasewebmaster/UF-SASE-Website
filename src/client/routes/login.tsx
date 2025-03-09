@@ -1,11 +1,11 @@
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
+import AuthLayout from "../components/AuthLayout";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import ShadowCard from "../components/AuthShadowCard";
 import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
@@ -52,21 +52,20 @@ export const Route = createFileRoute("/login")({
 
     return (
       <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
-          <AuthForm
-            title="Login"
-            buttonLabel="Login"
-            linkText="Forgot password?"
-            linkRoute="/"
-            onSubmit={handleLogin}
-            errorMessage={errorMessage || undefined}
-            additionalButton={{
-              text: "Register new account",
-              route: "/signup",
-            }}
-          />
-        </div>
+        <AuthLayout isSignUp={false}>
+        <AuthForm
+          title="Login"
+          buttonLabel="Login"
+          linkText="Forgot password?"
+          linkRoute="/"
+          onSubmit={handleLogin}
+          errorMessage={errorMessage || undefined}
+          additionalButton={{
+            text: "Register new account",
+            route: "/signup",
+          }}
+        />
+      </AuthLayout>
       </Page>
     );
   },

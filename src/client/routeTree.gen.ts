@@ -21,11 +21,11 @@ import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
 import { Route as ProfileImport } from './routes/profile'
-import { Route as PasswordImport } from './routes/password'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
 import { Route as GalleryImport } from './routes/gallery'
 import { Route as EventsImport } from './routes/events'
+import { Route as EmailVerificationImport } from './routes/email-verification'
 import { Route as BoardImport } from './routes/board'
 import { Route as BlogsImport } from './routes/blogs'
 import { Route as AuthedImport } from './routes/authed'
@@ -94,12 +94,6 @@ const ProfileRoute = ProfileImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const PasswordRoute = PasswordImport.update({
-  id: '/password',
-  path: '/password',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
@@ -121,6 +115,12 @@ const GalleryRoute = GalleryImport.update({
 const EventsRoute = EventsImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EmailVerificationRoute = EmailVerificationImport.update({
+  id: '/email-verification',
+  path: '/email-verification',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -193,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardImport
       parentRoute: typeof rootRoute
     }
+    '/email-verification': {
+      id: '/email-verification'
+      path: '/email-verification'
+      fullPath: '/email-verification'
+      preLoaderRoute: typeof EmailVerificationImport
+      parentRoute: typeof rootRoute
+    }
     '/events': {
       id: '/events'
       path: '/events'
@@ -219,13 +226,6 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/password': {
-      id: '/password'
-      path: '/password'
-      fullPath: '/password'
-      preLoaderRoute: typeof PasswordImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
@@ -309,11 +309,11 @@ export interface FileRoutesByFullPath {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/email-verification': typeof EmailVerificationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
-  '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -332,11 +332,11 @@ export interface FileRoutesByTo {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/email-verification': typeof EmailVerificationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
-  '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -356,11 +356,11 @@ export interface FileRoutesById {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/email-verification': typeof EmailVerificationRoute
   '/events': typeof EventsRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
-  '/password': typeof PasswordRoute
   '/profile': typeof ProfileRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -381,11 +381,11 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/email-verification'
     | '/events'
     | '/gallery'
     | '/interns'
     | '/login'
-    | '/password'
     | '/profile'
     | '/programs'
     | '/reset-password'
@@ -403,11 +403,11 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/email-verification'
     | '/events'
     | '/gallery'
     | '/interns'
     | '/login'
-    | '/password'
     | '/profile'
     | '/programs'
     | '/reset-password'
@@ -425,11 +425,11 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/email-verification'
     | '/events'
     | '/gallery'
     | '/interns'
     | '/login'
-    | '/password'
     | '/profile'
     | '/programs'
     | '/reset-password'
@@ -449,11 +449,11 @@ export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRoute
   BlogsRoute: typeof BlogsRoute
   BoardRoute: typeof BoardRoute
+  EmailVerificationRoute: typeof EmailVerificationRoute
   EventsRoute: typeof EventsRoute
   GalleryRoute: typeof GalleryRoute
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
-  PasswordRoute: typeof PasswordRoute
   ProfileRoute: typeof ProfileRoute
   ProgramsRoute: typeof ProgramsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -472,11 +472,11 @@ const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRoute,
   BlogsRoute: BlogsRoute,
   BoardRoute: BoardRoute,
+  EmailVerificationRoute: EmailVerificationRoute,
   EventsRoute: EventsRoute,
   GalleryRoute: GalleryRoute,
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
-  PasswordRoute: PasswordRoute,
   ProfileRoute: ProfileRoute,
   ProgramsRoute: ProgramsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -504,11 +504,11 @@ export const routeTree = rootRoute
         "/authed",
         "/blogs",
         "/board",
+        "/email-verification",
         "/events",
         "/gallery",
         "/interns",
         "/login",
-        "/password",
         "/profile",
         "/programs",
         "/reset-password",
@@ -536,6 +536,9 @@ export const routeTree = rootRoute
     "/board": {
       "filePath": "board.tsx"
     },
+    "/email-verification": {
+      "filePath": "email-verification.tsx"
+    },
     "/events": {
       "filePath": "events.tsx"
     },
@@ -547,9 +550,6 @@ export const routeTree = rootRoute
     },
     "/login": {
       "filePath": "login.tsx"
-    },
-    "/password": {
-      "filePath": "password.tsx"
     },
     "/profile": {
       "filePath": "profile.tsx"
