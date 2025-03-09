@@ -80,7 +80,7 @@ const AuthForm = ({
       <div className={cn("mb-6 flex items-center justify-center p-2", (isEmailVerification || isResetPassword) && "mt-[-40px]")}>
         <Logo />
       </div>
-      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3> {/* Kept original title size */}
+      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3> 
       {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
       {isEmailVerification && (
         <>
