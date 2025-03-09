@@ -75,4 +75,3 @@ export const Route = createFileRoute("/email-verification")({
     );
   },
 });
-

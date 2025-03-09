@@ -77,17 +77,11 @@ const AuthForm = ({
         isSignUp ? "min-h-[38em]" : "min-h-[32rem]",
       )}
     >
-      <div
-        className={cn(
-          "flex justify-center items-center mb-6 p-2",
-          (isEmailVerification || isResetPassword) && "mt-[-40px]",
-        )}
-      >
+      <div className={cn("mb-6 flex items-center justify-center p-2", (isEmailVerification || isResetPassword) && "mt-[-40px]")}>
         <Logo />
       </div>
       <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3> {/* Kept original title size */}
       {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
-
       {isEmailVerification && (
         <>
           <StyledFormField icon="icon-[material-symbols--mail-outline]" hasError={!!errors.email}>
@@ -104,7 +98,6 @@ const AuthForm = ({
           {errors.email && <span className="mb-1 font-redhat text-sm text-red-600">{errors.email.message}</span>}
         </>
       )}
-
       {!isResetPassword && !isEmailVerification && (
         <>
           <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
@@ -216,7 +209,6 @@ const AuthForm = ({
       >
         {buttonLabel}
       </Button>
-
       {!isResetPassword && (
         <p className="text-md mt-4 text-center font-redhat">
           {linkText}{" "}
@@ -235,7 +227,6 @@ const AuthForm = ({
           )}
         </p>
       )}
-
       {additionalButton && (
         <Link
           to={additionalButton.route}
