@@ -1,6 +1,8 @@
 import { db } from "@/server/db/db";
 import { emailSubscribers } from "@db/tables";
+import * as Schema from "@db/tables";
 import { createErrorResponse, createSuccessResponse } from "@shared/utils";
+import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { Resend } from "resend";
 
@@ -62,15 +64,21 @@ emailRoutes.post("/email/send", async (c) => {
 
 emailRoutes.post("/email/password-reset", async (c) => {
   try {
-    const { email, name } = await c.req.json();
+    const { email } = await c.req.json();
     if (!email) {
       return createErrorResponse(c, "INVALID_INPUT", "Email is required", 400);
     }
-    const resetPage = "http://ufsase.com/reset-password";
+
+    const user = await db.select().from(Schema.users).where(eq(Schema.users.email, email));
+    if (!user || user.length === 0) {
+      return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 404);
+    }
+
+    const resetPage = `http://ufsase.com/reset-password?id=${user[0].id}`;
     const htmlTemplate = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1>Password Reset Notification</h1>
-        <p>Hey ${name || "User"}.</p>
+        <p>Hello ${user[0].username || "user"},</p>
         <p>Your UF SASE password can be reset by clicking the button below. If you did not request a new password, please ignore this email.</p>
         <p>
           <a href="${resetPage}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
@@ -87,7 +95,7 @@ emailRoutes.post("/email/password-reset", async (c) => {
       subject: "Password Reset Request for UF SASE",
       html: htmlTemplate,
     });
-    return createSuccessResponse(c, result, "Password reset email sent successfully");
+    return createSuccessResponse(c, result.data, "Password reset email sent successfully");
   } catch (error) {
     console.error("Password reset email error:", error);
     return createErrorResponse(c, "PASSWORD_RESET_FAILURE", "Failed to send password reset email", 500);
