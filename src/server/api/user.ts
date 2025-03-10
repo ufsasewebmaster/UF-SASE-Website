@@ -1,7 +1,6 @@
 import { db } from "@/server/db/db";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
-import { updateUserSchema } from "@shared/schema/userSchema";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
