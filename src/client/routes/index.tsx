@@ -4,10 +4,10 @@ import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
+import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import MobileMemberCard from "../components/home/MobileMemberCard";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -164,14 +164,14 @@ export const Route = createFileRoute("/")({
         )}
 
         <div className="w-full bg-black p-10">
-          <h1 className="w-full pb-12 text-center font-oswald text-6xl text-white">Our Values</h1>
+          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium text-white">Our Values</h1>
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-        <div className="mr-2 flex w-full flex-col items-center bg-saseGray p-2">
-          <h1 className="w-full pb-10 text-center font-oswald text-6xl font-medium">Sponsors</h1>
-          <div className="justify-left mb-20 flex w-9/12 flex-wrap items-start gap-14">
-            <div className="ml-1 flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242] sm:w-[45%]">
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10">
+          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
+          <div className="mb-20 flex w-10/12 flex-col items-start gap-14 lg:flex-row xl:gap-24">
+            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
                 Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                 <br />
@@ -184,8 +184,8 @@ export const Route = createFileRoute("/")({
                 .
               </p>
             </div>
-            <div className="flex w-full flex-col items-center gap-12 sm:w-[45%]">
-              <div className="grid w-full grid-cols-1 gap-14 sm:grid-cols-2">
+            <div className="flex w-full flex-col items-center gap-12">
+              <div className="grid w-full grid-cols-2 gap-14 xl:gap-24">
                 {SponsorInfo.map((sponsor) =>
                   sponsor.tier === "Diamond" ? (
                     <SponsorCard
