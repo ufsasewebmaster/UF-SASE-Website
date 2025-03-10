@@ -185,7 +185,7 @@ export const Route = createFileRoute("/")({
               </p>
             </div>
             <div className="flex w-full flex-col items-center gap-12">
-              <div className="grid w-full grid-cols-2 gap-14 xl:gap-24">
+              <div className="grid w-full grid-cols-1 gap-14 sm:grid-cols-2 xl:gap-24">
                 {SponsorInfo.map((sponsor) =>
                   sponsor.tier === "Diamond" ? (
                     <SponsorCard
