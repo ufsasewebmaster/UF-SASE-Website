@@ -40,7 +40,6 @@ export const Route = createFileRoute("/reset-password")({
       },
       onSuccess: () => {
         setShowSuccessModal(true);
-        navigate({ to: "/login" });
       },
       onError: (error) => {
         setErrorMessage(error.message);
