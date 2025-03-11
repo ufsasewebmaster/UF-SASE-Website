@@ -24,7 +24,7 @@ export interface FormData {
   username: string;
   email: string;
   password: string;
-  newPassword?: string;
+  newPassword: string;
   retypePassword?: string;
 }
 
