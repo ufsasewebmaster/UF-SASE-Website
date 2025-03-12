@@ -58,7 +58,6 @@ userRoutes.delete("/users/:id", async (c) => {
 userRoutes.patch("/users/password", async (c) => {
   try {
     const { id: userID, newPassword: newPassword } = await c.req.json();
-    console.log("Received data:", { userID, newPassword });
     // Find user
     const user = await db.select().from(Schema.users).where(eq(Schema.users.id, userID));
     if (!user || user.length === 0) {
