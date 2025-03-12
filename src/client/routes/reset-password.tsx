@@ -1,12 +1,12 @@
-import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
+import type { FormData } from "@components/AuthForm";
 import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import ShadowCard from "../components/AuthShadowCard";
-import { useAuth } from "../hooks/AuthContext";
+import AuthLayout from "../components/AuthLayout";
+import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/reset-password")({
@@ -19,14 +19,17 @@ export const Route = createFileRoute("/reset-password")({
   ],
 
   component: () => {
-    const { login } = useAuth();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const userId = queryParams.get("id");
 
     const mutation = useMutation({
-      mutationFn: async (formData: FormData) => {
-        const response = await fetch("api/user/users/:id/password", {
-          method: "POST",
+      mutationFn: async (formData: { id: string; newPassword: string }) => {
+        const response = await fetch("/api/users/password", {
+          method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
@@ -36,8 +39,7 @@ export const Route = createFileRoute("/reset-password")({
         }
       },
       onSuccess: () => {
-        login();
-        navigate({ to: "/login" });
+        setShowSuccessModal(true);
       },
       onError: (error) => {
         setErrorMessage(error.message);
@@ -45,13 +47,20 @@ export const Route = createFileRoute("/reset-password")({
     });
 
     const handleResetPassword = (data: FormData) => {
-      mutation.mutate(data);
+      if (!userId) {
+        setErrorMessage("Invalid reset link");
+        return;
+      }
+      mutation.mutate({ id: userId, newPassword: data.newPassword });
+    };
+    const handleModalClose = () => {
+      setShowSuccessModal(false);
+      navigate({ to: "/login" });
     };
 
     return (
       <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
+        <AuthLayout isSignUp={false}>
           <AuthForm
             title="Reset Password"
             buttonLabel="Reset Password"
@@ -61,7 +70,8 @@ export const Route = createFileRoute("/reset-password")({
             onSubmit={handleResetPassword}
             errorMessage={errorMessage || undefined}
           />
-        </div>
+          <SuccessModal isOpen={showSuccessModal} onClose={handleModalClose} message="Your password has been successfully reset!" />
+        </AuthLayout>
       </Page>
     );
   },
