@@ -16,14 +16,15 @@ interface AuthFormProps {
   errorMessage?: string;
   isSignUp?: boolean;
   isResetPassword?: boolean;
+  isEmailVerification?: boolean;
   additionalButton?: { text: string; route: string };
 }
 
 export interface FormData {
   username: string;
-  email?: string;
+  email: string;
   password: string;
-  newPassword?: string;
+  newPassword: string;
   retypePassword?: string;
 }
 
@@ -31,7 +32,6 @@ export interface FormData {
 const StyledFormField = ({ children, hasError, icon }: { children: React.ReactNode; icon?: string; hasError?: boolean }) => (
   <div className="relative mb-2 w-full">
     {" "}
-    {/* Adjusted bottom margin */}
     {icon && <span className={`absolute left-3 top-[40%] z-10 h-5 w-5 -translate-y-1/2 text-gray-500 ${icon}`} />}
     {React.cloneElement(children as React.ReactElement, {
       className: cn(
@@ -46,6 +46,7 @@ const AuthForm = ({
   additionalButton,
   buttonLabel,
   errorMessage,
+  isEmailVerification = false,
   isResetPassword = false,
   isSignUp = false,
   linkRoute,
@@ -76,12 +77,28 @@ const AuthForm = ({
         isSignUp ? "min-h-[38em]" : "min-h-[32rem]",
       )}
     >
-      <div className="mb-6 p-2">
+      <div className={cn("mb-6 flex items-center justify-center p-2", (isEmailVerification || isResetPassword) && "mt-[-40px]")}>
         <Logo />
       </div>
-      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3> {/* Kept original title size */}
+      <h3 className="heading mb-3 pb-2 text-center font-oswald text-4xl font-semibold">{title}</h3>
       {errorMessage && <div className="mb-3 w-full text-center text-sm text-red-600">{errorMessage}</div>}
-      {!isResetPassword && (
+      {isEmailVerification && (
+        <>
+          <StyledFormField icon="icon-[material-symbols--mail-outline]" hasError={!!errors.email}>
+            <Input
+              id="email"
+              type="email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email address" },
+              })}
+              placeholder="Email"
+            />
+          </StyledFormField>
+          {errors.email && <span className="mb-1 font-redhat text-sm text-red-600">{errors.email.message}</span>}
+        </>
+      )}
+      {!isResetPassword && !isEmailVerification && (
         <>
           <StyledFormField icon="icon-[qlementine-icons--user-16]" hasError={!!errors.username}>
             <Input
@@ -195,9 +212,19 @@ const AuthForm = ({
       {!isResetPassword && (
         <p className="text-md mt-4 text-center font-redhat">
           {linkText}{" "}
-          <Link to={isSignUp ? linkRoute : "/password"} className="cursor-pointer text-saseBlue underline">
-            {isSignUp ? "Login here." : "Click here to reset."}
-          </Link>
+          {isEmailVerification ? (
+            <Link to="/login" className="cursor-pointer text-saseBlue underline">
+              Back to login.
+            </Link>
+          ) : isSignUp ? (
+            <Link to={linkRoute} className="cursor-pointer text-saseBlue underline">
+              Login here.
+            </Link>
+          ) : (
+            <Link to="/email-verification" className="cursor-pointer text-saseBlue underline">
+              Click here to reset.
+            </Link>
+          )}
         </p>
       )}
       {additionalButton && (
