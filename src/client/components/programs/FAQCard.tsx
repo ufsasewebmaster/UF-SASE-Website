@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 interface FAQItemProps {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
 }
 
 interface FAQProps {
