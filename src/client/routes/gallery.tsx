@@ -39,7 +39,7 @@ export const Route = createFileRoute("/gallery")({
           </div>
           <div className="flex-center pb-10">
             <a href={slideshowLink} target="__blank">
-              <div className="delay-50 ... flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
+              <div className="delay-50 ... flex h-10 items-center justify-center rounded-full border-2 border-border bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
                 <div className="pl-5 font-redhat">Click here to visit the Google Drives!</div>
                 <div className="pl-2 pr-5">
                   <IoMdLink size={15} />
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/gallery")({
           <div className="flex justify-center pb-10 font-redhat">
             <a href="https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n" target="_blank">
               <button className="delay-50 ... flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue pl-5 pr-5 text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
-                2024-2025 SASE Yearbook
+                2023-2024 SASE Yearbook
               </button>
             </a>
           </div>

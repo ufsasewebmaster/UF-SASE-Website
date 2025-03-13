@@ -1,6 +1,8 @@
 import { db } from "@/server/db/db";
 import { emailSubscribers } from "@db/tables";
-import { createErrorResponse } from "@shared/utils";
+import * as Schema from "@db/tables";
+import { createErrorResponse, createSuccessResponse } from "@shared/utils";
+import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { Resend } from "resend";
 
@@ -15,8 +17,7 @@ emailRoutes.get("/email/test", async (c) => {
       subject: "Test Email from Resend",
       html: "<h1>This is a test email</h1><p>If you received this, Resend works!</p>",
     });
-
-    return c.json({ message: "Test email sent successfully", result }, 200);
+    return createSuccessResponse(c, result, "Test email sent successfully");
   } catch (error) {
     console.error("Test email error:", error);
     return createErrorResponse(c, "EMAIL_TEST_FAILURE", "Failed to send test email", 500);
@@ -25,16 +26,13 @@ emailRoutes.get("/email/test", async (c) => {
 
 emailRoutes.post("/email/add", async (c) => {
   try {
-    // Parse and validate the request body
     const { email, name } = await c.req.json();
     if (!email) return createErrorResponse(c, "INVALID_INPUT", "Email is required", 400);
-
     await db.insert(emailSubscribers).values({
       email,
-      name: name || null, // Optional name
+      name: name || null,
     });
-
-    return c.json({ message: "Email added successfully" }, 200);
+    return createSuccessResponse(c, { success: true }, "Email added successfully");
   } catch (error) {
     console.error("Error adding email:", error);
     return createErrorResponse(c, "EMAIL_ADD_FAILURE", "Failed to add email", 500);
@@ -43,13 +41,10 @@ emailRoutes.post("/email/add", async (c) => {
 
 emailRoutes.post("/email/send", async (c) => {
   try {
-    // Parse and validate the request body
     const { html, recipientList, subject } = await c.req.json();
     if (!recipientList || !subject || !html) {
       return createErrorResponse(c, "INVALID_INPUT", "Missing required fields", 400);
     }
-
-    // Loop through recipients and send emails
     const results = [];
     for (const recipient of recipientList) {
       const result = await resend.emails.send({
@@ -60,8 +55,7 @@ emailRoutes.post("/email/send", async (c) => {
       });
       results.push(result);
     }
-
-    return c.json({ message: "Emails sent successfully", results }, 200);
+    return createSuccessResponse(c, results, "Emails sent successfully");
   } catch (error) {
     console.error("Email sending error:", error);
     return createErrorResponse(c, "EMAIL_SEND_FAILURE", "Failed to send emails", 500);
@@ -70,16 +64,21 @@ emailRoutes.post("/email/send", async (c) => {
 
 emailRoutes.post("/email/password-reset", async (c) => {
   try {
-    const { email, name } = await c.req.json();
+    const { email } = await c.req.json();
     if (!email) {
       return createErrorResponse(c, "INVALID_INPUT", "Email is required", 400);
     }
 
-    const resetPage = "http://ufsase.com/reset-password";
+    const user = await db.select().from(Schema.users).where(eq(Schema.users.email, email));
+    if (!user || user.length === 0) {
+      return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 404);
+    }
+
+    const resetPage = `http://ufsase.com/reset-password?id=${user[0].id}`;
     const htmlTemplate = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1>Password Reset Notification</h1>
-        <p>Hey ${name || "User"}.</p>
+        <p>Hello ${user[0].username || "user"},</p>
         <p>Your UF SASE password can be reset by clicking the button below. If you did not request a new password, please ignore this email.</p>
         <p>
           <a href="${resetPage}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
@@ -90,16 +89,15 @@ emailRoutes.post("/email/password-reset", async (c) => {
         <p>Best regards,<br>The UF SASE WebDev Team</p>
       </div>
     `;
-
     const result = await resend.emails.send({
       from: "UF SASE <password@email.ufsase.com>",
       to: [email],
       subject: "Password Reset Request for UF SASE",
       html: htmlTemplate,
     });
-
-    return c.json({ message: "Password reset email sent successfully", result }, 200);
-  } catch {
+    return createSuccessResponse(c, result.data, "Password reset email sent successfully");
+  } catch (error) {
+    console.error("Password reset email error:", error);
     return createErrorResponse(c, "PASSWORD_RESET_FAILURE", "Failed to send password reset email", 500);
   }
 });

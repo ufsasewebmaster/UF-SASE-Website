@@ -1,4 +1,4 @@
-import { useAuth } from "@/client/AuthContext";
+import { useAuth } from "@/client/hooks/AuthContext";
 import { cn } from "@/shared/utils";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
@@ -7,7 +7,9 @@ import { SearchBar } from "@navigation/SearchBar";
 import { UserButton } from "@navigation/UserButton";
 import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import DarkButton from "../DarkButton";
+import { DarkModeContext } from "../DarkModeProvider";
 
 const SCREEN_BREAKPOINT = 1024;
 
@@ -52,6 +54,7 @@ const Header: React.FC = () => {
   const { isAuthenticated, isLoading, logout } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -85,13 +88,16 @@ const Header: React.FC = () => {
     <header
       className={cn(`sticky left-0 top-0 z-50 w-full font-redhat font-medium shadow-md`, {
         "bg-black text-white": isHomePage,
-        "bg-white text-black": !isHomePage,
+        "bg-background text-foreground": !isHomePage,
       })}
     >
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
 
+        {/* TODO: For testing purposes */}
+
+        <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-4">
@@ -104,8 +110,9 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Nav */}
-        <div className="ml-auto flex items-center gap-2 md:hidden">
-          <SearchBar />
+        <div className="flex items-center gap-4 md:hidden">
+          <SearchBar className="w-32 focus:w-64" />
+          {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
           <button ref={hamburgerRef} className="focus:outline-none">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
           </button>

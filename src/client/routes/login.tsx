@@ -5,8 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import { useAuth } from "../AuthContext";
-import ShadowCard from "../components/AuthShadowCard";
+import AuthLayout from "../components/AuthLayout";
+import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/login")({
@@ -52,8 +52,7 @@ export const Route = createFileRoute("/login")({
 
     return (
       <Page>
-        <div className="relative flex min-h-screen items-center justify-center">
-          <ShadowCard />
+        <AuthLayout isSignUp={false}>
           <AuthForm
             title="Login"
             buttonLabel="Login"
@@ -66,7 +65,7 @@ export const Route = createFileRoute("/login")({
               route: "/signup",
             }}
           />
-        </div>
+        </AuthLayout>
       </Page>
     );
   },
