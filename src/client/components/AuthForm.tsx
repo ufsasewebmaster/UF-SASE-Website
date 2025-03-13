@@ -107,7 +107,7 @@ const AuthForm = ({
               {...register("username", {
                 required: { value: true, message: "Username is required" },
                 minLength: { value: 4, message: "Username must be at least 4 characters!" },
-                maxLength: { value: 12, message: "Username must be 12 characters or fewer!" },
+                maxLength: { value: 254, message: "Username must be 254 characters or fewer!" },
               })}
               placeholder={isSignUp ? "Username" : "Username or email"}
               className="h-12 p-4"
