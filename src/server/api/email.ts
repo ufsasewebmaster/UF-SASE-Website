@@ -5,8 +5,9 @@ import { createErrorResponse, createSuccessResponse } from "@shared/utils";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { Resend } from "resend";
+import { SERVER_ENV } from "@server/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(SERVER_ENV.RESEND_API_KEY);
 const emailRoutes = new Hono();
 
 emailRoutes.get("/email/test", async (c) => {
