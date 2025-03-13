@@ -11,17 +11,18 @@ interface NavItem {
 export const DesktopMenu: React.FC<{
   navItems: Array<NavItem>;
   isHomePage: boolean;
-}> = ({ isHomePage, navItems }) => {
+  darkMode: boolean;
+}> = ({ isHomePage, navItems, darkMode }) => {
   return (
     <ul className="flex space-x-6">
       {navItems.map((item) => (
-        <NavItemComponent key={item.name} item={item} isHomePage={isHomePage} />
+        <NavItemComponent key={item.name} item={item} isHomePage={isHomePage} darkMode={darkMode} />
       ))}
     </ul>
   );
 };
 
-const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({ isHomePage, item }) => {
+const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean; darkMode: boolean }> = ({ isHomePage, item, darkMode }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const hasChildren = item.children && item.children.length > 0;
@@ -49,8 +50,8 @@ const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({ is
             className={cn(`absolute left-0 mt-2 w-40 rounded border shadow-lg group-hover:block`, {
               hidden: !dropdownOpen,
               block: dropdownOpen,
-              "border-black bg-black text-white": isHomePage,
-              "border-white bg-white text-black": !isHomePage,
+              "border-black bg-black text-white": isHomePage || darkMode,
+              "border-white bg-white text-black": !isHomePage && !darkMode,
             })}
             style={{ paddingTop: "10px", marginTop: "0px" }} // Ensure dropdown is positioned without affecting the title
           >
