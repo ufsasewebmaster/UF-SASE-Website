@@ -18,22 +18,24 @@ export const Route = createFileRoute("/profile")({
       resources: false,
       settings: false,
     });
-    const { errorMessage, logout } = useAuth();
+    const { errorMessage, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
 
+    if (!isAuthenticated) {
+      setTimeout(() => {
+        navigate({ to: "/login" });
+      }, 2000);
+      return <div>Not authenticated, redirecting to login page</div>;
+    }
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
     const handleLogout = async () => {
       try {
         // Use a hook-based logout if possible; otherwise, fall back to fetch
-        const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-        if (response.ok) {
-          logout();
-          navigate({ to: "/" });
-        } else {
-          throw new Error("Logout failed");
-        }
+        // const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+        logout();
+        navigate({ to: "/" });
       } catch (error) {
         console.error("Logout error:", error);
       }
