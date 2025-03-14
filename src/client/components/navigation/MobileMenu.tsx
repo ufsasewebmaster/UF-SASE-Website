@@ -22,9 +22,8 @@ interface MobileMenuProps {
   darkMode: boolean;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout, darkMode }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ darkMode, isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout }) => {
   const [allSubmenusClosed, setAllSubmenusClosed] = useState(false);
-  //const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     setAllSubmenusClosed(!isOpen);

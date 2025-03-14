@@ -92,8 +92,8 @@ const EventsSlides: React.FC = () => {
           <button
             key={year}
             className={cn("border-b-2 p-3 px-6 text-lg transition-all duration-300 ease-in-out", {
-              "border-saseGreen text-black": selectedYear === year,
-              "border-transparent text-black hover:border-gray-400": selectedYear !== year,
+              "border-saseGreen text-foreground": selectedYear === year,
+              "border-transparent text-foreground hover:border-gray-400": selectedYear !== year,
             })}
             onClick={() => setSelectedYear(year as keyof typeof imageData)}
           >

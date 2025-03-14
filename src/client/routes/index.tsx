@@ -144,7 +144,7 @@ export const Route = createFileRoute("/")({
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-3 gap-12 bg-white p-12">
+          <div className="grid grid-cols-3 gap-12 bg-background p-12">
             <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
             <MemberCard
               image={imageUrls["InternalVicePresident.jpeg"]}
