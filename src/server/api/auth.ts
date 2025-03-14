@@ -63,6 +63,10 @@ authRoutes.post("/auth/signup", async (c) => {
       graduation_semester: "",
     });
 
+    await db.insert(Schema.userRoleRelationship).values({
+      user_id: userId,
+    });
+
     return createSuccessResponse(c, { userId }, "User successfully created");
   } catch (error) {
     console.log(error);
