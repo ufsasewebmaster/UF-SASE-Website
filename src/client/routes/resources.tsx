@@ -1,5 +1,7 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import ClassConnectorForms from "@components/ClassConnectorForms";
+import ResourcesCard from "@components/ResourcesCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
 import { IoMdLink } from "react-icons/io";
@@ -57,10 +59,11 @@ const careerResources: Array<ResourceCard> = [
   },
 ];
 
-const resourceTabs: Record<string, Array<ResourceCard>> = {
-  "Study Materials": studyMaterials,
-  Workshops: workshops,
-  "Career Resources": careerResources,
+const resourceTabs: Record<string, React.ReactNode> = {
+  "Study Materials": studyMaterials.map((card, index) => <ResourcesCard key={index} {...card} />),
+  Workshops: workshops.map((card, index) => <ResourcesCard key={index} {...card} />),
+  "Career Resources": careerResources.map((card, index) => <ResourcesCard key={index} {...card} />),
+  "Class Connector Forms": <ClassConnectorForms />,
 };
 
 export const Route = createFileRoute("/resources")({
@@ -128,17 +131,7 @@ export const Route = createFileRoute("/resources")({
         </div>
 
         {/* Resource Cards */}
-        <div className="grid grid-cols-1 justify-items-center gap-6 px-4 py-8 sm:grid-cols-2 lg:grid-cols-3">
-          {resourceTabs[activeTab].map((card, index) => (
-            <div key={index} className="w-full max-w-md rounded-lg border p-4 shadow-md hover:shadow-lg">
-              <h2 className="mb-2 text-xl font-semibold">{card.title}</h2>
-              <p className="mb-4 text-gray-600">{card.description}</p>
-              <a href={card.link} target="_blank" rel="noopener noreferrer" className="font-medium text-blue-600 hover:text-blue-800">
-                {card.linkText}
-              </a>
-            </div>
-          ))}
-        </div>
+        <div className="py-8">{resourceTabs[activeTab]}</div>
 
         {/* Green line */}
         <div className="mx-[5%] border-b-4 border-saseGreen" />
