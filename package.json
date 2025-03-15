@@ -39,6 +39,7 @@
     "@tanstack/react-router": "^1.58.7",
     "@tanstack/start": "1.78.1",
     "@types/bcryptjs": "^2.4.6",
+    "@uploadthing/react": "^7.3.0",
     "@vinxi/react": "^0.2.5",
     "@vitejs/plugin-react": "^4.3.1",
     "bcryptjs": "^2.4.3",
@@ -76,6 +77,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^7.5.2",
     "vinxi": "^0.5.1",
     "vite-plugin-image-optimizer": "^1.1.8",
     "zod": "^3.23.8"

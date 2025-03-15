@@ -16,8 +16,22 @@ said guidelines: all names MUST start with GBM followed by number and underscore
 after that, all hyphens and underscores are replaced by spaces, while spaces and capitalization are left alone
 */
 
-const folderMap = new Map();
+const folderMap = new Map<string, string>();
 const drive = google.drive({ version: "v3", auth });
+
+async function insertSlides(name: string, parent_folder: string, thumbnail_url: string, embed_url: string, last_modified: Date) {
+  try {
+    await db.insert(Schema.meetingSlides).values({
+      name,
+      parent_folder,
+      thumbnail_url,
+      embed_url,
+      last_modified,
+    });
+  } catch (err) {
+    writeFileSync("errors.log", `File ${name} was not added to DB. Error: \n ${err}`);
+  }
+}
 
 (async () => {
   const driveResponse = await drive.files.list({
@@ -26,7 +40,7 @@ const drive = google.drive({ version: "v3", auth });
   });
   if (driveResponse.data.files) {
     driveResponse.data.files.forEach((folder) => {
-      folderMap.set(folder.id, folder.name);
+      folderMap.set(String(folder.id), String(folder.name));
     });
     console.log(folderMap);
   } else {
@@ -55,16 +69,8 @@ const drive = google.drive({ version: "v3", auth });
       if (result.length == 0) {
         //add all nonfolder files to database
         console.log("nonpresentation file: ", file.name, " ", file.id, " ", file.thumbnailLink, "/n", file.webViewLink, " ", file.modifiedTime, " ");
-        //build embed URL
-        if (file.webViewLink) {
-          const editIndex = file.webViewLink.indexOf("/edit");
-          const embed_url = file.webViewLink.substring(0, editIndex + 1) + embedRules;
-          console.log(embed_url);
-        } else {
-          const event = new Date().toUTCString();
-          writeFileSync("errors.log", `File link not present at ${event}`);
-        }
         //download thumbnail
+        const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
         try {
           //change URL to get max image size
           let linkString: string = String(file.thumbnailLink);
@@ -77,18 +83,49 @@ const drive = google.drive({ version: "v3", auth });
           });
           const blob: Blob = await resp.blob();
           const arrayBuf: ArrayBuffer = await blob.arrayBuffer();
+          const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
           if (typeof arrayBuf !== "string") {
             const buffer: Buffer = Buffer.from(arrayBuf);
-            writeFile(`images/${file.name}_thumbnail.png`, buffer, { flag: "w" }, (err) => {
+            writeFile(filePath, buffer, { flag: "w" }, (err) => {
               console.log(err);
             });
           }
-          console.log(resp);
+          //console.log(resp);
         } catch {
           writeFileSync("errors.log", `Failed to download thumbnail from link ${file.thumbnailLink}`);
           return;
         }
-        //upload record to database
+
+        //build embed URL
+        if (!file.webViewLink) {
+          const event = new Date().toUTCString();
+          writeFileSync("errors.log", `File link not present at ${event}`);
+          return;
+        }
+        const editIndex = file.webViewLink.indexOf("/edit");
+        const embedURL: string = file.webViewLink.substring(0, editIndex + 1) + embedRules;
+
+        //find parent folder name
+        const fileParentArray: Array<string> | null | undefined = file.parents;
+
+        if (!fileParentArray || typeof fileParentArray == "undefined") {
+          const event = new Date().toUTCString();
+          writeFileSync("errors.log", `fileParentArray not present at ${event}`);
+          return;
+        }
+
+        if (fileParentArray.length < 1) {
+          const event = new Date().toUTCString();
+          writeFileSync("errors.log", `fileParentArray is empty at ${event}`);
+          return;
+        }
+
+        //slide decks without parent folder can be put in "Uncategorized section on website"
+        const parentFolderName: string = folderMap.get(fileParentArray[0]) ?? "";
+        //build timestamp
+        const timestamp = new Date(String(file.modifiedTime));
+        //add record to database, skipping and logging failed insertions
+        insertSlides(String(file.name), parentFolderName, filePath, embedURL, timestamp);
       }
     });
   } else {
