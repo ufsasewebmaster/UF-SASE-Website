@@ -19,7 +19,14 @@ after that, all hyphens and underscores are replaced by spaces, while spaces and
 const folderMap = new Map<string, string>();
 const drive = google.drive({ version: "v3", auth });
 
-async function insertSlides(name: string, parent_folder: string, thumbnail_url: string, embed_url: string, last_modified: Date) {
+async function insertSlides(
+  name: string,
+  parent_folder: string,
+  thumbnail_url: string,
+  embed_url: string,
+  last_modified: Date,
+  relative_order?: number,
+) {
   try {
     await db.insert(Schema.meetingSlides).values({
       name,
@@ -27,6 +34,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
       thumbnail_url,
       embed_url,
       last_modified,
+      relative_order,
     });
   } catch (err) {
     writeFileSync("errors.log", `File ${name} was not added to DB. Error: \n ${err}`);
@@ -53,7 +61,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
 {
   //retrieve all presentations
   const allFiles = await drive.files.list({
-    q: "mimeType='application/vnd.google-apps.presentation' and trashed=false",
+    q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
     fields: "*",
   });
   if (allFiles.data.files) {
@@ -66,9 +74,26 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
         .limit(1);
       if (result.length == 0) {
         //add all nonfolder files to database
-        console.log("file: ", file.name, " ", file.id, " ", file.thumbnailLink, "/n", file.webViewLink, " ", file.modifiedTime, " ");
+        //format name
+        let formattedTitle: string = String(file.name);
+        let meetingNumber: number = -1;
+        try {
+          const prefixIndex: number = String(file.name).indexOf("_");
+          meetingNumber = parseInt(String(file.name).slice(3, prefixIndex - 1));
+          const extIndex: number = String(file.name).lastIndexOf(".");
+          if (extIndex !== -1 && (String(file.name).slice(extIndex) === ".pptx" || String(file.name).slice(extIndex) === ".pdf")) {
+            formattedTitle = String(file.name).slice(prefixIndex + 1, extIndex - 1);
+          }
+          formattedTitle.replace("_", " ");
+          formattedTitle.replace("-", " ");
+          formattedTitle.replace(".", " ");
+        } catch {
+          writeFileSync("errors.log", `Malformed string: ${file.name}`, { flag: "a" });
+          return;
+        }
         //download thumbnail
-        const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
+        const pathTitle: string = formattedTitle.replace(" ", "_");
+        const filePath = `src/client/assets/thumbnails/${pathTitle}_tn.png`;
         try {
           //change URL to get max image size
           let linkString: string = String(file.thumbnailLink);
@@ -81,7 +106,6 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
           });
           const blob: Blob = await resp.blob();
           const arrayBuf: ArrayBuffer = await blob.arrayBuffer();
-          const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
           if (typeof arrayBuf !== "string") {
             const buffer: Buffer = Buffer.from(arrayBuf);
             writeFile(filePath, buffer, { flag: "w" }, (err) => {
@@ -119,11 +143,12 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
         }
 
         //slide decks without parent folder can be put in "Uncategorized section on website"
-        const parentFolderName: string = folderMap.get(fileParentArray[0]) ?? "";
+        const parentFolderName: string = folderMap.get(fileParentArray[0])?.slice(1) ?? "";
         //build timestamp
         const timestamp = new Date(String(file.modifiedTime));
+        console.log("file: ", formattedTitle, " ", parentFolderName, " ", file.thumbnailLink, "\n", file.webViewLink, " ", file.modifiedTime, " ");
         //add record to database, skipping and logging failed insertions
-        insertSlides(String(file.name), parentFolderName, filePath, embedURL, timestamp);
+        insertSlides(formattedTitle, parentFolderName, filePath, embedURL, timestamp, meetingNumber);
       }
     });
   } else {

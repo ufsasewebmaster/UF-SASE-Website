@@ -19,7 +19,14 @@ after that, all hyphens and underscores are replaced by spaces, while spaces and
 const folderMap = new Map<string, string>();
 const drive = google.drive({ version: "v3", auth });
 
-async function insertSlides(name: string, parent_folder: string, thumbnail_url: string, embed_url: string, last_modified: Date) {
+async function insertSlides(
+  name: string,
+  parent_folder: string,
+  thumbnail_url: string,
+  embed_url: string,
+  last_modified: Date,
+  relative_order?: number,
+) {
   try {
     await db.insert(Schema.meetingSlides).values({
       name,
@@ -27,6 +34,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
       thumbnail_url,
       embed_url,
       last_modified,
+      relative_order,
     });
   } catch (err) {
     writeFileSync("errors.log", `File ${name} was not added to DB. Error: \n ${err}`);
@@ -36,7 +44,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
 (async () => {
   const driveResponse = await drive.files.list({
     q: "mimeType='application/vnd.google-apps.folder' and trashed=false",
-    fields: "*",
+    fields: "files(name, id)",
   });
   if (driveResponse.data.files) {
     driveResponse.data.files.forEach((folder) => {
@@ -56,10 +64,30 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
   //retrieve all files
   const allFiles = await drive.files.list({
     q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
-    fields: "*",
+    fields: "files(name, thumbnailLink, webViewLink, modifiedTime, parents)",
   });
   if (allFiles.data.files) {
     allFiles.data.files.forEach(async (file) => {
+      //format name
+      console.log(file.name);
+      let formattedTitle: string = String(file.name);
+      let meetingNumber: number = -1;
+      try {
+        const prefixIndex: number = String(file.name).indexOf("_");
+        meetingNumber = parseInt(String(file.name).slice(3, prefixIndex));
+        const extIndex: number = String(file.name).lastIndexOf(".");
+
+        //remove file extension if necessary
+        if (extIndex !== -1 && (String(file.name).slice(extIndex) === ".pptx" || String(file.name).slice(extIndex) === ".pdf")) {
+          formattedTitle = String(file.name).slice(prefixIndex + 1, -5);
+        }
+
+        formattedTitle = formattedTitle.replaceAll("_", " ").replaceAll("-", " ").replaceAll("-", " ").replaceAll(".", " ");
+      } catch {
+        writeFileSync("errors.log", `Malformed string: ${file.name}`, { flag: "a" });
+        return;
+      }
+      console.log(formattedTitle, " ", meetingNumber);
       //skip files that are already in database by searching for them by name
       const result = await db
         .select()
@@ -68,7 +96,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
         .limit(1);
       if (result.length == 0) {
         //add all nonfolder files to database
-        console.log("nonpresentation file: ", file.name, " ", file.id, " ", file.thumbnailLink, "/n", file.webViewLink, " ", file.modifiedTime, " ");
+        console.log("file: ", file.name, " ", file.thumbnailLink, " ", file.webViewLink, " ", file.modifiedTime);
         //download thumbnail
         const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
         try {
@@ -83,7 +111,7 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
           });
           const blob: Blob = await resp.blob();
           const arrayBuf: ArrayBuffer = await blob.arrayBuffer();
-          const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
+          const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "_")}_tn.png`;
           if (typeof arrayBuf !== "string") {
             const buffer: Buffer = Buffer.from(arrayBuf);
             writeFile(filePath, buffer, { flag: "w" }, (err) => {
@@ -121,11 +149,11 @@ async function insertSlides(name: string, parent_folder: string, thumbnail_url: 
         }
 
         //slide decks without parent folder can be put in "Uncategorized section on website"
-        const parentFolderName: string = folderMap.get(fileParentArray[0]) ?? "";
+        const parentFolderName: string = folderMap.get(fileParentArray[0])?.slice(1) ?? "";
         //build timestamp
         const timestamp = new Date(String(file.modifiedTime));
         //add record to database, skipping and logging failed insertions
-        insertSlides(String(file.name), parentFolderName, filePath, embedURL, timestamp);
+        insertSlides(formattedTitle, parentFolderName, filePath, embedURL, timestamp, meetingNumber);
       }
     });
   } else {
