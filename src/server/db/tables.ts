@@ -167,4 +167,5 @@ export const meetingSlides = sqliteTable("meeting_slides", {
   thumbnail_url: text("thumbnail_url").notNull().unique(),
   embed_url: text("embed_url").notNull().unique(),
   last_modified: integer("last_modified", { mode: "timestamp" }).notNull(),
+  relative_order: integer(),
 });
