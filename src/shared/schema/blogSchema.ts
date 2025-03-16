@@ -8,6 +8,7 @@ export const blogSchema = z.object({
   author_id: z.string().min(1, "Author ID is required."),
   published_date: z.string().min(0, "Published date must be a valid timestamp."),
   time_updated: z.string().min(0, "Update time must be a valid timestamp."),
+  images: z.array(z.string().url()).optional(),
 });
 
 export const blogTitleSchema = z.object({
@@ -23,6 +24,7 @@ export const createBlogSchema = blogSchema
   })
   .extend({
     tags: z.array(z.string()).optional(),
+    images: z.array(z.string().url()).optional(),
   });
 
 export const updateBlogSchema = blogSchema.partial().omit({
