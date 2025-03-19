@@ -6,15 +6,14 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
+import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import useIsMobile from "../hooks/useIsMobile";
+import { useState } from "react"; // Added for Read More feature
 
 export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
-    const [expanded, setExpanded] = useState(false);
-    const toggleReadMore = () => setExpanded(!expanded);
+    const [expanded, setExpanded] = useState(false); // State for Read More / Read Less
 
     return (
       <div className="flex flex-col items-center">
@@ -55,25 +54,32 @@ export const Route = createFileRoute("/")({
                   allowFullScreen
                 ></iframe>
                 <p className="font-redhat text-lg text-white md:text-xl">
-                  The Society of Asian Scientists & Engineers is a vibrant and dynamic organization at the University of Florida. We are committed to
-                  fostering meaningful connections across cultures and empowering Asian Pacific Islander Desi American (APIDA) professionals in
-                  science and engineering.
+                  The <span className="font-semibold">Society of Asian Scientists & Engineers </span> is a vibrant and dynamic organization at the
+                  University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
+                  <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
+                  professionals in <span className="font-semibold">science and engineering</span>.
                 </p>
-                {!expanded && isMobile && <p className="font-redhat text-lg text-white md:text-xl">...</p>}
-                {(expanded || !isMobile) && (
-                  <div>
-                    <br></br>
+
+                {!isMobile || expanded ? (
+                  <>
+                    <br />
                     <p className="font-redhat text-lg text-white md:text-xl">
-                      Through engaging meetings and events, we provide a nurturing environment where you can acquire essential skills and knowledge to
-                      excel in the professional world. Our inclusive community welcomes individuals from all majors, offering a friendly atmosphere to
-                      help you secure internships, jobs, and network with like-minded peers. Beyond personal growth, we are dedicated to making a
-                      positive impact in our local communities. By celebrating diversity and embracing our heritage, we create opportunities for our
-                      members to contribute meaningfully to society.
+                      Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
+                      acquire <span className="font-semibold">essential skills and knowledge </span>
+                      to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
+                      welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with
+                      like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in
+                      our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
+                      <span className="font-semibold">opportunities </span>for our members to contribute meaningfully to society.
                     </p>
-                  </div>
-                )}
+                  </>
+                ) : null}
+
                 {isMobile && (
-                  <button className="ml-2 font-semibold text-white" onClick={toggleReadMore}>
+                  <button
+                    className="mt-4 text-saseGreen underline"
+                    onClick={() => setExpanded(!expanded)}
+                  >
                     {expanded ? "Read Less" : "Read More"}
                   </button>
                 )}
