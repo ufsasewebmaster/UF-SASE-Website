@@ -8,12 +8,12 @@ import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react"; // Added for Read More feature
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
-    const [expanded, setExpanded] = useState(false); // State for Read More / Read Less
+    const [expanded, setExpanded] = useState(false);
 
     return (
       <div className="flex flex-col items-center">
@@ -68,18 +68,15 @@ export const Route = createFileRoute("/")({
                       acquire <span className="font-semibold">essential skills and knowledge </span>
                       to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
                       welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with
-                      like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in
-                      our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
+                      like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact
+                      in our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
                       <span className="font-semibold">opportunities </span>for our members to contribute meaningfully to society.
                     </p>
                   </>
                 ) : null}
 
                 {isMobile && (
-                  <button
-                    className="mt-4 text-saseGreen underline"
-                    onClick={() => setExpanded(!expanded)}
-                  >
+                  <button className="mt-4 text-saseGreen underline" onClick={() => setExpanded(!expanded)}>
                     {expanded ? "Read Less" : "Read More"}
                   </button>
                 )}
