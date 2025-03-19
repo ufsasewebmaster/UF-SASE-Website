@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";  
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const filePath = join(__dirname, "..", "src", "client", "assets", "image_data.json");
