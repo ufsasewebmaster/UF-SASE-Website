@@ -6,12 +6,15 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
-import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
+    const [expanded, setExpanded] = useState(false);
+    const toggleReadMore = () => setExpanded(!expanded);
 
     return (
       <div className="flex flex-col items-center">
@@ -52,21 +55,28 @@ export const Route = createFileRoute("/")({
                   allowFullScreen
                 ></iframe>
                 <p className="font-redhat text-lg text-white md:text-xl">
-                  The <span className="font-semibold">Society of Asian Scientists & Engineers </span> is a vibrant and dynamic organization at the
-                  University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
-                  <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
-                  professionals in <span className="font-semibold">science and engineering</span>.
+                  The Society of Asian Scientists & Engineers is a vibrant and dynamic organization at the University of Florida. We are committed to
+                  fostering meaningful connections across cultures and empowering Asian Pacific Islander Desi American (APIDA) professionals in
+                  science and engineering.
                 </p>
-                <br />
-                <p className="font-redhat text-lg text-white md:text-xl">
-                  Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
-                  acquire <span className="font-semibold">essential skills and knowledge </span>
-                  to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
-                  welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with
-                  like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in
-                  our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
-                  <span className="font-semibold">opportunities </span>for our members to contribute meaningfully to society.
-                </p>
+                {!expanded && isMobile && <p className="font-redhat text-lg text-white md:text-xl">...</p>}
+                {(expanded || !isMobile) && (
+                  <div>
+                    <br></br>
+                    <p className="font-redhat text-lg text-white md:text-xl">
+                      Through engaging meetings and events, we provide a nurturing environment where you can acquire essential skills and knowledge to
+                      excel in the professional world. Our inclusive community welcomes individuals from all majors, offering a friendly atmosphere to
+                      help you secure internships, jobs, and network with like-minded peers. Beyond personal growth, we are dedicated to making a
+                      positive impact in our local communities. By celebrating diversity and embracing our heritage, we create opportunities for our
+                      members to contribute meaningfully to society.
+                    </p>
+                  </div>
+                )}
+                {isMobile && (
+                  <button className="ml-2 font-semibold text-white" onClick={toggleReadMore}>
+                    {expanded ? "Read Less" : "Read More"}
+                  </button>
+                )}
               </div>
               <img
                 src={imageUrls["SASELogoStar.png"]}
@@ -76,7 +86,6 @@ export const Route = createFileRoute("/")({
             </div>
           </div>
         </div>
-
         <div className="flex w-full flex-col items-center bg-saseGray p-12">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
           <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
