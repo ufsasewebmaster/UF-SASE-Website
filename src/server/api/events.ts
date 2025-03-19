@@ -1,7 +1,7 @@
 import { db } from "@/server/db/db";
 import * as Schema from "@db/tables";
 import { createErrorResponse, createSuccessResponse } from "@shared/utils";
-import { and, eq, gte, like, lte } from "drizzle-orm";
+import { and, desc, eq, gte, like, lte } from "drizzle-orm";
 import { Hono } from "hono";
 
 const eventRoutes = new Hono();
@@ -134,6 +134,24 @@ eventRoutes.get("/events/search/:name", async (c) => {
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "SEARCH_EVENTS_ERROR", "Failed to search events", 500);
+  }
+});
+
+eventRoutes.get("/events/slides/", async (c) => {
+  try {
+    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.parent_folder));
+    return c.json(result);
+  } catch (error) {
+    if (error) return createErrorResponse(c, "EVENT_SLIDES_ERROR", error.toString(), 500);
+  }
+});
+
+eventRoutes.get("/events/slides/", async (c) => {
+  try {
+    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.parent_folder));
+    return c.json(result);
+  } catch (error) {
+    if (error) return createErrorResponse(c, "EVENT_SLIDES_ERROR", error.toString(), 500);
   }
 });
 

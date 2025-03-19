@@ -98,7 +98,7 @@ async function insertSlides(
         //add all nonfolder files to database
         console.log("file: ", file.name, " ", file.thumbnailLink, " ", file.webViewLink, " ", file.modifiedTime);
         //download thumbnail
-        const filePath = `src/client/assets/thumbnails/${file.name}_tn.png`;
+        const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "_")}_tn.png`;
         try {
           //change URL to get max image size
           let linkString: string = String(file.thumbnailLink);
@@ -111,7 +111,6 @@ async function insertSlides(
           });
           const blob: Blob = await resp.blob();
           const arrayBuf: ArrayBuffer = await blob.arrayBuffer();
-          const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "_")}_tn.png`;
           if (typeof arrayBuf !== "string") {
             const buffer: Buffer = Buffer.from(arrayBuf);
             writeFile(filePath, buffer, { flag: "w" }, (err) => {
@@ -142,14 +141,15 @@ async function insertSlides(
           return;
         }
 
-        if (fileParentArray.length < 1) {
+        if (!fileParentArray[0]) {
           const event = new Date().toUTCString();
           writeFileSync("errors.log", `fileParentArray is empty at ${event}`);
           return;
         }
 
         //slide decks without parent folder can be put in "Uncategorized section on website"
-        const parentFolderName: string = folderMap.get(fileParentArray[0])?.slice(1) ?? "";
+        let parentFolderName: string = folderMap.get(fileParentArray[0])?.slice(1) ?? "";
+        parentFolderName = "'" + parentFolderName;
         //build timestamp
         const timestamp = new Date(String(file.modifiedTime));
         //add record to database, skipping and logging failed insertions
