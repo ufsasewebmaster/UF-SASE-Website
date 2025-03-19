@@ -63,6 +63,10 @@ authRoutes.post("/auth/signup", async (c) => {
       graduation_semester: "",
     });
 
+    await db.insert(Schema.userRoleRelationship).values({
+      user_id: userId,
+    });
+
     return createSuccessResponse(c, { userId }, "User successfully created");
   } catch (error) {
     console.log(error);
@@ -131,6 +135,7 @@ authRoutes.post("/auth/logout", async (c) => {
 // used for validating sessions
 authRoutes.get("/auth/session", async (c) => {
   const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+  console.log(sessionId);
 
   if (!sessionId) {
     return createErrorResponse(c, "NO_SESSION", "No active session", 401);
