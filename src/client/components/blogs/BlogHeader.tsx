@@ -1,28 +1,14 @@
+import type { BlogHeaderProps } from "@/shared/types/blogTypes";
 import React from "react";
 import BlogCard from "./BlogCard";
 import BlogContainer from "./BlogContainer";
-
-interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  images: Array<string>;
-  published_date: string;
-  time_updated: string;
-  author: string;
-}
-
-interface BlogHeaderProps {
-  blogs: Array<Blog>;
-  expandedBlogId: string | null;
-  setExpandedBlogId: (id: string | null) => void;
-}
 
 const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpandedBlogId }) => {
   if (expandedBlogId) {
     return null;
   }
 
+  //blog header is for the title and the recent posts (separate from all blogs)
   return (
     <div className="relative mb-10 mt-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">

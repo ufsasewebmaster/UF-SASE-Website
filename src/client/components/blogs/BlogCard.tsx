@@ -1,23 +1,7 @@
+import type { BlogCardProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React from "react";
 import { Button } from "../ui/button";
-
-interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  images: Array<string>;
-  published_date: string;
-  time_updated: string;
-  author: string;
-  read_time?: string;
-}
-
-interface BlogCardProps {
-  blog: Blog;
-  expandedBlogId: string | null;
-  setExpandedBlogId: (id: string | null) => void;
-}
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBlogId }) => {
   if (expandedBlogId === blog.id) {
@@ -33,7 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
     : "";
 
   return (
-    <div className="relative w-full max-w-6xl p-6">
+    <article className="relative w-full max-w-6xl p-6">
       <div className="group relative">
         {/* shadow card */}
         <div className="absolute left-5 top-5 z-0 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue"></div>
@@ -46,20 +30,20 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
         ></div>
 
         {/* main card */}
-        <div
+        <section
           className={cn(
             "relative z-10 flex flex-col items-start rounded-[50px] border-2 border-border bg-white p-12",
             "w-full shadow-lg transition sm:flex-col",
           )}
         >
           {/* image */}
-          <div className="mb-6 aspect-video w-full overflow-hidden rounded-[35px]">
+          <figure className="mb-6 aspect-video w-full overflow-hidden rounded-[35px]">
             {blog.images && blog.images.length > 0 ? (
               <img src={blog.images[0]} alt={blog.title} className="h-full w-full rounded-[35px] object-cover" />
             ) : (
               <div className="flex h-full w-full items-center justify-center rounded-[35px] bg-gray-300 text-gray-500">No Image</div>
             )}
-          </div>
+          </figure>
 
           {/* content */}
           <div className="flex w-full flex-col items-start">
@@ -72,7 +56,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
             </p>
 
             {/* read time ? need to do logic for this */}
-            {blog.read_time && <div className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</div>}
+            {blog.read_time && <span className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</span>}
 
             {/* content */}
             <p className={cn("mt-4 text-lg text-gray-700", "font-redhat")}>
@@ -100,9 +84,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </article>
   );
 };
 

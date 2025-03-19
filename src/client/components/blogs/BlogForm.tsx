@@ -1,20 +1,7 @@
+import type { BlogFormProps } from "@/shared/types/blogTypes";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
-
-interface BlogFormProps {
-  isCreating: boolean;
-  isEditing: boolean;
-  newBlogTitle: string;
-  newBlogContent: string;
-  newBlogTags: string;
-  error: string | null;
-  onTitleChange: (title: string) => void;
-  onContentChange: (content: string) => void;
-  onTagsChange: (tags: string) => void;
-  onSubmit: () => void;
-  onCancel: () => void;
-}
 
 const BlogForm: React.FC<BlogFormProps> = ({
   error,

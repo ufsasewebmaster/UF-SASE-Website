@@ -1,10 +1,7 @@
+import type { BlogCarouselProps } from "@/shared/types/blogTypes";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useCallback } from "react";
-
-interface BlogCarouselProps {
-  images: Array<string>;
-}
 
 const BlogCarousel: React.FC<BlogCarouselProps> = ({ images }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });

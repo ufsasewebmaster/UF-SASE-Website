@@ -1,24 +1,9 @@
+import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
 import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
-
-interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  images: Array<string>;
-  published_date: string;
-  time_updated: string;
-  author: string;
-}
-
-interface BlogExpandedProps {
-  blog: Blog;
-  onClose: () => void;
-  showBackButton?: boolean;
-}
 
 const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, onClose, showBackButton = true }) => {
   useEffect(() => {

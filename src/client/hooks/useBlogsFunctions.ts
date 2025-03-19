@@ -1,12 +1,12 @@
 import { useAuth } from "@/client/hooks/AuthContext";
 import { useBlogs } from "@hooks/useBlogs";
-import type { Blog } from "@shared/schema/blogSchema";
+import type { BlogBase } from "@shared/types/blogTypes";
 import { useState } from "react";
 
 export const useBlogFunctions = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [currentBlog, setCurrentBlog] = useState<Blog | null>(null);
+  const [currentBlog, setCurrentBlog] = useState<BlogBase | null>(null);
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogContent, setNewBlogContent] = useState("");
   const [newBlogTags, setNewBlogTags] = useState("");
@@ -52,7 +52,7 @@ export const useBlogFunctions = () => {
     }
   };
 
-  const handleEditBlog = (blog: Blog) => {
+  const handleEditBlog = (blog: BlogBase) => {
     setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);

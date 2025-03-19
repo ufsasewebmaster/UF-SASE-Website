@@ -36,10 +36,16 @@ export const Route = createFileRoute("/blogs")({
     if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
     if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error.message}</div>;
 
-    const sortedBlogs = [...(blogs.data || [])].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+    const blogDisplayData = (blogs.data || []).map((blog) => ({
+      ...blog,
+      images: blog.images || [],
+      author: blog.author_id || "",
+    }));
+
+    const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+
     const recentBlogs = sortedBlogs.slice(0, 2);
     const otherBlogs = sortedBlogs.slice(2);
-
     const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
 
     const handleCloseExpandedBlog = () => {
@@ -49,34 +55,10 @@ export const Route = createFileRoute("/blogs")({
 
     return (
       <div className="container mx-auto p-3">
-        {!expandedBlogId && (
-          <BlogHeader
-            blogs={recentBlogs.map((blog) => ({
-              ...blog,
-              images: blog.images || [],
-              author: blog.author_id || "",
-            }))}
-            expandedBlogId={expandedBlogId}
-            setExpandedBlogId={setExpandedBlogId}
-          />
-        )}
+        {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
 
         {/* expanded blog view */}
-        {expandedBlog && expandedBlogId && (
-          <BlogExpanded
-            blog={{
-              id: expandedBlog.id,
-              title: expandedBlog.title,
-              content: expandedBlog.content,
-              images: expandedBlog.images || [],
-              published_date: expandedBlog.published_date,
-              time_updated: expandedBlog.time_updated,
-              author: expandedBlog.author_id || "",
-            }}
-            onClose={handleCloseExpandedBlog}
-            showBackButton={true}
-          />
-        )}
+        {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
 
         {!expandedBlogId && (
           <>
@@ -127,20 +109,7 @@ export const Route = createFileRoute("/blogs")({
               <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
                 {otherBlogs.length > 0 ? (
                   otherBlogs.map((blog) => (
-                    <BlogCard
-                      key={blog.id}
-                      blog={{
-                        id: blog.id,
-                        title: blog.title,
-                        content: blog.content,
-                        images: blog.images ?? [],
-                        published_date: blog.published_date,
-                        time_updated: blog.time_updated,
-                        author: blog.author_id || "",
-                      }}
-                      expandedBlogId={expandedBlogId}
-                      setExpandedBlogId={setExpandedBlogId}
-                    />
+                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
                   ))
                 ) : (
                   <p className="font-redhat">No blogs found.</p>

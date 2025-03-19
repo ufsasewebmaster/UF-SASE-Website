@@ -1,10 +1,6 @@
+import type { BlogTagsProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React from "react";
-
-interface BlogTagsProps {
-  tags: Array<string>;
-  onTagClick?: (tag: string) => void;
-}
 
 const BlogTags: React.FC<BlogTagsProps> = ({ onTagClick, tags }) => {
   return (
@@ -25,7 +21,7 @@ const BlogTags: React.FC<BlogTagsProps> = ({ onTagClick, tags }) => {
               >
                 {tag}
               </button>
-              {index < tags.length && <div className="h-full w-0.5 bg-gray-300"></div>}
+              {index < tags.length - 1 && <div className="h-full w-0.5 bg-gray-300"></div>}
             </React.Fragment>
           ))}
           <button
