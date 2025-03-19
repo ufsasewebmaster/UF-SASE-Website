@@ -1,17 +1,9 @@
 import GoogleFormsImg from "@assets/resources/GoogleForms.png";
 import GoogleSheetsImg from "@assets/resources/GoogleSheets.png";
-import React from "react";
+import type { ResourceCardProps } from "@components/ResourcesCard";
+import ResourceCard from "@components/ResourcesCard";
 
-interface ResourceCard {
-  title: string;
-  description: string;
-  linkText: string;
-  link: string;
-  icon: JSX.Element;
-  shadowColor: string;
-}
-
-const classConnectorForms: Array<ResourceCard> = [
+const classConnectorForms: Array<ResourceCardProps> = [
   {
     title: "Google Form Link",
     description: "📝 Fill in your course information for peers to connect with you!",
@@ -43,23 +35,7 @@ const ClassConnectorForms: React.FC = () => {
       {/* Cards - Align with Description */}
       <div className="flex flex-wrap justify-start gap-6">
         {classConnectorForms.map((card, index) => (
-          <div key={index} className={`relative mb-14 w-full max-w-md p-5 font-redhat`}>
-            {/* Main Card with Border & Shadow */}
-            <div className={`relative flex flex-col rounded-3xl border-2 border-black bg-white p-12 ${card.shadowColor}`}>
-              {/* Title & Icon Row */}
-              <div className="flex w-full items-center justify-between">
-                {/* Title Link */}
-                <a href={card.link} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold text-blue-600 hover:underline">
-                  {card.linkText}
-                </a>
-                {/* Icon (Logo) */}
-                {card.icon}
-              </div>
-
-              {/* Description */}
-              <p className="mt-4 text-left font-semibold text-gray-700">{card.description}</p>
-            </div>
-          </div>
+          <ResourceCard key={index} {...card} />
         ))}
       </div>
     </div>

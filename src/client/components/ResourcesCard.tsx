@@ -1,22 +1,33 @@
 import React from "react";
 
-interface ResourceCardProps {
+export interface ResourceCardProps {
   title: string;
   description: string;
   linkText: string;
   link: string;
+  icon?: JSX.Element;
+  shadowColor?: string;
 }
 
-const ResourcesCard: React.FC<ResourceCardProps> = ({ description, link, linkText, title }) => {
+const ResourceCard: React.FC<ResourceCardProps> = ({ description, icon, link, linkText, shadowColor }) => {
   return (
-    <div className="w-full max-w-md rounded-lg border p-4 shadow-md hover:shadow-lg">
-      <h2 className="mb-2 text-xl font-semibold">{title}</h2>
-      <p className="mb-4 text-gray-600">{description}</p>
-      <a href={link} target="_blank" rel="noopener noreferrer" className="font-medium text-blue-600 hover:text-blue-800">
-        {linkText}
-      </a>
+    <div className={`relative mb-14 w-full max-w-md p-5 font-redhat`}>
+      {/* Main Card with Border & Shadow */}
+      <div className={`relative flex flex-col rounded-3xl border-2 border-black bg-white p-12 ${shadowColor || ""}`}>
+        {/* Title & Icon Row */}
+        <div className="flex w-full items-center justify-between">
+          {/* Title Link */}
+          <a href={link} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold text-blue-600 hover:underline">
+            {linkText}
+          </a>
+          {/* Icon (Logo) */}
+          {icon}
+        </div>
+        {/* Description */}
+        <p className="mt-4 text-left font-semibold text-gray-700">{description}</p>
+      </div>
     </div>
   );
 };
 
-export default ResourcesCard;
+export default ResourceCard;
