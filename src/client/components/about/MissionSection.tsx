@@ -20,7 +20,7 @@ const MissionSection: React.FC = () => {
     <section className={cn("mx-auto mb-12 w-full max-w-7xl px-4 sm:px-0")}>
       <div className={cn("mb-4 flex w-full items-center")}>
         <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
-        <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Mission Statement</h2>
+        <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>Mission Statement</h2>
       </div>
 
       <p className={cn("mb-8 text-center text-xl")}>To create a welcoming community where members:</p>

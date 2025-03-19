@@ -20,6 +20,7 @@ module.exports = {
         saseBlue: "#0668B3",
         saseBlueLight: "#1E77BA",
         saseGray: " #CBCBD4",
+        darkGreen: "#182825",
         blueShadow: "rgba(6, 104, 179, 0.58)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
