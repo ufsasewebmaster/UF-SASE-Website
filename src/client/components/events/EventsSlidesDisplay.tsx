@@ -40,8 +40,6 @@ const EventsSlides: React.FC = () => {
           }
           display[display.length - 1].slides.push(deck);
         });
-
-        console.log(display);
         setSemesters(display);
         setLoading(false);
       } catch (error) {

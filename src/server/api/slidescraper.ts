@@ -37,7 +37,7 @@ async function insertSlides(
       relative_order,
     });
   } catch (err) {
-    writeFileSync("errors.log", `File ${name} was not added to DB. Error: \n ${err}`);
+    writeFileSync("errors.log", `File ${name} was not added to DB. Error: \n ${err}`, { flag: "a" });
   }
 }
 
@@ -50,12 +50,11 @@ async function insertSlides(
     driveResponse.data.files.forEach((folder) => {
       folderMap.set(String(folder.id), String(folder.name));
     });
-    console.log(folderMap);
   } else {
     //if no response, write log into file and abort operation
     const event = new Date().toUTCString();
     writeFileSync("errors.log", `Folder retrieval failed at ${event}`, {
-      flag: "w",
+      flag: "a",
     });
     return;
   }
@@ -69,7 +68,6 @@ async function insertSlides(
   if (allFiles.data.files) {
     allFiles.data.files.forEach(async (file) => {
       //format name
-      console.log(file.name);
       let formattedTitle: string = String(file.name);
       let meetingNumber: number = -1;
       try {
@@ -87,7 +85,6 @@ async function insertSlides(
         writeFileSync("errors.log", `Malformed string: ${file.name}`, { flag: "a" });
         return;
       }
-      console.log(formattedTitle, " ", meetingNumber);
       //skip files that are already in database by searching for them by name
       const result = await db
         .select()
@@ -95,9 +92,7 @@ async function insertSlides(
         .where(eq(Schema.meetingSlides.name, String(file.name)))
         .limit(1);
       if (result.length == 0) {
-        //add all nonfolder files to database
-        console.log("file: ", file.name, " ", file.thumbnailLink, " ", file.webViewLink, " ", file.modifiedTime);
-        //download thumbnail
+        //add all nonfolder files to database and download thumbnail
         const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "_")}_tn.png`;
         try {
           //change URL to get max image size
@@ -117,16 +112,15 @@ async function insertSlides(
               console.log(err);
             });
           }
-          //console.log(resp);
         } catch {
-          writeFileSync("errors.log", `Failed to download thumbnail from link ${file.thumbnailLink}`);
+          writeFileSync("errors.log", `Failed to download thumbnail from link ${file.thumbnailLink}`, { flag: "a" });
           return;
         }
 
         //build embed URL
         if (!file.webViewLink) {
           const event = new Date().toUTCString();
-          writeFileSync("errors.log", `File link not present at ${event}`);
+          writeFileSync("errors.log", `File link not present at ${event}`, { flag: "a" });
           return;
         }
         const editIndex = file.webViewLink.indexOf("/edit");
@@ -137,13 +131,13 @@ async function insertSlides(
 
         if (!fileParentArray || typeof fileParentArray == "undefined") {
           const event = new Date().toUTCString();
-          writeFileSync("errors.log", `fileParentArray not present at ${event}`);
+          writeFileSync("errors.log", `fileParentArray not present at ${event}`, { flag: "a" });
           return;
         }
 
         if (!fileParentArray[0]) {
           const event = new Date().toUTCString();
-          writeFileSync("errors.log", `fileParentArray is empty at ${event}`);
+          writeFileSync("errors.log", `fileParentArray is empty at ${event}`, { flag: "a" });
           return;
         }
 
@@ -158,6 +152,6 @@ async function insertSlides(
     });
   } else {
     const event = new Date().toUTCString();
-    writeFileSync("errors.log", `File retrieval failed at ${event}`);
+    writeFileSync("errors.log", `File retrieval failed at ${event}`, { flag: "a" });
   }
 }
