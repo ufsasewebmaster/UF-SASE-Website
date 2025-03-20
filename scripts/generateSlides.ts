@@ -1,140 +1,236 @@
-import assert from "assert";
-import { writeFile } from "fs/promises";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { SERVER_ENV } from "@/server/env";
+//had to get credentials from creating a service account
+import fs, { writeFile, writeFileSync } from "fs";
+import path from "path";
+import { db } from "@/server/db/db";
+import * as Schema from "@/server/db/tables";
+import { eq } from "drizzle-orm";
 import { google } from "googleapis";
 
-// Ensure you run from the home dirctory if independnetly
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const filePath = join(__dirname, "..", "src", "client", "assets", "slides_data.json");
-const parentFolderId = "1OHYGiIuqYP2YsdLXsxG4XW-nQuUd00oR";
+const embedRules = "embed?start=false&loop=false&delayms=3000";
+const auth = new google.auth.GoogleAuth({
+  keyFile: process.env.CREDENTIALS_PATH,
+  scopes: ["https://www.googleapis.com/auth/drive"],
+});
 
-// console.log(SERVER_ENV);
-// console.log(SERVER_ENV.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"));
+//TODO: figure out how to process NextPageToken
+/*Note: by enforcing slide deck naming guidelines for GBMs, can sort w/o relying on timestamps
+said guidelines: all names MUST start with GBM followed by number and underscore
+after that, all hyphens and underscores are replaced by spaces, while spaces and capitalization are left alone
+*/
 
-async function generateSlides() {
-  console.log(SERVER_ENV.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"));
-
-  // Ensure that these are in env. Refer to env document
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: SERVER_ENV.GOOGLE_CLIENT_EMAIL,
-      private_key: SERVER_ENV.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/drive"],
-  });
-  const drive = google.drive({ version: "v3", auth });
-
-  // Query for semestser folders within parent folder
-  const folderRes = await drive.files.list({
-    q: `'${parentFolderId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
-    fields: "files(id, name)",
-  });
-
-  const slidesData: { [semester: string]: Array<{ name: string; webViewLink: string; thumbnailLink?: string }> } = {};
-
-  if (folderRes.data.files) {
-    for (const folder of folderRes.data.files) {
-      const semester = folder.name || "Unnamed Semester";
-
-      // ensure this doesn't happen
-      assert(semester !== "Unnamed Semester");
-
-      // List all slide files in this semester folder
-      const slidesRes = await drive.files.list({
-        q: `'${folder.id}' in parents and trashed=false`,
-        fields: "files(id, name, webViewLink, thumbnailLink)",
-      });
-      // Ensure matches what we expect!
-      slidesData[semester] =
-        slidesRes.data.files?.map((file) => ({
-          name: file.name || "Untitled Slide",
-          webViewLink: file.webViewLink || "",
-          thumbnailLink: file.thumbnailLink || "",
-        })) || [];
-    }
-  }
-
-  const output = JSON.stringify(slidesData, null, 2);
-  await writeFile(filePath, output, "utf-8");
-  console.log("Slides data generated successfully at", filePath);
+interface DriveFile {
+  id: string;
+  name: string;
 }
 
-generateSlides().catch(console.error);
+interface DriveResponse {
+  data: {
+    files?: Array<DriveFile>;
+  };
+}
 
-// //const key = "AIzaSyAbQwIEo6qgXEx9NTNqAgFD94u2IXRozPI";
-// //tutorial link: https://giminiani.com/posts/google-drive-api-with-node-js/#create-a-service-account
-// import { google } from "googleapis";
-// import { SERVER_ENV } from "@/server/env";
+const writeError = (err: string) => {
+  writeFileSync("errors.log", err + "\n", { flag: "a" });
+};
 
-// // If modifying these scopes, delete token.json.
-// // The file token.json stores the user's access and refresh tokens, and is
-// // created automatically when the authorization flow completes for the first
-// // time.
+const folderMap = new Map<string, string>();
+const drive = google.drive({ version: "v3", auth });
 
-// /**
-//  * Lists the names and IDs of up to 10 files.
-//  */
-// /*
-// const auth = new google.auth.GoogleAuth({
-//   keyFile: './credentials.json',
-//   scopes: ['https://www.googleapis.com/auth/drive.metadata.readonly'],
-// });
-// */
+async function insertSlides(category: string, name: string, semester: string, thumbnail_url: string, embed_url: string, date: Date) {
+  try {
+    await db.insert(Schema.meetingSlides).values({
+      category,
+      name,
+      semester,
+      thumbnail_url,
+      embed_url,
+      date,
+    });
+  } catch (err) {
+    writeError(`File ${name} was not added to DB: ${err}`);
+  }
+}
 
-// const auth = new google.auth.GoogleAuth({
-//   credentials: {
-//     client_email: SERVER_ENV.GOOGLE_CLIENT_EMAIL,
-//     private_key: SERVER_ENV.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-//   },
-//   scopes: ["https://www.googleapis.com/auth/drive"],
-// });
+/**
+ * Expected format: category_name_date.ext
+ * For example: "GBM-4_Return-of-SASEbender_2025-03-19.pptx"
+ */
+async function processFileName(fileName: string): Promise<{ category: string; name: string; date: Date } | undefined> {
+  try {
+    // Remove file extension.
+    const extIndex = fileName.lastIndexOf(".");
+    const baseName = extIndex !== -1 ? fileName.slice(0, extIndex) : fileName;
 
-// //TODO: figure out how to process NextPageToken
-// //first get all folder IDs
-// //embed?start=false&loop=false&delayms=3000
-// const folderMap = new Map();
-// const drive = google.drive({ version: "v3", auth });
+    // Split by underscore.
+    const parts = baseName.split("_");
+    if (parts.length !== 3) {
+      throw new Error("Filename must have exactly 3 parts separated by underscores.");
+    }
 
-// (async () => {
-//   const driveResponse = await drive.files.list({
-//     q: "mimeType='application/vnd.google-apps.folder' and trashed=false",
-//     fields: "*",
-//   });
-//   driveResponse.data.files?.forEach((folder) => {
-//     folderMap.set(folder.id, folder.name);
-//   });
-//   console.log(folderMap);
-// })()
-//   .catch((e) => {
-//     console.log(e);
-//   })
-//   .then();
-// {
-//   //retrieve all files
-//   const allFiles = await drive.files.list({
-//     q: "trashed=false",
-//     fields: "*",
-//   });
-//   allFiles.data.files?.forEach((file) => {
-//     if (String(file.mimeType) != "application/vnd.google-apps.folder") {
-//       console.log("nonpresentation file: ", file.name, " ", file.id, " ", file.thumbnailLink, " ", file.webViewLink);
-//     }
-//   });
-//   console.log(allFiles.data);
-// }
+    // Replace hyphens with spaces and trim
+    const category = parts[0].trim().replace(/-/g, " ");
+    const name = parts[1].trim().replace(/-/g, " ");
+    const dateStr = parts[2].trim();
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) throw new Error("Invalid date format.");
 
-// /*
-// //loops through each folder to get presentation files
-//   driveResponse.data.files.forEach((folder) => {
-//     console.log(folder.name, " ", folder.id)
-//     (async () => {
-//       const slides = await drive.files.list({
-//         q: `"\'${folder.id}\' in parents`,
-//         fields: "nextPageToken, files(id, name)"
-//       })
-//     })
-//     console.log(slides.data.files)
-//   })
-// */
+    return { category, name, date };
+  } catch (error) {
+    writeError(`Malformed string in ${fileName}: ${error}`);
+    return undefined;
+  }
+}
+
+/**
+ * Ensures that the directory for the given file path exists.
+ * [Change: Extracts parent directory from filePath]
+ */
+function ensureDirectoryExists(filePath: string) {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+/**
+ * Downloads the thumbnail from the given link and writes it to filePath.
+ */
+async function downloadThumbnail(thumbnailLink: string): Promise<Buffer | undefined> {
+  try {
+    const linkString = thumbnailLink.replace("=s220", "=s880");
+    const resp = await fetch(linkString, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const blob = await resp.blob();
+    const arrayBuf = await blob.arrayBuffer();
+    // Convert ArrayBuffer to Buffer.
+    if (typeof arrayBuf !== "string") {
+      const buffer = Buffer.from(arrayBuf);
+      return buffer;
+    }
+    return undefined;
+  } catch (error) {
+    writeError(`Failed to download thumbnail from link ${thumbnailLink}: ${error}`);
+    return undefined;
+  }
+}
+
+/**
+ * Builds the embed URL using the provided webViewLink.
+ */
+function buildEmbedURL(webViewLink: string): string | undefined {
+  if (!webViewLink) return undefined;
+  const editIndex = webViewLink.indexOf("/edit");
+  return editIndex !== -1 ? webViewLink.substring(0, editIndex + 1) + embedRules : webViewLink;
+}
+
+/**
+ * Expected folder name: year-semester, ex. "2023-Fall"
+ * Returns "Uncategorized" if no match is found.
+ */
+function parseSemesterFolder(folderName: string): string | undefined {
+  const regex = /^(\d{4})-(Fall|Spring|Summer|Winter)$/i;
+  const match = folderName.match(regex);
+  if (!match) return undefined;
+  const year = match[1].trim();
+  const semester = match[2].trim();
+  return `${year} ${semester}`;
+}
+
+(async () => {
+  // Map folder ids to semester
+  const folderResp = await drive.files.list({
+    q: "mimeType='application/vnd.google-apps.folder' and trashed=false",
+    fields: "files(name, id)",
+  });
+  const driveResponse: DriveResponse = {
+    data: {
+      files:
+        folderResp.data.files?.map((file) => ({
+          id: file.id ?? "",
+          name: file.name ?? "",
+        })) || [],
+    },
+  };
+  if (!driveResponse.data.files || driveResponse.data.files.length === 0) {
+    writeError(`Folder retrieval failed at ${new Date().toUTCString()}`);
+    return;
+  }
+  driveResponse.data.files.forEach((folder) => {
+    folderMap.set(folder.id, folder.name);
+  });
+
+  // 2. Retrieve all files.
+  const fileResp = await drive.files.list({
+    q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
+    fields: "files(name, thumbnailLink, webViewLink, modifiedTime, parents)",
+  });
+  const files = fileResp.data.files;
+  if (!files || files.length === 0) {
+    writeError(`File retrieval failed at ${new Date().toUTCString()}`);
+    return;
+  }
+  let processedFiles = 0;
+  for (const file of files) {
+    if (!file.name) {
+      writeError(`Missing filename, skipping file.`);
+      continue;
+    }
+    if (!file.thumbnailLink) {
+      writeError(`Missing thumbnail link for ${file.name}, skipping file.`);
+      continue;
+    }
+    if (!file.webViewLink) {
+      writeError(`Missing webViewLink for ${file.name}, skipping file.`);
+      continue;
+    }
+    if (!file.parents) {
+      writeError(`Missing parents for ${file.name}, skipping file.`);
+      continue;
+    }
+
+    const processed = await processFileName(file.name);
+    if (!processed) return;
+    const { category, date, name } = processed;
+
+    // Check if already processed
+    const result = await db.select().from(Schema.meetingSlides).where(eq(Schema.meetingSlides.name, name)).limit(1);
+    if (result.length !== 0) continue;
+
+    // Create thumbnail file path
+    const formattedTitle = `${category}_${name}_${date.toISOString().split("T")[0]}`;
+    const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
+    ensureDirectoryExists(filePath);
+
+    // Download thumbnail and write to file
+    const thumbnailBuffer = await downloadThumbnail(String(file.thumbnailLink));
+    if (!thumbnailBuffer) continue;
+    ensureDirectoryExists(filePath);
+    await new Promise((resolve, reject) => {
+      writeFile(filePath, thumbnailBuffer, { flag: "w" }, (err) => {
+        if (err) reject(err);
+        else resolve(true);
+      });
+    });
+
+    // Embed URL
+    const embedURL = buildEmbedURL(file.webViewLink);
+    if (!embedURL) {
+      writeError("invalid embed??");
+      continue;
+    }
+
+    // Get semester from parent folder
+    const semester = parseSemesterFolder(file.parents[0]);
+    if (!semester) {
+      writeError("invalid semester format");
+      continue;
+    }
+
+    // Insert into database
+    await insertSlides(category, name, semester, filePath, embedURL, date);
+    processedFiles++;
+  }
+  console.log(`${processedFiles} out of ${files.length} slides generated successfully`);
+})();

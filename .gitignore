@@ -17,6 +17,7 @@ scratchpad/*
 drizzle/meta
 
 client/routeTree.gen.ts
+credentials.json
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

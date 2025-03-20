@@ -139,7 +139,7 @@ eventRoutes.get("/events/search/:name", async (c) => {
 
 eventRoutes.get("/events/slides/", async (c) => {
   try {
-    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.parent_folder));
+    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.semester));
     return c.json(result);
   } catch (error) {
     if (error) return createErrorResponse(c, "EVENT_SLIDES_ERROR", error.toString(), 500);
@@ -148,7 +148,7 @@ eventRoutes.get("/events/slides/", async (c) => {
 
 eventRoutes.get("/events/slides/", async (c) => {
   try {
-    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.parent_folder));
+    const result = await db.select().from(Schema.meetingSlides).orderBy(desc(Schema.meetingSlides.semester));
     return c.json(result);
   } catch (error) {
     if (error) return createErrorResponse(c, "EVENT_SLIDES_ERROR", error.toString(), 500);

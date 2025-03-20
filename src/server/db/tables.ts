@@ -162,10 +162,10 @@ export const meetingSlides = sqliteTable("meeting_slides", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
+  category: text("category").notNull(),
   name: text("name").notNull(),
-  parent_folder: text("parent_folder").notNull(),
+  date: integer("date", { mode: "timestamp" }).notNull(),
+  semester: text("semester").notNull(),
   thumbnail_url: text("thumbnail_url").notNull().unique(),
   embed_url: text("embed_url").notNull().unique(),
-  last_modified: integer("last_modified", { mode: "timestamp" }).notNull(),
-  relative_order: integer(),
 });

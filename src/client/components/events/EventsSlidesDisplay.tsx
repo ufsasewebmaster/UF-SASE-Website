@@ -1,9 +1,11 @@
+import { cn } from "@/shared/utils";
 import React, { useEffect, useRef, useState } from "react";
 import ImageButton from "./ImageButton";
 
 interface SlideData {
+  category: string;
   name: string;
-  parent_folder: string;
+  semester: string;
   embed_url: string;
   thumbnail_url: string;
   relative_order: number;
@@ -15,13 +17,14 @@ interface Semester {
 }
 
 const EventsSlides: React.FC = () => {
-  //const [selectedYear, setSelectedYear] = useState<keyof typeof imageData>("Fall 2023");
   const [selectedSemester, setSelectedSemester] = useState<number>(0);
   const [view, setView] = useState<"slides" | "recordings">("slides");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [semesters, setSemesters] = useState<Array<Semester>>([]);
   const fetchedSlides = useRef(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -35,8 +38,8 @@ const EventsSlides: React.FC = () => {
 
         const display: Array<Semester> = [];
         slideData.forEach((deck) => {
-          if (display.length == 0 || deck.parent_folder !== display[display.length - 1].name) {
-            display.push({ name: deck.parent_folder, slides: [] });
+          if (display.length == 0 || deck.semester !== display[display.length - 1].name) {
+            display.push({ name: deck.semester, slides: [] });
           }
           display[display.length - 1].slides.push(deck);
         });
