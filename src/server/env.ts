@@ -8,7 +8,7 @@ dotenv.config();
 export const SERVER_ENV = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
-    DATABASE_AUTH_TOKEN: z.string().optional(),
+    DATABASE_AUTH_TOKEN: z.string(),
     RESEND_API_KEY: z.string(),
   },
   runtimeEnv: process.env,

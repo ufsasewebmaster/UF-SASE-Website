@@ -1,10 +1,11 @@
 import { readFile, writeFile } from "fs/promises";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const filePath = `${__dirname}/image_data.json`;
-const newFilePath = `${__dirname}/imageUrls.tsx`;
+const filePath = join(__dirname, "..", "src", "client", "assets", "image_data.json");
+const newFilePath = join(__dirname, "..", "src", "client", "assets", "imageUrls.tsx");
+
 async function generateImageMaps() {
   console.log(filePath);
   try {

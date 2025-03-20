@@ -30,22 +30,25 @@ bun install
 
 ### Setting Up the Environment Variables
 
-Create a `.env` file in the root directory of the project. Use the `.env.example` file as a reference.
-
+Create a `.env` file in the root directory of the project with this format. For production values, refer to our env document, or otherwise refer to the corresponding documentation for generation. 
 ```
-DATABASE_URL="file:local.db"
+DATABASE_URL="file:local.db"  # Turso
+DATABASE_AUTH_TOKEN=""
+RESEND_API_KEY=""             # Resend
+GOOGLE_CLIENT_EMAIL=""        # Google IAM
+GOOGLE_PRIVATE_KEY=""
 ```
 
-### Initializing the Local Development Database
+### Initializing the Local Database/Environment
 
-To set up the local SQLite database and apply the schema, run the following commands:
+To set up the local SQLite database (the `file:local.db` outlined above) and apply the schema, run:
 
 ```bash
-bun db:local:init
-bun db:push
+bun db:all
 ```
+Note in the package.json that this sets up everything related to the database.
 
-Start the development server:
+To start the development server:
 
 ```bash
 bun dev
@@ -53,31 +56,11 @@ bun dev
 
 The application should now be running at `http://localhost:3000`.
 
-## Deploying to Vercel
-
-### Setting Up an External Database
-
-We use [Turso](https://turso.tech/), a hosted SQLite service with a generous free tier, for our production database.
-
-1. **Create a Database:** Sign up for Turso, create a new database group, and then create a new database.
-2. **Generate an Auth Token:** Click on the three dots in the top right corner of the database, select "Create new token", and copy the credentials to your `.env` file as shown below:
-
-   ```
-   DATABASE_URL="libsql://your-url"
-   DATABASE_AUTH_TOKEN="your-auth-token"
-   ```
-
-3. **Update the Database Schema:** Push the database schema to the new database:
-
-   ```bash
-   bun db:push
-   ```
-
-**Note:** Running `bun dev` now connects to your production database. Be cautious when making changes in this mode. To switch back to local development, set `DATABASE_URL="file:local.db"` in the `.env` file.
+**Note:** Ensure that you are generally not on the production database unless necessary for development.
 
 ### Deploying to Vercel
 
-1. Deploy the project to Vercel by pushing changes to the main branch. Vercel will automatically build and deploy the project.
+1. We automatically deploy the project to Vercel by pushing changes to the main branch. 
 
 ## Project Structure
 

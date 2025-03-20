@@ -157,3 +157,15 @@ export const emailSubscribers = sqliteTable("email_subscriber", {
     .notNull()
     .$defaultFn(() => new Date()),
 });
+
+export const meetingSlides = sqliteTable("meeting_slides", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  category: text("category").notNull(),
+  name: text("name").notNull(),
+  date: integer("date", { mode: "timestamp" }).notNull(),
+  semester: text("semester").notNull(),
+  thumbnail_url: text("thumbnail_url").notNull().unique(),
+  embed_url: text("embed_url").notNull().unique(),
+});
