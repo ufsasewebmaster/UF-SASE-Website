@@ -1,5 +1,5 @@
 const EventsCalendar = () => (
-  <div className="group relative" style={{ width: "60%", height: "550px", minWidth: "550px" }}>
+  <div className="group relative" style={{ width: "100%", height: "550px", maxWidth: "60%", minWidth: "450px" }}>
     <div className="pointer-events-none absolute left-3 top-3 z-0 h-full w-full rounded-xl bg-gradient-to-b from-saseGreen to-saseBlue opacity-100 transition-opacity duration-700 ease-in-out group-hover:opacity-0"></div>
     <div className="pointer-events-none absolute left-3 top-3 z-0 h-full w-full rounded-xl bg-gradient-to-b from-saseBlue to-saseGreen opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"></div>
 
