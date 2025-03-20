@@ -1,155 +1,123 @@
-import { useAuth } from "@/client/hooks/AuthContext";
+import { cn } from "@/shared/utils";
 import { Button } from "@components/ui/button";
-import { Input } from "@components/ui/input";
-import { Textarea } from "@components/ui/textarea";
-import { useBlogs } from "@hooks/useBlogs";
-import type { Blog } from "@shared/schema/blogSchema";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import BlogCard from "../components/blogs/BlogCard";
+import BlogContainer from "../components/blogs/BlogContainer";
+import BlogExpanded from "../components/blogs/BlogExpanded";
+import BlogForm from "../components/blogs/BlogForm";
+import BlogHeader from "../components/blogs/BlogHeader";
+import BlogTags from "../components/blogs/BlogTags";
+import { useBlogFunctions } from "../hooks/useBlogsFunctions";
 
 export const Route = createFileRoute("/blogs")({
   component: () => {
-    const [isCreating, setIsCreating] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
-    const [currentBlog, setCurrentBlog] = useState<Blog | null>(null);
-    const [newBlogTitle, setNewBlogTitle] = useState("");
-    const [newBlogContent, setNewBlogContent] = useState("");
-    const [newBlogTags, setNewBlogTags] = useState("");
-    const { id, isAuthenticated } = useAuth();
-    const [error, setError] = useState<string | null>(null);
+    const {
+      blogs,
+      error,
+      handleCreateBlog,
+      handleUpdateBlog,
+      isAuthenticated,
+      isCreating,
+      isEditing,
+      newBlogContent,
+      newBlogTags,
+      newBlogTitle,
+      resetForm,
+      setIsCreating,
+      setIsEditing,
+      setNewBlogContent,
+      setNewBlogTags,
+      setNewBlogTitle,
+    } = useBlogFunctions();
 
-    const { blogs, createBlog, updateBlog } = useBlogs();
+    const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
 
-    const handleCreateBlog = () => {
-      createBlog.mutate(
-        {
-          title: newBlogTitle,
-          content: newBlogContent,
-          tags: newBlogTags.split(",").map((tag) => tag.trim()),
-          author_id: id,
-        },
-        {
-          onError: (error: Error) => {
-            setError(error.message);
-          },
-          onSuccess: () => {
-            setIsCreating(false);
-            resetForm();
-          },
-        },
-      );
+    if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
+    if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error.message}</div>;
+
+    const blogDisplayData = (blogs.data || []).map((blog) => ({
+      ...blog,
+      images: blog.images || [],
+      author: blog.author_id || "",
+    }));
+
+    const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+
+    const recentBlogs = sortedBlogs.slice(0, 2);
+    const otherBlogs = sortedBlogs.slice(2);
+    const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
+
+    const handleCloseExpandedBlog = () => {
+      setExpandedBlogId(null);
+      document.body.style.overflow = "auto";
     };
-
-    const handleUpdateBlog = () => {
-      if (currentBlog) {
-        updateBlog.mutate(
-          {
-            title: newBlogTitle,
-            content: newBlogContent,
-            // tags: newBlogTags.split(",").map((tag) => tag.trim()),
-          },
-          {
-            onError: (error: Error) => {
-              setError(error.message);
-            },
-            onSuccess: () => {
-              setIsEditing(false);
-              setCurrentBlog(null);
-              resetForm();
-            },
-          },
-        );
-      }
-    };
-
-    const handleEditBlog = (blog: Blog) => {
-      setCurrentBlog(blog);
-      setNewBlogTitle(blog.title);
-      setNewBlogContent(blog.content);
-      // setNewBlogTags(blog.tags?.join(", ") || "");
-      setIsEditing(true);
-      setError(null);
-    };
-
-    const resetForm = () => {
-      setNewBlogTitle("");
-      setNewBlogContent("");
-      setNewBlogTags("");
-      setError(null);
-    };
-
-    if (blogs.isLoading) return <div>Loading blogs...</div>;
-    if (blogs.isError) return <div>Error loading blogs: {blogs.error.message}</div>;
 
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="mb-6 text-3xl font-bold">Blogs</h1>
+      <div className="container mx-auto p-3">
+        {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
 
-        {isAuthenticated && !isCreating && !isEditing && (
-          <Button onClick={() => setIsCreating(true)} className="mb-4">
-            Create New Blog Post
-          </Button>
-        )}
+        {/* expanded blog view */}
+        {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
 
-        {(isCreating || isEditing) && (
-          <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
-            <h2 className="mb-4 text-2xl font-bold">{isCreating ? "Create New Blog Post" : "Edit Blog Post"}</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Title</label>
-                <Input value={newBlogTitle} onChange={(e) => setNewBlogTitle(e.target.value)} placeholder="Enter blog title" className="w-full" />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Content</label>
-                <Textarea
-                  value={newBlogContent}
-                  onChange={(e) => setNewBlogContent(e.target.value)}
-                  placeholder="Enter blog content"
-                  className="min-h-[200px] w-full"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Tags</label>
-                <Input
-                  value={newBlogTags}
-                  onChange={(e) => setNewBlogTags(e.target.value)}
-                  placeholder="Enter tags (comma-separated)"
-                  className="w-full"
-                />
-              </div>
-            </div>
-            <div className="mt-4 space-x-2">
-              <Button onClick={isCreating ? handleCreateBlog : handleUpdateBlog}>{isCreating ? "Create Post" : "Update Post"}</Button>
-              <Button
-                variant="secondary"
-                onClick={() => {
+        {!expandedBlogId && (
+          <>
+            {isAuthenticated && !isCreating && !isEditing && (
+              <Button onClick={() => setIsCreating(true)} className={cn("mb-3", "font-redhat")}>
+                Create New Blog Post
+              </Button>
+            )}
+
+            {(isCreating || isEditing) && (
+              <BlogForm
+                isCreating={isCreating}
+                isEditing={isEditing}
+                newBlogTitle={newBlogTitle}
+                newBlogContent={newBlogContent}
+                newBlogTags={newBlogTags}
+                error={error}
+                onTitleChange={setNewBlogTitle}
+                onContentChange={setNewBlogContent}
+                onTagsChange={setNewBlogTags}
+                onSubmit={isCreating ? handleCreateBlog : handleUpdateBlog}
+                onCancel={() => {
                   setIsCreating(false);
                   setIsEditing(false);
-                  setCurrentBlog(null);
                   resetForm();
                 }}
-              >
-                Cancel
-              </Button>
-            </div>
-            {error && <div className="mt-2 text-red-500">{error}</div>}
-          </div>
-        )}
+              />
+            )}
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.data && blogs.data.length > 0 ? (
-            blogs.data.map((blog: Blog) => (
-              <div key={blog.id} className="rounded-lg bg-white p-6 shadow-md">
-                <h2 className="mb-2 text-xl font-bold">{blog.title}</h2>
-                <p className="mb-4 text-gray-600">{blog.content.substring(0, 100)}...</p>
-                {/* {blog.tags && <p className="mb-2 text-sm text-gray-500">Tags: {blog.tags.join(", ")}</p>} */}
-                {isAuthenticated && <Button onClick={() => handleEditBlog(blog)}>Edit</Button>}
+            {/* tags */}
+            <BlogTags tags={["Winter Banquet", "Collaborations", "GBMs"]} />
+
+            {/* all posts header */}
+            <div className="mx-auto mb-5 mt-10 max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">
+              <h2
+                className={cn(
+                  "text-2xl sm:text-2xl md:text-3xl lg:text-4xl",
+                  "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
+                  "font-pixelify font-semibold tracking-wider",
+                )}
+              >
+                ALL POSTS
+              </h2>
+            </div>
+
+            {/* all blogs grid */}
+            <BlogContainer>
+              <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
+                {otherBlogs.length > 0 ? (
+                  otherBlogs.map((blog) => (
+                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+                  ))
+                ) : (
+                  <p className="font-redhat">No blogs found.</p>
+                )}
               </div>
-            ))
-          ) : (
-            <p>No blogs found.</p>
-          )}
-        </div>
+            </BlogContainer>
+          </>
+        )}
       </div>
     );
   },

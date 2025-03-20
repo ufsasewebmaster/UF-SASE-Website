@@ -18,8 +18,10 @@ module.exports = {
         saseGreen: "#7DC242",
         saseGreenLight: "#A5D57C",
         saseBlue: "#0668B3",
+        saseTeal: "#3B9080",
         saseBlueLight: "#1E77BA",
         saseGray: " #CBCBD4",
+        greenShadow: "#D4EEBA",
         blueShadow: "rgba(6, 104, 179, 0.58)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -64,7 +66,8 @@ module.exports = {
         oswald: ["Oswald", "sans-serif"],
         redhat: ["Red Hat Text", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
-        // sans: ["var(--font-sans)", ...fontFamily.sans],
+        pixelify: ["Pixelify Sans", "sans-serif"],
+        //sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
