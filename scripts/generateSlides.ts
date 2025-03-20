@@ -11,6 +11,7 @@ const auth = new google.auth.GoogleAuth({
   keyFile: process.env.CREDENTIALS_PATH,
   scopes: ["https://www.googleapis.com/auth/drive"],
 });
+const logFilePath = "errors.log";
 
 //TODO: figure out how to process NextPageToken
 /*Note: by enforcing slide deck naming guidelines for GBMs, can sort w/o relying on timestamps
@@ -18,11 +19,11 @@ said guidelines: all names MUST start with GBM followed by number and underscore
 after that, all hyphens and underscores are replaced by spaces, while spaces and capitalization are left alone
 */
 
+// Not necessary but helps clarify what structure we're using
 interface DriveFile {
   id: string;
   name: string;
 }
-
 interface DriveResponse {
   data: {
     files?: Array<DriveFile>;
@@ -30,7 +31,7 @@ interface DriveResponse {
 }
 
 const writeError = (err: string) => {
-  writeFileSync("errors.log", err + "\n", { flag: "a" });
+  writeFileSync(logFilePath, err + "\n", { flag: "a" });
 };
 
 const folderMap = new Map<string, string>();
@@ -161,7 +162,7 @@ function parseSemesterFolder(folderName: string): string | undefined {
     folderMap.set(folder.id, folder.name);
   });
 
-  // 2. Retrieve all files.
+  // Retrieve all files.
   const fileResp = await drive.files.list({
     q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
     fields: "files(name, thumbnailLink, webViewLink, modifiedTime, parents)",
@@ -174,19 +175,19 @@ function parseSemesterFolder(folderName: string): string | undefined {
   let processedFiles = 0;
   for (const file of files) {
     if (!file.name) {
-      writeError(`Missing filename, skipping file.`);
+      writeError(`Missing filename`);
       continue;
     }
     if (!file.thumbnailLink) {
-      writeError(`Missing thumbnail link for ${file.name}, skipping file.`);
+      writeError(`Missing thumbnail link for ${file.name}`);
       continue;
     }
     if (!file.webViewLink) {
-      writeError(`Missing webViewLink for ${file.name}, skipping file.`);
+      writeError(`Missing webViewLink for ${file.name}`);
       continue;
     }
     if (!file.parents) {
-      writeError(`Missing parents for ${file.name}, skipping file.`);
+      writeError(`Missing parents for ${file.name}`);
       continue;
     }
 
@@ -233,4 +234,5 @@ function parseSemesterFolder(folderName: string): string | undefined {
     processedFiles++;
   }
   console.log(`${processedFiles} out of ${files.length} slides generated successfully`);
+  if (processedFiles < files.length) console.log(`log written to ${logFilePath}`);
 })();

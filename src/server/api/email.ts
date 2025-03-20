@@ -1,11 +1,11 @@
 import { db } from "@/server/db/db";
 import { emailSubscribers } from "@db/tables";
 import * as Schema from "@db/tables";
+import { SERVER_ENV } from "@server/env";
 import { createErrorResponse, createSuccessResponse } from "@shared/utils";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { Resend } from "resend";
-import { SERVER_ENV } from "@server/env";
 
 const resend = new Resend(SERVER_ENV.RESEND_API_KEY);
 const emailRoutes = new Hono();
