@@ -17,7 +17,7 @@ export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn, 
   ) : (
     <Link to="/login">
       <button
-        className={`inline-block transform rounded-full border-2 ${isHomePage ? "border-white" : "border-black"} bg-saseBlue px-5 py-1 text-white duration-300 hover:scale-105 hover:bg-saseGreen hover:text-black`}
+        className={`inline-block transform rounded-full border-2 ${isHomePage ? "border-white" : "border-black"} whitespace-nowrap bg-saseBlue px-5 py-1 text-white duration-300 hover:scale-105 hover:bg-saseGreen hover:text-black`}
         onClick={onLogout}
       >
         Log In
