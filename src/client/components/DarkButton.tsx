@@ -9,7 +9,7 @@ const DarkButton: React.FC<DarkButtonProps> = ({ darkMode, toggleDarkMode }) => 
   return (
     <button onClick={toggleDarkMode} className="rounded-full p-2 transition-colors duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-800">
       <div className="relative h-6 w-6">
-        // Dark Mode Icon
+        {/* Dark Mode Icon */}
         <div
           className={`absolute inset-0 transform transition-opacity duration-500 ease-in-out ${
             darkMode ? "rotate-45 scale-75 opacity-0" : "rotate-0 scale-100 opacity-100"
@@ -29,7 +29,7 @@ const DarkButton: React.FC<DarkButtonProps> = ({ darkMode, toggleDarkMode }) => 
             />
           </svg>
         </div>
-        // Light Mode Icon
+        {/* Light Mode Icon */}
         <div
           className={`absolute inset-0 transform transition-opacity duration-500 ease-in-out ${
             darkMode ? "rotate-0 scale-100 opacity-100" : "-rotate-45 scale-75 opacity-0"
