@@ -4,19 +4,19 @@ const SecurityBox: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleDropdown = (name: string, event: React.MouseEvent) => {
-    event.preventDefault(); // Prevents the default open/close behavior
+    event.preventDefault();
     setActiveDropdown(activeDropdown === name ? null : name);
   };
 
   return (
-    <div className="w-3/4 rounded-2xl bg-white px-10 py-6 shadow-xl">
-      <h2 className="mb-6 font-redhat text-2xl font-bold">Security</h2>
+    <div className="min-h-[500px] w-3/4 rounded-2xl bg-white px-10 py-6 shadow-xl">
+      <h2 className="mb-10 font-redhat text-3xl font-bold">Security</h2>
 
       <div className="flex justify-between">
         {/* Left Section (Dropdowns) */}
         <div className="w-1/2">
           {/* Privacy Policy */}
-          <details className="group mb-4" open={activeDropdown === "privacy"}>
+          <details className="group mb-10" open={activeDropdown === "privacy"}>
             <summary onClick={(e) => toggleDropdown("privacy", e)} className="flex cursor-pointer items-center font-redhat text-lg font-semibold">
               <svg
                 className={`mr-2 h-6 w-6 transition-transform duration-300 ${activeDropdown === "privacy" ? "rotate-90" : ""}`}
@@ -61,7 +61,7 @@ const SecurityBox: React.FC = () => {
           </details>
 
           {/* User Agreement */}
-          <details className="group mb-4" open={activeDropdown === "user-agreement"}>
+          <details className="group mb-10" open={activeDropdown === "user-agreement"}>
             <summary
               onClick={(e) => toggleDropdown("user-agreement", e)}
               className="flex cursor-pointer items-center font-redhat text-lg font-semibold"
@@ -85,7 +85,7 @@ const SecurityBox: React.FC = () => {
           </details>
 
           {/* Cookie Policy */}
-          <details className="group mb-4" open={activeDropdown === "cookie"}>
+          <details className="group mb-10" open={activeDropdown === "cookie"}>
             <summary onClick={(e) => toggleDropdown("cookie", e)} className="flex cursor-pointer items-center font-redhat text-lg font-semibold">
               <svg
                 className={`mr-2 h-6 w-6 transition-transform duration-300 ${activeDropdown === "cookie" ? "rotate-90" : ""}`}
@@ -106,7 +106,7 @@ const SecurityBox: React.FC = () => {
           </details>
 
           {/* Copyright Policy */}
-          <details className="group mb-4" open={activeDropdown === "copyright"}>
+          <details className="group mb-10" open={activeDropdown === "copyright"}>
             <summary onClick={(e) => toggleDropdown("copyright", e)} className="flex cursor-pointer items-center font-redhat text-lg font-semibold">
               <svg
                 className={`mr-2 h-6 w-6 transition-transform duration-300 ${activeDropdown === "copyright" ? "rotate-90" : ""}`}
