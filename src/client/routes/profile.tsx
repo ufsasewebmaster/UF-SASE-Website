@@ -1,11 +1,13 @@
+import { DarkModeContext } from "@components/DarkModeProvider";
+import AccountBox from "@components/profile/AccountBox";
 import ProfileNav from "@components/profile/ProfileNav";
+import SecurityBox from "@components/profile/SecurityBox";
+import SettingsBox from "@components/profile/SettingsBox";
+import UserInfoBox from "@components/profile/UserInfoBox";
+import { useAuth } from "@hooks/AuthContext";
+import { useProfile } from "@hooks/useProfile";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import SecurityBox from "../components/profile/SecurityBox";
-import UserInfoBox from "../components/profile/UserInfoBox";
-import { Button } from "../components/ui/button";
-import { useAuth } from "../hooks/AuthContext";
-import { useProfile } from "../hooks/useProfile";
+import { useContext, useState } from "react";
 
 export const Route = createFileRoute("/profile")({
   component: () => {
@@ -13,6 +15,8 @@ export const Route = createFileRoute("/profile")({
     const [activeSection, setActiveSection] = useState<string>("account");
     const { errorMessage, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
+
+    const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
     if (!isAuthenticated) {
       setTimeout(() => {
@@ -45,16 +49,17 @@ export const Route = createFileRoute("/profile")({
           <ProfileNav profileName={profile?.username} update={updateComponent} activeSection={activeSection} />
         </div>
         <div className="flex w-full flex-col items-center justify-between py-6">
-          {activeSection === "userinfo" ? (
+          {activeSection === "account" ? (
+            <AccountBox username={profile?.username || "User"} handleLogout={handleLogout} />
+          ) : activeSection === "userinfo" ? (
             <UserInfoBox />
           ) : activeSection === "security" ? (
             <SecurityBox />
+          ) : activeSection === "settings" ? (
+            <SettingsBox darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           ) : (
             <div className="h-3/4 w-3/4 rounded-xl border border-black"></div>
           )}
-          <Button variant="destructive" className="mt-4" onClick={handleLogout}>
-            Log Out
-          </Button>
         </div>
       </div>
     );
