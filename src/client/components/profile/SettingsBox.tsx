@@ -22,7 +22,7 @@ const SettingsBox: React.FC<SettingsBoxProps> = ({ darkMode, toggleDarkMode }) =
 
       {/* Dark Mode Toggle */}
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-lg font-medium text-gray-700">Theme</span>
+        <span className="text-lg font-medium text-gray-700">Theme (Light/Dark)</span>
         <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
 
