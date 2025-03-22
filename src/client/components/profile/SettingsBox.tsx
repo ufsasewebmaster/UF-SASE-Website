@@ -1,7 +1,5 @@
 import DarkButton from "@components/DarkButton";
-import { DarkModeContext } from "@components/DarkModeProvider";
-import { Button } from "@components/ui/button";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 interface SettingsBoxProps {
   darkMode: boolean;
@@ -37,7 +35,7 @@ const SettingsBox: React.FC<SettingsBoxProps> = ({ darkMode, toggleDarkMode }) =
 
       {/* Delete Account Button (Dummy) */}
       <div className="mt-10 flex justify-center">
-        <button className="w-1/2 rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600" disabled>
+        <button className="rounded-full bg-red-500 px-4 py-2 text-white transition hover:bg-red-600" disabled>
           Delete Account
         </button>
       </div>

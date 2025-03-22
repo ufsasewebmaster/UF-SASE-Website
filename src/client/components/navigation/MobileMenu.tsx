@@ -12,17 +12,17 @@ interface NavItem {
 }
 
 interface MobileMenuProps {
-  navItems: Array<NavItem>;
-  isOpen: boolean;
-  onClose: () => void;
+  darkMode: boolean;
   isHomePage: boolean;
   isLoggedIn: boolean;
+  isOpen: boolean;
+  navItems: Array<NavItem>;
+  onClose: () => void;
   onLogout: () => void;
-  darkMode: boolean;
   toggleDarkMode: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout, darkMode, toggleDarkMode }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ darkMode, isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout, toggleDarkMode }) => {
   const [allSubmenusClosed, setAllSubmenusClosed] = useState(false);
 
   useEffect(() => {
