@@ -9,7 +9,7 @@ interface ProfileNavProps {
   update: (section: string) => void;
 }
 
-const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User", update, activeSection }) => {
+const ProfileNav: React.FC<ProfileNavProps> = ({ activeSection, profileName = "User", update }) => {
   return (
     <div className={cn("flex w-60 flex-col rounded-3xl bg-white p-6 font-redhat shadow-xl")}>
       {/* Profile Info */}
