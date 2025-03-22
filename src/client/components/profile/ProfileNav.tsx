@@ -51,7 +51,7 @@ interface NavItemProps {
   update: (section: string) => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ color, icon, text, update, isActive }) => {
+const NavItem: React.FC<NavItemProps> = ({ color, icon, isActive, text, update }) => {
   const setActiveSection = () => {
     const section = text.toLowerCase().replace(/\s+/g, "");
     update(section);
