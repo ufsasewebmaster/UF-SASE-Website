@@ -4,9 +4,9 @@ import { Icon } from "@iconify/react";
 const SASE_COLORS = ["saseBlue", "saseGreen"];
 
 interface ProfileNavProps {
+  activeSection: string;
   profileName?: string;
   update: (section: string) => void;
-  activeSection: string;
 }
 
 const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User", update, activeSection }) => {
@@ -44,11 +44,11 @@ const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User", update, a
 };
 
 interface NavItemProps {
-  icon: string;
-  text: string;
   color: string;
-  update: (section: string) => void;
+  icon: string;
   isActive: boolean;
+  text: string;
+  update: (section: string) => void;
 }
 
 const NavItem: React.FC<NavItemProps> = ({ color, icon, text, update, isActive }) => {
