@@ -130,7 +130,8 @@ function buildEmbedURL(webViewLink: string): string | undefined {
  * Expected folder name: year-semester, ex. "2023-Fall"
  * Returns "Uncategorized" if no match is found.
  */
-function parseSemesterFolder(folderName: string): string | undefined {
+function parseSemesterFolder(folderId: string): string | undefined {
+  const folderName = folderMap.get(folderId) ?? "";
   const regex = /^(\d{4})-(Fall|Spring|Summer|Winter)$/i;
   const match = folderName.match(regex);
   if (!match) return undefined;

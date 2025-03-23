@@ -5,6 +5,7 @@ import ImageButton from "./ImageButton";
 interface SlideData {
   category: string;
   name: string;
+  date: Date;
   semester: string;
   embed_url: string;
   thumbnail_url: string;
