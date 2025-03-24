@@ -3,6 +3,7 @@ import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
 import { IoMdLink } from "react-icons/io";
+import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 interface ResourceCard {
@@ -72,6 +73,10 @@ export const Route = createFileRoute("/resources")({
     }),
   ],
   component: () => {
+    useEffect(() => {
+      applyOmbreDivider();
+    }, []);
+
     const [activeTab, setActiveTab] = useState<keyof typeof resourceTabs>("Study Materials");
     const categories = Object.keys(resourceTabs);
     const tabRefs = useRef<Array<HTMLButtonElement>>([]);
@@ -99,7 +104,7 @@ export const Route = createFileRoute("/resources")({
         </div>
 
         {/* Blue line under title */}
-        <div className="mx-[5%] border-b-4 border-saseBlue" />
+        <div className="ombre-divider"></div>
 
         {/* Tab Bar / Sliding Underline */}
         <div className="mt-6 flex justify-center border-b">
@@ -141,7 +146,7 @@ export const Route = createFileRoute("/resources")({
         </div>
 
         {/* Green line */}
-        <div className="mx-[5%] border-b-4 border-saseGreen" />
+        <div className="ombre-divider"></div>
 
         {/* Linktree Button */}
         <div className="flex justify-center py-8">

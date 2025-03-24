@@ -1,7 +1,9 @@
 import { imageUrls } from "@assets/imageUrls";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import EventsSlides from "../components/events/EventsSlidesDisplay";
+import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/events")({
@@ -13,6 +15,9 @@ export const Route = createFileRoute("/events")({
     }),
   ],
   component: () => {
+    useEffect(() => {
+      applyOmbreDivider();
+    }, []);
     return (
       <div>
         <div className="py-5"></div>
