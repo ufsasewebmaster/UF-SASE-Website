@@ -63,6 +63,10 @@ authRoutes.post("/auth/signup", async (c) => {
       graduation_semester: "",
     });
 
+    await db.insert(Schema.userRoleRelationship).values({
+      user_id: userId,
+    });
+
     return createSuccessResponse(c, { userId }, "User successfully created");
   } catch (error) {
     console.log(error);
@@ -75,8 +79,9 @@ authRoutes.post("/auth/login", async (c) => {
   const formData = await c.req.json();
   const formUsername = formData["username"];
   const formPassword = formData["password"];
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  if (!formUsername || typeof formUsername !== "string") {
+  if (!formUsername || typeof formUsername !== "string" || formUsername.trim() === "") {
     return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 401);
   }
 
@@ -84,7 +89,12 @@ authRoutes.post("/auth/login", async (c) => {
     return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 401);
   }
 
-  const user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
+  let user;
+  if (emailRegex.test(formUsername)) {
+    user = await db.select().from(Schema.users).where(eq(Schema.users.email, formUsername));
+  } else {
+    user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
+  }
 
   if (user.length === 0) {
     return createErrorResponse(c, "INVALID_CREDENTIALS", "Invalid username or password!", 401);
@@ -125,6 +135,7 @@ authRoutes.post("/auth/logout", async (c) => {
 // used for validating sessions
 authRoutes.get("/auth/session", async (c) => {
   const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+  console.log(sessionId);
 
   if (!sessionId) {
     return createErrorResponse(c, "NO_SESSION", "No active session", 401);
