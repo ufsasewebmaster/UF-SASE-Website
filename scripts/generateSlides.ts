@@ -161,7 +161,7 @@ function parseSemesterFolder(folderId: string): string | undefined {
     fields: "files(name, id)",
   });
   const folderData = folderResp.data as FolderDriveResponse;
-  
+
   if (!folderData.files || folderData.files.length === 0) {
     console.log("No files???");
     return;
