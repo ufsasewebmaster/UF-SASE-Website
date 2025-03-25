@@ -223,7 +223,8 @@ function parseSemesterFolder(folderId: string): string | undefined {
     // Check if already processed
     const result = await db.select().from(Schema.meetingSlides).where(eq(Schema.meetingSlides.name, name)).limit(1);
     if (result.length !== 0) {
-      writeError(`Slide "${name}" already exists, skipping...`);
+      console.log(`Slide "${name}" already exists, skipping...`);
+      processedFiles++;
       continue;
     }
 
