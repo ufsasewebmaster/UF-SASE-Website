@@ -12,10 +12,6 @@ export const users = sqliteTable("user", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   email: text("email").notNull().unique(),
-
-  // TODO: password_hash
-  // password_hash: text("password_hash").notNull(),
-
   time_added: integer("time_added", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
@@ -23,7 +19,6 @@ export const users = sqliteTable("user", {
     .notNull()
     .$onUpdateFn(() => new Date()),
   points: integer("points"),
-  roles: text("roles"),
 });
 
 // Session table
@@ -31,15 +26,37 @@ export const sessions = sqliteTable("session", {
   id: text("id").primaryKey(),
   user_id: text("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   expires_at: integer("expires_at").notNull(),
+});
+
+//Roles table
+export const roles = sqliteTable("roles", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  name: text("name").notNull().unique(),
+});
+
+//User Roles Relationship table
+export const userRoleRelationship = sqliteTable("user_roles_relationship", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  user_id: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  role: text("role")
+    .notNull()
+    .references(() => roles.name)
+    .default("user"),
 });
 
 // Personal Info table
 export const personalInfo = sqliteTable("personal_info", {
   user_id: text("user_id")
     .primaryKey()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
   phone: text("phone"), // NOTE: Phone is bigint
@@ -50,7 +67,7 @@ export const personalInfo = sqliteTable("personal_info", {
 export const professionalInfo = sqliteTable("professional_info", {
   user_id: text("user_id")
     .primaryKey()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   resume_path: text("resume_path"),
   linkedin: text("linkedin"),
   portfolio: text("portfolio"),
@@ -63,7 +80,7 @@ export const professionalInfo = sqliteTable("professional_info", {
 export const saseInfo = sqliteTable("sase_info", {
   user_id: text("user_id")
     .primaryKey()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   events_attended: text("events_attended"),
   groups: text("groups"),
 });
@@ -117,7 +134,7 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  blog_id: text("blog_id").references(() => blogs.id),
+  blog_id: text("blog_id").references(() => blogs.id, { onDelete: "cascade" }),
   tag_id: text("tag_id").references(() => blogTags.id),
 });
 
@@ -126,8 +143,8 @@ export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship"
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  mentor_id: text("mentor_id").references(() => users.id),
-  mentee_id: text("mentee_id").references(() => users.id),
+  mentor_id: text("mentor_id").references(() => users.id, { onDelete: "cascade" }),
+  mentee_id: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const emailSubscribers = sqliteTable("email_subscriber", {
@@ -139,4 +156,16 @@ export const emailSubscribers = sqliteTable("email_subscriber", {
   subscribed_at: integer("subscribed_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
+});
+
+export const meetingSlides = sqliteTable("meeting_slides", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  category: text("category").notNull(),
+  name: text("name").notNull(),
+  date: integer("date", { mode: "timestamp" }).notNull(),
+  semester: text("semester").notNull(),
+  thumbnail_url: text("thumbnail_url").notNull().unique(),
+  embed_url: text("embed_url").notNull().unique(),
 });

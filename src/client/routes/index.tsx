@@ -8,10 +8,12 @@ import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
+    const [expanded, setExpanded] = useState(false);
 
     return (
       <div className="flex flex-col items-center">
@@ -57,16 +59,27 @@ export const Route = createFileRoute("/")({
                   <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
                   professionals in <span className="font-semibold">science and engineering</span>.
                 </p>
-                <br />
-                <p className="font-redhat text-lg text-white md:text-xl">
-                  Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
-                  acquire <span className="font-semibold">essential skills and knowledge </span>
-                  to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
-                  welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with
-                  like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact in
-                  our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
-                  <span className="font-semibold">opportunities </span>for our members to contribute meaningfully to society.
-                </p>
+
+                {!isMobile || expanded ? (
+                  <>
+                    <br />
+                    <p className="font-redhat text-lg text-white md:text-xl">
+                      Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
+                      acquire <span className="font-semibold">essential skills and knowledge </span>
+                      to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
+                      welcomes individuals from all majors, offering a friendly atmosphere to help you secure internships, jobs, and network with
+                      like-minded peers. Beyond <span className="font-semibold">personal growth</span>, we are dedicated to making a positive impact
+                      in our <span className="font-semibold">local communities</span>. By celebrating diversity and embracing our heritage, we create{" "}
+                      <span className="font-semibold">opportunities </span>for our members to contribute meaningfully to society.
+                    </p>
+                  </>
+                ) : null}
+
+                {isMobile && (
+                  <button className="mt-4 text-saseGreen underline" onClick={() => setExpanded(!expanded)}>
+                    {expanded ? "Read Less" : "Read More"}
+                  </button>
+                )}
               </div>
               <img
                 src={imageUrls["SASELogoStar.png"]}
@@ -77,7 +90,7 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-darkGreen">
+        <div className="dark:bg-darkGreen flex w-full flex-col items-center bg-saseGray p-12">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
           <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
             <MissionCard
@@ -168,7 +181,7 @@ export const Route = createFileRoute("/")({
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10 dark:bg-darkGreen">
+        <div className="dark:bg-darkGreen flex w-full flex-col items-center justify-center bg-saseGray p-10">
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
           <div className="mb-20 flex w-10/12 flex-col items-start gap-14 lg:flex-row xl:gap-24">
             <div className="flex w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">

@@ -1,3 +1,4 @@
+import { SERVER_ENV } from "@/server/env";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import { Hono } from "hono";
 
@@ -38,7 +39,7 @@ contactRoutes.post("/contact/submit", async (c) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        Authorization: `Bearer ${SERVER_ENV.RESEND_API_KEY}`,
       },
       body: JSON.stringify({
         from: "UF SASE <contactform@email.ufsase.com>",
@@ -54,7 +55,7 @@ contactRoutes.post("/contact/submit", async (c) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${SERVER_ENV.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
           from: "UF SASE <info@ufsase.com>",
