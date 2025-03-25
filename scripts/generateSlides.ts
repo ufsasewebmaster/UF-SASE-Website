@@ -3,12 +3,13 @@ import fs, { writeFile, writeFileSync } from "fs";
 import path from "path";
 import { db } from "@/server/db/db";
 import * as Schema from "@/server/db/tables";
+import { SERVER_ENV } from "@server/env";
 import { eq } from "drizzle-orm";
 import { google } from "googleapis";
 
 const embedRules = "embed?start=false&loop=false&delayms=3000";
 const auth = new google.auth.GoogleAuth({
-  keyFile: process.env.CREDENTIALS_PATH,
+  keyFile: SERVER_ENV.CREDENTIALS_PATH,
   scopes: ["https://www.googleapis.com/auth/drive"],
 });
 const logFilePath = "errors.log";
@@ -20,17 +21,29 @@ after that, all hyphens and underscores are replaced by spaces, while spaces and
 */
 
 // Not necessary but helps clarify what structure we're using
-interface DriveFile {
+interface DriveFolder {
   id: string;
   name: string;
 }
-interface DriveResponse {
-  data: {
-    files?: Array<DriveFile>;
-  };
+
+interface DriveFile {
+  id: string;
+  name: string;
+  thumbnailLink: string;
+  webViewLink: string;
+  modifiedTime?: string;
+  parents: Array<string>;
+}
+interface FileDriveResponse {
+  nextPageToken?: string;
+  files?: Array<DriveFile>;
+}
+interface FolderDriveResponse {
+  files?: Array<DriveFolder>;
 }
 
 const writeError = (err: string) => {
+  console.log(err);
   writeFileSync(logFilePath, err + "\n", { flag: "a" });
 };
 
@@ -147,29 +160,33 @@ function parseSemesterFolder(folderId: string): string | undefined {
     q: "mimeType='application/vnd.google-apps.folder' and trashed=false",
     fields: "files(name, id)",
   });
-  const driveResponse: DriveResponse = {
-    data: {
-      files:
-        folderResp.data.files?.map((file) => ({
-          id: file.id ?? "",
-          name: file.name ?? "",
-        })) || [],
-    },
-  };
-  if (!driveResponse.data.files || driveResponse.data.files.length === 0) {
-    writeError(`Folder retrieval failed at ${new Date().toUTCString()}`);
+  const folderData = folderResp.data as FolderDriveResponse;
+  
+  if (!folderData.files || folderData.files.length === 0) {
+    console.log("No files???");
     return;
   }
-  driveResponse.data.files.forEach((folder) => {
+  folderData.files.forEach((folder) => {
     folderMap.set(folder.id, folder.name);
   });
 
   // Retrieve all files.
-  const fileResp = await drive.files.list({
-    q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
-    fields: "files(name, thumbnailLink, webViewLink, modifiedTime, parents)",
-  });
-  const files = fileResp.data.files;
+  // Remember that all the folders must be shared with the service account! Sometimes the folder-side permissions don't propogate correctly
+  let files: Array<DriveFile> = [];
+  let pageToken: string | undefined;
+  do {
+    const fileResponse = await drive.files.list({
+      q: "mimeType!='application/vnd.google-apps.folder' and trashed=false",
+      fields: "nextPageToken, files(id, name, thumbnailLink, webViewLink, modifiedTime, parents)",
+      pageSize: 100,
+      pageToken,
+    });
+    const fileData = fileResponse.data as FileDriveResponse;
+    files = files.concat(fileData.files || []);
+    pageToken = fileData.nextPageToken ?? undefined;
+  } while (pageToken);
+
+  // console.log(files);
   if (!files || files.length === 0) {
     writeError(`File retrieval failed at ${new Date().toUTCString()}`);
     return;
@@ -181,6 +198,8 @@ function parseSemesterFolder(folderId: string): string | undefined {
       writeError(`Missing filename`);
       continue;
     }
+    // In order to have a thumbnail link you need to manually hover over the google slides icon in the folder!
+    // There is no way to activate this on the api
     if (!file.thumbnailLink) {
       writeError(`Missing thumbnail link for ${file.name}`);
       continue;
@@ -203,7 +222,10 @@ function parseSemesterFolder(folderId: string): string | undefined {
 
     // Check if already processed
     const result = await db.select().from(Schema.meetingSlides).where(eq(Schema.meetingSlides.name, name)).limit(1);
-    if (result.length !== 0) continue;
+    if (result.length !== 0) {
+      writeError(`Slide "${name}" already exists, skipping...`);
+      continue;
+    }
 
     // Create thumbnail file path
     const formattedTitle = `${category}_${name}_${date.toISOString().split("T")[0]}`;

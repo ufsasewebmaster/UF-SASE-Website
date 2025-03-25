@@ -10,6 +10,7 @@ export const SERVER_ENV = createEnv({
     DATABASE_URL: z.string().url(),
     DATABASE_AUTH_TOKEN: z.string(),
     RESEND_API_KEY: z.string(),
+    CREDENTIALS_PATH: z.string(),
   },
   runtimeEnv: process.env,
 });
