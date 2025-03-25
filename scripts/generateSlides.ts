@@ -9,7 +9,7 @@ import { google } from "googleapis";
 
 const embedRules = "embed?start=false&loop=false&delayms=3000";
 const auth = new google.auth.GoogleAuth({
-  keyFile: SERVER_ENV.CREDENTIALS_PATH,
+  credentials: SERVER_ENV.GOOGLE_CREDENTIALS,
   scopes: ["https://www.googleapis.com/auth/drive"],
 });
 const logFilePath = "errors.log";
