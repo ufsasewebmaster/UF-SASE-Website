@@ -132,6 +132,7 @@ function buildEmbedURL(webViewLink: string): string | undefined {
  */
 function parseSemesterFolder(folderId: string): string | undefined {
   const folderName = folderMap.get(folderId) ?? "";
+  console.log("folder name", folderName);
   const regex = /^(\d{4})-(Fall|Spring|Summer|Winter)$/i;
   const match = folderName.match(regex);
   if (!match) return undefined;
@@ -174,7 +175,8 @@ function parseSemesterFolder(folderId: string): string | undefined {
     return;
   }
   let processedFiles = 0;
-  for (const file of files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
     if (!file.name) {
       writeError(`Missing filename`);
       continue;
@@ -193,7 +195,10 @@ function parseSemesterFolder(folderId: string): string | undefined {
     }
 
     const processed = await processFileName(file.name);
-    if (!processed) return;
+    if (!processed) {
+      console.log("Cannot process file name", file.name);
+      return;
+    }
     const { category, date, name } = processed;
 
     // Check if already processed
@@ -233,6 +238,7 @@ function parseSemesterFolder(folderId: string): string | undefined {
     // Insert into database
     await insertSlides(category, name, semester, filePath, embedURL, date);
     processedFiles++;
+    console.log(`Processed file ${i + 1} of ${files.length}`);
   }
   console.log(`${processedFiles} out of ${files.length} slides generated successfully`);
   if (processedFiles < files.length) console.log(`log written to ${logFilePath}`);

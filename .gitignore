@@ -28,6 +28,7 @@ node_modules
 
 # testing
 coverage
+errors.log
 
 # next.js
 .next/
