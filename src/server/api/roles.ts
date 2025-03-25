@@ -6,9 +6,9 @@ import { Hono } from "hono";
 
 const roleRoutes = new Hono();
 
-roleRoutes.get("/roles/:id", async (c) => {
+roleRoutes.get("/roles/:userID", async (c) => {
   try {
-    const userId = c.req.param("id");
+    const userId = c.req.param("userID");
     const userRoles = await db
       .select({ role: Schema.userRoleRelationship.role })
       .from(Schema.userRoleRelationship)
@@ -25,17 +25,17 @@ roleRoutes.get("/roles/:id", async (c) => {
   }
 });
 
-roleRoutes.post("/assign", async (c) => {
+roleRoutes.post("/roles/assign", async (c) => {
   try {
     const { role, userId } = await c.req.json();
     const cookie = c.req.header("Cookie") || "";
+    console.log(cookie);
     const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
     if (!sessionIDMatch) {
       return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
     }
     const sessionID = sessionIDMatch[1];
-    const isAdmin = await verifyAdmin(sessionID);
-    if (!isAdmin) {
+    if (!(await isAdmin(sessionID))) {
       createErrorResponse(c, "ASSIGN_ACTION_UNAUTHORIZED", "Assigning unauthorized: Admin role required", 403);
     }
 
@@ -65,7 +65,7 @@ roleRoutes.post("/assign", async (c) => {
   }
 });
 
-roleRoutes.post("/delete", async (c) => {
+roleRoutes.post("/roles/delete", async (c) => {
   try {
     const { role, userId } = await c.req.json();
     const cookie = c.req.header("Cookie") || "";
@@ -74,8 +74,7 @@ roleRoutes.post("/delete", async (c) => {
       return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
     }
     const sessionID = sessionIDMatch[1];
-    const isAdmin = await verifyAdmin(sessionID);
-    if (!isAdmin) {
+    if (!(await isAdmin(sessionID))) {
       createErrorResponse(c, "USER_NOT_ADMIN", "Deleting unauthorized: Admin role required", 403);
     }
 
@@ -89,7 +88,7 @@ roleRoutes.post("/delete", async (c) => {
       .from(Schema.userRoleRelationship)
       .where(eq(Schema.userRoleRelationship.user_id, userId))
       .all();
-    if (currentRoles.some((r) => r.role === role)) {
+    if (!currentRoles.some((r) => r.role === role)) {
       return createErrorResponse(c, "ROLE_NOT_FOUND", "User doesn't have role", 400);
     }
 
@@ -100,11 +99,11 @@ roleRoutes.post("/delete", async (c) => {
     return createSuccessResponse(c, `Role '${role}' deleted from user ${userId}`);
   } catch (error) {
     console.log(error);
-    return createErrorResponse(c, "", "", 500);
+    return createErrorResponse(c, "DELETE_ROLE_ERROR", "Failed to delete role", 500);
   }
 });
 
-async function verifyAdmin(sessionId: string) {
+async function isAdmin(sessionId: string) {
   const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId)).get();
 
   if (!session) return false;
@@ -115,7 +114,7 @@ async function verifyAdmin(sessionId: string) {
     .where(eq(Schema.userRoleRelationship.user_id, session.user_id))
     .all();
 
-  if (!userRoles.some((r) => r.role === "editor")) return true;
+  if (!userRoles.some((r) => r.role === "admin")) return true;
 }
 
 export default roleRoutes;
