@@ -3,6 +3,8 @@ import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/BoardInfo";
 import BoardMemberCard from "@components/BoardMemberCard";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/board")({
@@ -14,6 +16,9 @@ export const Route = createFileRoute("/board")({
     }),
   ],
   component: () => {
+    useEffect(() => {
+      applyOmbreDivider();
+    }, []);
     return (
       <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
         {/* title */}
