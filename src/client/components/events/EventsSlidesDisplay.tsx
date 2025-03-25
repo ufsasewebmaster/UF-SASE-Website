@@ -2,105 +2,77 @@ import { cn } from "@/shared/utils";
 import React, { useEffect, useRef, useState } from "react";
 import ImageButton from "./ImageButton";
 
-const imageData = {
-  "Fall 2023": [
-    {
-      imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKBrvuah3ULJG6YbFtkQIHNdvnrupfCaVTR0mi",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vRjesIK8GtogrTIETwI2GGKuWsokmx4dFqY_tNVi9R1Ri3Cu3ljHG4AaoTPzochbz8lWk0Ga0cIqQgU/embed?start=false&loop=false&delayms=3000",
-      caption: "GBM 1: Into the SASE-Verse",
-    },
-    {
-      imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKhe5NTFG9SJMmEuRlABk3FjeDTi6ZgaqCo1G8",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vQUO65-H0ABBtwngsTFhCaQfT3-Hyqf2I3CUXM8E7ctM5YhdMuBNy3E2nV1cqnvldqhpzT6w0d2hxCu/embed?start=false&loop=false&delayms=3000",
-      caption: "GBM 2: Sailing the Seven SASE",
-    },
-    {
-      imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKidrjzFZSynwPNl9jBc1Ktr2gWOdfUJku0ZGD",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vSw2sO-s1BSEBMPcpRjiUXGmfUQ79_MmQrIbdfhsbDmSdsSaw6kcdmwJyGZLSUC9uE3JWRQiv7w2cFe/embed?start=false&loop=false&delayms=3000",
-      caption: "GBM 3: SASEatouille",
-    },
-    {
-      imageUrl: "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTK3XP8VibjaKwIicDGl8vTn5hBtmV0PXJLsH4e",
-      slideUrl:
-        "https://docs.google.com/presentation/d/e/2PACX-1vSJcZCq-AvyMTlY70mDxT9MnbCvQVfdbX_u0wSXh0DBLwfZ7uUGtRb7eq4SpQiaXAGvxmyeFyC-Gdj4/embed?start=false&loop=false&delayms=3000",
-      caption: "GBM 4: The Last SASEbender",
-    },
-  ],
-  // "Spring 2024": [
-  //   // Placeholder links for now
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vRjesIK8GtogrTIETwI2GGKuWsokmx4dFqY_tNVi9R1Ri3Cu3ljHG4AaoTPzochbz8lWk0Ga0cIqQgU/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vQUO65-H0ABBtwngsTFhCaQfT3-Hyqf2I3CUXM8E7ctM5YhdMuBNy3E2nV1cqnvldqhpzT6w0d2hxCu/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vSw2sO-s1BSEBMPcpRjiUXGmfUQ79_MmQrIbdfhsbDmSdsSaw6kcdmwJyGZLSUC9uE3JWRQiv7w2cFe/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vSJcZCq-AvyMTlY70mDxT9MnbCvQVfdbX_u0wSXh0DBLwfZ7uUGtRb7eq4SpQiaXAGvxmyeFyC-Gdj4/embed?start=false&loop=false&delayms=3000",
-  //   },
-  // ],
-  // "Fall 2024": [
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vRjesIK8GtogrTIETwI2GGKuWsokmx4dFqY_tNVi9R1Ri3Cu3ljHG4AaoTPzochbz8lWk0Ga0cIqQgU/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/p  resentation/d/e/2PACX-1vQUO65-H0ABBtwngsTFhCaQfT3-Hyqf2I3CUXM8E7ctM5YhdMuBNy3E2nV1cqnvldqhpzT6w0d2hxCu/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vSw2sO-s1BSEBMPcpRjiUXGmfUQ79_MmQrIbdfhsbDmSdsSaw6kcdmwJyGZLSUC9uE3JWRQiv7w2cFe/embed?start=false&loop=false&delayms=3000",
-  //   },
-  //   {
-  //     slideUrl:
-  //       "https://docs.google.com/presentation/d/e/2PACX-1vSJcZCq-AvyMTlY70mDxT9MnbCvQVfdbX_u0wSXh0DBLwfZ7uUGtRb7eq4SpQiaXAGvxmyeFyC-Gdj4/embed?start=false&loop=false&delayms=3000",
-  //   },
-  // ],
-};
+interface SlideData {
+  category: string;
+  name: string;
+  date: Date;
+  semester: string;
+  embed_url: string;
+  thumbnail_url: string;
+  relative_order: number;
+}
+
+interface Semester {
+  name: string;
+  slides: Array<SlideData>;
+}
 
 const EventsSlides: React.FC = () => {
-  const [selectedYear, setSelectedYear] = useState<keyof typeof imageData>("Fall 2023");
+  const [selectedSemester, setSelectedSemester] = useState<number>(0);
   const [view, setView] = useState<"slides" | "recordings">("slides");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [semesters, setSemesters] = useState<Array<Semester>>([]);
+  const fetchedSlides = useRef(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
+    (async () => {
+      try {
+        if (fetchedSlides.current) return;
+        fetchedSlides.current = true;
+        setLoading(true);
+
+        const resp = await fetch("api/events/slides/", { method: "GET" });
+        const slideData = (await resp.json()) as Array<SlideData>;
+
+        const display: Array<Semester> = [];
+        slideData.forEach((deck) => {
+          if (display.length == 0 || deck.semester !== display[display.length - 1].name) {
+            display.push({ name: deck.semester, slides: [] });
+          }
+          display[display.length - 1].slides.push(deck);
+        });
+        setSemesters(display);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+        console.log("Slides could not be fetched", error);
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    })();
   }, []);
 
   return (
     <div className="relative flex w-screen flex-col items-center gap-5 p-5">
-      {/* Year Selector */}
-      <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300 font-redhat">
-        {Object.keys(imageData).map((year) => (
-          <button
-            key={year}
-            className={cn("border-b-2 p-3 px-6 text-lg transition-all duration-300 ease-in-out", {
-              "border-saseGreen text-black": selectedYear === year,
-              "border-transparent text-black hover:border-gray-400": selectedYear !== year,
-            })}
-            onClick={() => setSelectedYear(year as keyof typeof imageData)}
-          >
-            {year}
-          </button>
-        ))}
-      </div>
+      {semesters.length > 0 && (
+        <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300">
+          {semesters.map((semester) => (
+            <button
+              key={semester.name}
+              className={`border-b-2 p-3 px-6 transition-all duration-300 ease-in-out ${
+                semesters[selectedSemester]?.name === semester.name
+                  ? "border-saseGreen text-black"
+                  : "border-transparent text-black hover:border-gray-400"
+              }`}
+              onClick={() => setSelectedSemester(semesters.indexOf(semester))}
+            >
+              {semester.name}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div ref={dropdownRef} className="absolute right-5 top-5 z-10">
         <button
@@ -149,19 +121,29 @@ const EventsSlides: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Slides Content */}
       {view === "slides" ? (
-        <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {imageData[selectedYear].map((item, index) => (
-            <div key={index} className="group flex w-full flex-col items-center">
-              {item.imageUrl && <ImageButton imageUrl={item.imageUrl} slideUrl={item.slideUrl} title={item.caption} />}
-              {item.caption && (
-                <p className="mt-4 text-center font-redhat text-lg transition-transform duration-300 group-hover:scale-105">{item.caption}</p>
-              )}
-            </div>
-          ))}
-        </div>
+        error ? (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-lg text-red-500">Failed to load slides. Please try again.</p>
+          </div>
+        ) : loading ? (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-lg">Loading presentation slides...</p>
+          </div>
+        ) : semesters.length > 0 ? (
+          <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {semesters[selectedSemester]?.slides.map((deck, index) => (
+              <div key={index} className="flex w-full flex-col items-center">
+                {deck.thumbnail_url && <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} />}
+                {deck.name && <p className="mt-2 text-center text-sm">{deck.name}</p>}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-lg">No slides available.</p>
+          </div>
+        )
       ) : (
         <div className="flex h-full w-full items-center justify-center">
           <p className="font-redhat text-lg">Recordings coming soon...</p>

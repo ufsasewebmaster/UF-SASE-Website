@@ -8,6 +8,20 @@
       "when": 1733114337816,
       "tag": "0000_sour_sugar_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1742432569840,
+      "tag": "0001_deep_marrow",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1742861791113,
+      "tag": "0002_noisy_red_ghost",
+      "breakpoints": true
     }
   ]
 }
