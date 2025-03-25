@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "bun run db:push && bun run db:generate && bunx dotenv -- vinxi build",
+    "build": "bun run db:push && bun run generate && bunx dotenv -- vinxi build",
     "start": "vinxi start",
     "fix": "concurrently \"bun run lint:js:fix\" \"bun run lint:fmt:fix\"",
     "generate": "bun run scripts/generateImageMaps.ts && bun run scripts/generateSlides.ts",
@@ -20,7 +20,7 @@
     "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
     "db:push": "bun drizzle-kit push --force",
-    "db:generate": "drizzle-kit generate && bun run scripts/generateImageMaps.ts && bun run scripts/generateSlides.ts",
+    "db:generate": "drizzle-kit generate && bun run generate",
     "db:local:init": "bun run scripts/initDb.mjs",
     "db:local:seed": "bun run scripts/seed.ts",
     "db:studio": "drizzle-kit studio --port 3003 --verbose",
