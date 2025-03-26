@@ -34,6 +34,7 @@ export const Route = createFileRoute("/profile")({
         logout();
         navigate({ to: "/" });
       } catch (error) {
+        console.error("");
         console.error("Logout error:", error);
       }
     };
