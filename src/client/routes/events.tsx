@@ -22,7 +22,7 @@ export const Route = createFileRoute("/events")({
       <div>
         <div className="py-5"></div>
         <div className="flex justify-center">
-          <div className="flex-5 pb-5 text-center font-oswald text-7xl">EVENTS & SLIDES</div>
+          <div className="flex-5 pb-5 text-center font-oswald text-5xl sm:text-5xl md:text-6xl lg:text-7xl">EVENTS & SLIDES</div>
         </div>
         <div className="flex w-full justify-center">
           <hr className="h-5 w-10/12 border-t-4 border-saseBlue" />

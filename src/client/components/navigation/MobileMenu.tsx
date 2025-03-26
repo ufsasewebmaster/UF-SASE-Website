@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { UserButton } from "@navigation/UserButton";
 import { useRouter } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
+import DarkButton from "../DarkButton";
 
 interface NavItem {
   name: string;
@@ -11,15 +12,17 @@ interface NavItem {
 }
 
 interface MobileMenuProps {
-  navItems: Array<NavItem>;
-  isOpen: boolean;
-  onClose: () => void;
+  darkMode: boolean;
   isHomePage: boolean;
   isLoggedIn: boolean;
+  isOpen: boolean;
+  navItems: Array<NavItem>;
+  onClose: () => void;
   onLogout: () => void;
+  toggleDarkMode: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ darkMode, isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout, toggleDarkMode }) => {
   const [allSubmenusClosed, setAllSubmenusClosed] = useState(false);
 
   useEffect(() => {
@@ -41,6 +44,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
           <MobileNavItem key={item.name} item={item} onClose={onClose} isHomePage={isHomePage} closeAll={allSubmenusClosed} />
         ))}
         <UserButton isLoggedIn={isLoggedIn} onLogout={onLogout} isHomePage={isHomePage} />
+        <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </ul>
     </div>
   );

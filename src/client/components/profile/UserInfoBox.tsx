@@ -5,7 +5,7 @@ const UserInfoBox = () => {
   const [editMode, setEditMode] = useState(false);
 
   return (
-    <div className="w-3/4 rounded-2xl border border-black bg-white px-10 py-6">
+    <div className="w-3/4 rounded-2xl bg-white px-10 py-6 shadow-xl">
       <div className="mb-6 flex flex-row justify-between font-redhat">
         <p className="font-redhat text-xl font-bold">User Info</p>
         <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(true)}>
