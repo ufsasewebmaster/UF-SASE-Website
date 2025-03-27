@@ -18,34 +18,14 @@ permissions: {}
 
 jobs:
   types:
-    name: Typecheck
+    name: Lint Check
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: bun run lint:ts
-
-  lint:
-    name: Eslint
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/setup
-      - run: bun run lint:js
-
-  fmt:
-    name: Formatting
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/setup
-      - run: bun run lint:fmt
+      - run: bun run lint
 
   test:
     name: Test

@@ -1,7 +1,9 @@
 import { imageUrls } from "@assets/imageUrls";
 import EventsCalendar from "@components/EventsCalendar";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import EventsSlides from "../components/events/EventsSlidesDisplay";
+import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/events")({
@@ -13,11 +15,14 @@ export const Route = createFileRoute("/events")({
     }),
   ],
   component: () => {
+    useEffect(() => {
+      applyOmbreDivider();
+    }, []);
     return (
       <div>
         <div className="py-5"></div>
         <div className="flex justify-center">
-          <div className="flex-5 pb-5 text-center font-oswald text-7xl text-foreground">EVENTS & SLIDES</div>
+          <div className="flex-5 pb-5 text-center font-oswald text-5xl sm:text-5xl md:text-6xl lg:text-7xl">EVENTS & SLIDES</div>
         </div>
         <div className="flex w-full justify-center">
           <hr className="h-5 w-10/12 border-t-4 border-saseBlue" />
