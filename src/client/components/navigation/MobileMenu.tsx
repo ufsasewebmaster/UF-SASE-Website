@@ -84,12 +84,57 @@ const MobileNavItem: React.FC<{
     isHomePage || darkMode ? "text-white hover:text-[#0f6cb6]" : "text-black hover:text-[#0f6cb6]",
   );
 
+  const svgClasses = cn("mr-1 h-4 w-4 transition-transform duration-300");
+  const gradientClasses = cn(
+    "mr-4 mt-1 w-auto bg-gradient-to-r transition-all duration-500 ease-in-out",
+    isHomePage || darkMode ? "from-saseGreen via-saseBlue to-black" : "from-saseBlue via-saseGreen to-white",
+    submenuOpen
+      ? "pointer-events-auto max-h-screen translate-y-0 transform opacity-100"
+      : "pointer-events-none max-h-0 -translate-y-2 transform opacity-0",
+  );
+  const childUlClasses = cn("flex w-full flex-col items-end space-y-1", isHomePage || darkMode ? "text-white" : "text-black");
+  const childButtonClasses = cn("block w-full px-2 py-2 text-right transition-transform duration-300 hover:scale-105");
+
   return (
     <li className={liClasses}>
       <button className={buttonClasses} onClick={handleClick} aria-haspopup="true" aria-expanded={submenuOpen}>
         {item.name === "Home" && <Icon icon="oui:home" className="mr-2 h-4 w-4" />}
+        {item.children && item.children.length > 0 && (
+          <svg
+            className={svgClasses}
+            style={{ transform: submenuOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        )}
         <span>{item.name}</span>
       </button>
+      {item.children && item.children.length > 0 && (
+        <div className={gradientClasses}>
+          <ul className={childUlClasses}>
+            {item.children.map(
+              (child) =>
+                child.path && (
+                  <li key={child.name} className="w-full">
+                    <button
+                      onClick={() => {
+                        router.navigate({ to: child.path });
+                        onClose();
+                      }}
+                      className={childButtonClasses}
+                    >
+                      {child.name}
+                    </button>
+                  </li>
+                ),
+            )}
+          </ul>
+        </div>
+      )}
     </li>
   );
 };
