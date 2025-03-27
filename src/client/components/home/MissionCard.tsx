@@ -8,7 +8,7 @@ const MissionCard = ({ image, mission, shadow, text }: { image: string; mission:
           "hover:shadow-[12px_12px_0px_#0668B3]": shadow === "blue",
           "hover:shadow-[12px_12px_0px_#7DC242]": shadow === "green",
         },
-        `bg-muted-background flex flex-col items-center rounded-2xl border border-border p-6 duration-300 hover:scale-105`,
+        `flex flex-col items-center rounded-2xl border border-border bg-muted p-6 duration-300 hover:scale-105`,
       )}
     >
       <p className="pb-4 text-center font-redhat text-2xl font-semibold">{mission}</p>

@@ -174,7 +174,7 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
                 <div key={index} className="relative flex flex-col items-center" style={{ width: `${100 / items.length}%` }}>
                   {/* Card */}
                   <div
-                    className={`bg-muted-background absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-border p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
+                    className={`absolute flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-border bg-muted p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:scale-105 hover:shadow-[0px_10px_0px_#0668B3] ${
                       isTop ? "bottom-full mb-14" : "top-full mt-14"
                     }`}
                   >

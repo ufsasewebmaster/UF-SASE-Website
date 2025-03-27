@@ -23,6 +23,7 @@ module.exports = {
         saseGray: " #CBCBD4",
         greenShadow: "#D4EEBA",
         blueShadow: "rgba(6, 104, 179, 0.58)",
+        greenBackground: "#182825",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

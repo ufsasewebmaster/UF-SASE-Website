@@ -9,21 +9,21 @@ interface NavItem {
 }
 
 export const DesktopMenu: React.FC<{
-  navItems: Array<NavItem>;
+  darkMode: boolean;
   isHomePage: boolean;
-}> = ({ isHomePage, navItems }) => {
+  navItems: Array<NavItem>;
+}> = ({ darkMode, isHomePage, navItems }) => {
   return (
     <ul className="flex space-x-6">
       {navItems.map((item) => (
-        <NavItemComponent key={item.name} item={item} isHomePage={isHomePage} />
+        <NavItemComponent key={item.name} item={item} isHomePage={isHomePage} darkMode={darkMode} />
       ))}
     </ul>
   );
 };
 
-const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({ isHomePage, item }) => {
+const NavItemComponent: React.FC<{ darkMode: boolean; isHomePage: boolean; item: NavItem }> = ({ darkMode, isHomePage, item }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const hasChildren = item.children && item.children.length > 0;
 
   return (
@@ -49,15 +49,15 @@ const NavItemComponent: React.FC<{ item: NavItem; isHomePage: boolean }> = ({ is
             className={cn(`absolute left-0 mt-2 w-40 rounded border shadow-lg group-hover:block`, {
               hidden: !dropdownOpen,
               block: dropdownOpen,
-              "border-black bg-black text-white": isHomePage,
-              "border-white bg-white text-black": !isHomePage,
+              "border-black bg-black text-white": isHomePage || darkMode,
+              "border-white bg-white text-black": !isHomePage && !darkMode,
             })}
             style={{ paddingTop: "10px", marginTop: "0px" }} // Ensure dropdown is positioned without affecting the title
           >
             {item.children &&
               Array.isArray(item.children) &&
               item.children.map((child) => (
-                <li key={child.name} className={`p-2 ${isHomePage ? "hover:bg-gray-700" : "hover:bg-gray-200"}`}>
+                <li key={child.name} className={`p-2 ${isHomePage || darkMode ? "hover:bg-gray-700" : "hover:bg-gray-200"}`}>
                   <NavLink to={child.path ?? "#"} onClick={() => setDropdownOpen(false)}>
                     {child.name}
                   </NavLink>

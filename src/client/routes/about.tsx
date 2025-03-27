@@ -51,7 +51,7 @@ export const Route = createFileRoute("/about")({
           <MissionSection />
           <div className={cn("mb-10 flex items-center")}>
             <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
-            <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>History</h2>
+            <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>History</h2>
           </div>
           <section className={cn("mb-6 flex justify-center")}>
             <div className={cn("w-full max-w-5xl")}>
@@ -62,14 +62,14 @@ export const Route = createFileRoute("/about")({
           <section className={cn("mb-20")}>
             <div className={cn("mb-8 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Timeline of Achievements</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>Timeline of Achievements</h2>
             </div>
             <Timeline />
           </section>
           <section id="contact" className={cn("mb-12")}>
             <div className={cn("mb-4 flex items-center")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
-              <h2 className={cn("font-oswald text-3xl font-semibold text-muted-foreground")}>Contact Us</h2>
+              <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>Contact Us</h2>
             </div>
             <ContactForm />
           </section>

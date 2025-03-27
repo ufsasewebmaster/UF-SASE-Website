@@ -24,7 +24,7 @@ export const Route = createFileRoute("/board")({
         {/* title */}
         <div className="text-center">
           <h1 className="font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">BOARD</h1>
-          <p className="mb-8 mt-8 text-lg text-black sm:text-xl md:text-2xl">Meet our 2024-2025 SASE Board Members!</p>
+          <p className="mb-8 mt-8 text-lg text-foreground sm:text-xl md:text-2xl">Meet our 2024-2025 SASE Board Members!</p>
           <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
         </div>
 

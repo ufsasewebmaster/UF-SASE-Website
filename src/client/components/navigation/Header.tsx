@@ -97,7 +97,7 @@ const Header: React.FC = () => {
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="ml-auto flex items-center gap-2">
-            <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
+            <DesktopMenu darkMode={darkMode} navItems={navItems} isHomePage={isHomePage} />
             <SearchBar className="ml-4" />
             <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             <div className="hidden md:block">
@@ -110,7 +110,7 @@ const Header: React.FC = () => {
         <div className="ml-auto flex items-center gap-2 md:hidden">
           <SearchBar />
           <button ref={hamburgerRef} className="focus:outline-none">
-            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
+            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage || darkMode ? "#fff" : "#000"} size={22} />
           </button>
         </div>
 

@@ -89,7 +89,8 @@ export const Route = createFileRoute("/")({
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-center bg-saseGray p-12">
+
+        <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-greenBackground">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
           <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
             <MissionCard
@@ -122,7 +123,7 @@ export const Route = createFileRoute("/")({
               <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
               <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
             </div>
-            <div className="my-2 flex w-full flex-col items-center bg-white px-12">
+            <div className="my-2 flex w-full flex-col items-center bg-background px-12">
               <MobileMemberCard
                 image={imageUrls["President.jpeg"]}
                 name="Vincent Lin"
@@ -156,7 +157,7 @@ export const Route = createFileRoute("/")({
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-3 gap-12 bg-white p-12">
+          <div className="grid grid-cols-3 gap-12 bg-background p-12">
             <MemberCard image={imageUrls["President.jpeg"]} name="Vincent Lin" role="President" textColor="blue" quote="Love the SASE Community :)" />
             <MemberCard
               image={imageUrls["InternalVicePresident.jpeg"]}
@@ -180,10 +181,10 @@ export const Route = createFileRoute("/")({
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10">
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10 dark:bg-greenBackground">
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
           <div className="mb-20 flex w-10/12 flex-col items-start gap-14 lg:flex-row xl:gap-24">
-            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-black bg-white p-10 shadow-[12px_12px_0px_#7DC242]">
+            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
               <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
                 Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                 <br />
@@ -211,7 +212,7 @@ export const Route = createFileRoute("/")({
                   ) : null,
                 )}
               </div>
-              <p className="m-0 mt-[-30px] w-full text-center font-redhat text-2xl italic text-black xl:text-3xl">Current Featured Sponsors</p>
+              <p className="m-0 mt-[-30px] w-full text-center font-redhat text-2xl italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
             </div>
           </div>
         </div>

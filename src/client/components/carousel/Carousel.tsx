@@ -134,9 +134,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       {purpose === "Images" ? (
         <div className="absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-white to-transparent dark:from-black" />
       ) : null}
-      {purpose === "Values" ? (
-        <div className="absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-black to-transparent dark:from-white" />
-      ) : null}
+      {purpose === "Values" ? <div className="absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-black to-transparent" /> : null}
 
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
@@ -188,9 +186,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       {purpose === "Images" ? (
         <div className="absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-white to-transparent dark:from-black" />
       ) : null}
-      {purpose === "Values" ? (
-        <div className="absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-black to-transparent dark:from-white" />
-      ) : null}
+      {purpose === "Values" ? <div className="absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-black to-transparent" /> : null}
 
       {/* Testimonials have arrows on sides while Values/Images have arrows at the bottom */}
       {purpose === "Testimonials" ? (
