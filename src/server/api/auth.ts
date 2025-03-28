@@ -16,6 +16,7 @@ authRoutes.post("/auth/signup", async (c) => {
   const formUsername = formData["username"];
   const formPassword = formData["password"];
   const formEmail = formData["email"];
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*!@#$%^&*()\-_=+\\|[{}\];:'",<>./?])[A-Za-z\d!@#$%^&*()\-_=+\\|[{}\];:'",<>./?]{8,}$/;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   //validate username
@@ -23,7 +24,7 @@ authRoutes.post("/auth/signup", async (c) => {
     return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 400);
   }
   //validate password
-  if (!formPassword || typeof formPassword !== "string") {
+  if (!formPassword || typeof formPassword !== "string" || !passwordRegex.test(formPassword)) {
     return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 400);
   }
   //validate email

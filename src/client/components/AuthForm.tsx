@@ -67,7 +67,8 @@ const AuthForm = ({
     const { retypePassword, ...submitData } = data;
     onSubmit(submitData as FormData);
   };
-
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_\-+=[\]{}\\|;:'",<>./?])[A-Za-z\d!@#$%^&*()_\-+=[\]{}\\|;:'",<>./?]{8,}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -90,7 +91,7 @@ const AuthForm = ({
               type="email"
               {...register("email", {
                 required: "Email is required",
-                pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email address" },
+                pattern: { value: emailRegex, message: "Enter a valid email address" },
               })}
               placeholder="Email"
             />
@@ -123,7 +124,7 @@ const AuthForm = ({
                   type="email"
                   {...register("email", {
                     required: "Email is required",
-                    pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Enter a valid email address" },
+                    pattern: { value: emailRegex, message: "Enter a valid email address" },
                   })}
                   placeholder="Email"
                 />
@@ -139,7 +140,7 @@ const AuthForm = ({
               {...register("password", {
                 required: "Password is required",
                 pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                  value: passwordRegex,
                   message: "Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character!",
                 },
               })}
@@ -177,7 +178,7 @@ const AuthForm = ({
               {...register("newPassword", {
                 required: "New password is required",
                 pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                  value: passwordRegex,
                   message: "New password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character!",
                 },
               })}
