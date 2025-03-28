@@ -2,7 +2,7 @@ import { createClient } from "@libsql/client";
 import "dotenv/config";
 import { SERVER_ENV } from "../src/server/env";
 
-const databaseUrl = SERVER_ENV.DATABASE_URL || "file:local.db";
+const databaseUrl = SERVER_ENV.DATABASE_URL.match("local.db") ? "file:local.db" : SERVER_ENV.DATABASE_URL;
 
 const client = createClient({
   url: databaseUrl,
