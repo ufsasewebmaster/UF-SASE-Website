@@ -9,6 +9,7 @@ export interface BlogDisplay extends Omit<BlogBase, "author_id"> {
   images: Array<string>;
   author: string;
   read_time?: string;
+  displayEditButton: boolean;
 }
 
 // Props for blog components

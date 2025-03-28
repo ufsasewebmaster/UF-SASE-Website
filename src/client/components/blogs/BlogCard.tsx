@@ -7,7 +7,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
   if (expandedBlogId === blog.id) {
     return null;
   }
-
   const formattedDate = blog.published_date
     ? new Date(blog.published_date).toLocaleDateString("en-US", {
         month: "short",
@@ -15,7 +14,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
         year: "numeric",
       })
     : "";
-
   return (
     <article className="relative w-full max-w-6xl p-6">
       <div className="group relative">
@@ -44,7 +42,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
               <div className="flex h-full w-full items-center justify-center rounded-[35px] bg-gray-300 text-gray-500">No Image</div>
             )}
           </figure>
-
+          {/*Edit button*/}
+          <div>{blog.displayEditButton && <Button>Edit</Button>}</div>
           {/* content */}
           <div className="flex w-full flex-col items-start">
             {/* title */}

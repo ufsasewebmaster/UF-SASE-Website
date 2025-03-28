@@ -40,10 +40,10 @@ export const Route = createFileRoute("/blogs")({
       ...blog,
       images: blog.images || [],
       author: blog.author_id || "",
+      displayEditButton: isAuthenticated,
     }));
 
     const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
-
     const recentBlogs = sortedBlogs.slice(0, 2);
     const otherBlogs = sortedBlogs.slice(2);
     const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
@@ -56,7 +56,6 @@ export const Route = createFileRoute("/blogs")({
     return (
       <div className="container mx-auto p-3">
         {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
-
         {/* expanded blog view */}
         {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
 
@@ -107,7 +106,7 @@ export const Route = createFileRoute("/blogs")({
             {/* all blogs grid */}
             <BlogContainer>
               <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
-                {otherBlogs.length > 0 ? (
+                {otherBlogs.length > 0 && isAuthenticated ? (
                   otherBlogs.map((blog) => (
                     <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
                   ))
