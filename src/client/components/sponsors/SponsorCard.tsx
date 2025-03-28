@@ -61,7 +61,7 @@ const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCar
       </p>
 
       <div
-        className={`relative flex h-full flex-col items-center rounded-2xl border-4 border-black bg-white p-1 ${shadowcolor} shadow-2xl duration-300 hover:scale-105`}
+        className={`relative flex h-full flex-col items-center rounded-2xl border-4 border-foreground bg-muted p-1 ${shadowcolor} shadow-2xl duration-300 hover:scale-105`}
       >
         <Link to={link} className="absolute inset-0 z-10" />
         <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />

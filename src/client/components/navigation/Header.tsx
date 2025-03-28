@@ -1,5 +1,7 @@
 import { useAuth } from "@/client/hooks/AuthContext";
 import { cn } from "@/shared/utils";
+import DarkButton from "@components/DarkButton";
+import { DarkModeContext } from "@components/DarkModeProvider";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
@@ -8,8 +10,6 @@ import { UserButton } from "@navigation/UserButton";
 import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import DarkButton from "../DarkButton";
-import { DarkModeContext } from "../DarkModeProvider";
 
 const SCREEN_BREAKPOINT = 1024;
 
@@ -94,15 +94,12 @@ const Header: React.FC = () => {
       <nav className="relative flex h-16 w-full items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <Logo />
-
-        {/* TODO: For testing purposes */}
-
-        <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
-          <div className="ml-auto flex items-center gap-4">
-            <DesktopMenu navItems={navItems} isHomePage={isHomePage} />
-            <SearchBar />
+          <div className="ml-auto flex items-center gap-2">
+            <DesktopMenu darkMode={darkMode} navItems={navItems} isHomePage={isHomePage} />
+            <SearchBar className="ml-4" />
+            <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             <div className="hidden md:block">
               {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
             </div>
@@ -110,11 +107,10 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Nav */}
-        <div className="flex items-center gap-4 md:hidden">
-          <SearchBar className="w-32 focus:w-64" />
-          {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
+        <div className="ml-auto flex items-center gap-2 md:hidden">
+          <SearchBar />
           <button ref={hamburgerRef} className="focus:outline-none">
-            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage ? "#fff" : "#000"} size={22} />
+            <Hamburger toggled={menuOpen} toggle={setMenuOpen} color={isHomePage || darkMode ? "#fff" : "#000"} size={22} />
           </button>
         </div>
 
@@ -127,6 +123,8 @@ const Header: React.FC = () => {
             isHomePage={isHomePage}
             isLoggedIn={isAuthenticated}
             onLogout={logout}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
           />
         </div>
       </nav>

@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { UserButton } from "@navigation/UserButton";
 import { useRouter } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
+import DarkButton from "../DarkButton";
 
 interface NavItem {
   name: string;
@@ -11,15 +12,17 @@ interface NavItem {
 }
 
 interface MobileMenuProps {
-  navItems: Array<NavItem>;
-  isOpen: boolean;
-  onClose: () => void;
+  darkMode: boolean;
   isHomePage: boolean;
   isLoggedIn: boolean;
+  isOpen: boolean;
+  navItems: Array<NavItem>;
+  onClose: () => void;
   onLogout: () => void;
+  toggleDarkMode: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ darkMode, isHomePage, isLoggedIn, isOpen, navItems, onClose, onLogout, toggleDarkMode }) => {
   const [allSubmenusClosed, setAllSubmenusClosed] = useState(false);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
   const menuClasses = cn(
     "fixed right-0 top-16 h-auto w-auto rounded-bl-2xl pb-20 font-redhat text-lg shadow-md transition-all duration-300 ease-in-out",
     isOpen ? "pointer-events-auto translate-x-0 opacity-100" : "pointer-events-none translate-x-20 opacity-0",
-    isHomePage ? "bg-black text-white" : "bg-white text-black",
+    isHomePage || darkMode ? "bg-black text-white" : "bg-white text-black",
   );
 
   const ulClasses = cn("flex w-full flex-col items-end space-y-2 pb-4 pr-4 pt-3");
@@ -38,20 +41,22 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isHomePage, isLoggedIn, 
     <div className={menuClasses}>
       <ul className={ulClasses}>
         {navItems.map((item) => (
-          <MobileNavItem key={item.name} item={item} onClose={onClose} isHomePage={isHomePage} closeAll={allSubmenusClosed} />
+          <MobileNavItem key={item.name} item={item} onClose={onClose} isHomePage={isHomePage} closeAll={allSubmenusClosed} darkMode={darkMode} />
         ))}
         <UserButton isLoggedIn={isLoggedIn} onLogout={onLogout} isHomePage={isHomePage} />
+        <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </ul>
     </div>
   );
 };
 
 const MobileNavItem: React.FC<{
+  darkMode: boolean;
+  isHomePage: boolean;
   item: NavItem;
   onClose: () => void;
-  isHomePage: boolean;
   closeAll: boolean;
-}> = ({ closeAll, isHomePage, item, onClose }) => {
+}> = ({ closeAll, darkMode, isHomePage, item, onClose }) => {
   const router = useRouter();
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
@@ -79,21 +84,18 @@ const MobileNavItem: React.FC<{
 
   const buttonClasses = cn(
     "flex w-full items-center justify-end px-2 py-1 pl-20 text-right transition-colors duration-300 focus:outline-none",
-    isHomePage ? "text-white hover:text-[#0f6cb6]" : "text-black hover:text-[#0f6cb6]",
+    isHomePage || darkMode ? "text-white hover:text-[#0f6cb6]" : "text-black hover:text-[#0f6cb6]",
   );
 
   const svgClasses = cn("mr-1 h-4 w-4 transition-transform duration-300");
-
   const gradientClasses = cn(
     "mr-4 mt-1 w-auto bg-gradient-to-r transition-all duration-500 ease-in-out",
-    isHomePage ? "from-saseGreen via-saseBlue to-black" : "from-saseBlue via-saseGreen to-white",
+    isHomePage || darkMode ? "from-saseGreen via-saseBlue to-black" : "from-saseBlue via-saseGreen to-white",
     submenuOpen
       ? "pointer-events-auto max-h-screen translate-y-0 transform opacity-100"
       : "pointer-events-none max-h-0 -translate-y-2 transform opacity-0",
   );
-
-  const childUlClasses = cn("flex w-full flex-col items-end space-y-1", isHomePage ? "text-white" : "text-black");
-
+  const childUlClasses = cn("flex w-full flex-col items-end space-y-1", isHomePage || darkMode ? "text-white" : "text-black");
   const childButtonClasses = cn("block w-full px-2 py-2 text-right transition-transform duration-300 hover:scale-105");
 
   return (

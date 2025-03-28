@@ -19,7 +19,7 @@ const GalleryDropdown: React.FC<DropdownProps> = React.memo(({ setSlideshow }) =
   return (
     <div className="flex w-full flex-col justify-center gap-5 md:flex-row">
       <div className="w-full">
-        <div id="photo_drives" className="dropdown-container pb-1 pl-2 pt-1 font-semibold" onClick={toggleVisibility}>
+        <div id="photo_drives" className="dropdown-container pb-1 pl-2 pt-1 font-semibold text-foreground" onClick={toggleVisibility}>
           <div className="flex flex-row justify-between">
             <div>Photo Google Drives</div>
             <div className="flex items-center pr-3">{isDropdownVisible ? <FaChevronDown /> : <FaChevronUp />}</div>
