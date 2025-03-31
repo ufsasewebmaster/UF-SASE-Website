@@ -8,8 +8,18 @@ import { useAuth } from "@hooks/AuthContext";
 import { useProfile } from "@hooks/useProfile";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useContext, useState } from "react";
+import { imageUrls } from "../assets/imageUrls";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/profile")({
+  meta: () => [
+    ...seo({
+      title: "Profile | UF SASE",
+      description: "Profile page for usser information, must be logged in to UF SASE account view.",
+      image: imageUrls["SASELogo.png"],
+    }),
+  ],
+
   component: () => {
     const { data: profile, error, isLoading } = useProfile();
     const [activeSection, setActiveSection] = useState<string>("account");

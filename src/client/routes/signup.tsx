@@ -11,7 +11,7 @@ import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/signup")({
-  meta: () => [...seo({ title: "Signup | UF SASE", description: "UF Society of Asian Scientists & Engineers", image: imageUrls["SASELogo.png"] })],
+  meta: () => [...seo({ title: "Signup | UF SASE", description: "Sign Up page for UF SASE", image: imageUrls["SASELogo.png"] })],
 
   component: () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);

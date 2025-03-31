@@ -9,8 +9,18 @@ import SponsorCard from "@components/sponsors/SponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/")({
+  meta: () => [
+    ...seo({
+      title: "UF SASE",
+      description:
+        "University of Florida Chapter of the Society of Asian Scientists & Engineers, committed to fostering meaningful connections across cultures and empowering Asian Pacific Islander Desi American (APIDA) professionals in science and engineering.",
+      image: imageUrls["SASELogo.png"],
+    }),
+  ],
+
   component: () => {
     const isMobile = useIsMobile();
     const [expanded, setExpanded] = useState(false);
