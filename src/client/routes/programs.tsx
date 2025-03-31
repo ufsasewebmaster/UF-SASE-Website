@@ -6,8 +6,18 @@ import BoardPicture from "@components/programs/BoardPicture";
 import ProgramCard from "@components/programs/ProgramCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
+import { imageUrls } from "../assets/imageUrls";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/programs")({
+  meta: () => [
+    ...seo({
+      title: "Programs | UF SASE",
+      description: "Programs page for UF SASE, learn about the professional, social, and technical programs we offer.",
+      image: imageUrls["SASELogo.png"],
+    }),
+  ],
+
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">

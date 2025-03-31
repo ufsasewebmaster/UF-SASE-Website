@@ -18,8 +18,8 @@ import { seo } from "../utils/seo";
 export const Route = createFileRoute("/webdev")({
   meta: () => [
     ...seo({
-      title: "WEBDEV | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      title: "Web Dev | UF SASE",
+      description: "UF SASE Web Development team consists of UI/UX, Frontend, and Backend teams creating the SASE website, using agile practices.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

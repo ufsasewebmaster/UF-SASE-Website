@@ -13,7 +13,7 @@ export const Route = createFileRoute("/login")({
   meta: () => [
     ...seo({
       title: "Login | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Login page for UF SASE",
       image: imageUrls["SASELogo.png"],
     }),
   ],

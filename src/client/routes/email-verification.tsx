@@ -12,7 +12,7 @@ export const Route = createFileRoute("/email-verification")({
   meta: () => [
     ...seo({
       title: "Email Verification | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Password reset page for UF SASE.",
       image: imageUrls["SASELogo.png"],
     }),
   ],
