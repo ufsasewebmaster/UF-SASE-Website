@@ -82,8 +82,8 @@ async function processFileName(fileName: string): Promise<{ category: string; na
     }
 
     // Replace hyphens with spaces and trim
-    const category = parts[0].trim().replace(/-/g, " ");
-    const name = parts[1].trim().replace(/-/g, " ");
+    const category = parts[0].trim();
+    const name = parts[1].trim();
     const dateStr = parts[2].trim();
     const date = new Date(dateStr);
     if (isNaN(date.getTime())) throw new Error("Invalid date format.");
@@ -145,7 +145,6 @@ function buildEmbedURL(webViewLink: string): string | undefined {
  */
 function parseSemesterFolder(folderId: string): string | undefined {
   const folderName = folderMap.get(folderId) ?? "";
-  console.log("folder name", folderName);
   const regex = /^(\d{4})-(Fall|Spring|Summer|Winter)$/i;
   const match = folderName.match(regex);
   if (!match) return undefined;
