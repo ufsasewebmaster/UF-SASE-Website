@@ -229,7 +229,7 @@ function parseSemesterFolder(folderId: string): string | undefined {
 
     // Create thumbnail file path
     const formattedTitle = `${category}_${name}_${date.toISOString().split("T")[0]}`;
-    const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
+    const filePath = `public/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
     ensureDirectoryExists(filePath);
 
     // Download thumbnail and write to file
@@ -257,8 +257,8 @@ function parseSemesterFolder(folderId: string): string | undefined {
       continue;
     }
 
-    // Insert into database
-    await insertSlides(category, name, semester, filePath, embedURL, date);
+    // Insert into database. Note we can left strip "public" from the filePath
+    await insertSlides(category, name, semester, filePath.replace(/^public/, ""), embedURL, date);
     processedFiles++;
     console.log(`Processed file ${i + 1} of ${files.length}`);
   }

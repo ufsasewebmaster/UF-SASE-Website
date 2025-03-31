@@ -120,7 +120,7 @@ export const imageUrls = {
   "fall2023_5.jpg": "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKJ0oQRkT402P9k7UlC1m8TYv6nZxQhaz5yRqW",
   "ServiceChair.jpeg": "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKcqEYUxPpMwbOnfqEJ7TVa05IgRhUszKWGF28",
   "Suitcase.png": "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKsVzvgSvNXQI7vJOBi4C8jpqwVZz0efGoksdW",
-  "SETRobot.png": "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKIISNrb2IJDaG589To0SN4hLYtuCq1Env6XKb",
+  "SETRobot.png": "https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKIISNrb2IJDaG589To0SN4hLYtuCq1Env6XKb"
 } as const;
 
 export type imageName = keyof typeof imageUrls;
