@@ -11,7 +11,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, category, children, description }) => {
+const Modal: React.FC<ModalProps> = ({ category, children, description, isOpen, onClose, title }) => {
   if (!isOpen) return null;
 
   return (
