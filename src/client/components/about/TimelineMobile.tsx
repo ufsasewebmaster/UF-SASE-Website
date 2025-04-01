@@ -97,10 +97,6 @@ const defaultItems: Array<TimelineItem> = [
 const TimelineMobile = () => {
   return (
     <div className="scrollbar-custom max-h-[42rem] overflow-y-auto px-6 py-10">
-      <h2 className="mb-12 text-center font-oswald text-3xl font-bold tracking-wide text-foreground underline decoration-saseGreen decoration-4 underline-offset-4">
-        Timeline of Accomplishments
-      </h2>
-
       <div className="flex flex-col items-center gap-20">
         {defaultItems.map((item, index) => {
           const isLeft = index % 2 === 0;
