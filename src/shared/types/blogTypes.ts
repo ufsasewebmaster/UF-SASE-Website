@@ -17,12 +17,16 @@ export interface BlogCardProps {
   blog: BlogDisplay;
   expandedBlogId: string | null;
   setExpandedBlogId: (id: string | null) => void;
+  setIsEditing: (state: boolean) => void;
 }
 
 export interface BlogExpandedProps {
   blog: BlogDisplay;
   onClose: () => void;
   showBackButton?: boolean;
+  isEditing: boolean;
+  setIsEditing: (state: boolean) => void;
+  editView: boolean;
 }
 
 export interface BlogHeaderProps {

@@ -5,11 +5,12 @@ import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
-const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, onClose, showBackButton = true }) => {
+const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, editView, isEditing, onClose, setIsEditing, showBackButton = true }) => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
-
+    console.log(setIsEditing);
+    console.log("Edit view: ", editView);
     return () => {
       document.body.style.overflow = originalStyle;
     };
@@ -20,6 +21,10 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, onClose, showBackButt
     if (onClose) {
       onClose();
     }
+  };
+  const handleEditButtonClicked = () => {
+    setIsEditing(!isEditing);
+    console.log("Editing status set to: ", isEditing);
   };
 
   const renderContent = () => {
@@ -76,7 +81,15 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, onClose, showBackButt
           <div className={cn("relative z-10 flex flex-col rounded-[50px] border-2 border-border bg-white p-8", "w-full shadow-lg transition")}>
             {/* header */}
             <div className="px-4 py-2 text-center">
-              <h1 className={cn("text-4xl font-bold", "font-oswald")}>{blog.title}</h1>
+              {/*Row with title and edit button*/}
+              <div className="relative flex items-center justify-center">
+                <h1 className={cn("text-4xl font-bold", "font-oswald")}>{blog.title}</h1>
+                {blog.displayEditButton && (
+                  <Button className={cn("absolute right-0")} onClick={handleEditButtonClicked}>
+                    {isEditing ? "Edit" : "Close Editor"}
+                  </Button>
+                )}
+              </div>
               <div className={cn("mt-2 flex items-center justify-center text-sm text-gray-600", "font-redhat")}>
                 <span className="mr-2">{blog.time_updated || "15 min read"}</span>
                 <span className="mx-2">by {blog.author}</span>

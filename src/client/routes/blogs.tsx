@@ -19,19 +19,18 @@ export const Route = createFileRoute("/blogs")({
       handleUpdateBlog,
       isAuthenticated,
       isCreating,
-      isEditing,
       newBlogContent,
       newBlogTags,
       newBlogTitle,
       resetForm,
       setIsCreating,
-      setIsEditing,
       setNewBlogContent,
       setNewBlogTags,
       setNewBlogTitle,
     } = useBlogFunctions();
 
     const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
 
     if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
     if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error.message}</div>;
@@ -41,6 +40,7 @@ export const Route = createFileRoute("/blogs")({
       images: blog.images || [],
       author: blog.author_id || "",
       displayEditButton: isAuthenticated,
+      editView: false,
     }));
 
     const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
@@ -57,7 +57,16 @@ export const Route = createFileRoute("/blogs")({
       <div className="container mx-auto p-3">
         {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
         {/* expanded blog view */}
-        {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
+        {expandedBlog && expandedBlogId && (
+          <BlogExpanded
+            blog={expandedBlog}
+            onClose={handleCloseExpandedBlog}
+            showBackButton={true}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            editView={isEditing}
+          />
+        )}
 
         {!expandedBlogId && (
           <>
@@ -108,7 +117,13 @@ export const Route = createFileRoute("/blogs")({
               <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
                 {otherBlogs.length > 0 && isAuthenticated ? (
                   otherBlogs.map((blog) => (
-                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+                    <BlogCard
+                      key={blog.id}
+                      blog={blog}
+                      expandedBlogId={expandedBlogId}
+                      setExpandedBlogId={setExpandedBlogId}
+                      setIsEditing={setIsEditing}
+                    />
                   ))
                 ) : (
                   <p className="font-redhat">No blogs found.</p>
