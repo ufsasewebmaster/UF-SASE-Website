@@ -66,7 +66,7 @@ authRoutes.post("/auth/signup", async (c) => {
 
     await db.insert(Schema.userRoleRelationship).values({
       user_id: userId,
-      role: "user"
+      role: "user",
     });
 
     return createSuccessResponse(c, { userId }, "User successfully created");
