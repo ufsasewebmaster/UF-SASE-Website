@@ -1,3 +1,4 @@
+import TimelineMobile from "@/client/components/about/TimelineMobile";
 import { cn } from "@/shared/utils";
 import AboutCard from "@about/AboutCard";
 import ContactForm from "@about/ContactForm";
@@ -7,6 +8,7 @@ import MissionSection from "@about/MissionSection";
 import Timeline from "@about/Timeline";
 import YoutubeSection from "@about/YoutubeSection";
 import { imageUrls } from "@assets/imageUrls";
+import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
@@ -19,6 +21,7 @@ export const Route = createFileRoute("/about")({
     }),
   ],
   component: () => {
+    const isMobile = useIsMobile();
     return (
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background font-redhat">
         <div className="w-full max-w-7xl px-4 py-8">
@@ -64,7 +67,7 @@ export const Route = createFileRoute("/about")({
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
               <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>Timeline of Achievements</h2>
             </div>
-            <Timeline />
+            {isMobile ? <TimelineMobile /> : <Timeline />}
           </section>
           <section id="contact" className={cn("mb-12")}>
             <div className={cn("mb-4 flex items-center")}>

@@ -37,13 +37,15 @@ const EventsSlides: React.FC = () => {
         const resp = await fetch("api/events/slides/", { method: "GET" });
         const slideData = (await resp.json()) as Array<SlideData>;
 
-        const display: Array<Semester> = [];
+        const semesterMap = new Map<string, Semester>();
         slideData.forEach((deck) => {
-          if (display.length == 0 || deck.semester !== display[display.length - 1].name) {
-            display.push({ name: deck.semester, slides: [] });
+          if (!semesterMap.has(deck.semester)) {
+            semesterMap.set(deck.semester, { name: deck.semester, slides: [] });
           }
-          display[display.length - 1].slides.push(deck);
+          semesterMap.get(deck.semester)?.slides.push(deck);
         });
+        const display = Array.from(semesterMap.values());
+
         setSemesters(display);
         setLoading(false);
       } catch (error) {
