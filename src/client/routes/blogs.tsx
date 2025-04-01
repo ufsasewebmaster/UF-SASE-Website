@@ -11,114 +11,169 @@ import BlogTags from "../components/blogs/BlogTags";
 import { useBlogFunctions } from "../hooks/useBlogsFunctions";
 
 export const Route = createFileRoute("/blogs")({
-  component: () => {
-    const {
-      blogs,
-      error,
-      handleCreateBlog,
-      handleUpdateBlog,
-      isAuthenticated,
-      isCreating,
-      isEditing,
-      newBlogContent,
-      newBlogTags,
-      newBlogTitle,
-      resetForm,
-      setIsCreating,
-      setIsEditing,
-      setNewBlogContent,
-      setNewBlogTags,
-      setNewBlogTitle,
-    } = useBlogFunctions();
+  component: BlogsPage,
+});
 
-    const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
+function BlogsPage() {
+  const {
+    activeTag,
+    blogs,
+    error,
+    handleCreateBlog,
+    handleTagClick,
+    handleUpdateBlog,
+    isAuthenticated,
+    isCreating,
+    isEditing,
+    newBlogContent,
+    newBlogTags,
+    newBlogTitle,
+    resetForm,
+    setIsCreating,
+    setIsEditing,
+    setNewBlogContent,
+    setNewBlogTags,
+    setNewBlogTitle,
+    setSearchQuery,
+    tags,
+  } = useBlogFunctions();
 
-    if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
-    if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error.message}</div>;
+  const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
 
-    const blogDisplayData = (blogs.data || []).map((blog) => ({
-      ...blog,
-      images: blog.images || [],
-      author: blog.author_id || "",
-    }));
+  // loading states
+  if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
+  if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error?.message}</div>;
 
-    const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+  // process blogs
+  const availableTags = tags.data?.map(tag => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
+  const processedBlogs = (blogs.data || []).map(blog => ({
+    ...blog,
+    author: "SASE at UF",
+    images: blog.images || [],
+    read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
+    tags: blog.tags || []
+  }));
+  
+  // filter blogs
+  const filteredBlogs = activeTag 
+    ? processedBlogs.filter(blog => blog.tags.some(tag => 
+        tag.toLowerCase() === activeTag.toLowerCase()))
+    : processedBlogs;
+  
+  const sortedBlogs = [...filteredBlogs].sort((a, b) => 
+    new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+  
+  // blog groups
+  const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
+  const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;
+  const expandedBlog = expandedBlogId ? sortedBlogs.find(blog => blog.id === expandedBlogId) : null;
 
-    const recentBlogs = sortedBlogs.slice(0, 2);
-    const otherBlogs = sortedBlogs.slice(2);
-    const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
+  // handlers
+  const handleCloseExpandedBlog = () => {
+    setExpandedBlogId(null);
+    document.body.style.overflow = "auto";
+  };
 
-    const handleCloseExpandedBlog = () => {
-      setExpandedBlogId(null);
-      document.body.style.overflow = "auto";
-    };
+  const handleFormCancel = () => {
+    setIsCreating(false);
+    setIsEditing(false);
+    resetForm();
+  };
 
-    return (
-      <div className="container mx-auto p-3">
-        {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
+  const sectionTitle = cn(
+    "text-2xl sm:text-2xl md:text-3xl lg:text-4xl",
+    "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
+    "font-pixelify font-semibold tracking-wider"
+  );
 
-        {/* expanded blog view */}
-        {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
+  // display logic
+  const displayBlogs = activeTag ? sortedBlogs : otherBlogs;
+  const noResultsMessage = activeTag 
+    ? `No blogs found with tag: ${activeTag}`
+    : "No blogs found.";
 
-        {!expandedBlogId && (
-          <>
-            {isAuthenticated && !isCreating && !isEditing && (
-              <Button onClick={() => setIsCreating(true)} className={cn("mb-3", "font-redhat")}>
-                Create New Blog Post
-              </Button>
-            )}
+  return (
+    <div className="container mx-auto p-3">
+      {/* header */}
+      {!expandedBlogId && !activeTag && recentBlogs.length > 0 && (
+        <BlogHeader 
+          blogs={recentBlogs} 
+          expandedBlogId={expandedBlogId} 
+          setExpandedBlogId={setExpandedBlogId} 
+        />
+      )}
 
-            {(isCreating || isEditing) && (
-              <BlogForm
-                isCreating={isCreating}
-                isEditing={isEditing}
-                newBlogTitle={newBlogTitle}
-                newBlogContent={newBlogContent}
-                newBlogTags={newBlogTags}
-                error={error}
-                onTitleChange={setNewBlogTitle}
-                onContentChange={setNewBlogContent}
-                onTagsChange={setNewBlogTags}
-                onSubmit={isCreating ? handleCreateBlog : handleUpdateBlog}
-                onCancel={() => {
-                  setIsCreating(false);
-                  setIsEditing(false);
-                  resetForm();
-                }}
-              />
-            )}
+      {/* expanded view */}
+      {expandedBlog && expandedBlogId && (
+        <BlogExpanded 
+          blog={expandedBlog} 
+          onClose={handleCloseExpandedBlog} 
+          showBackButton={true} 
+        />
+      )}
 
-            {/* tags */}
-            <BlogTags tags={["Winter Banquet", "Collaborations", "GBMs"]} />
+      {!expandedBlogId && (
+        <>
+          {/* create button */}
+          {isAuthenticated && !isCreating && !isEditing && (
+            <Button onClick={() => setIsCreating(true)} className={cn("mb-3", "font-redhat")}>
+              Create New Blog Post
+            </Button>
+          )}
 
-            {/* all posts header */}
-            <div className="mx-auto mb-5 mt-10 max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">
-              <h2
-                className={cn(
-                  "text-2xl sm:text-2xl md:text-3xl lg:text-4xl",
-                  "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
-                  "font-pixelify font-semibold tracking-wider",
-                )}
-              >
-                ALL POSTS
-              </h2>
-            </div>
+          {/* blog form */}
+          {(isCreating || isEditing) && (
+            <BlogForm
+              isCreating={isCreating}
+              isEditing={isEditing}
+              newBlogTitle={newBlogTitle}
+              newBlogContent={newBlogContent}
+              newBlogTags={newBlogTags}
+              error={error}
+              onTitleChange={setNewBlogTitle}
+              onContentChange={setNewBlogContent}
+              onTagsChange={setNewBlogTags}
+              onSubmit={isCreating ? handleCreateBlog : handleUpdateBlog}
+              onCancel={handleFormCancel}
+            />
+          )}
 
-            {/* all blogs grid */}
+          {/* tags */}
+          <BlogTags 
+            tags={availableTags}
+            activeTag={activeTag}
+            onTagClick={handleTagClick}
+            onSearch={setSearchQuery}
+          />
+
+          {/* title */}
+          <div className="mx-auto mb-5 mt-10 max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">
+            <h2 className={sectionTitle}>
+              {activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}
+            </h2>
+          </div>
+
+          {/* blog grid */}
+          <div className="relative mb-10 mt-8">
             <BlogContainer>
-              <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
-                {otherBlogs.length > 0 ? (
-                  otherBlogs.map((blog) => (
-                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+              <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
+                {displayBlogs.length > 0 ? (
+                  displayBlogs.map((blog) => (
+                    <BlogCard 
+                      key={blog.id} 
+                      blog={blog} 
+                      expandedBlogId={expandedBlogId} 
+                      setExpandedBlogId={setExpandedBlogId} 
+                    />
                   ))
                 ) : (
-                  <p className="font-redhat">No blogs found.</p>
+                  <p className="font-redhat">{noResultsMessage}</p>
                 )}
               </div>
             </BlogContainer>
-          </>
-        )}
-      </div>
-    );
-  },
-});
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

@@ -1,14 +1,17 @@
 import type { Blog as SchemaBaseBlog, CreateBlog as SchemaCreateBlog, UpdateBlog as SchemaUpdateBlog } from "@shared/schema/blogSchema";
+import type { BlogTag as SchemaTag } from "@shared/schema/blogTagSchema";
 
 export type BlogBase = SchemaBaseBlog;
 export type CreateBlogInput = SchemaCreateBlog;
 export type UpdateBlogInput = SchemaUpdateBlog;
+export type BlogTag = SchemaTag;
 
 // Enhanced display type that components use
-export interface BlogDisplay extends Omit<BlogBase, "author_id"> {
+export interface BlogDisplay extends Omit<BlogBase, 'images' | 'tags'> {
   images: Array<string>;
   author: string;
   read_time?: string;
+  tags: Array<string>;
 }
 
 // Props for blog components
@@ -46,7 +49,9 @@ export interface BlogFormProps {
 
 export interface BlogTagsProps {
   tags: Array<string>;
+  activeTag: string | null;
   onTagClick?: (tag: string) => void;
+  onSearch?: (query: string) => void;
 }
 
 export interface BlogCarouselProps {

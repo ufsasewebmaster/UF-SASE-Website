@@ -1,30 +1,38 @@
 import type { Blog, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
+import type { BlogTag } from "@shared/schema/blogTagSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createBlog, fetchBlogById, fetchBlogs, searchBlogsByTitle, updateBlog } from "../api/blogs";
+import { createBlog, fetchAllTags, fetchBlogById, fetchBlogs, fetchBlogsByTag, searchBlogsByTitle, updateBlog } from "../api/blogs";
 
 export const useBlogs = () => {
   const queryClient = useQueryClient();
 
-  // Fetch all blogs
+  // cache invalidation function for mutations
+  const invalidateCache = () => {
+    queryClient.invalidateQueries({ queryKey: ["blogs"] });
+    queryClient.invalidateQueries({ queryKey: ["blogTags"] });
+  };
+
+ // Fetch all blogs
   const blogsQuery = useQuery<Array<Blog>, Error>({
     queryKey: ["blogs"],
     queryFn: fetchBlogs,
   });
 
+  const tagsQuery = useQuery<Array<BlogTag>, Error>({
+    queryKey: ["blogTags"],
+    queryFn: fetchAllTags,
+  });
+
   // Create a new blog
   const createBlogMutation = useMutation<Blog, Error, CreateBlog>({
     mutationFn: createBlog,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
-    },
+    onSuccess: invalidateCache,
   });
-
-  // Update an existing blog
+  
+ // Update an existing blog
   const updateBlogMutation = useMutation<Blog, Error, UpdateBlog>({
     mutationFn: updateBlog,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
-    },
+    onSuccess: invalidateCache,
   });
 
   // Fetch a blog by ID
@@ -35,9 +43,16 @@ export const useBlogs = () => {
       enabled: !!blogId,
     });
 
+  const fetchBlogsByTagQuery = (tagName: string) =>
+    useQuery<Array<Blog>, Error>({
+      queryKey: ["blogs", "tag", tagName],
+      queryFn: () => fetchBlogsByTag(tagName),
+      enabled: !!tagName,
+    });
+
   // Search blogs by title
   const searchBlogsQuery = (title: string) =>
-    useQuery<Blog, Error>({
+    useQuery<Array<Blog>, Error>({
       queryKey: ["blogs", "search", title],
       queryFn: () => searchBlogsByTitle(title),
       enabled: !!title,
@@ -45,17 +60,11 @@ export const useBlogs = () => {
 
   return {
     blogs: blogsQuery,
-    createBlog: {
-      mutate: createBlogMutation.mutate,
-      isError: createBlogMutation.isError,
-      error: createBlogMutation.error,
-    },
-    updateBlog: {
-      mutate: updateBlogMutation.mutate,
-      isError: updateBlogMutation.isError,
-      error: updateBlogMutation.error,
-    },
+    tags: tagsQuery,
+    createBlog: createBlogMutation,
+    updateBlog: updateBlogMutation,
     fetchBlogById: fetchBlogByIdQuery,
+    fetchBlogsByTag: fetchBlogsByTagQuery,
     searchBlogs: searchBlogsQuery,
   };
 };
