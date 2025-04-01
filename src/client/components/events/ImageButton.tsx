@@ -8,9 +8,10 @@ interface ImageButtonProps {
   imgWidth?: string;
   imgHeight?: string;
   title: string;
+  category: string;
 }
 
-const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px", slideUrl, title }) => {
+const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px", slideUrl, title, category }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -30,8 +31,10 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, imgWidth = "320px",
       </div>
 
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={closeModal} title={title} description="">
-          <iframe src={slideUrl} className="h-[60vh] w-full" allowFullScreen />
+        <Modal isOpen={isModalOpen} onClose={closeModal} title={title} category={category} description="">
+          <div className="relative w-full pt-[56.25%]">
+            <iframe src={slideUrl} className="absolute left-0 top-0 h-full w-full rounded-lg" allowFullScreen />
+          </div>
         </Modal>
       )}
     </div>

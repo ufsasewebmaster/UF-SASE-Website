@@ -35,7 +35,16 @@ const EventsSlides: React.FC = () => {
         setLoading(true);
 
         const resp = await fetch("api/events/slides/", { method: "GET" });
-        const slideData = (await resp.json()) as Array<SlideData>;
+        const rawData = await resp.json();
+
+        if (!Array.isArray(rawData)) {
+          throw new Error("Invalid data format");
+        }
+
+        const slideData: SlideData[] = rawData.map((deck: any) => ({
+          ...deck,
+          date: new Date(deck.date),
+        }));
 
         const semesterMap = new Map<string, Semester>();
         slideData.forEach((deck) => {
@@ -57,7 +66,7 @@ const EventsSlides: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative flex w-screen flex-col items-center gap-5 p-5">
+    <div className="relative flex w-screen flex-col items-center gap-5 p-5 font-redhat">
       {semesters.length > 0 && (
         <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300">
           {semesters.map((semester) => (
@@ -65,7 +74,7 @@ const EventsSlides: React.FC = () => {
               key={semester.name}
               className={`border-b-2 p-3 px-6 transition-all duration-300 ease-in-out ${
                 semesters[selectedSemester]?.name === semester.name
-                  ? "border-saseGreen text-black"
+                  ? "border-saseGreen font-semibold text-black"
                   : "border-transparent text-black hover:border-gray-400"
               }`}
               onClick={() => setSelectedSemester(semesters.indexOf(semester))}
@@ -123,6 +132,7 @@ const EventsSlides: React.FC = () => {
           )}
         </div>
       </div>
+
       {view === "slides" ? (
         error ? (
           <div className="flex h-full w-full items-center justify-center">
@@ -136,8 +146,23 @@ const EventsSlides: React.FC = () => {
           <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {semesters[selectedSemester]?.slides.map((deck, index) => (
               <div key={index} className="flex w-full flex-col items-center">
-                {deck.thumbnail_url && <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} />}
-                {deck.name && <p className="mt-2 text-center text-sm">{deck.name}</p>}
+                {deck.thumbnail_url && (
+                  <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} category={deck.category} />
+                )}
+                {deck.category && deck.name && (
+                  <div className="mt-2 text-center text-sm text-black">
+                    <p>
+                      <span className="font-semibold">{deck.category}:</span> <span>{deck.name}</span>
+                    </p>
+                    <p className="text-xs text-gray-700">
+                      {deck.date.toLocaleDateString("en-US", {
+                        year: "2-digit",
+                        month: "numeric",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
