@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import BlogCard from "../components/blogs/BlogCard";
 import BlogContainer from "../components/blogs/BlogContainer";
+import BlogEditor from "../components/blogs/BlogEditor";
 import BlogExpanded from "../components/blogs/BlogExpanded";
 import BlogForm from "../components/blogs/BlogForm";
 import BlogHeader from "../components/blogs/BlogHeader";
@@ -19,18 +20,20 @@ export const Route = createFileRoute("/blogs")({
       handleUpdateBlog,
       isAuthenticated,
       isCreating,
+      isEditing,
       newBlogContent,
       newBlogTags,
       newBlogTitle,
       resetForm,
+      setCurrentBlog,
       setIsCreating,
+      setIsEditing,
       setNewBlogContent,
       setNewBlogTags,
       setNewBlogTitle,
     } = useBlogFunctions();
 
     const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
-    const [isEditing, setIsEditing] = useState<boolean>(false);
 
     if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
     if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error.message}</div>;
@@ -40,7 +43,6 @@ export const Route = createFileRoute("/blogs")({
       images: blog.images || [],
       author: blog.author_id || "",
       displayEditButton: isAuthenticated,
-      editView: false,
     }));
 
     const sortedBlogs = [...blogDisplayData].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
@@ -50,6 +52,7 @@ export const Route = createFileRoute("/blogs")({
 
     const handleCloseExpandedBlog = () => {
       setExpandedBlogId(null);
+      setCurrentBlog(null);
       document.body.style.overflow = "auto";
     };
 
@@ -57,16 +60,26 @@ export const Route = createFileRoute("/blogs")({
       <div className="container mx-auto p-3">
         {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
         {/* expanded blog view */}
-        {expandedBlog && expandedBlogId && (
-          <BlogExpanded
-            blog={expandedBlog}
-            onClose={handleCloseExpandedBlog}
-            showBackButton={true}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            editView={isEditing}
-          />
-        )}
+        {isEditing && expandedBlog && expandedBlogId && "ass"}
+        {expandedBlog &&
+          expandedBlogId &&
+          (isEditing ? (
+            <BlogEditor
+              blog={expandedBlog}
+              onClose={handleCloseExpandedBlog}
+              showBackButton={false}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
+          ) : (
+            <BlogExpanded
+              blog={expandedBlog}
+              onClose={handleCloseExpandedBlog}
+              showBackButton={true}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
+          ))}
 
         {!expandedBlogId && (
           <>
@@ -76,10 +89,10 @@ export const Route = createFileRoute("/blogs")({
               </Button>
             )}
 
-            {(isCreating || isEditing) && (
+            {isCreating && (
               <BlogForm
                 isCreating={isCreating}
-                isEditing={isEditing}
+                isEditing={false}
                 newBlogTitle={newBlogTitle}
                 newBlogContent={newBlogContent}
                 newBlogTags={newBlogTags}
@@ -122,6 +135,7 @@ export const Route = createFileRoute("/blogs")({
                       blog={blog}
                       expandedBlogId={expandedBlogId}
                       setExpandedBlogId={setExpandedBlogId}
+                      isEditing={isEditing}
                       setIsEditing={setIsEditing}
                     />
                   ))

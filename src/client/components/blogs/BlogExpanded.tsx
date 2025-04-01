@@ -5,12 +5,11 @@ import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
-const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, editView, isEditing, onClose, setIsEditing, showBackButton = true }) => {
+const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, setIsEditing, showBackButton = true }) => {
+  console.log("editing value on expansion: ", isEditing);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
-    console.log(setIsEditing);
-    console.log("Edit view: ", editView);
     return () => {
       document.body.style.overflow = originalStyle;
     };
@@ -18,6 +17,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, editView, isEditing, 
 
   const handleClose = () => {
     console.log("Close button clicked");
+    setIsEditing(false);
     if (onClose) {
       onClose();
     }
@@ -86,7 +86,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, editView, isEditing, 
                 <h1 className={cn("text-4xl font-bold", "font-oswald")}>{blog.title}</h1>
                 {blog.displayEditButton && (
                   <Button className={cn("absolute right-0")} onClick={handleEditButtonClicked}>
-                    {isEditing ? "Edit" : "Close Editor"}
+                    {!isEditing ? "Edit" : "Close Editor"}
                   </Button>
                 )}
               </div>
