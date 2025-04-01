@@ -41,6 +41,7 @@ export const Route = createFileRoute("/search")({
       }
     });
 
+    console.log(metaTagsList);
     return (
       <div>
         <h1 className="mb-4 text-2xl font-bold">About</h1>
