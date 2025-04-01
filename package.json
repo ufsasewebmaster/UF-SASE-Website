@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "bun run db:push && bun run generate && bunx dotenv -- vinxi build",
+    "build": "bun run db:all && bunx dotenv -- vinxi build",
     "start": "vinxi start",
     "fix": "concurrently \"eslint . --fix\" \"prettier --write .\"",
     "generate": "bun run scripts/generateImageMaps.ts && bun run scripts/generateSlides.ts",
@@ -14,12 +14,12 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
-    "db:push": "bun drizzle-kit push --force",
-    "db:generate": "drizzle-kit generate && bun run generate",
     "db:local:init": "bun run scripts/initDb.mjs",
-    "db:local:seed": "bun run scripts/seed.ts",
     "db:studio": "drizzle-kit studio --port 3003 --verbose",
-    "db:all": "bun db:local:init && bun db:push && bun db:local:seed && bun db:generate && bun db:studio"
+    "db:push": "bun drizzle-kit push --force",
+    "db:seed": "bun run scripts/seed.ts",
+    "db:generate": "drizzle-kit generate && bun run generate",
+    "db:all": "bun db:push && bun db:seed && bun db:generate"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",

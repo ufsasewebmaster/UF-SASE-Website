@@ -25,7 +25,7 @@ authRoutes.post("/auth/signup", async (c) => {
   }
   //validate password
   if (!formPassword || typeof formPassword !== "string" || !passwordRegex.test(formPassword)) {
-    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 400);
+    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password from regex", 400);
   }
   //validate email
   // add 3rd validation for email using regular expressions
@@ -66,6 +66,7 @@ authRoutes.post("/auth/signup", async (c) => {
 
     await db.insert(Schema.userRoleRelationship).values({
       user_id: userId,
+      role: "user"
     });
 
     return createSuccessResponse(c, { userId }, "User successfully created");
@@ -87,7 +88,7 @@ authRoutes.post("/auth/login", async (c) => {
   }
 
   if (!formPassword || typeof formPassword !== "string") {
-    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 401);
+    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password from login", 401);
   }
 
   let user;
@@ -98,13 +99,14 @@ authRoutes.post("/auth/login", async (c) => {
   }
 
   if (user.length === 0) {
+    console.log(user);
     return createErrorResponse(c, "INVALID_CREDENTIALS", "Invalid username or password!", 401);
   }
 
   const validPassword = await compare(formPassword, user[0].password);
 
   if (!validPassword) {
-    return createErrorResponse(c, "INVALID_PASSWORD", "Invalid password!", 401);
+    return createErrorResponse(c, "INVALID_PASSWORD", "Incorrect password!", 401);
   } else {
     const session_id = generateIdFromEntropySize(16);
     createSession(session_id, user[0].id);

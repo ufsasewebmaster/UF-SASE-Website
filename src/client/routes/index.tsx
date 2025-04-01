@@ -10,6 +10,7 @@ import useIsMobile from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
+
 export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
