@@ -82,8 +82,8 @@ async function processFileName(fileName: string): Promise<{ category: string; na
     }
 
     // Replace hyphens with spaces and trim
-    const category = parts[0].trim().replace(/-/g, " ");
-    const name = parts[1].trim().replace(/-/g, " ");
+    const category = parts[0].trim();
+    const name = parts[1].trim();
     const dateStr = parts[2].trim();
     const date = new Date(dateStr);
     if (isNaN(date.getTime())) throw new Error("Invalid date format.");
@@ -145,7 +145,6 @@ function buildEmbedURL(webViewLink: string): string | undefined {
  */
 function parseSemesterFolder(folderId: string): string | undefined {
   const folderName = folderMap.get(folderId) ?? "";
-  console.log("folder name", folderName);
   const regex = /^(\d{4})-(Fall|Spring|Summer|Winter)$/i;
   const match = folderName.match(regex);
   if (!match) return undefined;
@@ -230,7 +229,7 @@ function parseSemesterFolder(folderId: string): string | undefined {
 
     // Create thumbnail file path
     const formattedTitle = `${category}_${name}_${date.toISOString().split("T")[0]}`;
-    const filePath = `src/client/assets/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
+    const filePath = `public/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
     ensureDirectoryExists(filePath);
 
     // Download thumbnail and write to file
@@ -258,8 +257,8 @@ function parseSemesterFolder(folderId: string): string | undefined {
       continue;
     }
 
-    // Insert into database
-    await insertSlides(category, name, semester, filePath, embedURL, date);
+    // Insert into database. Note we can left strip "public" from the filePath
+    await insertSlides(category, name, semester, filePath.replace(/^public/, ""), embedURL, date);
     processedFiles++;
     console.log(`Processed file ${i + 1} of ${files.length}`);
   }
