@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export const useBlogFunctions = () => {
   const [isCreating, setIsCreating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [currentBlog, setCurrentBlog] = useState<BlogBase | null>(null);
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogContent, setNewBlogContent] = useState("");
@@ -43,7 +42,6 @@ export const useBlogFunctions = () => {
         {
           onError: (error: Error) => setError(error.message),
           onSuccess: () => {
-            setIsEditing(false);
             setCurrentBlog(null);
             resetForm();
           },
@@ -56,7 +54,6 @@ export const useBlogFunctions = () => {
     setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
-    setIsEditing(true);
     setError(null);
   };
 
@@ -72,8 +69,6 @@ export const useBlogFunctions = () => {
     isAuthenticated,
     isCreating,
     setIsCreating,
-    isEditing,
-    setIsEditing,
     currentBlog,
     handleCreateBlog,
     handleUpdateBlog,
