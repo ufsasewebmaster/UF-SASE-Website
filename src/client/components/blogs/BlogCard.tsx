@@ -3,7 +3,10 @@ import { cn } from "@/shared/utils";
 import React from "react";
 import { Button } from "../ui/button";
 
-const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBlogId, setIsEditing }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId }) => {
+  console.log(expandedBlogId);
+  console.log(typeof setExpandedBlogId);
+  console.log("Card load: ", isEditing);
   if (expandedBlogId === blog.id) {
     return null;
   }
@@ -14,6 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
         year: "numeric",
       })
     : "";
+
   return (
     <article className="relative w-full max-w-6xl p-6">
       <div className="group relative">
@@ -47,19 +51,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
             <div className="flex w-full flex-row justify-between">
               {/* title */}
               <h2 className={cn("place-content-start text-4xl font-bold text-gray-800", "font-oswald")}>{blog.title}</h2>
-              {/*Edit button*/}
-              {blog.displayEditButton && (
-                <Button
-                  onClick={() => {
-                    //blog expands automatically in edit mode
-                    setExpandedBlogId(blog.id);
-                    setIsEditing(true);
-                    console.log("Set is editing");
-                  }}
-                >
-                  Edit
-                </Button>
-              )}
             </div>
 
             {/* author, date */}

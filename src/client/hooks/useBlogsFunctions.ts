@@ -10,6 +10,7 @@ export const useBlogFunctions = () => {
   const [newBlogContent, setNewBlogContent] = useState("");
   const [newBlogTags, setNewBlogTags] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const { id, isAuthenticated } = useAuth();
   const { blogs, createBlog, updateBlog } = useBlogs();
@@ -33,7 +34,10 @@ export const useBlogFunctions = () => {
   };
 
   const handleUpdateBlog = () => {
+    console.log("got here");
+    console.log(currentBlog);
     if (currentBlog) {
+      console.log("got here");
       updateBlog.mutate(
         {
           title: newBlogTitle,
@@ -42,11 +46,12 @@ export const useBlogFunctions = () => {
         {
           onError: (error: Error) => setError(error.message),
           onSuccess: () => {
-            setCurrentBlog(null);
+            setIsEditing(false);
             resetForm();
           },
         },
       );
+      console.log("got here");
     }
   };
 
@@ -70,8 +75,11 @@ export const useBlogFunctions = () => {
     isCreating,
     setIsCreating,
     currentBlog,
+    setCurrentBlog,
     handleCreateBlog,
     handleUpdateBlog,
+    isEditing,
+    setIsEditing,
     handleEditBlog,
     resetForm,
     newBlogTitle,
