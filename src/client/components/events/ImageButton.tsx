@@ -11,7 +11,7 @@ interface ImageButtonProps {
   category: string;
 }
 
-const ImageButton: React.FC<ImageButtonProps> = ({ imageUrl, slideUrl, imgWidth = "320px", title, category }) => {
+const ImageButton: React.FC<ImageButtonProps> = ({ category, imageUrl, imgWidth = "320px", slideUrl, title }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
