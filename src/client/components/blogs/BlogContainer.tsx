@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from "react";
 const BlogContainer = ({ children }: { children: ReactNode }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [key, setKey] = useState(0);
-  
+
   useEffect(() => {
-    setKey(prev => prev + 1);
+    setKey((prev) => prev + 1);
   }, [children]);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className="relative mx-auto mt-5 max-w-6xl rounded-[70px] bg-gradient-to-tr from-gray-50 from-30% via-greenShadow to-saseGreenLight p-6 shadow-md"
     >
       {/* blue shadow */}

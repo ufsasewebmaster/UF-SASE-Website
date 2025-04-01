@@ -45,28 +45,26 @@ function BlogsPage() {
   if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error?.message}</div>;
 
   // process blogs
-  const availableTags = tags.data?.map(tag => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
-  const processedBlogs = (blogs.data || []).map(blog => ({
+  const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
+  const processedBlogs = (blogs.data || []).map((blog) => ({
     ...blog,
     author: "SASE at UF",
     images: blog.images || [],
     read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
-    tags: blog.tags || []
+    tags: blog.tags || [],
   }));
-  
+
   // filter blogs
-  const filteredBlogs = activeTag 
-    ? processedBlogs.filter(blog => blog.tags.some(tag => 
-        tag.toLowerCase() === activeTag.toLowerCase()))
+  const filteredBlogs = activeTag
+    ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag.toLowerCase()))
     : processedBlogs;
-  
-  const sortedBlogs = [...filteredBlogs].sort((a, b) => 
-    new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
-  
+
+  const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+
   // blog groups
   const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
   const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;
-  const expandedBlog = expandedBlogId ? sortedBlogs.find(blog => blog.id === expandedBlogId) : null;
+  const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
 
   // handlers
   const handleCloseExpandedBlog = () => {
@@ -83,34 +81,22 @@ function BlogsPage() {
   const sectionTitle = cn(
     "text-2xl sm:text-2xl md:text-3xl lg:text-4xl",
     "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
-    "font-pixelify font-semibold tracking-wider"
+    "font-pixelify font-semibold tracking-wider",
   );
 
   // display logic
   const displayBlogs = activeTag ? sortedBlogs : otherBlogs;
-  const noResultsMessage = activeTag 
-    ? `No blogs found with tag: ${activeTag}`
-    : "No blogs found.";
+  const noResultsMessage = activeTag ? `No blogs found with tag: ${activeTag}` : "No blogs found.";
 
   return (
     <div className="container mx-auto p-3">
       {/* header */}
       {!expandedBlogId && !activeTag && recentBlogs.length > 0 && (
-        <BlogHeader 
-          blogs={recentBlogs} 
-          expandedBlogId={expandedBlogId} 
-          setExpandedBlogId={setExpandedBlogId} 
-        />
+        <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
       )}
 
       {/* expanded view */}
-      {expandedBlog && expandedBlogId && (
-        <BlogExpanded 
-          blog={expandedBlog} 
-          onClose={handleCloseExpandedBlog} 
-          showBackButton={true} 
-        />
-      )}
+      {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
 
       {!expandedBlogId && (
         <>
@@ -139,18 +125,11 @@ function BlogsPage() {
           )}
 
           {/* tags */}
-          <BlogTags 
-            tags={availableTags}
-            activeTag={activeTag}
-            onTagClick={handleTagClick}
-            onSearch={setSearchQuery}
-          />
+          <BlogTags tags={availableTags} activeTag={activeTag} onTagClick={handleTagClick} onSearch={setSearchQuery} />
 
           {/* title */}
           <div className="mx-auto mb-5 mt-10 max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">
-            <h2 className={sectionTitle}>
-              {activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}
-            </h2>
+            <h2 className={sectionTitle}>{activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}</h2>
           </div>
 
           {/* blog grid */}
@@ -159,12 +138,7 @@ function BlogsPage() {
               <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
                 {displayBlogs.length > 0 ? (
                   displayBlogs.map((blog) => (
-                    <BlogCard 
-                      key={blog.id} 
-                      blog={blog} 
-                      expandedBlogId={expandedBlogId} 
-                      setExpandedBlogId={setExpandedBlogId} 
-                    />
+                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
                   ))
                 ) : (
                   <p className="font-redhat">{noResultsMessage}</p>

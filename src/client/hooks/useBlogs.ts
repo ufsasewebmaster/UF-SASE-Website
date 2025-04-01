@@ -12,7 +12,7 @@ export const useBlogs = () => {
     queryClient.invalidateQueries({ queryKey: ["blogTags"] });
   };
 
- // Fetch all blogs
+  // Fetch all blogs
   const blogsQuery = useQuery<Array<Blog>, Error>({
     queryKey: ["blogs"],
     queryFn: fetchBlogs,
@@ -28,8 +28,8 @@ export const useBlogs = () => {
     mutationFn: createBlog,
     onSuccess: invalidateCache,
   });
-  
- // Update an existing blog
+
+  // Update an existing blog
   const updateBlogMutation = useMutation<Blog, Error, UpdateBlog>({
     mutationFn: updateBlog,
     onSuccess: invalidateCache,

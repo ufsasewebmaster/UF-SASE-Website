@@ -22,17 +22,17 @@ export const useBlogFunctions = () => {
 
   // filtered blogs query
   const filteredBlogsQuery = useQuery({
-    queryKey: ['blogs', 'tag', activeTag],
-    queryFn: () => activeTag ? fetchBlogsByTag(activeTag) : Promise.resolve([]),
+    queryKey: ["blogs", "tag", activeTag],
+    queryFn: () => (activeTag ? fetchBlogsByTag(activeTag) : Promise.resolve([])),
     enabled: !!activeTag,
   });
 
   // parse tags helper
-  const parseTags = (tagsString: string) => 
+  const parseTags = (tagsString: string) =>
     tagsString
       .split(",")
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0);
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
 
   // form validation
   const validateForm = () => {
@@ -104,11 +104,9 @@ export const useBlogFunctions = () => {
     setNewBlogTags("");
     setError(null);
   };
-  
+
   const getBlogDisplayData = (): Array<BlogDisplay> => {
-    const blogsToUse = activeTag && filteredBlogsQuery.data 
-      ? filteredBlogsQuery.data
-      : blogs.data || [];
+    const blogsToUse = activeTag && filteredBlogsQuery.data ? filteredBlogsQuery.data : blogs.data || [];
 
     return blogsToUse.map((blog) => ({
       ...blog,

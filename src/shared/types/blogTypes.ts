@@ -7,7 +7,7 @@ export type UpdateBlogInput = SchemaUpdateBlog;
 export type BlogTag = SchemaTag;
 
 // Enhanced display type that components use
-export interface BlogDisplay extends Omit<BlogBase, 'images' | 'tags'> {
+export interface BlogDisplay extends Omit<BlogBase, "images" | "tags"> {
   images: Array<string>;
   author: string;
   read_time?: string;
