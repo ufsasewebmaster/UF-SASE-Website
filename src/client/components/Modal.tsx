@@ -23,7 +23,6 @@ const Modal: React.FC<ModalProps> = ({ category, children, description, isOpen, 
               {category && <span className="font-semibold">{category}:</span>} <span>{title}</span>
             </h2>
           )}
-
           <Button variant="ghost" size="icon" onClick={onClose}>
             <Icon icon="mdi:close" className="h-6 w-6" />
           </Button>
