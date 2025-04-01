@@ -6,20 +6,19 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "bun run db:push && bun run generate && bunx dotenv -- vinxi build",
+    "build": "bun run db:push && bun run db:seed && bun run generateContent && bunx dotenv -- vinxi build",
     "start": "vinxi start",
     "fix": "concurrently \"eslint . --fix\" \"prettier --write .\"",
-    "generate": "bun run scripts/generateImageMaps.ts && bun run scripts/generateSlides.ts",
+    "generateContent": "bun run scripts/generateImageMaps.ts && bun run scripts/generateSlides.ts",
     "lint": "concurrently \"bun run tsc -b tsconfig.json\" \"eslint .\" \"prettier --check .\"",
     "test": "vitest --run",
     "test:watch": "vitest",
     "clean": "git clean -xdf -e .env -e local.db",
-    "db:push": "bun drizzle-kit push --force",
-    "db:generate": "drizzle-kit generate && bun run generate",
     "db:local:init": "bun run scripts/initDb.mjs",
-    "db:local:seed": "bun run scripts/seed.ts",
     "db:studio": "drizzle-kit studio --port 3003 --verbose",
-    "db:all": "bun db:local:init && bun db:push && bun db:local:seed && bun db:generate && bun db:studio"
+    "db:generate": "drizzle-kit generate && bun run generate",
+    "db:push": "bun drizzle-kit push --force",
+    "db:seed": "bun run scripts/seed.ts"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",
@@ -38,6 +37,7 @@
     "@vinxi/react": "^0.2.5",
     "@vitejs/plugin-react": "^4.3.1",
     "bcryptjs": "^2.4.3",
+    "caniuse-lite": "^1.0.30001707",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dompurify": "^3.1.7",
