@@ -27,6 +27,8 @@ const EventsSlides: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  type RawSlideData = Omit<SlideData, "date"> & { date: string };
+
   useEffect(() => {
     (async () => {
       try {
@@ -35,13 +37,13 @@ const EventsSlides: React.FC = () => {
         setLoading(true);
 
         const resp = await fetch("api/events/slides/", { method: "GET" });
-        const rawData = await resp.json();
+        const rawData = (await resp.json()) as Array<RawSlideData>;
 
         if (!Array.isArray(rawData)) {
           throw new Error("Invalid data format");
         }
 
-        const slideData: SlideData[] = rawData.map((deck: any) => ({
+        const slideData: Array<SlideData> = rawData.map((deck) => ({
           ...deck,
           date: new Date(deck.date),
         }));
