@@ -3,7 +3,7 @@ import React from "react";
 import BlogCard from "./BlogCard";
 import BlogContainer from "./BlogContainer";
 
-const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpandedBlogId }) => {
+const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpandedBlogId, setIsEditing }) => {
   if (expandedBlogId) {
     return null;
   }
@@ -25,7 +25,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpan
       <BlogContainer>
         <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
           {blogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+            <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} setIsEditing={setIsEditing} />
           ))}
         </div>
       </BlogContainer>

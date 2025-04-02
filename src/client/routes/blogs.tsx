@@ -58,9 +58,10 @@ export const Route = createFileRoute("/blogs")({
 
     return (
       <div className="container mx-auto p-3">
-        {!expandedBlogId && <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />}
+        {!expandedBlogId && (
+          <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} setIsEditing={setIsEditing} />
+        )}
         {/* expanded blog view */}
-        {isEditing && expandedBlog && expandedBlogId && "ass"}
         {expandedBlog &&
           expandedBlogId &&
           (isEditing ? (
