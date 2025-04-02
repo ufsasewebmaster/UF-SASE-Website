@@ -56,7 +56,6 @@ export const useBlogFunctions = () => {
   };
 
   const handleEditBlog = (blog: BlogBase) => {
-    setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
     setError(null);
