@@ -34,17 +34,32 @@ export const Route = createFileRoute("/search")({
     const routes = router.flatRoutes;
     const metaTagsList: Array<object> = [];
     routes.forEach((route) => {
-      const meta_tags = route.options.meta && route.options.meta(router.routeTree.useRouteContext());
-
+      const meta_tags =
+        route.options.meta &&
+        route.options.meta({
+          matches: [],
+          match: route.id,
+          params: {},
+          loaderData: null,
+        });
       if (meta_tags) {
-        metaTagsList.push(meta_tags);
+        const meta_info = {
+          path: route.id,
+          title: meta_tags[0]?.title || "",
+          description: meta_tags[1]?.content || "",
+        };
+        metaTagsList.push(meta_info);
       }
     });
 
-    console.log(metaTagsList);
     return (
       <div>
         <h1 className="mb-4 text-2xl font-bold">About</h1>
+        {metaTagsList.map((metaTags, index) => (
+          <div key={index}>
+            <pre>{JSON.stringify(metaTags, null, 2)}</pre>
+          </div>
+        ))}
       </div>
     );
   },
