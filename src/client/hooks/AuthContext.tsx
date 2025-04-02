@@ -9,6 +9,7 @@ export interface AuthContextType {
   logout: () => Promise<void>;
   isLoading: boolean;
   id: string;
+  username: string;
   errorMessage: string;
 }
 
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
   isLoading: true,
   id: "",
+  username: "",
   errorMessage: "",
 });
 
@@ -29,6 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [id, setId] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const checkSession = async () => {
@@ -43,6 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       );
       console.log("ID set to ", user.data.id);
       setId(user.data.id);
+      setUsername(user.data.username);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -81,7 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  return <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, login, logout, isLoading }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, username, login, logout, isLoading }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {
