@@ -23,8 +23,9 @@ export const Route = createRootRoute({
       content: "width=device-width, initial-scale=1",
     },
     ...seo({
-      title: "UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      title: "UF SASE Homepage",
+      description:
+        "UF Society of Asian Scientists & Engineers, committed to fostering meaningful connections across cultures and empowering Asian Pacific Islander Desi American (APIDA) professionals in science and engineering.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/events")({
   meta: () => [
     ...seo({
       title: "Events | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Calendar of UF SASE events plus all slides for GBMs, socials, and workshops.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

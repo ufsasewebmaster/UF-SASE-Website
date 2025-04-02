@@ -8,7 +8,7 @@ export const Route = createFileRoute("/sponsors")({
   meta: () => [
     ...seo({
       title: "Sponsors | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Current corporate sponsors of UF SASE and contact info for company sponsorship packet",
       image: imageUrls["SASELogo.png"],
     }),
   ],
