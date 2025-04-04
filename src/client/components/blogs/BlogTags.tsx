@@ -83,7 +83,7 @@ const BlogTags: React.FC<BlogTagsProps> = ({ activeTag, onSearch, onTagClick, ta
                 )}
                 onClick={() => onTagClick?.("")}
               >
-                Back
+                Clear
               </button>
             </>
           )}
