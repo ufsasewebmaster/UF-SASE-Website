@@ -9,14 +9,23 @@ import BlogForm from "./BlogForm";
 
 const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
   console.log("blog editor opened");
-  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
-    useBlogFunctions();
+  const { 
+    error, 
+    handleUpdateBlog, 
+    newBlogContent, 
+    newBlogTags, 
+    newBlogTitle, 
+    setNewBlogContent, 
+    setNewBlogTags, 
+    setNewBlogTitle 
+  } = useBlogFunctions();
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
+    setNewBlogTags(blog.tags || []);
     return () => {
       document.body.style.overflow = originalStyle;
     };

@@ -18,6 +18,7 @@ export const useBlogs = () => {
     queryFn: fetchBlogs,
   });
 
+  // Fetch all tags
   const tagsQuery = useQuery<Array<BlogTag>, Error>({
     queryKey: ["blogTags"],
     queryFn: fetchAllTags,
@@ -36,6 +37,8 @@ export const useBlogs = () => {
   });
 
   // Fetch a blog by ID
+  // queryKey - includes ID for specific blog cache entry
+  // enabled: !!blogId - means only runs when blogId is available
   const fetchBlogByIdQuery = (blogId: string) =>
     useQuery<Blog, Error>({
       queryKey: ["blogs", blogId],
@@ -43,6 +46,9 @@ export const useBlogs = () => {
       enabled: !!blogId,
     });
 
+  // Search blogs by title
+  // queryKey - identifies search results by title
+  // enabled: !!title - only runs when title is non-empty
   const searchBlogsQuery = (title: string) =>
     useQuery<Array<Blog>, Error>({
       queryKey: ["blogs", "search", title], 
@@ -50,6 +56,9 @@ export const useBlogs = () => {
       enabled: !!title, 
     });
   
+  // Fetch blogs by tag
+  // queryKey - identifies blogs filtered by tag
+  // enabled: !!tagName - only runs when tagName is provided
   const fetchBlogsByTagQuery = (tagName: string) =>
     useQuery<Array<Blog>, Error>({
       queryKey: ["blogs", "tag", tagName], 

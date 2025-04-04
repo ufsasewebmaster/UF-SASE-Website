@@ -54,23 +54,13 @@ export const createBlog = async (newBlog: CreateBlog): Promise<Blog> => {
 };
 
 // Update Blog
-export const updateBlog = async (blog: UpdateBlog): Promise<Blog> => {
-  const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    time_updated,
-    ...cleanBlog
-  }: Partial<
-    UpdateBlog & {
-      time_updated?: unknown;
-    }
-  > = blog;
-
+export const updateBlog = async (newBlog: UpdateBlog): Promise<Blog> => {
   const response = await apiFetch(
     "/api/blogs/update",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cleanBlog),
+      body: JSON.stringify(newBlog),
     },
     updateBlogSchema,
   );

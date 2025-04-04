@@ -15,7 +15,7 @@ export const useBlogFunctions = () => {
   const [currentBlog, setCurrentBlog] = useState<BlogBase | null>(null);
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogContent, setNewBlogContent] = useState("");
-  const [newBlogTags, setNewBlogTags] = useState("");
+  const [newBlogTags, setNewBlogTags] = useState<Array<string>>([]);
   const [error, setError] = useState<string | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,13 +26,6 @@ export const useBlogFunctions = () => {
     queryFn: () => (activeTag ? fetchBlogsByTag(activeTag) : Promise.resolve([])),
     enabled: !!activeTag,
   });
-
-  // parse tags helper
-  const parseTags = (tagsString: string) =>
-    tagsString
-      .split(",")
-      .map((tag) => tag.trim())
-      .filter((tag) => tag.length > 0);
 
   // form validation
   const validateForm = () => {
@@ -50,8 +43,8 @@ export const useBlogFunctions = () => {
       {
         title: newBlogTitle,
         content: newBlogContent,
-        tags: parseTags(newBlogTags),
-        author_id: id,
+        tags: newBlogTags,  
+        author_id: id, 
         images: [],
       } as unknown as BlogBase,
       {
@@ -72,7 +65,7 @@ export const useBlogFunctions = () => {
         id: currentBlog.id,
         title: newBlogTitle,
         content: newBlogContent,
-        tags: parseTags(newBlogTags),
+        tags: newBlogTags,
       },
       {
         onError: (error: Error) => setError(error.message),
@@ -89,19 +82,20 @@ export const useBlogFunctions = () => {
     setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
-    setNewBlogTags(blog.tags?.join(", ") || "");
+    setNewBlogTags(blog.tags || []);
     setIsEditing(true);
     setError(null);
   };
 
   const handleTagClick = (tagName: string) => {
-    setActiveTag(activeTag === tagName ? null : tagName);
+    const normalizedTagName = tagName.toLowerCase();
+    setActiveTag(activeTag === normalizedTagName ? null : normalizedTagName);
   };
 
   const resetForm = () => {
     setNewBlogTitle("");
     setNewBlogContent("");
-    setNewBlogTags("");
+    setNewBlogTags([]);
     setError(null);
   };
 
@@ -111,7 +105,7 @@ export const useBlogFunctions = () => {
     return blogsToUse.map((blog) => ({
       ...blog,
       images: blog.images || [],
-      author: blog.author_id || "SASE at UF",
+      author: blog.author_id || "UF SASE",
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],
       displayEditButton: isAuthenticated,

@@ -15,6 +15,16 @@ const BlogForm: React.FC<BlogFormProps> = ({
   onTagsChange,
   onTitleChange,
 }) => {
+  const tagsString = Array.isArray(newBlogTags) ? newBlogTags.join(', ') : '';
+  const handleTagsChange = (value: string) => {
+    const tagsArray = value
+      .split(',')
+      .map(tag => tag.trim())
+      .filter(tag => tag.length > 0);
+    
+    onTagsChange(tagsArray);
+  };
+
   return (
     <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
       <h2 className="mb-4 text-2xl font-bold">{isCreating ? "Create New Blog Post" : "Edit Blog Post"}</h2>
@@ -34,7 +44,12 @@ const BlogForm: React.FC<BlogFormProps> = ({
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">Tags</label>
-          <Input value={newBlogTags} onChange={(e) => onTagsChange(e.target.value)} placeholder="Enter tags (comma-separated)" className="w-full" />
+          <Input 
+            value={tagsString} 
+            onChange={(e) => handleTagsChange(e.target.value)} 
+            placeholder="Enter tags (comma-separated)" 
+            className="w-full" 
+          />
         </div>
       </div>
       <div className="mt-4 space-x-2">

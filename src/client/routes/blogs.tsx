@@ -59,8 +59,8 @@ function BlogsPage() {
 
   // filter blogs
   const filteredBlogs = activeTag
-    ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag.toLowerCase()))
-    : processedBlogs;
+  ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag))
+  : processedBlogs;
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
 
@@ -158,7 +158,7 @@ function BlogsPage() {
           <div className="relative mb-10 mt-8">
             <BlogContainer>
               <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
-                {displayBlogs.length > 0 && isAuthenticated ? (
+                {displayBlogs.length > 0 ? (
                   displayBlogs.map((blog) => (
                     <BlogCard
                       key={blog.id}
