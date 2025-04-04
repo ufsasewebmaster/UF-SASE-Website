@@ -36,6 +36,7 @@ export const updateBlogSchema = blogSchema
   })
   .extend({
     id: z.string().min(1, "Blog ID is required for updates."),
+    images: z.array(z.string().url()).optional(),
   });
 
 export type Blog = z.infer<typeof blogSchema>;

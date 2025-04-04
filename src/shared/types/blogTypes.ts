@@ -7,11 +7,12 @@ export type UpdateBlogInput = SchemaUpdateBlog;
 export type BlogTag = SchemaTag;
 
 // Enhanced display type that components use
-export interface BlogDisplay extends Omit<BlogBase, "images" | "tags"> {
+export interface BlogDisplay extends Omit<BlogBase, "images" | "tags" | "author_id"> {
   images: Array<string>;
   author: string;
   read_time?: string;
   tags: Array<string>;
+  displayEditButton?: boolean;
 }
 
 // Props for blog components
@@ -19,18 +20,32 @@ export interface BlogCardProps {
   blog: BlogDisplay;
   expandedBlogId: string | null;
   setExpandedBlogId: (id: string | null) => void;
+  isEditing?: boolean;
+  setIsEditing?: (state: boolean) => void;
 }
 
 export interface BlogExpandedProps {
   blog: BlogDisplay;
   onClose: () => void;
   showBackButton?: boolean;
+  isEditing?: boolean;
+  setIsEditing?: (state: boolean) => void;
+}
+
+export interface BlogEditorProps {
+  blog: BlogDisplay;
+  onClose: () => void;
+  showBackButton?: boolean;
+  isEditing: boolean;
+  setIsEditing: (state: boolean) => void;
+  editView?: boolean;
 }
 
 export interface BlogHeaderProps {
   blogs: Array<BlogDisplay>;
   expandedBlogId: string | null;
   setExpandedBlogId: (id: string | null) => void;
+  setIsEditing?: (state: boolean) => void;
 }
 
 export interface BlogFormProps {
@@ -49,7 +64,7 @@ export interface BlogFormProps {
 
 export interface BlogTagsProps {
   tags: Array<string>;
-  activeTag: string | null;
+  activeTag?: string | null;
   onTagClick?: (tag: string) => void;
   onSearch?: (query: string) => void;
 }

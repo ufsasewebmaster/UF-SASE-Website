@@ -43,19 +43,18 @@ export const useBlogs = () => {
       enabled: !!blogId,
     });
 
-  const fetchBlogsByTagQuery = (tagName: string) =>
-    useQuery<Array<Blog>, Error>({
-      queryKey: ["blogs", "tag", tagName],
-      queryFn: () => fetchBlogsByTag(tagName),
-      enabled: !!tagName,
-    });
-
-  // Search blogs by title
   const searchBlogsQuery = (title: string) =>
     useQuery<Array<Blog>, Error>({
-      queryKey: ["blogs", "search", title],
+      queryKey: ["blogs", "search", title], 
       queryFn: () => searchBlogsByTitle(title),
-      enabled: !!title,
+      enabled: !!title, 
+    });
+  
+  const fetchBlogsByTagQuery = (tagName: string) =>
+    useQuery<Array<Blog>, Error>({
+      queryKey: ["blogs", "tag", tagName], 
+      queryFn: () => fetchBlogsByTag(tagName),
+      enabled: !!tagName, 
     });
 
   return {

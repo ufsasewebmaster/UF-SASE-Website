@@ -1,15 +1,22 @@
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
+import { useBlogFunctions } from "../../hooks/useBlogsFunctions";
 import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
+import BlogForm from "./BlogForm";
 
-const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, setIsEditing, showBackButton = true }) => {
-  console.log("editing value on expansion: ", isEditing);
+const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
+  console.log("blog editor opened");
+  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
+    useBlogFunctions();
+
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
+    setNewBlogTitle(blog.title);
+    setNewBlogContent(blog.content);
     return () => {
       document.body.style.overflow = originalStyle;
     };
@@ -30,38 +37,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
     }
     console.log("Editing status set to: ", isEditing);
   };
-
-  const renderContent = () => {
-    if (!blog.content.includes("##")) {
-      return <p className={cn("mb-6 text-gray-800", "font-redhat")}>{blog.content}</p>;
-    }
-
-    const sections = blog.content.split(/##\s*([^\n]+)/);
-
-    return sections.map((section, index) => {
-      if (index === 0) {
-        return section ? (
-          <p key={`content-intro`} className={cn("mb-6 text-gray-800", "font-redhat")}>
-            {section}
-          </p>
-        ) : null;
-      }
-      if (index % 2 === 1) {
-        return (
-          <h2 key={`heading-${index}`} className={cn("mb-2 text-xl font-semibold", "font-redhat font-bold")}>
-            {section}
-          </h2>
-        );
-      } else {
-        return (
-          <p key={`content-${index}`} className={cn("mb-6 text-gray-800", "font-redhat")}>
-            {section}
-          </p>
-        );
-      }
-    });
-  };
-
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-white">
       <div className="mx-auto max-w-6xl px-4 py-8">
@@ -120,15 +95,19 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
             </div>
 
             {/* content */}
-            <div
-              className={cn(
-                "mx-4 mb-8 max-h-full overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
-                "border-saseGreen/40 border-r-saseBlue/60",
-              )}
-            >
-              {renderContent()}
-            </div>
-
+            <BlogForm
+              isCreating={false}
+              isEditing={isEditing}
+              newBlogTitle={newBlogTitle}
+              newBlogContent={newBlogContent}
+              newBlogTags={newBlogTags}
+              error={error}
+              onTitleChange={setNewBlogTitle}
+              onContentChange={setNewBlogContent}
+              onTagsChange={setNewBlogTags}
+              onSubmit={handleUpdateBlog}
+              onCancel={() => setIsEditing && setIsEditing(false)}
+            />
             {/* nav buttons */}
             <div className="mb-2 mt-auto flex items-center justify-between px-4">
               <Button className={cn("rounded-full bg-saseBlue px-6 py-2 text-white", "transition hover:bg-saseBlue/80", "font-redhat font-medium")}>
@@ -152,4 +131,4 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
   );
 };
 
-export default BlogExpanded;
+export default BlogEditor;

@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import BlogCard from "../components/blogs/BlogCard";
 import BlogContainer from "../components/blogs/BlogContainer";
+import BlogEditor from "../components/blogs/BlogEditor";
 import BlogExpanded from "../components/blogs/BlogExpanded";
 import BlogForm from "../components/blogs/BlogForm";
 import BlogHeader from "../components/blogs/BlogHeader";
@@ -29,6 +30,7 @@ function BlogsPage() {
     newBlogTags,
     newBlogTitle,
     resetForm,
+    setCurrentBlog,
     setIsCreating,
     setIsEditing,
     setNewBlogContent,
@@ -48,10 +50,11 @@ function BlogsPage() {
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
   const processedBlogs = (blogs.data || []).map((blog) => ({
     ...blog,
-    author: "SASE at UF",
+    author: blog.author_id || "SASE at UF",
     images: blog.images || [],
     read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
     tags: blog.tags || [],
+    displayEditButton: isAuthenticated,
   }));
 
   // filter blogs
@@ -69,6 +72,7 @@ function BlogsPage() {
   // handlers
   const handleCloseExpandedBlog = () => {
     setExpandedBlogId(null);
+    setCurrentBlog(null);
     document.body.style.overflow = "auto";
   };
 
@@ -92,11 +96,29 @@ function BlogsPage() {
     <div className="container mx-auto p-3">
       {/* header */}
       {!expandedBlogId && !activeTag && recentBlogs.length > 0 && (
-        <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+        <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} setIsEditing={setIsEditing} />
       )}
 
       {/* expanded view */}
-      {expandedBlog && expandedBlogId && <BlogExpanded blog={expandedBlog} onClose={handleCloseExpandedBlog} showBackButton={true} />}
+      {expandedBlog &&
+        expandedBlogId &&
+        (isEditing ? (
+          <BlogEditor
+            blog={expandedBlog}
+            onClose={handleCloseExpandedBlog}
+            showBackButton={false}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+          />
+        ) : (
+          <BlogExpanded
+            blog={expandedBlog}
+            onClose={handleCloseExpandedBlog}
+            showBackButton={true}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+          />
+        ))}
 
       {!expandedBlogId && (
         <>
@@ -108,10 +130,10 @@ function BlogsPage() {
           )}
 
           {/* blog form */}
-          {(isCreating || isEditing) && (
+          {isCreating && (
             <BlogForm
               isCreating={isCreating}
-              isEditing={isEditing}
+              isEditing={false}
               newBlogTitle={newBlogTitle}
               newBlogContent={newBlogContent}
               newBlogTags={newBlogTags}
@@ -136,9 +158,16 @@ function BlogsPage() {
           <div className="relative mb-10 mt-8">
             <BlogContainer>
               <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
-                {displayBlogs.length > 0 ? (
+                {displayBlogs.length > 0 && isAuthenticated ? (
                   displayBlogs.map((blog) => (
-                    <BlogCard key={blog.id} blog={blog} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} />
+                    <BlogCard
+                      key={blog.id}
+                      blog={blog}
+                      expandedBlogId={expandedBlogId}
+                      setExpandedBlogId={setExpandedBlogId}
+                      isEditing={isEditing}
+                      setIsEditing={setIsEditing}
+                    />
                   ))
                 ) : (
                   <p className="font-redhat">{noResultsMessage}</p>

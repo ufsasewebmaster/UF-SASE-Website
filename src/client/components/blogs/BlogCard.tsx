@@ -3,11 +3,13 @@ import { cn } from "@/shared/utils";
 import React from "react";
 import { Button } from "../ui/button";
 
-const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBlogId }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId }) => {
+  console.log(expandedBlogId);
+  console.log(typeof setExpandedBlogId);
+  console.log("Card load: ", isEditing);
   if (expandedBlogId === blog.id) {
     return null;
   }
-
   const formattedDate = blog.published_date
     ? new Date(blog.published_date).toLocaleDateString("en-US", {
         month: "short",
@@ -44,11 +46,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, setExpandedBl
               <div className="flex h-full w-full items-center justify-center rounded-[35px] bg-gray-300 text-gray-500">No Image</div>
             )}
           </figure>
-
           {/* content */}
           <div className="flex w-full flex-col items-start">
-            {/* title */}
-            <h2 className={cn("text-4xl font-bold text-gray-800", "font-oswald")}>{blog.title}</h2>
+            <div className="flex w-full flex-row justify-between">
+              {/* title */}
+              <h2 className={cn("place-content-start text-4xl font-bold text-gray-800", "font-oswald")}>{blog.title}</h2>
+            </div>
 
             {/* author, date */}
             <p className="mt-2 font-serif text-lg italic text-gray-600">

@@ -41,25 +41,12 @@ export const fetchBlogsByTag = async (tagName: string): Promise<Array<Blog>> => 
 
 // Create a new Blog
 export const createBlog = async (newBlog: CreateBlog): Promise<Blog> => {
-  const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    published_date,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    time_updated,
-    ...cleanBlog
-  }: Partial<
-    CreateBlog & {
-      published_date?: unknown;
-      time_updated?: unknown;
-    }
-  > = newBlog;
-
   const response = await apiFetch(
     "/api/blogs/add",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cleanBlog),
+      body: JSON.stringify(newBlog),
     },
     blogSchema,
   );

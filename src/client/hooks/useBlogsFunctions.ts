@@ -114,6 +114,7 @@ export const useBlogFunctions = () => {
       author: blog.author_id || "SASE at UF",
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],
+      displayEditButton: isAuthenticated,
     }));
   };
 
@@ -126,6 +127,7 @@ export const useBlogFunctions = () => {
     isEditing,
     setIsEditing,
     currentBlog,
+    setCurrentBlog,
     handleCreateBlog,
     handleUpdateBlog,
     handleEditBlog,
