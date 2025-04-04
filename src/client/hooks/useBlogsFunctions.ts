@@ -43,8 +43,8 @@ export const useBlogFunctions = () => {
       {
         title: newBlogTitle,
         content: newBlogContent,
-        tags: newBlogTags,  
-        author_id: id, 
+        tags: newBlogTags,
+        author_id: id,
         images: [],
       } as unknown as BlogBase,
       {

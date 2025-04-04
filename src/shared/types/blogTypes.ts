@@ -53,11 +53,11 @@ export interface BlogFormProps {
   isEditing: boolean;
   newBlogTitle: string;
   newBlogContent: string;
-  newBlogTags: Array<string>; 
+  newBlogTags: Array<string>;
   error: string | null;
   onTitleChange: (title: string) => void;
   onContentChange: (content: string) => void;
-  onTagsChange: (tags: Array<string>) => void; 
+  onTagsChange: (tags: Array<string>) => void;
   onSubmit: () => void;
   onCancel: () => void;
 }

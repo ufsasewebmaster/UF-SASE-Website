@@ -58,9 +58,7 @@ function BlogsPage() {
   }));
 
   // filter blogs
-  const filteredBlogs = activeTag
-  ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag))
-  : processedBlogs;
+  const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
 

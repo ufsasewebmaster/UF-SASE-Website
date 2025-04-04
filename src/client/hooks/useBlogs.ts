@@ -51,19 +51,19 @@ export const useBlogs = () => {
   // enabled: !!title - only runs when title is non-empty
   const searchBlogsQuery = (title: string) =>
     useQuery<Array<Blog>, Error>({
-      queryKey: ["blogs", "search", title], 
+      queryKey: ["blogs", "search", title],
       queryFn: () => searchBlogsByTitle(title),
-      enabled: !!title, 
+      enabled: !!title,
     });
-  
+
   // Fetch blogs by tag
   // queryKey - identifies blogs filtered by tag
   // enabled: !!tagName - only runs when tagName is provided
   const fetchBlogsByTagQuery = (tagName: string) =>
     useQuery<Array<Blog>, Error>({
-      queryKey: ["blogs", "tag", tagName], 
+      queryKey: ["blogs", "tag", tagName],
       queryFn: () => fetchBlogsByTag(tagName),
-      enabled: !!tagName, 
+      enabled: !!tagName,
     });
 
   return {
