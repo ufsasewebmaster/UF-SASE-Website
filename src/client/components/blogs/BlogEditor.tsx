@@ -9,8 +9,16 @@ import BlogForm from "./BlogForm";
 
 const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
   console.log("blog editor opened");
-  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
-    useBlogFunctions();
+  const { 
+    error, 
+    handleUpdateBlog, 
+    newBlogContent, 
+    newBlogTags, 
+    newBlogTitle, 
+    setNewBlogContent, 
+    setNewBlogTags, 
+    setNewBlogTitle 
+  } = useBlogFunctions();
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
