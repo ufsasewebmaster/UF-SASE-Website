@@ -1,6 +1,7 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import ClassConnectorForms from "@components/ClassConnectorForms";
+import FreshmenFAQ from "@components/resources/FreshmenFAQ";
 import ResourcesCard from "@components/ResourcesCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
@@ -65,6 +66,7 @@ const resourceTabs: Record<string, React.ReactNode> = {
   Workshops: workshops.map((card, index) => <ResourcesCard key={index} {...card} />),
   "Career Resources": careerResources.map((card, index) => <ResourcesCard key={index} {...card} />),
   "Class Connector Forms": <ClassConnectorForms />,
+  Resources: <FreshmenFAQ />,
 };
 
 export const Route = createFileRoute("/resources")({

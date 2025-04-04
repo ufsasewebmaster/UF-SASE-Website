@@ -39,9 +39,12 @@ const TEST_EMAIL = process.env.TEST_EMAIL || "test@example.com";
     "INSERT OR IGNORE INTO user_roles_relationship (id, user_id, role) VALUES ('ricky-role', 'ricky-admin-id', 'admin');",
     "INSERT OR IGNORE INTO user_roles_relationship (id, user_id, role) VALUES ('test-role', 'test-user-id', 'user');",
   ]);
+  //Insert dummy data for personal and professional info
   await client.batch([
     "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, phone, area_code) VALUES ('ricky-admin-id', 'Ricky', 'Admin', '1234567890', 123);",
     "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, phone, area_code) VALUES ('test-user-id', 'Test', 'User', '0987654321', 456);",
+    "INSERT OR IGNORE INTO professional_info (user_id, resume_path, linkedin, portfolio, majors, minors, graduation_semester) VALUES ('ricky-admin-id', 'path/to/resume.pdf', 'https://linkedin.com', 'https://portfolio.com/', 'Computer Science', 'Mathematics', 'Spring 2025');",
+    "INSERT OR IGNORE INTO professional_info (user_id, resume_path, linkedin, portfolio, majors, minors, graduation_semester) VALUES ('test-user-id', 'path/to/resume.pdf', 'https://linkedin.com', 'https://portfolio.com/', 'Computer Science', 'Finance', 'Spring 2025');",
   ]);
 
   console.log("Essential seeding complete.");
