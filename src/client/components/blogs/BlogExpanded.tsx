@@ -17,13 +17,17 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
 
   const handleClose = () => {
     console.log("Close button clicked");
-    setIsEditing(false);
+    if (setIsEditing) {
+      setIsEditing(false);
+    }
     if (onClose) {
       onClose();
     }
   };
   const handleEditButtonClicked = () => {
-    setIsEditing(!isEditing);
+    if (setIsEditing) {
+      setIsEditing(!isEditing);
+    }
     console.log("Editing status set to: ", isEditing);
   };
 

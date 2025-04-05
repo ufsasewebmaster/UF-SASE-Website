@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 import BlogForm from "./BlogForm";
 
-const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, setIsEditing, showBackButton = true }) => {
+const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
   console.log("blog editor opened");
   const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
     useBlogFunctions();
@@ -17,6 +17,7 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, set
     document.body.style.overflow = "hidden";
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
+    setNewBlogTags(blog.tags || []);
     return () => {
       document.body.style.overflow = originalStyle;
     };
@@ -24,13 +25,17 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, set
 
   const handleClose = () => {
     console.log("Close button clicked");
-    setIsEditing(false);
+    if (setIsEditing) {
+      setIsEditing(false);
+    }
     if (onClose) {
       onClose();
     }
   };
   const handleEditButtonClicked = () => {
-    setIsEditing(!isEditing);
+    if (setIsEditing) {
+      setIsEditing(!isEditing);
+    }
     console.log("Editing status set to: ", isEditing);
   };
   return (
@@ -102,7 +107,7 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, set
               onContentChange={setNewBlogContent}
               onTagsChange={setNewBlogTags}
               onSubmit={handleUpdateBlog}
-              onCancel={() => setIsEditing(false)}
+              onCancel={() => setIsEditing && setIsEditing(false)}
             />
             {/* nav buttons */}
             <div className="mb-2 mt-auto flex items-center justify-between px-4">

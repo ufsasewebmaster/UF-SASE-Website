@@ -1,18 +1,29 @@
 import type { ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const BlogContainer = ({ children }: { children: ReactNode }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    setKey((prev) => prev + 1);
+  }, [children]);
+
   return (
-    <div className="relative mx-auto mt-5 max-w-6xl rounded-[70px] bg-gradient-to-tr from-gray-50 from-30% via-greenShadow to-saseGreenLight p-6 shadow-md">
+    <div
+      ref={containerRef}
+      className="relative mx-auto mt-5 max-w-6xl rounded-[70px] bg-gradient-to-tr from-gray-50 from-30% via-greenShadow to-saseGreenLight p-6 shadow-md"
+    >
       {/* blue shadow */}
       <div
         className="absolute right-0 top-0 z-0 h-1/3 w-1/3 rounded-[70px]"
         style={{
-          background: "radial-gradient(circle at top right, #A8D8F0, transparent 50%)",
+          background: "radial-gradient(circle at top right, #A8D8F0, transparent 30%)",
         }}
       ></div>
 
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[70px]">
-        <svg width="100%" height="100%" className="absolute inset-0">
+        <svg key={key} width="100%" height="100%" className="absolute inset-0" preserveAspectRatio="none">
           <defs>
             <linearGradient id="borderGradient" gradientUnits="userSpaceOnUse" x1="50%" y1="0%" x2="50%" y2="100%">
               <stop offset="0%" stopColor="#7DC242" /> {/* saseGreen */}
