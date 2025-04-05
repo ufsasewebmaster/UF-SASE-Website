@@ -2,6 +2,7 @@ import { createClient } from "@libsql/client";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
 import { SERVER_ENV } from "@server/env";
+import { SEED_ENV } from "./env";
 
 const client = createClient({
   url: SERVER_ENV.DATABASE_URL,
@@ -9,13 +10,13 @@ const client = createClient({
 });
 
 // Get admin credentials from environment variables
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "ADMIN";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Saseadmin@123";
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@example.com";
+const ADMIN_USERNAME = SEED_ENV.ADMIN_USERNAME;
+const ADMIN_PASSWORD = SEED_ENV.ADMIN_PASSWORD;
+const ADMIN_EMAIL = SEED_ENV.ADMIN_EMAIL;
 
-const TEST_USERNAME = process.env.TEST_USERNAME || "TEST";
-const TEST_PASSWORD = process.env.TEST_PASSWORD || "Sasetest@123";
-const TEST_EMAIL = process.env.TEST_EMAIL || "test@example.com";
+const TEST_USERNAME = SEED_ENV.TEST_USERNAME;
+const TEST_PASSWORD = SEED_ENV.TEST_PASSWORD;
+const TEST_EMAIL = SEED_ENV.TEST_EMAIL;
 
 (async () => {
   const adminHash = await bcrypt.hash(ADMIN_PASSWORD, 10);
@@ -39,6 +40,7 @@ const TEST_EMAIL = process.env.TEST_EMAIL || "test@example.com";
     "INSERT OR IGNORE INTO user_roles_relationship (id, user_id, role) VALUES ('ricky-role', 'ricky-admin-id', 'admin');",
     "INSERT OR IGNORE INTO user_roles_relationship (id, user_id, role) VALUES ('test-role', 'test-user-id', 'user');",
   ]);
+
   //Insert dummy data for personal and professional info
   await client.batch([
     "INSERT OR IGNORE INTO personal_info (user_id, first_name, last_name, phone, area_code) VALUES ('ricky-admin-id', 'Ricky', 'Admin', '1234567890', 123);",
