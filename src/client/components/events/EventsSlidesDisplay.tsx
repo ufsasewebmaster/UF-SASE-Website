@@ -70,14 +70,14 @@ const EventsSlides: React.FC = () => {
   return (
     <div className="relative flex w-screen flex-col items-center gap-5 p-5 font-redhat">
       {semesters.length > 0 && (
-        <div className="mb-6 flex w-full gap-4 border-b-2 border-gray-300">
+        <div className="mb-6 flex w-full gap-4 border-b-2 border-border">
           {semesters.map((semester) => (
             <button
               key={semester.name}
               className={`border-b-2 p-3 px-6 transition-all duration-300 ease-in-out ${
                 semesters[selectedSemester]?.name === semester.name
-                  ? "border-saseGreen font-semibold text-black"
-                  : "border-transparent text-black hover:border-gray-400"
+                  ? "border-saseGreen font-semibold text-foreground"
+                  : "border-transparent text-foreground hover:border-gray-400"
               }`}
               onClick={() => setSelectedSemester(semesters.indexOf(semester))}
             >
@@ -90,7 +90,7 @@ const EventsSlides: React.FC = () => {
       <div ref={dropdownRef} className="absolute right-5 top-5 z-10">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="flex w-40 items-center justify-between rounded-xl border border-black bg-white px-2 py-2 font-redhat text-black"
+          className="flex w-40 items-center justify-between rounded-xl border border-foreground bg-background px-2 py-2 font-redhat text-foreground"
         >
           <span>{view === "slides" ? "Slides" : "Recordings"}</span>
           <svg
@@ -106,7 +106,7 @@ const EventsSlides: React.FC = () => {
         </button>
 
         <div
-          className={cn("absolute left-0 w-40 transform overflow-hidden rounded-xl border border-black bg-white transition-all duration-200", {
+          className={cn("absolute left-0 w-40 transform overflow-hidden rounded-xl border border-border bg-background transition-all duration-200", {
             "translate-y-0 opacity-100": isDropdownOpen,
             "-translate-y-2 opacity-0": !isDropdownOpen,
           })}
@@ -152,7 +152,7 @@ const EventsSlides: React.FC = () => {
                   <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} category={deck.category} />
                 )}
                 {deck.category && deck.name && (
-                  <div className="mt-2 text-center text-sm text-black">
+                  <div className="mt-2 text-center text-sm text-foreground">
                     <p>
                       <span className="font-semibold">{deck.category}:</span> <span>{deck.name}</span>
                     </p>
