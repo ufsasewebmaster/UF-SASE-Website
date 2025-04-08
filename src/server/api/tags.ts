@@ -17,7 +17,7 @@ tagRoutes.get("/tags/all", async (c) => {
   }
 });
 
-// Fetch blogs by tag name - simpler approach
+// Fetch blogs by tag name
 tagRoutes.get("/tags/:tagName/blogs", async (c) => {
   try {
     const tagName = c.req.param("tagName");

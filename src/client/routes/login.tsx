@@ -30,14 +30,15 @@ export const Route = createFileRoute("/login")({
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
+          credentials: "include",
         });
         if (!response.ok) {
           const errorMessage = await response.text();
           throw new Error(errorMessage);
         }
       },
-      onSuccess: () => {
-        login();
+      onSuccess: async () => {
+        await login();
         navigate({ to: "/" });
       },
       onError: (error) => {

@@ -58,8 +58,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkSession();
   }, []);
 
-  const login = () => {
-    setIsAuthenticated(true);
+  const login = async () => {
+    await checkSession();
   };
 
   const logout = async () => {
