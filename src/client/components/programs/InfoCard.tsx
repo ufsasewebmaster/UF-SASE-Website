@@ -7,11 +7,13 @@ interface SimpleCardProps {
 const InfoCard: React.FC<SimpleCardProps> = ({ text }) => {
   return (
     <div className="relative mx-auto mb-14 w-full max-w-4xl p-5 font-redhat">
-      {/* Main Card with Black Border and Green Shadow */}
-      <div className="relative flex flex-col items-center rounded-3xl border-2 border-border bg-muted p-12 shadow-[24px_24px_0px_#7DC242]">
-        {/* Text Content */}
-        <div className="flex flex-col justify-between">
-          <p className="mb-4 text-xl text-foreground">{text}</p>
+      {/* Gradient Border Background */}
+      <div className="rounded-[2rem] bg-gradient-to-br from-saseBlue to-saseGreen p-[8px] shadow-[12px_12px_12px_rgba(125,194,66,0.5)]">
+        <div className="flex flex-col items-center rounded-[calc(1.5rem-3px)] bg-muted p-12">
+          {/* Text Content */}
+          <div className="flex flex-col justify-between">
+            <p className="mb-4 text-xl text-foreground">{text}</p>
+          </div>
         </div>
       </div>
     </div>
