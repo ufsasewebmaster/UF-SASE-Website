@@ -139,8 +139,8 @@ blogRoutes.post("/blogs/add", async (c) => {
 
     return createSuccessResponse(c, { ...newBlog, tags }, "Blog added successfully");
   } catch (error) {
-    console.error(error);
-    return createErrorResponse(c, "ADD_BLOG_ERROR", "Failed to add blog", 500);
+    console.error("[ADD_BLOG_ERROR]", error);
+    return createErrorResponse(c, "ADD_BLOG_ERROR", error instanceof Error ? error.message : "Unknown error occurred", 500);
   }
 });
 
