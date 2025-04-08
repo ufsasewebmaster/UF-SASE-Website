@@ -38,7 +38,7 @@ export const Route = createFileRoute("/login")({
         }
       },
       onSuccess: async () => {
-        await login();
+        login();
         navigate({ to: "/" });
       },
       onError: (error) => {
