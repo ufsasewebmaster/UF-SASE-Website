@@ -39,9 +39,7 @@ export const Route = createFileRoute("/login")({
       },
       onSuccess: async () => {
         login();
-        setTimeout(() => {
-          navigate({ to: "/" });
-        }, 250);
+        navigate({ to: "/" });
       },
       onError: (error) => {
         console.error("Error during mutation:", error);

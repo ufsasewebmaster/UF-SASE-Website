@@ -32,7 +32,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const checkSession = async () => {
-    setIsLoading(true);
     try {
       const user = await apiFetch(
         "/api/auth/session",
@@ -61,6 +60,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async () => {
     await checkSession();
+    setIsAuthenticated(true);
   };
 
   const logout = async () => {
