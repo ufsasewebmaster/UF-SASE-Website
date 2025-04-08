@@ -9,13 +9,13 @@ export const blogSchema = z.object({
   published_date: z.string().min(0, "Published date must be a valid timestamp."),
   time_updated: z.string().min(0, "Update time must be a valid timestamp."),
   images: z.array(z.string().url()).optional(),
+  tags: z.array(z.string()).optional(),
 });
 
 export const blogTitleSchema = z.object({
   title: z.string().min(1, "Search title cannot be empty."),
 });
 
-// Auto-handled by the backend
 export const createBlogSchema = blogSchema
   .omit({
     id: true,
@@ -27,11 +27,17 @@ export const createBlogSchema = blogSchema
     images: z.array(z.string().url()).optional(),
   });
 
-export const updateBlogSchema = blogSchema.partial().omit({
-  id: true, // Immutable fields
-  author_id: true,
-  published_date: true,
-});
+export const updateBlogSchema = blogSchema
+  .partial()
+  .omit({
+    id: true,
+    author_id: true,
+    published_date: true,
+  })
+  .extend({
+    id: z.string().min(1, "Blog ID is required for updates."),
+    images: z.array(z.string().url()).optional(),
+  });
 
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogTitle = z.infer<typeof blogTitleSchema>;

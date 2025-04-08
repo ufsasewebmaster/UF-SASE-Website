@@ -1,5 +1,6 @@
 import type { BlogCardProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
 import React from "react";
 import { Button } from "../ui/button";
 
@@ -95,6 +96,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
               </div>
             </div>
           </div>
+          {/* SASE Logo Star */}
+          <img src={imageUrls["SASELogoStar.png"]} alt="Logo" className="absolute -bottom-12 -right-12 h-[140px] w-[140px] object-contain" />
         </section>
       </div>
     </article>

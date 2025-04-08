@@ -1,11 +1,19 @@
+import { imageUrls } from "@/client/assets/imageUrls";
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
-import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
-const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, setIsEditing, showBackButton = true }) => {
+const BlogExpanded: React.FC<BlogExpandedProps> = ({
+  blog,
+  isEditing,
+  onClose,
+  onNavigateNext,
+  onNavigatePrev,
+  setIsEditing,
+  showBackButton = true,
+}) => {
   console.log("editing value on expansion: ", isEditing);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -17,13 +25,12 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
 
   const handleClose = () => {
     console.log("Close button clicked");
-    setIsEditing(false);
-    if (onClose) {
-      onClose();
-    }
+    if (setIsEditing) setIsEditing(false);
+    if (onClose) onClose();
   };
+
   const handleEditButtonClicked = () => {
-    setIsEditing(!isEditing);
+    if (setIsEditing) setIsEditing(!isEditing);
     console.log("Editing status set to: ", isEditing);
   };
 
@@ -75,10 +82,8 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
 
         <div className="relative">
           {/* shadow card */}
-          <div className="absolute left-5 top-5 z-0 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue"></div>
-
-          {/* main card */}
-          <div className={cn("relative z-10 flex flex-col rounded-[50px] border-2 border-border bg-white p-8", "w-full shadow-lg transition")}>
+          <div className="relative rounded-[50px] border-2 border-border bg-white p-8 shadow-lg transition">
+            <div className="pointer-events-none absolute left-5 top-5 -z-10 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue" />
             {/* header */}
             <div className="px-4 py-2 text-center">
               {/*Row with title and edit button*/}
@@ -102,7 +107,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
                 </span>
               </div>
             </div>
-
             {/* carousel */}
             <div className="mb-6 mt-4">
               {blog.images.length > 0 ? (
@@ -114,7 +118,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
                 {blog.images.length > 0 ? "caption lorem ipsum yuh lots of words to say about this photo" : ""}
               </div>
             </div>
-
             {/* content */}
             <div
               className={cn(
@@ -125,23 +128,43 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
               {renderContent()}
             </div>
 
-            {/* nav buttons */}
-            <div className="mb-2 mt-auto flex items-center justify-between px-4">
-              <Button className={cn("rounded-full bg-saseBlue px-6 py-2 text-white", "transition hover:bg-saseBlue/80", "font-redhat font-medium")}>
+            <img src={imageUrls["SASELogoStar.png"]} alt="Logo" className="absolute -bottom-12 -right-12 h-[130px] w-[130px] object-contain" />
+          </div>
+        </div>
+        {/* nav buttons */}
+        <div className="mt-10 flex w-full justify-center gap-10">
+          {onNavigatePrev && (
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <Button
+                onClick={onNavigatePrev}
+                className={cn(
+                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "underline decoration-1 underline-offset-4",
+                  "z-10 px-6 py-2",
+                )}
+              >
                 &lt; Read last post
               </Button>
-
-              <div className="absolute bottom-0 right-10 -mb-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-saseBlue p-3 text-white">
-                  <Logo />
-                </div>
-              </div>
-
-              <Button className={cn("rounded-full bg-saseBlue px-6 py-2 text-white", "transition hover:bg-saseBlue/80", "font-redhat font-medium")}>
+            </div>
+          )}
+          {onNavigateNext && (
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <Button
+                onClick={onNavigateNext}
+                className={cn(
+                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "underline decoration-1 underline-offset-4",
+                  "z-10 px-6 py-2",
+                )}
+              >
                 Read next post &gt;
               </Button>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

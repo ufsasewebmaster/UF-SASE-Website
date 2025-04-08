@@ -20,6 +20,10 @@ const ProgramImages = [
     program: "Sports",
     images: [SportsPic, SportsPic, SportsPic, SportsPic],
   },
+  {
+    program: "Mentor Mentee",
+    images: [],
+  },
 ];
 
 export default ProgramImages;

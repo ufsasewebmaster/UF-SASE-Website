@@ -2,6 +2,7 @@ import { useAuth } from "@/client/hooks/AuthContext";
 import { cn } from "@/shared/utils";
 import DarkButton from "@components/DarkButton";
 import { DarkModeContext } from "@components/DarkModeProvider";
+import { useIsMobile } from "@hooks/useIsMobile";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
@@ -39,6 +40,7 @@ const navItems = [
       { name: "SET", path: "/set" },
       { name: "Web Dev", path: "/webdev" },
       { name: "Sports", path: "/sports" },
+      { name: "Mentor Mentee", path: "/mentor-mentee" },
     ],
   },
   {
@@ -56,6 +58,7 @@ const Header: React.FC = () => {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
+  // Handle clicks outside of the menu/hamburger button
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
@@ -72,17 +75,11 @@ const Header: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
+  const isMobile = useIsMobile(SCREEN_BREAKPOINT);
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= SCREEN_BREAKPOINT) {
-        setMenuOpen(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
 
   return (
     <header
@@ -101,7 +98,7 @@ const Header: React.FC = () => {
             <SearchBar className="ml-4" />
             <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             <div className="hidden md:block">
-              {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
+              {isLoading ? null : <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
             </div>
           </div>
         </div>
