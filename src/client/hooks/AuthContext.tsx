@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  login: () => Promise<void>;
   logout: () => Promise<void>;
   isLoading: boolean;
   id: string;
@@ -14,7 +14,7 @@ export interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
-  login: () => {},
+  login: async () => {},
   logout: async () => {},
   isLoading: true,
   id: "",
@@ -32,6 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const checkSession = async () => {
+    setIsLoading(true);
     try {
       const user = await apiFetch(
         "/api/auth/session",

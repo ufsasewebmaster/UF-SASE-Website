@@ -98,7 +98,7 @@ const Header: React.FC = () => {
             <SearchBar className="ml-4" />
             <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             <div className="hidden md:block">
-              {!isLoading && <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
+              {isLoading ? null : <UserButton isLoggedIn={isAuthenticated} onLogout={logout} isHomePage={isHomePage} />}
             </div>
           </div>
         </div>

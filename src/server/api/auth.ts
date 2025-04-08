@@ -111,7 +111,7 @@ authRoutes.post("/auth/login", async (c) => {
     const session_id = generateIdFromEntropySize(16);
     createSession(session_id, user[0].id);
     // Set cookie here
-    c.header("Set-Cookie", `sessionId=${session_id}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Strict`);
+    c.header("Set-Cookie", `sessionId=${session_id}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Lax`);
     return createSuccessResponse(c, { sessionId: session_id }, "Successfully logged in");
   }
 });
