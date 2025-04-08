@@ -5,7 +5,15 @@ import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
-const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, setIsEditing, showBackButton = true }) => {
+const BlogExpanded: React.FC<BlogExpandedProps> = ({
+  blog,
+  isEditing,
+  onClose,
+  onNavigateNext,
+  onNavigatePrev,
+  setIsEditing,
+  showBackButton = true,
+}) => {
   console.log("editing value on expansion: ", isEditing);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -124,34 +132,39 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({ blog, isEditing, onClose, s
           </div>
         </div>
         {/* nav buttons */}
-        <div className="mt-10 flex w-full justify-center gap-6">
-          <div className="relative">
-            <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
-            <Button
-              className={cn(
-                "relative rounded-full bg-saseBlue font-serif text-lg italic",
-                "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
-                "underline decoration-1 underline-offset-4",
-                "z-10 px-6 py-2",
-              )}
-            >
-              &lt; Read last post
-            </Button>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
-            <Button
-              className={cn(
-                "relative rounded-full bg-saseBlue font-serif text-lg italic",
-                "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
-                "underline decoration-1 underline-offset-4",
-                "z-10 px-6 py-2",
-              )}
-            >
-              Read next post &gt;
-            </Button>
-          </div>
+        <div className="mt-10 flex w-full justify-center gap-10">
+          {onNavigatePrev && (
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <Button
+                onClick={onNavigatePrev}
+                className={cn(
+                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "underline decoration-1 underline-offset-4",
+                  "z-10 px-6 py-2",
+                )}
+              >
+                &lt; Read last post
+              </Button>
+            </div>
+          )}
+          {onNavigateNext && (
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <Button
+                onClick={onNavigateNext}
+                className={cn(
+                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "underline decoration-1 underline-offset-4",
+                  "z-10 px-6 py-2",
+                )}
+              >
+                Read next post &gt;
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

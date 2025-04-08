@@ -66,6 +66,9 @@ function BlogsPage() {
   const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
   const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;
   const expandedBlog = expandedBlogId ? sortedBlogs.find((blog) => blog.id === expandedBlogId) : null;
+  const currentIndex = sortedBlogs.findIndex((blog) => blog.id === expandedBlogId);
+  const prevBlog = currentIndex > 0 ? sortedBlogs[currentIndex - 1] : null;
+  const nextBlog = currentIndex < sortedBlogs.length - 1 ? sortedBlogs[currentIndex + 1] : null;
 
   // handlers
   const handleCloseExpandedBlog = () => {
@@ -115,6 +118,8 @@ function BlogsPage() {
             showBackButton={true}
             isEditing={isEditing}
             setIsEditing={setIsEditing}
+            onNavigatePrev={prevBlog ? () => setExpandedBlogId(prevBlog.id) : undefined}
+            onNavigateNext={nextBlog ? () => setExpandedBlogId(nextBlog.id) : undefined}
           />
         ))}
 

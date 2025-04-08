@@ -30,6 +30,8 @@ export interface BlogExpandedProps {
   showBackButton?: boolean;
   isEditing?: boolean;
   setIsEditing?: (state: boolean) => void;
+  onNavigatePrev?: () => void;
+  onNavigateNext?: () => void;
 }
 
 export interface BlogEditorProps {
