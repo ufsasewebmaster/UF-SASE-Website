@@ -1,4 +1,4 @@
-import BoardPic from "@assets/board/BoardPic.jpeg";
+import BoardPic from "@assets/board/BoardPic.jpg";
 import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/BoardInfo";
 import BoardMemberCard from "@components/BoardMemberCard";
