@@ -7,4 +7,3 @@ export const useIsMobile = (breakpoint: number = SCREEN_BREAKPOINT) => {
   const { width } = windowSize || { height: 0, width: 0 };
   return width < breakpoint;
 };
-

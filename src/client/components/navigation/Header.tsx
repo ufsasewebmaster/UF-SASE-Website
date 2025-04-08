@@ -2,6 +2,7 @@ import { useAuth } from "@/client/hooks/AuthContext";
 import { cn } from "@/shared/utils";
 import DarkButton from "@components/DarkButton";
 import { DarkModeContext } from "@components/DarkModeProvider";
+import { useIsMobile } from "@hooks/useIsMobile";
 import { DesktopMenu } from "@navigation/DesktopMenu";
 import { Logo } from "@navigation/Logo";
 import { MobileMenu } from "@navigation/MobileMenu";
@@ -9,8 +10,6 @@ import { SearchBar } from "@navigation/SearchBar";
 import { UserButton } from "@navigation/UserButton";
 import { useLocation } from "@tanstack/react-router";
 import { Squash as Hamburger } from "hamburger-react";
-import { useIsMobile } from "@hooks/useIsMobile";
-
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const SCREEN_BREAKPOINT = 1024;
