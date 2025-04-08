@@ -1,18 +1,11 @@
 import { imageUrls } from "@/client/assets/imageUrls";
 import { cn } from "@/shared/utils";
-import { useEffect, useState } from "react";
 import MissionCard from "./MissionCard";
 import MissionSectionMobile from "./MissionSectionMobile";
+import {useIsMobile} from "@/client/hooks/useIsMobile";
 
 const MissionSection: React.FC = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const isMobile = useIsMobile();
 
   return isMobile ? (
     <MissionSectionMobile />

@@ -8,6 +8,7 @@ export const pages = [
   { name: "Blogs", path: "/blogs", aliases: ["Articles", "News", "Posts"] },
   { name: "Programs", path: "/programs", aliases: ["Interns", "SET", "Web Dev", "Sports"] },
   { name: "Interns", path: "/interns", aliases: ["SASE Interns", "Internships"] },
+  { name: "Mentor Mentee", path: "/mentor-mentee", aliases: ["Mentor", "Mentee"] },
   { name: "SET", path: "/set", aliases: ["SASE Engineering Team", "Engineering Team"] },
   {
     name: "Web Dev",

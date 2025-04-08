@@ -8,7 +8,7 @@ import MissionSection from "@about/MissionSection";
 import Timeline from "@about/Timeline";
 import YoutubeSection from "@about/YoutubeSection";
 import { imageUrls } from "@assets/imageUrls";
-import useIsMobile from "@hooks/useIsMobile";
+import {useIsMobile} from "@hooks/useIsMobile";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 

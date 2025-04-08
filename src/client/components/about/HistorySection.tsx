@@ -1,4 +1,4 @@
-import useIsMobile from "@hooks/useIsMobile";
+import {useIsMobile} from "@hooks/useIsMobile";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
