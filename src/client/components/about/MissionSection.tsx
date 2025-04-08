@@ -1,8 +1,8 @@
 import { imageUrls } from "@/client/assets/imageUrls";
+import { useIsMobile } from "@/client/hooks/useIsMobile";
 import { cn } from "@/shared/utils";
 import MissionCard from "./MissionCard";
 import MissionSectionMobile from "./MissionSectionMobile";
-import {useIsMobile} from "@/client/hooks/useIsMobile";
 
 const MissionSection: React.FC = () => {
   const isMobile = useIsMobile();

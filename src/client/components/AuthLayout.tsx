@@ -1,6 +1,6 @@
+import { useDimensions } from "@hooks/useDimensions";
 import React, { useEffect, useState } from "react";
 import ShadowCard from "./AuthShadowCard";
-import { useDimensions } from "@hooks/useDimensions";
 
 const AuthLayout = ({ children, isSignUp }: { children: React.ReactNode; isSignUp: boolean }) => {
   const [formHeight, setFormHeight] = useState(0);

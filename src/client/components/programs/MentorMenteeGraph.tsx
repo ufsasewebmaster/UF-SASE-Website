@@ -42,7 +42,7 @@ const MentorMenteeGraph = () => {
           graphData={data}
           width={dims.width}
           height={dims.height}
-        //   onEngineStop={() => fgRef.current && fgRef.current.zoomToFit(0, 100)}
+          //   onEngineStop={() => fgRef.current && fgRef.current.zoomToFit(0, 100)}
         />
       )}
     </div>
