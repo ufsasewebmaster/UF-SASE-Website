@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 import BlogForm from "./BlogForm";
 
-const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
+const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = true, onClose, setIsEditing, showBackButton = true }) => {
   console.log("blog editor opened");
   const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
     useBlogFunctions();

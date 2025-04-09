@@ -32,7 +32,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   };
 
   const handleEditButtonClicked = () => {
-    if (setIsEditing && isEditing) {
+    if (setIsEditing) {
       setIsEditing(!isEditing);
     } else {
       console.log("Editing hook not defined");
