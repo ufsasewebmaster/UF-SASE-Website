@@ -14,7 +14,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   setIsEditing,
   showBackButton = true,
 }) => {
-  console.log("editing value on expansion: ", isEditing);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -24,14 +23,20 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   }, []);
 
   const handleClose = () => {
-    console.log("Close button clicked");
-    if (setIsEditing) setIsEditing(false);
-    if (onClose) onClose();
+    if (setIsEditing && onClose) {
+      setIsEditing(false);
+      onClose();
+    } else {
+      console.log("Editing hook not defined");
+    }
   };
 
   const handleEditButtonClicked = () => {
-    if (setIsEditing) setIsEditing(!isEditing);
-    console.log("Editing status set to: ", isEditing);
+    if (setIsEditing && isEditing) {
+      setIsEditing(!isEditing);
+    } else {
+      console.log("Editing hook not defined");
+    }
   };
 
   const renderContent = () => {

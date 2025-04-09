@@ -5,9 +5,6 @@ import React from "react";
 import { Button } from "../ui/button";
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId, setIsEditing }) => {
-  console.log(expandedBlogId);
-  console.log(typeof setExpandedBlogId);
-  console.log("Card load: ", isEditing);
   if (expandedBlogId === blog.id) {
     return null;
   }
@@ -19,8 +16,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
       })
     : "";
   const onEditButtonClicked = () => {
-    setExpandedBlogId(blog.id);
-    setIsEditing(true);
+    if (setExpandedBlogId && setIsEditing) {
+      setExpandedBlogId(blog.id);
+      setIsEditing(true);
+    } else {
+      console.log("Editing hook not defined");
+    }
   };
   return (
     <article className="relative w-full max-w-6xl p-6">
@@ -87,7 +88,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
                     "z-10 px-8 py-3",
                   )}
                   onClick={() => {
-                    console.log("Expanding blog:", blog.id);
                     setExpandedBlogId(blog.id);
                   }}
                 >
