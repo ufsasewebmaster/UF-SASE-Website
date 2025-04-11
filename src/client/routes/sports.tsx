@@ -11,7 +11,7 @@ export const Route = createFileRoute("/sports")({
   meta: () => [
     ...seo({
       title: "Sports | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Learn about UF SASE intramual sports teams such as Basketball, Volleyball, Indoor Soccer, Ultimate Frisbee, Pickleball and more.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

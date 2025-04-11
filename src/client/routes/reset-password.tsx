@@ -13,7 +13,7 @@ export const Route = createFileRoute("/reset-password")({
   meta: () => [
     ...seo({
       title: "Reset Password | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Reset Password page for UF SASE",
       image: imageUrls["SASELogo.png"],
     }),
   ],

@@ -11,7 +11,8 @@ export const Route = createFileRoute("/interns")({
   meta: () => [
     ...seo({
       title: "Interns | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description:
+        "Learn about SASE interns, a program where you can help execute a project for the UF SASE community, hone your communication, event planning, and leadership skills",
       image: imageUrls["SASELogo.png"],
     }),
   ],
