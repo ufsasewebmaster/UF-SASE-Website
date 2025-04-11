@@ -5,9 +5,10 @@ import React, { useState } from "react";
 interface UserButtonProps {
   isLoggedIn: boolean;
   isHomePage: boolean;
+  onLogout: () => void;
 }
 
-export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn }) => {
+export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn, onLogout }) => {
   const { bio, id, logout, title, username } = useAuth();
   const [isHoveringButton, setIsHoveringButton] = useState(false);
   const [isHoveringCard, setIsHoveringCard] = useState(false);
@@ -34,7 +35,6 @@ export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn }
               onMouseLeave={() => setTimeout(() => setIsHoveringCard(false), 100)}
               className="absolute right-0 mt-2 w-[420px] rounded-2xl bg-white px-6 py-5 shadow-xl"
             >
-              {/* Row with Avatar, Text, and Logout */}
               <div className="flex items-start justify-between">
                 {/* Avatar + Text */}
                 <div className="flex gap-6">
@@ -50,7 +50,13 @@ export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn }
                 </div>
 
                 {/* Logout */}
-                <button onClick={logout} className="text-sm font-semibold text-black hover:text-red-600">
+                <button
+                  onClick={() => {
+                    logout();
+                    onLogout();
+                  }}
+                  className="text-sm font-semibold text-black hover:text-red-600"
+                >
                   Logout
                 </button>
               </div>
