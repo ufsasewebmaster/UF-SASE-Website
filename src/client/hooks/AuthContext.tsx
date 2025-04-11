@@ -1,8 +1,7 @@
-import { profileSchema } from "@/shared/schema/profileSchema";
-import type { Profile } from "@/shared/schema/profileSchema";
 import { apiFetch } from "@/shared/utils";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { z } from "zod";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -11,10 +10,9 @@ export interface AuthContextType {
   isLoading: boolean;
   id: string;
   username: string;
-  title?: string;
-  bio?: string;
+  title: string;
+  bio: string;
   errorMessage: string;
-  updateProfile: (updates: Partial<Profile>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -27,7 +25,6 @@ const AuthContext = createContext<AuthContextType>({
   title: "",
   bio: "",
   errorMessage: "",
-  updateProfile: async () => {},
 });
 
 interface AuthProviderProps {
@@ -35,17 +32,26 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [id, setId] = useState("");
-  const [username, setUsername] = useState("");
-  const [title, setTitle] = useState<string | undefined>("");
-  const [bio, setBio] = useState<string | undefined>("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [id, setId] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [bio, setBio] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const checkSession = async () => {
     try {
-      const user = await apiFetch("/api/auth/session", { credentials: "include" }, profileSchema);
+      const user = await apiFetch(
+        "/api/auth/session",
+        { credentials: "include" },
+        z.object({
+          id: z.string(),
+          username: z.string(),
+          title: z.string(),
+          bio: z.string(),
+        }),
+      );
       setId(user.data.id);
       setUsername(user.data.username);
       setTitle(user.data.title);
@@ -77,9 +83,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (response.ok) {
         setIsAuthenticated(false);
         setId("");
-        setUsername("");
-        setTitle("");
-        setBio("");
       } else {
         throw new Error("Logout failed");
       }
@@ -89,39 +92,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const updateProfile = async (updates: Partial<Profile>) => {
-    try {
-      const updated = await apiFetch(
-        "/api/profile",
-        {
-          method: "PATCH",
-          credentials: "include",
-          body: JSON.stringify(updates),
-          headers: { "Content-Type": "application/json" },
-        },
-        profileSchema,
-      );
-      setUsername(updated.data.username);
-      setTitle(updated.data.title);
-      setBio(updated.data.bio);
-    } catch (err) {
-      console.error("Failed to update profile:", err);
-    }
-  };
-
   return (
     <AuthContext.Provider
       value={{
+        errorMessage,
         isAuthenticated,
-        login,
-        logout,
-        isLoading,
         id,
         username,
         title,
         bio,
-        errorMessage,
-        updateProfile,
+        login,
+        logout,
+        isLoading,
       }}
     >
       {children}
