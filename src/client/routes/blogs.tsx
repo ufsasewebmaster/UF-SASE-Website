@@ -21,7 +21,7 @@ export const Route = createFileRoute("/blogs")({
       image: imageUrls["SASELogo.png"],
     }),
   ],
-  
+
   component: BlogsPage,
 });
 

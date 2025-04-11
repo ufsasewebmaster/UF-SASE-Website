@@ -29,7 +29,7 @@ const EventsSlides: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Array<string>>([]);
   const categories = ["GBM", "Workshop", "Professional", "Service"];
 
   const toggleCategory = (category: string) => {
