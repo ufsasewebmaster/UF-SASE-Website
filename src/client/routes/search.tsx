@@ -6,23 +6,23 @@ export const Route = createFileRoute("/search")({
     const router = useRouter();
     const routes = router.flatRoutes;
     const metaTagsList: Array<object> = [];
+
+    // const [text, setText] = useState("");
+
     routes.forEach((route) => {
-      const meta_tags =
-        route.options.meta &&
-        route.options.meta({
-          matches: [],
-          match: route.id,
-          params: {},
-          loaderData: null,
-        });
-      if (meta_tags) {
-        const meta_info = {
-          path: route.id,
-          title: meta_tags[0]?.title || "",
-          description: meta_tags[1]?.content || "",
-        };
-        metaTagsList.push(meta_info);
-      }
+      if (!route.options.meta) return;
+      const meta = route.options.meta({
+        matches: [],
+        match: route.id,
+        params: {},
+        loaderData: null,
+      });
+      if (!meta) return;
+      metaTagsList.push({
+        path: route.id,
+        title: meta[0]?.title || "",
+        description: meta[1]?.content || "",
+      });
     });
 
     const fuseOptions = {
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/search")({
     const fuse = new Fuse(metaTagsList, fuseOptions);
 
     // Change the pattern
-    const searchPattern = "Pickleball";
+    const searchPattern = "SASE";
 
     return (
       <div>
