@@ -39,11 +39,7 @@
     "@vinxi/react": "^0.2.5",
     "@vitejs/plugin-react": "^4.3.1",
     "bcryptjs": "^2.4.3",
-<<<<<<< HEAD
-    "caniuse-lite": "^1.0.30001712",
-=======
-    "caniuse-lite": "^1.0.30001707",
->>>>>>> 5dedbdd (Collect meta tags (bugged))
+    "caniuse-lite": "^1.0.30001713",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
