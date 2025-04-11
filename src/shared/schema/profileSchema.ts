@@ -13,8 +13,8 @@ export const profileSchema = z.object({
     z.number().int().min(0, "Time updated must be a valid timestamp."),
   ),
 
-  first_name: z.string(), // allow empty string if needed
-  last_name: z.string(), // allow empty string if needed
+  first_name: z.string(),
+  last_name: z.string(),
   phone: z.string().optional(),
 
   resume: z.string().optional(),
@@ -23,6 +23,9 @@ export const profileSchema = z.object({
   majors: z.string().optional(),
   minors: z.string().optional(),
   graduation_semester: z.string().optional(),
+
+  title: z.string().optional(),
+  bio: z.string().optional(),
 });
 
 export type Profile = z.infer<typeof profileSchema>;

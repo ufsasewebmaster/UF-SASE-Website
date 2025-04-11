@@ -1,7 +1,8 @@
+import { profileSchema } from "@/shared/schema/profileSchema";
+import type { Profile } from "@/shared/schema/profileSchema";
 import { apiFetch } from "@/shared/utils";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { z } from "zod";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -10,7 +11,10 @@ export interface AuthContextType {
   isLoading: boolean;
   id: string;
   username: string;
+  title?: string;
+  bio?: string;
   errorMessage: string;
+  updateProfile: (updates: Partial<Profile>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,7 +24,10 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
   id: "",
   username: "",
+  title: "",
+  bio: "",
   errorMessage: "",
+  updateProfile: async () => {},
 });
 
 interface AuthProviderProps {
@@ -28,28 +35,23 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [id, setId] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
+  const [title, setTitle] = useState<string | undefined>("");
+  const [bio, setBio] = useState<string | undefined>("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const checkSession = async () => {
     try {
-      const user = await apiFetch(
-        "/api/auth/session",
-        { credentials: "include" },
-        z.object({
-          id: z.string(),
-          username: z.string(),
-        }),
-      );
-      console.log("ID set to ", user.data.id);
+      const user = await apiFetch("/api/auth/session", { credentials: "include" }, profileSchema);
       setId(user.data.id);
       setUsername(user.data.username);
+      setTitle(user.data.title);
+      setBio(user.data.bio);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log(error);
       const errMsg = error instanceof Error ? error.message : "Unknown error occurred";
       setErrorMessage(errMsg);
       setIsAuthenticated(false);
@@ -75,17 +77,56 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (response.ok) {
         setIsAuthenticated(false);
         setId("");
+        setUsername("");
+        setTitle("");
+        setBio("");
       } else {
         throw new Error("Logout failed");
       }
     } catch (error) {
-      console.error("Logout error:", error);
       const errMsg = error instanceof Error ? error.message : "Unknown error occurred";
       setErrorMessage(errMsg);
     }
   };
 
-  return <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, username, login, logout, isLoading }}>{children}</AuthContext.Provider>;
+  const updateProfile = async (updates: Partial<Profile>) => {
+    try {
+      const updated = await apiFetch(
+        "/api/profile",
+        {
+          method: "PATCH",
+          credentials: "include",
+          body: JSON.stringify(updates),
+          headers: { "Content-Type": "application/json" },
+        },
+        profileSchema,
+      );
+      setUsername(updated.data.username);
+      setTitle(updated.data.title);
+      setBio(updated.data.bio);
+    } catch (err) {
+      console.error("Failed to update profile:", err);
+    }
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        isLoading,
+        id,
+        username,
+        title,
+        bio,
+        errorMessage,
+        updateProfile,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = (): AuthContextType => {
