@@ -22,6 +22,7 @@ export interface BlogCardProps {
   setExpandedBlogId: (id: string | null) => void;
   isEditing?: boolean;
   setIsEditing?: (state: boolean) => void;
+  displayEditButton: boolean;
 }
 
 export interface BlogExpandedProps {

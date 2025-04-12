@@ -4,7 +4,7 @@ import { imageUrls } from "@assets/imageUrls";
 import React from "react";
 import { Button } from "../ui/button";
 
-const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId, setIsEditing }) => {
   console.log(expandedBlogId);
   console.log(typeof setExpandedBlogId);
   console.log("Card load: ", isEditing);
@@ -18,7 +18,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
         year: "numeric",
       })
     : "";
-
+  const onEditButtonClicked = () => {
+    if (blog.id && setIsEditing) {
+      setIsEditing(true);
+      setExpandedBlogId(blog.id);
+    } else {
+      console.log("Expanded blog or edit hook undefined");
+    }
+  };
   return (
     <article className="relative w-full max-w-6xl p-6">
       <div className="group relative">
@@ -48,12 +55,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             )}
           </figure>
           {/* content */}
-          <div className="flex w-full flex-col items-start">
-            <div className="flex w-full flex-row justify-between">
+          <div className="flex w-full flex-col items-stretch">
+            <div className="relative flex items-center justify-center">
               {/* title */}
               <h2 className={cn("place-content-start text-4xl font-bold text-gray-800", "font-oswald")}>{blog.title}</h2>
+              {blog.displayEditButton && (
+                <Button className={cn("absolute right-0")} onClick={onEditButtonClicked}>
+                  {!isEditing ? "Edit" : "Close Editor"}
+                </Button>
+              )}
             </div>
-
             {/* author, date */}
             <p className="mt-2 font-serif text-lg italic text-gray-600">
               {blog.author}, {formattedDate}

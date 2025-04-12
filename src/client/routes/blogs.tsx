@@ -180,6 +180,7 @@ function BlogsPage() {
                       setExpandedBlogId={setExpandedBlogId}
                       isEditing={isEditing}
                       setIsEditing={setIsEditing}
+                      displayEditButton={isAuthenticated}
                     />
                   ))
                 ) : (
