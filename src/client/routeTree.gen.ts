@@ -17,6 +17,7 @@ import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SetImport } from './routes/set'
+import { Route as SearchImport } from './routes/search'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
@@ -68,6 +69,12 @@ const SignupRoute = SignupImport.update({
 const SetRoute = SetImport.update({
   id: '/set',
   path: '/set',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SearchRoute = SearchImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -270,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesImport
       parentRoute: typeof rootRoute
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchImport
+      parentRoute: typeof rootRoute
+    }
     '/set': {
       id: '/set'
       path: '/set'
@@ -333,6 +347,7 @@ export interface FileRoutesByFullPath {
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/search': typeof SearchRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -357,6 +372,7 @@ export interface FileRoutesByTo {
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/search': typeof SearchRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -382,6 +398,7 @@ export interface FileRoutesById {
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/search': typeof SearchRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -408,6 +425,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/reset-password'
     | '/resources'
+    | '/search'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -431,6 +449,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/reset-password'
     | '/resources'
+    | '/search'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -454,6 +473,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/reset-password'
     | '/resources'
+    | '/search'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -479,6 +499,7 @@ export interface RootRouteChildren {
   ProgramsRoute: typeof ProgramsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
+  SearchRoute: typeof SearchRoute
   SetRoute: typeof SetRoute
   SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -503,6 +524,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgramsRoute: ProgramsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
+  SearchRoute: SearchRoute,
   SetRoute: SetRoute,
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
@@ -536,6 +558,7 @@ export const routeTree = rootRoute
         "/programs",
         "/reset-password",
         "/resources",
+        "/search",
         "/set",
         "/signup",
         "/sponsors",
@@ -588,6 +611,9 @@ export const routeTree = rootRoute
     },
     "/resources": {
       "filePath": "resources.tsx"
+    },
+    "/search": {
+      "filePath": "search.tsx"
     },
     "/set": {
       "filePath": "set.tsx"

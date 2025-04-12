@@ -51,6 +51,7 @@
     "embla-carousel-react": "^8.6.0",
     "eslint-plugin-react": "^7.37.5",
     "fs": "^0.0.1-security",
+    "fuse.js": "^7.1.0",
     "google-auth-library": "^9.15.1",
     "googleapis": "^146.0.0",
     "hamburger-react": "^2.5.2",

@@ -9,7 +9,7 @@ import { applyOmbreDivider } from "../utils/ombre-divider.js";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/gallery")({
-  meta: () => [...seo({ title: "Gallery | UF SASE", description: "UF Society of Asian Scientists & Engineers", image: imageUrls["SASELogo.png"] })],
+  meta: () => [...seo({ title: "Gallery | UF SASE", description: "Pictures of all UF SASE events", image: imageUrls["SASELogo.png"] })],
   component: () => {
     const [slideshow, setSlideshow] = useState<string>("Fall 2024");
     const [slideshowLink, setSlideshowLink] = useState<string>("");
