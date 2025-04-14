@@ -126,7 +126,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       {purpose === "Testimonials" ? (
         <>
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} purpose={purpose} />
-          <div className="absolute left-0 top-0 z-10 ml-[8%] h-full w-16 bg-gradient-to-r from-white to-transparent dark:from-black" />
+          <div className="absolute left-0 top-0 z-10 ml-[5%] h-full w-16 bg-gradient-to-r from-white to-transparent dark:from-black" />
         </>
       ) : null}
 
@@ -191,7 +191,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       {/* Testimonials have arrows on sides while Values/Images have arrows at the bottom */}
       {purpose === "Testimonials" ? (
         <>
-          <div className="absolute right-0 top-0 z-10 mr-[8%] h-full w-16 bg-gradient-to-l from-white to-transparent dark:from-black" />
+          <div className="absolute right-0 top-0 z-10 mr-[5%] h-full w-16 bg-gradient-to-l from-white to-transparent dark:from-black" />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} purpose={purpose} />
         </>
       ) : (

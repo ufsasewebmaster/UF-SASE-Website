@@ -27,7 +27,7 @@ export const faqData: Array<{ question: string; answer: string | React.ReactNode
   {
     question: "What does the time commitment look like?",
     answer:
-      "Intramural sports have a commitment of an hour a week for games, plus any casual practices the team decides to hold! Casual sports have no time commitment!",
+      "Intramural sports have a commitment of an hour a week for games, plus any casual practices the team decides to hold! Casual sports run for about two hours per week and have no time commitment!",
   },
   {
     question: "I have more questions!",
