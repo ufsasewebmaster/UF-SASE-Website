@@ -5,9 +5,6 @@ import React from "react";
 import { Button } from "../ui/button";
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, setExpandedBlogId, setIsEditing }) => {
-  console.log(expandedBlogId);
-  console.log(typeof setExpandedBlogId);
-  console.log("Card load: ", isEditing);
   if (expandedBlogId === blog.id) {
     return null;
   }

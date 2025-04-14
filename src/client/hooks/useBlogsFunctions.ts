@@ -12,7 +12,7 @@ export const useBlogFunctions = () => {
   // state management
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [currentBlog, setCurrentBlog] = useState<BlogBase | null>(null);
+  const [currentBlog, setCurrentBlog] = useState<BlogDisplay | null>(null);
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogContent, setNewBlogContent] = useState("");
   const [newBlogTags, setNewBlogTags] = useState<Array<string>>([]);
@@ -58,11 +58,19 @@ export const useBlogFunctions = () => {
   };
 
   const handleUpdateBlog = () => {
-    if (!currentBlog || !validateForm()) return;
+    if (!validateForm()) return;
+
+    // Use the current blog ID if it exists
+    const blogId = currentBlog?.id;
+
+    if (!blogId) {
+      setError("Blog ID is missing");
+      return;
+    }
 
     updateBlog.mutate(
       {
-        id: currentBlog.id,
+        id: blogId,
         title: newBlogTitle,
         content: newBlogContent,
         tags: newBlogTags,
@@ -71,14 +79,15 @@ export const useBlogFunctions = () => {
         onError: (error: Error) => setError(error.message),
         onSuccess: () => {
           setIsEditing(false);
-          setCurrentBlog(null);
           resetForm();
         },
       },
     );
   };
 
-  const handleEditBlog = (blog: BlogBase) => {
+  // New function to start editing a blog
+  const startEditingBlog = (blog: BlogDisplay) => {
+    console.log("blog editing started", blog);
     setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
@@ -124,7 +133,7 @@ export const useBlogFunctions = () => {
     setCurrentBlog,
     handleCreateBlog,
     handleUpdateBlog,
-    handleEditBlog,
+    startEditingBlog,
     handleTagClick,
     resetForm,
     newBlogTitle,
