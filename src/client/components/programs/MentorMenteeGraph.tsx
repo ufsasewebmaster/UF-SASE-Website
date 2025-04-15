@@ -63,6 +63,7 @@ const MentorMenteeGraph: React.FC = () => {
     setTimeout(() => fg.zoomToFit(0, 100), 100);
   }, [dims, graphData]);
 
+  if (!dims) console.log("AAAAAAAAHHHH");
   return (
     <ClientOnly>
       <div ref={containerRef} style={{ width: "100%", height: "600px", border: "1px solid #ccc" }}>
