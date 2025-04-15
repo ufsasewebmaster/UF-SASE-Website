@@ -2,6 +2,7 @@ import type { BlogFormProps } from "@/shared/types/blogTypes";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
+import { useEffect } from "react";
 
 const BlogForm: React.FC<BlogFormProps> = ({
   error,
@@ -14,9 +15,11 @@ const BlogForm: React.FC<BlogFormProps> = ({
   onSubmit,
   onTagsChange,
   onTitleChange,
+  setTagsInput,
+  tagsInput,
 }) => {
-  const tagsString = Array.isArray(newBlogTags) ? newBlogTags.join(", ") : "";
   const handleTagsChange = (value: string) => {
+    if (setTagsInput) setTagsInput(value);
     const tagsArray = value
       .split(",")
       .map((tag) => tag.trim())
@@ -24,6 +27,10 @@ const BlogForm: React.FC<BlogFormProps> = ({
 
     onTagsChange(tagsArray);
   };
+
+  useEffect(() => {
+    if (setTagsInput) setTagsInput(newBlogTags.join(","));
+  }, []);
 
   return (
     <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
@@ -44,12 +51,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">Tags</label>
-          <Input
-            value={tagsString}
-            onChange={(e) => handleTagsChange(e.target.value)}
-            placeholder="Enter tags (comma-separated)"
-            className="w-full"
-          />
+          <Input value={tagsInput} onChange={(e) => handleTagsChange(e.target.value)} placeholder="Enter tags (comma-separated)" className="w-full" />
         </div>
       </div>
       <div className="mt-4 space-x-2">
