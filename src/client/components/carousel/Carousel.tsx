@@ -159,13 +159,25 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                     {checkisTestimonial(slide) ? (
                       <>
                         <img src={slide.image} alt={`Image`} className="aspect-auto rounded-xl" />
-                        <div className="absolute inset-0 flex flex-col items-center justify-end rounded-xl bg-saseGray/60 hover:bg-saseGray/90">
-                          <p className="absolute pb-10 font-redhat text-xl font-semibold opacity-100 transition duration-300 group-hover:opacity-0">
+                        <div className="absolute inset-0 flex flex-col items-center justify-end rounded-xl transition duration-300 ease-in-out hover:bg-saseGray/90">
+                          <p
+                            className="absolute pb-10 font-redhat text-xl font-semibold text-black opacity-100 transition duration-300 group-hover:opacity-0"
+                            style={{
+                              textShadow: `0.7px 0 white,-0.7px 0 white,0 0.7px white,0 -0.7px white`,
+                            }}
+                          >
                             {slide.name}
                           </p>
-                          <p className="absolute pb-4 font-redhat text-lg opacity-100 transition duration-300 group-hover:opacity-0">
+
+                          <p
+                            className="absolute pb-4 font-redhat text-lg text-black opacity-100 transition duration-300 group-hover:opacity-0"
+                            style={{
+                              textShadow: `0.7px 0 white,-0.7px 0 white,0 0.7px white,0 -0.7px white`,
+                            }}
+                          >
                             {slide.position}
                           </p>
+
                           <p className="flex h-0 w-full items-center justify-center overflow-hidden px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-700 ease-in-out group-hover:h-full group-hover:translate-y-0 group-hover:opacity-100 md:text-sm lg:text-base">
                             "{slide.quote}"
                           </p>
