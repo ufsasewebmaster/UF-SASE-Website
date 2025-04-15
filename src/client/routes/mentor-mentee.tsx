@@ -1,10 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
-import Carousel from "@components/carousel/Carousel";
 import FAQ from "@components/programs/FAQCard";
 import { faqData as mentorFaqData } from "@components/programs/faqMentorMentee"; // assumed analogous to faqInterns
-import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
-import MentorMenteeGraph from "@components/programs/MentorMenteeGraph";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
