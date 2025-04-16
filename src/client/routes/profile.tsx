@@ -54,7 +54,7 @@ export const Route = createFileRoute("/profile")({
     };
 
     return (
-      <div className="flex min-h-screen bg-gray-100 p-10">
+      <div className="flex min-h-screen bg-muted p-10">
         {errorMessage && <div className="mb-4 rounded bg-red-100 p-2 text-red-700">{errorMessage}</div>}
         <div className="flex items-start">
           <ProfileNav profileName={profile?.username} update={updateComponent} activeSection={activeSection} />
