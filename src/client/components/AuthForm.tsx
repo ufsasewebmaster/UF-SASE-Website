@@ -74,7 +74,7 @@ const AuthForm = ({
       onSubmit={handleSubmit(handleFormSubmit)}
       noValidate
       className={cn(
-        "relative z-10 flex w-full max-w-md flex-col items-center justify-center overflow-y-auto rounded-lg border bg-gray-100 p-6 shadow-xl",
+        "relative z-10 flex w-full max-w-md flex-col items-center justify-center overflow-y-auto rounded-lg border-muted bg-muted p-6 shadow-xl",
         isSignUp ? "min-h-[38em]" : "min-h-[32rem]",
       )}
     >
