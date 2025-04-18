@@ -5,6 +5,7 @@ import blogRoutes from "@api/blogs";
 import contactRoutes from "@api/contact";
 import emailRoutes from "@api/email";
 import eventRoutes from "@api/events";
+import mentorMenteeRoutes from "@api/mentorMentee";
 import profileRoutes from "@api/profile";
 import roleRoutes from "@api/roles";
 import saseRoutes from "@api/saseInfo";
@@ -45,4 +46,5 @@ app
   .route("/api", profileRoutes)
   .route("/api", contactRoutes)
   .route("/api", eventRoutes)
-  .route("/api", roleRoutes);
+  .route("/api", roleRoutes)
+  .route("/api", mentorMenteeRoutes);

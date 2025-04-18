@@ -2,6 +2,8 @@ import { imageUrls } from "@assets/imageUrls";
 import FAQ from "@components/programs/FAQCard";
 import { faqData as mentorFaqData } from "@components/programs/faqMentorMentee"; // assumed analogous to faqInterns
 import InfoCard from "@components/programs/InfoCard";
+import MentorMenteeGraph from "@components/programs/MentorMenteeGraph";
+import { ClientOnly } from "@shared/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
@@ -18,8 +20,10 @@ export const Route = createFileRoute("/mentor-mentee")({
   component: () => {
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
-        {/* <MentorMenteeGraph />
-        Header Section */}
+        <ClientOnly>
+          <MentorMenteeGraph />
+        </ClientOnly>
+        {/* Header Section */}
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
             <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
