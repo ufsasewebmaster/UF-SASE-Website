@@ -25,6 +25,9 @@ const config = {
     },
   },
   vite: {
+    ssr: {
+      noExternal: ["react-force-graph-2d", "force-graph"],
+    },
     plugins: [tsConfigPaths({ projects: ["./tsconfig.json"] }), ViteImageOptimizer()],
   },
 };

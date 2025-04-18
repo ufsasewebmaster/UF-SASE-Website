@@ -23,7 +23,11 @@ infoRoutes.post("/users/personal", async (c) => {
 infoRoutes.get("/users/personal/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const personal_info = await db.select().from(Schema.personalInfo).where(eq(Schema.personalInfo.user_id, user_id));
+    const rows = await db.select().from(Schema.personalInfo).where(eq(Schema.personalInfo.user_id, user_id));
+    if (rows.length === 0) {
+      return createErrorResponse(c, "NOT_FOUND", "No personal info", 404);
+    }
+    const personal_info = rows[0];
     return createSuccessResponse(c, personal_info, "Personal info retrieved successfully");
   } catch (error) {
     console.log(error);
