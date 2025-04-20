@@ -11,7 +11,7 @@ interface ProfileNavProps {
 
 const ProfileNav: React.FC<ProfileNavProps> = ({ activeSection, profileName = "User", update }) => {
   return (
-    <div className={cn("flex w-60 flex-col rounded-3xl bg-white p-6 font-redhat shadow-xl")}>
+    <div className={cn("flex w-60 flex-col rounded-3xl bg-background p-6 font-redhat shadow-xl")}>
       {/* Profile Info */}
       <div className="mb-6 flex flex-col items-center text-center">
         <div className={cn("flex h-36 w-36 items-center justify-center rounded-full bg-saseBlueLight text-white")}>

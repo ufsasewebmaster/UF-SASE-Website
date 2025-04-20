@@ -71,7 +71,6 @@ function BlogsPage() {
   const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
-
   // blog groups
   const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
   const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;
@@ -180,6 +179,7 @@ function BlogsPage() {
                       setExpandedBlogId={setExpandedBlogId}
                       isEditing={isEditing}
                       setIsEditing={setIsEditing}
+                      displayEditButton={isAuthenticated}
                     />
                   ))
                 ) : (
