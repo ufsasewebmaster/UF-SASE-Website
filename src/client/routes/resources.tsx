@@ -2,7 +2,7 @@ import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import ClassConnectorForms from "@components/ClassConnectorForms";
 import FreshmenFAQ from "@components/resources/FreshmenFAQ";
-import ResourcesCard from "@components/ResourcesCard";
+// import ResourcesCard from "@components/ResourcesCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
 import { IoMdLink } from "react-icons/io";
@@ -11,68 +11,68 @@ import MarstonBooking from "../components/resources/MarstonBooking";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
-interface ResourceCard {
-  title: string;
-  description: string;
-  linkText: string;
-  link: string;
-}
+// interface ResourceCard {
+//   title: string;
+//   description: string;
+//   linkText: string;
+//   link: string;
+// }
 
-const studyMaterials: Array<ResourceCard> = [
-  {
-    title: "Study Guide 1",
-    description: "Comprehensive guide for subject ABC.",
-    linkText: "View Guide",
-    link: "#",
-  },
-  {
-    title: "Study Guide 2",
-    description: "Practice problems for XYZ.",
-    linkText: "Access Problems",
-    link: "#",
-  },
-];
+// const studyMaterials: Array<ResourceCard> = [
+//   {
+//     title: "Study Guide 1",
+//     description: "Comprehensive guide for subject ABC.",
+//     linkText: "View Guide",
+//     link: "#",
+//   },
+//   {
+//     title: "Study Guide 2",
+//     description: "Practice problems for XYZ.",
+//     linkText: "Access Problems",
+//     link: "#",
+//   },
+// ];
 
-const workshops: Array<ResourceCard> = [
-  {
-    title: "Workshop Slides",
-    description: "Slides from our recent leadership workshop.",
-    linkText: "Open Slides",
-    link: "#",
-  },
-  {
-    title: "Workshop Recording",
-    description: "Watch the session from last semester’s event.",
-    linkText: "Watch",
-    link: "#",
-  },
-];
+// const workshops: Array<ResourceCard> = [
+//   {
+//     title: "Workshop Slides",
+//     description: "Slides from our recent leadership workshop.",
+//     linkText: "Open Slides",
+//     link: "#",
+//   },
+//   {
+//     title: "Workshop Recording",
+//     description: "Watch the session from last semester’s event.",
+//     linkText: "Watch",
+//     link: "#",
+//   },
+// ];
 
-const careerResources: Array<ResourceCard> = [
-  {
-    title: "Resume Tips",
-    description: "A quick guide to building a strong resume.",
-    linkText: "View Tips",
-    link: "#",
-  },
-  {
-    title: "Interview Prep",
-    description: "Resources to help you ace your interviews.",
-    linkText: "Start Preparing",
-    link: "#",
-  },
-];
+// const careerResources: Array<ResourceCard> = [
+//   {
+//     title: "Resume Tips",
+//     description: "A quick guide to building a strong resume.",
+//     linkText: "View Tips",
+//     link: "#",
+//   },
+//   {
+//     title: "Interview Prep",
+//     description: "Resources to help you ace your interviews.",
+//     linkText: "Start Preparing",
+//     link: "#",
+//   },
+// ];
 
-const mapToCards = (data: Array<ResourceCard>) => data.map((card, index) => <ResourcesCard key={index} {...card} />);
+// const mapToCards = (data: Array<ResourceCard>) => data.map((card, index) => <ResourcesCard key={index} {...card} />);
 
 const resourceTabs: Record<string, React.ReactNode> = {
   "Board Office Hours": <BoardOfficeHours />,
   "Marston Study Room Booking": <MarstonBooking />,
   "Class Connector Forms": <ClassConnectorForms />,
   "Freshman FAQs": <FreshmenFAQ />,
-  "Study Materials": mapToCards(studyMaterials),
-  Workshops: mapToCards(workshops),
-  "Career Resources": mapToCards(careerResources),
+  // "Study Materials": mapToCards(studyMaterials),
+  // Workshops: mapToCards(workshops),
+  // "Career Resources": mapToCards(careerResources),
 };
 
 export const Route = createFileRoute("/resources")({
