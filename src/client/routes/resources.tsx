@@ -120,7 +120,7 @@ export const Route = createFileRoute("/resources")({
                       "whitespace-nowrap rounded-full border px-5 py-2 font-redhat text-base font-semibold transition-colors duration-200",
                       isActive
                         ? "border-saseGray bg-saseBlueLight text-white shadow-sm"
-                        : "border-transparent bg-transparent text-black hover:text-saseBlueLight",
+                        : "border-transparent bg-transparent text-foreground hover:text-saseBlueLight",
                     )}
                   >
                     {category}

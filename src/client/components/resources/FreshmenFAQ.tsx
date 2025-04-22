@@ -66,7 +66,7 @@ const FreshmenFAQ = () => {
                   onClick={() => setActiveTab(category as keyof typeof resourceTabs)}
                   className={cn(
                     "relative whitespace-nowrap px-4 py-2 text-base font-semibold transition-colors",
-                    isActive ? "text-saseBlue" : "text-gray-600 hover:text-black",
+                    isActive ? "text-saseBlue" : "text-foreground hover:text-saseBlue",
                   )}
                 >
                   {category}
