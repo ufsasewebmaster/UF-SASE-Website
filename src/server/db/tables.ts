@@ -59,7 +59,9 @@ export const personalInfo = sqliteTable("personal_info", {
     .references(() => users.id, { onDelete: "cascade" }),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
+  bio: text("bio"),
   phone: text("phone"), // NOTE: Phone is bigint
+  discord: text("discord"),
   area_code: integer("area_code"),
 });
 

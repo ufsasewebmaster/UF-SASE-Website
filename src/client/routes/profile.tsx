@@ -15,7 +15,7 @@ export const Route = createFileRoute("/profile")({
   meta: () => [
     ...seo({
       title: "Profile | UF SASE",
-      description: "Profile page for usser information, must be logged in to UF SASE account view.",
+      description: "Profile page for user information, must be logged in to UF SASE account view.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

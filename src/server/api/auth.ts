@@ -50,7 +50,9 @@ authRoutes.post("/auth/signup", async (c) => {
       user_id: userId,
       first_name: "",
       last_name: "",
+      bio: "",
       phone: "",
+      discord: "",
       area_code: 0,
     });
 
