@@ -114,10 +114,8 @@ profileRoutes.patch("/profile", async (c) => {
       const body = await c.req.json();
 
       const updatePromises = Object.keys(body).map(async (key) => {
-        console.log("key: ", key);
         if (key in profileSelection) {
           const value = body[key];
-          console.log("value: ", value);
           // Update based on the column name and its respective table
           if (personalColumns.has(key)) {
             await db
@@ -138,7 +136,6 @@ profileRoutes.patch("/profile", async (c) => {
         }
         if (specialColumns.has(key)) {
           const roleArray: Array<string> = body.roles.split(",");
-          console.log(roleArray);
           await insertRoles(roleArray, userID);
         }
       });
@@ -155,7 +152,6 @@ profileRoutes.patch("/profile", async (c) => {
 });
 
 const insertRoles = (roleArray: Array<string>, userID: string) => {
-  console.log(roleArray);
   return Promise.all(
     roleArray.map(async (raw) => {
       const role = raw.trim();

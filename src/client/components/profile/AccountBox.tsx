@@ -36,7 +36,6 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     try {
       const fields: SelectedFields = initializeInterface(data.username, data.email, data.bio);
-      console.log(fields);
       fetch("api/profile", {
         method: "PATCH",
         body: JSON.stringify(fields),
