@@ -61,7 +61,12 @@ export const Route = createFileRoute("/profile")({
         </div>
         <div className="flex w-full flex-col items-center justify-between py-6">
           {activeSection === "account" ? (
-            <AccountBox username={profile?.username || "User"} email={profile?.email || ""} bio={profile?.bio || ""} handleLogout={handleLogout} />
+            <AccountBox
+              username={profile?.username || "User"}
+              email={profile?.email || ""}
+              bio={profile?.bio || "Add a bio!"}
+              handleLogout={handleLogout}
+            />
           ) : activeSection === "userinfo" ? (
             <UserInfoBox />
           ) : activeSection === "security" ? (
