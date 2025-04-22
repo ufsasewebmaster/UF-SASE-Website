@@ -2,71 +2,77 @@ import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import ClassConnectorForms from "@components/ClassConnectorForms";
 import FreshmenFAQ from "@components/resources/FreshmenFAQ";
-import ResourcesCard from "@components/ResourcesCard";
+// import ResourcesCard from "@components/ResourcesCard";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
 import { IoMdLink } from "react-icons/io";
+import BoardOfficeHours from "../components/resources/BoardOfficeHours";
+import MarstonBooking from "../components/resources/MarstonBooking";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
-interface ResourceCard {
-  title: string;
-  description: string;
-  linkText: string;
-  link: string;
-}
+// interface ResourceCard {
+//   title: string;
+//   description: string;
+//   linkText: string;
+//   link: string;
+// }
 
-const studyMaterials: Array<ResourceCard> = [
-  {
-    title: "Study Guide 1",
-    description: "Comprehensive guide for subject ABC.",
-    linkText: "View Guide",
-    link: "#",
-  },
-  {
-    title: "Study Guide 2",
-    description: "Practice problems for XYZ.",
-    linkText: "Access Problems",
-    link: "#",
-  },
-];
+// const studyMaterials: Array<ResourceCard> = [
+//   {
+//     title: "Study Guide 1",
+//     description: "Comprehensive guide for subject ABC.",
+//     linkText: "View Guide",
+//     link: "#",
+//   },
+//   {
+//     title: "Study Guide 2",
+//     description: "Practice problems for XYZ.",
+//     linkText: "Access Problems",
+//     link: "#",
+//   },
+// ];
 
-const workshops: Array<ResourceCard> = [
-  {
-    title: "Workshop Slides",
-    description: "Slides from our recent leadership workshop.",
-    linkText: "Open Slides",
-    link: "#",
-  },
-  {
-    title: "Workshop Recording",
-    description: "Watch the session from last semester’s event.",
-    linkText: "Watch",
-    link: "#",
-  },
-];
+// const workshops: Array<ResourceCard> = [
+//   {
+//     title: "Workshop Slides",
+//     description: "Slides from our recent leadership workshop.",
+//     linkText: "Open Slides",
+//     link: "#",
+//   },
+//   {
+//     title: "Workshop Recording",
+//     description: "Watch the session from last semester’s event.",
+//     linkText: "Watch",
+//     link: "#",
+//   },
+// ];
 
-const careerResources: Array<ResourceCard> = [
-  {
-    title: "Resume Tips",
-    description: "A quick guide to building a strong resume.",
-    linkText: "View Tips",
-    link: "#",
-  },
-  {
-    title: "Interview Prep",
-    description: "Resources to help you ace your interviews.",
-    linkText: "Start Preparing",
-    link: "#",
-  },
-];
+// const careerResources: Array<ResourceCard> = [
+//   {
+//     title: "Resume Tips",
+//     description: "A quick guide to building a strong resume.",
+//     linkText: "View Tips",
+//     link: "#",
+//   },
+//   {
+//     title: "Interview Prep",
+//     description: "Resources to help you ace your interviews.",
+//     linkText: "Start Preparing",
+//     link: "#",
+//   },
+// ];
+
+// const mapToCards = (data: Array<ResourceCard>) => data.map((card, index) => <ResourcesCard key={index} {...card} />);
 
 const resourceTabs: Record<string, React.ReactNode> = {
-  "Study Materials": studyMaterials.map((card, index) => <ResourcesCard key={index} {...card} />),
-  Workshops: workshops.map((card, index) => <ResourcesCard key={index} {...card} />),
-  "Career Resources": careerResources.map((card, index) => <ResourcesCard key={index} {...card} />),
+  "Board Office Hours": <BoardOfficeHours />,
+  "Marston Study Room Booking": <MarstonBooking />,
   "Class Connector Forms": <ClassConnectorForms />,
-  Resources: <FreshmenFAQ />,
+  "Freshman FAQs": <FreshmenFAQ />,
+  // "Study Materials": mapToCards(studyMaterials),
+  // Workshops: mapToCards(workshops),
+  // "Career Resources": mapToCards(careerResources),
 };
 
 export const Route = createFileRoute("/resources")({
@@ -83,24 +89,9 @@ export const Route = createFileRoute("/resources")({
       applyOmbreDivider();
     }, []);
 
-    const [activeTab, setActiveTab] = useState<keyof typeof resourceTabs>("Study Materials");
-    const categories = Object.keys(resourceTabs);
+    const [activeTab, setActiveTab] = useState<keyof typeof resourceTabs>("Board Office Hours");
     const tabRefs = useRef<Array<HTMLButtonElement>>([]);
-    const [sliderStyle, setSliderStyle] = useState({
-      left: "0px",
-      width: "0px",
-    });
-
-    useEffect(() => {
-      const currentIndex = categories.indexOf(activeTab);
-      if (currentIndex < 0) return;
-      const currentTab = tabRefs.current[currentIndex];
-      if (!currentTab) return;
-      setSliderStyle({
-        left: currentTab.offsetLeft + "px",
-        width: currentTab.offsetWidth + "px",
-      });
-    }, [activeTab, categories]);
+    const categories = Object.keys(resourceTabs);
 
     return (
       <div className="w-full">
@@ -112,30 +103,32 @@ export const Route = createFileRoute("/resources")({
         {/* Blue line under title */}
         <div className="ombre-divider"></div>
 
-        {/* Tab Bar / Sliding Underline */}
-        <div className="mt-6 flex justify-center border-b">
-          <ul className="relative flex space-x-4 px-4">
-            <div className="absolute bottom-0 h-1 bg-saseBlue transition-all duration-300" style={sliderStyle} />
-            {categories.map((category, idx) => {
-              const isActive = category === activeTab;
-              return (
-                <li key={category}>
+        {/* Tab Bar */}
+        <div className="mt-6 border-b-2 border-gray-300 pb-6">
+          <div className="mx-auto max-w-5xl px-4">
+            <div className="mb-4 flex flex-wrap justify-center gap-4">
+              {categories.map((category, idx) => {
+                const isActive = category === activeTab;
+                return (
                   <button
+                    key={category}
                     ref={(el) => {
                       if (el) tabRefs.current[idx] = el;
                     }}
                     onClick={() => setActiveTab(category as keyof typeof resourceTabs)}
                     className={cn(
-                      "relative whitespace-nowrap px-4 py-2 text-base font-semibold transition-colors",
-                      isActive ? "text-saseBlue" : "text-gray-600 hover:text-black",
+                      "whitespace-nowrap rounded-full border px-5 py-2 font-redhat text-base font-semibold transition-colors duration-200",
+                      isActive
+                        ? "border-saseGray bg-saseBlueLight text-white shadow-sm"
+                        : "border-transparent bg-transparent text-foreground hover:text-saseBlueLight",
                     )}
                   >
                     {category}
                   </button>
-                </li>
-              );
-            })}
-          </ul>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Resource Cards */}
