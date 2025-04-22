@@ -15,18 +15,18 @@ const SettingsBox: React.FC<SettingsBoxProps> = ({ darkMode, toggleDarkMode }) =
   };
 
   return (
-    <div className="group min-h-[500px] w-3/4 rounded-2xl bg-white px-10 py-6 shadow-xl">
-      <h1 className="mb-10 text-3xl font-bold text-gray-800">Settings</h1>
+    <div className="group min-h-[500px] w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
+      <h1 className="mb-10 text-3xl font-bold text-foreground">Settings</h1>
 
       {/* Dark Mode Toggle */}
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-lg font-medium text-gray-700">Theme (Light/Dark)</span>
+        <span className="text-lg font-medium text-foreground">Theme (Light/Dark)</span>
         <DarkButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
 
       {/* Email Notifications */}
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-lg font-medium text-gray-700">Email Notifications</span>
+        <span className="text-lg font-medium text-foreground">Email Notifications</span>
         <label className="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" className="peer sr-only" checked={emailNotifications} onChange={handleEmailToggle} />
           <div className="h-6 w-11 rounded-full bg-gray-300 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-saseGreen peer-checked:after:translate-x-full" />

@@ -3,6 +3,8 @@ import { errorResponseSchema, successResponseSchema } from "@schema/responseSche
 import { clsx, type ClassValue } from "clsx";
 import type { Context } from "hono";
 import type { StatusCode } from "hono/utils/http-status";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import type { ZodTypeAny } from "zod";
 
@@ -32,4 +34,14 @@ export const apiFetch = async (url: string, options: RequestInit = {}, dataSucce
   }
   const fullSchema = successResponseSchema.extend({ data: dataSuccessSchema });
   return fullSchema.parse(json);
+};
+
+export const ClientOnly: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  return children;
 };
