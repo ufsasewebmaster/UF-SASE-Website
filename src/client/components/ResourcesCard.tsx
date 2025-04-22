@@ -3,29 +3,30 @@ import React from "react";
 export interface ResourceCardProps {
   title: string;
   description: string;
-  linkText: string;
   link: string;
   icon?: JSX.Element;
   shadowColor?: string;
 }
 
-const ResourceCard: React.FC<ResourceCardProps> = ({ description, icon, link, linkText, shadowColor }) => {
+const ResourceCard: React.FC<ResourceCardProps> = ({ description, icon, link, shadowColor, title }) => {
   return (
-    <div className={`relative mb-14 w-full max-w-md p-5 font-redhat`}>
-      {/* Main Card with Border & Shadow */}
-      <div className={`relative flex flex-col rounded-3xl border-2 border-black bg-white p-12 ${shadowColor || ""}`}>
+    <div className="relative mb-14 w-full max-w-md p-5 font-redhat">
+      {/* Wrap entire card in anchor to make the whole card clickable */}
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`relative flex flex-col rounded-3xl border-2 border-black bg-white p-12 ${shadowColor || ""} transition duration-300 hover:scale-105`}
+      >
         {/* Title & Icon Row */}
         <div className="flex w-full items-center justify-between">
-          {/* Title Link */}
-          <a href={link} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold text-blue-600 hover:underline">
-            {linkText}
-          </a>
-          {/* Icon (Logo) */}
+          <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
           {icon}
         </div>
+
         {/* Description */}
         <p className="mt-4 text-left font-semibold text-gray-700">{description}</p>
-      </div>
+      </a>
     </div>
   );
 };
