@@ -1,14 +1,18 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserInfoBox = () => {
   const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    console.log("Edit mode", editMode);
+  }, [editMode]);
 
   return (
     <div className="w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
       <div className="mb-6 flex flex-row justify-between font-redhat">
         <p className="font-redhat text-xl font-bold">User Info</p>
-        <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(true)}>
+        <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(!editMode)}>
           <Icon icon="material-symbols:edit" width="24" height="24" color="#0668B3" />
           <p className="font-semibold text-saseBlue">Edit</p>
         </button>
@@ -17,22 +21,37 @@ const UserInfoBox = () => {
         <div className="w-1/3">
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Name:</p>
-            <input type="text" placeholder="[First_Last]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
+            <input
+              type="text"
+              placeholder="[First_Last]"
+              className={editMode ? "rounded-md border border-black bg-white p-2" : "rounded-md border border-black bg-gray-300 p-2"}
+              disabled={!editMode}
+            />
           </div>
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Bio:</p>
-            <input type="text" placeholder="[Bio]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
+            <input
+              type="text"
+              placeholder="[Bio]"
+              className={editMode ? "rounded-md border border-black bg-white p-2" : "rounded-md border border-black bg-gray-300 p-2"}
+              disabled={!editMode}
+            />
           </div>
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Discord:</p>
-            <input type="text" placeholder="[Discord_Username]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
+            <input
+              type="text"
+              placeholder="[Discord_Username]"
+              className={editMode ? "rounded-md border border-black bg-white p-2" : "rounded-md border border-black bg-gray-300 p-2"}
+              disabled={!editMode}
+            />
           </div>
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Roles:</p>
             <input
               type="text"
               placeholder="[Ex. Webdev member, Interns]"
-              className="rounded-md border border-black bg-gray-300 p-2"
+              className={editMode ? "rounded-md border border-black bg-white p-2" : "rounded-md border border-black bg-gray-300 p-2"}
               disabled={!editMode}
             />
           </div>
@@ -40,7 +59,12 @@ const UserInfoBox = () => {
         <div className="mr-10 w-1/3">
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Email:</p>
-            <input type="text" placeholder="[Email]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
+            <input
+              type="text"
+              placeholder="[Email]"
+              className={editMode ? "rounded-md border border-black bg-white p-2" : "rounded-md border border-black bg-gray-300 p-2"}
+              disabled={!editMode}
+            />
           </div>
           <div className="mb-4 flex flex-col">
             <p>Password:</p>
