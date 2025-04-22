@@ -16,7 +16,8 @@ export const profileSchema = z.object({
   first_name: z.string(), // allow empty string if needed
   last_name: z.string(), // allow empty string if needed
   phone: z.string().optional(),
-
+  discord: z.string().optional(),
+  roles: z.string().optional(),
   resume: z.string().optional(),
   linkedin: z.string().optional(),
   portfolio: z.string().optional(),
