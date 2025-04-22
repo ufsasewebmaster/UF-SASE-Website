@@ -1,3 +1,4 @@
+import { useIsMobile } from "@/client/hooks/useIsMobile";
 import { cn } from "@/shared/utils";
 import React, { useEffect, useRef, useState } from "react";
 import ImageButton from "./ImageButton";
@@ -26,6 +27,14 @@ const EventsSlides: React.FC = () => {
   const fetchedSlides = useRef(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+
+  const [selectedCategories, setSelectedCategories] = useState<Array<string>>([]);
+  const categories = ["GBM", "Workshop", "Professional", "Service"];
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) => (prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]));
+  };
 
   type RawSlideData = Omit<SlideData, "date"> & { date: string };
 
@@ -67,26 +76,37 @@ const EventsSlides: React.FC = () => {
     })();
   }, []);
 
+  const filteredSlides =
+    semesters[selectedSemester]?.slides.filter((deck) => {
+      if (selectedCategories.length === 0) return true;
+      return selectedCategories.some((cat) => deck.category.toLowerCase().includes(cat.toLowerCase()));
+    }) || [];
+
   return (
     <div className="relative flex w-screen flex-col items-center gap-5 p-5 font-redhat">
+      {/* Semester Buttons */}
       {semesters.length > 0 && (
-        <div className="mb-6 flex w-full gap-4 border-b-2 border-border">
-          {semesters.map((semester) => (
-            <button
-              key={semester.name}
-              className={`border-b-2 p-3 px-6 transition-all duration-300 ease-in-out ${
-                semesters[selectedSemester]?.name === semester.name
-                  ? "border-saseGreen font-semibold text-foreground"
-                  : "border-transparent text-foreground hover:border-gray-400"
-              }`}
-              onClick={() => setSelectedSemester(semesters.indexOf(semester))}
-            >
-              {semester.name}
-            </button>
-          ))}
+        <div className={cn("mb-6 w-full border-b-2 border-border pr-44", isMobile ? "scrollbar-thinner overflow-x-auto whitespace-nowrap" : "")}>
+          <div className="flex w-max min-w-full gap-4">
+            {semesters.map((semester) => (
+              <button
+                key={semester.name}
+                className={cn(
+                  "whitespace-nowrap border-b-2 p-3 px-6 transition-all duration-300 ease-in-out",
+                  semesters[selectedSemester]?.name === semester.name
+                    ? "border-saseGreen font-semibold text-foreground"
+                    : "border-transparent text-foreground hover:border-gray-400",
+                )}
+                onClick={() => setSelectedSemester(semesters.indexOf(semester))}
+              >
+                {semester.name}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
+      {/* View Dropdown (Top right) */}
       <div ref={dropdownRef} className="absolute right-5 top-5 z-10">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -107,8 +127,8 @@ const EventsSlides: React.FC = () => {
 
         <div
           className={cn("absolute left-0 w-40 transform overflow-hidden rounded-xl border border-border bg-background transition-all duration-200", {
-            "translate-y-0 opacity-100": isDropdownOpen,
-            "-translate-y-2 opacity-0": !isDropdownOpen,
+            "pointer-events-auto translate-y-0 opacity-100": isDropdownOpen,
+            "pointer-events-none -translate-y-2 opacity-0": !isDropdownOpen,
           })}
         >
           {view === "slides" ? (
@@ -135,6 +155,36 @@ const EventsSlides: React.FC = () => {
         </div>
       </div>
 
+      {/* Category Filter */}
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        {categories.map((category) => {
+          const isSelected = selectedCategories.includes(category);
+          return (
+            <button
+              key={category}
+              onClick={() => toggleCategory(category)}
+              className={cn(
+                "rounded-full px-3 py-1 text-sm font-semibold transition-colors",
+                isSelected
+                  ? "bg-saseGreen text-white"
+                  : "transform bg-gray-200 text-gray-800 transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-300",
+              )}
+            >
+              {category}
+            </button>
+          );
+        })}
+        {selectedCategories.length > 0 && (
+          <button
+            onClick={() => setSelectedCategories([])}
+            className="rounded-full bg-red-400 px-3 py-1 text-xs font-semibold text-white hover:bg-red-500"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* Slides Display */}
       {view === "slides" ? (
         error ? (
           <div className="flex h-full w-full items-center justify-center">
@@ -146,27 +196,31 @@ const EventsSlides: React.FC = () => {
           </div>
         ) : semesters.length > 0 ? (
           <div className="grid h-full w-full grid-cols-1 justify-items-center gap-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {semesters[selectedSemester]?.slides.map((deck, index) => (
-              <div key={index} className="flex w-full flex-col items-center">
-                {deck.thumbnail_url && (
-                  <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} category={deck.category} />
-                )}
-                {deck.category && deck.name && (
-                  <div className="mt-2 text-center text-sm text-foreground">
-                    <p>
-                      <span className="font-semibold">{deck.category}:</span> <span>{deck.name}</span>
-                    </p>
-                    <p className="text-xs text-gray-700">
-                      {deck.date.toLocaleDateString("en-US", {
-                        year: "2-digit",
-                        month: "numeric",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+            {filteredSlides.length > 0 ? (
+              filteredSlides.map((deck, index) => (
+                <div key={index} className="flex w-full flex-col items-center">
+                  {deck.thumbnail_url && (
+                    <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} category={deck.category} />
+                  )}
+                  {deck.category && deck.name && (
+                    <div className="mt-2 text-center text-sm text-foreground">
+                      <p>
+                        <span className="font-semibold">{deck.category}:</span> <span>{deck.name}</span>
+                      </p>
+                      <p className="text-xs text-foreground">
+                        {deck.date.toLocaleDateString("en-US", {
+                          year: "2-digit",
+                          month: "numeric",
+                          day: "numeric",
+                        })}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full mt-10 text-center text-lg text-muted-foreground">No events found for the selected categories.</div>
+            )}
           </div>
         ) : (
           <div className="flex h-full w-full items-center justify-center">

@@ -5,7 +5,7 @@ const UserInfoBox = () => {
   const [editMode, setEditMode] = useState(false);
 
   return (
-    <div className="w-3/4 rounded-2xl bg-white px-10 py-6 shadow-xl">
+    <div className="w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
       <div className="mb-6 flex flex-row justify-between font-redhat">
         <p className="font-redhat text-xl font-bold">User Info</p>
         <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(true)}>
@@ -18,10 +18,6 @@ const UserInfoBox = () => {
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Name:</p>
             <input type="text" placeholder="[First_Last]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
-          </div>
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">UFID:</p>
-            <input type="text" placeholder="[UFID]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
           </div>
           <div className="mb-4 flex flex-col gap-2">
             <p className="pl-2">Bio:</p>

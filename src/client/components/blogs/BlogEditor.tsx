@@ -1,6 +1,6 @@
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useBlogFunctions } from "../../hooks/useBlogsFunctions";
 import { Logo } from "../navigation/Logo";
 import { Button } from "../ui/button";
@@ -8,20 +8,22 @@ import BlogCarousel from "./BlogCarousel";
 import BlogForm from "./BlogForm";
 
 const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
-  console.log("blog editor opened");
-  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
+  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setCurrentBlog, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
     useBlogFunctions();
-
+  const [tagsInput, setTagsInput] = useState<string>("");
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
+    console.log(blog.tags);
+    // Set the current blog for editing
+    setCurrentBlog(blog);
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
-    setNewBlogTags(blog.tags || []);
+    setTagsInput(blog.tags.join(","));
     return () => {
       document.body.style.overflow = originalStyle;
     };
-  }, []);
+  }, [blog, setCurrentBlog, setNewBlogContent, setNewBlogTags, setNewBlogTitle]);
 
   const handleClose = () => {
     console.log("Close button clicked");
@@ -32,12 +34,23 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
       onClose();
     }
   };
+
   const handleEditButtonClicked = () => {
     if (setIsEditing) {
       setIsEditing(!isEditing);
     }
     console.log("Editing status set to: ", isEditing);
   };
+
+  const handleEditFormSubmit = () => {
+    handleUpdateBlog();
+    if (setIsEditing) {
+      setIsEditing(!isEditing);
+    } else {
+      console.log("Error: setIsEditing hook not found");
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-white">
       <div className="mx-auto max-w-6xl px-4 py-8">
@@ -105,8 +118,10 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
               error={error}
               onTitleChange={setNewBlogTitle}
               onContentChange={setNewBlogContent}
+              tagsInput={tagsInput}
+              setTagsInput={setTagsInput}
               onTagsChange={setNewBlogTags}
-              onSubmit={handleUpdateBlog}
+              onSubmit={handleEditFormSubmit}
               onCancel={() => setIsEditing && setIsEditing(false)}
             />
             {/* nav buttons */}

@@ -22,6 +22,7 @@ export interface BlogCardProps {
   setExpandedBlogId: (id: string | null) => void;
   isEditing?: boolean;
   setIsEditing?: (state: boolean) => void;
+  displayEditButton: boolean;
 }
 
 export interface BlogExpandedProps {
@@ -38,9 +39,10 @@ export interface BlogEditorProps {
   blog: BlogDisplay;
   onClose: () => void;
   showBackButton?: boolean;
-  isEditing: boolean;
-  setIsEditing: (state: boolean) => void;
-  editView?: boolean;
+  isEditing?: boolean;
+  setIsEditing?: (state: boolean) => void;
+  onNavigatePrev?: () => void;
+  onNavigateNext?: () => void;
 }
 
 export interface BlogHeaderProps {
@@ -62,6 +64,8 @@ export interface BlogFormProps {
   onTagsChange: (tags: Array<string>) => void;
   onSubmit: () => void;
   onCancel: () => void;
+  tagsInput?: string;
+  setTagsInput?: (input: string) => void;
 }
 
 export interface BlogTagsProps {

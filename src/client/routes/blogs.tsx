@@ -2,6 +2,7 @@ import { cn } from "@/shared/utils";
 import { Button } from "@components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { imageUrls } from "../assets/imageUrls";
 import BlogCard from "../components/blogs/BlogCard";
 import BlogContainer from "../components/blogs/BlogContainer";
 import BlogEditor from "../components/blogs/BlogEditor";
@@ -10,8 +11,17 @@ import BlogForm from "../components/blogs/BlogForm";
 import BlogHeader from "../components/blogs/BlogHeader";
 import BlogTags from "../components/blogs/BlogTags";
 import { useBlogFunctions } from "../hooks/useBlogsFunctions";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/blogs")({
+  meta: () => [
+    ...seo({
+      title: "Blogs | UF SASE",
+      description: "Blogs page for UF SASE, view and search through all blog posts related to the organization.",
+      image: imageUrls["SASELogo.png"],
+    }),
+  ],
+
   component: BlogsPage,
 });
 
@@ -61,7 +71,6 @@ function BlogsPage() {
   const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;
 
   const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
-
   // blog groups
   const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
   const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;
@@ -170,6 +179,7 @@ function BlogsPage() {
                       setExpandedBlogId={setExpandedBlogId}
                       isEditing={isEditing}
                       setIsEditing={setIsEditing}
+                      displayEditButton={isAuthenticated}
                     />
                   ))
                 ) : (

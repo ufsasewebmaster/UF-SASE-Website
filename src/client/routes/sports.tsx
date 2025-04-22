@@ -11,7 +11,7 @@ export const Route = createFileRoute("/sports")({
   meta: () => [
     ...seo({
       title: "Sports | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Learn about UF SASE intramual sports teams such as Basketball, Volleyball, Indoor Soccer, Ultimate Frisbee, Pickleball and more.",
       image: imageUrls["SASELogo.png"],
     }),
   ],
@@ -32,9 +32,10 @@ export const Route = createFileRoute("/sports")({
           <InfoCard
             text={
               <>
-                <strong>SASE Intramurals</strong> include <strong>6v6 Indoor Volleyball, Indoor Soccer, Ultimate Frisbee, Doubles Pickleball </strong>{" "}
-                and more, available in Fall, Spring, and Summer semesters! SASE Sports provides a fantastic opportunity to meet new people, and the
-                best part is, no prior experience is required to play. Make sure to sign up for an amazing experience!
+                <strong>SASE Intramurals</strong> include{" "}
+                <strong>6v6 Indoor Volleyball, Indoor Soccer, Ultimate Frisbee, Doubles Pickleball, Basketball, Tennis, Flag Football </strong> and
+                more, available in Fall, Spring, and Summer semesters! SASE Sports provides a fantastic opportunity to meet new people, and the best
+                part is, no prior experience is required to play. Make sure to sign up for an amazing experience!
               </>
             }
           />

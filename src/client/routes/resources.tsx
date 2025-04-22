@@ -79,7 +79,8 @@ export const Route = createFileRoute("/resources")({
   meta: () => [
     ...seo({
       title: "Resources | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description:
+        "Resources for students provided by UF SASE, such as study materials, workshop slides, career resources, and class connector forms.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

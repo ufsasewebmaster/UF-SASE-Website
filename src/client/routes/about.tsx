@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
   meta: () => [
     ...seo({
       title: "About | UF SASE",
-      description: "UF Society of Asian Scientists & Engineers",
+      description: "Learn more about UF SASE's mission, our history, achievements, and how to contact us.",
       image: imageUrls["SASELogo.png"],
     }),
   ],

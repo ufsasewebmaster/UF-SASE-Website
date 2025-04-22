@@ -2,6 +2,7 @@ import { imageUrls } from "@/client/assets/imageUrls";
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
+import { useBlogFunctions } from "../../hooks/useBlogsFunctions";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
@@ -14,7 +15,8 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   setIsEditing,
   showBackButton = true,
 }) => {
-  console.log("editing value on expansion: ", isEditing);
+  const { startEditingBlog } = useBlogFunctions();
+  console.log(blog);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -24,14 +26,18 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   }, []);
 
   const handleClose = () => {
-    console.log("Close button clicked");
     if (setIsEditing) setIsEditing(false);
     if (onClose) onClose();
   };
 
   const handleEditButtonClicked = () => {
-    if (setIsEditing) setIsEditing(!isEditing);
-    console.log("Editing status set to: ", isEditing);
+    if (setIsEditing) {
+      setIsEditing(!isEditing);
+      // If switching to edit mode, set the current blog
+      if (!isEditing) {
+        startEditingBlog(blog);
+      }
+    }
   };
 
   const renderContent = () => {
