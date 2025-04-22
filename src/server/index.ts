@@ -8,6 +8,7 @@ import eventRoutes from "@api/events";
 import profileRoutes from "@api/profile";
 import roleRoutes from "@api/roles";
 import saseRoutes from "@api/saseInfo";
+import sheetsRoutes from "@api/sheets";
 import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
 import infoRoutes from "@api/userInfo";
@@ -45,4 +46,5 @@ app
   .route("/api", profileRoutes)
   .route("/api", contactRoutes)
   .route("/api", eventRoutes)
+  .route("/api", sheetsRoutes)
   .route("/api", roleRoutes);
