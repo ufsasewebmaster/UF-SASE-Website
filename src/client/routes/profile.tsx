@@ -68,7 +68,15 @@ export const Route = createFileRoute("/profile")({
               handleLogout={handleLogout}
             />
           ) : activeSection === "userinfo" ? (
-            <UserInfoBox />
+            <UserInfoBox
+              first_name={profile?.first_name || ""}
+              last_name={profile?.last_name || ""}
+              linkedin={profile?.linkedin || ""}
+              discord={profile?.discord || ""}
+              majors={profile?.majors || ""}
+              minors={profile?.minors || ""}
+              roles={profile?.roles || ""}
+            />
           ) : activeSection === "security" ? (
             <SecurityBox />
           ) : activeSection === "settings" ? (

@@ -1,6 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -31,6 +31,7 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
     formState: { errors },
     handleSubmit,
     register,
+    setValue,
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -46,6 +47,12 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
   };
 
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setValue("username", username);
+    setValue("email", email);
+    setValue("bio", bio);
+  }, [bio, email, username]);
 
   const initializeInterface = (username?: string, email?: string, bio?: string): SelectedFields => {
     const fields: SelectedFields = {};
