@@ -134,11 +134,12 @@ profileRoutes.patch("/profile", async (c) => {
               .update(Schema.users)
               .set({ [key]: value })
               .where(eq(Schema.users.id, userID));
-          } else if (specialColumns.has(key)) {
-            const roleArray: Array<string> = body.roles.split(",");
-            console.log(roleArray);
-            await db.insert(Schema.roles);
           }
+        }
+        if (specialColumns.has(key)) {
+          const roleArray: Array<string> = body.roles.split(",");
+          console.log(roleArray);
+          await insertRoles(roleArray, userID);
         }
       });
 
@@ -152,6 +153,21 @@ profileRoutes.patch("/profile", async (c) => {
     return createErrorResponse(c, "UPDATE_PROFILE_ERROR", "Failed to update info", 500);
   }
 });
+
+const insertRoles = (roleArray: Array<string>, userID: string) => {
+  console.log(roleArray);
+  return Promise.all(
+    roleArray.map(async (raw) => {
+      const role = raw.trim();
+      try {
+        await db.insert(Schema.roles).values({ name: role }).onConflictDoNothing();
+        await db.insert(Schema.userRoleRelationship).values({ user_id: userID, role }).onConflictDoNothing();
+      } catch (err) {
+        console.error(`Error inserting role “${role}”:`, err);
+      }
+    }),
+  );
+};
 
 export default profileRoutes;
 
