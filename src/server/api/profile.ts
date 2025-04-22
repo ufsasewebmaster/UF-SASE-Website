@@ -107,6 +107,7 @@ profileRoutes.patch("/profile", async (c) => {
       const personalColumns = columnNames[0];
       const professionalColumns = columnNames[1];
       const userInfoColumns = columnNames[2];
+      const specialColumns = columnNames[3];
 
       const userID = result[0].user_id;
 
@@ -133,6 +134,10 @@ profileRoutes.patch("/profile", async (c) => {
               .update(Schema.users)
               .set({ [key]: value })
               .where(eq(Schema.users.id, userID));
+          } else if (specialColumns.has(key)) {
+            const roleArray: Array<string> = body.roles.split(",");
+            console.log(roleArray);
+            await db.insert(Schema.roles);
           }
         }
       });
@@ -154,5 +159,7 @@ function generateColumns() {
   const personalInfoColumns = new Set(Object.values(getTableColumns(Schema.personalInfo)).map((col) => col.name));
   const professionalInfoColumns = new Set(Object.values(getTableColumns(Schema.professionalInfo)).map((col) => col.name));
   const userInfoColumns = new Set(["username", "email", "time_updated"]);
-  return [personalInfoColumns, professionalInfoColumns, userInfoColumns];
+  //For columns that require special processing or database touching things that are not really columns- just roles for now
+  const specialColumns = new Set(["roles"]);
+  return [personalInfoColumns, professionalInfoColumns, userInfoColumns, specialColumns];
 }
