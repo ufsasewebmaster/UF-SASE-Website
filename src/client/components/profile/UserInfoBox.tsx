@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface updateFields {
   first_name?: string;
@@ -30,7 +30,17 @@ const createInterface = (name?: string, majors?: string, minors?: string, discor
   return fields;
 };
 
-const UserInfoBox: React.FC = () => {
+interface UserInfoBoxProps {
+  first_name: string;
+  last_name: string;
+  majors: string;
+  minors: string;
+  linkedin: string;
+  discord: string;
+  roles: string;
+}
+
+const UserInfoBox: React.FC<UserInfoBoxProps> = ({ discord, first_name, last_name, linkedin, majors, minors, roles }) => {
   const [editMode, setEditMode] = useState(false);
 
   const [nameInput, setNameInput] = useState("");
@@ -40,14 +50,14 @@ const UserInfoBox: React.FC = () => {
   const [linkedinInput, setLinkedinInput] = useState("");
   const [rolesInput, setRolesInput] = useState("");
 
-  const resetInputs = () => {
-    setNameInput("");
-    setMajorsInput("");
-    setMinorsInput("");
-    setDiscordInput("");
-    setLinkedinInput("");
-    setRolesInput("");
-  };
+  useEffect(() => {
+    setNameInput(String(first_name + " " + last_name));
+    setMajorsInput(majors);
+    setMinorsInput(minors);
+    setLinkedinInput(linkedin);
+    setDiscordInput(discord);
+    setRolesInput(roles);
+  }, [first_name, last_name, majors, minors, linkedin, discord, roles]);
 
   const HandleSaveButtonClicked = () => {
     setEditMode(false);
@@ -57,7 +67,6 @@ const UserInfoBox: React.FC = () => {
         method: "PATCH",
         body: JSON.stringify(updatedFields),
       });
-      resetInputs();
     } catch {
       console.log("Profile couldn't be updated from user info box");
     }
@@ -90,7 +99,7 @@ const UserInfoBox: React.FC = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="pl-2">majors(s):</label>
+            <label className="pl-2">Majors(s):</label>
             <input
               type="text"
               placeholder="[Enter your majors(s)]"
@@ -101,7 +110,7 @@ const UserInfoBox: React.FC = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="pl-2">minors(s):</label>
+            <label className="pl-2">Minors(s):</label>
             <input
               type="text"
               placeholder="[Enter your minors(s)]"
