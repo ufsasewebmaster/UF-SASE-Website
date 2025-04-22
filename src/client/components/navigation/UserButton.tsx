@@ -10,7 +10,7 @@ interface UserButtonProps {
 export const UserButton: React.FC<UserButtonProps> = ({ isHomePage, isLoggedIn, onLogout }) =>
   isLoggedIn ? (
     <Link to="/profile">
-      <button className={`transform rounded-full ${isHomePage ? "text-white" : "text-foreground"} duration-300 hover:scale-105 hover:text-[#000000]`}>
+      <button className={`transform rounded-full ${isHomePage ? "text-white" : "text-foreground"} duration-300 hover:scale-105`}>
         <span className="icon-[qlementine-icons--user-16] h-8 w-8"></span>
       </button>
     </Link>
