@@ -65,8 +65,27 @@ const MentorMenteeGraph: React.FC = () => {
 
   return (
     <ClientOnly>
-      <div ref={containerRef} style={{ width: "100%", height: "600px", border: "1px solid #ccc" }}>
-        {!graphData && <p>Loading data…</p>}
+      <div
+        ref={containerRef}
+        style={{
+          width: "100%",
+          height: "600px",
+          border: "1px solid #ccc",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {!graphData && (
+          <p
+            style={{
+              fontSize: "2.25rem",
+              fontWeight: 500,
+            }}
+          >
+            Loading data…
+          </p>
+        )}{" "}
         {graphData && (
           <ForceGraph2D
             ref={fgRef as React.MutableRefObject<ForceGraphMethods<FgNode, FgLink>>}
