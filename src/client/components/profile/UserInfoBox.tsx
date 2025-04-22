@@ -53,7 +53,6 @@ const UserInfoBox: React.FC = () => {
     setEditMode(false);
     try {
       const updatedFields = createInterface(nameInput, majorsInput, minorsInput, discordInput, linkedinInput, rolesInput);
-      console.log(updatedFields);
       fetch("api/profile", {
         method: "PATCH",
         body: JSON.stringify(updatedFields),
