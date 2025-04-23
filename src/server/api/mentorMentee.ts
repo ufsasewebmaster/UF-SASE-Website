@@ -21,8 +21,7 @@ mentorMenteeRoutes.get("/mentorMentee/all", async (c) => {
 // TODO: admin verification?
 mentorMenteeRoutes.post("mentorMentee/single", async (c) => {
   try {
-    const mentorId = c.req.query("mentorId");
-    const menteeId = c.req.query("menteeId");
+    const { menteeId, mentorId } = await c.req.json();
     if (!mentorId || !menteeId) {
       return createErrorResponse(c, "MISSING_PARAMETERS", "missing parameters", 422);
     }
@@ -38,8 +37,7 @@ mentorMenteeRoutes.post("mentorMentee/single", async (c) => {
 
 mentorMenteeRoutes.post("mentorMentee/invite", async (c) => {
   try {
-    const mentorId = c.req.query("mentorId");
-    const menteeId = c.req.query("menteeId");
+    const { menteeId, mentorId } = await c.req.json();
     if (!mentorId || !menteeId) {
       return createErrorResponse(c, "MISSING_PARAMETERS", "missing parameters", 422);
     }

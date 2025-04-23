@@ -1,6 +1,8 @@
-import { addMentorMenteeInvite, addMentorMenteeRelation, getAllMentees, getAllMentors } from "@/client/api/mentorMentee";
-import type { Mentee, Mentor } from "@/shared/schema";
+import { addMentorMenteeInvite, addMentorMenteeRelation } from "@/client/api/mentorMentee";
+import { fetchUsers } from "@/client/api/users";
+import type { MinimalUser } from "@/shared/schema";
 import { useAuth } from "@hooks/AuthContext";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import AddPairingButton from "./AddPairingButton";
 import type { Option } from "./SearchableSelect";
@@ -8,16 +10,31 @@ import SearchableSelect from "./SearchableSelect";
 
 export default function MMPairingForm() {
   const { id, isAdmin } = useAuth();
+
+  // Do not show if user is not signed in
+  if (!id) {
+    return (
+      <div className="p-4 text-center text-gray-600">
+        Please{" "}
+        <Link to="/login" className="text-blue-600 underline">
+          sign in
+        </Link>{" "}
+        to add mentor / mentee pairings.
+      </div>
+    );
+  }
+
   const [mode, setMode] = useState<"mentor" | "mentee">("mentor");
-  const [mentors, setMentors] = useState<Array<Mentor>>([]);
-  const [mentees, setMentees] = useState<Array<Mentee>>([]);
+  // const [mentors, setMentors] = useState<Array<Mentor>>([]);
+  // const [mentees, setMentees] = useState<Array<Mentee>>([]);
+  const [users, setUsers] = useState<Array<MinimalUser>>([]);
+
   const [mentorId, setMentorId] = useState("");
   const [menteeId, setMenteeId] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllMentors().then(setMentors);
-    getAllMentees().then(setMentees);
+    fetchUsers().then(setUsers);
   }, []);
 
   useEffect(() => {
@@ -42,7 +59,7 @@ export default function MMPairingForm() {
         alert("Invite sent!");
       }
     } catch (err) {
-      alert("Failed: " + err);
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -52,18 +69,15 @@ export default function MMPairingForm() {
     setMode((m) => (m === "mentor" ? "mentee" : "mentor"));
   };
 
-  const realMentorOptions: Array<Option> = mentors.map((m) => ({
-    value: m.mentorId,
-    label: `${m.firstName} ${m.lastName}`,
-  }));
-  const realMenteeOptions: Array<Option> = mentees.map((m) => ({
-    value: m.menteeId,
-    label: `${m.firstName} ${m.lastName}`,
+  const allOptions: Array<Option> = users.map((u) => ({
+    value: u.id,
+    label: u.username,
   }));
 
-  const mentorOptions = !isAdmin && mode === "mentee" && id ? [{ value: id, label: "You" }, ...realMentorOptions] : realMentorOptions;
+  // when locked, prepend “You”
+  const mentorOptions = !isAdmin && mode === "mentee" && id ? [{ value: id, label: "You" }, ...allOptions] : allOptions;
 
-  const menteeOptions = !isAdmin && mode === "mentor" && id ? [{ value: id, label: "You" }, ...realMenteeOptions] : realMenteeOptions;
+  const menteeOptions = !isAdmin && mode === "mentor" && id ? [{ value: id, label: "You" }, ...allOptions] : allOptions;
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-6 p-4">
@@ -72,7 +86,7 @@ export default function MMPairingForm() {
         <div className="flex-1">
           <label className="mb-1 block">Select Mentor</label>
           <SearchableSelect
-            className="w-[172px] transition-opacity duration-200 disabled:opacity-50"
+            className="transition-opacity duration-200 disabled:opacity-50"
             options={mentorOptions}
             value={mentorId}
             onChange={setMentorId}
@@ -102,7 +116,7 @@ export default function MMPairingForm() {
         <div className="flex-1">
           <label className="mb-1 block">Select Mentee</label>
           <SearchableSelect
-            className="w-[172px] transition-opacity duration-200 disabled:opacity-50"
+            className="transition-opacity duration-200 disabled:opacity-50"
             options={menteeOptions}
             value={menteeId}
             onChange={setMenteeId}

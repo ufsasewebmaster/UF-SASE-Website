@@ -44,3 +44,9 @@ export const deleteUserSchema = z.object({
   id: z.string().min(1, "User ID is required."),
 });
 export type DeleteUser = z.infer<typeof deleteUserSchema>;
+
+export const minimalUserSchema = z.object({
+  id: z.string().min(1, "User ID is required."),
+  username: z.string().min(1, "Username is required."),
+});
+export type MinimalUser = z.infer<typeof minimalUserSchema>;
