@@ -11,15 +11,15 @@ const getBlogTags = async (blogId: string) => {
   return db
     .select({ name: Schema.blogTags.name })
     .from(Schema.blogTagRelationship)
-    .innerJoin(Schema.blogTags, eq(Schema.blogTags.id, Schema.blogTagRelationship.tag_id))
-    .where(eq(Schema.blogTagRelationship.blog_id, blogId))
+    .innerJoin(Schema.blogTags, eq(Schema.blogTags.id, Schema.blogTagRelationship.tagId))
+    .where(eq(Schema.blogTagRelationship.blogId, blogId))
     .then((tags) => tags.map((t) => t.name));
 };
 
 // helper to add or update tags
 const updateBlogTags = async (blogId: string, tags: Array<string> = []) => {
   // delete existing relationships
-  await db.delete(Schema.blogTagRelationship).where(eq(Schema.blogTagRelationship.blog_id, blogId));
+  await db.delete(Schema.blogTagRelationship).where(eq(Schema.blogTagRelationship.blogId, blogId));
 
   // add new tag relationships
   if (tags.length > 0) {
@@ -41,7 +41,7 @@ const updateBlogTags = async (blogId: string, tags: Array<string> = []) => {
         }
 
         // create relationship
-        await db.insert(Schema.blogTagRelationship).values({ blog_id: blogId, tag_id: tagId });
+        await db.insert(Schema.blogTagRelationship).values({ blogId: blogId, tagId: tagId });
       }),
     );
   }

@@ -1,14 +1,14 @@
+import { faqData as mentorFaqData } from "@/client/components/programs/MentorMentee/MMfaq"; // assumed analogous to faqInterns
 import { imageUrls } from "@assets/imageUrls";
 import FAQ from "@components/programs/FAQCard";
-import { faqData as mentorFaqData } from "@components/programs/faqMentorMentee"; // assumed analogous to faqInterns
 import InfoCard from "@components/programs/InfoCard";
+import MMPairingForm from "@components/programs/MentorMentee/MMPairingForm";
 import { ClientOnly } from "@shared/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 import { seo } from "../utils/seo";
-import { addMentorMenteeRelation, getAllMentees, getAllMentors } from "../api/mentorMentee";
 
-const MentorMenteeGraph = lazy(() => import("@components/programs/MentorMenteeGraph"));
+const MentorMenteeGraph = lazy(() => import("@/client/components/programs/MentorMentee/MMGraph"));
 
 export const Route = createFileRoute("/mentor-mentee")({
   meta: () => [
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/mentor-mentee")({
           <div className="flex w-full flex-1">
             <Suspense
               fallback={
-                <div className="flex flex-1 justify-center items-center">
+                <div className="flex flex-1 items-center justify-center">
                   <span className="text-4xl font-medium">Loading graph…</span>
                 </div>
               }
@@ -37,6 +37,7 @@ export const Route = createFileRoute("/mentor-mentee")({
           </div>
         </ClientOnly>
 
+        <MMPairingForm></MMPairingForm>
 
         {/* Header Section */}
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">

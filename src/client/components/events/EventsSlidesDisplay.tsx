@@ -8,8 +8,8 @@ interface SlideData {
   name: string;
   date: Date;
   semester: string;
-  embed_url: string;
-  thumbnail_url: string;
+  embedUrl: string;
+  thumbnailUrl: string;
   relative_order: number;
 }
 
@@ -199,8 +199,8 @@ const EventsSlides: React.FC = () => {
             {filteredSlides.length > 0 ? (
               filteredSlides.map((deck, index) => (
                 <div key={index} className="flex w-full flex-col items-center">
-                  {deck.thumbnail_url && (
-                    <ImageButton imageUrl={deck.thumbnail_url} slideUrl={deck.embed_url} title={deck.name} category={deck.category} />
+                  {deck.thumbnailUrl && (
+                    <ImageButton imageUrl={deck.thumbnailUrl} slideUrl={deck.embedUrl} title={deck.name} category={deck.category} />
                   )}
                   {deck.category && deck.name && (
                     <div className="mt-2 text-center text-sm text-foreground">

@@ -21,7 +21,7 @@ saseRoutes.post("/users/sase", async (c) => {
 saseRoutes.get("/users/sase/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const sase_info = await db.select().from(Schema.saseInfo).where(eq(Schema.saseInfo.user_id, user_id));
+    const sase_info = await db.select().from(Schema.saseInfo).where(eq(Schema.saseInfo.userId, user_id));
     return createSuccessResponse(c, sase_info, "SASE info retrieved successfully");
   } catch (error) {
     console.error("Error retrieving SASE info:", error);

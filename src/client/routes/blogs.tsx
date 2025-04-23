@@ -60,7 +60,7 @@ function BlogsPage() {
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
   const processedBlogs = (blogs.data || []).map((blog) => ({
     ...blog,
-    author: blog.author_id || "SASE at UF",
+    author: blog.authorId || "SASE at UF",
     images: blog.images || [],
     read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
     tags: blog.tags || [],
@@ -70,7 +70,7 @@ function BlogsPage() {
   // filter blogs
   const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;
 
-  const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+  const sortedBlogs = [...filteredBlogs].sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
   // blog groups
   const recentBlogs = !activeTag ? sortedBlogs.slice(0, 2) : [];
   const otherBlogs = !activeTag ? sortedBlogs.slice(2) : sortedBlogs;

@@ -44,7 +44,7 @@ export const useBlogFunctions = () => {
         title: newBlogTitle,
         content: newBlogContent,
         tags: newBlogTags,
-        author_id: id,
+        authorId: id,
         images: [],
       } as unknown as BlogBase,
       {
@@ -114,7 +114,7 @@ export const useBlogFunctions = () => {
     return blogsToUse.map((blog) => ({
       ...blog,
       images: blog.images || [],
-      author: blog.author_id || "UF SASE",
+      author: blog.authorId || "UF SASE",
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],
       displayEditButton: isAuthenticated,

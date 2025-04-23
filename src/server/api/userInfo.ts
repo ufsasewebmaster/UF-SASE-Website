@@ -23,7 +23,7 @@ infoRoutes.post("/users/personal", async (c) => {
 infoRoutes.get("/users/personal/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const rows = await db.select().from(Schema.personalInfo).where(eq(Schema.personalInfo.user_id, user_id));
+    const rows = await db.select().from(Schema.personalInfo).where(eq(Schema.personalInfo.userId, user_id));
     if (rows.length === 0) {
       return createErrorResponse(c, "NOT_FOUND", "No personal info", 404);
     }
@@ -37,10 +37,10 @@ infoRoutes.get("/users/personal/:id", async (c) => {
 
 infoRoutes.patch("/users/personal/:id", async (c) => {
   try {
-    const user_id = c.req.param("id");
+    const userId = c.req.param("id");
     const payload = await c.req.json();
     const updateInfo = personalInfoUpdateSchema.parse(payload);
-    const personal_info = await db.update(Schema.personalInfo).set(updateInfo).where(eq(Schema.personalInfo.user_id, user_id));
+    const personal_info = await db.update(Schema.personalInfo).set(updateInfo).where(eq(Schema.personalInfo.userId, userId));
     return createSuccessResponse(c, personal_info, "Personal info updated successfully");
   } catch (error) {
     console.log(error);
@@ -63,7 +63,7 @@ infoRoutes.post("/users/professional", async (c) => {
 infoRoutes.get("/users/professional/:id", async (c) => {
   try {
     const user_id = c.req.param("id");
-    const professional_info = await db.select().from(Schema.professionalInfo).where(eq(Schema.professionalInfo.user_id, user_id));
+    const professional_info = await db.select().from(Schema.professionalInfo).where(eq(Schema.professionalInfo.userId, user_id));
     return createSuccessResponse(c, professional_info, "Professional info retrieved successfully");
   } catch (error) {
     console.log(error);
@@ -76,7 +76,7 @@ infoRoutes.patch("/users/professional/:id", async (c) => {
     const user_id = c.req.param("id");
     const payload = await c.req.json();
     const updateInfo = professionalInfoUpdateSchema.parse(payload);
-    const professional_info = await db.update(Schema.professionalInfo).set(updateInfo).where(eq(Schema.professionalInfo.user_id, user_id));
+    const professional_info = await db.update(Schema.professionalInfo).set(updateInfo).where(eq(Schema.professionalInfo.userId, user_id));
     return createSuccessResponse(c, professional_info, "Professional info updated successfully");
   } catch (error) {
     console.log(error);

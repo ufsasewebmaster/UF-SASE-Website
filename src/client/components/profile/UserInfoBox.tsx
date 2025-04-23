@@ -5,8 +5,8 @@ import type { FieldConfig } from "./ConfigurableAccountBox";
 import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 
 interface updateFields {
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   majors?: string;
   minors?: string;
   linkedin?: string;
@@ -20,8 +20,8 @@ function createUpdateFields(updates: Record<string, string>): updateFields {
 
   if (updates.name?.trim()) {
     const [first, second] = updates.name.trim().split(" ", 2);
-    out.first_name = first;
-    if (second) out.last_name = second;
+    out.firstName = first;
+    if (second) out.lastName = second;
   }
   if (updates.majors?.trim()) out.majors = updates.majors;
   if (updates.minors?.trim()) out.minors = updates.minors;
@@ -34,8 +34,8 @@ function createUpdateFields(updates: Record<string, string>): updateFields {
 }
 
 interface UserInfoBoxProps {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   majors: string;
   minors: string;
   linkedin: string;
@@ -45,8 +45,8 @@ interface UserInfoBoxProps {
 
 export default function UserInfoBox(props: UserInfoBoxProps) {
   const [info, setInfo] = useState({
-    first_name: props.first_name,
-    last_name: props.last_name,
+    firstName: props.firstName,
+    lastName: props.lastName,
     majors: props.majors,
     minors: props.minors,
     linkedin: props.linkedin,
@@ -56,7 +56,7 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
   });
 
   const initialData: Record<string, string> = {
-    name: `${info.first_name} ${info.last_name}`,
+    name: `${info.firstName} ${info.lastName}`,
     majors: info.majors,
     minors: info.minors,
     linkedin: info.linkedin,

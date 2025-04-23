@@ -50,14 +50,14 @@ const writeError = (err: string) => {
 const folderMap = new Map<string, string>();
 const drive = google.drive({ version: "v3", auth });
 
-async function insertSlides(category: string, name: string, semester: string, thumbnail_url: string, embed_url: string, date: Date) {
+async function insertSlides(category: string, name: string, semester: string, thumbnailUrl: string, embedUrl: string, date: Date) {
   try {
     await db.insert(Schema.meetingSlides).values({
       category,
       name,
       semester,
-      thumbnail_url,
-      embed_url,
+      thumbnailUrl,
+      embedUrl,
       date,
     });
   } catch (err) {

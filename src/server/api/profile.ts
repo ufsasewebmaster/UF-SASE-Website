@@ -10,19 +10,21 @@ const profileSelection = {
   id: Schema.users.id,
   username: Schema.users.username,
   email: Schema.users.email,
-  time_added: Schema.users.time_added,
-  time_updated: Schema.users.time_updated,
-  first_name: Schema.personalInfo.first_name,
-  last_name: Schema.personalInfo.last_name,
+  timeAdded: Schema.users.timeAdded,
+  timeUpdated: Schema.users.timeUpdated,
+
+  firstName: Schema.personalInfo.firstName,
+  lastName: Schema.personalInfo.lastName,
   bio: Schema.personalInfo.bio,
   phone: Schema.personalInfo.phone,
   discord: Schema.personalInfo.discord,
-  resume: Schema.professionalInfo.resume_path,
+
+  resumePath: Schema.professionalInfo.resumePath,
   linkedin: Schema.professionalInfo.linkedin,
   portfolio: Schema.professionalInfo.portfolio,
   majors: Schema.professionalInfo.majors,
   minors: Schema.professionalInfo.minors,
-  graduation_semester: Schema.professionalInfo.graduation_semester,
+  graduationSemester: Schema.professionalInfo.graduationSemester,
 };
 
 profileRoutes.get("/profile", async (c) => {
@@ -37,9 +39,9 @@ profileRoutes.get("/profile", async (c) => {
     const result = await db
       .select(profileSelection)
       .from(Schema.users)
-      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.user_id))
-      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.user_id))
-      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.user_id))
+      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
+      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.userId))
+      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
       .where(eq(Schema.sessions.id, sessionID));
 
     if (result.length === 1) {
@@ -70,9 +72,9 @@ profileRoutes.get("/profile", async (c) => {
     const result = await db
       .select(profileSelection)
       .from(Schema.users)
-      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.user_id))
-      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.user_id))
-      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.user_id))
+      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
+      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.userId))
+      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
       .where(eq(Schema.sessions.id, sessionID));
 
     if (result.length === 1) {
@@ -109,7 +111,7 @@ profileRoutes.patch("/profile", async (c) => {
       const userInfoColumns = columnNames[2];
       const specialColumns = columnNames[3];
 
-      const userID = result[0].user_id;
+      const userID = result[0].userId;
 
       const body = await c.req.json();
 
@@ -121,12 +123,12 @@ profileRoutes.patch("/profile", async (c) => {
             await db
               .update(Schema.personalInfo)
               .set({ [key]: value })
-              .where(eq(Schema.personalInfo.user_id, userID));
+              .where(eq(Schema.personalInfo.userId, userID));
           } else if (professionalColumns.has(key)) {
             await db
               .update(Schema.professionalInfo)
               .set({ [key]: value })
-              .where(eq(Schema.professionalInfo.user_id, userID));
+              .where(eq(Schema.professionalInfo.userId, userID));
           } else if (userInfoColumns.has(key)) {
             await db
               .update(Schema.users)
@@ -157,7 +159,7 @@ const insertRoles = (roleArray: Array<string>, userID: string) => {
       const role = raw.trim();
       try {
         await db.insert(Schema.roles).values({ name: role }).onConflictDoNothing();
-        await db.insert(Schema.userRoleRelationship).values({ user_id: userID, role }).onConflictDoNothing();
+        await db.insert(Schema.userRoleRelationship).values({ userId: userID, role }).onConflictDoNothing();
       } catch (err) {
         console.error(`Error inserting role “${role}”:`, err);
       }

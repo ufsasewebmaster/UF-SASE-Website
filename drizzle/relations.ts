@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { blog, blogTag, blogTagRelationship, mentorMenteeRelationship, personalInfo, professionalInfo, saseInfo, session, user } from "./schema";
+import { blog, blogTag, blogTagRelationship, mentorMenteeRelationship, personalInfo, professionalInfo, saseInfo, session, user } from "@db/tables";
 
 export const blogTagRelationshipRelations = relations(blogTagRelationship, ({ one }) => ({
   blogTag: one(blogTag, {

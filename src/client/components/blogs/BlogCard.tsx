@@ -8,8 +8,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
   if (expandedBlogId === blog.id) {
     return null;
   }
-  const formattedDate = blog.published_date
-    ? new Date(blog.published_date).toLocaleDateString("en-US", {
+  const formattedDate = blog.publishedDate
+    ? new Date(blog.publishedDate).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",

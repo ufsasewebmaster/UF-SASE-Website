@@ -47,27 +47,27 @@ authRoutes.post("/auth/signup", async (c) => {
     });
 
     await db.insert(Schema.personalInfo).values({
-      user_id: userId,
-      first_name: "",
-      last_name: "",
+      userId,
+      firstName: "",
+      lastName: "",
       bio: "",
       phone: "",
       discord: "",
-      area_code: "",
+      areaCode: "",
     });
 
     await db.insert(Schema.professionalInfo).values({
-      user_id: userId,
-      resume_path: "",
+      userId: userId,
+      resumePath: "",
       linkedin: "",
       portfolio: "",
       majors: "",
       minors: "",
-      graduation_semester: "",
+      graduationSemester: "",
     });
 
     await db.insert(Schema.userRoleRelationship).values({
-      user_id: userId,
+      userId: userId,
       role: "user",
     });
 
@@ -153,7 +153,7 @@ authRoutes.get("/auth/session", async (c) => {
       return createErrorResponse(c, "SESSION_NOT_FOUND", "Session not found", 401);
     }
 
-    if (session[0].expires_at < Date.now()) {
+    if (session[0].expiresAt < Date.now()) {
       await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
       // maybe renew session?
       return createErrorResponse(c, "SESSION_EXPIRED", "Session expired", 401);
@@ -162,7 +162,7 @@ authRoutes.get("/auth/session", async (c) => {
     const user = await db
       .select({ id: Schema.users.id, username: Schema.users.username })
       .from(Schema.users)
-      .where(eq(Schema.users.id, session[0].user_id));
+      .where(eq(Schema.users.id, session[0].userId));
 
     if (user.length === 0) {
       return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 401);
@@ -179,8 +179,8 @@ async function createSession(sessionID: string, userID: string) {
   try {
     await db.insert(Schema.sessions).values({
       id: sessionID,
-      user_id: userID, //Session expires in 1 hour from when it is created
-      expires_at: Date.now() + 3600 * 1000,
+      userId: userID, //Session expires in 1 hour from when it is created
+      expiresAt: Date.now() + 3600 * 1000,
     });
   } catch (error) {
     console.log(error);
