@@ -1,5 +1,8 @@
-import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+// components/UserInfoBox.tsx
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import type { FieldConfig } from "./ConfigurableAccountBox";
+import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 
 interface updateFields {
   first_name?: string;
@@ -12,23 +15,23 @@ interface updateFields {
   roles?: string;
 }
 
-const createInterface = (name?: string, majors?: string, minors?: string, discord?: string, linkedin?: string, roles?: string): updateFields => {
-  //conditionally initializes interface fields
-  const names = name?.split(" ", 2);
-  const fields: updateFields = {};
-  if (names?.[0] != undefined && names[0] != "") {
-    fields.first_name = names[0];
+function createUpdateFields(updates: Record<string, string>): updateFields {
+  const out: updateFields = {};
+
+  if (updates.name?.trim()) {
+    const [first, second] = updates.name.trim().split(" ", 2);
+    out.first_name = first;
+    if (second) out.last_name = second;
   }
-  if (names?.[1] != undefined && names[1] != "") {
-    fields.last_name = names[1];
-  }
-  if (majors != undefined && majors != "") fields.majors = majors;
-  if (minors != undefined && minors != "") fields.minors = minors;
-  if (discord != undefined && discord != "") fields.discord = discord;
-  if (linkedin != undefined && linkedin != "") fields.linkedin = linkedin;
-  if (roles != undefined && roles != "") fields.roles = roles;
-  return fields;
-};
+  if (updates.majors?.trim()) out.majors = updates.majors;
+  if (updates.minors?.trim()) out.minors = updates.minors;
+  if (updates.linkedin?.trim()) out.linkedin = updates.linkedin;
+  if (updates.discord?.trim()) out.discord = updates.discord;
+  if (updates.bio?.trim()) out.bio = updates.bio;
+  if (updates.roles?.trim()) out.roles = updates.roles;
+
+  return out;
+}
 
 interface UserInfoBoxProps {
   first_name: string;
@@ -40,134 +43,55 @@ interface UserInfoBoxProps {
   roles: string;
 }
 
-const UserInfoBox: React.FC<UserInfoBoxProps> = ({ discord, first_name, last_name, linkedin, majors, minors, roles }) => {
-  const [editMode, setEditMode] = useState(false);
+export default function UserInfoBox(props: UserInfoBoxProps) {
+  const [info, setInfo] = useState({
+    first_name: props.first_name,
+    last_name: props.last_name,
+    majors: props.majors,
+    minors: props.minors,
+    linkedin: props.linkedin,
+    discord: props.discord,
+    roles: props.roles,
+    bio: "", // if you have an initial bio, pass it via props
+  });
 
-  const [nameInput, setNameInput] = useState("");
-  const [majorsInput, setMajorsInput] = useState("");
-  const [minorsInput, setMinorsInput] = useState("");
-  const [discordInput, setDiscordInput] = useState("");
-  const [linkedinInput, setLinkedinInput] = useState("");
-  const [rolesInput, setRolesInput] = useState("");
+  const initialData: Record<string, string> = {
+    name: `${info.first_name} ${info.last_name}`,
+    majors: info.majors,
+    minors: info.minors,
+    linkedin: info.linkedin,
+    discord: info.discord,
+    roles: info.roles,
+    bio: info.bio,
+  };
 
-  useEffect(() => {
-    setNameInput(String(first_name + " " + last_name));
-    setMajorsInput(majors);
-    setMinorsInput(minors);
-    setLinkedinInput(linkedin);
-    setDiscordInput(discord);
-    setRolesInput(roles);
-  }, [first_name, last_name, majors, minors, linkedin, discord, roles]);
+  const fieldConfigs: Array<FieldConfig> = [
+    { name: "name", label: "Name", type: "text", editable: true },
+    { name: "majors", label: "Majors", type: "text", editable: true },
+    { name: "minors", label: "Minors", type: "text", editable: true },
+    { name: "linkedin", label: "LinkedIn", type: "text", editable: true },
+    { name: "discord", label: "Discord", type: "text", editable: true },
+    { name: "roles", label: "Roles", type: "text", editable: true },
+    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+  ];
 
-  const HandleSaveButtonClicked = () => {
-    setEditMode(false);
+  const handleSave = async (updates: Record<string, string>) => {
     try {
-      const updatedFields = createInterface(nameInput, majorsInput, minorsInput, discordInput, linkedinInput, rolesInput);
-      fetch("api/profile", {
+      const payload = createUpdateFields(updates);
+      const res = await fetch("/api/profile", {
         method: "PATCH",
-        body: JSON.stringify(updatedFields),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-    } catch {
-      console.log("Profile couldn't be updated from user info box");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      setInfo((prev) => ({ ...prev, ...payload }));
+      toast.success("Info saved successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to save info.");
     }
   };
 
-  return (
-    <div className="w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
-      {/* Header */}
-      <div className="mb-6 flex flex-row justify-between font-redhat">
-        <p className="text-xl font-bold">User Info</p>
-        <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(!editMode)}>
-          <Icon icon="material-symbols:edit" width="24" height="24" color="#0668B3" />
-          <p className="font-semibold text-saseBlue">Edit</p>
-        </button>
-      </div>
-
-      {/* Two-Column Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {/* Left Column */}
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">Name:</label>
-            <input
-              type="text"
-              placeholder="[First_Last]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">Majors(s):</label>
-            <input
-              type="text"
-              placeholder="[Enter your majors(s)]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={majorsInput}
-              onChange={(e) => setMajorsInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">Minors(s):</label>
-            <input
-              type="text"
-              placeholder="[Enter your minors(s)]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={minorsInput}
-              onChange={(e) => setMinorsInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-        </div>
-
-        {/* Right Column */}
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">LinkedIn:</label>
-            <input
-              type="text"
-              placeholder="[Enter LinkedIn profile URL]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={linkedinInput}
-              onChange={(e) => setLinkedinInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">Discord:</label>
-            <input
-              type="text"
-              placeholder="[Enter your Discord Username]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={discordInput}
-              onChange={(e) => setDiscordInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="pl-2">Roles:</label>
-            <input
-              type="text"
-              placeholder="[Ex. Webdev member, Interns]"
-              className={`rounded-md border border-black p-2 ${editMode ? "bg-white" : "bg-gray-300"}`}
-              value={rolesInput}
-              onChange={(e) => setRolesInput(e.target.value)}
-              disabled={!editMode}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Save Button */}
-      <div className="mt-6 flex justify-end">
-        <button className="rounded-md border border-black bg-gray-300 px-4 py-2 font-semibold hover:scale-105" onClick={HandleSaveButtonClicked}>
-          Save
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default UserInfoBox;
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} handleLogout={() => {}} onSave={handleSave} />;
+}

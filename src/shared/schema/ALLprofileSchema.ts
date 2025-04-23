@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const profileSchema = z.object({
+export const ALLprofileSchema = z.object({
   id: z.string().min(1, "User ID is required."),
   username: z.string().min(1, "Username is required."),
   email: z.string().email("Invalid email address."),
@@ -27,4 +27,4 @@ export const profileSchema = z.object({
   graduation_semester: z.string().optional(),
 });
 
-export type Profile = z.infer<typeof profileSchema>;
+export type ALLProfile = z.infer<typeof ALLprofileSchema>;

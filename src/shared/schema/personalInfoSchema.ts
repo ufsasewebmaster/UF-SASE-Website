@@ -6,7 +6,9 @@ export const personalInfoSchema = z.object({
   first_name: z.string().min(1, "First name is required."),
   last_name: z.string().min(1, "Last name is required."),
   phone: z.string().optional(),
-  area_code: z.number().int().min(0).optional(),
+  area_code: z.string().optional(),
+  discord: z.string().optional(),
+  bio: z.string().optional(),
 });
 
 export const personalInfoInsertSchema = personalInfoSchema.partial({
