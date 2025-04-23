@@ -53,7 +53,7 @@ authRoutes.post("/auth/signup", async (c) => {
       bio: "",
       phone: "",
       discord: "",
-      area_code: 0,
+      area_code: "",
     });
 
     await db.insert(Schema.professionalInfo).values({
