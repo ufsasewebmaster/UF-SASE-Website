@@ -59,8 +59,10 @@ export const personalInfo = sqliteTable("personal_info", {
     .references(() => users.id, { onDelete: "cascade" }),
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
-  phone: text("phone"), // NOTE: Phone is bigint
-  area_code: integer("area_code"),
+  bio: text("bio").notNull().default(""),
+  phone: text("phone").notNull().default(""),
+  discord: text("discord").notNull().default(""),
+  area_code: text("area_code").notNull().default(""),
 });
 
 // Professional Info table

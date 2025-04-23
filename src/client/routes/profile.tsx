@@ -15,7 +15,7 @@ export const Route = createFileRoute("/profile")({
   meta: () => [
     ...seo({
       title: "Profile | UF SASE",
-      description: "Profile page for usser information, must be logged in to UF SASE account view.",
+      description: "Profile page for user information, must be logged in to UF SASE account view.",
       image: imageUrls["SASELogo.png"],
     }),
   ],
@@ -61,9 +61,22 @@ export const Route = createFileRoute("/profile")({
         </div>
         <div className="flex w-full flex-col items-center justify-between py-6">
           {activeSection === "account" ? (
-            <AccountBox username={profile?.username || "User"} handleLogout={handleLogout} />
+            <AccountBox
+              username={profile?.username || "User"}
+              email={profile?.email || ""}
+              bio={profile?.bio || "Add a bio!"}
+              handleLogout={handleLogout}
+            />
           ) : activeSection === "userinfo" ? (
-            <UserInfoBox />
+            <UserInfoBox
+              first_name={profile?.first_name || ""}
+              last_name={profile?.last_name || ""}
+              linkedin={profile?.linkedin || ""}
+              discord={profile?.discord || ""}
+              majors={profile?.majors || ""}
+              minors={profile?.minors || ""}
+              roles={profile?.roles || ""}
+            />
           ) : activeSection === "security" ? (
             <SecurityBox />
           ) : activeSection === "settings" ? (

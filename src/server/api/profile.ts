@@ -14,7 +14,9 @@ const profileSelection = {
   time_updated: Schema.users.time_updated,
   first_name: Schema.personalInfo.first_name,
   last_name: Schema.personalInfo.last_name,
+  bio: Schema.personalInfo.bio,
   phone: Schema.personalInfo.phone,
+  discord: Schema.personalInfo.discord,
   resume: Schema.professionalInfo.resume_path,
   linkedin: Schema.professionalInfo.linkedin,
   portfolio: Schema.professionalInfo.portfolio,
@@ -104,6 +106,9 @@ profileRoutes.patch("/profile", async (c) => {
       const columnNames = generateColumns();
       const personalColumns = columnNames[0];
       const professionalColumns = columnNames[1];
+      const userInfoColumns = columnNames[2];
+      const specialColumns = columnNames[3];
+
       const userID = result[0].user_id;
 
       const body = await c.req.json();
@@ -111,7 +116,6 @@ profileRoutes.patch("/profile", async (c) => {
       const updatePromises = Object.keys(body).map(async (key) => {
         if (key in profileSelection) {
           const value = body[key];
-
           // Update based on the column name and its respective table
           if (personalColumns.has(key)) {
             await db
@@ -123,7 +127,16 @@ profileRoutes.patch("/profile", async (c) => {
               .update(Schema.professionalInfo)
               .set({ [key]: value })
               .where(eq(Schema.professionalInfo.user_id, userID));
+          } else if (userInfoColumns.has(key)) {
+            await db
+              .update(Schema.users)
+              .set({ [key]: value })
+              .where(eq(Schema.users.id, userID));
           }
+        }
+        if (specialColumns.has(key)) {
+          const roleArray: Array<string> = body.roles.split(",");
+          await insertRoles(roleArray, userID);
         }
       });
 
@@ -138,10 +151,27 @@ profileRoutes.patch("/profile", async (c) => {
   }
 });
 
+const insertRoles = (roleArray: Array<string>, userID: string) => {
+  return Promise.all(
+    roleArray.map(async (raw) => {
+      const role = raw.trim();
+      try {
+        await db.insert(Schema.roles).values({ name: role }).onConflictDoNothing();
+        await db.insert(Schema.userRoleRelationship).values({ user_id: userID, role }).onConflictDoNothing();
+      } catch (err) {
+        console.error(`Error inserting role “${role}”:`, err);
+      }
+    }),
+  );
+};
+
 export default profileRoutes;
 
 function generateColumns() {
   const personalInfoColumns = new Set(Object.values(getTableColumns(Schema.personalInfo)).map((col) => col.name));
   const professionalInfoColumns = new Set(Object.values(getTableColumns(Schema.professionalInfo)).map((col) => col.name));
-  return [personalInfoColumns, professionalInfoColumns];
+  const userInfoColumns = new Set(["username", "email", "time_updated"]);
+  //For columns that require special processing or database touching things that are not really columns- just roles for now
+  const specialColumns = new Set(["roles"]);
+  return [personalInfoColumns, professionalInfoColumns, userInfoColumns, specialColumns];
 }

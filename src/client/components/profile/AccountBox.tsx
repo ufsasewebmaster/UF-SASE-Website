@@ -1,40 +1,62 @@
-import { Button } from "@components/ui/button";
+// components/AccountBox.tsx
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import type { FieldConfig } from "./ConfigurableAccountBox";
+import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 
 interface AccountBoxProps {
   handleLogout: () => void;
   username: string;
+  email: string;
+  bio: string;
 }
 
-const AccountBox: React.FC<AccountBoxProps> = ({ handleLogout, username }) => {
-  return (
-    <div className="group min-h-[500px] w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
-      <h1 className="relative mb-10 text-5xl font-bold leading-tight text-foreground">
-        Welcome,{" "}
-        <span className="relative inline-block leading-tight">
-          <span className="absolute inset-0 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent opacity-100 transition-opacity duration-500 group-hover:opacity-0">
-            {username}
-          </span>
-          <span className="absolute inset-0 bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text text-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            {username}
-          </span>
-          <span className="invisible block">{username}</span>
-        </span>
-        !
-      </h1>
-      <p className="mb-10 text-2xl text-foreground">
-        This is your account dashboard. Here you can manage your user info, security details, and settings.
-      </p>
-      <div className="mt-10 flex justify-center">
-        <Button
-          variant="destructive"
-          className="mt-4 rounded-full bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
-          onClick={handleLogout}
-        >
-          Log Out
-        </Button>
-      </div>
-    </div>
-  );
-};
+export default function AccountBox({ bio: initialBio, email: initialEmail, handleLogout, username: initialUsername }: AccountBoxProps) {
+  // lift state here
+  const [info, setInfo] = useState({
+    username: initialUsername,
+    email: initialEmail,
+    bio: initialBio,
+  });
 
-export default AccountBox;
+  const fieldConfigs: Array<FieldConfig> = [
+    { name: "username", label: "Username", type: "text", editable: true },
+    { name: "email", label: "Email", type: "email", editable: true },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      editable: false,
+      showResetLink: true,
+      resetLinkUrl: "/api/email/password-reset",
+    },
+    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+  ];
+
+  const initialData: Record<string, string> = {
+    username: info.username,
+    email: info.email,
+    password: "",
+    bio: info.bio,
+  };
+
+  const handleSave = async (updates: Record<string, string>) => {
+    try {
+      const res = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      // merge into parent state so the UI stays updated
+      setInfo((prev) => ({ ...prev, ...updates }));
+      toast.success("Info saved successfully!");
+    } catch (err) {
+      console.error("Save failed", err);
+      toast.error("Failed to save info.");
+    }
+  };
+
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} handleLogout={handleLogout} onSave={handleSave} />;
+}

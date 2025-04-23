@@ -1,67 +1,97 @@
-import { Icon } from "@iconify/react";
+// components/UserInfoBox.tsx
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import type { FieldConfig } from "./ConfigurableAccountBox";
+import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 
-const UserInfoBox = () => {
-  const [editMode, setEditMode] = useState(false);
+interface updateFields {
+  first_name?: string;
+  last_name?: string;
+  majors?: string;
+  minors?: string;
+  linkedin?: string;
+  discord?: string;
+  bio?: string;
+  roles?: string;
+}
 
-  return (
-    <div className="w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
-      <div className="mb-6 flex flex-row justify-between font-redhat">
-        <p className="font-redhat text-xl font-bold">User Info</p>
-        <button className="flex flex-row gap-2 hover:scale-105" onClick={() => setEditMode(true)}>
-          <Icon icon="material-symbols:edit" width="24" height="24" color="#0668B3" />
-          <p className="font-semibold text-saseBlue">Edit</p>
-        </button>
-      </div>
-      <div className="flex flex-row justify-between">
-        <div className="w-1/3">
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">Name:</p>
-            <input type="text" placeholder="[First_Last]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
-          </div>
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">Bio:</p>
-            <input type="text" placeholder="[Bio]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
-          </div>
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">Discord:</p>
-            <input type="text" placeholder="[Discord_Username]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
-          </div>
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">Roles:</p>
-            <input
-              type="text"
-              placeholder="[Ex. Webdev member, Interns]"
-              className="rounded-md border border-black bg-gray-300 p-2"
-              disabled={!editMode}
-            />
-          </div>
-        </div>
-        <div className="mr-10 w-1/3">
-          <div className="mb-4 flex flex-col gap-2">
-            <p className="pl-2">Email:</p>
-            <input type="text" placeholder="[Email]" className="rounded-md border border-black bg-gray-300 p-2" disabled={!editMode} />
-          </div>
-          <div className="mb-4 flex flex-col">
-            <p>Password:</p>
-            <p>[xxxxxxxxxxx]</p>
-            <p className="text-saseBlue">2FA to reset password</p>
-          </div>
-          <div className="relative flex h-1/4 w-1/2 items-center justify-center rounded-full bg-saseBlue">
-            <Icon icon="mdi:account" className="text-7xl text-saseGreen" />
-            <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 transform rounded-full p-2">
-              <Icon icon="mdi:upload" className="text-5xl text-white" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <button className="rounded-md border border-black bg-gray-300 px-4 py-2 font-semibold hover:scale-105" onClick={() => setEditMode(false)}>
-          Save
-        </button>
-      </div>
-    </div>
-  );
-};
+function createUpdateFields(updates: Record<string, string>): updateFields {
+  const out: updateFields = {};
 
-export default UserInfoBox;
+  if (updates.name?.trim()) {
+    const [first, second] = updates.name.trim().split(" ", 2);
+    out.first_name = first;
+    if (second) out.last_name = second;
+  }
+  if (updates.majors?.trim()) out.majors = updates.majors;
+  if (updates.minors?.trim()) out.minors = updates.minors;
+  if (updates.linkedin?.trim()) out.linkedin = updates.linkedin;
+  if (updates.discord?.trim()) out.discord = updates.discord;
+  if (updates.bio?.trim()) out.bio = updates.bio;
+  if (updates.roles?.trim()) out.roles = updates.roles;
+
+  return out;
+}
+
+interface UserInfoBoxProps {
+  first_name: string;
+  last_name: string;
+  majors: string;
+  minors: string;
+  linkedin: string;
+  discord: string;
+  roles: string;
+}
+
+export default function UserInfoBox(props: UserInfoBoxProps) {
+  const [info, setInfo] = useState({
+    first_name: props.first_name,
+    last_name: props.last_name,
+    majors: props.majors,
+    minors: props.minors,
+    linkedin: props.linkedin,
+    discord: props.discord,
+    roles: props.roles,
+    bio: "", // if you have an initial bio, pass it via props
+  });
+
+  const initialData: Record<string, string> = {
+    name: `${info.first_name} ${info.last_name}`,
+    majors: info.majors,
+    minors: info.minors,
+    linkedin: info.linkedin,
+    discord: info.discord,
+    roles: info.roles,
+    bio: info.bio,
+  };
+
+  const fieldConfigs: Array<FieldConfig> = [
+    { name: "name", label: "Name", type: "text", editable: true },
+    { name: "majors", label: "Majors", type: "text", editable: true },
+    { name: "minors", label: "Minors", type: "text", editable: true },
+    { name: "linkedin", label: "LinkedIn", type: "text", editable: true },
+    { name: "discord", label: "Discord", type: "text", editable: true },
+    { name: "roles", label: "Roles", type: "text", editable: true },
+    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+  ];
+
+  const handleSave = async (updates: Record<string, string>) => {
+    try {
+      const payload = createUpdateFields(updates);
+      const res = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      setInfo((prev) => ({ ...prev, ...payload }));
+      toast.success("Info saved successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to save info.");
+    }
+  };
+
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} handleLogout={() => {}} onSave={handleSave} />;
+}
