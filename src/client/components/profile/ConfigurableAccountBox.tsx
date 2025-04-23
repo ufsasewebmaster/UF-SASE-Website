@@ -41,7 +41,7 @@ export function ConfigurableAccountBox({ fieldConfigs, handleLogout, initialData
       }
     });
     await onSave(updates);
-    
+
     setIsEditing(false);
   };
 

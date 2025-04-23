@@ -60,7 +60,7 @@ export const personalInfo = sqliteTable("personal_info", {
   first_name: text("first_name").notNull(),
   last_name: text("last_name").notNull(),
   bio: text("bio").notNull().default(""),
-  phone: text("phone").notNull().default(""), 
+  phone: text("phone").notNull().default(""),
   discord: text("discord").notNull().default(""),
   area_code: text("area_code").notNull().default(""),
 });
