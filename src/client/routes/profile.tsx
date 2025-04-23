@@ -39,8 +39,6 @@ export const Route = createFileRoute("/profile")({
 
     const handleLogout = async () => {
       try {
-        // Use a hook-based logout if possible; otherwise, fall back to fetch
-        // const response = await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
         logout();
         navigate({ to: "/" });
       } catch (error) {
