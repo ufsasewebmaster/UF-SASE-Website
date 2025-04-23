@@ -6,12 +6,13 @@ export const Route = createFileRoute("/authed")({
 });
 
 function AuthedComponent() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   console.log(isAuthenticated);
   return (
     <div>
       <div>Helllllllo</div>
-      {isAuthenticated ? <div>Hellllllllo, you are indeed authenticated</div> : <div>Sorry, you are not authenticated</div>}
+      {isAuthenticated ? <div>Hello, you are indeed authenticated</div> : <div>Sorry, you are not authenticated</div>}
+      {isAdmin ? <div>You are an admin</div> : <div>You are not an admin</div>}
     </div>
   );
 }

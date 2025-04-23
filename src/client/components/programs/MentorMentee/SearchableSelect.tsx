@@ -12,9 +12,11 @@ interface SearchableSelectProps {
   value: string;
   placeholder: string;
   onChange: (value: string) => void;
+  disabled: boolean;
+  className: string;
 }
 
-const SearchableSelect: React.FC<SearchableSelectProps> = ({ options, value, placeholder, onChange }) => {
+const SearchableSelect: React.FC<SearchableSelectProps> = ({ options, value, placeholder, onChange, disabled, className }) => {
   // find the selected option object (or null)
   const selected = options.find((o) => o.value === value) ?? null;
 
@@ -25,9 +27,11 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({ options, value, pla
       onChange={(opt: SingleValue<Option>) => onChange(opt?.value ?? "")}
       placeholder={placeholder}
       isSearchable
+      isDisabled={disabled}
       styles={{
         container: (base) => ({ ...base, width: "100%" }),
       }}
+      className={className}
     />
   );
 };

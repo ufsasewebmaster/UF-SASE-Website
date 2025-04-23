@@ -1,4 +1,6 @@
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export const useDimensions = <T extends HTMLElement>(): [React.RefCallback<T>, DOMRect | undefined] => {
   const [dimensions, setDimensions] = useState<DOMRect>();
@@ -10,7 +12,7 @@ export const useDimensions = <T extends HTMLElement>(): [React.RefCallback<T>, D
   }, []);
 
   // This effect runs synchronously after DOM mutations
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (node) {
       const update = () => setDimensions(node.getBoundingClientRect());
       update();

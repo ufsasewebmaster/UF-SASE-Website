@@ -1,12 +1,12 @@
 import type { FormData } from "@components/AuthForm";
 import AuthForm from "@components/AuthForm";
 import { Page } from "@components/Page";
+import { useAuth } from "@hooks/AuthContext";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import AuthLayout from "../components/AuthLayout";
-import { useAuth } from "../hooks/AuthContext";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/login")({
@@ -19,35 +19,26 @@ export const Route = createFileRoute("/login")({
   ],
 
   component: () => {
-    const { login } = useAuth();
+    const { login } = useAuth(); // this is (username,password)=>Promise<void>
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
     const mutation = useMutation({
-      mutationFn: async (formData: FormData) => {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include",
-        });
-        if (!response.ok) {
-          const errorMessage = await response.text();
-          throw new Error(errorMessage);
-        }
+      mutationFn: async (data: FormData) => {
+        // call your AuthContext login directly
+        await login(data.username, data.password);
       },
-      onSuccess: async () => {
-        login();
+      onSuccess: () => {
+        // on a successful login, send them home
         navigate({ to: "/" });
       },
-      onError: (error) => {
-        console.error("Error during mutation:", error);
-        setErrorMessage(error.message);
+      onError: (err: any) => {
+        setErrorMessage(err.message);
       },
     });
 
     const handleLogin = (data: FormData) => {
+      setErrorMessage(null);
       mutation.mutate(data);
     };
 

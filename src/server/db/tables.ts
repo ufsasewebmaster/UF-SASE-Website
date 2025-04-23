@@ -149,6 +149,12 @@ export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship"
   menteeId: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
 });
 
+export const mentorMenteeInvites = sqliteTable("mentor_mentee_invites", {
+  id: text("id").primaryKey().$defaultFn(() => generateIdFromEntropySize(10)),
+  mentorId: text("mentor_id").references(() => users.id, { onDelete: "cascade" }),
+  menteeId: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
+})
+
 export const emailSubscribers = sqliteTable("email_subscriber", {
   id: text("id")
     .primaryKey()

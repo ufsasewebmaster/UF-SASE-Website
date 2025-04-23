@@ -18,15 +18,28 @@ export const addMentorMenteeRelation = async (mentorId: string, menteeId: string
     MMRelationshipSchema,
   );
 
-  return response.data();
+  return response.data;
+};
+
+export const addMentorMenteeInvite = async (mentorId: string, menteeId: string): Promise<null> => {
+  const info = { mentorId: mentorId, menteeId: menteeId };
+  const response = await apiFetch(
+    "/api/mentorMentee/invite",
+    {
+      method: "POST",
+      body: JSON.stringify(info),
+    },
+    MMRelationshipSchema,
+  );
+  return response.data;
 };
 
 export const getAllMentors = async (): Promise<Array<Mentor>> => {
   const response = await apiFetch("/api/mentorMentee/mentors", { method: "GET" }, MentorSchema.array());
-  return response.data();
+  return response.data;
 };
 
 export const getAllMentees = async (): Promise<Array<Mentee>> => {
   const response = await apiFetch("/api/mentorMentee/mentees", { method: "GET" }, MenteeSchema.array());
-  return response.data();
+  return response.data;
 };
