@@ -6,10 +6,11 @@ const SASE_COLORS = ["saseBlue", "saseGreen"];
 interface ProfileNavProps {
   activeSection: string;
   profileName?: string;
+  bio: string;
   update: (section: string) => void;
 }
 
-const ProfileNav: React.FC<ProfileNavProps> = ({ activeSection, profileName = "User", update }) => {
+const ProfileNav: React.FC<ProfileNavProps> = ({ activeSection, bio, profileName = "User", update }) => {
   return (
     <div className={cn("flex w-60 flex-col rounded-3xl bg-background p-6 font-redhat shadow-xl")}>
       {/* Profile Info */}
@@ -19,7 +20,7 @@ const ProfileNav: React.FC<ProfileNavProps> = ({ activeSection, profileName = "U
         </div>
         <h2 className="mt-3 text-2xl font-semibold">{profileName}</h2>
         <p className="text-med italic text-gray-500">ex: SASE President</p>
-        <p className="text-med italic text-gray-500">Bio: [Short sentence]</p>
+        <p className="text-med italic text-gray-500">{bio}</p>
       </div>
 
       <nav className="flex flex-col space-y-2">

@@ -5,7 +5,7 @@ import SecurityBox from "@components/profile/SecurityBox";
 import SettingsBox from "@components/profile/SettingsBox";
 import UserInfoBox from "@components/profile/UserInfoBox";
 import { useAuth } from "@hooks/AuthContext";
-import { useProfile } from "@hooks/useProfile";
+import { triggerProfileRefetch, useProfile } from "@hooks/useProfile";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useContext, useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/profile")({
       <div className="flex min-h-screen bg-muted p-10">
         {errorMessage && <div className="mb-4 rounded bg-red-100 p-2 text-red-700">{errorMessage}</div>}
         <div className="flex items-start">
-          <ProfileNav profileName={profile?.username} update={updateComponent} activeSection={activeSection} />
+          <ProfileNav profileName={profile?.username} bio={profile?.bio || "Add a bio!"} update={updateComponent} activeSection={activeSection} />
         </div>
         <div className="flex w-full flex-col items-center justify-between py-6">
           {activeSection === "account" ? (
@@ -66,6 +66,7 @@ export const Route = createFileRoute("/profile")({
               email={profile?.email || ""}
               bio={profile?.bio || "Add a bio!"}
               handleLogout={handleLogout}
+              handleUpdate={triggerProfileRefetch}
             />
           ) : activeSection === "userinfo" ? (
             <UserInfoBox

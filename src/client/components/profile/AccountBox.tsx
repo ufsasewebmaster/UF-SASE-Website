@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 interface AccountBoxProps {
   handleLogout: () => void;
+  handleUpdate: () => void;
   username: string;
   email: string;
   bio: string;
@@ -26,7 +27,7 @@ interface SelectedFields {
   bio?: string;
 }
 
-const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, username }) => {
+const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, handleUpdate, username }) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -41,6 +42,7 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
         method: "PATCH",
         body: JSON.stringify(fields),
       });
+      handleUpdate();
     } catch {
       console.log("Updating profile info from account box failed");
     }
@@ -61,6 +63,19 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
     if (bio && bio != "") fields.bio = bio;
     return fields;
   };
+
+  const passwordResetHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    try {
+      fetch("api/email/password-reset", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+    } catch (error) {
+      console.log("Password reset email could not be sent", error);
+    }
+  };
+
   return (
     <div className="group min-h-[500px] w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
       <h1 className="relative mb-10 text-5xl font-bold leading-tight text-foreground">
@@ -111,7 +126,7 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, usern
               <label className="mb-1 block text-sm font-medium">Password</label>
               <p className="rounded-lg bg-gray-50 px-4 py-2">••••••••</p>
               {isEditing && (
-                <a href="api/email/password-reset" className="text-sm text-blue-600 hover:underline">
+                <a href="#" onClick={passwordResetHandler} className="text-sm text-blue-600 hover:underline">
                   Send Password Reset Email
                 </a>
               )}
