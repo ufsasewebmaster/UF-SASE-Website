@@ -37,9 +37,7 @@ export const Route = createFileRoute("/mentor-mentee")({
           </div>
         </ClientOnly>
 
-        <MMPairingForm>
-          
-        </MMPairingForm>
+        <MMPairingForm></MMPairingForm>
 
         {/* Header Section */}
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">

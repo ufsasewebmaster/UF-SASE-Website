@@ -8,7 +8,7 @@ export const fetchMentorMenteeRelations = async (): Promise<Array<MMRelationship
 };
 
 export const addMentorMenteeRelation = async (mentorId: string, menteeId: string): Promise<null> => {
-  const info = { mentorId: mentorId, menteeId: menteeId };
+  const info = { mentorId, menteeId };
   const response = await apiFetch(
     "/api/mentorMentee/single",
     {
@@ -22,7 +22,7 @@ export const addMentorMenteeRelation = async (mentorId: string, menteeId: string
 };
 
 export const addMentorMenteeInvite = async (mentorId: string, menteeId: string): Promise<null> => {
-  const info = { mentorId: mentorId, menteeId: menteeId };
+  const info = { mentorId, menteeId };
   const response = await apiFetch(
     "/api/mentorMentee/invite",
     {

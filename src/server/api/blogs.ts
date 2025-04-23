@@ -41,7 +41,7 @@ const updateBlogTags = async (blogId: string, tags: Array<string> = []) => {
         }
 
         // create relationship
-        await db.insert(Schema.blogTagRelationship).values({ blogId: blogId, tagId: tagId });
+        await db.insert(Schema.blogTagRelationship).values({ blogId, tagId });
       }),
     );
   }

@@ -1,6 +1,7 @@
 // components/SearchableSelect.tsx
 import React from "react";
-import Select, { SingleValue } from "react-select";
+import type { SingleValue } from "react-select";
+import Select from "react-select";
 
 export interface Option {
   value: string;
@@ -8,7 +9,7 @@ export interface Option {
 }
 
 interface SearchableSelectProps {
-  options: Option[];
+  options: Array<Option>;
   value: string;
   placeholder: string;
   onChange: (value: string) => void;
@@ -16,23 +17,22 @@ interface SearchableSelectProps {
   className: string;
 }
 
-const SearchableSelect: React.FC<SearchableSelectProps> = ({ options, value, placeholder, onChange, disabled, className }) => {
+const SearchableSelect: React.FC<SearchableSelectProps> = ({ className, disabled, onChange, options, placeholder, value }) => {
   // find the selected option object (or null)
   const selected = options.find((o) => o.value === value) ?? null;
 
   return (
-    <Select<Option, false>
-      options={options}
-      value={selected}
-      onChange={(opt: SingleValue<Option>) => onChange(opt?.value ?? "")}
-      placeholder={placeholder}
-      isSearchable
-      isDisabled={disabled}
-      styles={{
-        container: (base) => ({ ...base, width: "100%" }),
-      }}
-      className={className}
-    />
+    <div className={className}>
+      <Select<Option, false>
+        options={options}
+        value={selected}
+        onChange={(opt: SingleValue<Option>) => onChange(opt?.value ?? "")}
+        placeholder={placeholder}
+        isSearchable
+        isDisabled={disabled}
+        styles={{ container: (base) => ({ ...base, width: "100%" }) }}
+      />
+    </div>
   );
 };
 

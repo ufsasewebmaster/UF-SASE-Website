@@ -5,7 +5,7 @@ import { fetchSession, loginApi, logoutApi } from "../api/auth";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
-  roles: string[];
+  roles: Array<string>;
   isAdmin: boolean;
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -22,7 +22,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [roles, setRoles] = useState<string[]>([]);
+  const [roles, setRoles] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [id, setId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,10 +35,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setRoles(user.roles);
       setIsAuthenticated(true);
       setErrorMessage("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setIsAuthenticated(false);
       setRoles([]);
-      setErrorMessage(err.message ?? "Unknown error occurred");
+      setErrorMessage("Unknown error occurred" + err);
     } finally {
       setIsLoading(false);
     }
@@ -53,14 +53,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       await loginApi({ username, password });
       const user = await fetchSession();
-      
+
       setId(user.id);
       setRoles(user.roles);
       setIsAuthenticated(true);
       setErrorMessage("");
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      setErrorMessage(err.message ?? "Unknown error");
+      setErrorMessage("Unknown error" + err);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -75,8 +75,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setRoles([]);
       setId("");
       setErrorMessage("");
-    } catch (err: any) {
-      setErrorMessage(err.message ?? "Unknown error occurred");
+    } catch (err) {
+      setErrorMessage("Unknown error occurred" + err);
     } finally {
       setIsLoading(false);
     }

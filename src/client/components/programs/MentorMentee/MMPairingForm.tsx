@@ -3,13 +3,14 @@ import type { Mentee, Mentor } from "@/shared/schema";
 import { useAuth } from "@hooks/AuthContext";
 import { useEffect, useState } from "react";
 import AddPairingButton from "./AddPairingButton";
-import SearchableSelect, { Option } from "./SearchableSelect";
+import type { Option } from "./SearchableSelect";
+import SearchableSelect from "./SearchableSelect";
 
 export default function MMPairingForm() {
   const { id, isAdmin } = useAuth();
   const [mode, setMode] = useState<"mentor" | "mentee">("mentor");
-  const [mentors, setMentors] = useState<Mentor[]>([]);
-  const [mentees, setMentees] = useState<Mentee[]>([]);
+  const [mentors, setMentors] = useState<Array<Mentor>>([]);
+  const [mentees, setMentees] = useState<Array<Mentee>>([]);
   const [mentorId, setMentorId] = useState("");
   const [menteeId, setMenteeId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,8 +41,8 @@ export default function MMPairingForm() {
         await addMentorMenteeInvite(mentorId, menteeId);
         alert("Invite sent!");
       }
-    } catch (err: any) {
-      alert("Failed: " + err.message);
+    } catch (err) {
+      alert("Failed: " + err);
     } finally {
       setLoading(false);
     }
@@ -51,11 +52,11 @@ export default function MMPairingForm() {
     setMode((m) => (m === "mentor" ? "mentee" : "mentor"));
   };
 
-  const realMentorOptions: Option[] = mentors.map((m) => ({
+  const realMentorOptions: Array<Option> = mentors.map((m) => ({
     value: m.mentorId,
     label: `${m.firstName} ${m.lastName}`,
   }));
-  const realMenteeOptions: Option[] = mentees.map((m) => ({
+  const realMenteeOptions: Array<Option> = mentees.map((m) => ({
     value: m.menteeId,
     label: `${m.firstName} ${m.lastName}`,
   }));
@@ -71,7 +72,7 @@ export default function MMPairingForm() {
         <div className="flex-1">
           <label className="mb-1 block">Select Mentor</label>
           <SearchableSelect
-            className="w-72"
+            className="w-[172px] transition-opacity duration-200 disabled:opacity-50"
             options={mentorOptions}
             value={mentorId}
             onChange={setMentorId}
@@ -101,7 +102,7 @@ export default function MMPairingForm() {
         <div className="flex-1">
           <label className="mb-1 block">Select Mentee</label>
           <SearchableSelect
-            className="w-72"
+            className="w-[172px] transition-opacity duration-200 disabled:opacity-50"
             options={menteeOptions}
             value={menteeId}
             onChange={setMenteeId}

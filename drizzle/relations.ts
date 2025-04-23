@@ -1,80 +1,90 @@
+import {
+  blogs,
+  blogTagRelationship,
+  blogTags,
+  mentorMenteeRelationship,
+  personalInfo,
+  professionalInfo,
+  saseInfo,
+  sessions,
+  users,
+} from "@db/tables";
 import { relations } from "drizzle-orm/relations";
-import { blog, blogTag, blogTagRelationship, mentorMenteeRelationship, personalInfo, professionalInfo, saseInfo, session, user } from "@db/tables";
 
 export const blogTagRelationshipRelations = relations(blogTagRelationship, ({ one }) => ({
-  blogTag: one(blogTag, {
+  blogTag: one(blogTags, {
     fields: [blogTagRelationship.tagId],
-    references: [blogTag.id],
+    references: [blogTags.id],
   }),
-  blog: one(blog, {
+  blog: one(blogs, {
     fields: [blogTagRelationship.blogId],
-    references: [blog.id],
+    references: [blogs.id],
   }),
 }));
 
-export const blogTagRelations = relations(blogTag, ({ many }) => ({
+export const blogTagRelations = relations(blogTags, ({ many }) => ({
   blogTagRelationships: many(blogTagRelationship),
 }));
 
-export const blogRelations = relations(blog, ({ many, one }) => ({
+export const blogRelations = relations(blogs, ({ many, one }) => ({
   blogTagRelationships: many(blogTagRelationship),
-  user: one(user, {
-    fields: [blog.author_id],
-    references: [user.id],
+  user: one(users, {
+    fields: [blogs.authorId],
+    references: [users.id],
   }),
 }));
 
-export const userRelations = relations(user, ({ many }) => ({
-  blogs: many(blog),
+export const userRelations = relations(users, ({ many }) => ({
+  blogs: many(blogs),
   mentorMenteeRelationships_menteeId: many(mentorMenteeRelationship, {
     relationName: "mentorMenteeRelationship_menteeId_user_id",
   }),
   mentorMenteeRelationships_mentorId: many(mentorMenteeRelationship, {
     relationName: "mentorMenteeRelationship_mentorId_user_id",
   }),
-  sessions: many(session),
+  sessions: many(sessions),
   personalInfos: many(personalInfo),
   professionalInfos: many(professionalInfo),
   saseInfos: many(saseInfo),
 }));
 
 export const mentorMenteeRelationshipRelations = relations(mentorMenteeRelationship, ({ one }) => ({
-  user_menteeId: one(user, {
+  user_menteeId: one(users, {
     fields: [mentorMenteeRelationship.menteeId],
-    references: [user.id],
+    references: [users.id],
     relationName: "mentorMenteeRelationship_menteeId_user_id",
   }),
-  user_mentorId: one(user, {
+  user_mentorId: one(users, {
     fields: [mentorMenteeRelationship.mentorId],
-    references: [user.id],
+    references: [users.id],
     relationName: "mentorMenteeRelationship_mentorId_user_id",
   }),
 }));
 
-export const sessionRelations = relations(session, ({ one }) => ({
-  user: one(user, {
-    fields: [session.userId],
-    references: [user.id],
+export const sessionRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
   }),
 }));
 
 export const personalInfoRelations = relations(personalInfo, ({ one }) => ({
-  user: one(user, {
+  user: one(users, {
     fields: [personalInfo.userId],
-    references: [user.id],
+    references: [users.id],
   }),
 }));
 
 export const professionalInfoRelations = relations(professionalInfo, ({ one }) => ({
-  user: one(user, {
+  user: one(users, {
     fields: [professionalInfo.userId],
-    references: [user.id],
+    references: [users.id],
   }),
 }));
 
 export const saseInfoRelations = relations(saseInfo, ({ one }) => ({
-  user: one(user, {
+  user: one(users, {
     fields: [saseInfo.userId],
-    references: [user.id],
+    references: [users.id],
   }),
 }));

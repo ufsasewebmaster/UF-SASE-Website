@@ -36,7 +36,7 @@ export const Route = createFileRoute("/signup")({
       onSuccess: () => {
         setShowSuccessModal(true);
       },
-      onError: (err: any) => {
+      onError: (err) => {
         console.error("Error during signup:", err);
         setErrorMessage(err.message);
       },

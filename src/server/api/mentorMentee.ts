@@ -77,8 +77,8 @@ mentorMenteeRoutes.delete("mentorMentee/invite", async (c) => {
     await db.delete(Schema.mentorMenteeInvites).where(eq(Schema.mentorMenteeInvites.id, id));
 
     return createSuccessResponse(c, null, "Invite deleted successfully");
-  } catch (error: any) {
-    return createErrorResponse(c, "UNKNOWN_ERROR", "Failed to delete invite: " + error.message, 500);
+  } catch (error) {
+    return createErrorResponse(c, "UNKNOWN_ERROR", "Failed to delete invite: " + error, 500);
   }
 });
 
@@ -110,8 +110,8 @@ mentorMenteeRoutes.get("mentorMentee/mentees", async (c) => {
       .innerJoin(personalInfo, eq(personalInfo.userId, mentorMenteeRelationship.menteeId));
 
     return createSuccessResponse(c, res, "Mentees retrieved successfully");
-  } catch (error: any) {
-    return createErrorResponse(c, "UNKNOWN_ERROR", "Failed to fetch mentees: " + error.message, 500);
+  } catch (error) {
+    return createErrorResponse(c, "UNKNOWN_ERROR", "Failed to fetch mentees: " + error, 500);
   }
 });
 export default mentorMenteeRoutes;

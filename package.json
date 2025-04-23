@@ -100,6 +100,7 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
+    "ansi-styles": "^6.2.1",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.2",
     "drizzle-kit": "^0.28.1",

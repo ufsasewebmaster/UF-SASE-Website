@@ -32,8 +32,8 @@ export const Route = createFileRoute("/login")({
         // on a successful login, send them home
         navigate({ to: "/" });
       },
-      onError: (err: any) => {
-        setErrorMessage(err.message);
+      onError: (err) => {
+        setErrorMessage("HUH" + err);
       },
     });
 

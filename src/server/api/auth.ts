@@ -57,7 +57,7 @@ authRoutes.post("/auth/signup", async (c) => {
     });
 
     await db.insert(professionalInfo).values({
-      userId: userId,
+      userId,
       resumePath: "",
       linkedin: "",
       portfolio: "",
@@ -67,7 +67,7 @@ authRoutes.post("/auth/signup", async (c) => {
     });
 
     await db.insert(userRoleRelationship).values({
-      userId: userId,
+      userId,
       role: "user",
     });
 
@@ -173,7 +173,7 @@ authRoutes.get("/auth/session", async (c) => {
       .all()
       .then((rows) => rows.map((r) => r.role));
 
-    return createSuccessResponse(c, { id: user.id, username: user.username, roles: roles }, "Session valid");
+    return createSuccessResponse(c, { id: user.id, username: user.username, roles }, "Session valid");
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "SESSION_CHECK_ERROR", "Error checking session", 500);

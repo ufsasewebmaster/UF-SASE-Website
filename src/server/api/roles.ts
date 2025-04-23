@@ -54,7 +54,7 @@ roleRoutes.post("/roles/assign", async (c) => {
     }
 
     await db.insert(Schema.userRoleRelationship).values({
-      userId: userId,
+      userId,
       role,
     });
 

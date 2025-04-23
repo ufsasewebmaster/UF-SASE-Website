@@ -6,7 +6,7 @@ export const Route = createFileRoute("/authed")({
 });
 
 function AuthedComponent() {
-  const { isAuthenticated, isAdmin } = useAuth();
+  const { isAdmin, isAuthenticated } = useAuth();
   console.log(isAuthenticated);
   return (
     <div>
