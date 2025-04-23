@@ -1,4 +1,5 @@
 import { Button } from "@components/ui/button";
+import { useTimer } from "@hooks/useTimer";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
@@ -49,6 +50,7 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, handl
   };
 
   const [isEditing, setIsEditing] = useState(false);
+  const { seconds, startTimer, timerRunning } = useTimer();
 
   useEffect(() => {
     setValue("username", username);
@@ -66,13 +68,17 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, handl
 
   const passwordResetHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    try {
-      fetch("api/email/password-reset", {
-        method: "POST",
-        body: JSON.stringify({ email }),
-      });
-    } catch (error) {
-      console.log("Password reset email could not be sent", error);
+    //does nothing if timer is running (reset email has already been sent)
+    if (!timerRunning) {
+      try {
+        fetch("api/email/password-reset", {
+          method: "POST",
+          body: JSON.stringify({ email }),
+        });
+        startTimer(10);
+      } catch (error) {
+        console.log("Password reset email could not be sent", error);
+      }
     }
   };
 
@@ -127,7 +133,7 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, handl
               <p className="rounded-lg bg-gray-50 px-4 py-2">••••••••</p>
               {isEditing && (
                 <a href="#" onClick={passwordResetHandler} className="text-sm text-blue-600 hover:underline">
-                  Send Password Reset Email
+                  {timerRunning ? `Reset Email Sent! Please wait ${seconds} seconds to try again.` : "Send Password Reset Email"}
                 </a>
               )}
             </div>
@@ -146,13 +152,13 @@ const AccountBox: React.FC<AccountBoxProps> = ({ bio, email, handleLogout, handl
           </div>
           <div className="mt-10 flex justify-center">
             <Button type="button" onClick={() => setIsEditing(!isEditing)}>
-              <Icon icon="material-symbols:edit" width="24" height="24" color="#0668B3" />
+              <Icon icon="material-symbols:edit" width="24" height="24" color="#FFFFFF" />
               Toggle Editing
             </Button>
             {isEditing && (
               <div className="pl-4">
                 <Button type="submit">
-                  <Icon icon="material-symbols:save" width="24" height="24" color="#0668B3" />
+                  <Icon icon="material-symbols:save" width="24" height="24" color="#FFFFFF" />
                   Save Changes
                 </Button>
               </div>
