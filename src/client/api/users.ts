@@ -1,10 +1,10 @@
 import type { DeleteUser, InsertUser, SelectUser, UpdateUser } from "@shared/schema/userSchema";
-import { deleteUserSchema, insertUserSchema, selectUserSchema } from "@shared/schema/userSchema";
+import { deleteUserSchema, insertUserSchema, minimalUserSchema, selectUserSchema } from "@shared/schema/userSchema";
 import { apiFetch } from "@shared/utils";
 
 // Fetch ALL Users
 export const fetchUsers = async (): Promise<Array<SelectUser>> => {
-  const response = await apiFetch("/api/users", { method: "GET" }, selectUserSchema.array());
+  const response = await apiFetch("/api/users", { method: "GET" }, minimalUserSchema.array());
   return response.data;
 };
 

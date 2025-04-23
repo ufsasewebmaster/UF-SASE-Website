@@ -12,10 +12,10 @@ export const users = sqliteTable("user", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   email: text("email").notNull().unique(),
-  time_added: integer("time_added", { mode: "timestamp" })
+  timeAdded: integer("time_added", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
-  time_updated: integer("time_updated", { mode: "timestamp" })
+  timeUpdated: integer("time_updated", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
   points: integer("points"),
@@ -24,10 +24,10 @@ export const users = sqliteTable("user", {
 // Session table
 export const sessions = sqliteTable("session", {
   id: text("id").primaryKey(),
-  user_id: text("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  expires_at: integer("expires_at").notNull(),
+  expiresAt: integer("expires_at").notNull(),
 });
 
 //Roles table
@@ -43,7 +43,7 @@ export const userRoleRelationship = sqliteTable("user_roles_relationship", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  user_id: text("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   role: text("role")
@@ -54,36 +54,36 @@ export const userRoleRelationship = sqliteTable("user_roles_relationship", {
 
 // Personal Info table
 export const personalInfo = sqliteTable("personal_info", {
-  user_id: text("user_id")
+  userId: text("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" }),
-  first_name: text("first_name").notNull(),
-  last_name: text("last_name").notNull(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   bio: text("bio").notNull().default(""),
   phone: text("phone").notNull().default(""),
   discord: text("discord").notNull().default(""),
-  area_code: text("area_code").notNull().default(""),
+  areaCode: text("area_code").notNull().default(""),
 });
 
 // Professional Info table
 export const professionalInfo = sqliteTable("professional_info", {
-  user_id: text("user_id")
+  userId: text("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" }),
-  resume_path: text("resume_path"),
+  resumePath: text("resume_path"),
   linkedin: text("linkedin"),
   portfolio: text("portfolio"),
   majors: text("majors"),
   minors: text("minors"),
-  graduation_semester: text("graduation_semester"),
+  graduationSemester: text("graduation_semester"),
 });
 
 // SASE Info table
 export const saseInfo = sqliteTable("sase_info", {
-  user_id: text("user_id")
+  userId: text("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" }),
-  events_attended: text("events_attended"),
+  eventsAttended: text("events_attended"),
   groups: text("groups"),
 });
 
@@ -94,17 +94,17 @@ export const events = sqliteTable("event", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   name: text("name").notNull().unique(),
   description: text("description"),
-  time_added: integer("time_added", { mode: "timestamp" })
+  timeAdded: integer("time_added", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
-  time_updated: integer("time_updated", { mode: "timestamp" })
+  timeUpdated: integer("time_updated", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
   location: text("location").notNull(),
-  start_time: integer("start_time", { mode: "timestamp" }).notNull(),
-  end_time: integer("end_time", { mode: "timestamp" }).notNull(),
-  involved_groups: text("involved_groups"),
-  slides_url: text("slides_url"),
+  startTime: integer("start_time", { mode: "timestamp" }).notNull(),
+  endTime: integer("end_time", { mode: "timestamp" }).notNull(),
+  involvedGroups: text("involved_groups"),
+  slidesUrl: text("slides_url"),
 });
 
 // Blogs table
@@ -114,11 +114,11 @@ export const blogs = sqliteTable("blog", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   title: text("title").notNull().unique(),
   content: text("content").notNull(), // Assuming markdown content
-  author_id: text("author_id").references(() => users.id),
-  published_date: integer("published_date", { mode: "timestamp" })
+  authorId: text("author_id").references(() => users.id),
+  publishedDate: integer("published_date", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
-  time_updated: integer("time_updated", { mode: "timestamp" })
+  timeUpdated: integer("time_updated", { mode: "timestamp" })
     .notNull()
     .$onUpdateFn(() => new Date()),
 });
@@ -136,8 +136,8 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  blog_id: text("blog_id").references(() => blogs.id, { onDelete: "cascade" }),
-  tag_id: text("tag_id").references(() => blogTags.id),
+  blogId: text("blog_id").references(() => blogs.id, { onDelete: "cascade" }),
+  tagId: text("tag_id").references(() => blogTags.id),
 });
 
 // Mentor/Mentee Relationship table
@@ -145,8 +145,16 @@ export const mentorMenteeRelationship = sqliteTable("mentor_mentee_relationship"
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
-  mentor_id: text("mentor_id").references(() => users.id, { onDelete: "cascade" }),
-  mentee_id: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
+  mentorId: text("mentor_id").references(() => users.id, { onDelete: "cascade" }),
+  menteeId: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
+});
+
+export const mentorMenteeInvites = sqliteTable("mentor_mentee_invites", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  mentorId: text("mentor_id").references(() => users.id, { onDelete: "cascade" }),
+  menteeId: text("mentee_id").references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const emailSubscribers = sqliteTable("email_subscriber", {
@@ -155,7 +163,7 @@ export const emailSubscribers = sqliteTable("email_subscriber", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   email: text("email").notNull().unique(),
   name: text("name"),
-  subscribed_at: integer("subscribed_at", { mode: "timestamp" })
+  subscribedAt: integer("subscribed_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
 });
@@ -168,6 +176,6 @@ export const meetingSlides = sqliteTable("meeting_slides", {
   name: text("name").notNull(),
   date: integer("date", { mode: "timestamp" }).notNull(),
   semester: text("semester").notNull(),
-  thumbnail_url: text("thumbnail_url").notNull().unique(),
-  embed_url: text("embed_url").notNull().unique(),
+  thumbnailUrl: text("thumbnail_url").notNull().unique(),
+  embedUrl: text("embed_url").notNull().unique(),
 });

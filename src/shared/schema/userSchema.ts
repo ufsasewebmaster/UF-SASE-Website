@@ -5,8 +5,8 @@ export const userSchema = z.object({
   username: z.string().min(1, "Username is required."),
   password: z.string().min(1, "Password is required."),
   email: z.string().email("Invalid email address."),
-  time_added: z.number().int().min(0, "Time added must be a valid timestamp."),
-  time_updated: z.number().int().min(0, "Time updated must be a valid timestamp."),
+  timeAdded: z.number().int().min(0, "Time added must be a valid timestamp."),
+  timeUpdated: z.number().int().min(0, "Time updated must be a valid timestamp."),
   points: z.number().int().min(0).optional(),
   roles: z.string().optional(),
 });
@@ -16,8 +16,8 @@ export type User = z.infer<typeof userSchema>;
 export const insertUserSchema = userSchema
   .omit({
     id: true,
-    time_added: true,
-    time_updated: true,
+    timeAdded: true,
+    timeUpdated: true,
     password: true,
   })
   .extend({
@@ -44,3 +44,9 @@ export const deleteUserSchema = z.object({
   id: z.string().min(1, "User ID is required."),
 });
 export type DeleteUser = z.infer<typeof deleteUserSchema>;
+
+export const minimalUserSchema = z.object({
+  id: z.string().min(1, "User ID is required."),
+  username: z.string().min(1, "Username is required."),
+});
+export type MinimalUser = z.infer<typeof minimalUserSchema>;

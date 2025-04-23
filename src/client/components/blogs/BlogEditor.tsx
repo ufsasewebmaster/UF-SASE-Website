@@ -84,10 +84,10 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
                 )}
               </div>
               <div className={cn("mt-2 flex items-center justify-center text-sm text-gray-600", "font-redhat")}>
-                <span className="mr-2">{blog.time_updated || "15 min read"}</span>
+                <span className="mr-2">{blog.timeUpdated || "15 min read"}</span>
                 <span className="mx-2">by {blog.author}</span>
                 <span className="ml-2">
-                  {new Date(blog.published_date).toLocaleDateString("en-US", {
+                  {new Date(blog.publishedDate).toLocaleDateString("en-US", {
                     month: "long",
                     day: "numeric",
                     year: "numeric",

@@ -1,54 +1,44 @@
-import { apiFetch } from "@/shared/utils";
+// src/context/AuthContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { z } from "zod";
+import { fetchSession, loginApi, logoutApi } from "../api/auth";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => Promise<void>;
+  roles: Array<string>;
+  isAdmin: boolean;
+  login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   isLoading: boolean;
   id: string;
   errorMessage: string;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  isAuthenticated: false,
-  login: async () => {},
-  logout: async () => {},
-  isLoading: true,
-  id: "",
-  errorMessage: "",
-});
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [roles, setRoles] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [id, setId] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [id, setId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const checkSession = async () => {
     try {
-      const user = await apiFetch(
-        "/api/auth/session",
-        { credentials: "include" },
-        z.object({
-          id: z.string(),
-          username: z.string(),
-        }),
-      );
-      console.log("ID set to ", user.data.id);
-      setId(user.data.id);
+      const user = await fetchSession();
+      // console.log
+      setId(user.id);
+      setRoles(user.roles);
       setIsAuthenticated(true);
-    } catch (error) {
-      console.log(error);
-      const errMsg = error instanceof Error ? error.message : "Unknown error occurred";
-      setErrorMessage(errMsg);
+      setErrorMessage("");
+    } catch (err: unknown) {
       setIsAuthenticated(false);
+      setRoles([]);
+      setErrorMessage("Unknown error occurred" + err);
     } finally {
       setIsLoading(false);
     }
@@ -58,37 +48,62 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkSession();
   }, []);
 
-  const login = async () => {
-    await checkSession();
-    setIsAuthenticated(true);
-  };
-
-  const logout = async () => {
+  const login = async (username: string, password: string) => {
+    setIsLoading(true);
     try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        setIsAuthenticated(false);
-        setId("");
-      } else {
-        throw new Error("Logout failed");
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-      const errMsg = error instanceof Error ? error.message : "Unknown error occurred";
-      setErrorMessage(errMsg);
+      await loginApi({ username, password });
+      const user = await fetchSession();
+
+      setId(user.id);
+      setRoles(user.roles);
+      setIsAuthenticated(true);
+      setErrorMessage("");
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("Unknown error" + err);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return <AuthContext.Provider value={{ errorMessage, isAuthenticated, id, login, logout, isLoading }}>{children}</AuthContext.Provider>;
+  const logout = async () => {
+    setIsLoading(true);
+    try {
+      await logoutApi();
+      setIsAuthenticated(false);
+      setRoles([]);
+      setId("");
+      setErrorMessage("");
+    } catch (err) {
+      setErrorMessage("Unknown error occurred" + err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const isAdmin = roles.includes("admin");
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        roles,
+        isAdmin,
+        login,
+        logout,
+        isLoading,
+        id,
+        errorMessage,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within an AuthProvider");
+  return ctx;
 };

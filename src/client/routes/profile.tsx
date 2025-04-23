@@ -69,8 +69,8 @@ export const Route = createFileRoute("/profile")({
             />
           ) : activeSection === "userinfo" ? (
             <UserInfoBox
-              first_name={profile?.first_name || ""}
-              last_name={profile?.last_name || ""}
+              firstName={profile?.firstName || ""}
+              lastName={profile?.lastName || ""}
               linkedin={profile?.linkedin || ""}
               discord={profile?.discord || ""}
               majors={profile?.majors || ""}

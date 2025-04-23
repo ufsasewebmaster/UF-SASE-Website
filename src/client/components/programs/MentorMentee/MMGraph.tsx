@@ -29,15 +29,15 @@ const MentorMenteeGraph: React.FC = () => {
     async function fetchData() {
       try {
         const relations = await fetchMentorMenteeRelations();
-        const links = relations.map(({ mentee_id: t, mentor_id: m }) => ({
+        const links = relations.map(({ menteeId: t, mentorId: m }) => ({
           source: m,
           target: t,
         }));
-        const uniqueIds = Array.from(new Set(relations.flatMap(({ mentee_id, mentor_id }) => [mentor_id, mentee_id])));
+        const uniqueIds = Array.from(new Set(relations.flatMap(({ menteeId, mentorId }) => [mentorId, menteeId])));
         const users = await Promise.all(uniqueIds.map((id) => fetchPersonalInfo(id)));
         const nodes = users.map((u) => ({
-          id: u.user_id,
-          name: `${u.first_name} ${u.last_name}`,
+          id: u.userId,
+          name: `${u.firstName} ${u.lastName}`,
         }));
         // console.log("nodes", nodes);
         // console.log("links", links);
@@ -65,8 +65,27 @@ const MentorMenteeGraph: React.FC = () => {
 
   return (
     <ClientOnly>
-      <div ref={containerRef} style={{ width: "100%", height: "600px", border: "1px solid #ccc" }}>
-        {!graphData && <p>Loading data…</p>}
+      <div
+        ref={containerRef}
+        style={{
+          width: "100%",
+          height: "600px",
+          border: "1px solid #ccc",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {!graphData && (
+          <p
+            style={{
+              fontSize: "2.25rem",
+              fontWeight: 500,
+            }}
+          >
+            Loading data…
+          </p>
+        )}{" "}
         {graphData && (
           <ForceGraph2D
             ref={fgRef as React.MutableRefObject<ForceGraphMethods<FgNode, FgLink>>}

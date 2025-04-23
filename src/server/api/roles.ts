@@ -12,7 +12,7 @@ roleRoutes.get("/roles/:userID", async (c) => {
     const userRoles = await db
       .select({ role: Schema.userRoleRelationship.role })
       .from(Schema.userRoleRelationship)
-      .where(eq(Schema.userRoleRelationship.user_id, userId))
+      .where(eq(Schema.userRoleRelationship.userId, userId))
       .all();
     if (userRoles.length === 0) {
       return createErrorResponse(c, "ROLE_NOT_FOUND", "No role found", 404);
@@ -47,14 +47,14 @@ roleRoutes.post("/roles/assign", async (c) => {
     const currentRoles = await db
       .select({ role: Schema.userRoleRelationship.role })
       .from(Schema.userRoleRelationship)
-      .where(eq(Schema.userRoleRelationship.user_id, userId))
+      .where(eq(Schema.userRoleRelationship.userId, userId))
       .all();
     if (currentRoles.some((r) => r.role === role)) {
       return createErrorResponse(c, "ROLE_ALREADY_ASSIGNED", "Role already assigned", 400);
     }
 
     await db.insert(Schema.userRoleRelationship).values({
-      user_id: userId,
+      userId,
       role,
     });
 
@@ -86,7 +86,7 @@ roleRoutes.post("/roles/delete", async (c) => {
     const currentRoles = await db
       .select({ role: Schema.userRoleRelationship.role })
       .from(Schema.userRoleRelationship)
-      .where(eq(Schema.userRoleRelationship.user_id, userId))
+      .where(eq(Schema.userRoleRelationship.userId, userId))
       .all();
     if (!currentRoles.some((r) => r.role === role)) {
       return createErrorResponse(c, "ROLE_NOT_FOUND", "User doesn't have role", 400);
@@ -94,7 +94,7 @@ roleRoutes.post("/roles/delete", async (c) => {
 
     await db
       .delete(Schema.userRoleRelationship)
-      .where(and(eq(Schema.userRoleRelationship.user_id, userId), eq(Schema.userRoleRelationship.role, role)));
+      .where(and(eq(Schema.userRoleRelationship.userId, userId), eq(Schema.userRoleRelationship.role, role)));
 
     return createSuccessResponse(c, `Role '${role}' deleted from user ${userId}`);
   } catch (error) {
@@ -111,7 +111,7 @@ async function isAdmin(sessionId: string) {
   const userRoles = await db
     .select({ role: Schema.userRoleRelationship.role })
     .from(Schema.userRoleRelationship)
-    .where(eq(Schema.userRoleRelationship.user_id, session.user_id))
+    .where(eq(Schema.userRoleRelationship.userId, session.userId))
     .all();
 
   if (!userRoles.some((r) => r.role === "admin")) return true;

@@ -1,4 +1,3 @@
-// libapi/blogs.ts
 import type { Blog, CreateBlog, UpdateBlog } from "@shared/schema/blogSchema";
 import { blogSchema, updateBlogSchema } from "@shared/schema/blogSchema";
 import type { BlogTag } from "@shared/schema/blogTagSchema";

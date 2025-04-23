@@ -1,6 +1,6 @@
 import { db } from "@/server/db/db";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
-import * as Schema from "@db/tables";
+import { personalInfo, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -39,35 +39,35 @@ authRoutes.post("/auth/signup", async (c) => {
   const userId = generateIdFromEntropySize(16); // 16 characters long
 
   try {
-    await db.insert(Schema.users).values({
+    await db.insert(users).values({
       id: userId,
       username: formUsername,
       password: formPasswordHash,
       email: formEmail,
     });
 
-    await db.insert(Schema.personalInfo).values({
-      user_id: userId,
-      first_name: "",
-      last_name: "",
+    await db.insert(personalInfo).values({
+      userId,
+      firstName: "",
+      lastName: "",
       bio: "",
       phone: "",
       discord: "",
-      area_code: "",
+      areaCode: "",
     });
 
-    await db.insert(Schema.professionalInfo).values({
-      user_id: userId,
-      resume_path: "",
+    await db.insert(professionalInfo).values({
+      userId,
+      resumePath: "",
       linkedin: "",
       portfolio: "",
       majors: "",
       minors: "",
-      graduation_semester: "",
+      graduationSemester: "",
     });
 
-    await db.insert(Schema.userRoleRelationship).values({
-      user_id: userId,
+    await db.insert(userRoleRelationship).values({
+      userId,
       role: "user",
     });
 
@@ -86,6 +86,7 @@ authRoutes.post("/auth/login", async (c) => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!formUsername || typeof formUsername !== "string" || formUsername.trim() === "") {
+    console.log("??????");
     return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 401);
   }
 
@@ -95,9 +96,9 @@ authRoutes.post("/auth/login", async (c) => {
 
   let user;
   if (emailRegex.test(formUsername)) {
-    user = await db.select().from(Schema.users).where(eq(Schema.users.email, formUsername));
+    user = await db.select().from(users).where(eq(users.email, formUsername));
   } else {
-    user = await db.select().from(Schema.users).where(eq(Schema.users.username, formUsername));
+    user = await db.select().from(users).where(eq(users.username, formUsername));
   }
 
   if (user.length === 0) {
@@ -128,9 +129,9 @@ authRoutes.post("/auth/logout", async (c) => {
 
   try {
     // delete the session id row from the table
-    await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+    await db.delete(sessions).where(eq(sessions.id, sessionId));
 
-    return createSuccessResponse(c, { success: true }, "Successfully logged out");
+    return createSuccessResponse(c, null, "Successfully logged out");
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "LOGOUT_ERROR", "Error logging out", 500);
@@ -147,28 +148,32 @@ authRoutes.get("/auth/session", async (c) => {
   }
 
   try {
-    const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+    const session = await db.select().from(sessions).where(eq(sessions.id, sessionId)).get();
 
-    if (session.length === 0) {
+    if (!session) {
       return createErrorResponse(c, "SESSION_NOT_FOUND", "Session not found", 401);
     }
 
-    if (session[0].expires_at < Date.now()) {
-      await db.delete(Schema.sessions).where(eq(Schema.sessions.id, sessionId));
+    if (session.expiresAt < Date.now()) {
+      await db.delete(sessions).where(eq(sessions.id, sessionId));
       // maybe renew session?
       return createErrorResponse(c, "SESSION_EXPIRED", "Session expired", 401);
     }
 
-    const user = await db
-      .select({ id: Schema.users.id, username: Schema.users.username })
-      .from(Schema.users)
-      .where(eq(Schema.users.id, session[0].user_id));
+    const user = await db.select({ id: users.id, username: users.username }).from(users).where(eq(users.id, session.userId)).get();
 
-    if (user.length === 0) {
+    if (!user) {
       return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 401);
     }
 
-    return createSuccessResponse(c, { id: user[0].id, username: user[0].username }, "Session valid");
+    const roles = await db
+      .select({ role: userRoleRelationship.role })
+      .from(userRoleRelationship)
+      .where(eq(userRoleRelationship.userId, session.userId))
+      .all()
+      .then((rows) => rows.map((r) => r.role));
+
+    return createSuccessResponse(c, { id: user.id, username: user.username, roles }, "Session valid");
   } catch (error) {
     console.log(error);
     return createErrorResponse(c, "SESSION_CHECK_ERROR", "Error checking session", 500);
@@ -177,10 +182,10 @@ authRoutes.get("/auth/session", async (c) => {
 
 async function createSession(sessionID: string, userID: string) {
   try {
-    await db.insert(Schema.sessions).values({
+    await db.insert(sessions).values({
       id: sessionID,
-      user_id: userID, //Session expires in 1 hour from when it is created
-      expires_at: Date.now() + 3600 * 1000,
+      userId: userID, //Session expires in 1 hour from when it is created
+      expiresAt: Date.now() + 3600 * 1000,
     });
   } catch (error) {
     console.log(error);

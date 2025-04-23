@@ -5,9 +5,9 @@ export const blogSchema = z.object({
   id: z.string().min(1, "Blog ID is required."),
   title: z.string().min(1, "Title is required."),
   content: z.string().min(1, "Content cannot be empty."),
-  author_id: z.string().min(1, "Author ID is required."),
-  published_date: z.string().min(0, "Published date must be a valid timestamp."),
-  time_updated: z.string().min(0, "Update time must be a valid timestamp."),
+  authorId: z.string().min(1, "Author ID is required."),
+  publishedDate: z.string().min(0, "Published date must be a valid timestamp."),
+  timeUpdated: z.string().min(0, "Update time must be a valid timestamp."),
   images: z.array(z.string().url()).optional(),
   tags: z.array(z.string()).optional(),
 });
@@ -19,8 +19,8 @@ export const blogTitleSchema = z.object({
 export const createBlogSchema = blogSchema
   .omit({
     id: true,
-    time_updated: true,
-    published_date: true,
+    authorId: true,
+    publishedDate: true,
   })
   .extend({
     tags: z.array(z.string()).optional(),
@@ -31,8 +31,8 @@ export const updateBlogSchema = blogSchema
   .partial()
   .omit({
     id: true,
-    author_id: true,
-    published_date: true,
+    authorId: true,
+    publishedDate: true,
   })
   .extend({
     id: z.string().min(1, "Blog ID is required for updates."),
@@ -45,5 +45,5 @@ export type CreateBlog = z.infer<typeof createBlogSchema>;
 export type UpdateBlog = z.infer<typeof updateBlogSchema>;
 
 export const blogSearchResponseSchema = z.object({
-  blog_ids: z.array(z.string().min(1, "Blog ID must be valid.")),
+  blogIds: z.array(z.string().min(1, "Blog ID must be valid.")),
 });

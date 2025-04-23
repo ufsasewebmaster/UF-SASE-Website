@@ -33,9 +33,9 @@ tagRoutes.get("/tags/:tagName/blogs", async (c) => {
 
     // Get all blog IDs related to this tag
     const blogRelationships = await db
-      .select({ blog_id: Schema.blogTagRelationship.blog_id })
+      .select({ blog_id: Schema.blogTagRelationship.blogId })
       .from(Schema.blogTagRelationship)
-      .where(eq(Schema.blogTagRelationship.tag_id, tagId));
+      .where(eq(Schema.blogTagRelationship.tagId, tagId));
 
     if (blogRelationships.length === 0) {
       return createSuccessResponse(c, [], "No blogs found with this tag");
@@ -60,8 +60,8 @@ tagRoutes.get("/tags/:tagName/blogs", async (c) => {
         const tags = await db
           .select({ name: Schema.blogTags.name })
           .from(Schema.blogTagRelationship)
-          .innerJoin(Schema.blogTags, eq(Schema.blogTags.id, Schema.blogTagRelationship.tag_id))
-          .where(eq(Schema.blogTagRelationship.blog_id, blog.id));
+          .innerJoin(Schema.blogTags, eq(Schema.blogTags.id, Schema.blogTagRelationship.tagId))
+          .where(eq(Schema.blogTagRelationship.blogId, blog.id));
 
         return {
           ...blog,

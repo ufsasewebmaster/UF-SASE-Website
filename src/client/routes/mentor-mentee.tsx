@@ -1,11 +1,14 @@
+import { faqData as mentorFaqData } from "@/client/components/programs/MentorMentee/MMfaq"; // assumed analogous to faqInterns
 import { imageUrls } from "@assets/imageUrls";
 import FAQ from "@components/programs/FAQCard";
-import { faqData as mentorFaqData } from "@components/programs/faqMentorMentee"; // assumed analogous to faqInterns
 import InfoCard from "@components/programs/InfoCard";
-import MentorMenteeGraph from "@components/programs/MentorMenteeGraph";
+import MMPairingForm from "@components/programs/MentorMentee/MMPairingForm";
 import { ClientOnly } from "@shared/utils";
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { seo } from "../utils/seo";
+
+const MentorMenteeGraph = lazy(() => import("@/client/components/programs/MentorMentee/MMGraph"));
 
 export const Route = createFileRoute("/mentor-mentee")({
   meta: () => [
@@ -21,8 +24,21 @@ export const Route = createFileRoute("/mentor-mentee")({
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
         <ClientOnly>
-          <MentorMenteeGraph />
+          <div className="flex w-full flex-1">
+            <Suspense
+              fallback={
+                <div className="flex flex-1 items-center justify-center">
+                  <span className="text-4xl font-medium">Loading graph…</span>
+                </div>
+              }
+            >
+              <MentorMenteeGraph />
+            </Suspense>
+          </div>
         </ClientOnly>
+
+        <MMPairingForm></MMPairingForm>
+
         {/* Header Section */}
         <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
           <header className="mr-8 mt-10 flex items-center px-5">
