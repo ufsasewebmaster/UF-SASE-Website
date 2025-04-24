@@ -21,7 +21,6 @@ import { Route as SearchImport } from './routes/search'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
-import { Route as ProfileOLDImport } from './routes/profileOLD'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
@@ -98,12 +97,6 @@ const ResetPasswordRoute = ResetPasswordImport.update({
 const ProgramsRoute = ProgramsImport.update({
   id: '/programs',
   path: '/programs',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileOLDRoute = ProfileOLDImport.update({
-  id: '/profileOLD',
-  path: '/profileOLD',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -291,13 +284,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MentorMenteeImport
       parentRoute: typeof rootRoute
     }
-    '/profileOLD': {
-      id: '/profileOLD'
-      path: '/profileOLD'
-      fullPath: '/profileOLD'
-      preLoaderRoute: typeof ProfileOLDImport
-      parentRoute: typeof rootRoute
-    }
     '/programs': {
       id: '/programs'
       path: '/programs'
@@ -432,7 +418,6 @@ export interface FileRoutesByFullPath {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -461,7 +446,6 @@ export interface FileRoutesByTo {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -492,7 +476,6 @@ export interface FileRoutesById {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -524,7 +507,6 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -552,7 +534,6 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -581,7 +562,6 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -612,7 +592,6 @@ export interface RootRouteChildren {
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
-  ProfileOLDRoute: typeof ProfileOLDRoute
   ProgramsRoute: typeof ProgramsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
@@ -638,7 +617,6 @@ const rootRouteChildren: RootRouteChildren = {
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
-  ProfileOLDRoute: ProfileOLDRoute,
   ProgramsRoute: ProgramsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
@@ -673,7 +651,6 @@ export const routeTree = rootRoute
         "/interns",
         "/login",
         "/mentor-mentee",
-        "/profileOLD",
         "/programs",
         "/reset-password",
         "/resources",
@@ -727,9 +704,6 @@ export const routeTree = rootRoute
     },
     "/mentor-mentee": {
       "filePath": "mentor-mentee.tsx"
-    },
-    "/profileOLD": {
-      "filePath": "profileOLD.tsx"
     },
     "/programs": {
       "filePath": "programs.tsx"
