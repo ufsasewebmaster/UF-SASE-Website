@@ -68,7 +68,8 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ color, icon, text, to }) => {
   // Correct usage: call hook with no args, then invoke with { to }
-  const match = useMatchRoute()(to);
+  const matchRoute = useMatchRoute();
+  const match = matchRoute({ to });
   const isActive = Boolean(match);
 
   return (

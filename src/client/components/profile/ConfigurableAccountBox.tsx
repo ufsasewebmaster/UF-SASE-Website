@@ -84,7 +84,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
                   )}
                 </div>
               ) : (
-                <div className="rounded-lg bg-gray-50 px-4 py-2">{initialData[cfg.name] || "-"}</div>
+                <div className="rounded-lg bg-gray-50 px-4 py-2 text-black">{initialData[cfg.name] || "-"}</div>
               )}
             </div>
           ))}
