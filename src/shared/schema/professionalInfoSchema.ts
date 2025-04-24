@@ -2,12 +2,15 @@ import { z } from "zod";
 
 export const professionalInfoSchema = z.object({
   userId: z.string().min(1, "User ID is required."),
-  resumePath: z.string().url("Resume path must be a valid URL."),
-  linkedin: z.string().url("LinkedIn must be a valid URL."),
-  portfolio: z.string().url("Portfolio must be a valid URL."),
-  majors: z.string(),
-  minors: z.string(),
-  graduationSemester: z.string(),
+  phone: z.string().optional(),
+  discord: z.string().optional(),
+  bio: z.string().optional(),
+  resumePath: z.string().url("Resume path must be a valid URL.").optional().or(z.literal("")),
+  linkedin: z.string().url("LinkedIn must be a valid URL.").optional().or(z.literal("")),
+  portfolio: z.string().url("Portfolio must be a valid URL.").optional().or(z.literal("")),
+  majors: z.string().optional(),
+  minors: z.string().optional(),
+  graduationSemester: z.string().optional(),
 });
 
 // All optional except id

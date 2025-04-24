@@ -5,6 +5,8 @@ export const userSchema = z.object({
   username: z.string().min(1, "Username is required."),
   password: z.string().min(1, "Password is required."),
   email: z.string().email("Invalid email address."),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
   timeAdded: z.number().int().min(0, "Time added must be a valid timestamp."),
   timeUpdated: z.number().int().min(0, "Time updated must be a valid timestamp."),
   points: z.number().int().min(0).optional(),
@@ -48,5 +50,7 @@ export type DeleteUser = z.infer<typeof deleteUserSchema>;
 export const minimalUserSchema = z.object({
   id: z.string().min(1, "User ID is required."),
   username: z.string().min(1, "Username is required."),
+  firstName: z.string().min(1, "First name is required."),
+  lastName: z.string().min(1, "Last name is required."),
 });
 export type MinimalUser = z.infer<typeof minimalUserSchema>;

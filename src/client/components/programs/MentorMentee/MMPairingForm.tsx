@@ -1,6 +1,6 @@
 import { addMentorMenteeInvite, addMentorMenteeRelation } from "@/client/api/mentorMentee";
 import { fetchUsers } from "@/client/api/users";
-import type { MinimalUser } from "@/shared/schema";
+import type { SelectUser } from "@/shared/schema";
 import { useAuth } from "@hooks/AuthContext";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ export default function MMPairingForm() {
   const [mode, setMode] = useState<"mentor" | "mentee">("mentor");
   // const [mentors, setMentors] = useState<Array<Mentor>>([]);
   // const [mentees, setMentees] = useState<Array<Mentee>>([]);
-  const [users, setUsers] = useState<Array<MinimalUser>>([]);
+  const [users, setUsers] = useState<Array<SelectUser>>([]);
 
   const [mentorId, setMentorId] = useState("");
   const [menteeId, setMenteeId] = useState("");

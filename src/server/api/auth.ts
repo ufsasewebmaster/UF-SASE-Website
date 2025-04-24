@@ -1,6 +1,6 @@
 import { db } from "@/server/db/db";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
-import { personalInfo, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
+import { professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -16,6 +16,10 @@ authRoutes.post("/auth/signup", async (c) => {
   const formUsername = formData["username"];
   const formPassword = formData["password"];
   const formEmail = formData["email"];
+  // TODO
+  // const formFirstName = formData["firstName"];
+  // const formLastName = formData["lastName"];
+
   const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*!@#$%^&*()\-_=+\\|[{}\];:'",<>./?])[A-Za-z\d!@#$%^&*()\-_=+\\|[{}\];:'",<>./?]{8,}$/;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -30,6 +34,7 @@ authRoutes.post("/auth/signup", async (c) => {
   //validate email
   // add 3rd validation for email using regular expressions
   if (!formEmail || typeof formEmail !== "string" || !emailRegex.test(formEmail)) {
+    console.log(formEmail);
     return createErrorResponse(c, "INVALID_EMAIL", "Invalid email!", 400);
   }
 
@@ -44,26 +49,12 @@ authRoutes.post("/auth/signup", async (c) => {
       username: formUsername,
       password: formPasswordHash,
       email: formEmail,
-    });
-
-    await db.insert(personalInfo).values({
-      userId,
-      firstName: "",
-      lastName: "",
-      bio: "",
-      phone: "",
-      discord: "",
-      areaCode: "",
+      // firstName: formFirstName,
+      // lastName: formLastName,
     });
 
     await db.insert(professionalInfo).values({
       userId,
-      resumePath: "",
-      linkedin: "",
-      portfolio: "",
-      majors: "",
-      minors: "",
-      graduationSemester: "",
     });
 
     await db.insert(userRoleRelationship).values({

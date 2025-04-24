@@ -12,13 +12,15 @@ export const users = sqliteTable("user", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   email: text("email").notNull().unique(),
-  timeAdded: integer("time_added", { mode: "timestamp" })
+  firstName: text("first_name").notNull().default(""),
+  lastName: text("last_name").notNull().default(""),
+  timeAdded: integer("time_added")
     .notNull()
-    .$defaultFn(() => new Date()),
-  timeUpdated: integer("time_updated", { mode: "timestamp" })
+    .$defaultFn(() => Date.now()),
+  timeUpdated: integer("time_updated")
     .notNull()
-    .$onUpdateFn(() => new Date()),
-  points: integer("points"),
+    .$onUpdateFn(() => Date.now()),
+  points: integer("points").notNull().default(0),
 });
 
 // Session table
@@ -52,30 +54,20 @@ export const userRoleRelationship = sqliteTable("user_roles_relationship", {
     .default("user"),
 });
 
-// Personal Info table
-export const personalInfo = sqliteTable("personal_info", {
-  userId: text("user_id")
-    .primaryKey()
-    .references(() => users.id, { onDelete: "cascade" }),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
-  bio: text("bio").notNull().default(""),
-  phone: text("phone").notNull().default(""),
-  discord: text("discord").notNull().default(""),
-  areaCode: text("area_code").notNull().default(""),
-});
-
 // Professional Info table
 export const professionalInfo = sqliteTable("professional_info", {
   userId: text("user_id")
     .primaryKey()
     .references(() => users.id, { onDelete: "cascade" }),
-  resumePath: text("resume_path"),
-  linkedin: text("linkedin"),
-  portfolio: text("portfolio"),
-  majors: text("majors"),
-  minors: text("minors"),
-  graduationSemester: text("graduation_semester"),
+  bio: text("bio").notNull().default(""),
+  phone: text("phone").notNull().default(""),
+  discord: text("discord").notNull().default(""),
+  resumePath: text("resume_path").notNull().default(""),
+  linkedin: text("linkedin").notNull().default(""),
+  portfolio: text("portfolio").notNull().default(""),
+  majors: text("majors").notNull().default(""),
+  minors: text("minors").notNull().default(""),
+  graduationSemester: text("graduation_semester").notNull().default(""),
 });
 
 // SASE Info table
@@ -94,12 +86,12 @@ export const events = sqliteTable("event", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   name: text("name").notNull().unique(),
   description: text("description"),
-  timeAdded: integer("time_added", { mode: "timestamp" })
+  timeAdded: integer("time_added")
     .notNull()
-    .$defaultFn(() => new Date()),
-  timeUpdated: integer("time_updated", { mode: "timestamp" })
+    .$defaultFn(() => Date.now()),
+  timeUpdated: integer("time_updated")
     .notNull()
-    .$onUpdateFn(() => new Date()),
+    .$onUpdateFn(() => Date.now()),
   location: text("location").notNull(),
   startTime: integer("start_time", { mode: "timestamp" }).notNull(),
   endTime: integer("end_time", { mode: "timestamp" }).notNull(),

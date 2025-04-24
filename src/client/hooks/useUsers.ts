@@ -2,6 +2,16 @@ import type { InsertUser, UpdateUser } from "@schema/userSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createUser, deleteUser, fetchUser, fetchUsers, updateUser } from "../api/users";
 
+// export const useProfile = () => {
+//   return useQuery<ALLProfile, Error>({
+//     queryKey: ["profile"],
+//     queryFn: async () => {
+//       const response = await apiFetch("/api/profile", { credentials: "include" }, ALLprofileSchema);
+//       return response.data;
+//     },
+//   });
+// };
+
 export const useUsers = (id: string) => {
   const queryClient = useQueryClient();
 
@@ -33,8 +43,17 @@ export const useUsers = (id: string) => {
   });
 
   return {
-    user: userQuery,
-    users: usersQuery,
+    // single‐user
+    user: userQuery.data,
+    isLoading: userQuery.isLoading,
+    error: userQuery.error,
+
+    // all‐users
+    users: usersQuery.data,
+    isLoadingUsers: usersQuery.isLoading,
+    errorUsers: usersQuery.error,
+
+    // mutations
     createUser: createUserMutation,
     updateUser: updateUserMutation,
     deleteUser: deleteUserMutation,

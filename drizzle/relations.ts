@@ -1,14 +1,4 @@
-import {
-  blogs,
-  blogTagRelationship,
-  blogTags,
-  mentorMenteeRelationship,
-  personalInfo,
-  professionalInfo,
-  saseInfo,
-  sessions,
-  users,
-} from "@db/tables";
+import { blogs, blogTagRelationship, blogTags, mentorMenteeRelationship, professionalInfo, saseInfo, sessions, users } from "@db/tables";
 import { relations } from "drizzle-orm/relations";
 
 export const blogTagRelationshipRelations = relations(blogTagRelationship, ({ one }) => ({
@@ -43,7 +33,6 @@ export const userRelations = relations(users, ({ many }) => ({
     relationName: "mentorMenteeRelationship_mentorId_user_id",
   }),
   sessions: many(sessions),
-  personalInfos: many(personalInfo),
   professionalInfos: many(professionalInfo),
   saseInfos: many(saseInfo),
 }));
@@ -64,13 +53,6 @@ export const mentorMenteeRelationshipRelations = relations(mentorMenteeRelations
 export const sessionRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
-    references: [users.id],
-  }),
-}));
-
-export const personalInfoRelations = relations(personalInfo, ({ one }) => ({
-  user: one(users, {
-    fields: [personalInfo.userId],
     references: [users.id],
   }),
 }));

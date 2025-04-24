@@ -1,5 +1,5 @@
 import { fetchMentorMenteeRelations } from "@/client/api/mentorMentee";
-import { fetchPersonalInfo } from "@/client/api/userInfo";
+import { fetchUser } from "@/client/api/users";
 import { useDimensions } from "@/client/hooks/useDimensions";
 import { ClientOnly } from "@/shared/utils";
 import * as d3 from "d3";
@@ -34,10 +34,11 @@ const MentorMenteeGraph: React.FC = () => {
           target: t,
         }));
         const uniqueIds = Array.from(new Set(relations.flatMap(({ menteeId, mentorId }) => [mentorId, menteeId])));
-        const users = await Promise.all(uniqueIds.map((id) => fetchPersonalInfo(id)));
+        const users = await Promise.all(uniqueIds.map((id) => fetchUser(id)));
         const nodes = users.map((u) => ({
-          id: u.userId,
+          id: u.id,
           name: `${u.firstName} ${u.lastName}`,
+          username: u.username,
         }));
         // console.log("nodes", nodes);
         // console.log("links", links);

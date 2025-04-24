@@ -26,6 +26,8 @@ export interface FormData {
   password: string;
   newPassword: string;
   retypePassword?: string;
+  firstName: string;
+  lastName: string;
 }
 
 // only styling

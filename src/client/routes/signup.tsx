@@ -29,7 +29,11 @@ export const Route = createFileRoute("/signup")({
     const mutation = useMutation({
       mutationFn: async (data: FormData) => {
         // 1) Create the new user
-        await signupUser({ username: data.username, password: data.password });
+        await signupUser({
+          username: data.username,
+          password: data.password,
+          email: data.email,
+        });
         // 2) Immediately log them in via AuthContext
         await login(data.username, data.password);
       },

@@ -1,22 +1,34 @@
-// components/AccountBox.tsx
+// src/components/profile/AccountBox.tsx
+import type { userSchema } from "@shared/schema/userSchema";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import type { z } from "zod";
 import type { FieldConfig } from "./ConfigurableAccountBox";
 import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 
+type User = z.infer<typeof userSchema>;
+
 interface AccountBoxProps {
-  handleLogout: () => void;
-  username: string;
-  email: string;
-  bio: string;
+  username: User["username"];
+  email: User["email"];
+  firstName?: User["firstName"];
+  lastName?: User["lastName"];
+  timeAdded: number;
+  timeUpdated: number;
+  points?: number;
+  roles?: string;
 }
 
-export default function AccountBox({ bio: initialBio, email: initialEmail, handleLogout, username: initialUsername }: AccountBoxProps) {
-  // lift state here
+export default function AccountBox(props: AccountBoxProps) {
   const [info, setInfo] = useState({
-    username: initialUsername,
-    email: initialEmail,
-    bio: initialBio,
+    username: props.username,
+    email: props.email,
+    firstName: props.firstName ?? "",
+    lastName: props.lastName ?? "",
+    timeAdded: props.timeAdded.toString(),
+    timeUpdated: props.timeUpdated.toString(),
+    points: (props.points ?? 0).toString(),
+    roles: props.roles ?? "",
   });
 
   const fieldConfigs: Array<FieldConfig> = [
@@ -30,14 +42,24 @@ export default function AccountBox({ bio: initialBio, email: initialEmail, handl
       showResetLink: true,
       resetLinkUrl: "/api/email/password-reset",
     },
-    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+    { name: "firstName", label: "First Name", type: "text", editable: true },
+    { name: "lastName", label: "Last Name", type: "text", editable: true },
+    { name: "roles", label: "Roles", type: "text", editable: true },
+    { name: "points", label: "Points", type: "number", editable: true },
+    { name: "timeAdded", label: "Time Added", type: "text", editable: false },
+    { name: "timeUpdated", label: "Time Updated", type: "text", editable: false },
   ];
 
   const initialData: Record<string, string> = {
     username: info.username,
     email: info.email,
     password: "",
-    bio: info.bio,
+    firstName: info.firstName,
+    lastName: info.lastName,
+    roles: info.roles,
+    points: info.points,
+    timeAdded: info.timeAdded,
+    timeUpdated: info.timeUpdated,
   };
 
   const handleSave = async (updates: Record<string, string>) => {
@@ -49,7 +71,6 @@ export default function AccountBox({ bio: initialBio, email: initialEmail, handl
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      // merge into parent state so the UI stays updated
       setInfo((prev) => ({ ...prev, ...updates }));
       toast.success("Info saved successfully!");
     } catch (err) {
@@ -58,5 +79,5 @@ export default function AccountBox({ bio: initialBio, email: initialEmail, handl
     }
   };
 
-  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} handleLogout={handleLogout} onSave={handleSave} />;
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
 }

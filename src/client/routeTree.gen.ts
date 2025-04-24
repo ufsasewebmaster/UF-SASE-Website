@@ -21,7 +21,7 @@ import { Route as SearchImport } from './routes/search'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
-import { Route as ProfileImport } from './routes/profile'
+import { Route as ProfileOLDImport } from './routes/profileOLD'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
@@ -32,7 +32,12 @@ import { Route as BoardImport } from './routes/board'
 import { Route as BlogsImport } from './routes/blogs'
 import { Route as AuthedImport } from './routes/authed'
 import { Route as AboutImport } from './routes/about'
+import { Route as ProfileRouteImport } from './routes/profile/route'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProfileIndexImport } from './routes/profile/index'
+import { Route as ProfileSettingsImport } from './routes/profile/settings'
+import { Route as ProfileSecurityImport } from './routes/profile/security'
+import { Route as ProfileInfoImport } from './routes/profile/info'
 
 // Create/Update Routes
 
@@ -96,9 +101,9 @@ const ProgramsRoute = ProgramsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProfileRoute = ProfileImport.update({
-  id: '/profile',
-  path: '/profile',
+const ProfileOLDRoute = ProfileOLDImport.update({
+  id: '/profileOLD',
+  path: '/profileOLD',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -162,10 +167,40 @@ const AboutRoute = AboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProfileRouteRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileIndexRoute = ProfileIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileSettingsRoute = ProfileSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileSecurityRoute = ProfileSecurityImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileInfoRoute = ProfileInfoImport.update({
+  id: '/info',
+  path: '/info',
+  getParentRoute: () => ProfileRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -177,6 +212,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -249,11 +291,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MentorMenteeImport
       parentRoute: typeof rootRoute
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileImport
+    '/profileOLD': {
+      id: '/profileOLD'
+      path: '/profileOLD'
+      fullPath: '/profileOLD'
+      preLoaderRoute: typeof ProfileOLDImport
       parentRoute: typeof rootRoute
     }
     '/programs': {
@@ -326,13 +368,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
+    '/profile/info': {
+      id: '/profile/info'
+      path: '/info'
+      fullPath: '/profile/info'
+      preLoaderRoute: typeof ProfileInfoImport
+      parentRoute: typeof ProfileRouteImport
+    }
+    '/profile/security': {
+      id: '/profile/security'
+      path: '/security'
+      fullPath: '/profile/security'
+      preLoaderRoute: typeof ProfileSecurityImport
+      parentRoute: typeof ProfileRouteImport
+    }
+    '/profile/settings': {
+      id: '/profile/settings'
+      path: '/settings'
+      fullPath: '/profile/settings'
+      preLoaderRoute: typeof ProfileSettingsImport
+      parentRoute: typeof ProfileRouteImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexImport
+      parentRoute: typeof ProfileRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface ProfileRouteRouteChildren {
+  ProfileInfoRoute: typeof ProfileInfoRoute
+  ProfileSecurityRoute: typeof ProfileSecurityRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+}
+
+const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileInfoRoute: ProfileInfoRoute,
+  ProfileSecurityRoute: ProfileSecurityRoute,
+  ProfileSettingsRoute: ProfileSettingsRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+}
+
+const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(
+  ProfileRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
@@ -343,7 +432,7 @@ export interface FileRoutesByFullPath {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profile': typeof ProfileRoute
+  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -354,6 +443,10 @@ export interface FileRoutesByFullPath {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/info': typeof ProfileInfoRoute
+  '/profile/security': typeof ProfileSecurityRoute
+  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/': typeof ProfileIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -368,7 +461,7 @@ export interface FileRoutesByTo {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profile': typeof ProfileRoute
+  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -379,11 +472,16 @@ export interface FileRoutesByTo {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/info': typeof ProfileInfoRoute
+  '/profile/security': typeof ProfileSecurityRoute
+  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile': typeof ProfileIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
@@ -394,7 +492,7 @@ export interface FileRoutesById {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
-  '/profile': typeof ProfileRoute
+  '/profileOLD': typeof ProfileOLDRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -405,12 +503,17 @@ export interface FileRoutesById {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/info': typeof ProfileInfoRoute
+  '/profile/security': typeof ProfileSecurityRoute
+  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/': typeof ProfileIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/profile'
     | '/about'
     | '/authed'
     | '/blogs'
@@ -421,7 +524,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profile'
+    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -432,6 +535,10 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/info'
+    | '/profile/security'
+    | '/profile/settings'
+    | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -445,7 +552,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profile'
+    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -456,9 +563,14 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/info'
+    | '/profile/security'
+    | '/profile/settings'
+    | '/profile'
   id:
     | '__root__'
     | '/'
+    | '/profile'
     | '/about'
     | '/authed'
     | '/blogs'
@@ -469,7 +581,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
-    | '/profile'
+    | '/profileOLD'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -480,11 +592,16 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/info'
+    | '/profile/security'
+    | '/profile/settings'
+    | '/profile/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProfileRouteRoute: typeof ProfileRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthedRoute: typeof AuthedRoute
   BlogsRoute: typeof BlogsRoute
@@ -495,7 +612,7 @@ export interface RootRouteChildren {
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
-  ProfileRoute: typeof ProfileRoute
+  ProfileOLDRoute: typeof ProfileOLDRoute
   ProgramsRoute: typeof ProgramsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
@@ -510,6 +627,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProfileRouteRoute: ProfileRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthedRoute: AuthedRoute,
   BlogsRoute: BlogsRoute,
@@ -520,7 +638,7 @@ const rootRouteChildren: RootRouteChildren = {
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
-  ProfileRoute: ProfileRoute,
+  ProfileOLDRoute: ProfileOLDRoute,
   ProgramsRoute: ProgramsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
@@ -544,6 +662,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/profile",
         "/about",
         "/authed",
         "/blogs",
@@ -554,7 +673,7 @@ export const routeTree = rootRoute
         "/interns",
         "/login",
         "/mentor-mentee",
-        "/profile",
+        "/profileOLD",
         "/programs",
         "/reset-password",
         "/resources",
@@ -569,6 +688,15 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/profile": {
+      "filePath": "profile/route.tsx",
+      "children": [
+        "/profile/info",
+        "/profile/security",
+        "/profile/settings",
+        "/profile/"
+      ]
     },
     "/about": {
       "filePath": "about.tsx"
@@ -600,8 +728,8 @@ export const routeTree = rootRoute
     "/mentor-mentee": {
       "filePath": "mentor-mentee.tsx"
     },
-    "/profile": {
-      "filePath": "profile.tsx"
+    "/profileOLD": {
+      "filePath": "profileOLD.tsx"
     },
     "/programs": {
       "filePath": "programs.tsx"
@@ -632,6 +760,22 @@ export const routeTree = rootRoute
     },
     "/webdev": {
       "filePath": "webdev.tsx"
+    },
+    "/profile/info": {
+      "filePath": "profile/info.tsx",
+      "parent": "/profile"
+    },
+    "/profile/security": {
+      "filePath": "profile/security.tsx",
+      "parent": "/profile"
+    },
+    "/profile/settings": {
+      "filePath": "profile/settings.tsx",
+      "parent": "/profile"
+    },
+    "/profile/": {
+      "filePath": "profile/index.tsx",
+      "parent": "/profile"
     }
   }
 }

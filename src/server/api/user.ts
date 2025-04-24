@@ -11,8 +11,8 @@ const userRoutes = new Hono();
 userRoutes.get("/users/:id", async (c) => {
   try {
     const userId = c.req.param("id");
-    const user = await db.select().from(users).where(eq(users.id, userId));
-    if (!user || user.length === 0) {
+    const user = await db.select().from(users).where(eq(users.id, userId)).get();
+    if (!user) {
       return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 404);
     }
     return createSuccessResponse(c, user, "User retrieved successfully");

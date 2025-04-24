@@ -1,5 +1,6 @@
 // import * as Schema from "./db/schema";
 // import { eq } from "drizzle-orm";
+import infoRoutes from "@/server/api/professionalInfo";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
 import contactRoutes from "@api/contact";
@@ -12,7 +13,6 @@ import saseRoutes from "@api/saseInfo";
 import sheetsRoutes from "@api/sheets";
 import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
-import infoRoutes from "@api/userInfo";
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { eventHandler, toWebRequest } from "vinxi/http";

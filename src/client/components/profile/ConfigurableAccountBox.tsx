@@ -1,11 +1,10 @@
 // components/ConfigurableAccountBox.tsx
-import { Button } from "@components/ui/button";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-export type FieldType = "text" | "email" | "password";
+export type FieldType = "text" | "email" | "password" | "number";
 export interface FieldConfig {
   name: string;
   label: string;
@@ -19,11 +18,10 @@ export interface FieldConfig {
 interface Props {
   initialData: Record<string, string>;
   fieldConfigs: Array<FieldConfig>;
-  handleLogout: () => void;
   onSave: (updates: Record<string, string>) => void | Promise<void>;
 }
 
-export function ConfigurableAccountBox({ fieldConfigs, handleLogout, initialData, onSave }: Props) {
+export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Props) {
   const { handleSubmit, register, reset } = useForm<Record<string, string>>();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -92,12 +90,6 @@ export function ConfigurableAccountBox({ fieldConfigs, handleLogout, initialData
           ))}
         </div>
       </form>
-
-      <div className="mt-10 flex justify-center">
-        <Button variant="destructive" onClick={handleLogout}>
-          Log Out
-        </Button>
-      </div>
     </div>
   );
 }

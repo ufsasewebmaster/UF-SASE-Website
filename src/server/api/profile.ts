@@ -6,6 +6,7 @@ import { Hono } from "hono";
 
 const profileRoutes = new Hono();
 
+// TODO: HIGHLY consider separating this into the user vs professionalInfo components.
 const profileSelection = {
   id: Schema.users.id,
   username: Schema.users.username,
@@ -13,11 +14,12 @@ const profileSelection = {
   timeAdded: Schema.users.timeAdded,
   timeUpdated: Schema.users.timeUpdated,
 
-  firstName: Schema.personalInfo.firstName,
-  lastName: Schema.personalInfo.lastName,
-  bio: Schema.personalInfo.bio,
-  phone: Schema.personalInfo.phone,
-  discord: Schema.personalInfo.discord,
+  firstName: Schema.users.firstName,
+  lastName: Schema.users.lastName,
+
+  bio: Schema.professionalInfo.bio,
+  phone: Schema.professionalInfo.phone,
+  discord: Schema.professionalInfo.discord,
 
   resumePath: Schema.professionalInfo.resumePath,
   linkedin: Schema.professionalInfo.linkedin,
@@ -40,7 +42,6 @@ profileRoutes.get("/profile", async (c) => {
       .select(profileSelection)
       .from(Schema.users)
       .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
-      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.userId))
       .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
       .where(eq(Schema.sessions.id, sessionID));
 
@@ -73,7 +74,6 @@ profileRoutes.get("/profile", async (c) => {
       .select(profileSelection)
       .from(Schema.users)
       .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
-      .innerJoin(Schema.personalInfo, eq(Schema.users.id, Schema.personalInfo.userId))
       .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
       .where(eq(Schema.sessions.id, sessionID));
 
@@ -106,10 +106,9 @@ profileRoutes.patch("/profile", async (c) => {
     if (result.length > 0) {
       // Creates a set of column names for personal and professional info respectively
       const columnNames = generateColumns();
-      const personalColumns = columnNames[0];
-      const professionalColumns = columnNames[1];
-      const userInfoColumns = columnNames[2];
-      const specialColumns = columnNames[3];
+      const professionalColumns = columnNames[0];
+      const userInfoColumns = columnNames[1];
+      const specialColumns = columnNames[2];
 
       const userID = result[0].userId;
 
@@ -119,12 +118,7 @@ profileRoutes.patch("/profile", async (c) => {
         if (key in profileSelection) {
           const value = body[key];
           // Update based on the column name and its respective table
-          if (personalColumns.has(key)) {
-            await db
-              .update(Schema.personalInfo)
-              .set({ [key]: value })
-              .where(eq(Schema.personalInfo.userId, userID));
-          } else if (professionalColumns.has(key)) {
+          if (professionalColumns.has(key)) {
             await db
               .update(Schema.professionalInfo)
               .set({ [key]: value })
@@ -170,10 +164,9 @@ const insertRoles = (roleArray: Array<string>, userID: string) => {
 export default profileRoutes;
 
 function generateColumns() {
-  const personalInfoColumns = new Set(Object.values(getTableColumns(Schema.personalInfo)).map((col) => col.name));
   const professionalInfoColumns = new Set(Object.values(getTableColumns(Schema.professionalInfo)).map((col) => col.name));
   const userInfoColumns = new Set(["username", "email", "time_updated"]);
   //For columns that require special processing or database touching things that are not really columns- just roles for now
   const specialColumns = new Set(["roles"]);
-  return [personalInfoColumns, professionalInfoColumns, userInfoColumns, specialColumns];
+  return [professionalInfoColumns, userInfoColumns, specialColumns];
 }

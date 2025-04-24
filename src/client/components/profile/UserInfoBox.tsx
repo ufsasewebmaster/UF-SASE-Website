@@ -1,97 +1,67 @@
-// components/UserInfoBox.tsx
+// src/components/profile/UserInfoBox.tsx
+import type { professionalInfoSchema } from "@shared/schema/professionalInfoSchema";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import type { FieldConfig } from "./ConfigurableAccountBox";
-import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
+import type { z } from "zod";
+import { ConfigurableAccountBox, type FieldConfig } from "./ConfigurableAccountBox";
 
-interface updateFields {
-  firstName?: string;
-  lastName?: string;
-  majors?: string;
-  minors?: string;
-  linkedin?: string;
-  discord?: string;
-  bio?: string;
-  roles?: string;
-}
-
-function createUpdateFields(updates: Record<string, string>): updateFields {
-  const out: updateFields = {};
-
-  if (updates.name?.trim()) {
-    const [first, second] = updates.name.trim().split(" ", 2);
-    out.firstName = first;
-    if (second) out.lastName = second;
-  }
-  if (updates.majors?.trim()) out.majors = updates.majors;
-  if (updates.minors?.trim()) out.minors = updates.minors;
-  if (updates.linkedin?.trim()) out.linkedin = updates.linkedin;
-  if (updates.discord?.trim()) out.discord = updates.discord;
-  if (updates.bio?.trim()) out.bio = updates.bio;
-  if (updates.roles?.trim()) out.roles = updates.roles;
-
-  return out;
-}
-
-interface UserInfoBoxProps {
-  firstName: string;
-  lastName: string;
-  majors: string;
-  minors: string;
-  linkedin: string;
-  discord: string;
-  roles: string;
-}
+type ProfessionalInfo = z.infer<typeof professionalInfoSchema>;
+type UserInfoBoxProps = Omit<ProfessionalInfo, "userId"> & {
+  onSave: (updates: Partial<Omit<ProfessionalInfo, "userId">>) => Promise<void> | void;
+};
 
 export default function UserInfoBox(props: UserInfoBoxProps) {
-  const [info, setInfo] = useState({
-    firstName: props.firstName,
-    lastName: props.lastName,
+  const [info, setInfo] = useState<Omit<ProfessionalInfo, "userId">>({
+    phone: props.phone,
+    discord: props.discord,
+    bio: props.bio,
+    resumePath: props.resumePath,
+    linkedin: props.linkedin,
+    portfolio: props.portfolio,
     majors: props.majors,
     minors: props.minors,
-    linkedin: props.linkedin,
-    discord: props.discord,
-    roles: props.roles,
-    bio: "", // if you have an initial bio, pass it via props
+    graduationSemester: props.graduationSemester,
   });
 
   const initialData: Record<string, string> = {
-    name: `${info.firstName} ${info.lastName}`,
-    majors: info.majors,
-    minors: info.minors,
-    linkedin: info.linkedin,
-    discord: info.discord,
-    roles: info.roles,
-    bio: info.bio,
+    phone: info.phone ?? "",
+    discord: info.discord ?? "",
+    bio: info.bio ?? "",
+    resumePath: info.resumePath ?? "",
+    linkedin: info.linkedin ?? "",
+    portfolio: info.portfolio ?? "",
+    majors: info.majors ?? "",
+    minors: info.minors ?? "",
+    graduationSemester: info.graduationSemester ?? "",
   };
 
   const fieldConfigs: Array<FieldConfig> = [
-    { name: "name", label: "Name", type: "text", editable: true },
+    { name: "phone", label: "Phone", type: "text", editable: true },
+    { name: "discord", label: "Discord", type: "text", editable: true },
+    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+    { name: "resumePath", label: "Resume Path", type: "text", editable: true },
+    { name: "linkedin", label: "LinkedIn", type: "text", editable: true },
+    { name: "portfolio", label: "Portfolio", type: "text", editable: true },
     { name: "majors", label: "Majors", type: "text", editable: true },
     { name: "minors", label: "Minors", type: "text", editable: true },
-    { name: "linkedin", label: "LinkedIn", type: "text", editable: true },
-    { name: "discord", label: "Discord", type: "text", editable: true },
-    { name: "roles", label: "Roles", type: "text", editable: true },
-    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
+    { name: "graduationSemester", label: "Graduation Semester", type: "text", editable: true },
   ];
 
   const handleSave = async (updates: Record<string, string>) => {
+    const payload: Partial<Omit<ProfessionalInfo, "userId">> = {};
+    for (const [key, val] of Object.entries(updates)) {
+      if (val.trim()) {
+        (payload as Partial<Omit<ProfessionalInfo, "userId">>)[key as keyof Omit<ProfessionalInfo, "userId">] = val;
+      }
+    }
     try {
-      const payload = createUpdateFields(updates);
-      const res = await fetch("/api/profile", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+      await props.onSave(payload);
       setInfo((prev) => ({ ...prev, ...payload }));
       toast.success("Info saved successfully!");
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Failed to save info.");
     }
   };
 
-  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} handleLogout={() => {}} onSave={handleSave} />;
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
 }
