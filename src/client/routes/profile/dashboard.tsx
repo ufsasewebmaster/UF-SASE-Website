@@ -11,7 +11,7 @@ type Invite = { id: string; mentorId: string; menteeId: string };
 
 export const Route = createFileRoute("/profile/dashboard")({
   component: () => {
-    const { id } = useAuth();
+    const { id, isAdmin } = useAuth();
     const { error: userError, isLoading: userLoading, isLoadingUsers, user, users } = useUsers(id);
 
     const [invites, setInvites] = useState<Array<Invite>>([]);
@@ -97,25 +97,28 @@ export const Route = createFileRoute("/profile/dashboard")({
           </section>
 
           {/* Roles (placeholder) */}
-          <section className="flex w-full flex-col space-y-4">
-            <h1 className="text-3xl font-bold text-saseBlue">Admin Dashboard</h1>
-            <h2 className="text-xl font-semibold">Users</h2>
-            {loading ? (
-              <p>Loading users...</p>
-            ) : (
-              <div className="flex w-full flex-col gap-6">
-                {users != undefined ? (
-                  users.length > 0 ? (
-                    users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
+          {isAdmin && (
+            <section className="flex w-full flex-col space-y-4">
+              <h1 className="text-3xl font-bold text-saseBlue">Admin Dashboard</h1>
+              <h2 className="text-xl font-semibold">Users</h2>
+              {loading ? (
+                <p>Loading users...</p>
+              ) : (
+                <div className="flex w-full flex-col gap-6">
+                  {users != undefined ? (
+                    users.length > 0 ? (
+                      users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
+                    ) : (
+                      <p>No Users found</p>
+                    )
                   ) : (
-                    <p>No Users found</p>
-                  )
-                ) : (
-                  <div>Users could not be loaded</div>
-                )}
-              </div>
-            )}
-          </section>
+                    <div>Users could not be loaded</div>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
+          
 
           {/* Customization (placeholder) */}
           <section className="space-y-4">
