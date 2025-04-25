@@ -188,7 +188,6 @@ profileRoutes.patch("/profile", async (c) => {
           const newRoleArray: Array<string> = body.roles.split(",");
           //delete user's existing roles
           await db.delete(Schema.userRoleRelationship).where(eq(Schema.userRoleRelationship.userId, userID));
-          console.log(newRoleArray);
           await insertRoles(newRoleArray, userID);
         }
       });
