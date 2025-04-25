@@ -1,4 +1,5 @@
 // components/ConfigurableAccountBox.tsx
+import { useTimer } from "@hooks/useTimer";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
@@ -24,6 +25,7 @@ interface Props {
 export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Props) {
   const { handleSubmit, register, reset } = useForm<Record<string, string>>();
   const [isEditing, setIsEditing] = useState(false);
+  const { seconds, startTimer, timerRunning } = useTimer();
 
   // seed form whenever initialData changes
   useEffect(() => {
@@ -41,6 +43,21 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
     await onSave(updates);
 
     setIsEditing(false);
+  };
+
+  const handleResetButtonClicked = (e: React.MouseEvent, resetLink: string) => {
+    e.preventDefault();
+    if (timerRunning) return;
+    try {
+      fetch(resetLink, {
+        method: "POST",
+        body: JSON.stringify({ email: initialData.email || "" }),
+      });
+
+      startTimer(10);
+    } catch (err) {
+      console.log("Password reset email couldn't be sent.", err);
+    }
   };
 
   return (
@@ -77,9 +94,13 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
               ) : cfg.name === "password" ? (
                 <div className="flex flex-col gap-1">
                   <div className="rounded-lg bg-gray-50 px-4 py-2">••••••••</div>
-                  {cfg.showResetLink && cfg.resetLinkUrl && (
-                    <a href={cfg.resetLinkUrl} className="text-sm text-blue-600 hover:underline">
-                      Reset password
+                  {cfg.showResetLink && cfg.resetLinkUrl && isEditing && (
+                    <a
+                      href={cfg.resetLinkUrl}
+                      onClick={(e) => handleResetButtonClicked(e, cfg.resetLinkUrl || "")}
+                      className="text-sm text-blue-600 hover:underline"
+                    >
+                      {timerRunning ? `Can send link again in (${seconds}s)` : "Send password reset link"}
                     </a>
                   )}
                 </div>
