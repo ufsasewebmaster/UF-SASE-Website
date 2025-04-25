@@ -1,9 +1,11 @@
 import { isAdmin } from "@/server/api/roles";
 import { db } from "@/server/db/db";
+import type { ALLProfile } from "@/shared/schema";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { eq, getTableColumns } from "drizzle-orm";
 import { Hono } from "hono";
+import { arrayToString } from "./user";
 
 const profileRoutes = new Hono();
 
@@ -88,6 +90,56 @@ profileRoutes.get("/profile", async (c) => {
         return createErrorResponse(c, "MULTIPLE_USERS", "Multiple users", 500);
       }
     }
+  } catch (err) {
+    console.error("Error:", err);
+    return createErrorResponse(c, "FETCH_PROFILE_ERROR", "Internal server error", 500);
+  }
+});
+
+//gets all profiles for admin dashboard
+profileRoutes.get("/allprofiles", async (c) => {
+  try {
+    const cookie = c.req.header("Cookie") || "";
+    const page = Number(c.req.header("Page")) || 0;
+    const pageSize = 20;
+    const rowsToSkip = page * pageSize;
+
+    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
+    if (!sessionIDMatch) {
+      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
+    }
+    const sessionID = sessionIDMatch[1];
+    if (!isAdmin(sessionID)) {
+      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
+    }
+
+    const result = await db
+      .select(profileSelection)
+      .from(Schema.users)
+      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
+      .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
+      .limit(pageSize)
+      .offset(rowsToSkip);
+
+    if (result.length === 0) {
+      return createErrorResponse(c, "NO_USERS_FOUND", "No users found", 404);
+    }
+
+    //gets roles for each profile
+    const users: Array<ALLProfile> = await Promise.all(
+      result.map(async (profile) => {
+        const userRoles = await db
+          .select({ role: Schema.userRoleRelationship.role })
+          .from(Schema.userRoleRelationship)
+          .where(eq(Schema.userRoleRelationship.userId, profile.id));
+
+        const roleArray: Array<string> = userRoles.map((r) => r.role);
+        const roleString = arrayToString(roleArray);
+        const schemaUser: ALLProfile = { ...profile, firstName: "", lastName: "", bio: "", roles: roleString };
+        return schemaUser;
+      }),
+    );
+    return createSuccessResponse(c, users, "User profiles retrieved");
   } catch (err) {
     console.error("Error:", err);
     return createErrorResponse(c, "FETCH_PROFILE_ERROR", "Internal server error", 500);
