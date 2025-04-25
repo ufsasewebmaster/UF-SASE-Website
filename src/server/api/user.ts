@@ -37,23 +37,18 @@ userRoutes.get("/users", async (c) => {
 userRoutes.get("/users/public/:username/:id", async (c) => {
   try {
     const usernameParam = c.req.param("username");
-    const userId       = c.req.param("id");
+    const userId = c.req.param("id");
     if (!usernameParam || !userId) {
-      return createErrorResponse(
-        c,
-        "MISSING_PARAMETERS",
-        "Username and ID are required",
-        422
-      );
+      return createErrorResponse(c, "MISSING_PARAMETERS", "Username and ID are required", 422);
     }
     const row = await db
       .select({
         id: users.id,
-        username:  users.username,
-        email:     users.email,
+        username: users.username,
+        email: users.email,
         firstName: users.firstName,
-        lastName:  users.lastName,
-        points:    users.points,
+        lastName: users.lastName,
+        points: users.points,
       })
       .from(users)
       .where(eq(users.id, userId))
@@ -65,12 +60,7 @@ userRoutes.get("/users/public/:username/:id", async (c) => {
 
     // Optional: enforce slug correctness
     if (row.username !== usernameParam) {
-      return createErrorResponse(
-        c,
-        "SLUG_MISMATCH",
-        `Expected username '${row.username}' but got '${usernameParam}'`,
-        404
-      );
+      return createErrorResponse(c, "SLUG_MISMATCH", `Expected username '${row.username}' but got '${usernameParam}'`, 404);
     }
 
     // Validate the shape
@@ -78,12 +68,7 @@ userRoutes.get("/users/public/:username/:id", async (c) => {
     return createSuccessResponse(c, user, "User retrieved successfully");
   } catch (err) {
     console.error("Error fetching user:", err);
-    return createErrorResponse(
-      c,
-      "adfasdf",
-      "An error occurred while fetching the user",
-      500
-    );
+    return createErrorResponse(c, "adfasdf", "An error occurred while fetching the user", 500);
   }
 });
 

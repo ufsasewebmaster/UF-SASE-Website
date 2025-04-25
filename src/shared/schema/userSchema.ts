@@ -10,7 +10,7 @@ export const userSchema = z.object({
   timeAdded: z.number().int().min(0, "Time added must be a valid timestamp."),
   timeUpdated: z.number().int().min(0, "Time updated must be a valid timestamp."),
   points: z.number().int().min(0).optional(),
-  
+
   // TODO: remove roles from here? Shouldn't be part of users, only joined through the roles table
   roles: z.string().optional(),
 });
