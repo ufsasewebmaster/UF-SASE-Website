@@ -100,7 +100,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
                       onClick={(e) => handleResetButtonClicked(e, cfg.resetLinkUrl || "")}
                       className="text-sm text-blue-600 hover:underline"
                     >
-                      {timerRunning ? `Can send link again in (${seconds}s)` : "Send password reset link"}
+                      {timerRunning ? `Wait ${seconds}s to send link again` : "Send password reset link"}
                     </a>
                   )}
                 </div>
