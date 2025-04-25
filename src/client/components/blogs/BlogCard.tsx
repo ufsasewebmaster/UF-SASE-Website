@@ -1,3 +1,5 @@
+"use client";
+
 import type { BlogCardProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
@@ -27,14 +29,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
     <article className="relative w-full max-w-6xl p-6">
       <div className="group relative">
         {/* shadow card */}
-        <div className="absolute left-5 top-5 z-0 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue"></div>
+        <div className="absolute left-5 top-5 z-0 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue" />
         <div
           className={cn(
             "absolute left-5 top-5 z-0 h-full w-full rounded-[50px]",
             "bg-gradient-to-b from-saseBlue to-saseGreen opacity-0 transition-opacity duration-700 ease-in-out",
             "group-hover:opacity-100",
           )}
-        ></div>
+        />
 
         {/* main card */}
         <section
@@ -55,7 +57,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
           <div className="flex w-full flex-col items-stretch">
             <div className="relative flex items-center justify-center">
               {/* title */}
-              <h2 className={cn("place-content-start text-4xl font-bold text-gray-800", "font-oswald")}>{blog.title}</h2>
+              <h2 className={cn("place-content-start font-oswald font-bold text-gray-800", "text-2xl sm:text-4xl")}>{blog.title}</h2>
               {blog.displayEditButton && (
                 <Button className={cn("absolute right-0")} onClick={onEditButtonClicked}>
                   {!isEditing ? "Edit" : "Close Editor"}
@@ -63,31 +65,31 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
               )}
             </div>
             {/* author, date */}
-            <p className="mt-2 font-serif text-lg italic text-gray-600">
+            <p className="mt-2 font-serif text-sm italic text-gray-600 sm:text-lg">
               {blog.author}, {formattedDate}
             </p>
 
-            {/* read time ? need to do logic for this */}
+            {/* read time */}
             {blog.read_time && <span className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</span>}
 
             {/* content */}
-            <p className={cn("mt-4 text-lg text-gray-700", "font-redhat")}>
+            <p className={cn("mt-4 font-redhat text-gray-700", "text-sm sm:text-lg")}>
               {blog.content ? blog.content.substring(0, 120) + "..." : "No content available"}
             </p>
 
             {/* read more button*/}
             <div className="mt-6 flex w-full justify-center">
               <div className="relative">
-                <div className="absolute -inset-0.5 rounded-full bg-white shadow-md"></div>
+                <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
                 <Button
                   className={cn(
-                    "relative rounded-full bg-saseBlue font-serif text-xl italic",
+                    "relative rounded-full bg-saseBlue font-serif italic",
                     "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                     "underline decoration-1 underline-offset-4",
                     "z-10 px-8 py-3",
+                    "text-lg sm:text-xl",
                   )}
                   onClick={() => {
-                    console.log("Expanding blog:", blog.id);
                     setExpandedBlogId(blog.id);
                   }}
                 >
@@ -97,7 +99,17 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             </div>
           </div>
           {/* SASE Logo Star */}
-          <img src={imageUrls["SASELogoStar.png"]} alt="Logo" className="absolute -bottom-12 -right-12 h-[140px] w-[140px] object-contain" />
+          <img
+            src={imageUrls["SASELogoStar.png"]}
+            alt="Logo"
+            className={cn(
+              /* mobile */
+              "absolute -bottom-10 -right-10 h-24 w-24",
+              /* desktop */
+              "sm:-bottom-12 sm:-right-12 sm:h-[140px] sm:w-[140px]",
+              "object-contain",
+            )}
+          />
         </section>
       </div>
     </article>
