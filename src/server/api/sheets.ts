@@ -1,5 +1,6 @@
 import { SERVER_ENV } from "@server/env";
 import { createErrorResponse, createSuccessResponse } from "@shared/utils";
+import type { JWTInput } from "google-auth-library";
 import { google } from "googleapis";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -11,40 +12,55 @@ const sheetResponseSchema = z.object({
 });
 
 const auth = new google.auth.GoogleAuth({
-  credentials: SERVER_ENV.GOOGLE_CREDENTIALS,
+  credentials: JSON.parse(JSON.stringify(SERVER_ENV.GOOGLE_CREDENTIALS)) as JWTInput,
   scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
 });
 const sheets = google.sheets({ version: "v4", auth });
 
-const SHEET_CONFIG: Record<string, { id: string; range: string }> = {
-  board: {
-    id: "10Wx6CTsjUDtoSTYmVplydyAfoCm55FGVUNhEQRpiYVY",
-    range: "'Template'!B7:G",
-  },
-  marston: {
-    id: "1qKKHQE5nxGDsBOKozQl2QVFQYEdsOcF7J_p-B-faksc",
-    range: "'Bookers'!A1:C9",
-  },
+const SHEET_IDS: Record<"board" | "marston", string> = {
+  board: "10Wx6CTsjUDtoSTYmVplydyAfoCm55FGVUNhEQRpiYVY",
+  marston: "1qKKHQE5nxGDsBOKozQl2QVFQYEdsOcF7J_p-B-faksc",
 };
 
 sheetsRoutes.get("/resources/sheet", async (c) => {
-  const sheet = c.req.query("sheet");
-  if (!sheet || !(sheet in SHEET_CONFIG)) {
+  const which = c.req.query("sheet");
+  if (which !== "board" && which !== "marston") {
     return createErrorResponse(c, "INVALID_SHEET", "Invalid or missing sheet name", 400);
   }
 
-  try {
-    const { id, range } = SHEET_CONFIG[sheet];
-    const result = await sheets.spreadsheets.values.get({ spreadsheetId: id, range });
-    const raw = result.data.values ?? [];
+  // compute range
+  let range: string;
+  if (which === "board") {
+    // find most recent Monday
+    const today = new Date();
+    const day = today.getDay(); // 0=Sun,1=Mon,...6=Sat
+    const daysSinceMonday = (day + 6) % 7;
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - daysSinceMonday);
 
-    // server‐side validation
+    // format as M/D
+    const tabName = `${monday.getMonth() + 1}/${monday.getDate()}`;
+
+    // build A1 range
+    range = `'${tabName}'!B7:G`;
+  } else {
+    // marston stays static
+    range = "'Bookers'!A1:C9";
+  }
+
+  try {
+    const spreadsheetId = SHEET_IDS[which];
+    const result = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    });
+
+    const raw = result.data.values ?? [];
     const parsed = sheetResponseSchema.safeParse({ data: raw });
     if (!parsed.success) {
       console.error("Sheet validation error:", parsed.error);
       return createErrorResponse(c, "VALIDATION_ERROR", "Unexpected sheet shape", 500);
     }
-
     return createSuccessResponse(c, parsed.data.data, "Fetched sheet successfully");
   } catch (err) {
     console.error("Sheets API error:", err);

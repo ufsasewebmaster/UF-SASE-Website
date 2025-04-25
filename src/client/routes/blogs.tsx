@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/shared/utils";
 import { Button } from "@components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
@@ -11,6 +13,7 @@ import BlogForm from "../components/blogs/BlogForm";
 import BlogHeader from "../components/blogs/BlogHeader";
 import BlogTags from "../components/blogs/BlogTags";
 import { useBlogFunctions } from "../hooks/useBlogsFunctions";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/blogs")({
@@ -21,11 +24,11 @@ export const Route = createFileRoute("/blogs")({
       image: imageUrls["SASELogo.png"],
     }),
   ],
-
   component: BlogsPage,
 });
 
 function BlogsPage() {
+  const isMobile = useIsMobile();
   const {
     activeTag,
     blogs,
@@ -53,8 +56,8 @@ function BlogsPage() {
   const [expandedBlogId, setExpandedBlogId] = useState<string | null>(null);
 
   // loading states
-  if (blogs.isLoading) return <div className="font-redhat">Loading blogs...</div>;
-  if (blogs.isError) return <div className="font-redhat">Error loading blogs: {blogs.error?.message}</div>;
+  if (blogs.isLoading) return <div className="p-4 font-redhat">Loading blogs...</div>;
+  if (blogs.isError) return <div className="p-4 font-redhat">Error loading blogs: {blogs.error?.message}</div>;
 
   // process blogs
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
@@ -93,7 +96,7 @@ function BlogsPage() {
   };
 
   const sectionTitle = cn(
-    "text-2xl sm:text-2xl md:text-3xl lg:text-4xl",
+    "text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
     "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
     "font-pixelify font-semibold tracking-wider",
   );
@@ -103,10 +106,17 @@ function BlogsPage() {
   const noResultsMessage = activeTag ? `No blogs found with tag: ${activeTag}` : "No blogs found.";
 
   return (
-    <div className="container mx-auto p-3">
+    <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 md:px-8">
       {/* header */}
       {!expandedBlogId && !activeTag && recentBlogs.length > 0 && (
-        <BlogHeader blogs={recentBlogs} expandedBlogId={expandedBlogId} setExpandedBlogId={setExpandedBlogId} setIsEditing={setIsEditing} />
+        <div>
+          <BlogHeader
+            blogs={isMobile ? [recentBlogs[0]] : recentBlogs}
+            expandedBlogId={expandedBlogId}
+            setExpandedBlogId={setExpandedBlogId}
+            setIsEditing={setIsEditing}
+          />
+        </div>
       )}
 
       {/* expanded view */}
@@ -136,7 +146,7 @@ function BlogsPage() {
         <>
           {/* create button */}
           {isAuthenticated && !isCreating && !isEditing && (
-            <Button onClick={() => setIsCreating(true)} className={cn("mb-3", "font-redhat")}>
+            <Button onClick={() => setIsCreating(true)} className="mb-4 font-redhat">
               Create New Blog Post
             </Button>
           )}
@@ -162,14 +172,14 @@ function BlogsPage() {
           <BlogTags tags={availableTags} activeTag={activeTag} onTagClick={handleTagClick} onSearch={setSearchQuery} />
 
           {/* title */}
-          <div className="mx-auto mb-5 mt-10 max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10">
+          <div className="mx-auto mb-5 mt-10 max-w-6xl px-2 sm:px-0">
             <h2 className={sectionTitle}>{activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}</h2>
           </div>
 
           {/* blog grid */}
           <div className="relative mb-10 mt-8">
             <BlogContainer>
-              <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {displayBlogs.length > 0 ? (
                   displayBlogs.map((blog) => (
                     <BlogCard

@@ -22,22 +22,22 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpan
             RECENT POSTS
           </h2>
         </div>
-      </div>
 
-      <BlogContainer>
-        <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
-          {blogs.map((blog) => (
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-              expandedBlogId={expandedBlogId}
-              setExpandedBlogId={setExpandedBlogId}
-              setIsEditing={setIsEditing}
-              displayEditButton={isAuthenticated}
-            />
-          ))}
-        </div>
-      </BlogContainer>
+        <BlogContainer>
+          <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
+            {blogs.map((blog) => (
+              <BlogCard
+                key={blog.id}
+                blog={blog}
+                expandedBlogId={expandedBlogId}
+                setExpandedBlogId={setExpandedBlogId}
+                setIsEditing={setIsEditing}
+                displayEditButton={isAuthenticated}
+              />
+            ))}
+          </div>
+        </BlogContainer>
+      </div>
     </div>
   );
 };

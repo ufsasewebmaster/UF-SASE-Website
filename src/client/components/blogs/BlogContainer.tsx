@@ -16,9 +16,9 @@ const BlogContainer = ({ children }: { children: ReactNode }) => {
     >
       {/* blue shadow */}
       <div
-        className="absolute right-0 top-0 z-0 h-1/3 w-1/3 rounded-[70px]"
+        className="absolute right-0 top-0 z-0 h-32 w-32 rounded-[70px] sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56"
         style={{
-          background: "radial-gradient(circle at top right, #A8D8F0, transparent 30%)",
+          background: "radial-gradient(circle at top right, #A8D8F0, transparent 50%)",
         }}
       ></div>
 

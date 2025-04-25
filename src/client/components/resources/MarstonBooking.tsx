@@ -7,8 +7,10 @@ export default function MarstonBooking() {
   const { data, error, loading } = useSheetData("marston");
   const colCount = data[0]?.length ?? 0;
 
-  // Tailwind classes — with dark variants
-  const tableWrapper = cn("table-auto min-w-full border-collapse border border-gray-700 text-center font-redhat text-base", "dark:border-gray-400");
+  const tableWrapper = cn(
+    "table-auto min-w-full border-collapse border border-gray-700 text-center font-redhat font-semibold text-base",
+    "dark:border-gray-400",
+  );
   const cellPadding = cn("border border-gray-700 px-3 py-2", "dark:border-gray-400");
   const headerBg = [cn("bg-blue-100", "dark:bg-blue-900"), cn("bg-green-100", "dark:bg-green-900"), cn("bg-white", "dark:bg-gray-800")];
 
