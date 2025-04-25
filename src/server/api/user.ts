@@ -29,7 +29,7 @@ userRoutes.get("/users/:id", async (c) => {
   }
 });
 
-const arrayToString = (arr: Array<string>): string => {
+export const arrayToString = (arr: Array<string>): string => {
   let res: string = "";
   if (arr.length > 0) {
     for (const role of arr) {

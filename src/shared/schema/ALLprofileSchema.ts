@@ -27,4 +27,9 @@ export const ALLprofileSchema = z.object({
   graduationSemester: z.string().optional(),
 });
 
+//prevents type errors in admin dashboard
+export const ALLProfileArraySchema = z.object({
+  data: z.array(ALLprofileSchema),
+});
+
 export type ALLProfile = z.infer<typeof ALLprofileSchema>;

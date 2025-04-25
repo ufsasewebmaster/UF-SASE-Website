@@ -37,6 +37,7 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
+import { Route as ProfileAdminImport } from './routes/profile/admin'
 
 // Create/Update Routes
 
@@ -193,6 +194,12 @@ const ProfileSecurityRoute = ProfileSecurityImport.update({
 const ProfileInfoRoute = ProfileInfoImport.update({
   id: '/info',
   path: '/info',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileAdminRoute = ProfileAdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
@@ -354,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
+    '/profile/admin': {
+      id: '/profile/admin'
+      path: '/admin'
+      fullPath: '/profile/admin'
+      preLoaderRoute: typeof ProfileAdminImport
+      parentRoute: typeof ProfileRouteImport
+    }
     '/profile/info': {
       id: '/profile/info'
       path: '/info'
@@ -388,6 +402,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
+  ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -395,6 +410,7 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileAdminRoute: ProfileAdminRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -428,6 +444,7 @@ export interface FileRoutesByFullPath {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -456,6 +473,7 @@ export interface FileRoutesByTo {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -486,6 +504,7 @@ export interface FileRoutesById {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -517,6 +536,7 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -544,6 +564,7 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -572,6 +593,7 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -669,6 +691,7 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
+        "/profile/admin",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -734,6 +757,10 @@ export const routeTree = rootRoute
     },
     "/webdev": {
       "filePath": "webdev.tsx"
+    },
+    "/profile/admin": {
+      "filePath": "profile/admin.tsx",
+      "parent": "/profile"
     },
     "/profile/info": {
       "filePath": "profile/info.tsx",
