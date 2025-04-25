@@ -10,6 +10,8 @@ export const userSchema = z.object({
   timeAdded: z.number().int().min(0, "Time added must be a valid timestamp."),
   timeUpdated: z.number().int().min(0, "Time updated must be a valid timestamp."),
   points: z.number().int().min(0).optional(),
+  
+  // TODO: remove roles from here? Shouldn't be part of users, only joined through the roles table
   roles: z.string().optional(),
 });
 export type User = z.infer<typeof userSchema>;
@@ -54,3 +56,10 @@ export const minimalUserSchema = z.object({
   lastName: z.string().min(1, "Last name is required."),
 });
 export type MinimalUser = z.infer<typeof minimalUserSchema>;
+
+export const publicUserSchema = userSchema.omit({
+  password: true,
+  timeAdded: true,
+  timeUpdated: true,
+});
+export type PublicUser = z.infer<typeof publicUserSchema>;

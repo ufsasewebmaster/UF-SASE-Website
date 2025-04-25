@@ -22,7 +22,8 @@ export const Route = createFileRoute("/profile")({
     const [activeSection, setActiveSection] = useState<string>("account");
 
     if (!isAuthenticated) {
-      setTimeout(() => navigate({ to: "/login" }), 2000);
+      // We want to replace the navigation history on this redirect
+      setTimeout(() => navigate({ to: "/login", replace: true }), 2000);
       return <div>Not authenticated, redirecting to login page…</div>;
     }
     if (isLoading) return <div>Loading…</div>;

@@ -37,6 +37,8 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
+import { Route as ProfileDashboardImport } from './routes/profile/dashboard'
+import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
 // Create/Update Routes
 
@@ -194,6 +196,18 @@ const ProfileInfoRoute = ProfileInfoImport.update({
   id: '/info',
   path: '/info',
   getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileDashboardRoute = ProfileDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const UsersUsernameIdRoute = UsersUsernameIdImport.update({
+  id: '/users/$username/$id',
+  path: '/users/$username/$id',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -354,6 +368,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
+    '/profile/dashboard': {
+      id: '/profile/dashboard'
+      path: '/dashboard'
+      fullPath: '/profile/dashboard'
+      preLoaderRoute: typeof ProfileDashboardImport
+      parentRoute: typeof ProfileRouteImport
+    }
     '/profile/info': {
       id: '/profile/info'
       path: '/info'
@@ -382,12 +403,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexImport
       parentRoute: typeof ProfileRouteImport
     }
+    '/users/$username/$id': {
+      id: '/users/$username/$id'
+      path: '/users/$username/$id'
+      fullPath: '/users/$username/$id'
+      preLoaderRoute: typeof UsersUsernameIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
+  ProfileDashboardRoute: typeof ProfileDashboardRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -395,6 +424,7 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileDashboardRoute: ProfileDashboardRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -428,10 +458,12 @@ export interface FileRoutesByFullPath {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/profile/': typeof ProfileIndexRoute
+  '/users/$username/$id': typeof UsersUsernameIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -456,10 +488,12 @@ export interface FileRoutesByTo {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/profile': typeof ProfileIndexRoute
+  '/users/$username/$id': typeof UsersUsernameIdRoute
 }
 
 export interface FileRoutesById {
@@ -486,10 +520,12 @@ export interface FileRoutesById {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
+  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/profile/': typeof ProfileIndexRoute
+  '/users/$username/$id': typeof UsersUsernameIdRoute
 }
 
 export interface FileRouteTypes {
@@ -517,10 +553,12 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
     | '/profile/'
+    | '/users/$username/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -544,10 +582,12 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
     | '/profile'
+    | '/users/$username/$id'
   id:
     | '__root__'
     | '/'
@@ -572,10 +612,12 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
+    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
     | '/profile/'
+    | '/users/$username/$id'
   fileRoutesById: FileRoutesById
 }
 
@@ -602,6 +644,7 @@ export interface RootRouteChildren {
   SportsRoute: typeof SportsRoute
   UserpageRoute: typeof UserpageRoute
   WebdevRoute: typeof WebdevRoute
+  UsersUsernameIdRoute: typeof UsersUsernameIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -627,6 +670,7 @@ const rootRouteChildren: RootRouteChildren = {
   SportsRoute: SportsRoute,
   UserpageRoute: UserpageRoute,
   WebdevRoute: WebdevRoute,
+  UsersUsernameIdRoute: UsersUsernameIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -660,7 +704,8 @@ export const routeTree = rootRoute
         "/sponsors",
         "/sports",
         "/userpage",
-        "/webdev"
+        "/webdev",
+        "/users/$username/$id"
       ]
     },
     "/": {
@@ -669,6 +714,7 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
+        "/profile/dashboard",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -735,6 +781,10 @@ export const routeTree = rootRoute
     "/webdev": {
       "filePath": "webdev.tsx"
     },
+    "/profile/dashboard": {
+      "filePath": "profile/dashboard.tsx",
+      "parent": "/profile"
+    },
     "/profile/info": {
       "filePath": "profile/info.tsx",
       "parent": "/profile"
@@ -750,6 +800,9 @@ export const routeTree = rootRoute
     "/profile/": {
       "filePath": "profile/index.tsx",
       "parent": "/profile"
+    },
+    "/users/$username/$id": {
+      "filePath": "users/$username/$id.tsx"
     }
   }
 }

@@ -1,5 +1,5 @@
-import type { DeleteUser, InsertUser, SelectUser, UpdateUser } from "@shared/schema/userSchema";
-import { deleteUserSchema, insertUserSchema, selectUserSchema } from "@shared/schema/userSchema";
+import type { DeleteUser, InsertUser, PublicUser, SelectUser, UpdateUser } from "@shared/schema/userSchema";
+import { deleteUserSchema, insertUserSchema, publicUserSchema, selectUserSchema } from "@shared/schema/userSchema";
 import { apiFetch } from "@shared/utils";
 
 // Fetch ALL Users
@@ -9,7 +9,6 @@ export const fetchUsers = async (): Promise<Array<SelectUser>> => {
 };
 
 export const fetchUser = async (id: string): Promise<SelectUser> => {
-  console.log("id HERE", id);
   const response = await apiFetch(
     `/api/users/${id}`,
     {
@@ -18,6 +17,18 @@ export const fetchUser = async (id: string): Promise<SelectUser> => {
       headers: { "Content-Type": "application/json" },
     },
     selectUserSchema,
+  );
+  return response.data;
+};
+
+export const fetchPublicUser = async (username: string, id: string): Promise<PublicUser> => {
+  const response = await apiFetch(
+    `/api/users/public/${encodeURIComponent(username)}/${encodeURIComponent(id)}`,
+    {
+      method: "GET",
+      credentials: "include",
+    },
+    publicUserSchema,
   );
   return response.data;
 };

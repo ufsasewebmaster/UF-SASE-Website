@@ -21,3 +21,4 @@ export const MenteeSchema = z.object({
 export type MMRelationship = z.infer<typeof MMRelationshipSchema>;
 export type Mentor = z.infer<typeof MentorSchema>;
 export type Mentee = z.infer<typeof MenteeSchema>;
+

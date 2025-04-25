@@ -106,7 +106,7 @@ export const blogs = sqliteTable("blog", {
     .$defaultFn(() => generateIdFromEntropySize(10)),
   title: text("title").notNull().unique(),
   content: text("content").notNull(), // Assuming markdown content
-  authorId: text("author_id").references(() => users.id),
+  authorId: text("author_id").references(() => users.id, { onDelete: "cascade" }),
   publishedDate: integer("published_date", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
@@ -129,7 +129,7 @@ export const blogTagRelationship = sqliteTable("blog_tag_relationship", {
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
   blogId: text("blog_id").references(() => blogs.id, { onDelete: "cascade" }),
-  tagId: text("tag_id").references(() => blogTags.id),
+  tagId: text("tag_id").references(() => blogTags.id, { onDelete: "cascade" }),
 });
 
 // Mentor/Mentee Relationship table

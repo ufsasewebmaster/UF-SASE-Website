@@ -1,4 +1,5 @@
 import { db } from "@/server/db/db";
+import { publicUserSchema } from "@/shared/schema";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import { users } from "@db/tables";
 import bcrypt from "bcryptjs";
@@ -24,11 +25,65 @@ userRoutes.get("/users/:id", async (c) => {
 
 userRoutes.get("/users", async (c) => {
   try {
-    const rows = await db.select({ id: users.id, username: users.username }).from(users);
+    const rows = await db.select().from(users);
     return createSuccessResponse(c, rows, "Fetched all users");
   } catch (err) {
     console.error(err);
     return createErrorResponse(c, "FETCH_USERS_ERROR", "Failed to fetch users", 500);
+  }
+});
+
+// TODO: move validation to the server instaed of the client/api level
+userRoutes.get("/users/public/:username/:id", async (c) => {
+  try {
+    const usernameParam = c.req.param("username");
+    const userId       = c.req.param("id");
+    if (!usernameParam || !userId) {
+      return createErrorResponse(
+        c,
+        "MISSING_PARAMETERS",
+        "Username and ID are required",
+        422
+      );
+    }
+    const row = await db
+      .select({
+        id: users.id,
+        username:  users.username,
+        email:     users.email,
+        firstName: users.firstName,
+        lastName:  users.lastName,
+        points:    users.points,
+      })
+      .from(users)
+      .where(eq(users.id, userId))
+      .get();
+
+    if (!row) {
+      return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 404);
+    }
+
+    // Optional: enforce slug correctness
+    if (row.username !== usernameParam) {
+      return createErrorResponse(
+        c,
+        "SLUG_MISMATCH",
+        `Expected username '${row.username}' but got '${usernameParam}'`,
+        404
+      );
+    }
+
+    // Validate the shape
+    const user = publicUserSchema.parse(row);
+    return createSuccessResponse(c, user, "User retrieved successfully");
+  } catch (err) {
+    console.error("Error fetching user:", err);
+    return createErrorResponse(
+      c,
+      "adfasdf",
+      "An error occurred while fetching the user",
+      500
+    );
   }
 });
 

@@ -8,6 +8,12 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import type { ZodTypeAny } from "zod";
 
+export const SASE_COLORS = {
+  blue: "#0668B3",
+  green: "#7DC242",
+  blueLight: "#1E77BA",
+};
+
 // This is for shad-ci ui https://ui.shadcn.com/docs/installation/manual#add-a-cn-helper
 export function cn(...inputs: Array<ClassValue>) {
   return twMerge(clsx(inputs));

@@ -4,6 +4,7 @@ import type { SelectUser } from "@/shared/schema";
 import { useAuth } from "@hooks/AuthContext";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import AddPairingButton from "./AddPairingButton";
 import type { Option } from "./SearchableSelect";
 import SearchableSelect from "./SearchableSelect";
@@ -56,10 +57,15 @@ export default function MMPairingForm() {
         setMenteeId("");
       } else {
         await addMentorMenteeInvite(mentorId, menteeId);
-        alert("Invite sent!");
+        toast.success("Invite sent!");
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.log(err);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
