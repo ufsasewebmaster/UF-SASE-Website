@@ -26,7 +26,6 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
   const { handleSubmit, register, reset } = useForm<Record<string, string>>();
   const [isEditing, setIsEditing] = useState(false);
   const { seconds, startTimer, timerRunning } = useTimer();
-
   // seed form whenever initialData changes
   useEffect(() => {
     reset(initialData);

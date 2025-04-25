@@ -131,8 +131,10 @@ profileRoutes.patch("/profile", async (c) => {
           }
         }
         if (specialColumns.has(key)) {
-          const roleArray: Array<string> = body.roles.split(",");
-          await insertRoles(roleArray, userID);
+          const newRoleArray: Array<string> = body.roles.split(",");
+          //delete existing roles so API call functions as a replacement
+          await db.delete(Schema.roles).where(eq(Schema.roles.id, userID));
+          await insertRoles(newRoleArray, userID);
         }
       });
 
