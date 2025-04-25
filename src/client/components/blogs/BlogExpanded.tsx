@@ -1,3 +1,5 @@
+"use client";
+
 import { imageUrls } from "@/client/assets/imageUrls";
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
@@ -16,7 +18,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   showBackButton = true,
 }) => {
   const { startEditingBlog } = useBlogFunctions();
-  console.log(blog);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -42,28 +43,26 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
 
   const renderContent = () => {
     if (!blog.content.includes("##")) {
-      return <p className={cn("mb-6 text-gray-800", "font-redhat")}>{blog.content}</p>;
+      return <p className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>{blog.content}</p>;
     }
-
     const sections = blog.content.split(/##\s*([^\n]+)/);
-
-    return sections.map((section, index) => {
-      if (index === 0) {
-        return section ? (
-          <p key={`content-intro`} className={cn("mb-6 text-gray-800", "font-redhat")}>
+    return sections.map((section, idx) => {
+      if (idx === 0) {
+        return (
+          <p key="intro" className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>
             {section}
           </p>
-        ) : null;
+        );
       }
-      if (index % 2 === 1) {
+      if (idx % 2 === 1) {
         return (
-          <h2 key={`heading-${index}`} className={cn("mb-2 text-xl font-semibold", "font-redhat font-bold")}>
+          <h2 key={`h-${idx}`} className={cn("mb-2 font-redhat font-bold", "text-lg text-gray-800 sm:text-xl")}>
             {section}
           </h2>
         );
       } else {
         return (
-          <p key={`content-${index}`} className={cn("mb-6 text-gray-800", "font-redhat")}>
+          <p key={`p-${idx}`} className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>
             {section}
           </p>
         );
@@ -72,8 +71,8 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-white">
+      <div className="mx-auto max-w-full px-4 py-8 sm:max-w-6xl">
         {/* back button */}
         {showBackButton && (
           <button
@@ -88,20 +87,19 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
 
         <div className="relative">
           {/* shadow card */}
-          <div className="relative rounded-[50px] border-2 border-border bg-white p-8 shadow-lg transition">
+          <div className="relative rounded-[50px] border-2 border-border bg-white p-4 shadow-lg transition sm:p-8">
             <div className="pointer-events-none absolute left-5 top-5 -z-10 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue" />
             {/* header */}
             <div className="px-4 py-2 text-center">
-              {/*Row with title and edit button*/}
               <div className="relative flex items-center justify-center">
-                <h1 className={cn("text-4xl font-bold", "font-oswald")}>{blog.title}</h1>
+                <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl sm:text-4xl")}>{blog.title}</h1>
                 {blog.displayEditButton && (
-                  <Button className={cn("absolute right-0")} onClick={handleEditButtonClicked}>
+                  <Button className="absolute right-0" onClick={handleEditButtonClicked}>
                     {!isEditing ? "Edit" : "Close Editor"}
                   </Button>
                 )}
               </div>
-              <div className={cn("mt-2 flex items-center justify-center text-sm text-gray-600", "font-redhat")}>
+              <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
                 <span className="mr-2">{blog.timeUpdated || "15 min read"}</span>
                 <span className="mx-2">by {blog.author}</span>
                 <span className="ml-2">
@@ -120,21 +118,32 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
               ) : (
                 <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
               )}
-              <div className={cn("mt-2 text-center text-sm text-gray-500", "font-redhat")}>
+              <div className={cn("mt-2 font-redhat", "text-center text-sm text-gray-500 sm:text-base")}>
                 {blog.images.length > 0 ? "caption lorem ipsum yuh lots of words to say about this photo" : ""}
               </div>
             </div>
             {/* content */}
             <div
               className={cn(
-                "mx-4 mb-8 max-h-full overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
-                "border-saseGreen/40 border-r-saseBlue/60",
+                "mx-4 mb-8 overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
+                "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
               )}
             >
               {renderContent()}
             </div>
 
-            <img src={imageUrls["SASELogoStar.png"]} alt="Logo" className="absolute -bottom-12 -right-12 h-[130px] w-[130px] object-contain" />
+            {/* SASE Logo Star */}
+            <img
+              src={imageUrls["SASELogoStar.png"]}
+              alt="Logo"
+              className={cn(
+                /* mobile */
+                "absolute -bottom-10 -right-8 h-24 w-24",
+                /* desktop */
+                "sm:-bottom-12 sm:-right-12 sm:h-[140px] sm:w-[140px]",
+                "object-contain",
+              )}
+            />
           </div>
         </div>
         {/* nav buttons */}
