@@ -46,7 +46,25 @@ export const arrayToString = (arr: Array<string>): string => {
 userRoutes.get("/users", async (c) => {
   try {
     const rows = await db.select().from(users);
-    return createSuccessResponse(c, rows, "Fetched all users");
+
+    // Get roles for each user
+    const usersWithRoles = await Promise.all(
+      rows.map(async (user) => {
+        const userRoles = await db
+          .select({ role: userRoleRelationship.role })
+          .from(userRoleRelationship)
+          .where(eq(userRoleRelationship.userId, user.id));
+
+        const roleArray: Array<string> = userRoles.map((r) => r.role);
+        const roleString = arrayToString(roleArray);
+
+        // Initialize full Zod schema verified object with roles
+        const schemaUser: User = { ...user, roles: roleString };
+        return schemaUser;
+      }),
+    );
+
+    return createSuccessResponse(c, usersWithRoles, "Fetched all users");
   } catch (err) {
     console.error(err);
     return createErrorResponse(c, "FETCH_USERS_ERROR", "Failed to fetch users", 500);

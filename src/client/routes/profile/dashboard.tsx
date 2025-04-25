@@ -106,11 +106,7 @@ export const Route = createFileRoute("/profile/dashboard")({
               <div className="flex w-full flex-col gap-6">
                 {users != undefined ? (
                   users.length > 0 ? (
-                    users.map((user) => (
-                      <div className="w-full" key={user.username}>
-                        <AccountBox {...user} roles="admin" />
-                      </div>
-                    ))
+                    users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
                   ) : (
                     <p>No Users found</p>
                   )

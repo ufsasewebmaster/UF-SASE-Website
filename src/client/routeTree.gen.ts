@@ -37,7 +37,6 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
-import { Route as ProfileAdminImport } from './routes/profile/admin'
 import { Route as ProfileDashboardImport } from './routes/profile/dashboard'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
@@ -196,12 +195,6 @@ const ProfileSecurityRoute = ProfileSecurityImport.update({
 const ProfileInfoRoute = ProfileInfoImport.update({
   id: '/info',
   path: '/info',
-  getParentRoute: () => ProfileRouteRoute,
-} as any)
-
-const ProfileAdminRoute = ProfileAdminImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
@@ -375,13 +368,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
-    '/profile/admin': {
-      id: '/profile/admin'
-      path: '/admin'
-      fullPath: '/profile/admin'
-      preLoaderRoute: typeof ProfileAdminImport
-      parentRoute: typeof ProfileRouteImport
-    }
     '/profile/dashboard': {
       id: '/profile/dashboard'
       path: '/dashboard'
@@ -430,7 +416,6 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
-  ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileDashboardRoute: typeof ProfileDashboardRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
@@ -439,7 +424,6 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
-  ProfileAdminRoute: ProfileAdminRoute,
   ProfileDashboardRoute: ProfileDashboardRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
@@ -475,7 +459,6 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -505,7 +488,6 @@ export interface FileRoutesByTo {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
@@ -538,7 +520,6 @@ export interface FileRoutesById {
   '/sports': typeof SportsRoute
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
@@ -572,7 +553,6 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
-    | '/profile/admin'
     | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
@@ -602,7 +582,6 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
-    | '/profile/admin'
     | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
@@ -633,7 +612,6 @@ export interface FileRouteTypes {
     | '/sports'
     | '/userpage'
     | '/webdev'
-    | '/profile/admin'
     | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
@@ -736,7 +714,6 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
-        "/profile/admin",
         "/profile/dashboard",
         "/profile/info",
         "/profile/security",
@@ -803,10 +780,6 @@ export const routeTree = rootRoute
     },
     "/webdev": {
       "filePath": "webdev.tsx"
-    },
-    "/profile/admin": {
-      "filePath": "profile/admin.tsx",
-      "parent": "/profile"
     },
     "/profile/dashboard": {
       "filePath": "profile/dashboard.tsx",

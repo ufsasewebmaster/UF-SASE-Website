@@ -17,6 +17,7 @@ interface AccountBoxProps {
   timeUpdated: number;
   points?: number;
   roles?: string;
+  adminView: boolean;
 }
 
 export default function AccountBox(props: AccountBoxProps) {
@@ -50,6 +51,25 @@ export default function AccountBox(props: AccountBoxProps) {
     { name: "timeUpdated", label: "Time Updated", type: "text", editable: false },
   ];
 
+  const adminConfigs: Array<FieldConfig> = [
+    { name: "username", label: "Username", type: "text", editable: true },
+    { name: "email", label: "Email", type: "email", editable: true },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      editable: false,
+      showResetLink: true,
+      resetLinkUrl: "/api/email/password-reset",
+    },
+    { name: "firstName", label: "First Name", type: "text", editable: true },
+    { name: "lastName", label: "Last Name", type: "text", editable: true },
+    { name: "roles", label: "Roles", type: "text", editable: true },
+    { name: "points", label: "Points", type: "number", editable: true },
+    { name: "timeAdded", label: "Time Added", type: "text", editable: true },
+    { name: "timeUpdated", label: "Time Updated", type: "text", editable: true },
+  ];
+
   const initialData: Record<string, string> = {
     username: info.username,
     email: info.email,
@@ -79,5 +99,5 @@ export default function AccountBox(props: AccountBoxProps) {
     }
   };
 
-  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
+  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={props.adminView ? adminConfigs : fieldConfigs} onSave={handleSave} />;
 }

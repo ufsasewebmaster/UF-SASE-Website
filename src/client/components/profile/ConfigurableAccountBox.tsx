@@ -32,6 +32,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
   }, [initialData, reset]);
 
   const onSubmit: SubmitHandler<Record<string, string>> = async (data) => {
+    console.log("data, ", data);
     const updates: Record<string, string> = {};
     fieldConfigs.forEach((cfg) => {
       if (cfg.editable) {
@@ -39,6 +40,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
         if (v !== (initialData[cfg.name] || "")) updates[cfg.name] = v;
       }
     });
+    console.log("updates: ", updates);
     await onSave(updates);
 
     setIsEditing(false);

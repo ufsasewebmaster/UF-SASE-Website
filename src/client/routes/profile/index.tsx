@@ -6,7 +6,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/profile/")({
   component: () => {
-    const { id } = useAuth();
+    const { id, isAdmin } = useAuth();
     const { error, isLoading, user } = useUsers(id);
 
     if (isLoading) return <div>Loading…</div>;
@@ -23,6 +23,7 @@ export const Route = createFileRoute("/profile/")({
         timeUpdated={user.timeUpdated}
         points={user.points ?? 0}
         roles={user.roles ?? ""}
+        adminView={isAdmin}
       />
     );
   },

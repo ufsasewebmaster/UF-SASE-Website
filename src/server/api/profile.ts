@@ -155,7 +155,7 @@ profileRoutes.patch("/profile", async (c) => {
     }
     const sessionID = sessionIDMatch[1];
     const adminPerms = await isAdmin(sessionID);
-    console.log("Admin perms: ", adminPerms);
+    //console.log("Admin perms: ", adminPerms);
     const result = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionID));
     if (result.length > 0) {
       // Creates a set of column names for personal and professional info respectively
@@ -167,7 +167,7 @@ profileRoutes.patch("/profile", async (c) => {
       const userID = result[0].userId;
 
       const body = await c.req.json();
-
+      console.log(body);
       const updatePromises = Object.keys(body).map(async (key) => {
         if (key in profileSelection) {
           const value = body[key];
@@ -186,6 +186,7 @@ profileRoutes.patch("/profile", async (c) => {
         }
         if (specialColumns.has(key) && adminPerms) {
           const newRoleArray: Array<string> = body.roles.split(",");
+          console.log("got here");
           //delete user's existing roles
           await db.delete(Schema.userRoleRelationship).where(eq(Schema.userRoleRelationship.userId, userID));
           await insertRoles(newRoleArray, userID);
