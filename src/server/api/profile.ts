@@ -1,3 +1,4 @@
+import { isAdmin } from "@/server/api/roles";
 import { db } from "@/server/db/db";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
@@ -101,6 +102,7 @@ profileRoutes.patch("/profile", async (c) => {
       return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
     }
     const sessionID = sessionIDMatch[1];
+    const adminPerms = await isAdmin(sessionID);
 
     const result = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionID));
     if (result.length > 0) {
@@ -130,7 +132,7 @@ profileRoutes.patch("/profile", async (c) => {
               .where(eq(Schema.users.id, userID));
           }
         }
-        if (specialColumns.has(key)) {
+        if (specialColumns.has(key) && adminPerms) {
           const newRoleArray: Array<string> = body.roles.split(",");
           //delete user's existing roles
           await db.delete(Schema.userRoleRelationship).where(eq(Schema.userRoleRelationship.userId, userID));

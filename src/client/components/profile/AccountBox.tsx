@@ -44,7 +44,7 @@ export default function AccountBox(props: AccountBoxProps) {
     },
     { name: "firstName", label: "First Name", type: "text", editable: true },
     { name: "lastName", label: "Last Name", type: "text", editable: true },
-    { name: "roles", label: "Roles", type: "text", editable: true },
+    { name: "roles", label: "Roles", type: "text", editable: props.roles != undefined && props.roles.match(/(admin|board)/) != null },
     { name: "points", label: "Points", type: "number", editable: true },
     { name: "timeAdded", label: "Time Added", type: "text", editable: false },
     { name: "timeUpdated", label: "Time Updated", type: "text", editable: false },
