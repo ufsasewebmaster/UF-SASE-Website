@@ -21,8 +21,10 @@ const NAV_ITEMS = [
   { to: "/profile/settings", text: "Settings", icon: "mdi:cog-outline" },
 ];
 
+const ADMIN_NAV_ITEMS = [{ to: "/profile/admin", text: "Admin Dashboard", icon: "mdi:crown-outline" }];
+
 const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User" }) => {
-  const { logout } = useAuth();
+  const { isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -50,6 +52,8 @@ const ProfileNav: React.FC<ProfileNavProps> = ({ profileName = "User" }) => {
         {NAV_ITEMS.map((item, idx) => (
           <NavItem key={item.to} to={item.to} icon={item.icon} text={item.text} color={SASE_COLORS[idx % 2]} />
         ))}
+        {isAdmin &&
+          ADMIN_NAV_ITEMS.map((item, idx) => <NavItem key={item.to} to={item.to} icon={item.icon} text={item.text} color={SASE_COLORS[idx % 2]} />)}
       </nav>
       <div className="mt-10 flex justify-center">
         <Button variant="destructive" onClick={handleLogout}>

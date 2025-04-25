@@ -26,13 +26,13 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
   const { handleSubmit, register, reset } = useForm<Record<string, string>>();
   const [isEditing, setIsEditing] = useState(false);
   const { seconds, startTimer, timerRunning } = useTimer();
-
   // seed form whenever initialData changes
   useEffect(() => {
     reset(initialData);
   }, [initialData, reset]);
 
   const onSubmit: SubmitHandler<Record<string, string>> = async (data) => {
+    console.log("data, ", data);
     const updates: Record<string, string> = {};
     fieldConfigs.forEach((cfg) => {
       if (cfg.editable) {
@@ -40,6 +40,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave }: Pr
         if (v !== (initialData[cfg.name] || "")) updates[cfg.name] = v;
       }
     });
+    console.log("updates: ", updates);
     await onSave(updates);
 
     setIsEditing(false);

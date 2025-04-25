@@ -1,7 +1,8 @@
 import { db } from "@/server/db/db";
 import { publicUserSchema } from "@/shared/schema";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
-import { users } from "@db/tables";
+import { userRoleRelationship, users } from "@db/tables";
+import type { User } from "@shared/schema/userSchema";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -16,17 +17,54 @@ userRoutes.get("/users/:id", async (c) => {
     if (!user) {
       return createErrorResponse(c, "USER_NOT_FOUND", "User not found", 404);
     }
-    return createSuccessResponse(c, user, "User retrieved successfully");
+    const userRoles = await db.select({ role: userRoleRelationship.role }).from(userRoleRelationship).where(eq(userRoleRelationship.userId, userId));
+    const roleArray: Array<string> = userRoles.map((r) => r.role);
+    const roleString = arrayToString(roleArray);
+
+    //initialize full Zod schema verified object with roles
+    const schemaUser: User = { ...user, roles: roleString };
+    return createSuccessResponse(c, schemaUser, "User retrieved successfully");
   } catch (error) {
     console.error("Error fetching user:", error);
     return createErrorResponse(c, "FETCH_USER_ERROR", "An error occurred while fetching the user", 500);
   }
 });
 
+export const arrayToString = (arr: Array<string>): string => {
+  let res: string = "";
+  if (arr.length > 0) {
+    for (const role of arr) {
+      res += role + ", ";
+    }
+    res.trim();
+    res = res.slice(0, -2);
+  }
+
+  return res;
+};
+
 userRoutes.get("/users", async (c) => {
   try {
     const rows = await db.select().from(users);
-    return createSuccessResponse(c, rows, "Fetched all users");
+
+    // Get roles for each user
+    const usersWithRoles = await Promise.all(
+      rows.map(async (user) => {
+        const userRoles = await db
+          .select({ role: userRoleRelationship.role })
+          .from(userRoleRelationship)
+          .where(eq(userRoleRelationship.userId, user.id));
+
+        const roleArray: Array<string> = userRoles.map((r) => r.role);
+        const roleString = arrayToString(roleArray);
+
+        // Initialize full Zod schema verified object with roles
+        const schemaUser: User = { ...user, roles: roleString };
+        return schemaUser;
+      }),
+    );
+
+    return createSuccessResponse(c, usersWithRoles, "Fetched all users");
   } catch (err) {
     console.error(err);
     return createErrorResponse(c, "FETCH_USERS_ERROR", "Failed to fetch users", 500);
