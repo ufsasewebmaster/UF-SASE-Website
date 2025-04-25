@@ -39,7 +39,6 @@ import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
 import { Route as ProfileDashboardImport } from './routes/profile/dashboard'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
-import { Route as ProfileAdminImport } from './routes/profile/admin'
 
 // Create/Update Routes
 
@@ -211,12 +210,6 @@ const UsersUsernameIdRoute = UsersUsernameIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProfileAdminRoute = ProfileAdminImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => ProfileRouteRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -382,13 +375,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileDashboardImport
       parentRoute: typeof ProfileRouteImport
     }
-    '/profile/admin': {
-      id: '/profile/admin'
-      path: '/admin'
-      fullPath: '/profile/admin'
-      preLoaderRoute: typeof ProfileAdminImport
-      parentRoute: typeof ProfileRouteImport
-    }
     '/profile/info': {
       id: '/profile/info'
       path: '/info'
@@ -431,7 +417,6 @@ declare module '@tanstack/react-router' {
 
 interface ProfileRouteRouteChildren {
   ProfileDashboardRoute: typeof ProfileDashboardRoute
-  ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -440,7 +425,6 @@ interface ProfileRouteRouteChildren {
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
   ProfileDashboardRoute: ProfileDashboardRoute,
-  ProfileAdminRoute: ProfileAdminRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -475,7 +459,6 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -506,7 +489,6 @@ export interface FileRoutesByTo {
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -539,7 +521,6 @@ export interface FileRoutesById {
   '/userpage': typeof UserpageRoute
   '/webdev': typeof WebdevRoute
   '/profile/dashboard': typeof ProfileDashboardRoute
-  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -573,7 +554,6 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/webdev'
     | '/profile/dashboard'
-    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -603,7 +583,6 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/webdev'
     | '/profile/dashboard'
-    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -735,7 +714,6 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
-        "/profile/admin",
         "/profile/dashboard",
         "/profile/info",
         "/profile/security",
@@ -805,10 +783,6 @@ export const routeTree = rootRoute
     },
     "/profile/dashboard": {
       "filePath": "profile/dashboard.tsx",
-      "parent": "/profile"
-    },
-    "/profile/admin": {
-      "filePath": "profile/admin.tsx",
       "parent": "/profile"
     },
     "/profile/info": {

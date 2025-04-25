@@ -105,7 +105,6 @@ roleRoutes.post("/roles/delete", async (c) => {
 
 export async function isAdmin(sessionId: string) {
   const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId)).get();
-
   if (!session) return false;
 
   const userRoles = await db
@@ -114,7 +113,7 @@ export async function isAdmin(sessionId: string) {
     .where(eq(Schema.userRoleRelationship.userId, session.userId))
     .all();
 
-  if (!userRoles.some((r) => r.role === "admin" || r.role === "board")) return true;
+  if (userRoles.some((r) => r.role === "admin" || r.role === "board")) return true;
 }
 
 export default roleRoutes;

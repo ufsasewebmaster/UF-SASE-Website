@@ -1,7 +1,9 @@
 // src/routes/profile/index.tsx
 import { acceptMentorMenteeInvite, deleteMentorMenteeInvite, getAllMentorMenteeInvites } from "@/client/api/mentorMentee";
+import AccountBox from "@/client/components/profile/AccountBox";
 import { useAuth } from "@hooks/AuthContext";
 import { useUsers } from "@hooks/useUsers";
+import type { User } from "@shared/schema/userSchema";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
 
@@ -10,9 +12,10 @@ type Invite = { id: string; mentorId: string; menteeId: string };
 export const Route = createFileRoute("/profile/dashboard")({
   component: () => {
     const { id } = useAuth();
-    const { error: userError, isLoading: userLoading, user } = useUsers(id);
+    const { error: userError, isLoading: userLoading, isLoadingUsers, user, users } = useUsers(id);
 
     const [invites, setInvites] = useState<Array<Invite>>([]);
+    const [allUsers, setAllUsers] = useState<Array<User>>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +27,20 @@ export const Route = createFileRoute("/profile/dashboard")({
         .then(setInvites)
         .catch(() => setError("Failed to load invites"))
         .finally(() => setLoading(false));
-    }, [id]);
+      try {
+        setLoading(true);
+        console.log(users);
+        const userArray: Array<User> = [];
+        users?.forEach((user) => {
+          const userObj: User = { ...user, password: "······" };
+          userArray.push(userObj);
+        });
+        setAllUsers(userArray);
+        console.log(allUsers);
+      } catch {
+        setError("Failed to retrieve all users list");
+      }
+    }, [id, isLoadingUsers]);
 
     const handleAccept = async (inviteId: string) => {
       try {
@@ -81,9 +97,28 @@ export const Route = createFileRoute("/profile/dashboard")({
           </section>
 
           {/* Roles (placeholder) */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Roles</h2>
-            <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">No role data yet.</div>
+          <section className="flex w-full flex-col space-y-4">
+            <h1 className="text-3xl font-bold text-saseBlue">Admin Dashboard</h1>
+            <h2 className="text-xl font-semibold">Users</h2>
+            {loading ? (
+              <p>Loading users...</p>
+            ) : (
+              <div className="flex w-full flex-col gap-6">
+                {users != undefined ? (
+                  users.length > 0 ? (
+                    users.map((user) => (
+                      <div className="w-full" key={user.username}>
+                        <AccountBox {...user} roles="admin" />
+                      </div>
+                    ))
+                  ) : (
+                    <p>No Users found</p>
+                  )
+                ) : (
+                  <div>Users could not be loaded</div>
+                )}
+              </div>
+            )}
           </section>
 
           {/* Customization (placeholder) */}
