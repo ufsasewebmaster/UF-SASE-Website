@@ -50,7 +50,7 @@ const boardInfo = [
           "I handle space reservations for all SASE events, communicating with UF’s registrar to secure suitable rooms. I also moderate the UF SASE Discord server, including roles, channels, and resources. I update our Google Calendar and Discord Events tab with upcoming events and deadlines, and I oversee our weekly board meetings.",
       },
       {
-        name: "Kimmy Chu",
+        name: "Kimmy Chiu",
         role: "Public Relations",
         image: imageUrls["PublicRelations.jpeg"],
         major: "2nd Year Environmental Engineering",
