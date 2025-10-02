@@ -44,7 +44,7 @@ GOOGLE_PRIVATE_KEY=""
 To set up the local SQLite database (the `file:local.db` outlined above) and apply the schema, run:
 
 ```bash
-bun db:all
+bun db:local:init
 ```
 Note in the package.json that this sets up everything related to the database.
 
