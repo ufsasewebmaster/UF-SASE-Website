@@ -36,7 +36,7 @@ const logger: MiddlewareHandler = async (c, next) => {
 };
 app.use("*", logger);
 
-const CAL_ID = "37ac4d5540136c7524b9a64daa11762754c52afa770f3f12e1ac6edca7cb59a3@group.calendar.google.com";
+const CAL_ID = "e24a44ee200ef77976669ed34b153649852357066a2137c9a9fb6e0888fad00c@group.calendar.google.com";
 const ICS_URL = `https://calendar.google.com/calendar/ical/${encodeURIComponent(CAL_ID)}/public/basic.ics`;
 
 const uploadthingHandler = createRouteHandler({

@@ -7,7 +7,7 @@ const EventsCalendar = () => (
     <div className="relative h-full w-full overflow-hidden rounded-2xl border-[3px] border-black bg-white">
       <iframe
         title="UF SASE Calendar"
-        src="https://calendar.google.com/calendar/embed?src=37ac4d5540136c7524b9a64daa11762754c52afa770f3f12e1ac6edca7cb59a3%40group.calendar.google.com&ctz=America%2FNew_York"
+        src="https://calendar.google.com/calendar/embed?src=e24a44ee200ef77976669ed34b153649852357066a2137c9a9fb6e0888fad00c%40group.calendar.google.com&ctz=America%2FNew_York"
         className="h-full w-full"
         frameBorder="0"
         scrolling="no"
