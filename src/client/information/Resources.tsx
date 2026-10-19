@@ -15,7 +15,7 @@ export const TopResources = [
   {
     title: "SASE's Gcal",
     icon: <img src={imageUrls["Google-Calendar-Logo.png"]} width={75} height={75} />,
-    href: "https://calendar.google.com/calendar/u/0/r?cid=MzdhYzRkNTU0MDEzNmM3NTI0YjlhNjRkYWExMTc2Mjc1NGM1MmFmYTc3MGYzZjEyZTFhYzZlZGNhN2NiNTlhM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+    href: "https://calendar.google.com/calendar/u/0/r?cid=ZTI0YTQ0ZWUyMDBlZjc3OTc2NjY5ZWQzNGIxNTM2NDk4NTIzNTcwNjZhMjEzN2M5YTlmYjZlMDg4OGZhZDAwY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
   },
 ];
 
