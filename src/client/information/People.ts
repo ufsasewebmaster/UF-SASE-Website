@@ -10,7 +10,7 @@ export const PIEBoard: Array<{
 }> = [
   {
     fullName: "Justin Doan",
-    position: "President",
+    position: "Ex-President",
     image: imageUrls["JustinDoan.jpg"],
     quote: "Advance your career with SASE!",
     fontColor: "blue",
@@ -18,7 +18,7 @@ export const PIEBoard: Array<{
   },
   {
     fullName: "Leann Tang",
-    position: "Internal Vice President",
+    position: "Ex-Internal Vice President",
     image: imageUrls["LeannTang.jpg"],
     quote: "💖⋆˙⟡ I love SASE!! ⋆˙⟡💖",
     fontColor: "green",
@@ -26,7 +26,7 @@ export const PIEBoard: Array<{
   },
   {
     fullName: "Manav Sanghvi",
-    position: "External Vice President",
+    position: "Ex-External Vice President",
     image: imageUrls["ManavSanghvi.jpg"],
     quote: "The SASE community is incredible 😄",
     fontColor: "blue",
@@ -47,7 +47,24 @@ export const Webmasters: Array<{
 }> = [
   {
     team: "Current",
-    information: [],
+    information: [
+      {
+        name: "Jonathan Tang",
+        image: imageUrls["JonathanTang-26.jpg"],
+        quote: "SWT 是第一!",
+        year: "2026-27",
+        textColor: "green",
+        mobileAlign: "left",
+      },
+      {
+        name: "Kenzo Fukuda",
+        image: imageUrls["KenzoFukuda-26.jpg"],
+        quote: "skating into the codebase",
+        year: "2026-27",
+        textColor: "blue",
+        mobileAlign: "right",
+      },
+    ],
   },
   {
     team: "Past",

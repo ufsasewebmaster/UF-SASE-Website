@@ -65,7 +65,7 @@
   - Mobile banners: `768x432`
 - **Optimization Steps:**
   - Download image information to `image_data.json`.
-  - Run `generateImageMaps` with `bun generate`.
+  - Run `generateImageMaps` (and the slides importer) with `bun run generateContent`.
 
 #### Components
 

@@ -37,10 +37,10 @@ export const Route = createFileRoute("/community-outreach")({
 
             <div className="rounded-[1.5rem] bg-gradient-to-r from-saseBlue to-saseGreen p-[3px]">
               <div className="rounded-[calc(1.5rem-3px)] bg-muted px-10 py-12 text-center">
-                <p className="font-oswald text-3xl font-semibold text-foreground">Applications for Community Outreach open 9/16!</p>
-                <p className="mt-4 font-redhat text-xl text-foreground">
-                  The application form isn't live yet. Check back after <strong>9/16</strong>. Deadline: <strong>9/27</strong>.
+                <p className="font-oswald text-3xl font-semibold text-foreground">
+                  Applications for Community Outreach are closed for this semester.
                 </p>
+                <p className="mt-4 font-redhat text-xl text-foreground">Keep an eye out on UF SASE’s Instagram and Discord for the next round!</p>
               </div>
             </div>
           </div>

@@ -106,7 +106,7 @@ export function AlumniBankLockedState() {
                 required
                 value={graduationSemester}
                 onChange={(e) => setGraduationSemester(e.target.value)}
-                placeholder="Expected Graduation (e.g., Spring 2026)"
+                placeholder="Expected Graduation (e.g., Spring 2027)"
                 className="mb-1 w-full rounded-lg border border-gray-300 bg-saseGreenLight p-4 text-gray-900 placeholder:text-gray-500"
               />
             </div>

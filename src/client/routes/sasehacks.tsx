@@ -5,7 +5,6 @@ import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
-import { Icon } from "@iconify/react";
 import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
@@ -13,8 +12,9 @@ import { seo } from "../utils/seo";
 export const Route = createFileRoute("/sasehacks")({
   meta: () => [
     ...seo({
-      title: "Sponsors | UF SASE",
-      description: "Current corporate sponsors of UF SASE and contact info for company sponsorship packet",
+      title: "SASEHacks | UF SASE",
+      description:
+        "SASEHacks is UF SASE's 24-hour hackathon where students from any university build projects, attend workshops, and compete for prizes.",
       image: imageUrls["SASELogo.png"],
     }),
   ],
@@ -31,16 +31,7 @@ export const Route = createFileRoute("/sasehacks")({
         />
 
         <div className="relative my-6 flex flex-col items-center justify-center gap-4 text-lg font-thin 2xl:text-2xl">
-          <p>SASEHacks Committee App is open! (deadline: 09/10)</p>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSf8kFqNrrMn1zEPfiHgLJdZ-e6bJ6JZlo4cKlEMoRMb_x6lqQ/viewform?usp=header"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-2xl bg-saseGreen px-10 py-4 text-xl font-semibold text-white shadow-xl transition hover:brightness-90"
-          >
-            Apply Now
-            <Icon icon="mdi:open-in-new" className="text-lg" />
-          </a>
+          <p>SASEHacks Committee applications are closed for this semester. Keep an eye out for the next round!</p>
         </div>
         <OmbreDivider />
 

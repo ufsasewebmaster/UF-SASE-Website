@@ -3,7 +3,6 @@ import { imageUrls } from "@assets/imageUrls";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
-import { Icon } from "@iconify/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
@@ -51,19 +50,8 @@ export const Route = createFileRoute("/sase-pcr")({
 
             <div className="rounded-[1.5rem] bg-gradient-to-r from-saseBlue to-saseGreen p-[3px]">
               <div className="rounded-[calc(1.5rem-3px)] bg-muted px-10 py-12 text-center">
-                <p className="font-oswald text-3xl font-semibold text-foreground">Applications for SASE PCR are open!</p>
-                <p className="mt-4 font-redhat text-xl text-foreground">
-                  Deadline: <strong>09/12</strong>
-                </p>
-                <a
-                  href="https://forms.gle/5TLgt9KnP4ppoYdY8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-saseBlue px-10 py-4 text-xl font-semibold text-white shadow-xl transition hover:brightness-90"
-                >
-                  Apply Now
-                  <Icon icon="mdi:open-in-new" className="text-lg" />
-                </a>
+                <p className="font-oswald text-3xl font-semibold text-foreground">Applications for SASE PCR are closed for this semester.</p>
+                <p className="mt-4 font-redhat text-xl text-foreground">Keep an eye out on UF SASE’s Instagram and Discord for the next round!</p>
               </div>
             </div>
           </div>

@@ -39,11 +39,11 @@ export const Route = createFileRoute("/set")({
           <InfoCard
             text={
               <>
-                The <strong>SASE Engineering Team (SET)</strong> collaborates to design and execute a yearlong project that showcases{" "}
+                <strong>Gator Rover</strong> (formerly the SASE Engineering Team) collaborates to design and execute a yearlong project that showcases{" "}
                 <strong>technical creativity</strong> and <strong>problem-solving</strong>. By working on the project, members will enhance their
                 engineering, collaboration, and project management skills while gaining hands-on experience to highlight on their resumes and discuss
-                in interviews. Are you passionate about technology and eager to develop your skills in a collaborative, hands-on environment? The SASE
-                Engineering Team is your chance to make a real impact! Everyone of all skill levels are encouraged to apply!
+                in interviews. Are you passionate about technology and eager to develop your skills in a collaborative, hands-on environment? Gator
+                Rover is your chance to make a real impact! Everyone of all skill levels are encouraged to apply!
               </>
             }
           />
@@ -52,12 +52,7 @@ export const Route = createFileRoute("/set")({
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto
-              image={imageUrls["SETPHOTO3.jpg"]}
-              applicationStatus="OPEN"
-              nextSemester="Fall 2026"
-              applyLink="https://forms.gle/3S9innLfXJ2FEa229"
-            />
+            <ApplicationPhoto image={imageUrls["SETPHOTO3.jpg"]} applicationStatus="CLOSED" nextSemester="Spring 2027" />
           </div>
 
           {/* Past Projects */}

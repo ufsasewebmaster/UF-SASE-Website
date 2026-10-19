@@ -50,7 +50,7 @@ app.all("/api/uploadthing", (c) => uploadthingHandler(c.req.raw));
 app.get("/api/calendar/ics", async (_c) => {
   try {
     const r = await fetch(ICS_URL, {
-      headers: { "User-Agent": "UF-SASE-Website/1.0 (+https://uf-sase.com)" },
+      headers: { "User-Agent": "UF-SASE-Website/1.0 (+https://ufsase.com)" },
       cache: "no-store",
     });
 

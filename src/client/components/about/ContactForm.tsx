@@ -23,13 +23,15 @@ const emails: Record<string, string> = {
   meminvolvment: "ufsase.moc@gmail.com",
   multimedia: "ufsase.multimedia@gmail.com",
   networking: "ufsase.alumni@gmail.com",
-  precollegiate: "ufsase.precollegiate@gmail.com",
+  outreach: "ufsase.precollegiate@gmail.com",
+  gatorrover: "ufsase.tech@gmail.com",
+  hackathon: "ufsase.hackathon@gmail.com",
+  projects: "uf.saseprojects@gmail.com",
+  serc: "ufsase.conference@gmail.com",
   science: "ufsase.science@gmail.com",
-  service: "ufsase.service@gmail.com",
   social: "ufsase.social@gmail.com",
   sportcord: "ufsase.sports@gmail.com",
-  tech: "ufsase.tech@gmail.com",
-  web: "ufsase.web@gmail.com",
+  web: "ufsase.webmaster@gmail.com",
 };
 
 const notify = () =>
@@ -120,8 +122,17 @@ export const ContactForm = () => {
             <option value="advancement" className="text-black">
               Advancement
             </option>
+            <option value="outreach" className="text-black">
+              Community Outreach
+            </option>
+            <option value="gatorrover" className="text-black">
+              Gator Rover
+            </option>
             <option value="fundraising" className="text-black">
               Fundraising
+            </option>
+            <option value="hackathon" className="text-black">
+              Hackathon
             </option>
             <option value="historian" className="text-black">
               Historian
@@ -135,23 +146,20 @@ export const ContactForm = () => {
             <option value="networking" className="text-black">
               Networking
             </option>
-            <option value="precollegiate" className="text-black">
-              Pre-Collegiate
+            <option value="projects" className="text-black">
+              Projects
+            </option>
+            <option value="serc" className="text-black">
+              SERC
             </option>
             <option value="science" className="text-black">
               Science
-            </option>
-            <option value="service" className="text-black">
-              Service
             </option>
             <option value="social" className="text-black">
               Social
             </option>
             <option value="sportcord" className="text-black">
               Sports Coordinator
-            </option>
-            <option value="tech" className="text-black">
-              Technical
             </option>
             <option value="web" className="text-black">
               Webmaster

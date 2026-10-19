@@ -77,8 +77,14 @@ const Testimonials = [
         image: imageUrls["SetProject24-25.png"],
       },
       {
-        name: "2025-2026",
+        name: "SET Delivery Bot",
         position: "2025-2026 Project",
+        quote: "An autonomous delivery robot built to navigate and deliver items on its own 📦.",
+        image: imageUrls["ComingSoon.jpg"],
+      },
+      {
+        name: "2026-2027",
+        position: "2026-2027 Project",
         quote: "Coming soon...",
         image: imageUrls["ComingSoon.jpg"],
       },

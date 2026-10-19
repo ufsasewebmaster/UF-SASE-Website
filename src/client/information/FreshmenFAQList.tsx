@@ -183,12 +183,12 @@ export const FreshmanFAQList: Array<{ category: string; heading: string; questio
               <br /> <br />
               You can use the #study-chat or reach out to people using the{" "}
               <a
-                href="https://docs.google.com/spreadsheets/d/1ghaMRvGG6REIy-O5AMCLGbVD2blTlxPOUayYd4kddIA/edit#gid=1369741976"
+                href="https://docs.google.com/spreadsheets/d/1hXDAGoLMM4kcFoPU5XD9H1Mxge0BPbeNHrKQinkLioQ/edit?gid=1830176438#gid=1830176438"
                 className="text-saseGreen underline"
               >
                 Class Connector
               </a>{" "}
-              (Fall 2023) as well.
+              as well.
             </>
           ),
         },
@@ -341,7 +341,7 @@ export const FreshmanFAQList: Array<{ category: string; heading: string; questio
               There are many more conferences than the Fall/Spring Career Fairs. Some others include:
               <ul className="list-disc pl-5">
                 <li>UF Diversity Meet-up (Fall & Spring)</li>
-                <li>SASE National Convention (October)</li>
+                <li>SASE STEM Connect, formerly National Convention (October)</li>
                 <li>SASE Southeast Regional Conference (Spring)</li>
                 <li>UF Society of Women Engineers Evening with Industry</li>
                 <li>Grace Hopper Conference</li>
@@ -401,7 +401,9 @@ export const FreshmanFAQList: Array<{ category: string; heading: string; questio
           answer: (
             <>
               Use LinkedIn to start growing your network and reaching out for coffee chats. Check out our{" "}
-              <a href="https://drive.google.com/file/d/1XkbIRZqIvvK6jzDUSSJegL-1w1vZeRj2/view?usp=sharing" className="text-saseGreen underline"></a>{" "}
+              <a href="https://drive.google.com/file/d/1XkbIRZqIvvK6jzDUSSJegL-1w1vZeRj2/view?usp=sharing" className="text-saseGreen underline">
+                LinkedIn guide
+              </a>{" "}
               to learn how to get started on LinkedIn as well as some more helpful tips.
             </>
           ),
@@ -502,19 +504,19 @@ export const FreshmanFAQList: Array<{ category: string; heading: string; questio
               <br /> <br />
               Early in the fall, SASE intern applications will open. Through SASE interns you can gain a behind-the-scenes look into how an org like
               SASE operates by being on a committee to organize your own event. This is a great chance to work with others on a team, build leadership
-              skills, and meet other SASE members. Contact our MICs on Discord, @justind1 and @bananna4756, to learn more!
+              skills, and meet other SASE members. Contact our Member Involvement Chairs, Khanh and Kathleen, on Discord to learn more!
               <br /> <br />
               Joining SASE intramurals is a great way to stay active and connect with new people as well. The sports offered include ultimate frisbee,
-              indoor soccer, volleyball, rock league, flag football, and kickball. Contact our Sports Coordinators on Discord, @.brea.d and
-              @thebluesummon, to learn more!
+              indoor soccer, volleyball, rock league, flag football, and kickball. Contact our Sports Coordinators, Andrew and Carol, on Discord to
+              learn more!
               <br /> <br />
               Also, at the start of the fall/spring semester, you can join the mentor-mentee program. Mentors can help guide you academically,
               professionally, and just be a friend. We encourage you to get to know your fellow mentees and mentor by participating in Mentorship Cup
               challenges.
               <br /> <br />
-              Put your engineering skills to the test by joining SASE’s design team SET. Last spring, during SET's beta semester, our team created SET
-              Bro, a fully functional robot with the ability to converse with SASE members. This year, we are looking to expand SET much more. Don't
-              be afraid to apply if you think you lack experience. Contact our Technical Chairs on Discord, @kevintf2 and @mannvika, to learn more!
+              Put your engineering skills to the test by joining SASE’s design team, Gator Rover (formerly SET). Past teams have built a talking
+              robot, a trash-collecting robot, a robot rescue dog, and an autonomous delivery robot. Don't be afraid to apply if you think you lack
+              experience. Contact our Gator Rover Chair, Micah, on Discord to learn more!
               <br /> <br />
               You can sign up to help out with the winter/spring banquet committee if you’re looking for a shorter-term commitment. The different
               committees you can apply for include programming, logistics, marketing, and decorations.

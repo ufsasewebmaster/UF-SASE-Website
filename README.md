@@ -36,12 +36,22 @@ bun install
 
 Create a `.env` file in the root directory of the project with this format. For production values, refer to our env document, or otherwise refer to the corresponding documentation for generation. 
 ```
-DATABASE_URL="file:local.db"  # Turso
+DATABASE_URL="file:local.db"      # Turso (or a local SQLite file)
 DATABASE_AUTH_TOKEN=""
-RESEND_API_KEY=""             # Resend
-GOOGLE_CLIENT_EMAIL=""        # Google IAM
-GOOGLE_PRIVATE_KEY=""
+RESEND_API_KEY=""                 # Resend
+GOOGLE_CREDENTIALS=''             # Google IAM service-account JSON, as a single-line string
+GOOGLE_OAUTH_CLIENT_ID=""         # Google OAuth (login)
+GOOGLE_OAUTH_CLIENT_SECRET=""
+GOOGLE_OAUTH_REDIRECT_URI=""
+ADMIN_USERNAME=""                 # Seed/admin accounts (local scripts only)
+ADMIN_PASSWORD=""
+ADMIN_EMAIL=""
+TEST_USERNAME=""
+TEST_PASSWORD=""
+TEST_EMAIL=""
+LINKEDIN_MCP_URL=""               # Alumni bank refresh (optional)
 ```
+See `src/server/env.ts` and `scripts/env.ts` for the authoritative list.
 
 ### Initializing the Local Database/Environment
 
@@ -74,8 +84,8 @@ The `shared` directory contains code that is used by both the frontend and backe
 
 ### Server
 
-The backend entry point is `./server/index.ts`. It initializes the Hono app and sets up the database client. The database schema is defined in `./server/db/schema.ts`.
+The backend entry point is `./src/server/index.ts`. It initializes the Hono app and sets up the database client. The database schema is defined in `./src/server/db/tables.ts`.
 
 ### Frontend
 
-The frontend entry point is `./client/index.tsx`, which serves as the main React entry point. Routes are defined in the `./client/routes` folder, following the structure recommended by Tanstack Router. All static assets are located in the `./public` folder.
+The frontend entry point is `./src/client/client.tsx`, which serves as the main React entry point. Routes are defined in the `./src/client/routes` folder, following the structure recommended by Tanstack Router. All static assets are located in the `./public` folder.

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/gulfgames")({
         >
           <p className="text-center md:text-left">
             The <span className="font-semibold text-saseBlue">Gulf Games</span>, formerly known as SASElympics, is a fun and competitive sports event
-            where southeast collegiate SASE chapters come together for team-based games and athletic challenges. This year, the event will be hosted
+            where southeast collegiate SASE chapters come together for team-based games and athletic challenges. In Spring 2026, the event was hosted
             by the University of South Florida (USF) SASE Chapter. Compete against other teams in challenges for a chance to win a prize! Sports and
             games may include basketball, badminton, tug-of-war, and more.
             <div className="items-start text-left">
@@ -51,19 +51,19 @@ export const Route = createFileRoute("/gulfgames")({
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
           <img
             src={imageUrls["GulfGamesPhoto1.jpg"]}
-            alt="SERC promotional poster"
+            alt="Gulf Games event photo"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />
           <img
             src={imageUrls["GulfGamesPhoto2.jpg"]}
-            alt="SERC promotional poster"
+            alt="Gulf Games event photo"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />
           <img
             src={imageUrls["GulfGamesPhoto3.jpg"]}
-            alt="SERC promotional poster"
+            alt="Gulf Games event photo"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto", objectFit: "cover", objectPosition: "center" }}
           />
