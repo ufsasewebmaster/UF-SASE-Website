@@ -87,7 +87,7 @@ export const Route = createFileRoute("/stemconnect")({
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
           <img
             src={imageUrls["StemConnectPhoto1.jpg"]}
-            alt="2025-26 executive board at STEM Connect"
+            alt="UF SASE executive board at STEM Connect"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />

@@ -89,6 +89,9 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
     { value: "Summer 2028", label: "Summer 2028" },
     { value: "Fall 2028", label: "Fall 2028" },
     { value: "Spring 2029", label: "Spring 2029" },
+    { value: "Summer 2029", label: "Summer 2029" },
+    { value: "Fall 2029", label: "Fall 2029" },
+    { value: "Spring 2030", label: "Spring 2030" },
   ];
 
   const fieldConfigs: Array<FieldConfig> = [

@@ -18,9 +18,9 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     program: "Gator Rover",
     description: (
       <p>
-        The <span className="font-semibold text-saseGreen">SASE Engineering Team</span> works together on a year-long project to explore technical
-        creativity and problem-solving. Members gain hands-on experience, sharpen engineering and collaboration skills, and build impactful projects
-        while growing in a supportive team environment.
+        <span className="font-semibold text-saseGreen">Gator Rover</span>, SASE’s engineering design team, works together on a year-long project to
+        explore technical creativity and problem-solving. Members gain hands-on experience, sharpen engineering and collaboration skills, and build
+        impactful projects while growing in a supportive team environment.
       </p>
     ),
     image: imageUrls["SetCard.png"],
@@ -31,9 +31,9 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     program: "SWEET",
     description: (
       <p>
-        The <span className="font-semibold text-saseBlue">SASE Web Development Team</span> brings together UI/UX, Frontend, and Backend members to
-        develop and enhance the UF SASE website. Team members gain hands-on experience with agile workflows and collaborate to create a self-hosted
-        platform, sharpening technical and teamwork skills along the way.
+        <span className="font-semibold text-saseBlue">SWEET</span> (SoftWare Engineering Experience Team) brings together UI/UX, Frontend, and Backend
+        members to develop and enhance the UF SASE website. Team members gain hands-on experience with agile workflows and collaborate to create a
+        self-hosted platform, sharpening technical and teamwork skills along the way.
       </p>
     ),
     image: imageUrls["WebDevCard.png"],
@@ -57,7 +57,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     description: (
       <p>
         SASE's <span className="font-semibold text-saseBlue">Mentor-Mentee Program</span> allows underclassmen to build a close-knit community within
-        SASE through their mentor and mentee groups. By participating in M&M challenges, socials, and profesional developement, mentorshiop provides
+        SASE through their mentor and mentee groups. By participating in M&M challenges, socials, and professional development, mentorship provides
         underclassmen the chance to find their footing in SASE and college life.
       </p>
     ),

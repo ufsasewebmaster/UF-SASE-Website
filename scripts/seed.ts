@@ -47,7 +47,7 @@ const majors = [
 const minors = ["Mathematics", "Business Administration", "Statistics", "Economics", "Digital Arts", "None"];
 const graduationMonths = ["January", "May", "August", "December"];
 
-const graduationTerms = ["Spring 2026", "Fall 2026", "Spring 2027", "Fall 2027", "Spring 2028"];
+const graduationTerms = ["Spring 2027", "Fall 2027", "Spring 2028", "Fall 2028", "Spring 2029"];
 const groups = ["Web Dev", "Mentorship", "Events", "Outreach", "Marketing", "Projects"];
 const eventFormats = ["Workshop", "GBM", "Professional", "Tech", "Service", "Social"];
 const locations = ["Marston 201", "CSE E301", "MAE A101", "Reitz Union 2340", "Little Hall 125", "Zoom"];
@@ -402,7 +402,7 @@ const main = async () => {
     category: pick(["GBM", "Workshop", "Professional", "Service", "Tech"], idx),
     name: `Seed Slide Deck ${idx + 1}`,
     date: new Date(now - idx * 14 * 86_400_000),
-    semester: idx % 2 === 0 ? "Fall 2025" : "Spring 2026",
+    semester: idx % 2 === 0 ? "2026 Fall" : "2026 Spring",
     thumbnailUrl: `https://picsum.photos/seed/slide-thumb-${idx + 1}/640/360`,
     embedUrl: `https://docs.google.com/presentation/d/seed-slide-${idx + 1}/preview`,
   }));

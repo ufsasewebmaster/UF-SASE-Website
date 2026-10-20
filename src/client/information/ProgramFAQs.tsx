@@ -3,7 +3,7 @@ export const InternsFAQ: Array<{ question: string; answer: string | React.ReactN
     question: "How do I sign up?",
     answer: (
       <>
-        <strong>Fall 2026</strong> applications will open in late August and close in early September! Keep an eye out on UF SASE’s{" "}
+        Applications open each <strong>fall</strong> in late August and close in early September! Keep an eye out on UF SASE’s{" "}
         <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           Instagram
         </a>{" "}
@@ -32,7 +32,7 @@ export const InternsFAQ: Array<{ question: string; answer: string | React.ReactN
         <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           SASE Discord
         </a>{" "}
-        or contact our Member Involvement Chairs, Connie and Michael, through Discord!
+        or contact our Member Involvement Chairs, Khanh and Kathleen, through Discord!
       </>
     ),
   },
@@ -43,18 +43,19 @@ export const SetFAQ: Array<{ question: string; answer: string | React.ReactNode 
     question: "How do I sign up?",
     answer: (
       <>
-        This semester's application is closed, but feel free to apply in <strong>Fall 2026</strong> to be a part of 2026-2027 SET!
+        Applications for the <strong>2026-2027</strong> Gator Rover team are closed. Keep an eye out on UF SASE’s Instagram and Discord for the next
+        round!
       </>
     ),
   },
   {
-    question: "What projects does SET work on?",
+    question: "What projects does Gator Rover work on?",
     answer:
-      "SET members come together every year to choose what project to work on! Two years ago SET created a trash-picking-up robot, and last year, SET made a robot rescue dog! This year, we are working on a an autonomous delivery robot!",
+      "Gator Rover (formerly SET) members come together every year to choose what project to work on! Past projects include a trash-picking-up robot, a robot rescue dog, and an autonomous delivery robot. Details on this year's project are coming soon!",
   },
   {
     question: "What does the time commitment look like?",
-    answer: "SET has a time commitment of 5-10 hours a week with 2-hour meetings held twice a week!",
+    answer: "Gator Rover has a time commitment of 5-10 hours a week with 2-hour meetings held twice a week!",
   },
   {
     question: "I have more questions!",
@@ -64,7 +65,7 @@ export const SetFAQ: Array<{ question: string; answer: string | React.ReactNode 
         <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           SASE Discord channel
         </a>{" "}
-        or contact our Technical Chairs, Matthew and Vishal, through Discord!
+        or contact our Gator Rover Chair, Micah, through Discord!
       </>
     ),
   },
@@ -75,7 +76,7 @@ export const SportsFAQ: Array<{ question: string; answer: string | React.ReactNo
     question: "How do I sign up?",
     answer: (
       <>
-        Keep an eye out for <strong>Spring 2026</strong> part 1 and 2 intramural signups on UF SASE’s{" "}
+        Keep an eye out for <strong>Spring 2027</strong> part 1 and 2 intramural signups on UF SASE’s{" "}
         <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           Instagram
         </a>{" "}
@@ -114,7 +115,7 @@ export const SportsFAQ: Array<{ question: string; answer: string | React.ReactNo
         <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           SASE Discord channel
         </a>{" "}
-        or contact our Sports Coordinators, Cade and Kayla, through Discord!
+        or contact our Sports Coordinators, Andrew and Carol, through Discord!
       </>
     ),
   },
@@ -125,7 +126,7 @@ export const SwtFAQ: Array<{ question: string; answer: string | React.ReactNode 
     question: "How do I sign up?",
     answer: (
       <>
-        Keep an eye out for <strong>Fall 2026</strong> applications on UF SASE’s{" "}
+        Keep an eye out for <strong>Spring 2027</strong> applications on UF SASE’s{" "}
         <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           Instagram
         </a>{" "}
@@ -139,11 +140,11 @@ export const SwtFAQ: Array<{ question: string; answer: string | React.ReactNode 
   },
   {
     question: "What if I have little experience?",
-    answer: "It’s ok! SASE Web Dev team is open to people of all experiences! If you have little experience, this is a great opportunity to learn!",
+    answer: "It’s ok! SWEET is open to people of all experiences! If you have little experience, this is a great opportunity to learn!",
   },
   {
     question: "What is the time commitment?",
-    answer: "The Web Dev team time commitment is 2-5 hours a week including weekly meetings and outside work.",
+    answer: "The SWEET time commitment is 2-5 hours a week including weekly meetings and outside work.",
   },
   {
     question: "I have more questions!",
@@ -153,7 +154,7 @@ export const SwtFAQ: Array<{ question: string; answer: string | React.ReactNode 
         <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           SASE Discord channel
         </a>{" "}
-        or contact our Webmasters, Lynette and Thuy, through Discord!
+        or contact our Webmasters, Jonathan and Kenzo, through Discord!
       </>
     ),
   },
@@ -171,6 +172,6 @@ export const MMFAQ = [
   {
     question: "I have more questions!",
     answer:
-      "Feel free to ask your questions in the SASE Discord channel or contact our Member Involvement Chairs, Michael and Connie, through Discord.",
+      "Feel free to ask your questions in the SASE Discord channel or contact our Member Involvement Chairs, Khanh and Kathleen, through Discord.",
   },
 ];

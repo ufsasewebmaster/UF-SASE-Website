@@ -214,23 +214,24 @@ function parseSemesterFolder(folderId: string): string | undefined {
 
     const processed = await processFileName(file.name);
     if (!processed) {
-      console.log("Cannot process file name", file.name);
-      return;
-    }
-    const { category, date, name } = processed;
-
-    // Check if already processed
-    const result = await db.select().from(Schema.meetingSlides).where(eq(Schema.meetingSlides.name, name)).limit(1);
-    if (result.length !== 0) {
-      console.log(`Slide "${name}" already exists, skipping...`);
-      processedFiles++;
+      writeError(`Cannot process file name ${file.name}`);
       continue;
     }
+    const { category, date, name } = processed;
 
     // Create thumbnail file path
     const formattedTitle = `${category}_${name}_${date.toISOString().split("T")[0]}`;
     const filePath = `public/thumbnails/${formattedTitle.replaceAll(" ", "-")}_tn.png`;
-    ensureDirectoryExists(filePath);
+
+    // Check if already processed. Still (re)download the thumbnail if it is missing locally,
+    // since thumbnails generated on a previous build machine are not committed.
+    const result = await db.select().from(Schema.meetingSlides).where(eq(Schema.meetingSlides.name, name)).limit(1);
+    const alreadyInserted = result.length !== 0;
+    if (alreadyInserted && fs.existsSync(filePath)) {
+      console.log(`Slide "${name}" already exists, skipping...`);
+      processedFiles++;
+      continue;
+    }
 
     // Download thumbnail and write to file
     const thumbnailBuffer = await downloadThumbnail(String(file.thumbnailLink));
@@ -242,6 +243,12 @@ function parseSemesterFolder(folderId: string): string | undefined {
         else resolve(true);
       });
     });
+
+    if (alreadyInserted) {
+      console.log(`Slide "${name}" already exists, restored missing thumbnail.`);
+      processedFiles++;
+      continue;
+    }
 
     // Embed URL
     const embedURL = buildEmbedURL(file.webViewLink);

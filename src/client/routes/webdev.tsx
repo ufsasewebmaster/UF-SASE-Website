@@ -29,6 +29,7 @@ export const Route = createFileRoute("/webdev")({
     const isMobile = useIsMobile();
     const { darkMode } = useContext(DarkModeContext);
     const pastWebmastersInfo = Webmasters.find((team: { team: string }) => team.team === "Past")?.information;
+    const currentWebmastersInfo = Webmasters.find((team: { team: string }) => team.team === "Current")?.information;
 
     return (
       <div className="flex min-h-screen w-full flex-col items-center bg-background py-10">
@@ -62,19 +63,36 @@ export const Route = createFileRoute("/webdev")({
         <div className="flex w-full flex-col items-center py-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto
-              image={imageUrls["WebTeamWinterBanquet2025.JPG"]}
-              applicationStatus="OPEN"
-              nextSemester="Fall 2026"
-              applyLink="https://forms.gle/1hRXjJ5jDZoVKVM19"
-              deadline="9/13"
-            />
+            <ApplicationPhoto image={imageUrls["WebTeamWinterBanquet2025.JPG"]} applicationStatus="CLOSED" nextSemester="Spring 2027" />
           </div>
 
           {/* Leadership */}
           <header className="flex w-full justify-center py-10">
             <h2 className="ombre-text font-silkscreen text-5xl font-medium">Leadership</h2>
           </header>
+          <h3 className="pb-6 font-redhat text-2xl font-semibold text-foreground">Current Webmasters</h3>
+          {isMobile ? (
+            <div className="px-4 pb-10">
+              {currentWebmastersInfo?.map((lead, index) => (
+                <div key={index} className="flex flex-col gap-4">
+                  <MobileMemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} imageSide={lead.mobileAlign} />
+                  {index < currentWebmastersInfo.length - 1 && (
+                    <div className="mb-4">
+                      <OmbreDivider />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mb-12 flex flex-col items-center justify-center gap-8">
+              <div className="flex w-full max-w-7xl flex-row justify-center gap-8 px-4 pb-2">
+                {currentWebmastersInfo?.map((lead, index) => (
+                  <MemberCard key={index} image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} />
+                ))}
+              </div>
+            </div>
+          )}
           <h3 className="pb-6 font-redhat text-2xl font-semibold text-foreground">Past Webmasters</h3>
           {isMobile ? (
             // Mobile Leadership Display
