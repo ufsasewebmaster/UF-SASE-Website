@@ -47,7 +47,9 @@ export const Route = createFileRoute("/")({
       <div className="flex flex-col items-center">
         {/* Title & Image Section */}
         <div className="flex w-full flex-col items-center">
-          <img src={imageUrls["26-27Board.jpg"]} alt="2026-2027 SASE Board" className="relative h-auto w-full" />
+          <div className="relative aspect-[9/4] w-full overflow-hidden">
+            <img src={imageUrls["26-27Board.jpg"]} alt="2026-2027 SASE Board" className="h-full w-full object-cover object-[center_36%]" />
+          </div>
           <div className="absolute h-full w-full items-center bg-gradient-to-b from-transparent to-black px-[10%] pt-[25%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-7xl xl:pt-[30%]">
             <h1 className="flex w-full items-center">
               <span>S </span>
